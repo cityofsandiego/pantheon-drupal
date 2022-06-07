@@ -1,0 +1,64 @@
+<?php
+
+use Drupal\Component\Utility\Html;
+
+/**
+ * Implements hook_help().
+ */
+function cofsd_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match): ?string {
+  switch ($route_name) {
+    case 'help.page.cofsd':
+      $text = file_get_contents(__DIR__ . '/README.md');
+      if (!\Drupal::moduleHandler()->moduleExists('markdown')) {
+        return '<pre>' . Html::escape($text) . '</pre>';
+      }
+      else {
+        // Use the Markdown filter to render the README.
+        $filter_manager = \Drupal::service('plugin.manager.filter');
+        $settings = \Drupal::configFactory()->get('markdown.settings')->getRawData();
+        $config = ['settings' => $settings];
+        $filter = $filter_manager->createInstance('markdown', $config);
+        return $filter->process($text, 'en');
+      }
+  }
+  return NULL;
+}
+
+/**
+ * Implements hook_views_pre_build().
+ *
+ * @todo Switch all the below occurrences to the generic one.
+ *
+ * @param $view
+ */
+function cofsd_views_pre_build($view){
+  $view_name = $view->id();
+  $view_display = $view->current_display;
+
+  // Allow any view to pass an argument of list=99 to set page size.
+  $matches = [];
+  foreach($view->args as $arg) {
+    if (preg_match('/(^list=)(.*)/', $arg, $matches)) {
+      if (! is_numeric($matches[2])) {
+        \Drupal::messenger()->addMessage('Invalid view argument for list');
+      } else {
+        $view->setItemsPerPage($matches[2]);
+      }
+    }
+  }
+
+  // Legacy D7 implementation
+  if ($view_name == "department_notifications" && $view_display === "block_2") {
+    if (isset($view->args[3]) && is_numeric($view->args[3])) {
+      $view->setItemsPerPage($view->args[3]);
+    }
+  }
+  if ($view_name == "attractions_list" && $view_display == "location_type") {
+    if (isset($view->args[2]) && is_numeric($view->args[2])) {
+      $view->setOffset($view->args[2]);
+    }
+    if (isset($view->args[3]) && is_numeric($view->args[3])) {
+      $view->setItemsPerPage($view->args[3]);
+    }
+  }
+}
