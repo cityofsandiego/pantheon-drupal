@@ -15,7 +15,9 @@ function cofsd_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route
       else {
         // Use the Markdown filter to render the README.
         $filter_manager = \Drupal::service('plugin.manager.filter');
-        $settings = \Drupal::configFactory()->get('markdown.settings')->getRawData();
+        $settings = \Drupal::configFactory()
+          ->get('markdown.settings')
+          ->getRawData();
         $config = ['settings' => $settings];
         $filter = $filter_manager->createInstance('markdown', $config);
         return $filter->process($text, 'en');
@@ -49,7 +51,6 @@ function cofsd_views_pre_build($view){
 
   // Legacy D7 implementation
   if ($view_name == "department_notifications" && $view_display === "block_2") {
-    $arg3 = $view->args[3];
     if (isset($view->args[3]) && is_numeric($view->args[3])) {
       $view->setItemsPerPage($view->args[3]);
     }
