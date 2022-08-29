@@ -1,0 +1,22 @@
+pipelines:
+  custom:
+    pantheon-downstream:
+      - step:
+          name: Code updates from Pantheon site
+          image: cruno/if-php:1.5.1
+          caches:
+            - composer
+          script:
+            - ./scaffolding/scripts/bitbucket-automated-updates-pr.sh
+            - composer install
+          services:
+            - mysql
+definitions:
+  services:
+    mysql:
+      image: mysql:5.7
+      variables:
+        MYSQL_DATABASE: drupal
+        MYSQL_USERNAME: drupal
+        MYSQL_PASSWORD: drupal
+        MYSQL_ROOT_PASSWORD: drupal
