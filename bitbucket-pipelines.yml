@@ -6,3 +6,10 @@ pipelines:
           image: cruno/if-php-cms:1.5.1
           script:
             - ./scripts/pantheon-downstream-pr.sh
+  branches:
+    'main':
+      - step:
+          name: Deploy to Pantheon
+          image: cruno/if-php-cms:1.5.1
+          script:
+            - ./scripts/pantheon-upstream.sh
