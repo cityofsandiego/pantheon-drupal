@@ -32,8 +32,6 @@ git pull pantheon master
 git checkout main
 git checkout -b "${NEW_BRANCH}"
 git merge master
-git add .
-git commit -m "$TITLE"
 git push origin "${NEW_BRANCH}"
 
 BB_TOKEN=$(curl -s -S -f -X POST -u "${AUTOMATED_UPDATES_AUTH}" \
