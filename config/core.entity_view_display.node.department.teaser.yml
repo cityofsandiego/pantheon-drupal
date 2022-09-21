@@ -1,0 +1,54 @@
+uuid: 2fb6f625-1d1e-4316-9b06-8ed758188f50
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.department.body
+    - field.field.node.department.field_add_updated_tag
+    - field.field.node.department.field_category
+    - field.field.node.department.field_department
+    - field.field.node.department.field_feature_card_only
+    - field.field.node.department.field_image
+    - field.field.node.department.field_optional_dept_card_order
+    - field.field.node.department.field_other_description
+    - field.field.node.department.field_other_keywords
+    - field.field.node.department.field_promote_to_city_home
+    - field.field.node.department.field_resources
+    - field.field.node.department.field_search_keymatch
+    - field.field.node.department.field_sidebar_content
+    - field.field.node.department.field_subtitle
+    - field.field.node.department.field_summary
+    - node.type.department
+  module:
+    - text
+    - user
+id: node.department.teaser
+targetEntityType: node
+bundle: department
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_add_updated_tag: true
+  field_category: true
+  field_department: true
+  field_feature_card_only: true
+  field_image: true
+  field_optional_dept_card_order: true
+  field_other_description: true
+  field_other_keywords: true
+  field_promote_to_city_home: true
+  field_resources: true
+  field_search_keymatch: true
+  field_sidebar_content: true
+  field_subtitle: true
+  field_summary: true
+  links: true
