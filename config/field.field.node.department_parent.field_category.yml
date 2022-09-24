@@ -1,0 +1,29 @@
+uuid: 704c1a04-9e58-45d2-a41e-9d2dda94ac8d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category
+    - node.type.department_parent
+    - taxonomy.vocabulary.categories
+id: node.department_parent.field_category
+field_name: field_category
+entity_type: node
+bundle: department_parent
+label: Category
+description: '<p>Add to News Room</p>'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      categories: categories
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
