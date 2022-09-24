@@ -5,7 +5,13 @@ dependencies:
   config:
     - filter.format.full_html
     - filter.format.restricted_html
+    - media.type.audio
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.video
     - node.type.department
+    - node.type.department_parent
     - taxonomy.vocabulary.categories
     - taxonomy.vocabulary.departments
     - taxonomy.vocabulary.search_keymatch
@@ -27,8 +33,11 @@ dependencies:
     - filter
     - honeypot
     - image
+    - media
     - metatag
     - node
+    - paragraphs
+    - password_policy
     - path
     - pathauto
     - recaptcha
@@ -43,6 +52,7 @@ dependencies:
     - taxonomy
     - toolbar
     - tour
+    - update
     - views_ui
     - workflows
 id: sand_admin
@@ -54,6 +64,7 @@ permissions:
   - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
+  - 'access media overview'
   - 'access security review list'
   - 'access site in maintenance mode'
   - 'access site reports'
@@ -86,6 +97,11 @@ permissions:
   - 'administer filters'
   - 'administer honeypot'
   - 'administer image styles'
+  - 'administer media'
+  - 'administer media display'
+  - 'administer media fields'
+  - 'administer media form display'
+  - 'administer media types'
   - 'administer menu'
   - 'administer meta tags'
   - 'administer modules'
@@ -93,6 +109,11 @@ permissions:
   - 'administer node fields'
   - 'administer node form display'
   - 'administer nodes'
+  - 'administer paragraph display'
+  - 'administer paragraph fields'
+  - 'administer paragraph form display'
+  - 'administer paragraphs settings'
+  - 'administer paragraphs types'
   - 'administer pathauto'
   - 'administer permissions'
   - 'administer recaptcha'
@@ -121,37 +142,76 @@ permissions:
   - 'bypass node access'
   - 'cancel account'
   - 'change own username'
+  - 'create audio media'
   - 'create department content'
+  - 'create department_parent content'
+  - 'create document media'
+  - 'create image media'
+  - 'create media'
+  - 'create remote_video media'
   - 'create terms in categories'
   - 'create terms in departments'
   - 'create terms in search_keymatch'
   - 'create url aliases'
+  - 'create video media'
   - 'customize shortcut links'
   - 'delete all revisions'
+  - 'delete any audio media'
   - 'delete any department content'
+  - 'delete any department_parent content'
+  - 'delete any document media'
+  - 'delete any image media'
+  - 'delete any media'
+  - 'delete any remote_video media'
+  - 'delete any video media'
   - 'delete department revisions'
+  - 'delete department_parent revisions'
+  - 'delete media'
+  - 'delete own audio media'
   - 'delete own department content'
+  - 'delete own department_parent content'
+  - 'delete own document media'
+  - 'delete own image media'
+  - 'delete own remote_video media'
+  - 'delete own video media'
   - 'delete terms in categories'
   - 'delete terms in departments'
   - 'delete terms in search_keymatch'
+  - 'edit any audio media'
   - 'edit any department content'
+  - 'edit any department_parent content'
+  - 'edit any document media'
+  - 'edit any image media'
+  - 'edit any remote_video media'
+  - 'edit any video media'
+  - 'edit behavior plugin settings'
+  - 'edit own audio media'
   - 'edit own comments'
   - 'edit own department content'
+  - 'edit own department_parent content'
+  - 'edit own document media'
+  - 'edit own image media'
+  - 'edit own remote_video media'
+  - 'edit own video media'
   - 'edit terms in categories'
   - 'edit terms in departments'
   - 'edit terms in search_keymatch'
   - 'export configuration'
   - 'import configuration'
   - 'link to any page'
+  - 'manage password reset'
   - 'notify of path changes'
   - 'revert all revisions'
   - 'revert department revisions'
+  - 'revert department_parent revisions'
   - 'run security checks'
   - 'schedule publishing of nodes'
   - 'select account cancellation method'
   - 'skip CAPTCHA'
   - 'switch shortcut sets'
   - 'synchronize configuration'
+  - 'update any media'
+  - 'update media'
   - 'use advanced search'
   - 'use editorial transition archive'
   - 'use editorial transition archived_draft'
@@ -160,11 +220,16 @@ permissions:
   - 'use editorial transition publish'
   - 'use text format full_html'
   - 'use text format restricted_html'
+  - 'view all media revisions'
   - 'view all revisions'
   - 'view any unpublished content'
   - 'view department revisions'
+  - 'view department_parent revisions'
   - 'view latest version'
   - 'view own unpublished content'
+  - 'view own unpublished media'
   - 'view scheduled content'
   - 'view the administration theme'
+  - 'view unpublished paragraphs'
+  - 'view update notifications'
   - 'view user email addresses'
