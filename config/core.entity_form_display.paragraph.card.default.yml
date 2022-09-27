@@ -9,7 +9,6 @@ dependencies:
     - field.field.paragraph.card.field_link
     - paragraphs.paragraphs_type.card
   module:
-    - allowed_formats
     - link
     - media_library
     - text
@@ -19,16 +18,13 @@ bundle: card
 mode: default
 content:
   field_description:
-    type: text_textfield
-    weight: 2
+    type: text_textarea
+    weight: 4
     region: content
     settings:
-      size: 255
+      rows: 5
       placeholder: ''
-    third_party_settings:
-      allowed_formats:
-        hide_help: '0'
-        hide_guidelines: '0'
+    third_party_settings: {  }
   field_image:
     type: media_library_widget
     weight: 1
