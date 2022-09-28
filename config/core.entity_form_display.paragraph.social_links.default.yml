@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.social_links.field_link
     - field.field.paragraph.social_links.field_type
-    - field.field.paragraph.social_links.field_url
     - paragraphs.paragraphs_type.social_links
   module:
     - link
@@ -13,19 +13,19 @@ targetEntityType: paragraph
 bundle: social_links
 mode: default
 content:
-  field_type:
-    type: options_select
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_url:
+  field_link:
     type: link_default
     weight: 1
     region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
+    third_party_settings: {  }
+  field_type:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true
