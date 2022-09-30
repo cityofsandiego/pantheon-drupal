@@ -8,9 +8,9 @@ dependencies:
     - field.field.node.department.field_category
     - field.field.node.department.field_d7_nid
     - field.field.node.department.field_department
-    - field.field.node.department.field_feature_card_only
+    - field.field.node.department.field_dept_card_only
+    - field.field.node.department.field_dept_card_order
     - field.field.node.department.field_image
-    - field.field.node.department.field_optional_dept_card_order
     - field.field.node.department.field_other_description
     - field.field.node.department.field_other_keywords
     - field.field.node.department.field_promote_to_city_home
@@ -64,14 +64,15 @@ content:
     weight: 117
     region: content
   field_department:
-    type: entity_reference_label
+    type: entity_reference_entity_view
     label: hidden
     settings:
+      view_mode: default
       link: false
     third_party_settings: {  }
     weight: 107
     region: content
-  field_feature_card_only:
+  field_dept_card_only:
     type: boolean
     label: above
     settings:
@@ -79,7 +80,16 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 108
+    weight: 122
+    region: content
+  field_dept_card_order:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 121
     region: content
   field_image:
     type: entity_reference_entity_view
@@ -89,15 +99,6 @@ content:
       link: false
     third_party_settings: {  }
     weight: 116
-    region: content
-  field_optional_dept_card_order:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 112
     region: content
   field_other_description:
     type: text_default
