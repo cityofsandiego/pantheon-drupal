@@ -8,9 +8,9 @@ dependencies:
     - field.field.node.department.field_category
     - field.field.node.department.field_d7_nid
     - field.field.node.department.field_department
-    - field.field.node.department.field_feature_card_only
+    - field.field.node.department.field_dept_card_only
+    - field.field.node.department.field_dept_card_order
     - field.field.node.department.field_image
-    - field.field.node.department.field_optional_dept_card_order
     - field.field.node.department.field_other_description
     - field.field.node.department.field_other_keywords
     - field.field.node.department.field_promote_to_city_home
@@ -136,21 +136,24 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_department:
-    type: entity_reference_autocomplete
+    type: options_buttons
     weight: 12
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-  field_feature_card_only:
+  field_dept_card_only:
     type: boolean_checkbox
-    weight: 18
+    weight: 36
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_dept_card_order:
+    type: number
+    weight: 35
+    region: content
+    settings:
+      placeholder: ''
     third_party_settings: {  }
   field_image:
     type: media_library_widget
@@ -158,13 +161,6 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
-  field_optional_dept_card_order:
-    type: number
-    weight: 4
-    region: content
-    settings:
-      placeholder: ''
     third_party_settings: {  }
   field_other_description:
     type: text_textarea
