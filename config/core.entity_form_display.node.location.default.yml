@@ -1,0 +1,528 @@
+uuid: 92c1d162-4b94-4483-bac4-1367bcada5d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.location.body
+    - field.field.node.location.field_address
+    - field.field.node.location.field_alt_amenities_title
+    - field.field.node.location.field_alt_restrictions_title
+    - field.field.node.location.field_amenities
+    - field.field.node.location.field_department
+    - field.field.node.location.field_email
+    - field.field.node.location.field_exceptions
+    - field.field.node.location.field_exceptions_2
+    - field.field.node.location.field_location_bucket
+    - field.field.node.location.field_location_contact_name
+    - field.field.node.location.field_location_contact_title
+    - field.field.node.location.field_location_external_id
+    - field.field.node.location.field_location_external_place_id
+    - field.field.node.location.field_location_hours
+    - field.field.node.location.field_location_hours2
+    - field.field.node.location.field_location_hours_notes
+    - field.field.node.location.field_location_hours_notes2
+    - field.field.node.location.field_location_hours_title
+    - field.field.node.location.field_location_hours_title_2
+    - field.field.node.location.field_location_location_type
+    - field.field.node.location.field_partial_re_open_citywide
+    - field.field.node.location.field_phone
+    - field.field.node.location.field_resources
+    - field.field.node.location.field_restrictions
+    - field.field.node.location.field_search_keymatch
+    - field.field.node.location.field_sidebar
+    - field.field.node.location.field_subtitle
+    - field.field.node.location.field_summary
+    - field.field.node.location.field_title_sort
+    - field.field.node.location.field_website
+    - node.type.location
+  module:
+    - address
+    - field_group
+    - link
+    - office_hours
+    - paragraphs
+    - path
+    - scheduler
+    - scheduler_content_moderation_integration
+    - smart_date
+    - telephone
+    - text
+third_party_settings:
+  field_group:
+    group_main_tabs:
+      children:
+        - group_address_contact_info
+        - group_content
+        - group_hours
+        - group_vocabularies
+      label: 'Main Tabs'
+      region: content
+      parent_name: ''
+      weight: 4
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: vertical
+        width_breakpoint: 640
+    group_address_contact_info:
+      children:
+        - field_address
+        - field_location_contact_name
+        - field_location_contact_title
+        - field_phone
+        - field_email
+        - field_website
+      label: 'Address & Contact Info'
+      region: content
+      parent_name: group_main_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_content:
+      children:
+        - body
+        - field_alt_amenities_title
+        - field_amenities
+        - field_alt_restrictions_title
+        - field_restrictions
+        - field_resources
+        - field_sidebar
+      label: Content
+      region: content
+      parent_name: group_main_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_hours:
+      children:
+        - field_location_hours_title
+        - field_location_hours_notes
+        - field_location_hours
+        - field_exceptions
+        - field_location_hours_title_2
+        - field_location_hours_notes2
+        - field_location_hours2
+        - field_exceptions_2
+        - field_partial_re_open_citywide
+      label: Hours
+      region: content
+      parent_name: group_main_tabs
+      weight: 22
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_vocabularies:
+      children:
+        - field_location_bucket
+        - field_location_location_type
+        - field_department
+        - field_search_keymatch
+      label: Vocabularies
+      region: content
+      parent_name: group_main_tabs
+      weight: 23
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+id: node.location.default
+targetEntityType: node
+bundle: location
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 18
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_address:
+    type: address_default
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_alt_amenities_title:
+    type: string_textfield
+    weight: 19
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_alt_restrictions_title:
+    type: string_textfield
+    weight: 21
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_amenities:
+    type: paragraphs
+    weight: 20
+    region: content
+    settings:
+      title: 'Paragraph item'
+      title_plural: 'Paragraph items'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_department:
+    type: options_buttons
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_email:
+    type: email_default
+    weight: 23
+    region: content
+    settings:
+      placeholder: ''
+      size: 60
+    third_party_settings: {  }
+  field_exceptions:
+    type: smartdate_inline
+    weight: 26
+    region: content
+    settings:
+      show_extra: false
+      hide_date: true
+      modal: false
+      default_duration: 60
+      default_duration_increments: |-
+        30
+        60|1 hour
+        90
+        120|2 hours
+        custom
+    third_party_settings: {  }
+  field_exceptions_2:
+    type: smartdate_inline
+    weight: 30
+    region: content
+    settings:
+      hide_date: '1'
+      show_extra: 0
+      modal: false
+      default_duration: 60
+      default_duration_increments: |-
+        30
+        60|1 hour
+        90
+        120|2 hours
+        custom
+    third_party_settings: {  }
+  field_location_bucket:
+    type: options_select
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_location_contact_name:
+    type: string_textfield
+    weight: 20
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_location_contact_title:
+    type: string_textfield
+    weight: 21
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_location_external_id:
+    type: string_textfield
+    weight: 22
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_location_external_place_id:
+    type: string_textfield
+    weight: 23
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_location_hours:
+    type: office_hours_default
+    weight: 25
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_location_hours2:
+    type: office_hours_default
+    weight: 29
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_location_hours_notes:
+    type: string_textarea
+    weight: 24
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_location_hours_notes2:
+    type: string_textarea
+    weight: 28
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_location_hours_title:
+    type: string_textfield
+    weight: 23
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_location_hours_title_2:
+    type: string_textfield
+    weight: 27
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_location_location_type:
+    type: options_buttons
+    weight: 18
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_partial_re_open_citywide:
+    type: boolean_checkbox
+    weight: 31
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_phone:
+    type: telephone_default
+    weight: 22
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_resources:
+    type: paragraphs
+    weight: 24
+    region: content
+    settings:
+      title: 'Paragraph item'
+      title_plural: 'Paragraph items'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_restrictions:
+    type: paragraphs
+    weight: 22
+    region: content
+    settings:
+      title: 'Paragraph item'
+      title_plural: 'Paragraph items'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_search_keymatch:
+    type: entity_reference_autocomplete
+    weight: 20
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_sidebar:
+    type: text_textarea
+    weight: 25
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_subtitle:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_summary:
+    type: string_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title_sort:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_website:
+    type: link_default
+    weight: 25
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 8
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 16
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }
