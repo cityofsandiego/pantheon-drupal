@@ -6,6 +6,7 @@ drush import:taxonomy categories
 drush import:taxonomy search_keymatch
 
 Node import via drush and migrate api:
+drush mi:import sd_nodes_department --update --force
 
 Paragraph import and associations via drush:
 
