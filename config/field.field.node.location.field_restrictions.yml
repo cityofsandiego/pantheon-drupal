@@ -1,0 +1,46 @@
+uuid: 7ef4c399-ba13-4229-a49d-32231d05f328
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_restrictions
+    - node.type.location
+    - paragraphs.paragraphs_type.amenities_restrictions
+  module:
+    - entity_reference_revisions
+id: node.location.field_restrictions
+field_name: field_restrictions
+entity_type: node
+bundle: location
+label: Restrictions
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      amenities_restrictions: amenities_restrictions
+    negate: 0
+    target_bundles_drag_drop:
+      amenities_restrictions:
+        weight: 7
+        enabled: true
+      card:
+        weight: 8
+        enabled: false
+      featured_cards:
+        weight: 9
+        enabled: false
+      featured_item:
+        weight: 10
+        enabled: false
+      resources:
+        weight: 11
+        enabled: false
+      social_links:
+        weight: 12
+        enabled: false
+field_type: entity_reference_revisions

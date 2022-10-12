@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Component\Utility\Html;
+//use Drupal\markdown\Plugin\Markdown\Parsedown;
 
 /**
  * Implements hook_help().
@@ -13,12 +14,12 @@ function cofsd_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route
         return '<pre>' . Html::escape($text) . '</pre>';
       }
       else {
-        // Use the Markdown filter to render the README.
-        $filter_manager = \Drupal::service('plugin.manager.filter');
-        $settings = \Drupal::configFactory()->get('markdown.settings')->getRawData();
-        $config = ['settings' => $settings];
-        $filter = $filter_manager->createInstance('markdown', $config);
-        return $filter->process($text, 'en');
+        /** @var \Drupal\markdown\PluginManager\ParserManagerInterface $parser_manager */
+        $parser_manager = \Drupal::service('plugin.manager.markdown.parser');
+        $parser = $parser_manager->getDefaultParser([
+          'render_strategy' => ['type' => 'none'],
+        ]);
+        return $parser->parse($text); 
       }
   }
   return NULL;
