@@ -1,3 +1,4 @@
+uuid: 5f8f2cad-98e8-495e-b14e-642fc2335aef
 langcode: en
 status: true
 dependencies: {  }
@@ -12,37 +13,32 @@ source:
   plugin: csv
   path: modules/custom/if_sdmigration/migration_files/nodes/departments.csv
   delimiter: ','
-  enclosure: '"'
+  enclosure: '`'
   escape: \
   header_row_count: 1
   ids:
-    - "D7 ID"
+    - 'D7 ID'
 process:
   title: Title
   body/0/value: Body
   body/0/format:
     plugin: default_value
     default_value: full_html
-  field_add_updated_tag: "Add Updated Tag"
-  field_d7_nid: "D7 ID"
-  field_feature_card_only: "Feature Card Only"
-  field_optional_dept_card_order: "Optional Feature Card Order"
-  field_other_description: "Other Description"
-  field_other_keywords: "Other Keywords"
-  field_promote_to_city_home: "Promote to Front Page"
-  field_sidebar/0/value: "Sidebar Content"
+  field_add_updated_tag: 'Add Updated Tag'
+  field_d7_nid: 'D7 ID'
+  field_feature_card_only: 'Feature Card Only'
+  field_optional_dept_card_order: 'Optional Feature Card Order'
+  field_other_description: 'Other Description'
+  field_other_keywords: 'Other Keywords'
+  field_promote_to_city_home: 'Promote to Front Page'
+  field_sidebar/0/value: 'Sidebar Content'
   field_sidebar/0/format:
     plugin: default_value
     default_value: full_html
-  field_subtitle: "Subtitle"
+  field_subtitle: Subtitle
   status:
-    - plugin: static_map
-      source: 'Published status'
-      map:
-        'No': 0
-        'Yes': 1
-    - plugin: default_value
-      default_value: 1
+    plugin: default_value
+    default_value: 1
 destination:
   plugin: 'entity:node'
   default_bundle: department

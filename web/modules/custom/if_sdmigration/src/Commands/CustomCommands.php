@@ -84,4 +84,16 @@ class CustomCommands extends DrushCommands {
       }
     }
   }
+
+    /**
+     * Import fields: field_resources, field_search_keymatch, field_image, field_category, field_department
+     *
+     * @command import:department
+     *
+     * @usage import:department
+     */
+  public function finalizeDepartment() {
+    $text = 'test123';
+    echo iconv("UTF-8", "ISO-8859-1", $text), PHP_EOL;
+  }
 }
