@@ -16,6 +16,7 @@ dependencies:
     - node.type.bucket
   module:
     - field_group
+    - media_library
     - paragraphs
     - path
     - scheduler
@@ -111,24 +112,17 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_bucket:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 2
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_feature_video_img:
-    type: entity_reference_autocomplete
+    type: media_library_widget
     weight: 19
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      media_types: {  }
     third_party_settings: {  }
   field_featured_card:
     type: paragraphs
