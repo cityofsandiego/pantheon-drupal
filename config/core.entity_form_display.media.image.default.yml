@@ -3,12 +3,17 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.image.field_d7_mid
+    - field.field.media.image.field_department
+    - field.field.media.image.field_description
+    - field.field.media.image.field_license
     - field.field.media.image.field_media_image
     - image.style.thumbnail
     - media.type.image
   module:
     - image
     - path
+    - text
 _core:
   default_config_hash: JSY4-JPyNZBiYYo6imdRYF6_SdtWQexPndrLvn3-vw4
 id: media.image.default
@@ -19,6 +24,37 @@ content:
   created:
     type: datetime_timestamp
     weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_d7_mid:
+    type: number
+    weight: 101
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_department:
+    type: entity_reference_autocomplete
+    weight: 103
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_description:
+    type: text_textarea
+    weight: 102
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_license:
+    type: options_select
+    weight: 104
     region: content
     settings: {  }
     third_party_settings: {  }
