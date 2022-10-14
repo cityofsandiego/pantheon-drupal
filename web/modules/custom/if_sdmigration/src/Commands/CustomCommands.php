@@ -169,7 +169,7 @@ class CustomCommands extends DrushCommands {
           'field_icon' => $resource['icon'],
           'field_label' => $resource['label'],
           'field_link' => [
-            'uri' => $resource['link'],
+            'uri' => $resource['url'],
           ],
         ]);
         $paragraph->save();
@@ -178,69 +178,45 @@ class CustomCommands extends DrushCommands {
 
       // Create (if not pre-existing) and set image.
       if (!empty($data['image_path'])) {
-        $image = NULL;
-        // Check if media item exists, if so load + set. If not, create.
-        $query = $this->entityTypeManager
-          ->getStorage('media')
-          ->getQuery();
-        $query->condition('field_d7_mid', $data['image_d7id']);
-        $nids = $query->execute();
-        if (count($nids) > 0) {
-          $image = Media::load(reset($nids));
-        }
-        else {
-          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
-          if (file_exists($remote_file)) {
-            $file_data = file_get_contents($remote_file);
-            $local_file = file_save_data($file_data, 'public://' . str_replace('public://', '', $data['image_path']), FileSystemInterface::EXISTS_REPLACE);
-            $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'departments')];
+        $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
+        $file_data = file_get_contents($remote_file);
+        $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
+        $local_destination = str_replace('public://', '', $local_destination);
+        $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+        $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'departments')];
 
-            $image = Media::create([
-              'bundle' => 'image',
-              'uid' => 0,
-              'field_media_image' => [
-                'target_id' => $local_file->id(),
-                'alt' => $data['image_alt']
-              ],
-              'field_d7_mid' => $data['image_d7id'],
-            ]);
-            if (!empty($data['image_license'])) {
-              $image->field_license = $data['image_license'];
-            }
-            foreach ($image_department as $department) {
-              $image->field_department->appendItem([
-                'target_id' => $department,
-              ]);
-            }
-            $image->save();
-          }
+        $image = Media::create([
+          'bundle' => 'image',
+          'uid' => 0,
+          'field_media_image' => [
+            'target_id' => $local_file->id(),
+            'alt' => $data['image_alt']
+          ],
+          'field_d7_mid' => $data['image_d7id'],
+        ]);
+        if (!empty($data['image_license'])) {
+          $image->field_license = $data['image_license'];
         }
-        if ($image !== NULL) {
-          $node->field_image = $image;
+        foreach ($image_department as $department) {
+          $image->field_department->appendItem([
+            'target_id' => $department,
+          ]);
         }
-
-        // Set three taxonomies.
-        foreach (explode(' |', $data['department']) as $department) {
-          $tid = $this->taxonomyImportTasks->newTid($department, 'departments');
-          if (isset($tid)) {
-            $node->field_department->appendItem(['target_id' => $tid]);
-          }
-        }
-        foreach (explode('|', $data['category']) as $category) {
-          $tid = $this->taxonomyImportTasks->newTid($category, 'categories');
-          if (isset($tid)) {
-            $node->field_category->appendItem(['target_id' => $tid]);
-          }
-        }
-        foreach (explode('|', $data['search_keymatch']) as $search_keymatch) {
-          $tid = $this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch');
-          if (isset($tid)) {
-            $node->field_search_keymatch->appendItem(['target_id' => $tid]);
-          }
-        }
-
-        $node->save();
+        $image->save();
+        $node->field_image = $image;
       }
+      // Set three taxonomies.
+      foreach (explode(' |', $data['department']) as $department) {
+        $node->field_department->appendItem([$this->taxonomyImportTasks->newTid($department, 'departments')]);
+      }
+      foreach (explode('|', $data['category']) as $category) {
+        $node->field_category->appendItem([$this->taxonomyImportTasks->newTid($category, 'categories')]);
+      }
+      foreach (explode('|', $data['search_keymatch']) as $search_keymatch) {
+        $node->field_search_keymatch->appendItem([$this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch')]);
+      }
+
+      $node->save();
     }
   }
 }
