@@ -1,0 +1,108 @@
+<?php
+
+/**
+ * @file
+ * Documentation for the San Diego Data Layer module.
+ */
+
+declare(strict_types=1);
+
+const WEBTEAM_TAXONOMY_ID = 114;
+
+/**
+ * Implements hook_help().
+ */
+function sand_datalayer_help($route_name): ?string {
+  return sand_help_show_help(__DIR__, $route_name);
+}
+
+/**
+ * Get the upmost parent term of a taxonomy term or the term id if no parent.
+ *
+ * @param int $tid
+ *   Taxonomy Term ID.
+ * @param string $term_name
+ *   Taxonomy Term Name to use if this is a top term.
+ *
+ * @return array
+ *   Return the TID and Term Name.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ */
+function sand_datalayer_get_top_parent(int $tid, string $term_name): array {
+
+  /** @var \Drupal\taxonomy\TermInterface $parents */
+  $parents = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadAllParents($tid);
+
+  if (!empty($parents)) {
+    $parents = array_reverse($parents, TRUE);
+    $parents = reset($parents);
+    $parent_tid = $parents->id();
+    $parent_name = $parents->getName();
+  }
+  else {
+    // The $tid has no parent, so it must be a parent.
+    $parent_tid = $tid;
+    $parent_name = $term_name;
+  }
+  return [$parent_tid, $parent_name];
+}
+
+/**
+ * Implements hook_datalayer_alter().
+ *
+ * Alter the Data Layer data before it is output to the screen.
+ * Adding in deptId for Medallia feedback form.
+ *
+ *   GTM data layer data for the current page.
+ */
+function sand_datalayer_datalayer_alter(&$data_layer): void {
+
+  // Not needed for admin pages.
+  if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+    return;
+  }
+
+  $vocabulary_name = 'departments';
+  $departments = [];
+
+  // If there is a department in the datalayer,
+  // then find all selected Parent Departments on node.
+  if (!empty($data_layer["entityTaxonomy"][$vocabulary_name])) {
+    foreach ($data_layer["entityTaxonomy"][$vocabulary_name] as $dept_tid => $dept_name) {
+      [ $parent_tid, $parent_name ] = sand_datalayer_get_top_parent($dept_tid, $dept_name);
+      if (!array_key_exists($parent_tid, $departments)) {
+        $departments[$parent_tid] = $parent_name;
+      }
+    }
+  }
+  else {
+    $term_webteam = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->load(WEBTEAM_TAXONOMY_ID);
+    $term_webteam_name = $term_webteam->getName();
+    [ $parent_tid, $parent_name ] = sand_datalayer_get_top_parent(WEBTEAM_TAXONOMY_ID, $term_webteam_name);
+    $departments[$parent_tid] = $parent_name;
+  }
+
+  // If more than 1 parent Department on node, then force Webteam Department.
+  if (count($departments) > 1) {
+    $term_webteam = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->load(WEBTEAM_TAXONOMY_ID);
+    $term_webteam_name = $term_webteam->getName();
+    [ $parent_tid, $parent_name ] = sand_datalayer_get_top_parent(WEBTEAM_TAXONOMY_ID, $term_webteam_name);
+    $departments = [];
+    $departments[$parent_tid] = $parent_name;
+  }
+
+  // Add Department Parent ID and Name to datalayer.
+  if (!empty($departments)) {
+    reset($departments);
+    $data_layer['deptId'] = key($departments);
+    $data_layer['deptName'] = current($departments);
+  }
+}
