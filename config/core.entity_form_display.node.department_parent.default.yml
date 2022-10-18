@@ -4,16 +4,16 @@ status: true
 dependencies:
   config:
     - field.field.node.department_parent.field_category
-    - field.field.node.department_parent.field_contact_info
+    - field.field.node.department_parent.field_contact_info_grid
     - field.field.node.department_parent.field_department
-    - field.field.node.department_parent.field_dept_feature_alt_text
-    - field.field.node.department_parent.field_dept_par_hide_news_feed
-    - field.field.node.department_parent.field_dept_par_show_top_slider
+    - field.field.node.department_parent.field_feature_alt_text
     - field.field.node.department_parent.field_feature_video_img
     - field.field.node.department_parent.field_featured_content
+    - field.field.node.department_parent.field_hide_news_feed
     - field.field.node.department_parent.field_image
     - field.field.node.department_parent.field_news_alt_text
     - field.field.node.department_parent.field_search_keymatch
+    - field.field.node.department_parent.field_show_top_slider
     - field.field.node.department_parent.field_sidebar
     - field.field.node.department_parent.field_social_links
     - field.field.node.department_parent.field_summary
@@ -31,7 +31,7 @@ third_party_settings:
   field_group:
     group_main_tabs:
       children:
-        - field_contact_info
+        - field_contact_info_grid
         - field_top_content
         - field_social_links
         - field_sidebar
@@ -103,7 +103,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -117,9 +117,9 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_contact_info:
+  field_contact_info_grid:
     type: text_textarea
-    weight: 20
+    weight: 27
     region: content
     settings:
       rows: 5
@@ -131,27 +131,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_dept_feature_alt_text:
+  field_feature_alt_text:
     type: string_textfield
     weight: 6
     region: content
     settings:
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_dept_par_hide_news_feed:
-    type: boolean_checkbox
-    weight: 4
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  field_dept_par_show_top_slider:
-    type: boolean_checkbox
-    weight: 3
-    region: content
-    settings:
-      display_label: true
     third_party_settings: {  }
   field_feature_video_img:
     type: media_library_widget
@@ -168,12 +154,22 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_hide_news_feed:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_image:
-    type: media_library_widget
+    type: entity_reference_autocomplete
     weight: 2
     region: content
     settings:
-      media_types: {  }
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_news_alt_text:
     type: string_textfield
@@ -193,9 +189,16 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_show_top_slider:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_sidebar:
     type: text_textarea
-    weight: 23
+    weight: 30
     region: content
     settings:
       rows: 5
@@ -203,7 +206,7 @@ content:
     third_party_settings: {  }
   field_social_links:
     type: paragraphs
-    weight: 22
+    weight: 29
     region: content
     settings:
       title: Paragraph
@@ -229,7 +232,7 @@ content:
     third_party_settings: {  }
   field_top_content:
     type: text_textarea
-    weight: 21
+    weight: 28
     region: content
     settings:
       rows: 5
@@ -237,44 +240,44 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 13
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 11
+    weight: 12
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 14
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 16
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   simple_sitemap:
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 19
+    weight: 20
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 12
+    weight: 13
     region: content
     settings:
       display_label: true
@@ -299,18 +302,18 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 15
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 17
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 18
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
