@@ -214,14 +214,17 @@ class CustomCommands extends DrushCommands {
         $node->field_image = $image;
       }
       // Set three taxonomies.
+      $node->field_department = NULL;
       foreach (explode(' |', $data['department']) as $department) {
         $term = Term::load($this->taxonomyImportTasks->newTid($department, 'departments'));
         $node->field_department->appendItem($term);
       }
+      $node->field_category = NULL;
       foreach (explode('|', $data['category']) as $category) {
         $term = Term::load($this->taxonomyImportTasks->newTid($category, 'categories'));
         $node->field_category->appendItem($term);
       }
+      $node->field_search_keymatch = NULL;
       foreach (explode('|', $data['search_keymatch']) as $search_keymatch) {
         $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
         $node->field_search_keymatch->appendItem($term);
