@@ -1,0 +1,72 @@
+/* ============================================================
+  Styles for layout structure, including a column system!
+  ============================================================ */
+
+.layout-container {
+  @extend %centered-layout;
+
+  .not-found & {
+    margin: 0 3rem;
+  }
+
+  .content-top {
+    margin: 0 0 1.5rem;
+    position: relative;
+  }
+
+  .layout-content {
+
+    &.left-sidebar {
+      @include respond-to('m') {
+        margin: 0 0 0 1rem;
+      }
+  
+      @include respond-to('l') {
+        max-width: 800px;
+        margin: 0 0 0 1.5rem;
+      }
+  
+      @include respond-to('xl') {
+        margin: 0 0 0 2.5rem;
+      }  
+    }
+
+    &.right-sidebar {
+      @include respond-to('m') {
+        margin: 0 1rem 0 0;
+      }
+  
+      @include respond-to('l') {
+        margin: 0 1.5rem 0 0;
+      }
+  
+      @include respond-to('xl') {
+        margin: 0 2.5rem 0 0;
+      }
+    } 
+  }
+}
+
+  // Default column styling with gutters to match the negative margins.
+  .col {
+    flex: 1;
+
+  &.percent-33 {
+    @include respond-to('ml') {
+      flex: 0 0 auto;
+      width: calc(33% - .75rem);
+      min-width: 32%; // I LUV INTERNET EXPLORER 11.
+    }
+  }
+
+  &.percent-50 {
+    @include respond-to('xxs') {
+      flex: 0 0 auto;
+      width: 100%;
+    }
+    @include respond-to('xl') {
+      flex: 0 0 auto;
+      width: calc(50% - 1rem);
+    }
+  }
+}
