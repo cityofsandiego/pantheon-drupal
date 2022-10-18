@@ -8,7 +8,9 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\node\Entity\Node;
 use Drupal\media\Entity\Media;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\pathauto\PathautoState;
 use Drupal\if_sdmigration\TaxonomyImportTasks;
+use Drupal\taxonomy\Entity\Term;
 use Drush\Commands\DrushCommands;
 
 /**
@@ -115,20 +117,20 @@ class CustomCommands extends DrushCommands {
     $resourcedata = [];
 
     // Read extra field data for manual creation/update.
-    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/departments.csv', 'r')) {
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/departments-small.csv', 'r')) {
       fgets($file);
       while ($data = fgetcsv($file)) {
         $nodedata[str_replace('`', '', $data[0])] = [
-          'path' => str_replace('`', '', $data[5]),
-          'resources' => str_replace('`', '', $data[7]),
-          'department' => str_replace('`', '', $data[8]),
-          'category' => str_replace('`', '', $data[10]),
-          'search_keymatch' => str_replace('`', '', $data[16]),
-          'image_department' => str_replace('`', '', $data[17]),
-          'image_license' => str_replace('`', '', $data[18]),
-          'image_alt' => str_replace('`', '', $data[19]),
-          'image_d7id' => str_replace('`', '', $data[20]),
-          'image_path' => str_replace('`', '', $data[21]),
+          'path' => str_replace('`', '', $data[1]),
+          'resources' => str_replace('`', '', $data[2]),
+          'department' => str_replace('`', '', $data[3]),
+          'category' => str_replace('`', '', $data[4]),
+          'search_keymatch' => str_replace('`', '', $data[5]),
+          'image_department' => str_replace('`', '', $data[6]),
+          'image_license' => str_replace('`', '', $data[7]),
+          'image_alt' => str_replace('`', '', $data[8]),
+          'image_d7id' => str_replace('`', '', $data[9]),
+          'image_path' => str_replace('`', '', $data[10]),
         ];
       }
       fclose($file);
@@ -159,7 +161,10 @@ class CustomCommands extends DrushCommands {
       $node = Node::load($nid);
 
       // Set alias.
-      $node->path = ['alias' => $data['path']];
+      $node->path = [
+        'alias' => $data['path'],
+        'pathauto' => PathautoState::SKIP,
+      ];
 
       // Create and set resource paragraph.
       if (!empty($data['resources']) && isset($resourcedata[$data['resources']])) {
@@ -180,7 +185,10 @@ class CustomCommands extends DrushCommands {
       if (!empty($data['image_path'])) {
         $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
         $file_data = file_get_contents($remote_file);
+        // Fixes for irregular paths.
         $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
+        $local_destination = str_replace('default_images', '', $local_destination);
+        $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
         $local_destination = str_replace('public://', '', $local_destination);
         $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
         $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'departments')];
@@ -207,13 +215,16 @@ class CustomCommands extends DrushCommands {
       }
       // Set three taxonomies.
       foreach (explode(' |', $data['department']) as $department) {
-        $node->field_department->appendItem([$this->taxonomyImportTasks->newTid($department, 'departments')]);
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'departments'));
+        $node->field_department->appendItem($term);
       }
       foreach (explode('|', $data['category']) as $category) {
-        $node->field_category->appendItem([$this->taxonomyImportTasks->newTid($category, 'categories')]);
+        $term = Term::load($this->taxonomyImportTasks->newTid($category, 'categories'));
+        $node->field_category->appendItem($term);
       }
       foreach (explode('|', $data['search_keymatch']) as $search_keymatch) {
-        $node->field_search_keymatch->appendItem([$this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch')]);
+        $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
+        $node->field_search_keymatch->appendItem($term);
       }
 
       $node->save();
