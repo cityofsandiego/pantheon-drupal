@@ -4,3 +4,23 @@ config:
   framework: drupal8
   site: san-diego-custom-code
   id: 558ccf9c-33c1-459f-a727-08540af54518
+services:
+  node:
+    type: node:16
+    port: 6006
+    build_as_root:
+      - apt update -y && apt install -y apt-transport-https build-essential unzip
+    build:
+      - npm install -g npm
+      - npm install -g gulp
+tooling:
+  node:
+    service: node
+  npm:
+    service: node
+    cmd: npm
+    dir: /app/web/themes/custom/sand
+  gulp:
+    service: node
+    cmd: gulp
+    dir: /app/web/themes/custom/sand
