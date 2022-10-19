@@ -8,7 +8,9 @@ var gulp = require('gulp'),
   $      = require('gulp-load-plugins')(),
   sass   = require('gulp-sass')(require('sass'));
 
-/* 
+  const gulpStylelint = require('@ronilaukkarinen/gulp-stylelint');
+
+/*
 The main styles compliation function:
   1. Set source to be all .scss files in the sass directory.
   2. Create source maps.
@@ -24,6 +26,16 @@ gulp.task('styles', function(){
     .pipe($.rename({dirname: ''}))
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest('css'))
+});
+
+gulp.task('lint-scss', function lintCssTask() {
+
+  return gulp.src('sass/**/*.scss')
+    .pipe(gulpStylelint({
+      reporters: [
+        {formatter: 'string', console: true}
+      ]
+  }));
 });
 
 /*
