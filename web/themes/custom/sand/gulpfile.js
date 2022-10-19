@@ -6,7 +6,7 @@ We keep things pretty simple here:
 */
 var gulp = require('gulp'),
   $      = require('gulp-load-plugins')(),
-  sass   = require('gulp-sass');
+  sass   = require('gulp-sass')(require('sass'));
 
 /* 
 The main styles compliation function:
