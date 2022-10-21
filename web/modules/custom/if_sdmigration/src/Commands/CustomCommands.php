@@ -69,18 +69,20 @@ class CustomCommands extends DrushCommands {
         $termdata = [];
         fgets($taxonomy_file);
         while ($data = fgetcsv($taxonomy_file)) {
+          $d7id = str_replace('`', '', $data[0]);
+          $parent = str_replace('`', '', $data[1]);
           $term_info = [
-            'parent' => $data[1],
-            'name' => $data[2],
+            'parent' => $parent,
+            'name' => str_replace('`', '', $data[2]),
           ];
-          if (empty($data[1])) {
+          if (empty($parent)) {
             // No parent set, add term if it doesn't already exist.
-            if (empty($this->taxonomyImportTasks->newTid($data[0], $vocabulary))) {
-              $this->taxonomyImportTasks->createTerm($data[0], $vocabulary, $term_info);
+            if (empty($this->taxonomyImportTasks->newTid($d7id, $vocabulary))) {
+              $this->taxonomyImportTasks->createTerm($d7id, $vocabulary, $term_info);
             }
           }
           else {
-            $termdata[$data[0]] = $term_info;
+            $termdata[$d7id] = $term_info;
           }
         }
         /* Keep iterating as parent terms are added and there are no more child terms remaining. */
