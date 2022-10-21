@@ -7,11 +7,13 @@ Taxonomy import via drush:
 drush import:taxonomy departments
 drush import:taxonomy categories
 drush import:taxonomy search_keymatch
+drush import:taxonomy location
 
+Node imports:
 drush mi:import sd_nodes_department --update --force
 
-Paragraph import and associations via drush:
-
+Entity creation and associations via drush:
+drush import:department 
 
 Data status:
 Department nodes exported from dev 9/26/2022
@@ -19,3 +21,4 @@ field_dept_resources_coll field group exported from dev 9/26/2022
 Categories vocabulary exported from dev 9/26/2022
 Departments vocabulary exported from dev 9/26/2022
 Keymatch vocabulary exported from dev 9/26/2022
+Location vocabulary exported from dev 9/26/2022
