@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.location.body
     - field.field.node.location.field_address
+    - field.field.node.location.field_address_pin
     - field.field.node.location.field_alt_amenities_title
     - field.field.node.location.field_alt_restrictions_title
     - field.field.node.location.field_amenities
@@ -38,6 +39,7 @@ dependencies:
   module:
     - address
     - field_group
+    - geofield
     - link
     - office_hours
     - paragraphs
@@ -174,6 +176,13 @@ content:
     weight: 19
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_address_pin:
+    type: geofield_latlon
+    weight: 32
+    region: content
+    settings:
+      html5_geolocation: false
     third_party_settings: {  }
   field_alt_amenities_title:
     type: string_textfield
