@@ -43,14 +43,21 @@
  * @see html.html.twig
  */
 #}
-<header role="banner">
-  <div>
+
+{% if page.preheader %}
+<div class="preheader">
+  {{ page.preheader }}
+</div>
+{% endif %}
+
+<header role="banner" class="header">
+  <div class="layout-container">
     {{ page.header }}
   </div>
 </header>
 
 <div class="layout-container">
-  
+
   {{ page.help }}
 
   {{ page.content_top }}
@@ -69,7 +76,7 @@
     </div>{# /.layout-content #}
 
     {% if page.sidebar_second %}
-      <aside class="layout-sidebar-second col" role="complementary">
+      <aside class="layout-sidebar-second col percent-25" role="complementary">
         {{ page.sidebar_second }}
       </aside>
     {% endif %}
@@ -79,7 +86,7 @@
 </div>{# /.layout-container #}
 
 {% if page.footer %}
-<footer role="contentinfo">
+<footer role="contentinfo" class="footer">
   {{ page.footer }}
 </footer>
 {% endif %}

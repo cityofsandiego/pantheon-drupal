@@ -26,4 +26,168 @@
 /* ============================================================
   Styles for the header.
   ============================================================ */
+.header {
+  border-bottom: solid thin #000;
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 1024px) {
+  .header {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+}
+.header ul {
+  list-style: none;
+  padding-left: 0;
+}
+.header .layout-container {
+  background: #0098db;
+  display: grid;
+  grid-template-columns: 1fr 6rem;
+  grid-template-rows: repeat(3, auto);
+  padding: 0;
+}
+@media (min-width: 1024px) {
+  .header .layout-container {
+    grid-template-columns: repeat(2, auto);
+    padding: 0 2rem;
+  }
+}
+@media (min-width: 1280px) {
+  .header .layout-container {
+    padding: 0 5rem;
+  }
+}
+@media (min-width: 1440px) {
+  .header .layout-container {
+    padding: 0 6.25rem;
+  }
+}
+.header .layout-container .mobile-menu-trigger {
+  background: #009581;
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.header .layout-container .mobile-menu-trigger span {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.header .layout-container .mobile-menu-trigger span.close {
+  display: none;
+}
+.header .layout-container .mobile-menu-trigger span svg {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+.header .layout-container .mobile-menu-trigger.active span.open {
+  display: none;
+}
+.header .layout-container .mobile-menu-trigger.active span.close {
+  display: block;
+}
+.header .layout-container .main-menu {
+  background: #fff;
+  display: none;
+  grid-column: 1/3;
+  grid-row: 3/4;
+  padding: 0 1.5rem;
+}
+@media (min-width: 1024px) {
+  .header .layout-container .main-menu {
+    display: block;
+    grid-row: 2/3;
+    margin-top: 1.25rem;
+    padding: 0;
+  }
+}
+.header .layout-container .search-bar {
+  color: #009581;
+  display: none;
+  grid-column: 1/3;
+  padding: 0 1.5rem 2rem;
+}
+.header .layout-container .search-bar p {
+  margin-bottom: 0;
+}
+@media (min-width: 1024px) {
+  .header .layout-container .search-bar {
+    border-top: none;
+    display: block;
+    opacity: 1;
+    padding: 0;
+    position: relative;
+  }
+}
+.header .layout-container .secondary-menu {
+  display: none;
+  grid-column: 1/3;
+  grid-row: 4/5;
+  padding-top: 1rem;
+}
+@media (min-width: 1024px) {
+  .header .layout-container .secondary-menu {
+    background: #009581;
+    border-top: none;
+    display: block;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    margin-right: 0;
+    padding-top: 0;
+  }
+}
+.header .layout-container .secondary-menu ul {
+  border-top: dashed 2px #009581;
+  margin: 0 1.5rem 2rem;
+  padding: 1rem 0 0;
+}
+@media (min-width: 1024px) {
+  .header .layout-container .secondary-menu ul {
+    align-items: baseline;
+    justify-content: flex-end;
+  }
+}
+.header .layout-container .secondary-menu ul li {
+  font-weight: 700;
+  padding: 0.75rem 0;
+}
+@media (min-width: 1024px) {
+  .header .layout-container .secondary-menu ul li {
+    font-size: 1.25rem;
+    padding: 0.75rem 1rem;
+  }
+}
+.header .layout-container .secondary-menu ul li a {
+  color: #009581;
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+@media (min-width: 1024px) {
+  .header .layout-container .secondary-menu ul li a {
+    color: #00c7b2;
+    font-size: 1.125rem;
+    text-decoration: underline;
+  }
+}
+.header .layout-container .secondary-menu ul li a:hover, .header .layout-container .secondary-menu ul li a:focus {
+  text-decoration: none;
+}
+@media (min-width: 1024px) {
+  .header .layout-container .secondary-menu ul li:last-child {
+    padding-right: 0;
+  }
+}
+.header.active {
+  border-bottom: none;
+}
+.header.active .main-menu,
+.header.active .secondary-menu,
+.header.active .search-bar {
+  display: block;
+}
 /*# sourceMappingURL=organisms.css.map */
