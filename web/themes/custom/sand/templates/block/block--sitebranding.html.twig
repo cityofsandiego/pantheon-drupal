@@ -1,0 +1,26 @@
+{% extends "block.html.twig" %}
+{#
+/**
+ * @file
+ * Theme override for the footer branding block.
+ *
+ * Each branding element variable (logo, name, slogan) is only available if
+ * enabled in the block configuration.
+ *
+ * Available variables:
+ * - site_logo: Logo for site as defined in Appearance or theme settings.
+ * - site_name: Name for site as defined in Site information settings.
+ * - site_slogan: Slogan for site as defined in Site information settings.
+ */
+#}
+{% block content %}
+  {% if site_logo %}
+    <a href="{{ path('<front>') }}" rel="home" class="site-logo footer-logo">
+      <img src="/{{ directory }}/images/logo.png" alt="{{ 'Johnson County Election Office logo in white'|t }}" class="logo-inverse"/>
+    </a>
+  {% endif %}
+  {% if site_name %}
+    <h1 class="visually-hidden">{{ site_name }}</h1>
+  {% endif %}
+  {# {{ site_slogan }} #}
+{% endblock %}
