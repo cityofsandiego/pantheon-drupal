@@ -68,3 +68,18 @@ $baseline-px: 16 !default;
   margin: 0;
   padding: 0;
 }
+
+@mixin hide-on-mobile{
+  display: none;
+
+  @include respond-to('m') {
+    display: flex;
+  }
+}
+
+@mixin hide-on-desktop{
+
+  @include respond-to('m') {
+    display: none;
+  }
+}
