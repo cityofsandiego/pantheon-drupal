@@ -9,9 +9,30 @@
 
     &__inner {
       background-color: $primary-6;
+      color: $white;
 
       .menu--footer {
-        color: $white;
+        & > ul {
+          @include respond-to('l'){
+            display: flex;
+            gap: 3rem;
+          }
+          a { 
+            color: #6e8393;
+            font-weight: bold;
+          }
+          ul {
+              a {
+                color: $white;
+                font-weight: normal;
+              }
+          }
+        }
+
+      }
+
+      .footer--left{
+        background: #21282d;
       }
     }
 
@@ -48,7 +69,6 @@
     }
 
     &__bottom {
-      background: red;
       padding: 1rem;
     }
   }
