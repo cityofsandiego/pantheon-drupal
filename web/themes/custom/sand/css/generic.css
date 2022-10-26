@@ -49,46 +49,88 @@
   margin: 0 0 1.5rem;
   position: relative;
 }
-@media (min-width: 768px) {
-  .layout-container .layout-content.left-sidebar {
-    margin: 0 0 0 1rem;
-  }
-}
 @media (min-width: 1024px) {
-  .layout-container .layout-content.left-sidebar {
-    max-width: 800px;
+  .layout-container .layout-sidebar-second {
     margin: 0 0 0 1.5rem;
+    max-width: 800px;
   }
 }
-@media (min-width: 1280px) {
-  .layout-container .layout-content.left-sidebar {
-    margin: 0 0 0 2.5rem;
-  }
+.layout-container .layout-sidebar-first {
+  margin: 1.5rem 0 0;
 }
 @media (min-width: 768px) {
-  .layout-container .layout-content.right-sidebar {
+  .layout-container .layout-sidebar-first {
     margin: 0 1rem 0 0;
   }
 }
 @media (min-width: 1024px) {
-  .layout-container .layout-content.right-sidebar {
+  .layout-container .layout-sidebar-first {
     margin: 0 1.5rem 0 0;
   }
 }
-@media (min-width: 1280px) {
-  .layout-container .layout-content.right-sidebar {
-    margin: 0 2.5rem 0 0;
+.layout-container .layout-sidebar-first {
+  order: 2;
+}
+@media (min-width: 1024px) {
+  .layout-container .layout-sidebar-first {
+    order: 1;
+  }
+}
+.layout-container .layout-sidebar-first ~ .layout-content {
+  order: 1;
+}
+@media (min-width: 1024px) {
+  .layout-container .layout-sidebar-first ~ .layout-content {
+    max-width: 73%;
+    order: 2;
+  }
+}
+.layout-container .layout-sidebar-second {
+  order: 2;
+}
+@media (min-width: 1024px) {
+  .layout-container .layout-sidebar-second {
+    order: 2;
+  }
+}
+.layout-container .layout-sidebar-second ~ .layout-content {
+  order: 1;
+}
+@media (min-width: 1024px) {
+  .layout-container .layout-sidebar-second ~ .layout-content {
+    order: 1;
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 1024px) {
+  .row {
+    flex-flow: row wrap;
+    justify-content: start;
+  }
+  .row.no-justify {
+    justify-content: flex-start;
   }
 }
 
 .col {
   flex: 1;
 }
-@media (min-width: 888px) {
+@media (min-width: 1024px) {
+  .col.percent-25 {
+    flex: 0 0 auto;
+    min-width: 24%;
+    width: calc(25% - 0.75rem);
+  }
+}
+@media (min-width: 1024px) {
   .col.percent-33 {
     flex: 0 0 auto;
-    width: calc(33% - 0.75rem);
     min-width: 32%;
+    width: calc(33% - 0.75rem);
   }
 }
 @media (min-width: 444px) {
