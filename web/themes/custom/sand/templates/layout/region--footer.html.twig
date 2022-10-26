@@ -1,0 +1,64 @@
+{#
+/**
+ * @file
+ * Olivero's theme override to display the footer top region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region <div>.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+
+{%
+  set classes = [
+    'region',
+    'region--' ~ region|clean_class,
+    'grid-full',
+    'layout--pass--content-medium',
+    'ie11-autorow',
+  ]
+%}
+
+{% if content %}
+  <div{{ attributes.addClass(classes) }}>
+    <div class="region--{{ region }}__inner">
+      {{ content }}
+    </div>
+
+    <div class="region--{{ region }}__bottom">
+    {# Custom block: /block/award-badges-in-footer/edit?destination=admin/content/blocks #}
+      <div class="row l-margin-vd text-center hide-on-mobile">
+        <div class="four columns"><a href="https://www.govtech.com/cdg/government-experience/Government-Experience-Awards-2020-Winners-Announced.html"><img src="/sites/default/files/gea-2020.png" style="height: 73px; width: 178px;"></a></div>
+
+        <div class="four columns"><a href="https://whatworkscities.bloomberg.org/certification"><img src="/sites/default/files/what-works-2020-footer-logo.png" style="height: 73px; width: 195px;"></a></div>
+
+        <div class="four columns"><a href="https://www.govtech.com/dc/articles/digital-cities-2021-500-000-or-more-population-category"><img alt="Digital Cities Survey 2021 Winner" src="/sites/default/files/digital-cities-2021.jpg" style="height: 73px; width: 154px;"></a></div>
+      </div>
+
+      <div class="hide-on-desktop">
+        <div class="row l-margin-td text-center">
+          <div class="sm-four columns l-margin-bs"><a href="https://www.govtech.com/cdg/government-experience/Government-Experience-Awards-2020-Winners-Announced.html"><img src="/sites/default/files/gea-2020.png" style="height: 73px; width: 178px;"></a></div>
+
+          <div class="sm-four columns l-margin-bs"><a href="https://whatworkscities.bloomberg.org/certification/"><img src="/sites/default/files/what-works-2020-footer-logo.png" style="height: 73px; width: 195px;"></a></div>
+
+          <div class="sm-four columns l-margin-bs"><a href="https://www.govtech.com/dc/articles/digital-cities-2021-500-000-or-more-population-category"><img alt="Digital Cities Survey 2021 Winner" src="/sites/default/files/digital-cities-2021.jpg" style="height: 73px; width: 154px;"></a></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="region--{{ region }}__privacy">
+      <ul>
+        <li><a href="/disclaimers">Disclaimers</a></li>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
+        <li><a href="/accessibility">Accessibility</a></li>
+        <li><a href="/translation">Language Translation</a></li>
+        <li><a href="/contact">Contact the City</a></li>
+      </ul>
+    </div>
+  </div>
+{% endif %}
+
