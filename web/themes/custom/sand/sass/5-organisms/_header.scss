@@ -3,5 +3,185 @@
   ============================================================ */
 
 .header {
+  background: $primary-1;
+  margin-bottom: 1.5rem;
 
+  @include respond-to('l') {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding: 1rem 0;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .layout-container {
+    display: grid;
+    grid-template-columns: 1fr 6rem;
+    grid-template-rows: repeat(3, auto);
+    padding: 0;
+
+    @include respond-to('l') {
+      grid-template-columns: repeat(2, auto);
+      padding: 0 2rem;
+    }
+
+    @include respond-to('xl') {
+      padding: 0 5rem;
+    }
+
+    @include respond-to('xxl') {
+      padding: 0 6.25rem;
+    }
+
+    .mobile-menu-trigger {
+      background: $primary-3;
+      border: none;
+      font-family: $body-copy;
+      font-size: 1.25rem;
+      font-weight: 700;
+
+      span {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        &.close {
+          display: none;
+        }
+
+        svg {
+          font-size: 1.5rem;
+          margin-bottom: 0.25rem;
+        }
+      }
+
+      &.active {
+
+        span {
+
+          &.open {
+            display: none;
+          }
+
+          &.close {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .main-menu {
+      background: $white;
+      display: none;
+      grid-column: 1/3;
+      grid-row: 3/4;
+      padding: 0 1.5rem;
+
+      @include respond-to('l') {
+        display: block;
+        grid-row: 2/3;
+        margin-top: 1.25rem;
+        padding: 0;
+      }
+
+      // nav style on file _main-menu.scss
+    }
+
+    .search-bar {
+      color: $primary-3;
+      display: none;
+      padding: 0 1.5rem 2rem;
+
+      p {
+        margin-bottom: 0;
+      }
+
+      @include respond-to('l') {
+        border-top: none;
+        display: block;
+        opacity: 1;
+        padding: 0;
+        position: relative;
+      }
+
+      // Style search-box on file _search-bar.scss
+    }
+
+    .secondary-menu {
+      display: none;
+      grid-column: 1/3;
+      grid-row: 4/5;
+      padding-top: 1rem;
+
+      @include respond-to('l') {
+        background: $primary-3;
+        border-top: none;
+        display: block;
+        grid-column: 2/3;
+        grid-row: 1/2;
+        margin-right: 0;
+        padding-top: 0;
+      }
+
+      ul {
+        border-top: dashed 2px $primary-3;
+        margin: 0 1.5rem 2rem;
+        padding: 1rem 0 0;
+
+        @include respond-to('l') {
+          align-items: baseline;
+          justify-content: flex-end;
+        }
+
+        li {
+          font-weight: 700;
+          padding: 0.75rem 0;
+
+          @include respond-to('l') {
+            font-size: 1.25rem;
+            padding: 0.75rem 1rem;
+          }
+
+          a {
+            color: $primary-3;
+            display: block;
+            font-size: 1.125rem;
+            font-weight: 700;
+            text-decoration: none;
+
+            @include respond-to('l') {
+              color: $primary-2;
+              font-size: 1.125rem;
+              text-decoration: underline;
+            }
+
+            &:hover,
+            &:focus {
+              text-decoration: none;
+            }
+          }
+
+          &:last-child {
+            @include respond-to('l') {
+              padding-right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.active {
+    border-bottom: none;
+
+    .main-menu,
+    .secondary-menu,
+    .search-bar {
+      display: block;
+    }
+  }
 }
