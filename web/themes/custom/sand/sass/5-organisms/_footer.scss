@@ -3,6 +3,27 @@
   ============================================================ */
 .footer {
   .region--footer {
+    max-width: 16000px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include respond-to('m') {
+      font-size: 0.8125rem;
+    }
+
+    @include respond-to('l') {
+      padding: 0 2rem;
+      font-size: 1rem;
+    }
+
+    @include respond-to('xl') {
+      padding: 0 5rem;
+    }
+
+    @include respond-to('xxl') {
+      padding: 0 6.25rem;
+    }
+
     ul {
       @include list-reset;
     }
@@ -10,29 +31,126 @@
     &__inner {
       background-color: $primary-6;
       color: $white;
+      text-align: center;
+      
+      @include respond-to('m') {
+        display: flex;
+        text-align: left;
+      }
 
       .menu--footer {
+        padding: 2rem;
+
         & > ul {
-          @include respond-to('l'){
+          @include respond-to('m') {
             display: flex;
-            gap: 3rem;
+            gap: 2rem;
           }
+
+          .menu-item--expanded {
+            margin-bottom: 1.5rem;
+            list-style: none;
+            line-height: 1.4;
+
+            @include respond-to('m') {
+              flex: 1;
+            }
+          }
+
           a { 
             color: #6e8393;
-            font-weight: bold;
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
           }
+
           ul {
               a {
                 color: $white;
-                font-weight: normal;
+                font-weight: 400;
               }
           }
         }
 
+        @include respond-to('m') {
+          padding: 2rem 1rem;
+          width: 75%;
+        }
+
+        @include respond-to('l') {
+          padding: 2rem 2rem;
+        }
       }
 
-      .footer--left{
+      .footer--left {
         background: #21282d;
+        padding: 2rem;
+
+        @include respond-to('m') {
+          padding: 2rem 1rem;
+          width: 25%;
+        }
+
+        @include respond-to('l') {
+          padding: 2rem 2rem;
+        }
+
+        .socials {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1rem;
+          justify-content: center;
+          margin-top: 0.5rem;
+
+          @include respond-to('m') {
+            gap: 0.5rem;
+            justify-content: start;
+          }
+
+          a {
+            align-items: center;
+            background: rgba(246,246,246,0.8);
+            border-radius: 2px;
+            color: $primary-6;
+            display: flex;
+            height: 1.5rem;
+            justify-content: center;
+            width: 1.5rem;
+          }
+        }
+
+        p.copyright {
+          color: #6e8393;
+          font-size: 1rem;
+          margin: 2.5rem 0 0;
+
+          @include respond-to('m') {
+            font-size: 0.8125rem;
+          }
+        }
+      }
+    }
+
+    &__bottom {
+      background: $white;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+
+      @include respond-to('m') {
+        justify-content: space-around;
+      }
+      .logo {
+        max-width: 150px;
+
+        @include respond-to('m') {
+          max-width: 33%;
+        }
+
+        img {
+          width: 100%;
+        }
       }
     }
 
