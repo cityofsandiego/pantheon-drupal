@@ -1,61 +1,87 @@
 /* ============================================================
   Styles for background colors/gradients, opacity, and type color.
   ============================================================ */
-  $colors: (
-    "primary-1":$primary-1,
-    "primary-2": $primary-2,
-    "primary-3": $primary-3,
-    "primary-4": $primary-4,
-    "primary-5": $primary-5,
-    "primary-6": $primary-6,
-    "primary-7": $primary-7,
-    "accent-1": $accent-1,
-    "accent-2": $accent-2,
-    "accent-3": $accent-3,
-    "accent-4": $accent-4,
-    "accent-5": $accent-5,
-    "accent-6": $accent-6,
-    "accent-7": $accent-7,
-    "accent-8": $accent-8,
-    "accent-9": $accent-9,
-    "accent-10": $accent-10,
-    "accent-11": $accent-11,
-    "status-1": $status-1,
-    "status-2": $status-2,
-    "status-3": $status-3,
-  );
-  @each $name, $color in $colors {
-    .#{$name} {
-      color: $color;
-      &-bg{
-            background: $color;
-      }
-      &-bg.bg-level-2{
-        background: rgba($color, .9);
-      }
-      &-bg.bg-level-3{
-            background: rgba($color, .5);
-      }
-      &-bg.bg-level-4{
-            background: rgba($color, .2);
-      }
+$colors: (
+  'primary-1': $primary-1,
+  'primary-2': $primary-2,
+  'primary-3': $primary-3,
+  'primary-4': $primary-4,
+  'primary-5': $primary-5,
+  'primary-6': $primary-6,
+  'primary-7': $primary-7,
+  'accent-1': $accent-1,
+  'accent-2': $accent-2,
+  'accent-3': $accent-3,
+  'accent-4': $accent-4,
+  'accent-5': $accent-5,
+  'accent-6': $accent-6,
+  'accent-7': $accent-7,
+  'accent-8': $accent-8,
+  'accent-9': $accent-9,
+  'accent-10': $accent-10,
+  'accent-11': $accent-11,
+  'status-1': $status-1,
+  'status-2': $status-2,
+  'status-3': $status-3,
+);
+
+@each $name, $color in $colors {
+  .#{$name} {
+    color: $color;
+
+    &-bg {
+      background: $color;
+    }
+
+    &-bg.bg-level-2 {
+      background: rgba($color, 0.9);
+    }
+
+    &-bg.bg-level-3 {
+      background: rgba($color, 0.5);
+    }
+
+    &-bg.bg-level-4 {
+      background: rgba($color, 0.2);
     }
   }
+}
+
 .gradient-1 {
   background: $primary-1;
   background: -moz-linear-gradient(90deg, $primary-1, $accent-1);
   background: -webkit-linear-gradient(90deg, $primary-1, $accent-1);
   background: linear-gradient(90deg, $primary-1, $accent-1);
 }
+
 .gradient-2 {
   background: $primary-3;
   background: -moz-linear-gradient(90deg, $primary-3, $primary-2);
   background: -webkit-linear-gradient(90deg, $primary-3, $primary-2);
   background: linear-gradient(90deg, $primary-3, $primary-2);
 }
+
 .gradient-3 {
   background: $accent-1;
-  background: -moz-linear-gradient(90deg, $accent-1 0%, $primary-1 33%, $accent-2 66%, $primary-2 100%);
-  background: -webkit-linear-gradient(90deg, $accent-1 0%, $primary-1 33%, $accent-2 66%, $primary-2 100%);
-  background: linear-gradient(90deg, $accent-1 0%, $primary-1 33%, $accent-2 66%, $primary-2 100%);
+  background: -moz-linear-gradient(
+    90deg,
+    $accent-1 0%,
+    $primary-1 33%,
+    $accent-2 66%,
+    $primary-2 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    $accent-1 0%,
+    $primary-1 33%,
+    $accent-2 66%,
+    $primary-2 100%
+  );
+  background: linear-gradient(
+    90deg,
+    $accent-1 0%,
+    $primary-1 33%,
+    $accent-2 66%,
+    $primary-2 100%
+  );
 }
