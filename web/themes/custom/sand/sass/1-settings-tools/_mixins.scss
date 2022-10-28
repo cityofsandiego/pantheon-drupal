@@ -1,15 +1,3 @@
-// ==========================================================================
-// SAND Mixins
-// ==========================================================================
-
-
-// Box Sizing
-@mixin box-sizing( $box-model ) {
-  -webkit-box-sizing: $box-model; // Safari <= 5
-     -moz-box-sizing: $box-model; // Firefox <= 19
-          box-sizing: $box-model;
-}
-
 /*
  * General Mixins (put specific ones in component files where applicable)
 */
@@ -20,7 +8,7 @@
   padding: 0;
 }
 
-@mixin hide-on-mobile{
+@mixin hide-on-mobile {
   display: none;
 
   @include respond-to('m') {
@@ -28,8 +16,7 @@
   }
 }
 
-@mixin hide-on-desktop{
-
+@mixin hide-on-desktop {
   @include respond-to('m') {
     display: none;
   }
