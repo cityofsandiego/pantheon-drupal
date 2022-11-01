@@ -31,8 +31,8 @@ class TaxonomyImportTasks {
    * Checks to see if a term exists from a prior import.
    */
   public function newTid($d7id, $vocabulary) {
-    $query = \Drupal::entityQuery('taxonomy_term')
-      ->condition('vid', $vocabulary)
+    $query = $this->entityTypeManager->getStorage('taxonomy_term')->getQuery();
+    $query->condition('vid', $vocabulary)
       ->condition('field_field_d7_tid', $d7id);
     $tids = $query->execute();
     if (empty($tids)) {
