@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.location.body
     - field.field.node.location.field_address
+    - field.field.node.location.field_address_pin
     - field.field.node.location.field_alt_amenities_title
     - field.field.node.location.field_alt_restrictions_title
     - field.field.node.location.field_amenities
@@ -38,6 +39,7 @@ dependencies:
   module:
     - address
     - entity_reference_revisions
+    - geofield
     - link
     - office_hours
     - smart_date
@@ -62,6 +64,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 106
+    region: content
+  field_address_pin:
+    type: geofield_default
+    label: above
+    settings:
+      output_format: wkt
+      output_escape: true
+    third_party_settings: {  }
+    weight: 132
     region: content
   field_alt_amenities_title:
     type: string
