@@ -1,0 +1,29 @@
+uuid: 1f0d16a9-bf9f-4797-8db2-73eefd24acae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image
+    - media.type.image
+    - node.type.mayoral_artifacts
+id: node.mayoral_artifacts.field_image
+field_name: field_image
+entity_type: node
+bundle: mayoral_artifacts
+label: Photo
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
