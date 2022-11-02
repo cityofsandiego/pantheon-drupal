@@ -18,7 +18,6 @@ function sand_weather_cron():void {
 
   // We usually don't want to act every time cron runs.
   $next_execution = \Drupal::state()->get('sand_weather.next_execution', 0);
-  $next_execution = 0; // @todo remove!
   $request_time = \Drupal::time()->getRequestTime();
   if ($request_time >= $next_execution) {
     /** @var \Drupal\Core\Queue\DatabaseQueue $queue */
