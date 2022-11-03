@@ -228,7 +228,7 @@ const ICON_CLOUD = [
  *   cron = {"time" = 60}
  * )
  */
-final class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
+class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
 
   /**
    * The entity type manager.
@@ -278,7 +278,7 @@ final class SandWeatherQueue extends QueueWorkerBase implements ContainerFactory
    *
    * @return static
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition):static {
     return new static(
       $configuration,
       $plugin_id,
@@ -309,7 +309,7 @@ final class SandWeatherQueue extends QueueWorkerBase implements ContainerFactory
 
     $results_array = [];
     try {
-      /** @var ResponseInterface $response */
+      /** @var \Psr\Http\Message\ResponseInterface $response */
       $client = \Drupal::httpClient();
       $response = $client->get($url);
       if ($response->getStatusCode() == 200) {
@@ -324,7 +324,6 @@ final class SandWeatherQueue extends QueueWorkerBase implements ContainerFactory
           $weather = (string) $xml->weather;
           $results_array['icon'] = $this->getWeatherIcon($weather);
         }
-        // @todo Notify IF of the state variable for the headers.
         \Drupal::state()->set('sand_weather.weather', $results_array);
       }
     } catch (Exception $exception) {

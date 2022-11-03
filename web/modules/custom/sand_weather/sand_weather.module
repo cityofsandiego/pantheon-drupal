@@ -25,7 +25,7 @@ function sand_weather_cron():void {
     $item = new \stdClass();
     $item->request_time = $request_time;
     try {
-      $queue_id = $queue->createItem($item);
+      $queue->createItem($item);
     }
     catch (Exception $exception) {
       watchdog_exception('sand_weather', $exception);
