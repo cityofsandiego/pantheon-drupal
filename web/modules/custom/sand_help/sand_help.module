@@ -2,7 +2,6 @@
 
 /**
  * @file
- * Help functions for City of San Diego.
  */
 
 declare(strict_types=1);
@@ -36,8 +35,10 @@ This file: '. $directory . '/' . $filename;
   
   switch ($route_name) {
     case 'help.page.cofsd':
+    case 'help.page.sand_admin':
     case 'help.page.sand_datalayer':
     case 'help.page.sand_help':
+    case 'help.page.sand_weather':
       /** @var string $text */
       $text = file_get_contents($directory . '/' . $filename);
       if (!\Drupal::moduleHandler()->moduleExists('markdown')) {

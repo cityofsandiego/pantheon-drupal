@@ -2,10 +2,16 @@
 
 /**
  * @file
- * Sets the weather information for the header.
  */
 
 declare(strict_types=1);
+
+/**
+ * Implements hook_help().
+ */
+function sand_weather_help($route_name): ?string {
+  return sand_help_show_help(__DIR__, $route_name);
+}
 
 /**
  * Implements hook_cron().
