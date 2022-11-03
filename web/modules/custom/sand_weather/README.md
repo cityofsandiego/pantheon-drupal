@@ -8,7 +8,7 @@ http://w1.weather.gov/xml/current_obs/KSAN.xml and formats it for use in our hea
 Enable module.
 
 ### CONFIGURATION
-Module configuration file holds last time run and the url to get the weather from.
+See Configure link in <a href="/admin/modules">/admin/modules</a>
 
 ### TODO
 See individual files. Format: @todo ...
