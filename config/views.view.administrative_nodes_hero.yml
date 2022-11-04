@@ -11,11 +11,14 @@ dependencies:
     - field.storage.node.field_image
     - field.storage.node.field_path
     - image.style.thumbnail
+    - node.type.hero
+    - taxonomy.vocabulary.departments
   module:
     - history
     - media
     - node
     - options
+    - taxonomy
     - user
 id: administrative_nodes_hero
 label: 'Administrative Nodes Hero (Content)'
@@ -33,53 +36,6 @@ display:
     display_options:
       title: Content
       fields:
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: field
-          label: Title
-          exclude: false
-          alter:
-            alter_text: false
-            make_link: false
-            absolute: false
-            word_boundary: false
-            ellipsis: false
-            strip_tags: false
-            trim: false
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         node_bulk_form:
           id: node_bulk_form
           table: node
@@ -205,17 +161,64 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        publish_state:
-          id: publish_state
+        title:
+          id: title
           table: node_field_data
-          field: publish_state
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
-          entity_field: publish_state
+          entity_field: title
           plugin_id: field
-          label: 'Published status'
+          label: Title
+          exclude: false
+          alter:
+            alter_text: false
+            make_link: false
+            absolute: false
+            word_boundary: false
+            ellipsis: false
+            strip_tags: false
+            trim: false
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: status
+          plugin_id: field
+          label: Published
           exclude: false
           alter:
             alter_text: false
@@ -257,8 +260,11 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: list_default
-          settings: {  }
+          type: boolean
+          settings:
+            format: custom
+            format_custom_false: Unpublished
+            format_custom_true: Published
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -532,69 +538,6 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: true
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        delta:
-          id: delta
-          table: node__field_department
-          field: delta
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: numeric
           label: Department
           exclude: false
           alter:
@@ -636,14 +579,20 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          set_precision: false
-          precision: 0
-          decimal: .
-          separator: ','
-          format_plural: false
-          format_plural_string: !!binary MQNAY291bnQ=
-          prefix: ''
-          suffix: ''
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         timestamp:
           id: timestamp
           table: history
@@ -1018,7 +967,7 @@ display:
         type: basic
         options:
           submit_button: Apply
-          reset_button: false
+          reset_button: true
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
@@ -1064,6 +1013,507 @@ display:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          operator: in
+          value:
+            hero: hero
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: title_op
+            label: Title
+            description: ''
+            use_operator: false
+            operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: title
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        status_1:
+          id: status_1
+          table: node_field_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Published status'
+            description: null
+            use_operator: false
+            operator: status_1_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: status_1
+            required: true
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: true
+          group_info:
+            label: Published
+            description: ''
+            identifier: status_1
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: Published
+                operator: '='
+                value: '1'
+              2:
+                title: Unpublished
+                operator: '='
+                value: '0'
+              3:
+                title: ''
+                operator: '='
+                value: ''
+        field_hero_image_by_value:
+          id: field_hero_image_by_value
+          table: node__field_hero_image_by
+          field: field_hero_image_by_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_hero_image_by_value_op
+            label: 'Image by'
+            description: ''
+            use_operator: false
+            operator: field_hero_image_by_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_hero_image_by_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_hero_time_of_day_value:
+          id: field_hero_time_of_day_value
+          table: node__field_hero_time_of_day
+          field: field_hero_time_of_day_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: and
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_hero_time_of_day_value_op
+            label: 'Time of Day'
+            description: ''
+            use_operator: false
+            operator: field_hero_time_of_day_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_hero_time_of_day_value
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        field_hero_sitewide_value:
+          id: field_hero_sitewide_value
+          table: node__field_hero_sitewide
+          field: field_hero_sitewide_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Sitewide (field_hero_sitewide)'
+            description: ''
+            use_operator: false
+            operator: field_hero_sitewide_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_hero_sitewide_value
+            required: true
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+          is_grouped: true
+          group_info:
+            label: Sitewide
+            description: ''
+            identifier: field_hero_sitewide_value
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: 'Yes'
+                operator: '='
+                value: '1'
+              2:
+                title: 'No'
+                operator: '='
+                value: '1'
+        field_hero_frontpage_value:
+          id: field_hero_frontpage_value
+          table: node__field_hero_frontpage
+          field: field_hero_frontpage_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: boolean
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Use on Home Page of City of San Diego (field_hero_frontpage)'
+            description: ''
+            use_operator: false
+            operator: field_hero_frontpage_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_hero_frontpage_value
+            required: true
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+          is_grouped: true
+          group_info:
+            label: 'City Home'
+            description: ''
+            identifier: field_hero_frontpage_value
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: 'Yes'
+                operator: '='
+                value: '1'
+              2:
+                title: 'No'
+                operator: '='
+                value: '0'
+        field_department_target_id:
+          id: field_department_target_id
+          table: node__field_department
+          field: field_department_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_department_target_id_op
+            label: Department
+            description: ''
+            use_operator: false
+            operator: field_department_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_department_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: departments
+          type: textfield
+          hierarchy: false
+          limit: true
+          error_message: true
+        uid:
+          id: uid
+          table: node_field_data
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: uid
+          plugin_id: user_name
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: uid_op
+            label: 'Authored by'
+            description: ''
+            use_operator: false
+            operator: uid_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: uid
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       style:
         type: table
       row:
@@ -1085,7 +1535,9 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -1109,7 +1561,9 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
