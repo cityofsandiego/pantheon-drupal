@@ -1,0 +1,22 @@
+uuid: 3494f64d-e277-4739-9b05-4caeaab09e35
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: department
+label: 'External Data'
+type: 'canonical_entities:node'
+pattern: 'ocd/[node:title]-[node:field_doc_num]'
+selection_criteria:
+  c2c89081-324a-4632-83fb-3fb9c2ad40b2:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: c2c89081-324a-4632-83fb-3fb9c2ad40b2
+    context_mapping:
+      node: node
+    bundles:
+      external_data: external_data
+selection_logic: and
+weight: -5
+relationships: {  }
