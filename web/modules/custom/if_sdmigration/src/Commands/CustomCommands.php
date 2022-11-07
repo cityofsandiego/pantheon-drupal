@@ -311,7 +311,7 @@ class CustomCommands extends DrushCommands {
       $query = $this->entityTypeManager
         ->getStorage('node')
         ->getQuery();
-      $query->condition('type', 'department')
+      $query->condition('type', 'department_parent')
         ->condition('field_d7_nid', $d7id);
       $nid = reset($query->execute());
       $node = Node::load($nid);
@@ -392,7 +392,8 @@ class CustomCommands extends DrushCommands {
         $node->field_image = $image;
       }
       // Create (if not pre-existing) and set image.
-      if (!empty($data['featured_image_path'])) {
+      if (!empty($data['featured_image_path']) && strpos('youtube://', $data['featured_image_path']) < 0) {
+        // TODO: Youtube?
         $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['featured_image_path']);
         $file_data = file_get_contents($remote_file);
         // Fixes for irregular paths.
