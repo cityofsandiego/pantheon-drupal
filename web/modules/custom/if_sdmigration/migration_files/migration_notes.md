@@ -11,13 +11,17 @@ drush import:taxonomy location
 
 Node imports:
 drush mi:import sd_nodes_department --update --force
+drush mi:import sd_nodes_department_parent --update --force
 
 Entity creation and associations via drush:
-drush import:department 
+drush import:department
+drush import:department-parent
 
 Data status:
 Department nodes exported from dev 9/26/2022
+Department parent nodes exported from dev 9/26/2022
 field_dept_resources_coll field group exported from dev 9/26/2022
+field_dept_par_social_links_coll field group exported from dev 9/26/2022
 Categories vocabulary exported from dev 9/26/2022
 Departments vocabulary exported from dev 9/26/2022
 Keymatch vocabulary exported from dev 9/26/2022
