@@ -2,7 +2,6 @@
 
 /**
  * @file
- * Help functions for City of San Diego.
  */
 
 declare(strict_types=1);
@@ -28,23 +27,34 @@ function sand_help_help($route_name): ?string {
  *   Return the HTML or NULL if file does not exist.
  */
 function sand_help_show_help(string $directory, string $route_name):?string {
+  
+  $filename = 'README.md';
+  $fullname = '
+---
+This file: '. $directory . '/' . $filename; 
+  
   switch ($route_name) {
     case 'help.page.cofsd':
+    case 'help.page.sand_admin':
     case 'help.page.sand_datalayer':
     case 'help.page.sand_help':
+    case 'help.page.sand_weather':
       /** @var string $text */
-      $text = file_get_contents($directory . '/README.md');
+      $text = file_get_contents($directory . '/' . $filename);
       if (!\Drupal::moduleHandler()->moduleExists('markdown')) {
-        return '<pre>' . Html::escape($text) . '</pre>';
+        // Markdown module is not installed so just render the text file.
+        $output = '<pre>' . Html::escape($text . $fullname) . '</pre>';
       }
       else {
+        // Markdown module is enabled.
         /** @var \Drupal\markdown\PluginManager\ParserManagerInterface $parser_manager */
         $parser_manager = \Drupal::service('plugin.manager.markdown.parser');
         $parser = $parser_manager->getDefaultParser([
           'render_strategy' => ['type' => 'none'],
         ]);
-        return (string) $parser->parse($text);
+        $output = (string) $parser->parse($text . $fullname);
       }
+      return $output;
   }
   return NULL;
 }

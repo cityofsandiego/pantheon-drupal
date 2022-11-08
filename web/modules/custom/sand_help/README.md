@@ -20,7 +20,3 @@ Fully upgraded to D9.
 ### DRUPAL7
 
 Not in D7.
-
----
-
-(This file is README.md in the module directory, please update this if changes are made.)

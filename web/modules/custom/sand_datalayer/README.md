@@ -21,7 +21,3 @@ Fully upgraded to D9.
 ### DRUPAL7
 
 Basic logic is the same but needed some re-work and also now does not run on admin pages.
-
----
-
-(This file is README.md in the module directory, please update this if changes are made.)
