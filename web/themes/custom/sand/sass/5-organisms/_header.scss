@@ -2,186 +2,194 @@
   Styles for the header.
   ============================================================ */
 
+.off-canvas-wrapper {
+
+  .off-canvas-main-menu {
+    background: $off-black;
+    top: auto;
+
+    ul {
+      margin: 0;
+
+      a {
+        border-bottom: 1px solid $spruce;
+        color: $white;
+        display: block;
+        padding: 1rem;
+      }
+    }
+  }
+}
+
 .header {
-  background: $primary-1;
   margin-bottom: 1.5rem;
 
   @include respond-to('l') {
-    border-bottom: none;
+    display: block;
     margin-bottom: 0;
+  }
+
+  .header-first,
+  .header-second {
+    @include respond-to('l') {
+      background: $cerulean;
+    }
+
+    background-color: $white;
+  }
+
+  .header-first {
     padding: 1rem 0;
+
+    .button {
+      margin-bottom: 0;
+
+      &::after {
+        background: $cerulean;
+        box-shadow: 0 7px 0 $cerulean, 0 14px 0 $cerulean;
+      }
+    }
+
+    .burger-wrapper {
+      $s: 0.2rem;
+
+      cursor: pointer;
+      height: $s * 8;
+      margin: auto;
+      width: $s * 10;
+
+      .hamburger {
+        background: $cerulean;
+        height: $s;
+        position: relative;
+        transform: translateY($s * 4);
+        transition: background 10ms 300ms ease;
+        width: $s * 10;
+
+        &:before,
+        &:after {
+          background: $cerulean;
+          content: '';
+          height: $s;
+          left: 0;
+          position: absolute;
+          transform 300ms 50ms ease;
+          transition: top 300ms 350ms ease,
+          width: $s*10;
+        }
+
+        &:before {
+          top: $s * -3;
+        }
+
+        &:after {
+          top: $s * 3;
+        }
+      }
+    }
+
+    // .menu-trigger:checked {
+
+    //   ~ .burger-wrapper {
+
+    //     .hamburger {
+    //       background: transparent;
+
+    //       &:after, &:before {
+    //         top: 0;
+    //         transition: top 300ms 50ms ease,
+    //         transform 300ms 350ms ease;
+    //       }
+
+    //       &:before {
+    //         transform: rotate(45deg);
+    //       }
+
+    //       &:after {
+    //         transform: rotate(-45deg);
+    //       }
+    //     }
+    //   }
+    // }
+
+    .logo-mobile {
+      width: 4.5rem;
+    }
+
+    .search-bar {
+      color: $teal;
+
+      @include respond-to('l') {
+        display: block;
+      }
+    }
   }
 
-  ul {
-    list-style: none;
-    padding-left: 0;
-  }
-
-  .layout-container {
-    display: grid;
-    grid-template-columns: 1fr 6rem;
-    grid-template-rows: repeat(3, auto);
-    padding: 0;
+  .header-second {
 
     @include respond-to('l') {
-      grid-template-columns: repeat(2, auto);
-      padding: 0 2rem;
+      background-color: $white;
     }
 
-    @include respond-to('xl') {
-      padding: 0 5rem;
-    }
-
-    @include respond-to('xxl') {
-      padding: 0 6.25rem;
-    }
-
-    .mobile-menu-trigger {
-      background: $primary-3;
-      border: none;
-      font-family: $body-copy;
-      font-size: 1.25rem;
-      font-weight: 700;
-
-      span {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        &.close {
-          display: none;
-        }
-
-        svg {
-          font-size: 1.5rem;
-          margin-bottom: 0.25rem;
-        }
-      }
-
-      &.active {
-
-        span {
-
-          &.open {
-            display: none;
-          }
-
-          &.close {
-            display: block;
-          }
-        }
-      }
-    }
+    padding: 0;
 
     .main-menu {
-      background: $white;
-      display: none;
-      grid-column: 1/3;
-      grid-row: 3/4;
-      padding: 0 1.5rem;
 
       @include respond-to('l') {
+        background: $white;
         display: block;
-        grid-row: 2/3;
-        margin-top: 1.25rem;
         padding: 0;
       }
 
-      // nav style on file _main-menu.scss
+      .full-width {
+        width: 100%;
+      }
     }
 
-    .search-bar {
-      color: $primary-3;
-      display: none;
-      padding: 0 1.5rem 2rem;
-
-      p {
-        margin-bottom: 0;
-      }
-
-      @include respond-to('l') {
-        border-top: none;
-        display: block;
-        opacity: 1;
-        padding: 0;
-        position: relative;
-      }
-
-      // Style search-box on file _search-bar.scss
+    .tbm-submenu-toggle,
+    .tbm .tbm-item {
+      background-color: $white;
+      color: #333;
     }
 
-    .secondary-menu {
-      display: none;
-      grid-column: 1/3;
-      grid-row: 4/5;
-      padding-top: 1rem;
+    .tbm-submenu-toggle:hover,
+    .tbm-submenu-toggle:focus,
+    .tbm .tbm-item a:hover,
+    .tbm .tbm-item a:focus,
+    .tbm .tbm-item .open {
+      background-color: $tulip;
+      color: $white;
+    }
+
+    .tbm .nav li.dropdown.active > .dropdown-toggle .caret {
+      border-top-color: $tulip;
+      border-bottom-color: $tulip;
+    }
+
+    .tbm-main {
 
       @include respond-to('l') {
-        background: $primary-3;
-        border-top: none;
-        display: block;
-        grid-column: 2/3;
-        grid-row: 1/2;
-        margin-right: 0;
-        padding-top: 0;
+        background: $white;
       }
 
-      ul {
-        border-top: dashed 2px $primary-3;
-        margin: 0 1.5rem 2rem;
-        padding: 1rem 0 0;
-
-        @include respond-to('l') {
-          align-items: baseline;
-          justify-content: flex-end;
-        }
-
-        li {
-          font-weight: 700;
-          padding: 0.75rem 0;
-
-          @include respond-to('l') {
-            font-size: 1.25rem;
-            padding: 0.75rem 1rem;
-          }
-
-          a {
-            color: $primary-3;
-            display: block;
-            font-size: 1.125rem;
-            font-weight: 700;
-            text-decoration: none;
-
-            @include respond-to('l') {
-              color: $primary-2;
-              font-size: 1.125rem;
-              text-decoration: underline;
-            }
-
-            &:hover,
-            &:focus {
-              text-decoration: none;
-            }
-          }
-
-          &:last-child {
-            @include respond-to('l') {
-              padding-right: 0;
-            }
-          }
-        }
+      a {
+        background-color: $white;
+        color: #333;
       }
+    }
+
+    .tbm-submenu {
+      border-color: transparent;
+    }
+
+    .tbm-button {
+      margin: 0;
     }
   }
 
-  &.active {
-    border-bottom: none;
-
-    .main-menu,
-    .secondary-menu,
-    .search-bar {
-      display: block;
+  .search-bar {
+    .input-group {
+      margin: 0;
     }
   }
 }

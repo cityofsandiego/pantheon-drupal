@@ -13,24 +13,49 @@
  */
 #}
 {% if content %}
-    <div class="site-branding">
-      {{ drupal_entity('block', 'sitebranding')}}
-    </div>
-    <button class="mobile-menu-trigger primary-3 d-l-none">
-        <span class="open"><i class="far fa-bars burger"></i><span class="txt">{{ 'Menu'|t }}</span></span>
-        <span class="close"><i class="far fa-times close-x"></i><span class="txt">{{ 'Close'|t }}</span></span>
-    </button>
-    <!-- <div class="search-bar">
-      <form class="form--search" action="/" method="post" id="search-block-form"><div>
-        <div class="form-item form-type-textfield form-item-search-block-form">
-         <input placeholder="Search sandiego.gov" type="text" id="edit-search-block-form--2" name="search_block_form" value="" class="form-text">
+  <section class="header-first">
+    <div class="grid-container">
+      <div class="grid-x grid-margin-y align-middle">
+        <div class="site-branding cell small-6 large-8">
+          {{ drupal_entity('block', 'sitebranding')}}
         </div>
-        <div class="form-actions form-wrapper" id="edit-actions--2">
-          <input class="btn form-submit" type="submit" id="edit-submit--3" name="op" value="Search"></div><input type="hidden" name="form_build_id" value="form-rjCVEeb6aXUgpBf5PMgU2O-3uoYBVFG6QkMolZFeLEg">
+        <div class="cell small-6 hide-for-large text-right">
+          <input type="checkbox" id="togglenav" class="menu-trigger visually-hidden" data-toggle="offCanvas">
+          <label for="togglenav" class="burger-wrapper">
+            <div class="hamburger"></div>
+          </label>
+        </div>
+        <div class="search-bar cell small-4 show-for-large">
+          <div class="input-group">
+            <input class="input-group-field" type="text" placeholder="Search sandiego.gov">
+            <div class="input-group-button">
+              <input type="submit" class="button" value="Search">
+            </div>
           </div>
-      </form>
-    </div> -->
-    <div class="main-menu">
-      {{ drupal_entity('block', 'mainnavigation')}}
+        </div>
+      </div>
+      <div class="grid-x grid-margin-y hide-for-large">
+        <div class="search-bar cell small-12 align-center">
+          <div class="input-group">
+          <input class="input-group-field" type="text">
+          <div class="input-group-button">
+            <input type="submit" class="button" value="Search">
+          </div>
+        </div>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <section class="header-second show-for-large">
+    <div class="grid-container">
+      <div class="grid-x">
+        <div class="main-menu cell large-12">
+          {{ drupal_entity('block', 'mainnavigation_mega_menu')}}
+
+        </div>
+      </div>
+    </div>
+  </section>
+
 {% endif %}

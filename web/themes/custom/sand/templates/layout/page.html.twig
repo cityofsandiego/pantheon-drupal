@@ -44,49 +44,55 @@
  */
 #}
 
-{% if page.preheader %}
-<div class="preheader">
-  {{ page.preheader }}
-</div>
-{% endif %}
+<div class="off-canvas-wrapper">
+  <section class="off-canvas off-canvas-main-menu position-right hide-for-large" id="offCanvas" data-off-canvas>
+    {{ drupal_entity('block', 'mainnavigation')}}
+  </section>
+  {% if page.preheader %}
+    <div class="preheader">
+      {{ page.preheader }}
+    </div>
+  {% endif %}
 
-<header role="banner" class="header">
-  <div class="layout-container">
-    {{ page.header }}
-  </div>
-</header>
 
-<div class="layout-container">
+  <section class="off-canvas-content" data-off-canvas-content>
+    <header role="banner" class="header">
+      {{ page.header }}
+    </header>
 
-  {{ page.help }}
+    <div class="grid-container">
 
-  {{ page.content_top }}
+      {{ page.help }}
 
-  <main role="main" class="row">
-    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+      {{ page.content_top }}
 
-    {% if page.sidebar_first %}
-    <aside class="layout-sidebar-first col percent-25" role="complementary">
-      {{ page.sidebar_first }}
-    </aside>
-   {% endif %}
+      <main role="main" class="row">
+          <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
-    <div class="layout-content clearfix col">
-      {{ page.content }}
-    </div>{# /.layout-content #}
+          {% if page.sidebar_first %}
+          <aside class="layout-sidebar-first col percent-25" role="complementary">
+            {{ page.sidebar_first }}
+          </aside>
+         {% endif %}
 
-    {% if page.sidebar_second %}
-      <aside class="layout-sidebar-second col percent-25" role="complementary">
-        {{ page.sidebar_second }}
-      </aside>
+          <div class="layout-content clearfix col">
+            {{ page.content }}
+          </div>{# /.layout-content #}
+
+          {% if page.sidebar_second %}
+            <aside class="layout-sidebar-second col percent-25" role="complementary">
+              {{ page.sidebar_second }}
+            </aside>
+          {% endif %}
+
+      </main>
+
+    </div>{# /.grid-container #}
+
+    {% if page.footer %}
+    <footer role="contentinfo" class="footer">
+      {{ page.footer }}
+    </footer>
     {% endif %}
-
-  </main>
-
-</div>{# /.layout-container #}
-
-{% if page.footer %}
-<footer role="contentinfo" class="footer">
-  {{ page.footer }}
-</footer>
-{% endif %}
+  </section>
+</div>
