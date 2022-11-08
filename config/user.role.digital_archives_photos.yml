@@ -1,9 +1,21 @@
 uuid: dc0bf162-fdec-4bb4-a26f-1ab572c9aa35
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - node.type.mayoral_artifacts
+  module:
+    - node
 id: digital_archives_photos
 label: 'Digital Archives Photos'
 weight: -3
 is_admin: null
-permissions: {  }
+permissions:
+  - 'create mayoral_artifacts content'
+  - 'delete any mayoral_artifacts content'
+  - 'delete mayoral_artifacts revisions'
+  - 'delete own mayoral_artifacts content'
+  - 'edit any mayoral_artifacts content'
+  - 'edit own mayoral_artifacts content'
+  - 'revert mayoral_artifacts revisions'
+  - 'view mayoral_artifacts revisions'
