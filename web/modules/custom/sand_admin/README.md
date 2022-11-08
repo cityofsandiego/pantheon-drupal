@@ -1,7 +1,7 @@
-### MODULE: SAND_HELP
+### MODULE: SAND_ADMIN
 
 ### INTRODUCTION
-To display help in the extend page and any other such help functions.
+Administrative tasks.
 
 ### INSTALLATION
 Enable module.
