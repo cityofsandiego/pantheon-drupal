@@ -24,7 +24,3 @@ Fully upgraded to D9. We may want to put this in with sand_views for things view
 Sets number of lines for two different views:
 - "department_notifications" && $view_display === "block_2"
 - $view_name == "attractions_list" && $view_display == "location_type"
-
----
-
-(This file is README.md in the module directory, please update this if changes are made.)

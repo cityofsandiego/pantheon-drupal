@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies: {  }
+id: sd_nodes_department_parent
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: department_group
+label: 'Custom Department Parent node migration'
+source:
+  plugin: csv
+  path: modules/custom/if_sdmigration/migration_files/nodes/department-parents.csv
+  delimiter: ','
+  enclosure: '"'
+  escape: \
+  header_row_count: 1
+  ids:
+    - "D7 ID"
+process:
+  title: Title
+  field_d7_nid: "D7 ID"
+  field_contact_info_grid/0/value: "Contact Info"
+  field_contact_info_grid/0/format:
+    plugin: default_value
+    default_value: full_html
+  field_feature_alt_text: "Feature Alt Text"
+  field_featured_content/0/value: "Featured Content"
+  field_featured_content/0/format:
+    plugin: default_value
+    default_value: full_html
+  field_hide_news_feed: "Hide News Feed"
+  field_news_alt_text: "News Alt Text"
+  field_show_top_slider: "Show Top Slider"
+  field_sidebar/0/value: "Sidebar"
+  field_sidebar/0/format:
+    plugin: default_value
+    default_value: full_html
+  status:
+    - plugin: static_map
+      source: 'Published status'
+      map:
+        'No': 0
+        'Yes': 1
+    - plugin: default_value
+      default_value: 1
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: department_parent
+migration_dependencies: null
