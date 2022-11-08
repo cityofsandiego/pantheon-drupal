@@ -2,12 +2,12 @@
 
 /**
  * @file
- * Documentation for the San Diego Data Layer module.
  */
 
 declare(strict_types=1);
 
 const WEBTEAM_TAXONOMY_ID = 114;
+const VOCABULARY_NAME_DEPARTMENT = 'departments';
 
 /**
  * Implements hook_help().
@@ -66,14 +66,12 @@ function sand_datalayer_datalayer_alter(&$data_layer): void {
     return;
   }
 
-  $vocabulary_name = 'departments';
-  $departments = [];
-
   // If there is a department in the datalayer,
   // then find all selected Parent Departments on node.
-  if (!empty($data_layer["entityTaxonomy"][$vocabulary_name])) {
-    foreach ($data_layer["entityTaxonomy"][$vocabulary_name] as $dept_tid => $dept_name) {
-      [ $parent_tid, $parent_name ] = sand_datalayer_get_top_parent($dept_tid, $dept_name);
+  $departments = [];
+  if (!empty($data_layer["entityTaxonomy"][VOCABULARY_NAME_DEPARTMENT])) {
+    foreach ($data_layer["entityTaxonomy"][VOCABULARY_NAME_DEPARTMENT] as $dept_tid => $dept_name) {
+      [$parent_tid, $parent_name] = sand_datalayer_get_top_parent($dept_tid, $dept_name);
       if (!array_key_exists($parent_tid, $departments)) {
         $departments[$parent_tid] = $parent_name;
       }
@@ -84,7 +82,7 @@ function sand_datalayer_datalayer_alter(&$data_layer): void {
       ->getStorage('taxonomy_term')
       ->load(WEBTEAM_TAXONOMY_ID);
     $term_webteam_name = $term_webteam->getName();
-    [ $parent_tid, $parent_name ] = sand_datalayer_get_top_parent(WEBTEAM_TAXONOMY_ID, $term_webteam_name);
+    [$parent_tid, $parent_name] = sand_datalayer_get_top_parent(WEBTEAM_TAXONOMY_ID, $term_webteam_name);
     $departments[$parent_tid] = $parent_name;
   }
 
@@ -94,7 +92,7 @@ function sand_datalayer_datalayer_alter(&$data_layer): void {
       ->getStorage('taxonomy_term')
       ->load(WEBTEAM_TAXONOMY_ID);
     $term_webteam_name = $term_webteam->getName();
-    [ $parent_tid, $parent_name ] = sand_datalayer_get_top_parent(WEBTEAM_TAXONOMY_ID, $term_webteam_name);
+    [$parent_tid, $parent_name] = sand_datalayer_get_top_parent(WEBTEAM_TAXONOMY_ID, $term_webteam_name);
     $departments = [];
     $departments[$parent_tid] = $parent_name;
   }
