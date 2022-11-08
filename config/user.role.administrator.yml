@@ -1,11 +1,26 @@
 uuid: 77be7419-99a4-4e7e-9904-3698dc81e2a8
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.full_html
+    - node.type.slide
+  module:
+    - filter
+    - node
 _core:
   default_config_hash: OeKGIkmZA_c-t6QLH81WNQx8gDCc1MRmxaTuQgxBByU
 id: administrator
 label: Administrator
 weight: 5
 is_admin: false
-permissions: {  }
+permissions:
+  - 'create slide content'
+  - 'delete any slide content'
+  - 'delete own slide content'
+  - 'delete slide revisions'
+  - 'edit any slide content'
+  - 'edit own slide content'
+  - 'revert slide revisions'
+  - 'use text format full_html'
+  - 'view slide revisions'
