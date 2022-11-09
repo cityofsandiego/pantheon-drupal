@@ -16,6 +16,7 @@ dependencies:
     - node.type.mayoral_artifacts
   module:
     - field_group
+    - media_library
     - path
     - scheduler
     - scheduler_content_moderation_integration
@@ -105,14 +106,11 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_image:
-    type: entity_reference_autocomplete
+    type: media_library_widget
     weight: 16
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      media_types: {  }
     third_party_settings: {  }
   field_keywords:
     type: string_textfield
