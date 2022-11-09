@@ -11,8 +11,16 @@ services:
     build_as_root:
       - apt update -y && apt install -y apt-transport-https build-essential unzip
     build:
+      - echo "Installing NPM CLI..."
       - npm install -g npm
+      - echo "Installing Gulp CLI..."
       - npm install -g gulp
+      # Install theme dependencies
+      - echo "Installing theme dependencies..."
+      - cd /app/web/themes/custom/sand && npm install
+      # Build the theme
+      - echo "Building theme..."
+      - cd /app/web/themes/custom/sand && gulp styles
 tooling:
   node:
     service: node
