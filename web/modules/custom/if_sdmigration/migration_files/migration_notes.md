@@ -4,7 +4,7 @@ On the Drupal 7 site:
 3. Install and enable the d9_migration_views feature.  This supplies the views that generate the CSV files used for imports.
 
 Taxonomy import via drush:
-drush import:taxonomy departments
+drush import:taxonomy department
 drush import:taxonomy categories
 drush import:taxonomy search_keymatch
 drush import:taxonomy location
