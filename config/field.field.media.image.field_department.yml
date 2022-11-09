@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.media.field_department
     - media.type.image
+    - taxonomy.vocabulary.department
 id: media.image.field_department
 field_name: field_department
 entity_type: media
@@ -18,7 +19,8 @@ default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
   handler_settings:
-    target_bundles: {  }
+    target_bundles:
+      department: department
     sort:
       field: name
       direction: asc
