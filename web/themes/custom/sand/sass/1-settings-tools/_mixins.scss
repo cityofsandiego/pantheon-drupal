@@ -21,3 +21,45 @@
     display: none;
   }
 }
+
+// Box Sizing
+@mixin box-sizing( $box-model ) {
+    -webkit-box-sizing: $box-model; // Safari <= 5
+       -moz-box-sizing: $box-model; // Firefox <= 19
+            box-sizing: $box-model;
+}
+
+// Baseline
+$baseline-px: 16 !default;
+
+// Get the rem equivalent of a value
+@function rem-value( $value ) {
+
+    // If value is a number, do some magic rem stuff
+    @if type-of( $value ) == "number" and unit( $value ) == "px" {
+
+        // Slightly hacky way of removing unit
+        $unitless-value: $value / ( $value * 0 + 1 );
+
+        // Return rem value
+        @return #{$unitless-value / $baseline-px}rem;
+    }
+
+    // Non-numeric value, just return
+    @return $value;
+}
+
+// Rem mixin
+@mixin rem( $property, $values ) {
+
+    // Loop over pixel values to get rem values
+    $rem-values: unquote("");
+
+    @each $value in $values {
+        $rem-values: append( $rem-values, rem-value( $value ) );
+    }
+
+    // Set the pixel/rem values
+    #{$property}: $values;
+    #{$property}: $rem-values;
+}
