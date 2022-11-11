@@ -16,44 +16,47 @@
   <section class="header-first">
     <div class="grid-container">
       <div class="grid-x grid-margin-y align-middle">
-        <div class="site-branding cell small-6 large-8">
+        <div class="site-branding cell small-6 medium-8">
           {{ drupal_entity('block', 'sitebranding')}}
         </div>
-        <div class="cell small-6 hide-for-large text-right">
+        <div class="cell small-6 hide-for-medium text-right">
           <input type="checkbox" id="togglenav" class="menu-trigger visually-hidden" data-toggle="offCanvas">
           <label for="togglenav" class="burger-wrapper">
             <div class="hamburger"></div>
           </label>
         </div>
-        <div class="search-bar cell small-4 show-for-large">
-          <div class="input-group">
-            <input class="input-group-field" type="text" placeholder="Search sandiego.gov">
-            <div class="input-group-button">
-              <input type="submit" class="button" value="Search">
+        <div class="search-bar cell small-4 show-for-medium">
+          <form class="form--search">
+            <div class="input-group">
+              <input class="input-group-field" type="text" placeholder="Search sandiego.gov">
+              <div class="input-group-submit">
+                <input type="submit" class="btn form-submit" value="">
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="grid-x grid-margin-y hide-for-large">
-        <div class="search-bar cell small-12 align-center">
-          <div class="input-group">
-          <input class="input-group-field" type="text">
-          <div class="input-group-button">
-            <input type="submit" class="button" value="Search">
-          </div>
-        </div>
+          </form>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="header-second show-for-large">
-    <div class="grid-container">
+  <section class="header-second">
+    <div class="grid-container show-for-medium">
       <div class="grid-x">
-        <div class="main-menu cell large-12">
+        <div class="main-menu cell medium-12">
           {{ drupal_entity('block', 'mainnavigation_mega_menu')}}
-
         </div>
+      </div>
+    </div>
+    <div class="grid-x grid-margin-y hide-for-medium">
+      <div class="search-bar cell small-12 align-center">
+        <form class="form--search">
+          <div class="input-group">
+            <input class="input-group-field" type="text" placeholder="Search sandiego.gov">
+            <div class="input-group-submit">
+              <input type="submit" class="btn form-submit" value="">
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </section>
