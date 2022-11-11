@@ -24,22 +24,26 @@
 .header {
   margin-bottom: 1.5rem;
 
-  @include respond-to('l') {
+  @include respond-to('m') {
     display: block;
     margin-bottom: 0;
   }
 
   .header-first,
   .header-second {
-    @include respond-to('l') {
+    background-color: $white;
+
+    @include respond-to('m') {
       background: $cerulean;
     }
-
-    background-color: $white;
   }
 
   .header-first {
-    padding: 1rem 0;
+    padding: 0.5rem 0 1rem;
+
+    @include respond-to('m') {
+      padding: 1rem 0;
+    }
 
     .button {
       margin-bottom: 0;
@@ -116,26 +120,21 @@
       width: 4.5rem;
     }
 
-    .search-bar {
-      color: $teal;
-
-      @include respond-to('l') {
-        display: block;
-      }
-    }
   }
 
   .header-second {
+    background-color: $off-white;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
 
-    @include respond-to('l') {
+    @include respond-to('m') {
       background-color: $white;
+      padding: 0;
     }
-
-    padding: 0;
 
     .main-menu {
 
-      @include respond-to('l') {
+      @include respond-to('m') {
         background: $white;
         display: block;
         padding: 0;
@@ -168,7 +167,7 @@
 
     .tbm-main {
 
-      @include respond-to('l') {
+      @include respond-to('m') {
         background: $white;
       }
 
@@ -188,6 +187,16 @@
   }
 
   .search-bar {
+
+    @include respond-to('m') {
+      display: block;
+    }
+
+    .form-submit {
+      background-image: url(../images/search-icon-blue.png);
+      width: 2rem;
+    }
+
     .input-group {
       margin: 0;
     }
