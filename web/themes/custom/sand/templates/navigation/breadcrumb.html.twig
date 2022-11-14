@@ -10,9 +10,9 @@
 {% if breadcrumb %}
   <nav role="navigation" aria-labelledby="system-breadcrumb">
     <h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
-    <ol>
+    <ol class="breadcrumb">
     {% for item in breadcrumb %}
-      <li class="size-18">
+      <li>
         {% if item.url %}
           <a href="{{ item.url }}">{{ item.text }}</a> {% if not loop.last %}<i class="fal fa-angle-right"></i>{% endif %}
         {% else %}
