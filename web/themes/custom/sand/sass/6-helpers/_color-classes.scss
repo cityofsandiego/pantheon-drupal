@@ -1,0 +1,56 @@
+/* ============================================================
+  Styles for background colors/gradients, opacity, and type color.
+  ============================================================ */
+$colors: (
+  'cerulean': $cerulean,
+  'robin': $robin,
+  'teal': $teal,
+  'sunshade': $sunshade,
+  'schoolbus': $schoolbus,
+  'spruce': $spruce,
+  'westar': $westar,
+  'white': $white,
+  'tulip': $tulip,
+  'chateau': $chateau,
+  'science': $science,
+  'shuttle': $shuttle,
+  'gold': $gold,
+  'picton': $picton,
+  'riptide': $riptide,
+  'texasrose': $texasrose,
+  'manz': $manz,
+  'endeavour': $endeavour,
+  'off-white': $off-white,
+  'off-black': $off-black,
+  'mercury': $mercury,
+  'alto': $alto,
+  'gray': $gray,
+  'charcoal': $charcoal,
+  'pomegranate': $pomegranate, // red
+  'purple': $purple,
+);
+
+// Global
+// ----------------------------------------------------------------------
+
+@each $name, $color in $colors {
+  .#{$name} {
+    color: $color;
+
+    &-bg {
+      background: $color;
+    }
+
+    &-bg.bg-level-2 {
+      background: rgba($color, 0.9);
+    }
+
+    &-bg.bg-level-3 {
+      background: rgba($color, 0.5);
+    }
+
+    &-bg.bg-level-4 {
+      background: rgba($color, 0.2);
+    }
+  }
+}
