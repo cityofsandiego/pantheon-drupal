@@ -7,17 +7,17 @@
 // ==========================================================================
 
 %btn {
-  color: white;
+  background-color: $cerulean;
   border: none;
-  cursor: pointer;
   border-radius: 4px;
-  text-align: center;
-  position: relative;
+  color: $white;
+  cursor: pointer;
+  display: inline-block;
   line-height: normal;
   padding: 0.75em 2em;
-  display: inline-block;
+  position: relative;
+  text-align: center;
   text-decoration: none;
-  background-color: $cerulean;
 }
 
 /* Main
@@ -26,47 +26,50 @@
 .btn {
   @extend %btn;
 
-  &:hover {
-    color: white;
+  &:hover,
+  &:focus {
+    background-color: color.adjust($cerulean, $lightness: 10%);
+    color: $white;
     text-decoration: none;
-    background-color: lighten($cerulean, 10%);
   }
 
   i {
-    padding: 0.4em;
-    font-weight: 600;
-    color: $cerulean;
-    background: white;
+    background: $white;
     border-radius: 50%;
-    text-align: center;
-    margin-right: 0.5em;
+    color: $cerulean;
     display: inline-block;
+    font-weight: 600;
+    margin-right: 0.5em;
+    padding: 0.4em;
+    text-align: center;
     vertical-align: middle;
   }
 
   .icon-chevron-right,
   .icon-chevron-left {
-    padding: 0;
-    color: white;
-    font-size: 150%;
-    border-radius: 0;
     background: transparent;
-    vertical-align: sub;
+    border-radius: 0;
+    color: $white;
+    font-size: 150%;
     line-height: 0.4;
+    padding: 0;
+    vertical-align: sub;
   }
 }
 
 .btn--outline {
-  color: $cerulean;
-  background-color: white;
+  background-color: $white;
   border: 1px solid $cerulean;
-  &:hover {
-    color: white;
+  color: $cerulean;
+
+  &:hover,
+  &:focus {
     background-color: $cerulean;
+    color: $white;
 
     i {
-      color: white;
       background-color: $cerulean;
+      color: $white;
     }
   }
 
@@ -75,8 +78,8 @@
   }
 
   i.icon--heavy {
-    color: white;
     background: $cerulean;
+    color: $white;
     padding: 0.4em;
   }
 
@@ -85,27 +88,34 @@
     color: $cerulean;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
+
     i.icon-chevron-left,
     i.icon-chevron-right {
-      color: white;
+      color: $white;
     }
   }
 }
 
 .btn--primary {
   background-color: $cerulean;
-  color: white;
-  &:hover {
-    background-color: lighten($cerulean, 10%);
+  color: $white;
+
+  &:hover,
+  &:focus {
+    background-color: color.adjust($cerulean, $lightness: 10%);
   }
 }
 
 .btn--secondary {
   background-color: $sunshade;
-  &:hover {
-    background-color: lighten($sunshade, 10%);
+
+  &:hover,
+  &:focus {
+    background-color: color.adjust($sunshade, $lightness: 10%);
   }
+
   i {
     color: $sunshade;
   }
@@ -113,9 +123,12 @@
 
 .btn--tertiary {
   background-color: $spruce;
-  &:hover {
-    background-color: lighten($spruce, 10%);
+
+  &:hover,
+  &:focus {
+    background-color: color.adjust($spruce, $lightness: 10%);
   }
+
   i {
     color: $white;
   }
@@ -124,29 +137,31 @@
 .btn--quaternary {
   background-color: $alto;
   color: $spruce;
-  &:hover {
+
+  &:hover,
+  &:focus {
+    background-color: color.adjust($alto, $lightness: 4%);
     color: $spruce;
-    background-color: lighten($alto, 4%);
   }
 }
 
 .btn--icon {
-  padding: 1em;
-  text-align: left;
   display: flex;
   justify-content: space-between;
+  padding: 1em;
+  text-align: left;
 
   .icon-chevron-right,
   .icon-chevron-left {
-    color: white;
+    color: $white;
   }
 
   .icon-chevron-right {
-    padding: 0;
-    color: white;
-    line-height: 1;
-    border-radius: 0;
     background: transparent;
+    border-radius: 0;
+    color: $white;
+    line-height: 1;
+    padding: 0;
   }
 }
 
@@ -181,8 +196,8 @@
   padding-right: 3.5em;
 
   .icon-chevron-right {
-    right: 0.75em;
     margin-right: 0;
+    right: 0.75em;
   }
 }
 
@@ -240,7 +255,7 @@
 }
 
 .btn--third {
-  width: 33.33333%;
+  width: 33.3333%;
 }
 
 /* Colors
@@ -248,31 +263,34 @@
 
 .btn--success {
   background-color: $success;
-  color: white;
+  color: $white;
 
-  &:hover {
-    background-color: darken($success, 10%);
-    color: white;
+  &:hover,
+  &:focus {
+    background-color: color.adjust($success, $lightness: -10%);
+    color: $white;
   }
 }
 
 .btn--warning {
   background-color: $warning;
-  color: white;
+  color: $white;
 
-  &:hover {
-    background-color: darken($warning, 10%);
-    color: white;
+  &:hover,
+  &:focus {
+    background-color: color.adjust($warning, $lightness: -10%);
+    color: $white;
   }
 }
 
 .btn--error {
   background-color: $error;
-  color: white;
+  color: $white;
 
-  &:hover {
-    background-color: darken($error, 10%);
-    color: white;
+  &:hover,
+  &:focus {
+    background-color: color.adjust($error, $lightness: -10%);
+    color: $white;
   }
 }
 
@@ -286,9 +304,9 @@
 .btn--disabled:active {
   background-color: $alto;
   background-image: none;
-  box-shadow: none;
   border: 0;
-  opacity: 0.4;
-  cursor: not-allowed;
+  box-shadow: none;
   color: $gray;
+  cursor: not-allowed;
+  opacity: 0.4;
 }
