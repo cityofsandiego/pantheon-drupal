@@ -195,7 +195,7 @@ class CustomCommands extends DrushCommands {
         $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
         $local_destination = str_replace('public://', '', $local_destination);
         $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
-        $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'departments')];
+        $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
 
         $image = Media::create([
           'bundle' => 'image',
@@ -220,7 +220,7 @@ class CustomCommands extends DrushCommands {
       // Set three taxonomies.
       $node->field_department->setValue([]);
       foreach (explode(' |', $data['department']) as $department) {
-        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'departments'));
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
         $node->field_department->appendItem($term);
       }
       $node->field_category->setValue([]);
@@ -369,7 +369,7 @@ class CustomCommands extends DrushCommands {
         $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
         $local_destination = str_replace('public://', '', $local_destination);
         $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
-        $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'departments')];
+        $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
 
         $image = Media::create([
           'bundle' => 'image',
@@ -402,7 +402,7 @@ class CustomCommands extends DrushCommands {
         $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
         $local_destination = str_replace('public://', '', $local_destination);
         $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
-        $image_department = [$this->taxonomyImportTasks->newTid($data['featured_image_department'], 'departments')];
+        $image_department = [$this->taxonomyImportTasks->newTid($data['featured_image_department'], 'department')];
 
         $image = Media::create([
           'bundle' => 'image',
@@ -427,7 +427,7 @@ class CustomCommands extends DrushCommands {
       // Set three taxonomies.
       $node->field_department->setValue([]);
       foreach (explode(' |', $data['department']) as $department) {
-        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'departments'));
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
         $node->field_department->appendItem($term);
       }
       $node->field_category->setValue([]);
