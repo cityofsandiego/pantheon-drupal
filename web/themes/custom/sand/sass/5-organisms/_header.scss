@@ -148,7 +148,10 @@
     .tbm-submenu-toggle,
     .tbm .tbm-item {
       background-color: $white;
-      color: #333;
+    }
+
+    .tbm-submenu-toggle {
+      color: $tulip;
     }
 
     .tbm-submenu-toggle:hover,
@@ -158,6 +161,7 @@
     .tbm .tbm-item .open {
       background-color: $tulip;
       color: $white;
+      text-decoration: none;
     }
 
     .tbm .nav li.dropdown.active > .dropdown-toggle .caret {
@@ -174,6 +178,18 @@
       a {
         background-color: $white;
         color: #333;
+      }
+
+      .tbm-nav {
+        justify-content: space-between;
+
+        .tbm-item {
+          flex-grow: 1;
+
+          &.level-1:first-child {
+            border-left: 1px solid rgba(0,0,0,0.2);
+          }
+        }
       }
     }
 
