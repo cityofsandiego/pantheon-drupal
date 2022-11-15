@@ -24,22 +24,26 @@
 .header {
   margin-bottom: 1.5rem;
 
-  @include respond-to('l') {
+  @include respond-to('m') {
     display: block;
     margin-bottom: 0;
   }
 
   .header-first,
   .header-second {
-    @include respond-to('l') {
+    background-color: $white;
+
+    @include respond-to('m') {
       background: $cerulean;
     }
-
-    background-color: $white;
   }
 
   .header-first {
-    padding: 1rem 0;
+    padding: 0.5rem 0 1rem;
+
+    @include respond-to('m') {
+      padding: 1rem 0;
+    }
 
     .button {
       margin-bottom: 0;
@@ -62,8 +66,8 @@
         background: $cerulean;
         height: $s;
         position: relative;
-        transform: translateY($s * 4);
         transition: background 10ms 300ms ease;
+        transform: translateY($s * 4);
         width: $s * 10;
 
         &:before,
@@ -73,8 +77,8 @@
           height: $s;
           left: 0;
           position: absolute;
-          transform 300ms 50ms ease;
           transition: top 300ms 350ms ease,
+            transform 300ms 50ms ease;
           width: $s*10;
         }
 
@@ -89,22 +93,22 @@
     }
 
     // .menu-trigger:checked {
-
+    //
     //   ~ .burger-wrapper {
-
+    //
     //     .hamburger {
     //       background: transparent;
-
+    //
     //       &:after, &:before {
     //         top: 0;
     //         transition: top 300ms 50ms ease,
     //         transform 300ms 350ms ease;
     //       }
-
+    //
     //       &:before {
     //         transform: rotate(45deg);
     //       }
-
+    //
     //       &:after {
     //         transform: rotate(-45deg);
     //       }
@@ -116,26 +120,21 @@
       width: 4.5rem;
     }
 
-    .search-bar {
-      color: $teal;
-
-      @include respond-to('l') {
-        display: block;
-      }
-    }
   }
 
   .header-second {
+    background-color: $off-white;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
 
-    @include respond-to('l') {
+    @include respond-to('m') {
       background-color: $white;
+      padding: 0;
     }
-
-    padding: 0;
 
     .main-menu {
 
-      @include respond-to('l') {
+      @include respond-to('m') {
         background: $white;
         display: block;
         padding: 0;
@@ -149,7 +148,10 @@
     .tbm-submenu-toggle,
     .tbm .tbm-item {
       background-color: $white;
-      color: #333;
+    }
+
+    .tbm-submenu-toggle {
+      color: $tulip;
     }
 
     .tbm-submenu-toggle:hover,
@@ -159,6 +161,7 @@
     .tbm .tbm-item .open {
       background-color: $tulip;
       color: $white;
+      text-decoration: none;
     }
 
     .tbm .nav li.dropdown.active > .dropdown-toggle .caret {
@@ -168,13 +171,25 @@
 
     .tbm-main {
 
-      @include respond-to('l') {
+      @include respond-to('m') {
         background: $white;
       }
 
       a {
         background-color: $white;
         color: #333;
+      }
+
+      .tbm-nav {
+        justify-content: space-between;
+
+        .tbm-item {
+          flex-grow: 1;
+
+          &.level-1:first-child {
+            border-left: 1px solid rgba(0,0,0,0.2);
+          }
+        }
       }
     }
 
@@ -188,6 +203,16 @@
   }
 
   .search-bar {
+
+    @include respond-to('m') {
+      display: block;
+    }
+
+    .form-submit {
+      background-image: url(../images/search-icon-blue.png);
+      width: 2rem;
+    }
+
     .input-group {
       margin: 0;
     }
