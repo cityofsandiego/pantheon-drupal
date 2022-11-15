@@ -35,10 +35,7 @@ This file: '. $directory . '/' . $filename;
   
   switch ($route_name) {
     case 'help.page.cofsd':
-    case 'help.page.sand_admin':
-    case 'help.page.sand_datalayer':
-    case 'help.page.sand_help':
-    case 'help.page.sand_weather':
+    case (preg_match('/help.page.sand_.*/', $route_name) ? true : false) :
       /** @var string $text */
       $text = file_get_contents($directory . '/' . $filename);
       if (!\Drupal::moduleHandler()->moduleExists('markdown')) {
