@@ -187,34 +187,40 @@ class CustomCommands extends DrushCommands {
 
       // Create (if not pre-existing) and set image.
       if (!empty($data['image_path'])) {
-        $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
-        $file_data = file_get_contents($remote_file);
-        // Fixes for irregular paths.
-        $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
-        $local_destination = str_replace('default_images', '', $local_destination);
-        $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
-        $local_destination = str_replace('public://', '', $local_destination);
-        $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
-        $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
+        $prior_image = $this->checkMediaId($data['image_d7id']);
+        if ($prior_image == NULL) {
+          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
+          $file_data = file_get_contents($remote_file);
+          // Fixes for irregular paths.
+          $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
+          $local_destination = str_replace('default_images', '', $local_destination);
+          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+          $local_destination = str_replace('public://', '', $local_destination);
+          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+          $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
 
-        $image = Media::create([
-          'bundle' => 'image',
-          'uid' => 0,
-          'field_media_image' => [
-            'target_id' => $local_file->id(),
-            'alt' => $data['image_alt']
-          ],
-          'field_d7_mid' => $data['image_d7id'],
-        ]);
-        if (!empty($data['image_license'])) {
-          $image->field_license = $data['image_license'];
-        }
-        foreach ($image_department as $department) {
-          $image->field_department->appendItem([
-            'target_id' => $department,
+          $image = Media::create([
+            'bundle' => 'image',
+            'uid' => 0,
+            'field_media_image' => [
+              'target_id' => $local_file->id(),
+              'alt' => $data['image_alt']
+            ],
+            'field_d7_mid' => $data['image_d7id'],
           ]);
+          if (!empty($data['image_license'])) {
+            $image->field_license = $data['image_license'];
+          }
+          foreach ($image_department as $department) {
+            $image->field_department->appendItem([
+              'target_id' => $department,
+            ]);
+          }
+          $image->save();
         }
-        $image->save();
+        else {
+          $image = Media::load($prior_image);
+        }
         $node->field_image = $image;
       }
       // Set three taxonomies.
@@ -361,67 +367,79 @@ class CustomCommands extends DrushCommands {
 
       // Create (if not pre-existing) and set image.
       if (!empty($data['image_path'])) {
-        $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
-        $file_data = file_get_contents($remote_file);
-        // Fixes for irregular paths.
-        $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
-        $local_destination = str_replace('default_images', '', $local_destination);
-        $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
-        $local_destination = str_replace('public://', '', $local_destination);
-        $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
-        $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
+        $prior_image = $this->checkMediaId($data['image_d7id']);
+        if ($prior_image == NULL) {
+          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
+          $file_data = file_get_contents($remote_file);
+          // Fixes for irregular paths.
+          $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
+          $local_destination = str_replace('default_images', '', $local_destination);
+          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+          $local_destination = str_replace('public://', '', $local_destination);
+          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+          $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
 
-        $image = Media::create([
-          'bundle' => 'image',
-          'uid' => 0,
-          'field_media_image' => [
-            'target_id' => $local_file->id(),
-            'alt' => $data['image_alt']
-          ],
-          'field_d7_mid' => $data['image_d7id'],
-        ]);
-        if (!empty($data['image_license'])) {
-          $image->field_license = $data['image_license'];
-        }
-        foreach ($image_department as $department) {
-          $image->field_department->appendItem([
-            'target_id' => $department,
+          $image = Media::create([
+            'bundle' => 'image',
+            'uid' => 0,
+            'field_media_image' => [
+              'target_id' => $local_file->id(),
+              'alt' => $data['image_alt']
+            ],
+            'field_d7_mid' => $data['image_d7id'],
           ]);
+          if (!empty($data['image_license'])) {
+            $image->field_license = $data['image_license'];
+          }
+          foreach ($image_department as $department) {
+            $image->field_department->appendItem([
+              'target_id' => $department,
+            ]);
+          }
+          $image->save();
         }
-        $image->save();
+        else {
+          $image = Media::load($prior_image);
+        }
         $node->field_image = $image;
       }
       // Create (if not pre-existing) and set image.
       if (!empty($data['featured_image_path']) && strpos('youtube://', $data['featured_image_path']) < 0) {
         // TODO: Youtube?
-        $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['featured_image_path']);
-        $file_data = file_get_contents($remote_file);
-        // Fixes for irregular paths.
-        $local_destination = str_replace('legacy/police/graphics', '', $data['featured_image_path']);
-        $local_destination = str_replace('default_images', '', $local_destination);
-        $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
-        $local_destination = str_replace('public://', '', $local_destination);
-        $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
-        $image_department = [$this->taxonomyImportTasks->newTid($data['featured_image_department'], 'department')];
+        $prior_image = $this->checkMediaId($data['featured_image_d7id']);
+        if ($prior_image == NULL) {
+          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['featured_image_path']);
+          $file_data = file_get_contents($remote_file);
+          // Fixes for irregular paths.
+          $local_destination = str_replace('legacy/police/graphics', '', $data['featured_image_path']);
+          $local_destination = str_replace('default_images', '', $local_destination);
+          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+          $local_destination = str_replace('public://', '', $local_destination);
+          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+          $image_department = [$this->taxonomyImportTasks->newTid($data['featured_image_department'], 'department')];
 
-        $image = Media::create([
-          'bundle' => 'image',
-          'uid' => 0,
-          'field_media_image' => [
-            'target_id' => $local_file->id(),
-            'alt' => $data['featured_image_alt']
-          ],
-          'field_d7_mid' => $data['featured_image_d7id'],
-        ]);
-        if (!empty($data['featured_image_license'])) {
-          $image->field_license = $data['featured_image_license'];
-        }
-        foreach ($image_department as $department) {
-          $image->field_department->appendItem([
-            'target_id' => $department,
+          $image = Media::create([
+            'bundle' => 'image',
+            'uid' => 0,
+            'field_media_image' => [
+              'target_id' => $local_file->id(),
+              'alt' => $data['featured_image_alt']
+            ],
+            'field_d7_mid' => $data['featured_image_d7id'],
           ]);
+          if (!empty($data['featured_image_license'])) {
+            $image->field_license = $data['featured_image_license'];
+          }
+          foreach ($image_department as $department) {
+            $image->field_department->appendItem([
+              'target_id' => $department,
+            ]);
+          }
+          $image->save();
         }
-        $image->save();
+        else {
+          $image = Media::load($prior_image);
+        }
         $node->field_feature_video_img = $image;
       }
       // Set three taxonomies.
@@ -442,6 +460,43 @@ class CustomCommands extends DrushCommands {
       }
 
       $node->save();
+    }
+  }
+
+  /**
+   * Deletes all image media.
+   *
+   * @command import:delete-images
+   *
+   * @usage import:delete-images
+   */
+  public function deleteImages() {
+    $query = $this->entityTypeManager
+      ->getStorage('media')
+      ->getQuery();
+    $query->condition('bundle', 'image');
+    $images = $query->execute();
+    foreach ($images as $image) {
+      $media = Media::load($image);
+      $media->delete();
+    }
+  }
+
+  /**
+   * Checks if image media was already imported; returns media id if it was.
+   */
+  public function checkMediaId($d7id) {
+    $query = $this->entityTypeManager
+      ->getStorage('media')
+      ->getQuery();
+    $query->condition('bundle', 'image')
+      ->condition('field_d7_mid', $d7id);
+    $image_id = $query->execute();
+    if (count($image_id) == 1) {
+      return reset($image_id);
+    }
+    else {
+      return NULL;
     }
   }
 }
