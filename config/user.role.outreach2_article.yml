@@ -1,9 +1,20 @@
 uuid: 83f1cdf1-5512-4539-8436-142c1402716f
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - node.type.article
+    - node.type.blog
+  module:
+    - node
 id: outreach2_article
 label: 'Outreach2 Article'
 weight: 0
 is_admin: null
-permissions: {  }
+permissions:
+  - 'create article content'
+  - 'create blog content'
+  - 'edit own article content'
+  - 'edit own blog content'
+  - 'view article revisions'
+  - 'view blog revisions'
