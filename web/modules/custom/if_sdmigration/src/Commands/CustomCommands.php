@@ -499,4 +499,24 @@ class CustomCommands extends DrushCommands {
       return NULL;
     }
   }
+
+  /**
+   * Delete all nodes of type.
+   *
+   * @command delete:nodes
+   * @param $content_type (Content type to delete).
+   *
+   * @usage delete:nodes
+   */
+  public function deleteNodes($content_type) {
+    $query = $this->entityTypeManager
+      ->getStorage('node')
+      ->getQuery();
+    $query->condition('type', $content_type);
+    $nids = $query->execute();
+    foreach ($nids as $nid) {
+      $node = Node::load($nid);
+      $node->delete();
+    }
+  }
 }
