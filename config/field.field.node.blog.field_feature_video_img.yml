@@ -1,0 +1,31 @@
+uuid: ddd78a7b-2d40-46c3-9127-97a70f32d340
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_feature_video_img
+    - media.type.image
+    - media.type.video
+    - node.type.blog
+id: node.blog.field_feature_video_img
+field_name: field_feature_video_img
+entity_type: node
+bundle: blog
+label: 'Video / Image'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+      video: video
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference
