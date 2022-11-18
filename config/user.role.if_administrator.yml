@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.basic_html
     - filter.format.full_html
     - filter.format.restricted_html
     - media.type.audio
@@ -10,11 +11,16 @@ dependencies:
     - media.type.image
     - media.type.remote_video
     - media.type.video
+    - node.type.article
+    - node.type.blog
     - node.type.bucket
+    - node.type.business_resource
+    - node.type.date
     - node.type.department
     - node.type.department_parent
     - node.type.external_data
     - node.type.hero
+    - node.type.location
     - node.type.mayoral_artifacts
     - node.type.outreach
     - node.type.slide
@@ -41,13 +47,18 @@ dependencies:
     - contextual
     - crop
     - easy_breadcrumb
+    - entity_reference_revisions
     - field_ui
     - file
     - filter
+    - fontawesome
+    - geocoder
+    - geofield_map
     - honeypot
     - image
     - media
     - metatag
+    - migrate_tools
     - node
     - paragraphs
     - password_policy
@@ -60,9 +71,12 @@ dependencies:
     - security_review
     - shortcut
     - simple_sitemap
+    - site_alert
     - smart_date
+    - smart_date_recur
     - system
     - taxonomy
+    - tb_megamenu
     - toolbar
     - tour
     - update
@@ -74,18 +88,25 @@ weight: 4
 is_admin: null
 permissions:
   - 'access administration pages'
+  - 'access comments'
+  - 'access content'
   - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
+  - 'access fontawesome additional settings'
+  - 'access geocoder api endpoints'
   - 'access media overview'
   - 'access security review list'
+  - 'access shortcuts'
   - 'access site in maintenance mode'
   - 'access site reports'
+  - 'access site-wide contact form'
   - 'access taxonomy overview'
   - 'access toolbar'
   - 'access tour'
   - 'access user contact forms'
   - 'access user profiles'
+  - 'add site alerts'
   - 'administer CAPTCHA settings'
   - 'administer account settings'
   - 'administer block_content display'
@@ -117,6 +138,7 @@ permissions:
   - 'administer media types'
   - 'administer menu'
   - 'administer meta tags'
+  - 'administer migrations'
   - 'administer modules'
   - 'administer node display'
   - 'administer node fields'
@@ -135,6 +157,7 @@ permissions:
   - 'administer scheduler'
   - 'administer search'
   - 'administer shortcuts'
+  - 'administer site alert'
   - 'administer site configuration'
   - 'administer sitemap settings'
   - 'administer smart date formats'
@@ -143,6 +166,7 @@ permissions:
   - 'administer taxonomy_term display'
   - 'administer taxonomy_term fields'
   - 'administer taxonomy_term form display'
+  - 'administer tb_megamenu'
   - 'administer themes'
   - 'administer url aliases'
   - 'administer user display'
@@ -154,15 +178,22 @@ permissions:
   - 'bypass honeypot protection'
   - 'bypass node access'
   - 'cancel account'
+  - 'cancel smart date recur instances'
   - 'change own username'
+  - 'configure geofield_map'
+  - 'create article content'
   - 'create audio media'
+  - 'create blog content'
   - 'create bucket content'
+  - 'create business_resource content'
+  - 'create date content'
   - 'create department content'
   - 'create department_parent content'
   - 'create document media'
   - 'create external_data content'
   - 'create hero content'
   - 'create image media'
+  - 'create location content'
   - 'create mayoral_artifacts content'
   - 'create media'
   - 'create outreach content'
@@ -182,41 +213,58 @@ permissions:
   - 'create video media'
   - 'customize shortcut links'
   - 'delete all revisions'
+  - 'delete any article content'
   - 'delete any audio media'
+  - 'delete any blog content'
   - 'delete any bucket content'
+  - 'delete any business_resource content'
+  - 'delete any date content'
   - 'delete any department content'
   - 'delete any department_parent content'
   - 'delete any document media'
   - 'delete any external_data content'
   - 'delete any hero content'
   - 'delete any image media'
+  - 'delete any location content'
   - 'delete any mayoral_artifacts content'
   - 'delete any media'
   - 'delete any outreach content'
   - 'delete any remote_video media'
   - 'delete any slide content'
   - 'delete any video media'
+  - 'delete article revisions'
+  - 'delete blog revisions'
   - 'delete bucket revisions'
+  - 'delete business_resource revisions'
+  - 'delete date revisions'
   - 'delete department revisions'
   - 'delete department_parent revisions'
   - 'delete external_data revisions'
   - 'delete hero revisions'
+  - 'delete location revisions'
   - 'delete mayoral_artifacts revisions'
   - 'delete media'
+  - 'delete orphan revisions'
   - 'delete outreach revisions'
+  - 'delete own article content'
   - 'delete own audio media'
+  - 'delete own blog content'
   - 'delete own bucket content'
+  - 'delete own business_resource content'
+  - 'delete own date content'
   - 'delete own department content'
   - 'delete own department_parent content'
   - 'delete own document media'
   - 'delete own external_data content'
   - 'delete own hero content'
   - 'delete own image media'
+  - 'delete own location content'
   - 'delete own mayoral_artifacts content'
   - 'delete own outreach content'
   - 'delete own remote_video media'
   - 'delete own slide content'
   - 'delete own video media'
+  - 'delete site alerts'
   - 'delete slide revisions'
   - 'delete terms in bucket'
   - 'delete terms in business_resources_organization'
@@ -228,29 +276,39 @@ permissions:
   - 'delete terms in location'
   - 'delete terms in registration'
   - 'delete terms in search_keymatch'
+  - 'edit any article content'
   - 'edit any audio media'
+  - 'edit any blog content'
   - 'edit any bucket content'
+  - 'edit any business_resource content'
+  - 'edit any date content'
   - 'edit any department content'
   - 'edit any department_parent content'
   - 'edit any document media'
   - 'edit any external_data content'
   - 'edit any hero content'
   - 'edit any image media'
+  - 'edit any location content'
   - 'edit any mayoral_artifacts content'
   - 'edit any outreach content'
   - 'edit any remote_video media'
   - 'edit any slide content'
   - 'edit any video media'
   - 'edit behavior plugin settings'
+  - 'edit own article content'
   - 'edit own audio media'
+  - 'edit own blog content'
   - 'edit own bucket content'
+  - 'edit own business_resource content'
   - 'edit own comments'
+  - 'edit own date content'
   - 'edit own department content'
   - 'edit own department_parent content'
   - 'edit own document media'
   - 'edit own external_data content'
   - 'edit own hero content'
   - 'edit own image media'
+  - 'edit own location content'
   - 'edit own mayoral_artifacts content'
   - 'edit own outreach content'
   - 'edit own remote_video media'
@@ -269,43 +327,61 @@ permissions:
   - 'export configuration'
   - 'import configuration'
   - 'link to any page'
+  - 'make smart dates recur'
   - 'manage password reset'
   - 'notify of path changes'
+  - 'post comments'
+  - 'reschedule smart date recur instances'
   - 'revert all revisions'
+  - 'revert article revisions'
+  - 'revert blog revisions'
   - 'revert bucket revisions'
+  - 'revert business_resource revisions'
+  - 'revert date revisions'
   - 'revert department revisions'
   - 'revert department_parent revisions'
   - 'revert external_data revisions'
   - 'revert hero revisions'
+  - 'revert location revisions'
   - 'revert mayoral_artifacts revisions'
   - 'revert outreach revisions'
   - 'revert slide revisions'
   - 'run security checks'
   - 'schedule publishing of nodes'
+  - 'search content'
   - 'select account cancellation method'
   - 'skip CAPTCHA'
+  - 'skip comment approval'
   - 'switch shortcut sets'
   - 'synchronize configuration'
   - 'update any media'
   - 'update media'
+  - 'update site alerts'
   - 'use advanced search'
   - 'use editorial transition archive'
   - 'use editorial transition archived_draft'
   - 'use editorial transition archived_published'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition publish'
+  - 'use text format basic_html'
   - 'use text format full_html'
   - 'use text format restricted_html'
   - 'view all media revisions'
   - 'view all revisions'
   - 'view any unpublished content'
+  - 'view article revisions'
+  - 'view blog revisions'
   - 'view bucket revisions'
+  - 'view business_resource revisions'
+  - 'view date revisions'
   - 'view department revisions'
   - 'view department_parent revisions'
   - 'view external_data revisions'
   - 'view hero revisions'
   - 'view latest version'
+  - 'view location revisions'
   - 'view mayoral_artifacts revisions'
+  - 'view media'
   - 'view outreach revisions'
   - 'view own unpublished content'
   - 'view own unpublished media'
