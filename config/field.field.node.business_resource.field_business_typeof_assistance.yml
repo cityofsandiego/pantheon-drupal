@@ -1,0 +1,29 @@
+uuid: 6f869dd5-191d-4474-ab3e-309d9380567e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_business_typeof_assistance
+    - node.type.business_resource
+    - taxonomy.vocabulary.business_resources_type_assist
+id: node.business_resource.field_business_typeof_assistance
+field_name: field_business_typeof_assistance
+entity_type: node
+bundle: business_resource
+label: 'Type of Assistance'
+description: '<p>Add tags to describe what this resource does. Use pre-existing tags that are already in the resource matcher before adding new ones. Example types of assistance include "training", "grants", and "financing".</p>'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      business_resources_type_assist: business_resources_type_assist
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
