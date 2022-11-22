@@ -464,6 +464,428 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   * Import fields: field_bucket, field_events_programs_initiative, field_featured_items, field_feature_video_img, field_resources, field_search_keymatch
+   *
+   * @command import:bucket
+   *
+   * @usage import:bucket
+   */
+  public function finalizeBucket() {
+    $nodedata = [];
+    $resourcedata = [];
+    $eventpidata = [];
+    $featured_items = [];
+    $featured_cards = [];
+    $cards = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/buckets.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'path' => str_replace('`', '', $data[1]),
+          'resources' => str_replace('`', '', $data[15]),
+          'search_keymatch' => str_replace('`', '', $data[16]),
+          'image_department' => str_replace('`', '', $data[6]),
+          'image_license' => str_replace('`', '', $data[7]),
+          'image_alt' => str_replace('`', '', $data[8]),
+          'image_d7id' => str_replace('`', '', $data[9]),
+          'image_path' => str_replace('`', '', $data[10]),
+          'bucket' => str_replace('`', '', $data[4]),
+          'featured_cards' => str_replace('`', '', $data[11]),
+          'event_pi_items' => str_replace('`', '', $data[13]),
+          'featured_items' => str_replace('`', '', $data[15]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Resource field collection.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_dept_resources_coll.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $id = str_replace('`', '', $data[0]);
+        $id = str_replace(',', '', $id);
+        $resourcedata[$id] = [
+          'icon' => str_replace('`', '', $data[1]),
+          'label' => str_replace('`', '', $data[2]),
+          'url' => str_replace('`', '', $data[3]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Events PI field collection.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_bucket_events_pi_coll.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $id = str_replace('`', '', $data[0]);
+        $id = str_replace(',', '', $id);
+        $eventpidata[$id] = [
+          'image_department' => str_replace('`', '', $data[1]),
+          'image_license' => str_replace('`', '', $data[2]),
+          'image_alt' => str_replace('`', '', $data[3]),
+          'image_d7id' => str_replace('`', '', $data[4]),
+          'image_path' => str_replace('`', '', $data[5]),
+          'label' => str_replace('`', '', $data[6]),
+          'url' => str_replace('`', '', $data[7]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Featured items field collection.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_bucket_featured_coll.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $id = str_replace('`', '', $data[0]);
+        $id = str_replace(',', '', $id);
+        $featured_items[$id] = [
+          'label' => str_replace('`', '', $data[1]),
+          'url' => str_replace('`', '', $data[2]),
+          'image_department' => str_replace('`', '', $data[3]),
+          'image_license' => str_replace('`', '', $data[4]),
+          'image_alt' => str_replace('`', '', $data[5]),
+          'image_d7id' => str_replace('`', '', $data[6]),
+          'image_path' => str_replace('`', '', $data[7]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Featured cards field collection.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_bucket_featured_cards_coll.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $id = str_replace('`', '', $data[0]);
+        $id = str_replace(',', '', $id);
+        $featured_cards[$id] = [
+          'title' => str_replace('`', '', $data[1]),
+          'url' => str_replace('`', '', $data[2]),
+          'cards' => str_replace('`', '', $data[3]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Cards field collection.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_featured_cards_card.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $id = str_replace('`', '', $data[0]);
+        $id = str_replace(',', '', $id);
+        $cards[$id] = [
+          'image_department' => str_replace('`', '', $data[1]),
+          'image_license' => str_replace('`', '', $data[2]),
+          'image_alt' => str_replace('`', '', $data[3]),
+          'image_d7id' => str_replace('`', '', $data[4]),
+          'image_path' => str_replace('`', '', $data[5]),
+          'description' => str_replace('`', '', $data[6]),
+          'label' => str_replace('`', '', $data[7]),
+          'url' => str_replace('`', '', $data[8]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'bucket')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+
+      // Set alias.
+      $node->path = [
+        'alias' => $data['path'],
+        'pathauto' => PathautoState::SKIP,
+      ];
+
+      // Create and set resource paragraphs.
+      $resources = explode('|', $data['resources']);
+      $node->field_resources = [];
+      foreach ($resources as $resource) {
+        if (strpos($resourcedata[$resource]['url'], 'http') > -1) {
+          $url = $resourcedata[$resource]['url'];
+        }
+        else {
+          $url = 'https://www.sandiego.gov' . $resourcedata[$resource]['url'];
+        }
+        $paragraph = Paragraph::create([
+          'type' => 'resources',
+          'field_icon' => $resourcedata[$resource]['icon'],
+          'field_label' => $resourcedata[$resource]['label'],
+          'field_link' => [
+            'uri' => $url,
+          ],
+        ]);
+        $paragraph->save();
+        $node->field_resources[] = $paragraph;
+      }
+
+      // Create and set featured card paragraphs.
+      $node->field_featured_card = [];
+      $items = explode('|', $data['featured_cards']);
+      foreach ($items as $item) {
+        if (strpos($featured_cards[$item]['url'], 'http') > -1) {
+          $url = $featured_cards[$item]['url'];
+        }
+        else {
+          $url = 'https://www.sandiego.gov' . $featured_cards[$item]['url'];
+        }
+        $paragraph = Paragraph::create([
+          'type' => 'featured_cards',
+          'field_section_title' => $featured_cards[$item]['label'],
+          'field_link' => [
+            'uri' => $url,
+          ],
+        ]);
+        $paragraph->save();
+        // Cards
+        $card_ids = explode('|', $featured_cards[$item]['cards']);
+        foreach ($card_ids as $card) {
+          if (strpos($cards[$card]['url'], 'http') > -1) {
+            $url = $cards[$card]['url'];
+          }
+          else {
+            $url = 'https://www.sandiego.gov' . $cards[$card]['url'];
+          }
+          if (!empty($cards[$card]['image_path'])) {
+            $prior_image = $this->checkMediaId($cards[$card]['image_d7id']);
+            if ($prior_image == NULL) {
+              $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $cards[$card]['image_path']);
+              $file_data = file_get_contents($remote_file);
+              // Fixes for irregular paths.
+              $local_destination = str_replace('legacy/police/graphics', '', $cards[$card]['image_path']);
+              $local_destination = str_replace('default_images', '', $local_destination);
+              $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+              $local_destination = str_replace('public://', '', $local_destination);
+              $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+              $image_department = [$this->taxonomyImportTasks->newTid($cards[$card]['image_department'], 'department')];
+
+              $image = Media::create([
+                'bundle' => 'image',
+                'uid' => 0,
+                'field_media_image' => [
+                  'target_id' => $local_file->id(),
+                  'alt' => $cards[$card]['image_alt']
+                ],
+                'field_d7_mid' => $cards[$card]['image_d7id'],
+              ]);
+              if (!empty($cards[$card]['image_license'])) {
+                $image->field_license = $cards[$card]['image_license'];
+              }
+              foreach ($image_department as $department) {
+                $image->field_department->appendItem([
+                  'target_id' => $department,
+                ]);
+              }
+              $image->save();
+            }
+            else {
+              $image = Media::load($prior_image);
+            }
+          }
+          else {
+            $image = NULL;
+          }
+          $card_paragraph = Paragraph::create([
+            'type' => 'card',
+            'field_description' => $cards[$card]['description'],
+            'field_label' => $cards[$card]['label'],
+            'field_link' => [
+              'uri' => $url,
+            ],
+            'field_image' => $image,
+          ]);
+          $card_paragraph->save();
+          $paragraph->field_cards->appendItem($card_paragraph);
+        }
+        $paragraph->save();
+        $node->field_featured_card[] = $paragraph;
+      }
+
+      // Create and set featured item paragraphs.
+      $node->field_featured_items = [];
+      $items = explode('|', $data['featured_items']);
+      foreach ($items as $item) {
+        if (strpos($featured_items[$item]['url'], 'http') > -1) {
+          $url = $featured_cards[$item]['url'];
+        }
+        else {
+          $url = 'https://www.sandiego.gov' . $featured_cards[$item]['url'];
+        }
+        if (!empty($featured_items[$item]['image_path'])) {
+          $prior_image = $this->checkMediaId($featured_items[$item]['image_d7id']);
+          if ($prior_image == NULL) {
+            $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $featured_items[$item]['image_path']);
+            $file_data = file_get_contents($remote_file);
+            // Fixes for irregular paths.
+            $local_destination = str_replace('legacy/police/graphics', '', $featured_items[$item]['image_path']);
+            $local_destination = str_replace('default_images', '', $local_destination);
+            $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+            $local_destination = str_replace('public://', '', $local_destination);
+            $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+            $image_department = [$this->taxonomyImportTasks->newTid($featured_items[$item]['image_department'], 'department')];
+
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $featured_items[$item]['image_alt']
+              ],
+              'field_d7_mid' => $featured_items[$item]['image_d7id'],
+            ]);
+            if (!empty($featured_items[$item]['image_license'])) {
+              $image->field_license = $featured_items[$item]['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+          }
+          else {
+            $image = Media::load($prior_image);
+          }
+        }
+        else {
+          $image = NULL;
+        }
+        $paragraph = Paragraph::create([
+          'type' => 'featured_item',
+          'field_label' => $featured_items[$item]['label'],
+          'field_link' => [
+            'uri' => $url,
+          ],
+          'field_image' => $image,
+        ]);
+        $paragraph->save();
+        $node->field_featured_items[] = $paragraph;
+      }
+
+      // Create and set events pi paragraphs.
+      $node->field_events_programs_initiative = [];
+      $items = explode('|', $data['event_pi_items']);
+      foreach ($items as $item) {
+        if (strpos($featured_items[$item]['url'], 'http') > -1) {
+          $url = $featured_cards[$item]['url'];
+        }
+        else {
+          $url = 'https://www.sandiego.gov' . $featured_cards[$item]['url'];
+        }
+        if (!empty($featured_items[$item]['image_path'])) {
+          $prior_image = $this->checkMediaId($featured_items[$item]['image_d7id']);
+          if ($prior_image == NULL) {
+            $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $featured_items[$item]['image_path']);
+            $file_data = file_get_contents($remote_file);
+            // Fixes for irregular paths.
+            $local_destination = str_replace('legacy/police/graphics', '', $featured_items[$item]['image_path']);
+            $local_destination = str_replace('default_images', '', $local_destination);
+            $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+            $local_destination = str_replace('public://', '', $local_destination);
+            $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+            $image_department = [$this->taxonomyImportTasks->newTid($featured_items[$item]['image_department'], 'department')];
+
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $featured_items[$item]['image_alt']
+              ],
+              'field_d7_mid' => $featured_items[$item]['image_d7id'],
+            ]);
+            if (!empty($featured_items[$item]['image_license'])) {
+              $image->field_license = $featured_items[$item]['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+          }
+          else {
+            $image = Media::load($prior_image);
+          }
+        }
+        else {
+          $image = NULL;
+        }
+        $paragraph = Paragraph::create([
+          'type' => 'featured_item',
+          'field_label' => $featured_items[$item]['label'],
+          'field_link' => [
+            'uri' => $url,
+          ],
+          'field_image' => $image,
+        ]);
+        $paragraph->save();
+        $node->field_events_programs_initiative[] = $paragraph;
+      }
+
+      // Create (if not pre-existing) and set image.
+      if (!empty($data['image_path'])) {
+        $prior_image = $this->checkMediaId($data['image_d7id']);
+        if ($prior_image == NULL) {
+          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
+          $file_data = file_get_contents($remote_file);
+          // Fixes for irregular paths.
+          $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
+          $local_destination = str_replace('default_images', '', $local_destination);
+          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+          $local_destination = str_replace('public://', '', $local_destination);
+          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+          $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
+
+          $image = Media::create([
+            'bundle' => 'image',
+            'uid' => 0,
+            'field_media_image' => [
+              'target_id' => $local_file->id(),
+              'alt' => $data['image_alt']
+            ],
+            'field_d7_mid' => $data['image_d7id'],
+          ]);
+          if (!empty($data['image_license'])) {
+            $image->field_license = $data['image_license'];
+          }
+          foreach ($image_department as $department) {
+            $image->field_department->appendItem([
+              'target_id' => $department,
+            ]);
+          }
+          $image->save();
+        }
+        else {
+          $image = Media::load($prior_image);
+        }
+        $node->field_feature_video_img = $image;
+      }
+
+      // Set taxonomy fields.
+      $node->field_search_keymatch->setValue([]);
+      foreach (explode('|', $data['search_keymatch']) as $search_keymatch) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
+        $node->field_search_keymatch->appendItem($term);
+      }
+
+      $term = Term::load($this->taxonomyImportTasks->newTid($data['bucket'], 'bucket'));
+      $node->field_bucket = $term;
+
+
+      $node->save();
+    }
+  }
+
+  /**
    * Deletes all image media.
    *
    * @command import:delete-images
