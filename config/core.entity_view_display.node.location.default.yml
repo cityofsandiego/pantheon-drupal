@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.location.field_alt_amenities_title
     - field.field.node.location.field_alt_restrictions_title
     - field.field.node.location.field_amenities
+    - field.field.node.location.field_d7_nid
     - field.field.node.location.field_department
     - field.field.node.location.field_email
     - field.field.node.location.field_exceptions
@@ -56,14 +57,14 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 105
+    weight: 5
     region: content
   field_address:
     type: address_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 106
+    weight: 6
     region: content
   field_address_pin:
     type: geofield_default
@@ -72,7 +73,7 @@ content:
       output_format: wkt
       output_escape: true
     third_party_settings: {  }
-    weight: 132
+    weight: 32
     region: content
   field_alt_amenities_title:
     type: string
@@ -80,7 +81,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 109
+    weight: 9
     region: content
   field_alt_restrictions_title:
     type: string
@@ -88,7 +89,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 111
+    weight: 11
     region: content
   field_amenities:
     type: entity_reference_revisions_entity_view
@@ -97,7 +98,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 110
+    weight: 10
     region: content
   field_department:
     type: entity_reference_label
@@ -105,14 +106,14 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 127
+    weight: 27
     region: content
   field_email:
     type: email_mailto
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 123
+    weight: 23
     region: content
   field_exceptions:
     type: smartdate_default
@@ -125,7 +126,7 @@ content:
       add_classes: false
       time_wrapper: true
     third_party_settings: {  }
-    weight: 115
+    weight: 15
     region: content
   field_exceptions_2:
     type: smartdate_default
@@ -138,7 +139,7 @@ content:
       add_classes: false
       time_wrapper: true
     third_party_settings: {  }
-    weight: 119
+    weight: 19
     region: content
   field_location_bucket:
     type: entity_reference_label
@@ -146,7 +147,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 107
+    weight: 7
     region: content
   field_location_contact_name:
     type: string
@@ -154,7 +155,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 120
+    weight: 20
     region: content
   field_location_contact_title:
     type: string
@@ -162,7 +163,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 121
+    weight: 21
     region: content
   field_location_external_id:
     type: string
@@ -170,7 +171,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 129
+    weight: 29
     region: content
   field_location_external_place_id:
     type: string
@@ -178,7 +179,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 130
+    weight: 30
     region: content
   field_location_hours:
     type: office_hours
@@ -209,7 +210,7 @@ content:
       schema:
         enabled: false
     third_party_settings: {  }
-    weight: 114
+    weight: 14
     region: content
   field_location_hours2:
     type: office_hours
@@ -240,21 +241,21 @@ content:
       schema:
         enabled: false
     third_party_settings: {  }
-    weight: 118
+    weight: 18
     region: content
   field_location_hours_notes:
     type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 131
+    weight: 31
     region: content
   field_location_hours_notes2:
     type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 117
+    weight: 17
     region: content
   field_location_hours_title:
     type: string
@@ -262,7 +263,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 113
+    weight: 13
     region: content
   field_location_hours_title_2:
     type: string
@@ -270,7 +271,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 116
+    weight: 16
     region: content
   field_location_location_type:
     type: entity_reference_label
@@ -278,7 +279,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 108
+    weight: 8
     region: content
   field_partial_re_open_citywide:
     type: boolean
@@ -288,7 +289,7 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 125
+    weight: 25
     region: content
   field_phone:
     type: telephone_link
@@ -296,7 +297,7 @@ content:
     settings:
       title: ''
     third_party_settings: {  }
-    weight: 122
+    weight: 22
     region: content
   field_resources:
     type: entity_reference_revisions_entity_view
@@ -305,7 +306,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 124
+    weight: 24
     region: content
   field_restrictions:
     type: entity_reference_revisions_entity_view
@@ -314,7 +315,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 112
+    weight: 12
     region: content
   field_search_keymatch:
     type: entity_reference_label
@@ -322,14 +323,14 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 128
+    weight: 28
     region: content
   field_sidebar:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 126
+    weight: 26
     region: content
   field_subtitle:
     type: string
@@ -337,14 +338,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 102
+    weight: 2
     region: content
   field_summary:
     type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 101
+    weight: 1
     region: content
   field_title_sort:
     type: string
@@ -352,7 +353,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 103
+    weight: 3
     region: content
   field_website:
     type: link
@@ -364,11 +365,12 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 104
+    weight: 4
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
-hidden: {  }
+hidden:
+  field_d7_nid: true
