@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.department_parent.field_search_keymatch
     - field.field.node.department_parent.field_show_top_slider
     - field.field.node.department_parent.field_sidebar
+    - field.field.node.department_parent.field_single_line_title
     - field.field.node.department_parent.field_social_links
     - field.field.node.department_parent.field_summary
     - field.field.node.department_parent.field_top_content
@@ -146,10 +147,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_department:
-    type: options_select
+    type: entity_reference_autocomplete
     weight: 15
     region: content
-    settings: {  }
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_feature_alt_text:
     type: string_textfield
@@ -223,6 +228,13 @@ content:
     settings:
       rows: 5
       placeholder: ''
+    third_party_settings: {  }
+  field_single_line_title:
+    type: boolean_checkbox
+    weight: 26
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   field_social_links:
     type: paragraphs
