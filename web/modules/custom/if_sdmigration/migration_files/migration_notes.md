@@ -14,23 +14,33 @@ Node imports:
 lando terminus drush mi:import sd_nodes_department -- --update --force
 lando terminus drush mi:import sd_nodes_department_parent -- --update --force
 lando terminus drush mi:import sd_nodes_bucket -- --update --force
+lando terminus drush mi:import sd_nodes_location -- --update --force
 
 Entity creation and associations via drush:
 lando terminus drush import:department
 lando terminus drush import:department-parent
 lando terminus drush import:bucket
+lando terminus drush import:location
 
-Data status:
-Bucket nodes exported from dev 9/26/2022
-Department nodes exported from dev 9/26/2022
-Department parent nodes exported from dev 9/26/2022
-field_bucket_events_pi_coll field group exported from dev 9/26/2022
-field_bucket_featured_cards_coll field group exported from dev 9/26/2022
-field_bucket_featured_coll field group exported from dev 9/26/2022
-field_dept_resources_coll field group exported from dev 9/26/2022
-field_dept_par_social_links_coll field group exported from dev 9/26/2022
-Bucket vocabulary exported from 9/26/2022
-Categories vocabulary exported from dev 9/26/2022
-Departments vocabulary exported from dev 9/26/2022
-Keymatch vocabulary exported from dev 9/26/2022
-Location vocabulary exported from dev 9/26/2022
+Data status: 9/26/2022
+Nodes:
+Bucket
+Department
+Department parent
+Location
+Field groups:
+field_bucket_events_pi_coll
+field_bucket_featured_cards_coll
+field_bucket_featured_coll
+field_dept_resources_coll
+field_dept_par_social_links_coll
+field_location_exceptions_coll
+field_location_exceptions_coll2
+field_location_amenities
+field_location_restrictions
+Taxonomies:
+Bucket
+Categories
+Department
+Search KeyMatch
+Location
