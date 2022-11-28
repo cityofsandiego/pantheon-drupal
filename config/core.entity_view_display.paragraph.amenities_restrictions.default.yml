@@ -3,23 +3,22 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.amenities_restrictions.field_description
+    - field.field.paragraph.amenities_restrictions.field_amend_restrict_description
     - field.field.paragraph.amenities_restrictions.field_icon
     - field.field.paragraph.amenities_restrictions.field_title
     - paragraphs.paragraphs_type.amenities_restrictions
-  module:
-    - text
 id: paragraph.amenities_restrictions.default
 targetEntityType: paragraph
 bundle: amenities_restrictions
 mode: default
 content:
-  field_description:
-    type: text_default
-    label: hidden
-    settings: {  }
+  field_amend_restrict_description:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   field_icon:
     type: string
