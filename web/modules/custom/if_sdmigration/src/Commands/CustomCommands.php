@@ -886,6 +886,278 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   * Import fields:
+   * field_address X, field_amenities X, field_location_bucket X, field_department X,
+   * field_exceptions, field_location_hours X, field_location_location_type X,
+   * field_resources X, field_restrictions X, field_search_keymatch X,
+   * field_exceptions_2, field_location_hours2 X.
+   *
+   * @command import:location
+   *
+   * @usage import:location
+   */
+  public function finalizeLocation() {
+    $nodedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/locations.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'path' => str_replace('`', '', $data[1]),
+          'street' => str_replace('`', '', $data[3]),
+          'additional' => str_replace('`', '', $data[4]),
+          'city' => str_replace('`', '', $data[5]),
+          'name' => str_replace('`', '', $data[8]),
+          'postal_code' => str_replace('`', '', $data[9]),
+          'province' => str_replace('`', '', $data[10]),
+          'amenities' => explode('|', str_replace('`', '', $data[13])),
+          'bucket' => str_replace('`', '', $data[15]),
+          'department' => explode('|', str_replace('`', '', $data[18])),
+          'secondary_exceptions' => explode('|', str_replace('`', '', $data[20])),
+          'hours' => explode(' \ ', str_replace('`', '', $data[23])),
+          'location_type' => str_replace('`', '', $data[25]),
+          'resources' => explode('|', str_replace('`', '', $data[29])),
+          'restrictions' => explode('|', str_replace('`', '', $data[30])),
+          'secondary_hours' => explode(' \ ', str_replace('`', '', $data[31])),
+          'search_keymatch' => explode('|', str_replace('`', '', $data[36])),
+          'exceptions' => explode(' |', str_replace('`', '', $data[38])),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Load amenities_restrictions data.
+    $ardata = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_location_amenities_coll.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $id = str_replace('`', '', $data[0]);
+        $id = str_replace(',', '', $id);
+        $ardata[$id] = [
+          'description' => str_replace('`', '', $data[1]),
+          'icon' => str_replace('`', '', $data[2]),
+          'title' => str_replace('`', '', $data[3]),
+        ];
+      }
+      fclose($file);
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_location_restrictions_coll.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $id = str_replace('`', '', $data[0]);
+        $id = str_replace(',', '', $id);
+        $ardata[$id] = [
+          'description' => str_replace('`', '', $data[1]),
+          'icon' => str_replace('`', '', $data[2]),
+          'title' => str_replace('`', '', $data[3]),
+        ];
+      }
+      fclose($file);
+    }
+
+    $resourcedata = [];
+    // Resource field collection.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_dept_resources_coll.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $id = str_replace('`', '', $data[0]);
+        $id = str_replace(',', '', $id);
+        $resourcedata[$id] = [
+          'icon' => str_replace('`', '', $data[1]),
+          'label' => str_replace('`', '', $data[2]),
+          'url' => str_replace('`', '', $data[3]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Exceptions + Secondary exceptions
+    $exceptions = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_location_exceptions_coll.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $id = str_replace('`', '', $data[0]);
+        $id = str_replace(',', '', $id);
+        $exceptions[$id] = explode('|', str_replace('`', '', $data[1]));
+      }
+      fclose($file);
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_location_exceptions_coll2.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $id = str_replace('`', '', $data[0]);
+        $id = str_replace(',', '', $id);
+        $exceptions[$id] = explode('|', str_replace('`', '', $data[1]));
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'location')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+
+      // Set alias.
+      $node->path = [
+        'alias' => $data['path'],
+        'pathauto' => PathautoState::SKIP,
+      ];
+
+      // Set address.
+      $node->field_address = [
+        'country_code' => 'US',
+        'address_line1' => $data['street'],
+        'address_line2' => $data['additional'],
+        'locality' => $data['city'],
+        'administrative_area' => 'CA',
+        'postal_code' => str_pad($data['postal_code'], 5, '0', STR_PAD_LEFT),
+      ];
+
+      // Set hours.
+      $hours = [];
+      foreach ($data['hours'] as $hour_row) {
+        $hour_row = explode(';', $hour_row);
+        $day = $hour_row[0];
+        $hour_row = explode('~', $hour_row[1]);
+        $starthours = str_replace(':', '', $hour_row[0]);
+        $endhours = str_replace(':', '', $hour_row[1]);
+        $hours[] = [
+          'day' => $day,
+          'starthours' => $starthours,
+          'endhours' => $endhours,
+          'comment' => '',
+        ];
+      }
+      $secondary_hours = [];
+      foreach ($data['secondary_hours'] as $hour_row) {
+        $hour_row = explode(';', $hour_row);
+        $day = $hour_row[0];
+        $hour_row = explode('~', $hour_row[1]);
+        $starthours = str_replace(':', '', $hour_row[0]);
+        $endhours = str_replace(':', '', $hour_row[1]);
+        $secondary_hours[] = [
+          'day' => $day,
+          'starthours' => $starthours,
+          'endhours' => $endhours,
+          'comment' => '',
+        ];
+      }
+      $node->field_location_hours = $hours;
+      $node->field_location_hours2 = $secondary_hours;
+
+      $node->field_restrictions = [];
+      foreach ($data['restrictions'] as $restriction) {
+        $paragraph = Paragraph::create([
+          'type' => 'amenities_restrictions',
+          'field_description' => $ardata[$restriction]['description'],
+          'field_icon' => $ardata[$restriction]['icon'],
+          'field_title' => $ardata[$restriction]['title'],
+        ]);
+        $paragraph->save();
+        $node->field_restrictions[] = $paragraph;
+      }
+
+      $node->field_amenities = [];
+      foreach ($data['amenities'] as $amenity) {
+        $paragraph = Paragraph::create([
+          'type' => 'amenities_restrictions',
+          'field_description' => $ardata[$amenity]['description'],
+          'field_icon' => $ardata[$amenity]['icon'],
+          'field_title' => $ardata[$amenity]['title'],
+        ]);
+        $paragraph->save();
+        $node->field_amenities[] = $paragraph;
+      }
+
+      $node->field_resources = [];
+      foreach ($data['resources'] as $resource) {
+        $paragraph = Paragraph::create([
+          'type' => 'resources',
+          'field_icon' => $resourcedata[$resource]['icon'],
+          'field_label' => $resourcedata[$resource]['label'],
+          'field_link' => [
+            'uri' => $resourcedata[$resource]['url'],
+          ],
+        ]);
+        $paragraph->save();
+        $node->field_resources[] = $paragraph;
+      }
+
+      $node->field_department->setValue([]);
+      foreach ($data['department'] as $department) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+        $node->field_department->appendItem($term);
+      }
+
+      $node->field_search_keymatch->setValue([]);
+      foreach ($data['search_keymatch'] as $search_keymatch) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
+        $node->field_search_keymatch->appendItem($term);
+      }
+
+      $term = Term::load($this->taxonomyImportTasks->newTid($data['bucket'], 'bucket'));
+      $node->field_location_bucket = $term;
+
+      $term = Term::load($this->taxonomyImportTasks->newTid($data['location_type'], 'location'));
+      $node->field_location_location_type = $term;
+
+      $node->field_exceptions = [];
+      foreach ($data['exceptions'] as $exception) {
+        if (!empty($exception)) {
+          $times = $exceptions[$exception];
+          foreach ($times as $time) {
+            if (strpos($time, ' to ') !== FALSE) {
+              $timerange = explode(' to ', $time);
+              $value = strtotime($timerange[0]);
+              $end_value = strtotime($timerange[1]);
+            }
+            else {
+              $value = strtotime($time);
+              $end_value = NULL;
+            }
+            $node->field_exceptions[] = [
+              'value' => $value,
+              'end_value' => $end_value,
+            ];
+          }
+        }
+      }
+
+      $node->field_exceptions2 = [];
+      foreach ($data['secondary_exceptions'] as $exception) {
+        if (!empty($exception)) {
+          $times = $exceptions[$exception];
+          foreach ($times as $time) {
+            if (strpos($time, ' to ') !== FALSE) {
+              $timerange = explode(' to ', $time);
+              $value = strtotime($timerange[0]);
+              $end_value = strtotime($timerange[1]);
+            }
+            else {
+              $value = strtotime($time);
+              $end_value = NULL;
+            }
+            $node->field_exceptions2[] = [
+              'value' => $value,
+              'end_value' => $end_value,
+            ];
+          }
+        }
+      }
+
+      $node->save();
+    }
+  }
+
+
+  /**
    * Deletes all image media.
    *
    * @command import:delete-images

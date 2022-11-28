@@ -221,10 +221,14 @@ content:
         duplicate: duplicate
     third_party_settings: {  }
   field_department:
-    type: options_buttons
+    type: entity_reference_autocomplete
     weight: 19
     region: content
-    settings: {  }
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_email:
     type: email_default
@@ -349,7 +353,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_location_location_type:
-    type: options_buttons
+    type: options_select
     weight: 18
     region: content
     settings: {  }

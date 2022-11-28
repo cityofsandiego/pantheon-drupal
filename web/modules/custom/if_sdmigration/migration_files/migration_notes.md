@@ -20,6 +20,7 @@ Entity creation and associations via drush:
 lando terminus drush import:department
 lando terminus drush import:department-parent
 lando terminus drush import:bucket
+lando terminus drush import:location
 
 Data status: 9/26/2022
 Nodes:
