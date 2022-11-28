@@ -178,7 +178,7 @@ function template_preprocess_views_data_export_csv_body(&$vars) {
           $output = str_replace("\n", $vars['options']['newline_replacement'], $output);
         }
       }
-      if ($j == 'body' || $j == 'field_additional_content' || $j == 'field_dept_par_featured_content') {
+      if ($j == 'body' || $j == 'field_additional_content' || $j == 'field_dept_par_featured_content' || $j == 'field_bucket_subtitle' || $j == 'field_featured_card_description' || $j == 'field_department') {
         $output = str_replace(',', '&#44;', $output);
       }
       $output = $str = preg_replace('/[[:^print:]]/', '', $output);
