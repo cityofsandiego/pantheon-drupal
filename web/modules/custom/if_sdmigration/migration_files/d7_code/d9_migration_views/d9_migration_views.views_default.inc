@@ -751,7 +751,7 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['fields']['field_dept_resources_coll']['table'] = 'field_data_field_dept_resources_coll';
   $handler->display->display_options['fields']['field_dept_resources_coll']['field'] = 'field_dept_resources_coll';
   $handler->display->display_options['fields']['field_dept_resources_coll']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_dept_resources_coll']['alter']['text'] = '[field_dept_resources_coll-value] ';
+  $handler->display->display_options['fields']['field_dept_resources_coll']['alter']['text'] = '[field_dept_resources_coll-value]';
   $handler->display->display_options['fields']['field_dept_resources_coll']['type'] = 'field_collection_fields';
   $handler->display->display_options['fields']['field_dept_resources_coll']['settings'] = array(
     'view_mode' => 'full',
@@ -840,6 +840,7 @@ function d9_migration_views_views_default_views() {
     'view_mode' => 'full',
   );
   $handler->display->display_options['fields']['field_location_exceptions_coll']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_location_exceptions_coll']['separator'] = '|';
   /* Field: Content: Location Hours Title */
   $handler->display->display_options['fields']['field_location_hours_title']['id'] = 'field_location_hours_title';
   $handler->display->display_options['fields']['field_location_hours_title']['table'] = 'field_data_field_location_hours_title';
@@ -866,6 +867,275 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
   $handler->display->display_options['path'] = 'migration/locations';
+  $handler->display->display_options['use_batch'] = 'batch';
+  $handler->display->display_options['segment_size'] = '100';
+
+  /* Display: Data export 6 */
+  $handler = $view->new_display('views_data_export', 'Data export 6', 'views_data_export_6');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '0';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['newline_token'] = '1';
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 1;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Image (field_image:fid) */
+  $handler->display->display_options['relationships']['field_image_fid']['id'] = 'field_image_fid';
+  $handler->display->display_options['relationships']['field_image_fid']['table'] = 'field_data_field_image';
+  $handler->display->display_options['relationships']['field_image_fid']['field'] = 'field_image_fid';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'D7 ID';
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  /* Field: Field: Department */
+  $handler->display->display_options['fields']['field_department']['id'] = 'field_department';
+  $handler->display->display_options['fields']['field_department']['table'] = 'field_data_field_department';
+  $handler->display->display_options['fields']['field_department']['field'] = 'field_department';
+  $handler->display->display_options['fields']['field_department']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_department']['alter']['text'] = '[field_department-tid] ';
+  $handler->display->display_options['fields']['field_department']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_department']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_department']['separator'] = '|';
+  /* Field: Field: Department */
+  $handler->display->display_options['fields']['field_department_1']['id'] = 'field_department_1';
+  $handler->display->display_options['fields']['field_department_1']['table'] = 'field_data_field_department';
+  $handler->display->display_options['fields']['field_department_1']['field'] = 'field_department';
+  $handler->display->display_options['fields']['field_department_1']['relationship'] = 'field_image_fid';
+  $handler->display->display_options['fields']['field_department_1']['label'] = 'Image Department';
+  $handler->display->display_options['fields']['field_department_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_department_1']['alter']['text'] = '[field_department_1-tid]';
+  $handler->display->display_options['fields']['field_department_1']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_department_1']['settings'] = array(
+    'view_mode' => 'default',
+    'links' => 1,
+    'use_content_language' => 1,
+  );
+  $handler->display->display_options['fields']['field_department_1']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_department_1']['separator'] = '|';
+  /* Field: Field: License settings for this file */
+  $handler->display->display_options['fields']['field_license']['id'] = 'field_license';
+  $handler->display->display_options['fields']['field_license']['table'] = 'field_data_field_license';
+  $handler->display->display_options['fields']['field_license']['field'] = 'field_license';
+  $handler->display->display_options['fields']['field_license']['relationship'] = 'field_image_fid';
+  $handler->display->display_options['fields']['field_license']['label'] = 'Image License settings for this file';
+  $handler->display->display_options['fields']['field_license']['type'] = 'list_key';
+  /* Field: File: Alt Text */
+  $handler->display->display_options['fields']['field_file_image_alt_text']['id'] = 'field_file_image_alt_text';
+  $handler->display->display_options['fields']['field_file_image_alt_text']['table'] = 'field_data_field_file_image_alt_text';
+  $handler->display->display_options['fields']['field_file_image_alt_text']['field'] = 'field_file_image_alt_text';
+  $handler->display->display_options['fields']['field_file_image_alt_text']['relationship'] = 'field_image_fid';
+  $handler->display->display_options['fields']['field_file_image_alt_text']['label'] = 'Image Alt Text';
+  $handler->display->display_options['fields']['field_file_image_alt_text']['type'] = 'text_plain';
+  /* Field: File: File ID */
+  $handler->display->display_options['fields']['fid']['id'] = 'fid';
+  $handler->display->display_options['fields']['fid']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['fid']['field'] = 'fid';
+  $handler->display->display_options['fields']['fid']['relationship'] = 'field_image_fid';
+  $handler->display->display_options['fields']['fid']['label'] = 'Image File ID';
+  /* Field: File: Path */
+  $handler->display->display_options['fields']['uri']['id'] = 'uri';
+  $handler->display->display_options['fields']['uri']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['uri']['field'] = 'uri';
+  $handler->display->display_options['fields']['uri']['relationship'] = 'field_image_fid';
+  $handler->display->display_options['fields']['uri']['label'] = 'Image Path';
+  /* Field: Content: Caption */
+  $handler->display->display_options['fields']['field_caption']['id'] = 'field_caption';
+  $handler->display->display_options['fields']['field_caption']['table'] = 'field_data_field_caption';
+  $handler->display->display_options['fields']['field_caption']['field'] = 'field_caption';
+  $handler->display->display_options['fields']['field_caption']['type'] = 'text_plain';
+  /* Field: Content: Link Text */
+  $handler->display->display_options['fields']['field_link_text']['id'] = 'field_link_text';
+  $handler->display->display_options['fields']['field_link_text']['table'] = 'field_data_field_link_text';
+  $handler->display->display_options['fields']['field_link_text']['field'] = 'field_link_text';
+  $handler->display->display_options['fields']['field_link_text']['type'] = 'text_plain';
+  /* Field: Content: Link URL */
+  $handler->display->display_options['fields']['field_link_url']['id'] = 'field_link_url';
+  $handler->display->display_options['fields']['field_link_url']['table'] = 'field_data_field_link_url';
+  $handler->display->display_options['fields']['field_link_url']['field'] = 'field_link_url';
+  $handler->display->display_options['fields']['field_link_url']['type'] = 'text_plain';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'slide' => 'slide',
+  );
+  $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['label'] = 'Type';
+  $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+  $handler->display->display_options['path'] = 'migration/slides';
+  $handler->display->display_options['use_batch'] = 'batch';
+  $handler->display->display_options['segment_size'] = '100';
+
+  /* Display: Data export 7 */
+  $handler = $view->new_display('views_data_export', 'Data export 7', 'views_data_export_7');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '0';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['newline_token'] = '1';
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 1;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Photo (field_ma_photo:fid) */
+  $handler->display->display_options['relationships']['field_ma_photo_fid']['id'] = 'field_ma_photo_fid';
+  $handler->display->display_options['relationships']['field_ma_photo_fid']['table'] = 'field_data_field_ma_photo';
+  $handler->display->display_options['relationships']['field_ma_photo_fid']['field'] = 'field_ma_photo_fid';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'D7 ID';
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  /* Field: Content: Category */
+  $handler->display->display_options['fields']['field_category']['id'] = 'field_category';
+  $handler->display->display_options['fields']['field_category']['table'] = 'field_data_field_category';
+  $handler->display->display_options['fields']['field_category']['field'] = 'field_category';
+  $handler->display->display_options['fields']['field_category']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_category']['alter']['text'] = '[field_category-tid]';
+  $handler->display->display_options['fields']['field_category']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_category']['separator'] = '|';
+  /* Field: Field: Search KeyMatch */
+  $handler->display->display_options['fields']['field_search_keymatch']['id'] = 'field_search_keymatch';
+  $handler->display->display_options['fields']['field_search_keymatch']['table'] = 'field_data_field_search_keymatch';
+  $handler->display->display_options['fields']['field_search_keymatch']['field'] = 'field_search_keymatch';
+  $handler->display->display_options['fields']['field_search_keymatch']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_search_keymatch']['alter']['text'] = '[field_search_keymatch-tid]';
+  $handler->display->display_options['fields']['field_search_keymatch']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_search_keymatch']['separator'] = '|';
+  /* Field: Field: Department */
+  $handler->display->display_options['fields']['field_department_1']['id'] = 'field_department_1';
+  $handler->display->display_options['fields']['field_department_1']['table'] = 'field_data_field_department';
+  $handler->display->display_options['fields']['field_department_1']['field'] = 'field_department';
+  $handler->display->display_options['fields']['field_department_1']['relationship'] = 'field_ma_photo_fid';
+  $handler->display->display_options['fields']['field_department_1']['label'] = 'Image Department';
+  $handler->display->display_options['fields']['field_department_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_department_1']['alter']['text'] = '[field_department_1-tid]';
+  $handler->display->display_options['fields']['field_department_1']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_department_1']['settings'] = array(
+    'view_mode' => 'default',
+    'links' => 1,
+    'use_content_language' => 1,
+  );
+  $handler->display->display_options['fields']['field_department_1']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_department_1']['separator'] = '|';
+  /* Field: Field: License settings for this file */
+  $handler->display->display_options['fields']['field_license']['id'] = 'field_license';
+  $handler->display->display_options['fields']['field_license']['table'] = 'field_data_field_license';
+  $handler->display->display_options['fields']['field_license']['field'] = 'field_license';
+  $handler->display->display_options['fields']['field_license']['relationship'] = 'field_ma_photo_fid';
+  $handler->display->display_options['fields']['field_license']['label'] = 'Image License settings for this file';
+  $handler->display->display_options['fields']['field_license']['type'] = 'list_key';
+  /* Field: File: Alt Text */
+  $handler->display->display_options['fields']['field_file_image_alt_text']['id'] = 'field_file_image_alt_text';
+  $handler->display->display_options['fields']['field_file_image_alt_text']['table'] = 'field_data_field_file_image_alt_text';
+  $handler->display->display_options['fields']['field_file_image_alt_text']['field'] = 'field_file_image_alt_text';
+  $handler->display->display_options['fields']['field_file_image_alt_text']['relationship'] = 'field_ma_photo_fid';
+  $handler->display->display_options['fields']['field_file_image_alt_text']['label'] = 'Image Alt Text';
+  $handler->display->display_options['fields']['field_file_image_alt_text']['type'] = 'text_plain';
+  /* Field: File: File ID */
+  $handler->display->display_options['fields']['fid']['id'] = 'fid';
+  $handler->display->display_options['fields']['fid']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['fid']['field'] = 'fid';
+  $handler->display->display_options['fields']['fid']['relationship'] = 'field_ma_photo_fid';
+  $handler->display->display_options['fields']['fid']['label'] = 'Image File ID';
+  /* Field: File: Path */
+  $handler->display->display_options['fields']['uri']['id'] = 'uri';
+  $handler->display->display_options['fields']['uri']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['uri']['field'] = 'uri';
+  $handler->display->display_options['fields']['uri']['relationship'] = 'field_ma_photo_fid';
+  $handler->display->display_options['fields']['uri']['label'] = 'Image Path';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  /* Field: Content: Date of Photo */
+  $handler->display->display_options['fields']['field_ma_photo_date']['id'] = 'field_ma_photo_date';
+  $handler->display->display_options['fields']['field_ma_photo_date']['table'] = 'field_data_field_ma_photo_date';
+  $handler->display->display_options['fields']['field_ma_photo_date']['field'] = 'field_ma_photo_date';
+  $handler->display->display_options['fields']['field_ma_photo_date']['type'] = 'text_plain';
+  /* Field: Content: Keywords */
+  $handler->display->display_options['fields']['field_ma_keywords']['id'] = 'field_ma_keywords';
+  $handler->display->display_options['fields']['field_ma_keywords']['table'] = 'field_data_field_ma_keywords';
+  $handler->display->display_options['fields']['field_ma_keywords']['field'] = 'field_ma_keywords';
+  $handler->display->display_options['fields']['field_ma_keywords']['type'] = 'text_plain';
+  /* Field: Content: Location */
+  $handler->display->display_options['fields']['field_ma_location']['id'] = 'field_ma_location';
+  $handler->display->display_options['fields']['field_ma_location']['table'] = 'field_data_field_ma_location';
+  $handler->display->display_options['fields']['field_ma_location']['field'] = 'field_ma_location';
+  $handler->display->display_options['fields']['field_ma_location']['type'] = 'text_plain';
+  /* Field: Content: Mayor */
+  $handler->display->display_options['fields']['field_ma_mayor']['id'] = 'field_ma_mayor';
+  $handler->display->display_options['fields']['field_ma_mayor']['table'] = 'field_data_field_ma_mayor';
+  $handler->display->display_options['fields']['field_ma_mayor']['field'] = 'field_ma_mayor';
+  $handler->display->display_options['fields']['field_ma_mayor']['type'] = 'list_key';
+  /* Field: Content: Record ID */
+  $handler->display->display_options['fields']['field_ma_record_id']['id'] = 'field_ma_record_id';
+  $handler->display->display_options['fields']['field_ma_record_id']['table'] = 'field_data_field_ma_record_id';
+  $handler->display->display_options['fields']['field_ma_record_id']['field'] = 'field_ma_record_id';
+  $handler->display->display_options['fields']['field_ma_record_id']['type'] = 'text_plain';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'mayoral_artifacts' => 'mayoral_artifacts',
+  );
+  $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['label'] = 'Type';
+  $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+  $handler->display->display_options['path'] = 'migration/mayoral-artifacts';
   $handler->display->display_options['use_batch'] = 'batch';
   $handler->display->display_options['segment_size'] = '100';
   $export['content_migration'] = $view;
