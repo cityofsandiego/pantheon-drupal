@@ -1270,6 +1270,7 @@ class CustomCommands extends DrushCommands {
     $query->condition('type', 'department');
     $nids = $query->execute();
     foreach ($nids as $id) {
+      \Drupal::service('entity.memory_cache')->deleteAll();
       $node = Node::load($id);
       $sidebar_html = $node->field_sidebar->value;
       if (strpos($sidebar_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
