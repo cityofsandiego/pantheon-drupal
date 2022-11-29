@@ -1268,7 +1268,8 @@ class CustomCommands extends DrushCommands {
       ->getStorage('node')
       ->getQuery();
     $query->condition('type', 'department');
-    foreach ($query->execute() as $id) {
+    $nids = $query->execute();
+    foreach ($nids as $id) {
       $node = Node::load($id);
       $sidebar_html = $node->field_sidebar->value;
       if (strpos($sidebar_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
