@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.slide.field_caption
+    - field.field.node.slide.field_d7_nid
     - field.field.node.slide.field_department
     - field.field.node.slide.field_image
     - field.field.node.slide.field_link_text
@@ -23,7 +24,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 102
+    weight: 2
     region: content
   field_department:
     type: entity_reference_label
@@ -31,7 +32,7 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 105
+    weight: 5
     region: content
   field_image:
     type: entity_reference_entity_view
@@ -40,7 +41,7 @@ content:
       view_mode: default
       link: true
     third_party_settings: {  }
-    weight: 101
+    weight: 1
     region: content
   field_link_text:
     type: string
@@ -48,7 +49,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 104
+    weight: 4
     region: content
   field_url:
     type: link
@@ -60,11 +61,12 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 103
+    weight: 3
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
-hidden: {  }
+hidden:
+  field_d7_nid: true
