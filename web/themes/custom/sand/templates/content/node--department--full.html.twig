@@ -85,30 +85,35 @@
   {{ title_prefix }}
   {% if not page %}
     <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      <a href="{{ url }}" rel="bookmark">{{ label }} test </a>
     </h2>
   {% endif %}
   {{ title_suffix }}
 
   <div{{ content_attributes.addClass('node__content') }}>
-  <div class="grid-x">
-    <div class="cell small-12 medium-auto content">
-      <div class="l-padding-am">
-        {{ content.field_subtitle }}
-        {{ content.body }}
-        {{ content.field_image }}
-        {{ content.field_other_description }}
+    <div class="grid-x">
+      <div class="cell small-12 medium-auto content">
+        <div class="l-padding-am">
+          <h1>{{ label }}</h1>
+
+          {% if content.field_subtitle %}
+            <h2>{{ content.field_subtitle }}</h2>
+          {% endif %}
+
+          {{ content.body }}
+          {{ content.field_other_description }}
+        </div>
+        {{ content.field_resources }}
       </div>
-      {{ content.field_resources }}
-    </div>
-  {% if content.field_sidebar[0] %}
-    <div class="cell medium-4 large-4 sidebar light-gray-bg">
-      <div class="l-padding-am l-padding-mobile-hd l-margin-mobile-bm">
-        {{ content.field_sidebar }}
+
+      <div class="cell medium-3 large-3">
+        <div class="l-padding-am l-padding-mobile-hd l-margin-mobile-bm light-gray-bg sidebar">
+            {% if content.field_sidebar[0] %}
+              {{ content.field_sidebar }}
+            {% endif %}
+        </div>
       </div>
     </div>
-  {% endif %}
-  </div>
   </div>
 
 </article>
