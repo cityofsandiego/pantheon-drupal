@@ -15,12 +15,16 @@ lando terminus drush mi:import sd_nodes_department -- --update --force
 lando terminus drush mi:import sd_nodes_department_parent -- --update --force
 lando terminus drush mi:import sd_nodes_bucket -- --update --force
 lando terminus drush mi:import sd_nodes_location -- --update --force
+lando terminus drush mi:import sd_nodes_slide -- --update --force
+lando terminus drush mi:import sd_nodes_mayoral_artifact -- --update --force
 
 Entity creation and associations via drush:
 lando terminus drush import:department
+lando terminus drush import:department-fixes
 lando terminus drush import:department-parent
 lando terminus drush import:bucket
 lando terminus drush import:location
+lando terminus drush import:mayoral-artifact
 
 Data status: 9/26/2022
 Nodes:
@@ -28,6 +32,9 @@ Bucket
 Department
 Department parent
 Location
+Slide
+Mayoral artifacts
+
 Field groups:
 field_bucket_events_pi_coll
 field_bucket_featured_cards_coll
@@ -38,6 +45,7 @@ field_location_exceptions_coll
 field_location_exceptions_coll2
 field_location_amenities
 field_location_restrictions
+
 Taxonomies:
 Bucket
 Categories
