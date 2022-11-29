@@ -7,9 +7,11 @@ dependencies:
     - field.field.paragraph.card.field_image
     - field.field.paragraph.card.field_label
     - field.field.paragraph.card.field_link
+    - image.style.card
     - paragraphs.paragraphs_type.card
   module:
     - link
+    - media
     - text
 id: paragraph.card.default
 targetEntityType: paragraph
@@ -24,11 +26,13 @@ content:
     weight: 4
     region: content
   field_image:
-    type: entity_reference_entity_view
+    type: media_thumbnail
     label: hidden
     settings:
-      view_mode: default
-      link: false
+      image_link: ''
+      image_style: card
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 1
     region: content
@@ -44,11 +48,11 @@ content:
     type: link
     label: hidden
     settings:
-      trim_length: 80
+      trim_length: null
       url_only: false
       url_plain: false
-      rel: ''
-      target: ''
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
     weight: 3
     region: content

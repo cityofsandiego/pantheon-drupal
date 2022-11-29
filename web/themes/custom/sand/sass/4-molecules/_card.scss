@@ -1,0 +1,58 @@
+/* ============================================================
+  Styles for cards and featured cards.
+  ============================================================ */
+
+/* Featured Cards */
+.card-group {
+  padding: 1rem 0;
+
+  h2 {
+    font-family: $headline;
+  }
+
+  .card-group__wrapper {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 2rem;
+
+    @include respond-to('m') {
+      flex-flow: row nowrap;
+    }
+  }
+}
+
+/* Individual Card */
+.card {
+  max-width: 700px;
+  background-color: $alto;
+  border-radius: 2px;
+  flex: 1 100%;
+
+  a {
+    display: block;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+  }
+
+  .card__content {
+    color: $charcoal;
+    padding: 1rem;
+
+    .card__heading {
+      font-family: $headline;
+      font-size: 1.25rem;
+    }
+
+    .card__body {
+      margin: 1rem 0;
+    }
+  }
+}
