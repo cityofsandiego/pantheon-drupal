@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.location.field_alt_amenities_title
     - field.field.node.location.field_alt_restrictions_title
     - field.field.node.location.field_amenities
+    - field.field.node.location.field_d7_nid
     - field.field.node.location.field_department
     - field.field.node.location.field_email
     - field.field.node.location.field_exceptions
@@ -179,7 +180,7 @@ content:
     third_party_settings: {  }
   field_address_pin:
     type: geofield_latlon
-    weight: 32
+    weight: 19
     region: content
     settings:
       html5_geolocation: false
@@ -220,10 +221,14 @@ content:
         duplicate: duplicate
     third_party_settings: {  }
   field_department:
-    type: options_buttons
+    type: entity_reference_autocomplete
     weight: 19
     region: content
-    settings: {  }
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_email:
     type: email_default
@@ -289,7 +294,7 @@ content:
     third_party_settings: {  }
   field_location_external_id:
     type: string_textfield
-    weight: 22
+    weight: 17
     region: content
     settings:
       size: 60
@@ -297,7 +302,7 @@ content:
     third_party_settings: {  }
   field_location_external_place_id:
     type: string_textfield
-    weight: 23
+    weight: 18
     region: content
     settings:
       size: 60
@@ -348,7 +353,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_location_location_type:
-    type: options_buttons
+    type: options_select
     weight: 18
     region: content
     settings: {  }
@@ -534,4 +539,5 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_d7_nid: true
