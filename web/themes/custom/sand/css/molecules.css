@@ -14,6 +14,94 @@
 /* ============================================================
   Breakpoints
   ============================================================ */
+.background--odd {
+  background-color: #f6f6f6;
+}
+
+.background--even {
+  background-color: #e4e9eb;
+}
+
+.message--dark,
+.background--dark {
+  background-color: #37424a !important;
+}
+.message--dark.text-white > *,
+.background--dark.text-white > * {
+  color: white;
+}
+
+.message-off-white,
+.background-off-white {
+  background-color: #eaeeef !important;
+}
+
+.message-off-white-darker,
+.background-off-white-darer {
+  background-color: #d8dfe2;
+}
+
+.message-white,
+.background-white {
+  background-color: white !important;
+}
+
+.message--cerulean,
+.background--cerulean {
+  background-color: #0098db !important;
+}
+
+.message--science,
+.background--science {
+  background-color: #005bbb !important;
+}
+
+.message--sunshade,
+.background--sunshade {
+  background: #ffa02f !important;
+}
+
+.message--robin,
+.background--robin {
+  background: #00c7b2 !important;
+}
+
+.message--westar,
+.background--westar {
+  background: #dad7cb !important;
+}
+
+.message--off-white,
+.background--off-white {
+  background: #f6f6f6 !important;
+}
+
+.message--riptide,
+.background--riptide {
+  background: #80e0d3 !important;
+}
+
+.message--texasrose,
+.background--texasrose {
+  background: #ffb652 !important;
+}
+
+.message--manz,
+.background--manz {
+  background: #f3ec7a !important;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(55, 66, 74, 0.5);
+}
+
+/* Gradient
+   ========================================================================== */
 /* ============================================================
   Styles for fonts/typefaces.
   ============================================================ */
@@ -2682,24 +2770,226 @@
 /* ============================================================
   Styles for accordions.
   ============================================================ */
-.accordion-container .title {
-  font-family: "Merriweather", serif;
+.accordion {
+  margin: 0 0 1em 0;
+}
+.accordion .accordion-title {
+  color: #e4e9eb;
+  background-color: #e4e9eb;
+  font-size: 1.6875rem;
+  color: #37424a;
+  text-decoration: none;
+}
+.accordion .accordion-title:hover {
+  color: #0098db;
+}
+.accordion .accordion-title:before {
+  margin-top: -0.8rem;
+}
+.accordion .accordion__drawer {
+  padding: 1em;
+  display: none;
+  border: 1px solid #a7abad;
+  border-top: none;
+}
+
+/* Accordion D7
+   ========================================================================== */
+.accordions {
+  margin: 1em 0;
+}
+#list-container .accordions {
+  margin: 0;
+}
+
+.accordion {
+  margin: 0 0 1em 0;
+}
+#list-container .accordion {
+  margin: 0;
+}
+
+.accordion__heading {
+  margin: 0;
+  padding: 1rem 3.5rem 1rem 1rem;
+  color: #37424a;
+  background: #e4e9eb;
+  position: relative;
+  border: 1px solid white;
   font-size: 1.5rem;
-  padding: 0.5rem 0;
 }
-.accordion-container .title svg {
+#list-container .accordion__heading {
+  padding: 0.2em 1em;
+}
+
+.accordion__link {
+  display: block;
+  color: #37424a;
+  text-decoration: none;
+}
+#list-container .accordion__link i {
+  font-size: 0.75em;
+}
+.accordion__link:hover {
+  text-decoration: none;
+  color: #0098db;
+}
+
+.accordion__drawer {
+  padding: 1em;
+  display: none;
+  border: 1px solid #a7abad;
+  border-top: none;
+}
+.no-js .accordion__drawer {
+  display: block;
+}
+
+.toggle-icon {
+  margin-top: -0.75em;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+  display: inline-block;
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  overflow: hidden;
+}
+.toggle-icon:before, .toggle-icon:after {
+  content: "";
+  position: absolute;
+  display: block;
+  background: #a7abad;
+}
+.csstransforms3d .toggle-icon:before, .csstransforms3d .toggle-icon:after {
+  top: 50%;
+}
+.toggle-icon:before {
+  margin-top: -1px;
+  width: 100%;
+  height: 2px;
+  top: 50%;
+}
+.csstransforms3d .toggle-icon:before {
+  margin-top: auto;
+}
+.toggle-icon:after {
+  margin-left: -1px;
+  height: 100%;
+  width: 2px;
+  left: 50%;
+}
+.csstransforms3d .toggle-icon:after {
+  margin-left: auto;
+}
+
+.is-open > .accordion__heading {
+  font-weight: 700;
+  background: white;
+  border: 1px solid #a7abad;
+  border-bottom: none;
+}
+.csstransforms3d .is-open > div > h2 > a > .toggle-icon:before, .csstransforms3d .is-open > div > h2 > a > .toggle-icon:after, .csstransforms3d .is-open > div > h3 > a > .toggle-icon:before, .csstransforms3d .is-open > div > h3 > a > .toggle-icon:after, .csstransforms3d .is-open > div > h4 > a > .toggle-icon:before, .csstransforms3d .is-open > div > h4 > a > .toggle-icon:after, .csstransforms3d .is-open > div > h5 > a > .toggle-icon:before, .csstransforms3d .is-open > div > h5 > a > .toggle-icon:after, .csstransforms3d .is-open > div > h6 > a > .toggle-icon:before, .csstransforms3d .is-open > div > h6 > a > .toggle-icon:after, .csstransforms3d .is-open > p > a > .toggle-icon:before, .csstransforms3d .is-open > p > a > .toggle-icon:after, .csstransforms3d .is-open > h2 > a > .toggle-icon:before, .csstransforms3d .is-open > h2 > a > .toggle-icon:after, .csstransforms3d .is-open > h3 > a > .toggle-icon:before, .csstransforms3d .is-open > h3 > a > .toggle-icon:after, .csstransforms3d .is-open > h4 > a > .toggle-icon:before, .csstransforms3d .is-open > h4 > a > .toggle-icon:after, .csstransforms3d .is-open > h5 > a > .toggle-icon:before, .csstransforms3d .is-open > h5 > a > .toggle-icon:after, .csstransforms3d .is-open > h6 > a > .toggle-icon:before, .csstransforms3d .is-open > h6 > a > .toggle-icon:after {
+  background: #0098db;
+}
+.table__accordion {
+  margin: 0;
+  padding: 0;
+}
+.table__accordion .accordion {
+  margin: 0;
+}
+.table__accordion .accordion__drawer {
+  padding: 0;
+  border: none;
+  display: block;
+}
+.table__accordion .accordion__link {
+  display: block;
+  font-size: 0.875rem;
+}
+.table__accordion .accordion__link i {
+  line-height: 1.5;
+}
+.table__accordion .accordion__heading {
+  border: none;
+  padding: 0.25em 0;
+  line-height: 2.5;
+  background: transparent;
+}
+.table__accordion .toggle-icon {
+  position: static;
+  margin: 0;
+  line-height: 1;
+  width: auto;
+  height: 1em;
+  vertical-align: middle;
   font-size: 2rem;
-  top: 0.3rem;
 }
-.accordion-container .body {
-  font-family: "Open Sans", sans-serif;
-  font-size: 1.125rem;
-  line-height: 1.7;
+.table__accordion .toggle-icon:after, .table__accordion .toggle-icon:before {
+  display: none;
+}
+.table__accordion .toggle-icon i {
+  line-height: 1;
+}
+.table__accordion .is-open .accordion__heading {
+  border-bottom: none;
+}
+.amendities-restrictions--title {
+  font-weight: bold;
+  padding-left: 0.5rem;
+}
+
+/* ============================================================
+  Styles for cards and featured cards.
+  ============================================================ */
+/* Featured Cards */
+.card-group {
   padding: 1rem 0;
 }
-.accordion-container .body .txt ul,
-.accordion-container .body .txt ol {
-  margin: 1rem;
+.card-group h2 {
+  font-family: "Merriweather", serif;
+}
+.card-group .card-group__wrapper {
+  display: flex;
+  flex-flow: column wrap;
+  gap: 2rem;
+}
+@media (min-width: 800px) {
+  .card-group .card-group__wrapper {
+    flex-flow: row nowrap;
+  }
+}
+
+/* Individual Card */
+.card {
+  max-width: 700px;
+  background-color: #dde2e5;
+  border-radius: 2px;
+  flex: 1 100%;
+}
+.card a {
+  display: block;
+  text-decoration: none;
+}
+.card a:hover {
+  text-decoration: underline;
+}
+.card .image {
+  width: 100%;
+  height: auto;
+}
+.card .card__content {
+  color: #333332;
+  padding: 1rem;
+}
+.card .card__content .card__heading {
+  font-family: "Merriweather", serif;
+  font-size: 1.25rem;
+}
+.card .card__content .card__body {
+  margin: 1rem 0;
 }
 
 /* ============================================================
@@ -2716,12 +3006,20 @@
 }
 
 .resources {
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 3rem;
+  margin: 0 2rem;
+}
+@media (min-width: 800px) {
+  .resources {
+    margin: 0;
+  }
 }
 .resources .field__label {
   color: #37424a;
   font-family: "Merriweather", serif;
-  font-size: 2rem;
+  font-size: 1.6875rem;
+  margin-bottom: 0.875rem;
+  margin-top: 1.7rem;
 }
 .resources .paragraph--type--resources {
   display: flex;
@@ -2735,5 +3033,39 @@
 .resources .paragraph--type--resources .btn .content {
   align-items: center;
   display: flex;
+}
+.resources .paragraph--type--resources .btn .icon {
+  width: 2rem;
+  padding-left: 0.5rem;
+}
+
+/* ============================================================
+  Styles for social links.
+  ============================================================ */
+.social-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.social-links__item {
+  list-style: none;
+  margin: 0 0.25rem;
+  padding: 0;
+}
+.social-links__item:first-child {
+  margin: 0;
+}
+.social-links__item a {
+  background: #f6f6f6;
+  border-radius: 2px;
+  color: #333332;
+  display: block;
+  font-size: 1.2rem;
+  height: 2rem;
+  text-align: center;
+  text-decoration: none;
+  width: 2rem;
 }
 /*# sourceMappingURL=molecules.css.map */

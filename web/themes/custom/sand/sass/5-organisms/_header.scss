@@ -78,7 +78,7 @@
           left: 0;
           position: absolute;
           transition: top 300ms 350ms ease,
-            transform 300ms 50ms ease;
+          transform 300ms 50ms ease;
           width: $s*10;
         }
 
@@ -177,7 +177,21 @@
 
       a {
         background-color: $white;
-        color: #333;
+        color: $spruce;
+
+        &.tbm-link {
+          font-size: .8125rem;
+          font-weight: bold;
+          position: relative;
+          text-transform: uppercase;
+        }
+
+        &[title]:after {
+          content: attr(title);
+          font-size: 0.6875rem;
+          font-weight: normal;
+          text-transform: none;
+        }
       }
 
       .tbm-nav {
@@ -196,18 +210,30 @@
     .tbm-submenu {
       border-color: transparent;
 
-      h4 a {
-        text-decoration: underline;
+      h4 {
+        font-size: 1.125rem;
 
-        &:hover {
-          text-decoration: none;
+          a {
+            text-decoration: underline;
+
+          &:hover {
+            text-decoration: none;
+          }
         }
+      }
+
+      &.resident-resources h4 {
+        margin: 0;
+        padding: 1.125rem 0;
       }
 
       ul {
         margin: 0;
+
         li {
+          font-size: 0.875rem;
           list-style: none;
+          text-transform: uppercase;
         }
       }
 
@@ -257,6 +283,14 @@
 
     .input-group {
       margin: 0;
+    }
+
+    input {
+      font-size: 0.825rem;
+
+      &::placeholder {
+        color: $spruce;
+      }
     }
   }
 }
