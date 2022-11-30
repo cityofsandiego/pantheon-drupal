@@ -5,6 +5,7 @@
  * Code to work with hero images.
  */
 
+use Drupal\user\Entity\User;
 
 /**
  * Get the nodes by column value taking into account time of day.
@@ -75,8 +76,8 @@ function sand_view_get_hero_by_tid($tid, $time_of_day) {
  */
 function sand_hero_get_hero_image_info() {
 
-  $nids = array();
-  $time_of_day = sand_tool_timeofday();
+  $nids = [];
+  $time_of_day = sand_hero_timeofday();
   if (drupal_is_front_page()) {
     $nids = sand_hero_get_node_nids_by_field('hero', 'field_hero_frontpage', TRUE, $time_of_day);
   } else {
@@ -149,15 +150,67 @@ function sand_hero_create_hero_variable() {
 
 function sand_hero_page_attachments(array &$attachments) {
   // Unconditionally attach an asset to the page.
-  //$attachments['#attached']['library'][] = 'core/drupalSettings';
+  $attachments['#attached']['library'][] = 'sand_hero/global-scripts';
 }
 
 function sand_hero_page_attachments_alter(&$page) {
+  $nids = sand_hero_create_hero_variable();
   $nids = \Drupal::entityQuery('node')
     ->condition('type', 'department_parent')
     ->execute();
   $count = count($nids);
-  \Drupal::messenger()->addMessage("fired hook page alter: count = $count");
-  $page['#attached']['drupalSettings']['sand_hero']['count'] = $count;
+  $page['#attached']['drupalSettings']['sandHero']['count'] = $nids;
 //  $page['#attached']['library'][] = 'sand_hero/sand_hero';
+}
+
+/**
+ * Return a string to indicate what is the current type of day: night, day, etc
+ *
+ * @param $ddt
+ *    Timezone string.
+ * @param $latitude
+ * @param $longitude
+ *
+ * @return string
+ *  day or night.
+ */
+function sand_hero_timeofday($ddt = NULL, $latitude = 32.7157, $longitude = -117.1611): string {
+  $ddt = $ddt ?? \Drupal::currentUser()->getAccount()->getTimeZone();
+  $dtz = new DateTimeZone($ddt);
+  $timezone_time = new DateTime('now', $dtz);
+  $offset = $dtz->getOffset($timezone_time) / 3600;
+  $now = time();
+  // If we have expire enabled then we are probably using cloudflare so average
+  // out the actual time with when the page was cached with cloudflare.
+  if (function_exists('expire_menu')) {
+    $now -= 1200;
+  }
+  $time_of_day = array('all_day');
+
+//  $sunrise = date_sunrise($now, SUNFUNCS_RET_TIMESTAMP, $latitude, $longitude, 90, $offset);
+  $sun_info = date_sun_info($now, $latitude, $longitude);
+  $sunrise = $sun_info["sunrise"];
+  $sunset = $sun_info["sunset"];
+//  $sunset = date_sunset($now, SUNFUNCS_RET_TIMESTAMP, $latitude, $longitude, 90, $offset);
+  $dawn = array('start' => $sunrise - 3600, 'end' => $sunrise + 3600);
+  $dusk = array('start' => $sunset - 3600, 'end' => $sunset + 3600);
+
+  // Is it dawn?
+  if ($now > $dawn['start'] && $now < $dawn['end']) {
+    $time_of_day[] = 'dawn';
+  }
+
+  // Is it dust?
+  if ($now > $dusk['start'] && $now < $dusk['end']) {
+    $time_of_day[] = 'dusk';
+  }
+
+  if ($sunrise < $now && $now < $sunset) {
+    $time_of_day[] = 'day';
+  }
+  else {
+    $time_of_day[] = 'night';
+  }
+
+  return $time_of_day;
 }
