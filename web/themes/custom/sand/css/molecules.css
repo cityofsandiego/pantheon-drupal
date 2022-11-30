@@ -2793,6 +2793,149 @@
   border-top: none;
 }
 
+/* Accordion D7
+   ========================================================================== */
+.accordions {
+  margin: 1em 0;
+}
+#list-container .accordions {
+  margin: 0;
+}
+
+.accordion {
+  margin: 0 0 1em 0;
+}
+#list-container .accordion {
+  margin: 0;
+}
+
+.accordion__heading {
+  margin: 0;
+  padding: 1rem 3.5rem 1rem 1rem;
+  color: #37424a;
+  background: #e4e9eb;
+  position: relative;
+  border: 1px solid white;
+  font-size: 1.5rem;
+}
+#list-container .accordion__heading {
+  padding: 0.2em 1em;
+}
+
+.accordion__link {
+  display: block;
+  color: #37424a;
+  text-decoration: none;
+}
+#list-container .accordion__link i {
+  font-size: 0.75em;
+}
+.accordion__link:hover {
+  text-decoration: none;
+  color: #0098db;
+}
+
+.accordion__drawer {
+  padding: 1em;
+  display: none;
+  border: 1px solid #a7abad;
+  border-top: none;
+}
+.no-js .accordion__drawer {
+  display: block;
+}
+
+.toggle-icon {
+  margin-top: -0.75em;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+  display: inline-block;
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  overflow: hidden;
+}
+.toggle-icon:before, .toggle-icon:after {
+  content: "";
+  position: absolute;
+  display: block;
+  background: #a7abad;
+}
+.csstransforms3d .toggle-icon:before, .csstransforms3d .toggle-icon:after {
+  top: 50%;
+}
+.toggle-icon:before {
+  margin-top: -1px;
+  width: 100%;
+  height: 2px;
+  top: 50%;
+}
+.csstransforms3d .toggle-icon:before {
+  margin-top: auto;
+}
+.toggle-icon:after {
+  margin-left: -1px;
+  height: 100%;
+  width: 2px;
+  left: 50%;
+}
+.csstransforms3d .toggle-icon:after {
+  margin-left: auto;
+}
+
+.is-open > .accordion__heading {
+  font-weight: 700;
+  background: white;
+  border: 1px solid #a7abad;
+  border-bottom: none;
+}
+.csstransforms3d .is-open > div > h2 > a > .toggle-icon:before, .csstransforms3d .is-open > div > h2 > a > .toggle-icon:after, .csstransforms3d .is-open > div > h3 > a > .toggle-icon:before, .csstransforms3d .is-open > div > h3 > a > .toggle-icon:after, .csstransforms3d .is-open > div > h4 > a > .toggle-icon:before, .csstransforms3d .is-open > div > h4 > a > .toggle-icon:after, .csstransforms3d .is-open > div > h5 > a > .toggle-icon:before, .csstransforms3d .is-open > div > h5 > a > .toggle-icon:after, .csstransforms3d .is-open > div > h6 > a > .toggle-icon:before, .csstransforms3d .is-open > div > h6 > a > .toggle-icon:after, .csstransforms3d .is-open > p > a > .toggle-icon:before, .csstransforms3d .is-open > p > a > .toggle-icon:after, .csstransforms3d .is-open > h2 > a > .toggle-icon:before, .csstransforms3d .is-open > h2 > a > .toggle-icon:after, .csstransforms3d .is-open > h3 > a > .toggle-icon:before, .csstransforms3d .is-open > h3 > a > .toggle-icon:after, .csstransforms3d .is-open > h4 > a > .toggle-icon:before, .csstransforms3d .is-open > h4 > a > .toggle-icon:after, .csstransforms3d .is-open > h5 > a > .toggle-icon:before, .csstransforms3d .is-open > h5 > a > .toggle-icon:after, .csstransforms3d .is-open > h6 > a > .toggle-icon:before, .csstransforms3d .is-open > h6 > a > .toggle-icon:after {
+  background: #0098db;
+}
+.table__accordion {
+  margin: 0;
+  padding: 0;
+}
+.table__accordion .accordion {
+  margin: 0;
+}
+.table__accordion .accordion__drawer {
+  padding: 0;
+  border: none;
+  display: block;
+}
+.table__accordion .accordion__link {
+  display: block;
+  font-size: 0.875rem;
+}
+.table__accordion .accordion__link i {
+  line-height: 1.5;
+}
+.table__accordion .accordion__heading {
+  border: none;
+  padding: 0.25em 0;
+  line-height: 2.5;
+  background: transparent;
+}
+.table__accordion .toggle-icon {
+  position: static;
+  margin: 0;
+  line-height: 1;
+  width: auto;
+  height: 1em;
+  vertical-align: middle;
+  font-size: 2rem;
+}
+.table__accordion .toggle-icon:after, .table__accordion .toggle-icon:before {
+  display: none;
+}
+.table__accordion .toggle-icon i {
+  line-height: 1;
+}
+.table__accordion .is-open .accordion__heading {
+  border-bottom: none;
+}
 .amendities-restrictions--title {
   font-weight: bold;
   padding-left: 0.5rem;
@@ -2863,12 +3006,20 @@
 }
 
 .resources {
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 3rem;
+  margin: 0 2rem;
+}
+@media (min-width: 800px) {
+  .resources {
+    margin: 0;
+  }
 }
 .resources .field__label {
   color: #37424a;
   font-family: "Merriweather", serif;
-  font-size: 2rem;
+  font-size: 1.6875rem;
+  margin-bottom: 0.875rem;
+  margin-top: 1.7rem;
 }
 .resources .paragraph--type--resources {
   display: flex;
@@ -2882,6 +3033,10 @@
 .resources .paragraph--type--resources .btn .content {
   align-items: center;
   display: flex;
+}
+.resources .paragraph--type--resources .btn .icon {
+  width: 2rem;
+  padding-left: 0.5rem;
 }
 
 /* ============================================================
