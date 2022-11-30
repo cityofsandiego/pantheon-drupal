@@ -4,25 +4,51 @@ On the Drupal 7 site:
 3. Install and enable the d9_migration_views feature.  This supplies the views that generate the CSV files used for imports.
 
 Taxonomy import via drush:
-drush import:taxonomy department
-drush import:taxonomy categories
-drush import:taxonomy search_keymatch
-drush import:taxonomy location
+lando terminus drush import:taxonomy department
+lando terminus drush import:taxonomy categories
+lando terminus drush import:taxonomy search_keymatch
+lando terminus drush import:taxonomy location
+lando terminus drush import:taxonomy bucket
 
 Node imports:
-drush mi:import sd_nodes_department --update --force
-drush mi:import sd_nodes_department_parent --update --force
+lando terminus drush mi:import sd_nodes_department -- --update --force
+lando terminus drush mi:import sd_nodes_department_parent -- --update --force
+lando terminus drush mi:import sd_nodes_bucket -- --update --force
+lando terminus drush mi:import sd_nodes_location -- --update --force
+lando terminus drush mi:import sd_nodes_slide -- --update --force
+lando terminus drush mi:import sd_nodes_mayoral_artifact -- --update --force
 
 Entity creation and associations via drush:
-drush import:department
-drush import:department-parent
+lando terminus drush import:department
+lando terminus drush import:department-fixes
+lando terminus drush import:department-parent
+lando terminus drush import:bucket
+lando terminus drush import:location
+lando terminus drush import:mayoral-artifact
 
-Data status:
-Department nodes exported from dev 9/26/2022
-Department parent nodes exported from dev 9/26/2022
-field_dept_resources_coll field group exported from dev 9/26/2022
-field_dept_par_social_links_coll field group exported from dev 9/26/2022
-Categories vocabulary exported from dev 9/26/2022
-Departments vocabulary exported from dev 9/26/2022
-Keymatch vocabulary exported from dev 9/26/2022
-Location vocabulary exported from dev 9/26/2022
+Data status: 9/26/2022
+Nodes:
+Bucket
+Department
+Department parent
+Location
+Slide
+Mayoral artifacts
+
+Field groups:
+field_bucket_events_pi_coll
+field_bucket_featured_cards_coll
+field_bucket_featured_coll
+field_dept_resources_coll
+field_dept_par_social_links_coll
+field_location_exceptions_coll
+field_location_exceptions_coll2
+field_location_amenities
+field_location_restrictions
+
+Taxonomies:
+Bucket
+Categories
+Department
+Search KeyMatch
+Location

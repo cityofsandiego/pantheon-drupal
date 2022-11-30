@@ -14,6 +14,94 @@
 /* ============================================================
   Breakpoints
   ============================================================ */
+.background--odd {
+  background-color: #f6f6f6;
+}
+
+.background--even {
+  background-color: #e4e9eb;
+}
+
+.message--dark,
+.background--dark {
+  background-color: #37424a !important;
+}
+.message--dark.text-white > *,
+.background--dark.text-white > * {
+  color: white;
+}
+
+.message-off-white,
+.background-off-white {
+  background-color: #eaeeef !important;
+}
+
+.message-off-white-darker,
+.background-off-white-darer {
+  background-color: #d8dfe2;
+}
+
+.message-white,
+.background-white {
+  background-color: white !important;
+}
+
+.message--cerulean,
+.background--cerulean {
+  background-color: #0098db !important;
+}
+
+.message--science,
+.background--science {
+  background-color: #005bbb !important;
+}
+
+.message--sunshade,
+.background--sunshade {
+  background: #ffa02f !important;
+}
+
+.message--robin,
+.background--robin {
+  background: #00c7b2 !important;
+}
+
+.message--westar,
+.background--westar {
+  background: #dad7cb !important;
+}
+
+.message--off-white,
+.background--off-white {
+  background: #f6f6f6 !important;
+}
+
+.message--riptide,
+.background--riptide {
+  background: #80e0d3 !important;
+}
+
+.message--texasrose,
+.background--texasrose {
+  background: #ffb652 !important;
+}
+
+.message--manz,
+.background--manz {
+  background: #f3ec7a !important;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(55, 66, 74, 0.5);
+}
+
+/* Gradient
+   ========================================================================== */
 /* ============================================================
   Styles for fonts/typefaces.
   ============================================================ */
@@ -2679,8 +2767,34 @@
   }
 }
 
-.department {
-  background-color: #fff;
+.node--type-department h1 {
+  font-size: 2.25rem;
+  margin: 0.5rem 0;
+}
+.node--type-department h2 {
+  font-size: 1.6875rem;
+  margin: 1.5rem 0 0.875rem;
+}
+.node--type-department .sidebar {
+  border-left: 1px solid #fff;
+  margin: 1rem 2rem 2rem;
+}
+@media (min-width: 800px) {
+  .node--type-department .sidebar {
+    margin: 0;
+    height: 100%;
+  }
+}
+.node--type-department .sidebar ul {
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+}
+.node--type-department .sidebar ul li {
+  margin-bottom: 1rem;
+}
+.node--type-department .sidebar ul li .btn {
+  font-size: 1rem;
 }
 
 /* ============================================================
@@ -2991,7 +3105,19 @@
 }
 .header .header-second .tbm-main a {
   background-color: #fff;
-  color: #333;
+  color: #37424a;
+}
+.header .header-second .tbm-main a.tbm-link {
+  font-size: 0.8125rem;
+  font-weight: bold;
+  position: relative;
+  text-transform: uppercase;
+}
+.header .header-second .tbm-main a[title]:after {
+  content: attr(title);
+  font-size: 0.6875rem;
+  font-weight: normal;
+  text-transform: none;
 }
 .header .header-second .tbm-main .tbm-nav {
   justify-content: space-between;
@@ -3005,17 +3131,26 @@
 .header .header-second .tbm-submenu {
   border-color: transparent;
 }
+.header .header-second .tbm-submenu h4 {
+  font-size: 1.125rem;
+}
 .header .header-second .tbm-submenu h4 a {
   text-decoration: underline;
 }
 .header .header-second .tbm-submenu h4 a:hover {
   text-decoration: none;
 }
+.header .header-second .tbm-submenu.resident-resources h4 {
+  margin: 0;
+  padding: 1.125rem 0;
+}
 .header .header-second .tbm-submenu ul {
   margin: 0;
 }
 .header .header-second .tbm-submenu ul li {
+  font-size: 0.875rem;
   list-style: none;
+  text-transform: uppercase;
 }
 .header .header-second .tbm-submenu p {
   margin: 0;
@@ -3051,5 +3186,11 @@
 }
 .header .search-bar .input-group {
   margin: 0;
+}
+.header .search-bar input {
+  font-size: 0.825rem;
+}
+.header .search-bar input::placeholder {
+  color: #37424a;
 }
 /*# sourceMappingURL=organisms.css.map */
