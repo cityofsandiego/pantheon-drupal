@@ -1,0 +1,163 @@
+<?php
+
+/**
+ * @file
+ * Code to work with hero images.
+ */
+
+
+/**
+ * Get the nodes by column value taking into account time of day.
+ *
+ * @param type $value
+ * @param type $field_name
+ * @return type
+ */
+function sand_hero_get_node_nids_by_field($bundle,  $field_name, $value, $time_of_day) {
+
+  $column = sand_tool_get_field_column($field_name);
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+      ->addTag('DANGEROUS_ACCESS_CHECK_OPT_OUT')
+      ->entityCondition('bundle', $bundle)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldCondition($field_name, $column, $value)
+      ->fieldCondition('field_hero_time_of_day', 'value', $time_of_day, 'IN');
+  $result = $query->execute();
+
+  $nids = array();
+  if (isset($result['node'])) {
+    foreach ($result['node'] as $result_node) {
+      $nids[] = $result_node->nid;
+    }
+  }
+  return $nids;
+}
+
+
+/**
+ * Get all the hero NIDS that match this taxonomy term taking into account time of day.
+ *
+ * @param $tid
+ *    Term ID
+ * @return $nids
+ *    Array of NIDS to hero content type.
+ */
+function sand_view_get_hero_by_tid($tid, $time_of_day) {
+
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+      ->addTag('DANGEROUS_ACCESS_CHECK_OPT_OUT')
+      ->entityCondition('bundle', 'hero')
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldCondition('field_department', 'tid', $tid)
+      ->fieldCondition('field_hero_time_of_day', 'value', $time_of_day, 'IN');
+  $result = $query->execute();
+
+  $nids = array();
+  if (isset($result['node'])) {
+    foreach ($result['node'] as $result_node) {
+      $nids[] = $result_node->nid;
+    }
+  }
+  return $nids;
+}
+
+
+/**
+ * Get NIDS of heros to display, stopping at the first set retrieved.
+ *
+ * This looks first at the nodes current taxonomy and progresses up it's parents
+ * until it finds a match, if nothing is found then look for sitewide heros.
+ *
+ * @return $nids
+ *    Array of NIDS of heros to display.
+ */
+function sand_hero_get_hero_image_info() {
+
+  $nids = array();
+  $time_of_day = sand_tool_timeofday();
+  if (drupal_is_front_page()) {
+    $nids = sand_hero_get_node_nids_by_field('hero', 'field_hero_frontpage', TRUE, $time_of_day);
+  } else {
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+      if (!empty($node->field_department[\Drupal\Core\Language\Language::LANGCODE_NOT_SPECIFIED][0]['tid'])) {
+        $terms = taxonomy_get_parents_all($node->field_department[\Drupal\Core\Language\Language::LANGCODE_NOT_SPECIFIED][0]['tid']);
+        foreach ($terms as $term) {
+          if ($nids = sand_view_get_hero_by_tid($term->tid, $time_of_day)) {
+            break;
+          }
+        }
+      }
+    }
+  }
+  // If we did not find any hero images by taxonomy terms or frontpage look for
+  // sitewide images.
+  if (empty($nids)) {
+    $nids = sand_hero_get_node_nids_by_field('hero', 'field_hero_sitewide', TRUE, $time_of_day);
+  }
+  return $nids;
+}
+
+
+/**
+ * Generate a javascript variable to be used for rotating hero images.
+ *
+ * @return string
+ *    javascript variable declaration.
+ */
+function sand_hero_create_hero_variable() {
+
+  $nids = sand_hero_get_hero_image_info();
+  $output = array();
+  foreach($nids as $nid) {
+    $hero_node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+    $hero_wrapped = entity_metadata_wrapper('node', $hero_node);
+    $uri = $hero_wrapped->field_hero_image->value()['uri'];
+    if(!empty($hero_node->field_vimeo_url["und"][0]["value"])) {
+      $vimeo_uri = $hero_node->field_vimeo_url["und"][0]["value"];
+    } else {
+      $vimeo_uri = "";
+    }
+    $url = image_style_url('hero', $uri);
+    $alias = drupal_get_path_alias('node/' . $hero_node->nid);
+    $caption_value = !empty($hero_wrapped->field_hero_caption->value()) ? $hero_wrapped->field_hero_caption->value() : '';
+    $caption = '<span class=\'hero-caption\'>' . $caption_value  . '</span>';
+
+    if (empty($hero_wrapped->field_hero_image_by->value())) {
+      $image_by = '';
+    } else {
+      $image_by_prefix = (!empty($hero_wrapped->field_hero_image_by_prefix->value()) ? '<span class=\'hero-image-by-prefix\'>' . $hero_wrapped->field_hero_image_by_prefix->value() . '</span> ' : '');
+      // Put a <br> to separate the caption from the "by" if there is a caption.
+      $image_by_break = !empty($hero_wrapped->field_hero_caption->value()) ? '<br>' : '';
+      $image_by =  $image_by_break . $image_by_prefix . '<span class=\'hero-image-by\'>' . $hero_wrapped->field_hero_image_by->value() . '</span>';
+    }
+    $fields = array();
+    $fields[] = '"' . $alias . '"';
+    $fields[] = '"' . $caption . $image_by . '"';
+    $fields[] = '"' . $url . '"';
+    $fields[] = '"' . $vimeo_uri . '"';
+    $output[] = '[' . implode(',', $fields) . ']';
+  }
+
+  if (empty($fields)) {
+    return '';
+  } else {
+    return 'var hero_items = [' . implode(',', $output) . '];';
+  }
+}
+
+function sand_hero_page_attachments(array &$attachments) {
+  // Unconditionally attach an asset to the page.
+  //$attachments['#attached']['library'][] = 'core/drupalSettings';
+}
+
+function sand_hero_page_attachments_alter(&$page) {
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type', 'department_parent')
+    ->execute();
+  $count = count($nids);
+  \Drupal::messenger()->addMessage("fired hook page alter: count = $count");
+  $page['#attached']['drupalSettings']['sand_hero']['count'] = $count;
+//  $page['#attached']['library'][] = 'sand_hero/sand_hero';
+}
