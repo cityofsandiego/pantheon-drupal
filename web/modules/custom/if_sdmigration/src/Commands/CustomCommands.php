@@ -1273,12 +1273,19 @@ class CustomCommands extends DrushCommands {
       \Drupal::service('entity.memory_cache')->deleteAll();
       $node = Node::load($id);
       $sidebar_html = $node->field_sidebar->value;
+      $body_html = $node->body->value;
       if (strpos($sidebar_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
         $sidebar_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $sidebar_html);
         $node->field_sidebar->value = $sidebar_html;
         $node->save();
+        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
       }
-      $body_html = $node->body->value;
+      if (strpos($body_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
+        $body_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $body_html);
+        $node->body->value = $body_html;
+        $node->save();
+        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
+      }
       if (strpos($body_html, 'class="row') !== FALSE) {
         $body_html = str_replace('class="row', 'class="grid-x grid-margin-x', $body_html);
         $body_html = str_replace('class="four columns', 'class="cell medium-4', $body_html);
