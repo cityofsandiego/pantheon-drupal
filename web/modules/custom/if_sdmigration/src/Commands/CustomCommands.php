@@ -1274,10 +1274,20 @@ class CustomCommands extends DrushCommands {
       $node = Node::load($id);
       $sidebar_html = $node->field_sidebar->value;
       if (strpos($sidebar_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
-        echo $node->id(). PHP_EOL;
         $sidebar_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $sidebar_html);
         $node->field_sidebar->value = $sidebar_html;
         $node->save();
+      }
+      $body_html = $node->body->value;
+      if (strpos($body_html, 'class="row') !== FALSE) {
+        $body_html = str_replace('class="row', 'class="grid-x grid-margin-x', $body_html);
+        $body_html = str_replace('class="four columns', 'class="cell medium-4', $body_html);
+        $body_html = str_replace('class="three columns', 'class="cell medium-3', $body_html);
+        $body_html = str_replace('class="sm-two columns', 'class="cell small-2', $body_html);
+        $body_html = str_replace('class="sm-ten columns', 'class="cell small-10', $body_html);
+        $node->body->value = $body_html;
+        $node->save();
+        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
       }
     }
   }
