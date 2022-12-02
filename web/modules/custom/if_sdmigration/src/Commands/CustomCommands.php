@@ -1255,6 +1255,141 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   * Finalize outreach node import (field collection).
+   *
+   * @command import:outreach
+   *
+   * @usage import:outreach
+   */
+  public function finalizeOutreach() {
+    $nodedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/outreach.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'department' => explode('|', str_replace('`', '', $data[2])),
+          'search_keymatch' => explode('|', str_replace('`', '', $data[3])),
+          'sections' => explode('|', str_replace('`', '', $data[4])),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Load sections data.
+    $sectiondata = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field-outreach-sections-coll.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $id = str_replace('`', '', $data[0]);
+        $id = str_replace(',', '', $id);
+        $sectiondata[$id] = [
+          'image_department' => str_replace('`', '', $data[1]),
+          'image_license' => str_replace('`', '', $data[2]),
+          'image_alt' => str_replace('`', '', $data[3]),
+          'image_d7id' => str_replace('`', '', $data[4]),
+          'image_path' => str_replace('`', '', $data[5]),
+          'body' => str_replace('`', '', $data[6]),
+          'minimum_height' => str_replace('`', '', $data[7]),
+          'background_color' => str_replace('`', '', $data[8]),
+          'centered' => str_replace('`', '', $data[9]),
+          'full_width_mobile' => str_replace('`', '', $data[10]),
+          'image_scroll_ratio' => str_replace('`', '', $data[11]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'outreach')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+
+      $node->field_sections->setValue([]);
+      foreach ($data['sections'] as $section) {
+        if (!empty($sectiondata[$section]['image_path'])) {
+          $prior_image = $this->checkMediaId($sectiondata[$section]['image_d7id']);
+          if ($prior_image == NULL) {
+            $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $sectiondata[$section]['image_path']);
+            $file_data = file_get_contents($remote_file);
+            // Fixes for irregular paths.
+            $local_destination = str_replace('legacy/police/graphics', '', $sectiondata[$section]['image_path']);
+            $local_destination = str_replace('default_images', '', $local_destination);
+            $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+            $local_destination = str_replace('hero', '', $local_destination);
+            $local_destination = str_replace('public://', '', $local_destination);
+            $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+            $image_department = [$this->taxonomyImportTasks->newTid($sectiondata[$section]['image_department'], 'department')];
+
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $sectiondata[$section]['image_alt']
+              ],
+              'field_d7_mid' => $sectiondata[$section]['image_d7id'],
+            ]);
+            if (!empty($sectiondata[$section]['image_license'])) {
+              $image->field_license = $sectiondata[$section]['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+          }
+          else {
+            $image = Media::load($prior_image);
+          }
+        }
+        else {
+          $image = NULL;
+        }
+        echo '>>' . $section . PHP_EOL;
+        $paragraph = Paragraph::create([
+          'type' => 'sections',
+          'field_bg_color' => $sectiondata[$section]['background_color'],
+          'field_body' => [
+            'value' => $sectiondata[$section]['body'],
+            'format' => 'full_html',
+          ],
+          'field_centered' => $sectiondata[$section]['centered'],
+          'field_image' => $image,
+          'field_full_width_mobile' => $sectiondata[$section]['full_width_mobile'],
+          'field_image_scroll_ratio' => $sectiondata[$section]['image_scroll_ratio'],
+          'field_minimum_height' => $sectiondata[$section]['minimum_height'],
+        ]);
+        $paragraph->save();
+        $node->field_sections->appendItem($paragraph);
+      }
+
+      $node->field_department->setValue([]);
+      foreach ($data['department'] as $department) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+        $node->field_department->appendItem($term);
+      }
+
+      $node->field_search_keymatch->setValue([]);
+      foreach ($data['search_keymatch'] as $search_keymatch) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
+        $node->field_search_keymatch->appendItem($term);
+      }
+
+      $node->save();
+      echo $node->id() . PHP_EOL;
+    }
+  }
+
+  /**
    * Manual department node content fixes.
    *
    * @command import:department-fixes
@@ -1273,11 +1408,28 @@ class CustomCommands extends DrushCommands {
       \Drupal::service('entity.memory_cache')->deleteAll();
       $node = Node::load($id);
       $sidebar_html = $node->field_sidebar->value;
+      $body_html = $node->body->value;
       if (strpos($sidebar_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
-        echo $node->id(). PHP_EOL;
         $sidebar_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $sidebar_html);
         $node->field_sidebar->value = $sidebar_html;
         $node->save();
+        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
+      }
+      if (strpos($body_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
+        $body_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $body_html);
+        $node->body->value = $body_html;
+        $node->save();
+        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
+      }
+      if (strpos($body_html, 'class="row') !== FALSE) {
+        $body_html = str_replace('class="row', 'class="grid-x grid-margin-x', $body_html);
+        $body_html = str_replace('class="four columns', 'class="cell medium-4', $body_html);
+        $body_html = str_replace('class="three columns', 'class="cell medium-3', $body_html);
+        $body_html = str_replace('class="sm-two columns', 'class="cell small-2', $body_html);
+        $body_html = str_replace('class="sm-ten columns', 'class="cell small-10', $body_html);
+        $node->body->value = $body_html;
+        $node->save();
+        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
       }
     }
   }
