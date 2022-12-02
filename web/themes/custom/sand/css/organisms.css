@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ============================================================
   Styles for components that are shared across the whole site.
   Individual SCSS files in this directory are separate libraries
@@ -3105,6 +3106,8 @@
 .header .header-second .tbm-submenu-toggle:focus,
 .header .header-second .tbm .tbm-item a:hover,
 .header .header-second .tbm .tbm-item a:focus,
+.header .header-second .tbm .tbm-item--has-dropdown a:hover:before,
+.header .header-second .tbm .tbm-item--has-dropdown a:focus:before,
 .header .header-second .tbm .tbm-item .open {
   background-color: #e89e3b;
   color: #fff;
@@ -3134,6 +3137,14 @@
   font-size: 0.6875rem;
   font-weight: normal;
   text-transform: none;
+}
+.header .header-second .tbm-main .tbm-item--has-dropdown a:before {
+  color: #e89e3b;
+  content: "⌄";
+  font-size: 1.25rem;
+  position: absolute;
+  right: 3%;
+  top: 26%;
 }
 .header .header-second .tbm-main .tbm-nav {
   justify-content: space-between;
