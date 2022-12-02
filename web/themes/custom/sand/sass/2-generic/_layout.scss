@@ -1,3 +1,55 @@
 .main-grid-container {
   padding: 0;
 }
+
+/* request by Ron */
+div.l-section {
+  margin-left: -2em;
+  margin-right: -2em;
+  padding: 2em;
+}
+
+
+// ==========================================================================
+// Layout
+// ==========================================================================
+
+/* Containers
+   ========================================================================== */
+$site-constraint: 1200px;
+$desktop-wide: 1500px;
+$site: 960px;
+
+%l-constrained {
+    @extend %clearfix;
+    margin: 0 auto;
+    width: 100%;
+    max-width: $site-constraint;
+}
+
+.l-constrained {
+    @extend %l-constrained;
+}
+
+.l-constrained--main {
+    position: relative;
+}
+
+.l-constrained--site {
+    @extend %l-constrained;
+    max-width: $site;
+}
+
+.l-constrained--wide {
+    @extend %l-constrained;
+    max-width: $site-constraint;
+}
+
+.l-constrained--desktop {
+    @extend %l-constrained;
+    max-width: $desktop-wide;
+}
+
+.l-container {
+    @extend %clearfix;
+}
