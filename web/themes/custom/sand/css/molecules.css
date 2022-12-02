@@ -1759,7 +1759,7 @@
 /*
  * General Mixins (put specific ones in component files where applicable)
 */
-.comment-list article.comment-body footer {
+.leave-feedback, .comment-list article.comment-body footer {
   /*
    * Clearfix: contain floats
    *
@@ -1777,11 +1777,11 @@
    */
   *zoom: 1;
 }
-.comment-list article.comment-body footer:before, .comment-list article.comment-body footer:after {
+.leave-feedback:before, .comment-list article.comment-body footer:before, .leave-feedback:after, .comment-list article.comment-body footer:after {
   content: " "; /* 1 */
   display: table; /* 2 */
 }
-.comment-list article.comment-body footer:after {
+.leave-feedback:after, .comment-list article.comment-body footer:after {
   clear: both;
 }
 
@@ -2118,6 +2118,100 @@
 /* ============================================================
   Styles for exposed filters.
   ============================================================ */
+.leave-feedback {
+  background: #f6f6f6;
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  padding: 10px;
+  position: fixed;
+  left: 100%;
+  top: 50%;
+  -webkit-transform: translateY(-40%);
+  transform: translateY(-40%);
+  transition: left 1s, border 1s;
+  width: 280px;
+  z-index: 1000000;
+  font-family: "Open Sans", sans-serif;
+}
+@media print {
+  .leave-feedback {
+    display: none;
+  }
+}
+.leave-feedback.is-visible {
+  border-color: #e4e9eb;
+  left: calc(100% - 280px);
+}
+.leave-feedback__link-wrapper {
+  background-color: #ffa02f;
+  cursor: pointer;
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  bottom: 50%;
+  transition: all 0.8s;
+  width: 30px;
+}
+.leave-feedback.is-visible .leave-feedback__link-wrapper {
+  bottom: -1px;
+  top: -1px;
+}
+.leave-feedback__link {
+  background-color: #ffa02f;
+  color: #222;
+  font-size: 1rem;
+  font-family: "Open Sans", sans-serif;
+  line-height: 25px;
+  padding: 0 5px;
+  position: absolute;
+  right: 140%;
+  top: 50%;
+  -webkit-transform: rotate(-90deg) translate(10%, 280%);
+  transform: rotate(-90deg) translate(10%, 280%);
+}
+.leave-feedback.is-visible .leave-feedback__close {
+  border-bottom: none;
+  display: block;
+  height: 15px;
+  margin-left: 6px;
+  margin-top: 7px;
+  position: relative;
+  width: 15px;
+}
+.leave-feedback.is-visible .leave-feedback__close:hover {
+  opacity: 0.7;
+}
+.leave-feedback.is-visible .leave-feedback__close:before, .leave-feedback.is-visible .leave-feedback__close:after {
+  border: none;
+  content: "";
+  height: 3px;
+  width: 1em;
+  display: inline-block;
+  background: #222;
+  border-radius: 1px;
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.leave-feedback.is-visible .leave-feedback__close:after {
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.leave-feedback__label {
+  display: block;
+  margin-bottom: 10px;
+}
+.leave-feedback__input-field {
+  margin-bottom: 10px;
+  width: 100%;
+}
+.leave-feedback button {
+  clear: both;
+  float: right;
+}
+
 /* ============================================================
   Styles for the iframe paragraph
   ============================================================ */
