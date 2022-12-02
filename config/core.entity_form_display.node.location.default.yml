@@ -243,8 +243,8 @@ content:
     weight: 26
     region: content
     settings:
-      show_extra: false
-      hide_date: true
+      show_extra: 0
+      hide_date: 0
       modal: false
       default_duration: 60
       default_duration_increments: |-
@@ -253,7 +253,16 @@ content:
         90
         120|2 hours
         custom
-    third_party_settings: {  }
+    third_party_settings:
+      smart_date_recur:
+        modal: true
+        allowed_recur_freq_values:
+          MINUTELY: '0'
+          HOURLY: '0'
+          DAILY: DAILY
+          WEEKLY: WEEKLY
+          MONTHLY: MONTHLY
+          YEARLY: YEARLY
   field_exceptions_2:
     type: smartdate_inline
     weight: 30
