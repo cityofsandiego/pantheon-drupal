@@ -26,3 +26,137 @@
     border: none;
   }
 }
+
+/* Tabs (Module Legacy)
+   ========================================================================== */
+
+   .tabs-list {
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background: $off-white;
+    border: 1px solid $alto;
+  
+    // @include mq($from: site) {
+    //   border-bottom: none;
+    // }
+  }
+  
+  .tabs-list__item {
+    z-index: 3;
+    margin: 0;
+    cursor: pointer;
+    border-top: none;
+    background: white;
+    display: inline-block;
+    @include rem('font-size', 14px);
+  
+  
+    // @include mq(mobile, mobile-landscape) {
+    //   @include span(6 no-gutters);
+    //   &:last-child {
+    //     border-right: none;
+    //   }
+    // }
+  
+    // @include mq(mobile-landscape, site) {
+    //   border: 1px solid $alto;
+    //   border-top: none;
+    //   border-right: none;
+    //   @include span(4 no-gutters);
+    //   &:last-child {
+    //     border-bottom: none;
+    //     border-right: 1px solid $alto;
+    //   }
+    // }
+  
+    // @include mq($from: site) {
+    //   border-left: 1px solid $alto;
+    //   border-bottom: 1px solid $alto;
+    //   &:last-child {
+    //     border-right: 1px solid $alto;
+    //   }
+    //   @include span(1 of 5 no-gutters);
+    //   &:first-child {
+    //     border-left: none;
+    //   }
+    //   &.is-active {
+    //     border-bottom: 1px solid white;
+    //   }
+    // }
+  }
+  
+  .tabs-list__link {
+    padding: 0.5em;
+    display: block;
+    //color: $chateau;
+    text-decoration: none;
+    border-top: 3px solid transparent;
+  
+    &:hover,
+    .is-active & {
+      border-color: $cerulean;
+      color: $font-color;
+    }
+  }
+  
+  .tabs-container {
+    padding: 1em;
+    border: 1px solid $alto;
+    border-top: none;
+  }
+  
+  .tabs__bucket {
+    display: none;
+  
+    &.is-active {
+      display: block;
+    }
+  
+    .cke_editable & {
+      display: block;
+      border-style: double;
+      margin: 20px 0;
+      padding: 10px;
+    }
+  
+    .no-js & {
+      display: block;
+    }
+  }
+  
+  .tabs {
+    &.primary {
+      @media print {
+        display: none;
+      }
+  
+      .admin-menu & {
+        //margin-top:169px;
+        margin-top: 20px;
+      }
+  
+      @extend .l-constrained;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      padding: 0 1em 0 0;
+  
+      li {
+        display: inline-block;
+        height: 40px;
+        float: left;
+        @extend .l-margin-vn; //margin: 0;
+  
+        a {
+          height: 100%;
+          display: block;
+          padding-top: .5rem;
+        }
+      }
+  
+      .node-type-application & {
+        margin-top: 0px;
+      }
+    }
+  }

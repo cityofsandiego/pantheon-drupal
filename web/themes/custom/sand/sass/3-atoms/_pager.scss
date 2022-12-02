@@ -1,14 +1,33 @@
-/* ============================================================
-  Styles for the pager.
-  ============================================================ */
+/* Pagination
+   ========================================================================== */
+   .pager {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+  
+    li {
+      margin: 0 .5em;
+      font-weight: bold;
+      display: inline-block;
+      @include respond-to('m') {
+        @include rem('font-size', 13px);
+      }
+    }
+  
+    a {
+      color: $cerulean;
+      text-decoration: none;
+      text-transform: lowercase;
+  
+      &:hover {
+        color: darken($cerulean, 15%);
+      }
+    }
 
-.pager {
-  margin: 1.5rem 0;
+    &__items {
 
-  &__items {
-
-    .pager__item {
-      padding: 0.25rem 0.5rem;
+      .pager__item {
+        padding: 0.25rem 0.5rem;
+      }
     }
   }
-}

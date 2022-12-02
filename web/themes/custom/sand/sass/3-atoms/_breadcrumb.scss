@@ -4,7 +4,7 @@
 
 .breadcrumb {
   // color: $primary-2;
-  font-size: 16px;
+  @include rem('font-size', 11px);
   margin-bottom: 0;
   padding: 0.25rem 0;
 
@@ -21,7 +21,12 @@
     }
 
     a {
-      text-decoration: underline;
+      color: $spruce;
+      text-decoration: none;
+
+      &:hover {
+        color: darken($spruce, 20%);
+      }
     }
 
     .angle {
@@ -31,6 +36,10 @@
 
     &:last-child {
       font-weight: 700;
+    }
+
+    .breadcrumbs__current {
+      font-weight: bold;
     }
   }
 }
