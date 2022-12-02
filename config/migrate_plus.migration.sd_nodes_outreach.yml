@@ -1,0 +1,38 @@
+uuid: 655d1f70-a9aa-4c20-a743-cbe731a3bdc6
+langcode: en
+status: true
+dependencies: {  }
+id: sd_nodes_outreach
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: outreach_group
+label: 'Custom Outreach node migration'
+source:
+  plugin: csv
+  path: modules/custom/if_sdmigration/migration_files/nodes/outreach.csv
+  delimiter: ','
+  enclosure: '`'
+  escape: \
+  header_row_count: 1
+  ids:
+    - 'D7 ID'
+process:
+  field_d7_nid: 'D7 ID'
+  title: Title
+  path/pathauto:
+    plugin: default_value
+    default_value: 0
+  path/alias:
+    plugin: concat
+    source:
+      - Path
+  status:
+    -
+      plugin: default_value
+      default_value: 1
+destination:
+  plugin: 'entity:node'
+  default_bundle: outreach
+migration_dependencies: null
