@@ -2,215 +2,70 @@
 
 /**
  * @file
- * Code to work with hero images.
+ * Primary module hooks for sand_hero module.
  */
-
+// start of hero
 use Drupal\user\Entity\User;
 
 /**
- * Get the nodes by column value taking into account time of day.
- *
- * @param type $value
- * @param type $field_name
- * @return type
- */
-function sand_hero_get_node_nids_by_field($bundle,  $field_name, $value, $time_of_day) {
-
-  $column = sand_tool_get_field_column($field_name);
-  $query = new EntityFieldQuery();
-  $query->entityCondition('entity_type', 'node')
-      ->addTag('DANGEROUS_ACCESS_CHECK_OPT_OUT')
-      ->entityCondition('bundle', $bundle)
-      ->propertyCondition('status', NODE_PUBLISHED)
-      ->fieldCondition($field_name, $column, $value)
-      ->fieldCondition('field_hero_time_of_day', 'value', $time_of_day, 'IN');
-  $result = $query->execute();
-
-  $nids = array();
-  if (isset($result['node'])) {
-    foreach ($result['node'] as $result_node) {
-      $nids[] = $result_node->nid;
-    }
-  }
-  return $nids;
-}
-
-
-/**
- * Get all the hero NIDS that match this taxonomy term taking into account time of day.
- *
- * @param $tid
- *    Term ID
- * @return $nids
- *    Array of NIDS to hero content type.
- */
-function sand_view_get_hero_by_tid($tid, $time_of_day) {
-
-  $query = new EntityFieldQuery();
-  $query->entityCondition('entity_type', 'node')
-      ->addTag('DANGEROUS_ACCESS_CHECK_OPT_OUT')
-      ->entityCondition('bundle', 'hero')
-      ->propertyCondition('status', NODE_PUBLISHED)
-      ->fieldCondition('field_department', 'tid', $tid)
-      ->fieldCondition('field_hero_time_of_day', 'value', $time_of_day, 'IN');
-  $result = $query->execute();
-
-  $nids = array();
-  if (isset($result['node'])) {
-    foreach ($result['node'] as $result_node) {
-      $nids[] = $result_node->nid;
-    }
-  }
-  return $nids;
-}
-
-
-/**
- * Get NIDS of heros to display, stopping at the first set retrieved.
- *
- * This looks first at the nodes current taxonomy and progresses up it's parents
- * until it finds a match, if nothing is found then look for sitewide heros.
- *
- * @return $nids
- *    Array of NIDS of heros to display.
- */
-function sand_hero_get_hero_image_info() {
-
-  $nids = [];
-  $time_of_day = sand_hero_timeofday();
-  if (drupal_is_front_page()) {
-    $nids = sand_hero_get_node_nids_by_field('hero', 'field_hero_frontpage', TRUE, $time_of_day);
-  } else {
-    if ($node = \Drupal::routeMatch()->getParameter('node')) {
-      if (!empty($node->field_department[\Drupal\Core\Language\Language::LANGCODE_NOT_SPECIFIED][0]['tid'])) {
-        $terms = taxonomy_get_parents_all($node->field_department[\Drupal\Core\Language\Language::LANGCODE_NOT_SPECIFIED][0]['tid']);
-        foreach ($terms as $term) {
-          if ($nids = sand_view_get_hero_by_tid($term->tid, $time_of_day)) {
-            break;
-          }
-        }
-      }
-    }
-  }
-  // If we did not find any hero images by taxonomy terms or frontpage look for
-  // sitewide images.
-  if (empty($nids)) {
-    $nids = sand_hero_get_node_nids_by_field('hero', 'field_hero_sitewide', TRUE, $time_of_day);
-  }
-  return $nids;
-}
-
-
-/**
- * Generate a javascript variable to be used for rotating hero images.
- *
- * @return string
- *    javascript variable declaration.
- */
-function sand_hero_create_hero_variable() {
-
-  $nids = sand_hero_get_hero_image_info();
-  $output = array();
-  foreach($nids as $nid) {
-    $hero_node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
-    $hero_wrapped = entity_metadata_wrapper('node', $hero_node);
-    $uri = $hero_wrapped->field_hero_image->value()['uri'];
-    if(!empty($hero_node->field_vimeo_url["und"][0]["value"])) {
-      $vimeo_uri = $hero_node->field_vimeo_url["und"][0]["value"];
-    } else {
-      $vimeo_uri = "";
-    }
-    $url = image_style_url('hero', $uri);
-    $alias = drupal_get_path_alias('node/' . $hero_node->nid);
-    $caption_value = !empty($hero_wrapped->field_hero_caption->value()) ? $hero_wrapped->field_hero_caption->value() : '';
-    $caption = '<span class=\'hero-caption\'>' . $caption_value  . '</span>';
-
-    if (empty($hero_wrapped->field_hero_image_by->value())) {
-      $image_by = '';
-    } else {
-      $image_by_prefix = (!empty($hero_wrapped->field_hero_image_by_prefix->value()) ? '<span class=\'hero-image-by-prefix\'>' . $hero_wrapped->field_hero_image_by_prefix->value() . '</span> ' : '');
-      // Put a <br> to separate the caption from the "by" if there is a caption.
-      $image_by_break = !empty($hero_wrapped->field_hero_caption->value()) ? '<br>' : '';
-      $image_by =  $image_by_break . $image_by_prefix . '<span class=\'hero-image-by\'>' . $hero_wrapped->field_hero_image_by->value() . '</span>';
-    }
-    $fields = array();
-    $fields[] = '"' . $alias . '"';
-    $fields[] = '"' . $caption . $image_by . '"';
-    $fields[] = '"' . $url . '"';
-    $fields[] = '"' . $vimeo_uri . '"';
-    $output[] = '[' . implode(',', $fields) . ']';
-  }
-
-  if (empty($fields)) {
-    return '';
-  } else {
-    return 'var hero_items = [' . implode(',', $output) . '];';
-  }
-}
-
-function sand_hero_page_attachments(array &$attachments) {
-  // Unconditionally attach an asset to the page.
-  $attachments['#attached']['library'][] = 'sand_hero/global-scripts';
-}
-
-function sand_hero_page_attachments_alter(&$page) {
-  $nids = sand_hero_create_hero_variable();
-  $nids = \Drupal::entityQuery('node')
-    ->condition('type', 'department_parent')
-    ->execute();
-  $count = count($nids);
-  $page['#attached']['drupalSettings']['sandHero']['count'] = $nids;
-//  $page['#attached']['library'][] = 'sand_hero/sand_hero';
-}
-
-/**
- * Return a string to indicate what is the current type of day: night, day, etc
- *
- * @param $ddt
- *    Timezone string.
+ * @param string $timezone
  * @param $latitude
  * @param $longitude
  *
- * @return string
- *  day or night.
+ * @return string[]
+ * array(2) { [0]=> string(7) "all_day" [1]=> string(3) "day" }
  */
-function sand_hero_timeofday($ddt = NULL, $latitude = 32.7157, $longitude = -117.1611): string {
-  $ddt = $ddt ?? \Drupal::currentUser()->getAccount()->getTimeZone();
-  $dtz = new DateTimeZone($ddt);
-  $timezone_time = new DateTime('now', $dtz);
-  $offset = $dtz->getOffset($timezone_time) / 3600;
-  $now = time();
+function sand_hero_timesofday($timezone = "America/Los_Angeles", $latitude = 32.7157, $longitude = -117.1611) {
+  date_default_timezone_set($timezone);
+  $server_time = \Drupal::time()->getRequestTime();
+  $sun_info = date_sun_info($server_time, $latitude, $longitude);
+
   // If we have expire enabled then we are probably using cloudflare so average
   // out the actual time with when the page was cached with cloudflare.
   if (function_exists('expire_menu')) {
-    $now -= 1200;
+    $server_time -= 1200;
   }
-  $time_of_day = array('all_day');
+  $times_of_day = array('all_day');
 
-//  $sunrise = date_sunrise($now, SUNFUNCS_RET_TIMESTAMP, $latitude, $longitude, 90, $offset);
-  $sun_info = date_sun_info($now, $latitude, $longitude);
   $sunrise = $sun_info["sunrise"];
   $sunset = $sun_info["sunset"];
-//  $sunset = date_sunset($now, SUNFUNCS_RET_TIMESTAMP, $latitude, $longitude, 90, $offset);
   $dawn = array('start' => $sunrise - 3600, 'end' => $sunrise + 3600);
   $dusk = array('start' => $sunset - 3600, 'end' => $sunset + 3600);
 
-  // Is it dawn?
-  if ($now > $dawn['start'] && $now < $dawn['end']) {
-    $time_of_day[] = 'dawn';
+  if ($server_time > $dawn['start'] && $server_time < $dawn['end']) {
+    $times_of_day[] = 'dawn';
   }
 
-  // Is it dust?
-  if ($now > $dusk['start'] && $now < $dusk['end']) {
-    $time_of_day[] = 'dusk';
+  if ($server_time > $dusk['start'] && $server_time < $dusk['end']) {
+    $times_of_day[] = 'dusk';
   }
 
-  if ($sunrise < $now && $now < $sunset) {
-    $time_of_day[] = 'day';
+  if ($sunrise < $server_time && $server_time < $sunset) {
+    $times_of_day[] = 'day';
   }
   else {
-    $time_of_day[] = 'night';
+    $times_of_day[] = 'night';
   }
 
-  return $time_of_day;
+  return $times_of_day;
 }
+
+// get variables (departments, times)
+// - variable departments is like sand_tool_department_parents
+// - variable times is date_sun_info() PHP
+// - - generate from now() dawn, dusk, day, night
+$times_of_day = sand_hero_timesofday();
+// query hero nids with department(and parents) and time_of_day(dawn,dusk,day,night)
+// pick one random hero, if empty, default image
+// apply this image to Hero background PHP programmatically
+// generate variable for this image, JS to access for this page
+// attach JS to change the page image, changes even when page is cached
+
+
+
+
+
+
+// Notes:
+// \Drupal::cache()->set('my_cache_item', $school_list, \Drupal::time()->getRequestTime() + (86400));
+// \Drupal\Core\Cache\Cache::PERMANENT
