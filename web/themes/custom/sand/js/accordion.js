@@ -23,6 +23,8 @@
        */
       $('.js-toggle-accordion').on( 'click', '.accordion__link', function( e ) {
         e.preventDefault();
+        e.stopImmediatePropagation();
+
         var $this   = $(this),
             $parent = $this.closest('.accordion');
         // current drawer
