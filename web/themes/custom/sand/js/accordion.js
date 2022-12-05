@@ -26,14 +26,17 @@
         e.stopImmediatePropagation();
 
         var $this   = $(this),
-            $parent = $this.closest('.accordion');
+            $parent = $this.closest('.accordion'),
+            $icon   = $this.children('.toggle-icon');
         // current drawer
         if ( $parent.hasClass('current') ) {
           $parent
             .removeClass('current is-open')
             .children('.accordion__drawer')
             .stop( true, true )
-            .slideUp();
+            .slideUp(),
+          $icon
+            .removeClass('open')  ;
             // new drawer
         } else {
           // show new drawer
@@ -43,7 +46,9 @@
             .stop( true, true )
             .slideDown(function () {
               $('.flexslider').resize();
-            });
+            }),
+          $icon
+            .addClass('open');
         }
       });
     }

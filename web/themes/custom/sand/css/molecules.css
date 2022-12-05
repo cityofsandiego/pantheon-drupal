@@ -1865,6 +1865,9 @@
 .no-js .accordion__drawer {
   display: block;
 }
+.accordion__drawer .accordion__link {
+  font-size: 1rem;
+}
 
 .toggle-icon {
   margin-top: -0.75em;
@@ -1911,69 +1914,7 @@
   border: 1px solid #a7abad;
   border-bottom: none;
 }
-.csstransforms3d .is-open > div > h2 > a > .toggle-icon,
-.csstransforms3d .is-open > div > h3 > a > .toggle-icon,
-.csstransforms3d .is-open > div > h4 > a > .toggle-icon,
-.csstransforms3d .is-open > div > h5 > a > .toggle-icon,
-.csstransforms3d .is-open > div > h6 > a > .toggle-icon,
-.csstransforms3d .is-open > p > a > .toggle-icon,
-.csstransforms3d .is-open > h2 > a > .toggle-icon,
-.csstransforms3d .is-open > h3 > a > .toggle-icon,
-.csstransforms3d .is-open > h4 > a > .toggle-icon,
-.csstransforms3d .is-open > h5 > a > .toggle-icon,
-.csstransforms3d .is-open > h6 > a > .toggle-icon {
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-.csstransforms3d .is-open > div > h2 > a > .toggle-icon:before, .csstransforms3d .is-open > div > h2 > a > .toggle-icon:after,
-.csstransforms3d .is-open > div > h3 > a > .toggle-icon:before,
-.csstransforms3d .is-open > div > h3 > a > .toggle-icon:after,
-.csstransforms3d .is-open > div > h4 > a > .toggle-icon:before,
-.csstransforms3d .is-open > div > h4 > a > .toggle-icon:after,
-.csstransforms3d .is-open > div > h5 > a > .toggle-icon:before,
-.csstransforms3d .is-open > div > h5 > a > .toggle-icon:after,
-.csstransforms3d .is-open > div > h6 > a > .toggle-icon:before,
-.csstransforms3d .is-open > div > h6 > a > .toggle-icon:after,
-.csstransforms3d .is-open > p > a > .toggle-icon:before,
-.csstransforms3d .is-open > p > a > .toggle-icon:after,
-.csstransforms3d .is-open > h2 > a > .toggle-icon:before,
-.csstransforms3d .is-open > h2 > a > .toggle-icon:after,
-.csstransforms3d .is-open > h3 > a > .toggle-icon:before,
-.csstransforms3d .is-open > h3 > a > .toggle-icon:after,
-.csstransforms3d .is-open > h4 > a > .toggle-icon:before,
-.csstransforms3d .is-open > h4 > a > .toggle-icon:after,
-.csstransforms3d .is-open > h5 > a > .toggle-icon:before,
-.csstransforms3d .is-open > h5 > a > .toggle-icon:after,
-.csstransforms3d .is-open > h6 > a > .toggle-icon:before,
-.csstransforms3d .is-open > h6 > a > .toggle-icon:after {
-  background: #0098db;
-}
-.csstransforms3d .is-open > div > h2 > a > .toggle-icon:before,
-.csstransforms3d .is-open > div > h3 > a > .toggle-icon:before,
-.csstransforms3d .is-open > div > h4 > a > .toggle-icon:before,
-.csstransforms3d .is-open > div > h5 > a > .toggle-icon:before,
-.csstransforms3d .is-open > div > h6 > a > .toggle-icon:before,
-.csstransforms3d .is-open > p > a > .toggle-icon:before,
-.csstransforms3d .is-open > h2 > a > .toggle-icon:before,
-.csstransforms3d .is-open > h3 > a > .toggle-icon:before,
-.csstransforms3d .is-open > h4 > a > .toggle-icon:before,
-.csstransforms3d .is-open > h5 > a > .toggle-icon:before,
-.csstransforms3d .is-open > h6 > a > .toggle-icon:before {
-  top: 50%;
-  -webkit-transform: translate3d(0, -50%, 0);
-  -moz-transform: translate3d(0, -50%, 0);
-  -ms-transform: translate3d(0, -50%, 0);
-  -o-transform: translate3d(0, -50%, 0);
-  transform: translate3d(0, -50%, 0);
-  -webkit-transition: -webkit-transform 0.25s, opacity 0.25s;
-  -moz-transition: -moz-transform 0.25s, opacity 0.25s;
-  transition: transform 0.25s, opacity 0.25s;
-  opacity: 0;
-}
-.is-open .toggle-icon {
+.is-open .toggle-icon.open {
   -webkit-transition: -webkit-transform 0.25s;
   -moz-transition: -moz-transform 0.25s;
   transition: transform 0.25s;
@@ -1982,6 +1923,12 @@
   -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+.is-open .toggle-icon.open::before, .is-open .toggle-icon.open::after {
+  background: #0098db;
+}
+.is-open .accordion__link {
+  font-weight: bold;
 }
 
 .table__accordion {
