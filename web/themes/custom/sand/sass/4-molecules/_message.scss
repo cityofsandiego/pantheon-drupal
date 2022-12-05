@@ -1,0 +1,196 @@
+/* Messaging
+   ========================================================================== */
+.main__message {
+  z-index: 2;
+  padding: 1.5em;
+  text-align: center;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.35);
+
+  // @include mq($from: tablet) {
+  //   padding: 2.5em 1em;
+  //   .node-type-article & {
+  //     padding: 3em 0;
+  //   }
+  // }
+  // @include mq($until: tablet) {
+  //   padding: 1.5em 1em;
+  // }
+
+  .main__heading {
+    margin: 0;
+    color: white;
+    @include rem("font-size", 48px);
+    // @include mq($until: tablet) {
+    //   font-size: 2rem;
+    // }
+    @media print {
+      font-size: 2em;
+    }
+  }
+
+  .main__tagline {
+    margin: 0;
+    margin-top: 10px;
+    color: white;
+    @include rem("font-size", 16px);
+    // @include mq($until: tablet) {
+    //   text-align: center;
+    //   font-weight: normal;
+    // }
+    @media print {
+      font-size: 2em;
+    }
+    text-align: left;
+    font-weight: bold;
+    margin-top: 10px;
+    line-height: 1rem;
+    background-color: transparent;
+    text-shadow: 0 0 #555, 0 2px 0.5em black, 2px 0 0.5em black, 0 0 black;
+  }
+
+  .main__content {
+    margin: 0;
+    color: white;
+    @media print {
+      font-size: 1em;
+    }
+  }
+
+  a {
+    color: $gold;
+  }
+
+  &.main__message--white {
+    background-color: white;
+
+    a {
+      color: $off-black;
+    }
+
+    .main__heading {
+      color: $off-black;
+    }
+
+    .main__content {
+      color: $teal;
+    }
+  }
+
+  &.main__message--transparent {
+    background: transparent;
+
+    .main__heading {
+      color: white;
+      text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black;
+    }
+  }
+}
+
+.message {
+  padding: 1em;
+  border-radius: 4px;
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  i {
+    vertical-align: middle;
+    @include rem("font-size", 24px);
+  }
+
+  &.message--success {
+    background-color: $success-lt;
+
+    i {
+      color: $success;
+    }
+  }
+
+  &.message--warning {
+    background-color: $warning-lt;
+
+    i {
+      color: $warning;
+    }
+  }
+
+  &.message--error {
+    background-color: $error-lt;
+
+    i {
+      color: $error;
+    }
+  }
+
+  &.message--emergency {
+    background-color: $emergency-lt;
+    font-size: 1.375rem;
+    padding: 0.8em 1em;
+
+    i,
+    a,
+    p {
+      color: $emergency;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+
+    i {
+      font-size: 2.125rem;
+    }
+  }
+}
+
+/* New set of classes. Requested by Ron */
+.message--success {
+  background-color: $success-lt;
+
+  i {
+    color: $success;
+  }
+}
+
+.message--warning {
+  background-color: $warning-lt;
+
+  i {
+    color: $warning;
+  }
+}
+
+.message--error {
+  background-color: $error-lt;
+
+  i {
+    color: $error;
+  }
+}
+
+.message--emergency {
+  background-color: $emergency-lt;
+  font-size: 1.375rem;
+  padding: 0.8em 1em;
+
+  i,
+  a,
+  p {
+    color: $emergency;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  i {
+    font-size: 2.125rem;
+  }
+}
