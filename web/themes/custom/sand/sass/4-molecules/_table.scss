@@ -1,0 +1,87 @@
+/* Tables
+========================================================================== */
+table {
+  margin-bottom: 1em;
+  background: $off-white;
+
+  th {
+    padding: 0.5em 1em;
+    text-align: left;
+    word-wrap: break-word;
+    background: $mercury;
+    font-family: $font-family-secondary;
+
+    // @include mq($from: tablet) {
+    //   border-bottom: 1px solid grey;
+    // }
+  }
+
+  tr {
+    line-height: 1.6;
+
+    &:nth-child(even) {
+      background: $mercury;
+    }
+
+    &.subheading,
+    &:first-child {
+      background: transparent;
+    }
+
+    &.subheading {
+      color: $spruce;
+      font-family: $font-family;
+
+      td {
+        padding-left: 0;
+        // @include mq($from: tablet) {
+        //   line-height: 2.5;
+        //   @include rem("font-size", 16px);
+        // }
+      }
+    }
+
+    &.valign-m {
+      td {
+        vertical-align: middle !important;
+      }
+    }
+
+    &.valign-b {
+      td {
+        vertical-align: bottom !important;
+      }
+    }
+  }
+
+  td {
+    line-height: 1.8;
+    padding: 0.5em 1em;
+    vertical-align: top;
+
+    &:first-child {
+      padding-left: 1em;
+    }
+
+    &.table--break {
+      padding-left: 0;
+    }
+  }
+
+  &.ui-datepicker-calendar {
+    tr:nth-child(even) {
+      background: #f6f6f6;
+    }
+
+    td:first-child {
+      padding-left: 0;
+    }
+  }
+}
+
+.table--thirds {
+  p {
+    margin: 0;
+    line-height: 1.7;
+  }
+}
