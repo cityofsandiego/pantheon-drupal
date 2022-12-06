@@ -2516,24 +2516,82 @@ figure figcaption .photo-credit {
   padding: 0.25rem 0.5rem;
 }
 
-/* ============================================================
-  Styles for tables
-  ============================================= */
+/* Tables
+========================================================================== */
 table {
-  font-size: 1rem;
-  width: 100%;
+  margin-bottom: 1em;
+  background: #f6f6f6;
 }
-table p {
-  font-size: 1rem;
+table tbody {
+  background: #f6f6f6;
+}
+table thead tr:first-child th {
+  color: #37424a;
+}
+table th {
+  padding: 0.5em 1em;
+  text-align: left;
+  word-wrap: break-word;
+  background: #e4e9eb;
+  font-family: "Merriweather", serif;
+}
+table tr {
+  line-height: 1.6;
+  border-top: 0;
+  border-bottom: 0;
+}
+table tr:first-child {
+  border-top: 0;
+}
+table tr:nth-child(even) {
+  background: #e4e9eb;
+}
+table tr:nth-child(odd) {
+  background: #f6f6f6;
+}
+table tr.subheading, table tr:first-child {
+  background: transparent;
+}
+table tr.subheading {
+  color: #37424a;
+  font-family: "Open Sans", sans-serif;
+}
+table tr.subheading td {
+  padding-left: 0;
+}
+table tr.valign-m td {
+  vertical-align: middle !important;
+}
+table tr.valign-b td {
+  vertical-align: bottom !important;
+}
+table td {
+  line-height: 1.8;
+  padding: 0.5em 1em;
+  vertical-align: top;
+  font-weight: 400;
+}
+table td:first-child {
+  padding-left: 1em;
+}
+table td.table--break {
+  padding-left: 0;
+}
+table.ui-datepicker-calendar tr:nth-child(even) {
+  background: #f6f6f6;
+}
+table.ui-datepicker-calendar td:first-child {
+  padding-left: 0;
+}
+
+.table--thirds p {
   margin: 0;
-}
-table tr td,
-table tr th {
-  padding: 0.5rem;
+  line-height: 1.7;
 }
 
 .block-local-tasks-block {
-  margin-bottom: 1rem;
+  margin-bottom: 0;
+  background-color: #dde2e5;
 }
 .block-local-tasks-block .local-tasks {
   display: flex;
@@ -2652,14 +2710,12 @@ a:hover, a:focus {
 }
 
 p {
-  font-size: 1.125rem;
   line-height: 1.5;
   margin: 0 0 1rem;
 }
 
 .paragraph ul,
 .paragraph ol {
-  font-size: 1.125rem;
   line-height: 1.5;
 }
 .paragraph ul li,
