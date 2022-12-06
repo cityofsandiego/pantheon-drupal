@@ -221,14 +221,10 @@ content:
         duplicate: duplicate
     third_party_settings: {  }
   field_department:
-    type: entity_reference_autocomplete
+    type: options_buttons
     weight: 19
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_email:
     type: email_default
@@ -243,8 +239,8 @@ content:
     weight: 26
     region: content
     settings:
-      show_extra: 0
-      hide_date: 0
+      show_extra: false
+      hide_date: true
       modal: false
       default_duration: 60
       default_duration_increments: |-
@@ -253,16 +249,7 @@ content:
         90
         120|2 hours
         custom
-    third_party_settings:
-      smart_date_recur:
-        modal: true
-        allowed_recur_freq_values:
-          MINUTELY: '0'
-          HOURLY: '0'
-          DAILY: DAILY
-          WEEKLY: WEEKLY
-          MONTHLY: MONTHLY
-          YEARLY: YEARLY
+    third_party_settings: {  }
   field_exceptions_2:
     type: smartdate_inline
     weight: 30
