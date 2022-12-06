@@ -1421,12 +1421,27 @@ class CustomCommands extends DrushCommands {
         $node->save();
         echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
       }
-      if (strpos($body_html, 'class="row') !== FALSE) {
+      if (strpos($body_html, 'class="row') !== FALSE || strpos($body_html, 'columns') !== FALSE) {
+        $body_html = str_replace('  ', ' ', $body_html);
         $body_html = str_replace('class="row', 'class="grid-x grid-margin-x', $body_html);
-        $body_html = str_replace('class="four columns', 'class="cell medium-4', $body_html);
+        $body_html = str_replace('class="one columns', 'class="cell medium-1', $body_html);
+        $body_html = str_replace('class="two columns', 'class="cell medium-2', $body_html);
         $body_html = str_replace('class="three columns', 'class="cell medium-3', $body_html);
+        $body_html = str_replace('class="four columns', 'class="cell medium-4', $body_html);
+        $body_html = str_replace('class="five columns', 'class="cell medium-5', $body_html);
+        $body_html = str_replace('class="six columns', 'class="cell medium-6', $body_html);
+        $body_html = str_replace('class="seven columns', 'class="cell medium-7', $body_html);
+        $body_html = str_replace('class="eight columns', 'class="cell medium-8', $body_html);
+        $body_html = str_replace('class="nine columns', 'class="cell medium-9', $body_html);
+        $body_html = str_replace('class="ten columns', 'class="cell medium-10', $body_html);
+        $body_html = str_replace('class="eleven columns', 'class="cell medium-11', $body_html);
+        $body_html = str_replace('class="twelve columns', 'class="cell medium-12', $body_html);
         $body_html = str_replace('class="sm-two columns', 'class="cell small-2', $body_html);
+        $body_html = str_replace('class="sm-three columns', 'class="cell small-3', $body_html);
+        $body_html = str_replace('class="sm-seven columns', 'class="cell small-7', $body_html);
         $body_html = str_replace('class="sm-ten columns', 'class="cell small-10', $body_html);
+        $body_html = str_replace('class="two sm-two columns', 'class="cell medium-2 small-2', $body_html);
+        $body_html = str_replace('class="ten sm-ten columns', 'class="cell medium-10 small-10', $body_html);
         $node->body->value = $body_html;
         $node->save();
         echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
