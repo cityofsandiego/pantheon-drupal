@@ -2,15 +2,267 @@
   Styles for cards and featured cards.
   ============================================================ */
 
-/* Featured Cards */
-.featured-card-group {
+/* Cards Styles from D7 */
+%card {
+  background: white;
+  border-radius: 4px;
+  width: 100%;
+
+  &.border {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  @include respond-to('m') {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+}
+
+.card {
+  @extend %card;
+
+  > a {
+    text-decoration: none;
+  }
+
+  &.background-off-white {
+    background: $off-white;
+  }
+}
+
+.card__container {
+  position: relative;
+
+  @include respond-to('l') {
+    display: block;
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    -webkit-justify-content: flex-start; /* Safari */
+    justify-content: flex-start;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  // If .mobile-flexslider exists, it creates a ul.slides wrapping the .cards
+  @include respond-to('l') {
+    .slides {
+      display: block;
+      display: -webkit-flex; /* Safari */
+      display: flex;
+      -webkit-justify-content: flex-start; /* Safari */
+      justify-content: flex-start;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+
+    }
+  }
+
+  &.mobile-flexslider {
+    height: 100% !important;
+  }
+
+  .card__wrap, .card--wrap {
+    height: auto;
+    margin: 0 .5em;
+    width: 100%;
+
+    @include respond-to('m') {
+      margin: 0;
+      padding: .75em;
+      display: -webkit-flex; /* Safari */
+      display: flex;
+
+      .card {
+        flex: 0 1 auto;
+      }
+    }
+  }
+
+  .card__wrap_s, .card--wrap-s {
+    height: auto;
+    margin: 0 .5em;
+    width: 100%;
+
+    @include respond-to('l') {
+      margin: 0;
+      padding: .75em;
+      display: -webkit-flex; /* Safari */
+      display: flex;
+
+      .card {
+        flex: 0 1 auto;
+      }
+    }
+  }
+
+  .card__wrap_m, .card--wrap-m {
+    height: auto;
+    margin: 0 .5em;
+    width: 100%;
+
+    @include respond-to('l') {
+      margin: 0;
+      padding: .75em;
+      display: -webkit-flex; /* Safari */
+      display: flex;
+
+      .card {
+        flex: 0 1 auto;
+      }
+    }
+  }
+
+  .card__content {
+    padding: 1.5em;
+
+    @include respond-to('m') {
+      @include rem('font-size', 13px);
+    }
+
+    > a {
+      @include rem('font-size', 16px);
+    }
+  }
+
+  .card__headline.title,
+  .card__headline a {
+    color: $spruce;
+    text-decoration: none;
+    font-family: $headline;
+    @include rem('font-size', 16px);
+  }
+
+  .card__meta {
+    margin: 1em 0;
+
+    a {
+      color: $cerulean;
+      text-decoration: underline;
+    }
+  }
+
+  .card__image {
+    img {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+    }
+  }
+
+  .card__btn {
+    display: block;
+    font-weight: 600;
+  }
+
+  &.flexslider--mobile {
+    .card__wrap {
+      @include respond-to('m') {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.card__cta--graphic {
+  text-align: center;
+
+  background {
+    position: center center;
+    repeat: no-repeat;
+  }
+
+  > a {
+    display: block;
+    padding: 1.5em;
+    position: relative;
+
+    &:before {
+      content: '';
+      display: block;
+      background: black;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+
+    &:hover {
+      &:before {
+        opacity: .1;
+      }
+    }
+  }
+
+  a {
+    @include rem('font-size', 16px);
+  }
+
+  p {
+    color: white;
+    @include rem('font-size', 18px);
+    font-family: $headline;
+  }
+}
+
+.card--stats {
+  color: white;
+  padding: 0.75em;
+  border-radius: 0;
+  text-align: right;
+  background-color: $cerulean;
+
+  p {
+    margin: 0;
+  }
+
+  .card__headline {
+    line-height: 1;
+    font-weight: 700;
+    @include rem('font-size', 50px);
+  }
+}
+
+.card--notification {
+  p {
+    margin-bottom: 0;
+  }
+
+  i {
+    color: white;
+    padding: .3em;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+    @include rem('font-size', 24px);
+
+    @include mq(tablet, site) {
+      @include rem('font-size', 18px);
+    }
+  }
+
+  .date {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    @include rem('font-size', 12px);
+    font-family: $headline;
+  }
+}
+
+/* Featured Cards for D9 */
+.card-group {
   padding: 1rem 0;
 
   h2 {
     font-family: $headline;
   }
 
-  .featured-card-group__wrapper {
+  .card-group__wrapper {
     display: flex;
     flex-flow: column wrap;
     gap: 2rem;
@@ -21,8 +273,8 @@
   }
 }
 
-/* Individual Card */
-.featured-card {
+/* Featured Card Item for D9 */
+.card {
   max-width: 700px;
   background-color: $alto;
   border-radius: 2px;
@@ -42,16 +294,16 @@
     height: auto;
   }
 
-  .featured-card__content {
+  .card__content {
     color: $charcoal;
     padding: 1rem;
 
-    .featured-card__heading {
+    .card__heading {
       font-family: $headline;
       font-size: 1.25rem;
     }
 
-    .featured-card__body {
+    .card__body {
       margin: 1rem 0;
     }
   }
