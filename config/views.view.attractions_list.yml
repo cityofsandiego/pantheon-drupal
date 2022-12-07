@@ -1,10 +1,10 @@
 uuid: e038eba8-431a-423a-8239-f482ef1fc2f1
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - field.storage.node.body
-    - field.storage.node.field_location_location_type
+    - field.storage.node.field_location_type
     - field.storage.node.field_website
     - node.type.location
     - taxonomy.vocabulary.location
@@ -1963,8 +1963,9 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.taxonomy_term.bucket.default'
         - 'config:core.entity_view_display.taxonomy_term.categories.default'
-        - 'config:core.entity_view_display.taxonomy_term.departments.default'
+        - 'config:core.entity_view_display.taxonomy_term.department.default'
         - 'config:core.entity_view_display.taxonomy_term.location.default'
         - 'config:core.entity_view_display.taxonomy_term.search_keymatch.default'
         - 'config:field.storage.node.body'
@@ -2219,9 +2220,9 @@ display:
           empty_zero: false
           hide_alter_empty: false
         field_location_location_type:
-          id: field_location_location_type
-          table: node__field_location_location_type
-          field: field_location_location_type
+          id: field_location_type
+          table: node__field_location_type
+          field: field_location_type
           relationship: none
           group_type: group
           admin_label: ''
@@ -2455,5 +2456,5 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.body'
-        - 'config:field.storage.node.field_location_location_type'
+        - 'config:field.storage.node.field_location_type'
         - 'config:field.storage.node.field_website'
