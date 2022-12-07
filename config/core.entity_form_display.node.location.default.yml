@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.location.field_amenities
     - field.field.node.location.field_d7_nid
     - field.field.node.location.field_department
+    - field.field.node.location.field_edit_notes
     - field.field.node.location.field_email
     - field.field.node.location.field_exceptions
     - field.field.node.location.field_exceptions_2
@@ -151,6 +152,22 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_update_notes:
+      children:
+        - field_edit_notes
+      label: 'Update Notes'
+      region: content
+      parent_name: ''
+      weight: 18
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: false
+        weight: 0
 id: node.location.default
 targetEntityType: node
 bundle: location
@@ -225,6 +242,14 @@ content:
     weight: 19
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_edit_notes:
+    type: string_textarea
+    weight: 19
+    region: content
+    settings:
+      rows: 10
+      placeholder: ''
     third_party_settings: {  }
   field_email:
     type: email_default

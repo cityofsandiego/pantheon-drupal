@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.department_parent.field_contact_info_grid
     - field.field.node.department_parent.field_d7_nid
     - field.field.node.department_parent.field_department
+    - field.field.node.department_parent.field_edit_notes
     - field.field.node.department_parent.field_feature_alt_text
     - field.field.node.department_parent.field_feature_video_img
     - field.field.node.department_parent.field_featured_content
@@ -40,7 +41,7 @@ third_party_settings:
       label: 'Main Tabs'
       region: content
       parent_name: ''
-      weight: 7
+      weight: 5
       format_type: tabs
       format_settings:
         classes: ''
@@ -117,6 +118,22 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_update_notes:
+      children:
+        - field_edit_notes
+      label: 'Update Notes'
+      region: content
+      parent_name: ''
+      weight: 19
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: false
+        weight: 0
 id: node.department_parent.default
 targetEntityType: node
 bundle: department_parent
@@ -124,7 +141,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 11
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -151,6 +168,14 @@ content:
     weight: 15
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_edit_notes:
+    type: string_textarea
+    weight: 20
+    region: content
+    settings:
+      rows: 10
+      placeholder: ''
     third_party_settings: {  }
   field_feature_alt_text:
     type: string_textfield
@@ -227,7 +252,7 @@ content:
     third_party_settings: {  }
   field_single_line_title:
     type: boolean_checkbox
-    weight: 26
+    weight: 18
     region: content
     settings:
       display_label: true
@@ -268,44 +293,44 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 14
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 12
+    weight: 9
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 15
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 17
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
   simple_sitemap:
-    weight: 10
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 20
+    weight: 17
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 13
+    weight: 10
     region: content
     settings:
       display_label: true
@@ -320,7 +345,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 6
     region: content
     settings:
       match_operator: CONTAINS
@@ -330,18 +355,18 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 16
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 18
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 19
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
