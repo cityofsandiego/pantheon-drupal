@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.hero.field_hero_sitewide
     - field.field.node.hero.field_hero_time_of_day
     - field.field.node.hero.field_image
+    - field.field.node.hero.field_vimeo_url
     - node.type.hero
   module:
     - field_group
@@ -38,6 +39,7 @@ third_party_settings:
     group_content:
       children:
         - field_image
+        - field_vimeo_url
         - field_hero_caption
         - field_hero_prefix_image_by
         - field_hero_image_by
@@ -127,7 +129,7 @@ content:
       display_label: true
     third_party_settings: {  }
   field_hero_time_of_day:
-    type: options_select
+    type: options_buttons
     weight: 19
     region: content
     settings: {  }
@@ -138,6 +140,14 @@ content:
     region: content
     settings:
       media_types: {  }
+    third_party_settings: {  }
+  field_vimeo_url:
+    type: string_textfield
+    weight: 15
+    region: content
+    settings:
+      size: 255
+      placeholder: ''
     third_party_settings: {  }
   path:
     type: path
