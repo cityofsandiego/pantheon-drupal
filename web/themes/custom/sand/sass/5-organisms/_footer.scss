@@ -47,7 +47,7 @@
             font-size: 0.8125rem;
             gap: 2rem;
           }
-
+          
           .menu-item--expanded {
             line-height: 1.4;
             list-style: none;
@@ -68,6 +68,7 @@
             display: block;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            pointer-events: none;
           }
 
           ul {
@@ -75,8 +76,18 @@
               color: $white;
               font-weight: 400;
               line-height: 1.4;
+              pointer-events: initial;
+
               @include respond-to('m') {
                 font-size: 0.688rem;
+              }
+
+              &:hover {
+                color: #6e8393;
+              }
+
+              &.is-active{
+                color: #000;
               }
             }
           }
@@ -129,6 +140,12 @@
             height: 1.5rem;
             justify-content: center;
             width: 1.5rem;
+            font-size: 1rem;
+
+            &:hover {
+              background: $off-white;
+              color: #010101;
+            }
           }
         }
 
