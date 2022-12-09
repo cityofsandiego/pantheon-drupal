@@ -7,13 +7,16 @@ dependencies:
     - field.field.node.outreach_article2.field_category
     - field.field.node.outreach_article2.field_department
     - field.field.node.outreach_article2.field_image
-    - field.field.node.outreach_article2.field_image_text
+    - field.field.node.outreach_article2.field_outreach_body
+    - field.field.node.outreach_article2.field_outreach_header_type
     - field.field.node.outreach_article2.field_outreach_minimum_height
     - field.field.node.outreach_article2.field_search_keymatch
     - field.field.node.outreach_article2.field_subtitle
     - field.field.node.outreach_article2.field_vertical_alignment
+    - image.style.article_100
     - node.type.outreach_article2
   module:
+    - media
     - options
     - text
     - user
@@ -27,73 +30,49 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 101
-    region: content
-  field_category:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 107
-    region: content
-  field_department:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 108
+    weight: 4
     region: content
   field_image:
-    type: entity_reference_label
-    label: above
+    type: media_thumbnail
+    label: hidden
     settings:
-      link: true
+      image_link: ''
+      image_style: article_100
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    weight: 103
+    weight: 3
     region: content
-  field_image_text:
-    type: basic_string
+  field_outreach_body:
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 104
-    region: content
-  field_outreach_minimum_height:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 106
-    region: content
-  field_search_keymatch:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 109
+    weight: 2
     region: content
   field_subtitle:
     type: string
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 102
+    weight: 1
     region: content
   field_vertical_alignment:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 105
+    weight: 5
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
-hidden: {  }
+hidden:
+  field_category: true
+  field_department: true
+  field_outreach_header_type: true
+  field_outreach_minimum_height: true
+  field_search_keymatch: true
