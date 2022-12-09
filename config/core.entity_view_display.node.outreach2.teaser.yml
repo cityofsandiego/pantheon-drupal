@@ -1,0 +1,42 @@
+uuid: a4a27ee3-71b1-4f86-9481-245d68f89955
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.outreach2.body
+    - field.field.node.outreach2.field_department
+    - field.field.node.outreach2.field_edit_notes
+    - field.field.node.outreach2.field_outreach_footer_type
+    - field.field.node.outreach2.field_outreach_header_type
+    - field.field.node.outreach2.field_outreach_version
+    - field.field.node.outreach2.field_search_keymatch
+    - node.type.outreach2
+  module:
+    - text
+    - user
+id: node.outreach2.teaser
+targetEntityType: node
+bundle: outreach2
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_department: true
+  field_edit_notes: true
+  field_outreach_footer_type: true
+  field_outreach_header_type: true
+  field_outreach_version: true
+  field_search_keymatch: true
