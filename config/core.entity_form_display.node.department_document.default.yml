@@ -24,6 +24,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - term_reference_fancytree
     - text
 third_party_settings:
   field_group:
@@ -136,10 +137,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_department:
-    type: options_buttons
+    type: term_reference_fancytree
     weight: 20
     region: content
-    settings: {  }
+    settings:
+      select_all: false
+      select_children: false
     third_party_settings: {  }
   field_dept_doc_id:
     type: string_textfield
