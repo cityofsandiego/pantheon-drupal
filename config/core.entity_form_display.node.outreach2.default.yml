@@ -17,6 +17,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - term_reference_fancytree
 third_party_settings:
   field_group:
     group_main_tabs:
@@ -93,10 +94,12 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_department:
-    type: options_buttons
+    type: term_reference_fancytree
     weight: 17
     region: content
-    settings: {  }
+    settings:
+      select_all: false
+      select_children: false
     third_party_settings: {  }
   field_edit_notes:
     type: string_textarea
