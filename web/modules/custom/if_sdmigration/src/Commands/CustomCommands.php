@@ -1450,6 +1450,110 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   * Import "reusable component" content type which are legacy D7 blocks.
+   *
+   * @command import:reusable-components
+   *
+   * @usage import:reusable-components
+   */
+  public function importReusableComponents() {
+
+    // Delete any previously imported sidebar block contexts data.
+    $query = $this->entityTypeManager
+      ->getStorage('node')
+      ->getQuery();
+    $query->condition('type', 'sidebar_block_context');
+    $nids = $query->execute();
+    foreach ($nids as $nid) {
+      $node = Node::load($nid);
+      $node->delete();
+    }
+
+    // Load exported D7 block data.
+    $reusable_components = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/blocks/block-content.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $reusable_components[str_replace('`', '', $data[1])] = [
+          'id' => str_replace('`', '', $data[0]),
+          'label' => str_replace('`', '', $data[2]),
+          'body' => str_replace('`', '', $data[3]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Process contexts mysql table dump for block placement based on taxonomy.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/blocks/contexts.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $conditions = unserialize($data[3]);
+        $departments = NULL;
+        $departments_subs = NULL;
+        $paths = NULL;
+        if (array_key_exists('node_taxonomy', $conditions)) {
+          foreach ($conditions['node_taxonomy']['values'] as $dtid) {
+            $d9_tid = $this->taxonomyImportTasks->newTid($dtid, 'department');
+            if (!empty($d9_tid)) {
+              $departments[] = $d9_tid;
+            }
+          }
+        }
+        if (array_key_exists('taxonomy_descendants_condition', $conditions)) {
+          foreach ($conditions['taxonomy_descendants_condition']['values'] as $dtid) {
+            $d9_tid = $this->taxonomyImportTasks->newTid($dtid, 'department');
+            if (!empty($d9_tid)) {
+              $departments_subs[] = $d9_tid;
+            }
+          }
+        }
+        if (array_key_exists('path', $conditions)) {
+          foreach ($conditions['path'] as $path) {
+            $paths[] = $path;
+          }
+        }
+        $blocks = unserialize($data[4]);
+        if (array_key_exists('block', $blocks) && count($blocks['block']['blocks']) > 0) {
+          $node = Node::create([
+            'type' => 'sidebar_block_context',
+            'title' => $data[0],
+            'field_department' => $departments,
+            'field_department_subs' => $departments_subs,
+            'field_path' => $paths,
+            'moderation_state' => [
+              'target_id' => 'published',
+            ],
+            'uid' => 0
+          ]);
+          foreach ($blocks['block']['blocks'] as $delta => $block) {
+            if ($block['region'] == 'sidebar' || $block['region'] == 'sidebar_bottom') {
+              if (array_key_exists($block['delta'], $reusable_components) && !empty($reusable_components[$block['delta']])) {
+                $paragraph = Paragraph::create([
+                  'type' => 'block',
+                  'field_body' => [
+                    'value' => $reusable_components[$block['delta']]['body'],
+                    'format' => 'full_html'
+                  ],
+                  'field_label' => $reusable_components[$block['delta']]['label'],
+                  'field_weight' => $block['weight'],
+                  'field_region' => $block['region'],
+                ]);
+                $paragraph->save();
+                $node->field_block->appendItem($paragraph);
+              }
+            }
+          }
+          // Only save node if there are actually valid blocks.
+          if (count($node->field_block->getValue()) > 0) {
+            $node->save();
+          }
+        }
+      }
+      fclose($file);
+    }
+  }
+
+  /**
    * Deletes all image media.
    *
    * @command import:delete-images
