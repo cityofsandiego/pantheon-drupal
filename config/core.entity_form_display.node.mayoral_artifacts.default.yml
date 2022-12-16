@@ -22,6 +22,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - term_reference_fancytree
     - text
 third_party_settings:
   field_group:
@@ -62,6 +63,7 @@ third_party_settings:
         required_fields: true
     group_vocabularies:
       children:
+        - field_department
         - field_category
         - field_search_keymatch
       label: Vocabularies
@@ -99,7 +101,7 @@ content:
     third_party_settings: {  }
   field_category:
     type: entity_reference_autocomplete
-    weight: 20
+    weight: 27
     region: content
     settings:
       match_operator: CONTAINS
@@ -108,14 +110,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_department:
-    type: entity_reference_autocomplete
+    type: term_reference_fancytree
     weight: 26
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      select_all: false
+      select_children: false
     third_party_settings: {  }
   field_image:
     type: media_library_widget
@@ -164,7 +164,7 @@ content:
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete
-    weight: 21
+    weight: 28
     region: content
     settings:
       match_operator: CONTAINS
