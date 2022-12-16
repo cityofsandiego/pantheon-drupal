@@ -15,6 +15,7 @@ dependencies:
     - scheduler
     - scheduler_content_moderation_integration
     - smart_date
+    - term_reference_fancytree
     - text
 third_party_settings:
   field_group:
@@ -110,10 +111,12 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_department:
-    type: options_buttons
+    type: term_reference_fancytree
     weight: 17
     region: content
-    settings: {  }
+    settings:
+      select_all: false
+      select_children: false
     third_party_settings: {  }
   field_event_date:
     type: smartdate_inline

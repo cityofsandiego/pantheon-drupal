@@ -1,0 +1,10 @@
+services:
+  if_components.preprocess.node.department:
+    class: \Drupal\if_components\EventSubscriber\Preprocess\Node\Department
+    arguments:
+      - '@current_route_match'
+      - '@plugin.manager.menu.link'
+      - '@menu.active_trail'
+      - '@entity_type.manager'
+    tags:
+      - { name: event_subscriber }

@@ -108,9 +108,15 @@
 
       <div class="cell medium-3 large-3">
         <div class="l-padding-am l-padding-mobile-hd l-margin-mobile-bm light-gray-bg sidebar">
+            {% for item in sidebar %}
+              {{ item.value }}
+            {% endfor %}
             {% if content.field_sidebar[0] %}
               {{ content.field_sidebar }}
             {% endif %}
+            {% for item in sidebar_bottom %}
+              {{ item.value }}
+            {% endfor %}
         </div>
       </div>
     </div>
