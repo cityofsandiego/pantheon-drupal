@@ -2,6 +2,7 @@ On the Drupal 7 site:
 1. Disable the php filter module on the D7 site before exporting content. The inline PHP breaks the import.
 2. In the views_data_export module, replace the views_data_export.theme.inc file with the modified one supplied.
 3. Install and enable the d9_migration_views feature.  This supplies the views that generate the CSV files used for imports.
+4. Raw database table (CSV files) include blocks/contexts.csv, menu_custom.csv, and menu_links.csv.
 
 Taxonomy import via drush:
 lando terminus drush import:taxonomy department
@@ -19,7 +20,10 @@ lando terminus drush mi:import sd_nodes_slide -- --update --force
 lando terminus drush mi:import sd_nodes_mayoral_artifact -- --update --force
 lando terminus drush mi:import sd_nodes_outreach -- --update --force
 
-Entity creation and associations via drush:
+Menu import:
+lando terminus drush import:menus
+
+Entity creation and associations:
 lando terminus drush import:department
 lando terminus drush import:department-fixes
 lando terminus drush import:department-parent
@@ -27,6 +31,7 @@ lando terminus drush import:bucket
 lando terminus drush import:location
 lando terminus drush import:mayoral-artifact
 lando terminus drush import:outreach
+lando terminus drush import:reusable-components
 
 Data status: 9/26/2022
 Nodes:
