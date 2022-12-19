@@ -10,6 +10,8 @@ use Drupal\media\Entity\Media;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\pathauto\PathautoState;
 use Drupal\if_sdmigration\TaxonomyImportTasks;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\system\Entity\Menu;
 use Drupal\taxonomy\Entity\Term;
 use Drush\Commands\DrushCommands;
 
@@ -1542,12 +1544,144 @@ class CustomCommands extends DrushCommands {
                 $node->field_block->appendItem($paragraph);
               }
             }
+            if ($block['module'] == 'menu') {
+              if ($block['region'] == 'sidebar') {
+                $node->field_sidebar_menu_id = $block['delta'];
+              }
+              else if ($block['region'] == 'sub-navigation') {
+                $node->field_top_menu_id = $block['delta'];
+              }
+            }
           }
-          // Only save node if there are actually valid blocks.
-          if (count($node->field_block->getValue()) > 0) {
+
+          // Only save node if there are actually valid blocks or a menu.
+          if (count($node->field_block->getValue()) > 0 || count($node->field_sidebar_menu_id->getValue()) > 0 || count($node->field_top_menu_id->getValue()) > 0) {
             $node->save();
           }
         }
+      }
+      fclose($file);
+    }
+  }
+
+  /**
+   * Recreate D7 menus.
+   *
+   * @command import:menus
+   *
+   * @usage import:menus
+   */
+  public function importMenus() {
+    $ignore_list = [
+      'devel',
+      'features',
+      'main-menu',
+      'management',
+      'navigation',
+      'user-menu',
+    ];
+
+    // Create menus if not already existing.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/menu_custom.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $menu_id = str_replace('`', '', $data[0]);
+        $menu = $this->entityTypeManager->getStorage('menu')->loadByProperties(['id' => $menu_id]);
+        if (!in_array($menu_id, $ignore_list)) {
+          if (!empty($menu)) {
+            // Delete any previously migrated menu links.
+            /*@todo*/
+          }
+          else {
+            // Create new menu.
+            $menu = Menu::create([
+              'id' => $menu_id,
+              'label' => str_replace('`', '', $data[1]),
+            ]);
+            $menu->save();
+          }
+        }
+      }
+      fclose($file);
+    }
+
+    // Populate menus.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/menu_links.csv', 'r')) {
+      fgets($file);
+      $menu_d7id_uuid = [];
+      while ($data = fgetcsv($file)) {
+        $menu_name = str_replace('`', '', $data[0]);
+        if (in_array($menu_name, $ignore_list)) {
+          continue;
+        }
+        $link_path = str_replace('`', '', $data[3]);
+        // Convert to D9 node id.
+        if (strpos($link_path, 'node/') == 0) {
+          $d7id = str_replace('node/', '', $link_path);
+          $query = $this->entityTypeManager
+            ->getStorage('node')
+            ->getQuery();
+          $query->condition('field_d7_nid', $d7id);
+          $nid = reset($query->execute());
+          if (!empty($nid)) {
+            $link_path = 'internal:/node/' . $nid;
+          }
+          else {
+            // Node not imported yet or was unpublished; ignore this link.
+            continue;
+          }
+        }
+        elseif ($link_external == 0) {
+          $link_path = 'internal:/' . $link_path;
+        }
+        $link_title = str_replace('`', '', $data[5]);
+        $link_expanded = str_replace('`', '', $data[11]);
+        $link_external = str_replace('`', '', $data[9]);
+        $link_weight = str_replace('`', '', $data[12]);
+        $link_d7id = str_replace('`', '', $data[1]);
+        $depth = str_replace('`', '', $data[13]);
+        switch ($depth) {
+          case 1:
+            $link_parent = $data[15];
+            break;
+          case 2:
+            $link_parent = $data[16];
+            break;
+          case 3:
+            $link_parent = $data[17];
+            break;
+          case 4:
+            $link_parent = $data[18];
+            break;
+          case 5:
+            $link_parent = $data[19];
+            break;
+          case 6:
+            $link_parent = $data[20];
+            break;
+          case 7:
+            $link_parent = $data[21];
+            break;
+        }
+        $link_parent = str_replace('`', '', $link_parent);
+        if ($link_parent == $link_d7id || $link_parent == 1) {
+          $link_parent = NULL;
+        }
+        else {
+          $link_parent = $menu_d7id_uuid[$link_parent];
+        }
+        // Create menu link.
+        $menu_link = MenuLinkContent::create([
+          'title' => $link_title,
+          'weight' => $link_weight,
+          'link' => ['uri' => $link_path],
+          'menu_name' => $menu_name,
+          'parent' => $link_parent,
+          'expanded' => $link_expanded,
+        ]);
+        $menu_link->save();
+        // Save D7 ID with new D9 UUID to potentially set as parent for future.
+        $menu_d7id_uuid[$link_d7id] = 'menu_link_content:' . $menu_link->uuid();
       }
       fclose($file);
     }
