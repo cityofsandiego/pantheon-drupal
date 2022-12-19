@@ -80,15 +80,8 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
   ]
 %}
-<article{{ attributes.addClass(classes) }}>
 
-  {{ title_prefix }}
-  {% if not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }} test </a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
+<article{{ attributes.addClass(classes) }}>
 
   <div{{ content_attributes.addClass('node__content') }}>
     <div class="grid-x">
@@ -108,6 +101,14 @@
 
       <div class="cell medium-3 large-3">
         <div class="l-padding-am l-padding-mobile-hd l-margin-mobile-bm light-gray-bg sidebar">
+            {% if sidemenu is defined %}
+              <h2>{{ sidemenu.title }}</h2>
+              <ul>
+                {% for item in sidemenu.items %}
+                  <li{% if item.is_active == true %} class="active"{% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
             {% for item in sidebar %}
               {{ item.value }}
             {% endfor %}
