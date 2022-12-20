@@ -1581,34 +1581,10 @@ class CustomCommands extends DrushCommands {
       'user-menu',
     ];
 
-    // Create menus if not already existing.
-    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/menu_custom.csv', 'r')) {
-      fgets($file);
-      while ($data = fgetcsv($file)) {
-        $menu_id = str_replace('`', '', $data[0]);
-        $menu = $this->entityTypeManager->getStorage('menu')->loadByProperties(['id' => $menu_id]);
-        if (!in_array($menu_id, $ignore_list)) {
-          if (!empty($menu)) {
-            // Delete any previously migrated menu links.
-            /*@todo*/
-          }
-          else {
-            // Create new menu.
-            $menu = Menu::create([
-              'id' => $menu_id,
-              'label' => str_replace('`', '', $data[1]),
-            ]);
-            $menu->save();
-          }
-        }
-      }
-      fclose($file);
-    }
-
-    // Populate menus.
+    // Create menu item link array first so empty menus aren't imported.
+    $menu_links = [];
     if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/menu_links.csv', 'r')) {
       fgets($file);
-      $menu_d7id_uuid = [];
       while ($data = fgetcsv($file)) {
         $menu_name = str_replace('`', '', $data[0]);
         if (in_array($menu_name, $ignore_list)) {
@@ -1664,26 +1640,76 @@ class CustomCommands extends DrushCommands {
             break;
         }
         $link_parent = str_replace('`', '', $link_parent);
-        if ($link_parent == $link_d7id || $link_parent == 1) {
-          $link_parent = NULL;
-        }
-        else {
-          $link_parent = $menu_d7id_uuid[$link_parent];
-        }
-        // Create menu link.
-        $menu_link = MenuLinkContent::create([
+        $menu_links[$menu_name][$link_d7id] = [
+          'path' => $link_path,
           'title' => $link_title,
-          'weight' => $link_weight,
-          'link' => ['uri' => $link_path],
-          'menu_name' => $menu_name,
-          'parent' => $link_parent,
           'expanded' => $link_expanded,
-        ]);
-        $menu_link->save();
-        // Save D7 ID with new D9 UUID to potentially set as parent for future.
-        $menu_d7id_uuid[$link_d7id] = 'menu_link_content:' . $menu_link->uuid();
+          'external' => $link_external,
+          'weight' => $link_weight,
+          'parent' => $link_parent
+        ];
       }
       fclose($file);
+    }
+
+    // Note: commented out as this only needs to be run once locally to create
+    // menu config export files.
+
+//    // Get menu IDs + Labels array. Only get necessary menus.
+//    $menu = [];
+//    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/menu_custom.csv', 'r')) {
+//      fgets($file);
+//      while ($data = fgetcsv($file)) {
+//        $menu_id = str_replace('`', '', $data[0]);
+//        if (!in_array($menu_id, $ignore_list) && array_key_exists($menu_id, $menu_links)) {
+//          $menu[$menu_id] = str_replace('`', '', $data[1]);
+//        }
+//      }
+//      fclose($file);
+//    }
+//
+//    // Create menus.
+//    foreach ($menu as $menu_id => $label) {
+//      $menu_entity = $this->entityTypeManager->getStorage('menu')
+//        ->loadByProperties(['id' => $menu_id]);
+//      if (!empty($menu_entity)) {
+//        // Delete any previously migrated menu so it is recreated.
+//        $menu_entity = reset($menu_entity);
+//        $menu_entity->delete();
+//      }
+//      // Create new menu.
+//      $menu_entity = Menu::create([
+//        'id' => $menu_id,
+//        'label' => $label,
+//      ]);
+//      $menu_entity->save();
+//    }
+
+    // Populate menus.
+    $menu_d7id_uuid = [];
+    foreach ($menu_links as $menu_id => $items) {
+      foreach ($items as $d7id => $item) {
+        if ($item['parent'] == $d7id || $item['parent'] == 1) {
+          $parent = NULL;
+        }
+        else {
+          $parent = $menu_d7id_uuid[$item['parent']];
+        }
+
+        // Create menu link.
+        $menu_link = MenuLinkContent::create([
+          'title' => $item['title'],
+          'weight' => $item['weight'],
+          'link' => ['uri' => $item['path']],
+          'menu_name' => $menu_id,
+          'parent' => $parent,
+          'expanded' => $item['expanded'],
+        ]);
+        $menu_link->save();
+
+        // Save D7 ID with new D9 UUID to potentially set as parent for future.
+        $menu_d7id_uuid[$d7id] = $menu_link->getPluginId();
+      }
     }
   }
 
