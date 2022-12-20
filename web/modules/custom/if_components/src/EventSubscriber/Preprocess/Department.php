@@ -121,7 +121,7 @@ final class Department implements EventSubscriberInterface {
 
     if ($variables->get('base_plugin_id') == 'page_title_block') {
       $node = \Drupal::routeMatch()->getParameter('node');
-      if ($node instanceof NodeInterface && $node->getType() == 'department') {
+      if (isset($node) && $node instanceof NodeInterface && $node->getType() == 'department') {
         $this->getSidebarContexts('field_department', $this->departments);
         foreach ($this->context_ids as $nid) {
           $context_node = Node::load($nid);
