@@ -239,9 +239,9 @@ html[xmlns] .flexslider .slides {
       margin-left: 0;
     }
 
-    // @include mq( $from: mobile-wide ) {
-    //   width: span( 1 of 8 );
-    // }
+    @include breakpoint(small) {
+      width: span( 1 of 8 );
+    }
   }
 
   img {
@@ -276,9 +276,9 @@ html[xmlns] .flexslider .slides {
   background-color: $mercury;
   display: block;
 
-  // @include mq( $from: mobile-landscape ) {
-  //   padding-right: .5em;
-  // }
+  @include breakpoint(xsmall) {
+    padding-right: .5em;
+  }
 }
 
 .field-name-media-description {
@@ -387,15 +387,15 @@ html[xmlns] .flexslider .slides {
   }
 }
 
-// #slider-nav-basic {
-//   .slides {
-//     @include mq( $until: tablet ) {
-//       width: 100% !important;
-//       -webkit-transform: none !important;
-//       transform: none !important;
-//     }
-//   }
-// }
+#slider-nav-basic {
+  .slides {
+    @include breakpoint(medium down) {
+      width: 100% !important;
+      -webkit-transform: none !important;
+      transform: none !important;
+    }
+  }
+}
 
 .flexslider--thumbnails-nav {
   li {

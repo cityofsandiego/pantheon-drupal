@@ -6,7 +6,7 @@
       position: relative;
       margin-top: -50px;
 
-      @include mq( $from: site ) {
+      @include breakpoint(site) {
 	  .sub-navigation {
 	      margin-top: 0;
 	  }
@@ -378,7 +378,7 @@
 
   // Style search page.
   &.page-search {
-    @include mq( $from: tablet-landscape ) {
+    @include breakpoint(medium-large up) {
       header.header--fixed+div.container {
         position:relative;
         margin-top:0;
@@ -406,7 +406,7 @@
 
 
   // Adjustments after changing sandiego.gov to shorter header.
-  @include mq($from: site) {
+  @include breakpoint(site) {
     &.logged-in.admin-menu header.header--fixed {
       top: 0;
       position: relative;
@@ -445,4 +445,3 @@
 #edit-filters-sources-db-nodata-tables {
   height:400px;
 }
-
