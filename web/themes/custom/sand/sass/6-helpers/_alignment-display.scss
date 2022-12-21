@@ -96,7 +96,7 @@
   display: none;
 }
 
-@include respond-to("m") {
+@include breakpoint(large) {
   .d-m-inline {
     display: inline;
   }
@@ -130,7 +130,7 @@
   }
 }
 
-@include respond-to("l") {
+@include breakpoint(medium) {
   .d-l-inline {
     display: inline;
   }
@@ -164,7 +164,7 @@
   }
 }
 
-@include respond-to("xl") {
+@include breakpoint(xlarge) {
   .d-xl-inline {
     display: inline;
   }
@@ -216,7 +216,7 @@
   padding: 1em !important;
 
   &--desktop {
-    // @include mq( $from: tablet ) {
+    // breakpoint(medium){
     //   align-items: center;
     //   display: flex;
     //   justify-content: center;
@@ -230,7 +230,7 @@
   align-items: center;
 
   &--desktop {
-    // @include mq( $from: tablet ) {
+    // breakpoint(medium){
     //   display: flex;
     //   align-items: center;
     // }
@@ -250,7 +250,7 @@
 .width-50 {
   width: 50% !important;
   &--mobile {
-    @include respond-to("until-tablet") {
+    @include breakpoint(medium down) {
       width: 50% !important;
     }
   }
@@ -267,7 +267,7 @@
 .width-100 {
   width: 100% !important;
   &--mobile {
-    @include respond-to("until-tablet") {
+    @include breakpoint(medium down) {
       width: 100% !important;
     }
   }
@@ -280,13 +280,13 @@
   margin: 0 auto;
   display: block;
   &--desktop {
-    // @include mq($from: tablet) {
+    // @include breakpoint(medium) {
     //   margin: 0 auto;
     //   display: block;
     // }
   }
   &--mobile {
-    // @include mq($until: tablet) {
+    // @include breakpoint(medium down) {
     //   margin: 0 auto;
     //   display: block;
     // }
@@ -296,12 +296,12 @@
 .pull-left {
   float: left;
   &--desktop {
-    // @include mq($from: tablet) {
+    // @include breakpoint(medium) {
     //   float: left;
     // }
   }
   &--mobile {
-    // @include mq($until: tablet) {
+    // @include breakpoint(medium down) {
     //   float: left;
     // }
   }
@@ -310,19 +310,19 @@
 .pull-right {
   float: right;
   &--desktop {
-    // @include mq($from: tablet) {
+    // @include breakpoint(medium) {
     //   float: right;
     // }
   }
   &--mobile {
-    // @include mq($until: tablet) {
+    // @include breakpoint(medium down) {
     //   float: right;
     // }
   }
 }
 
 .alignleft {
-  // @include mq($from: tablet) {
+  // @include breakpoint(medium) {
   //   margin-right: 1.5em;
   //   margin-bottom: 1.5em;
   //   display: inline;
@@ -331,7 +331,7 @@
 }
 
 .alignright {
-  // @include mq($from: tablet) {
+  // @include breakpoint(medium) {
   //   margin-left: 1.5em;
   //   margin-bottom: 1.5em;
   //   display: inline;
@@ -340,7 +340,7 @@
 }
 
 .aligncenter {
-  // @include mq($from: tablet) {
+  // @include breakpoint(medium) {
   //   clear: both;
   //   display: block;
   //   margin: 0 auto;
@@ -367,9 +367,9 @@
     display: flex;
     justify-content: center;
     padding: 1em !important;
-  
+
     &--desktop {
-      // @include mq( $from: tablet ) {
+      // breakpoint(medium){
       //   align-items: center;
       //   display: flex;
       //   justify-content: center;
@@ -377,13 +377,13 @@
       // }
     }
   }
-  
+
   .l-flex-center {
     display: flex;
     align-items: center;
-  
+
     &--desktop {
-      // @include mq( $from: tablet ) {
+      // breakpoint(medium){
       //   display: flex;
       //   align-items: center;
       // }
