@@ -38,9 +38,9 @@
   background: $off-white;
   border: 1px solid $alto;
 
-  // @include mq($from: site) {
-  //   border-bottom: none;
-  // }
+  @include breakpoint(site) {
+    border-bottom: none;
+  }
 }
 
 .tabs-list__item {
@@ -52,38 +52,38 @@
   display: inline-block;
   @include rem("font-size", 14px);
 
-  // @include mq(mobile, mobile-landscape) {
-  //   @include span(6 no-gutters);
-  //   &:last-child {
-  //     border-right: none;
-  //   }
-  // }
+  @include breakpoint(xsmall) {
+    // @include span(6 no-gutters);
+    &:last-child {
+      border-right: none;
+    }
+  }
 
-  // @include mq(mobile-landscape, site) {
-  //   border: 1px solid $alto;
-  //   border-top: none;
-  //   border-right: none;
-  //   @include span(4 no-gutters);
-  //   &:last-child {
-  //     border-bottom: none;
-  //     border-right: 1px solid $alto;
-  //   }
-  // }
+  @include breakpoint(medium-large) {
+    border: 1px solid $alto;
+    border-top: none;
+    border-right: none;
+    // @include span(4 no-gutters);
+    &:last-child {
+      border-bottom: none;
+      border-right: 1px solid $alto;
+    }
+  }
 
-  // @include mq($from: site) {
-  //   border-left: 1px solid $alto;
-  //   border-bottom: 1px solid $alto;
-  //   &:last-child {
-  //     border-right: 1px solid $alto;
-  //   }
-  //   @include span(1 of 5 no-gutters);
-  //   &:first-child {
-  //     border-left: none;
-  //   }
-  //   &.is-active {
-  //     border-bottom: 1px solid white;
-  //   }
-  // }
+  @include breakpoint(site) {
+    border-left: 1px solid $alto;
+    border-bottom: 1px solid $alto;
+    &:last-child {
+      border-right: 1px solid $alto;
+    }
+    // @include span(1 of 5 no-gutters);
+    &:first-child {
+      border-left: none;
+    }
+    &.is-active {
+      border-bottom: 1px solid white;
+    }
+  }
 }
 
 .tabs-list__link {

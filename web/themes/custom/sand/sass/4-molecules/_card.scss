@@ -13,7 +13,7 @@
     padding-bottom: 0;
   }
 
-  @include respond-to('m') {
+  @include breakpoint(medium) {
     margin-top: 1em;
     margin-bottom: 1em;
   }
@@ -34,7 +34,7 @@
 .card__container {
   position: relative;
 
-  @include respond-to('l') {
+  @include breakpoint(large) {
     display: block;
     display: -webkit-flex; /* Safari */
     display: flex;
@@ -45,7 +45,7 @@
   }
 
   // If .mobile-flexslider exists, it creates a ul.slides wrapping the .cards
-  @include respond-to('l') {
+  @include breakpoint(large) {
     .slides {
       display: block;
       display: -webkit-flex; /* Safari */
@@ -67,7 +67,7 @@
     margin: 0 .5em;
     width: 100%;
 
-    @include respond-to('m') {
+    @include breakpoint(medium) {
       margin: 0;
       padding: .75em;
       display: -webkit-flex; /* Safari */
@@ -84,7 +84,7 @@
     margin: 0 .5em;
     width: 100%;
 
-    @include respond-to('l') {
+    @include breakpoint(large) {
       margin: 0;
       padding: .75em;
       display: -webkit-flex; /* Safari */
@@ -101,7 +101,7 @@
     margin: 0 .5em;
     width: 100%;
 
-    @include respond-to('l') {
+    @include breakpoint(large) {
       margin: 0;
       padding: .75em;
       display: -webkit-flex; /* Safari */
@@ -116,7 +116,7 @@
   .card__content {
     padding: 1.5em;
 
-    @include respond-to('m') {
+    @include breakpoint(medium) {
       @include rem('font-size', 13px);
     }
 
@@ -156,7 +156,7 @@
 
   &.flexslider--mobile {
     .card__wrap {
-      @include respond-to('m') {
+      @include breakpoint(medium) {
         margin: 0;
       }
     }
@@ -239,7 +239,7 @@
     vertical-align: -webkit-baseline-middle;
     @include rem('font-size', 24px);
 
-    @include mq(tablet, site) {
+    @include breakpoint(medium up) {
       @include rem('font-size', 18px);
     }
   }
@@ -267,7 +267,7 @@
     flex-flow: column wrap;
     gap: 2rem;
 
-    @include respond-to('m') {
+    @include breakpoint(medium) {
       flex-flow: row nowrap;
     }
   }
