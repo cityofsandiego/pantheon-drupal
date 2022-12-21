@@ -10,38 +10,38 @@
   position:fixed;
   left:100%;
   top:50%;
-  -webkit-transform:translateY(-40%); 
-  transform:translateY(-40%); 
+  -webkit-transform:translateY(-40%);
+  transform:translateY(-40%);
   transition: left 1s, border 1s;
   width:280px;
   z-index:1000000;
   font-family: $font-family;
 
-  // @include mq(mobile) {
-  //   padding:20px 25px;
-  //   width:290px;
-  // }
+  @include breakpoint(xxsmall only) {
+    padding:20px 25px;
+    width:290px;
+  }
 
-  // @include mq( $until: tablet) {
-  //   top: 120px;
-  // }
+  @include breakpoint(medium down) {
+    top: 120px;
+  }
 
   &.is-visible {
     border-color: $mercury;
     left:calc(100% - 280px);
-    
-    // @include mq(mobile) {
-    //   left:calc(100% - 290px);
-    // }
+
+    @include breakpoint(xxsmall only) {
+      left:calc(100% - 290px);
+    }
   }
 
-  // @include mq(tablet) {
-  //   width:500px;
-    
-  //   &.is-visible {
-  //     left:calc(100% - 500px);
-  //   }
-  // }
+  @include breakpoint(medium only) {
+    width:500px;
+
+    &.is-visible {
+      left:calc(100% - 500px);
+    }
+  }
   &__link-wrapper {
     background-color:$sunshade;
     cursor:pointer;
@@ -83,18 +83,18 @@
       opacity: 0.7;
     }
 
-    &:before, 
+    &:before,
     &:after {
       border:none;
-      content:''; 
-      height:3px; 
-      width:1em; 
-      display:inline-block; 
-      background:$off-black; 
+      content:'';
+      height:3px;
+      width:1em;
+      display:inline-block;
+      background:$off-black;
       border-radius:1px;
-      position:absolute; 
-      top:.5em; 
-      left:0; 
+      position:absolute;
+      top:.5em;
+      left:0;
       -webkit-transform:rotate(-45deg);
       transform:rotate(-45deg);
     }

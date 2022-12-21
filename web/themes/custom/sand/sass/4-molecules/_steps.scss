@@ -7,7 +7,7 @@
     padding: .5em .75em;
     text-align: center;
     border: 1px solid $chateau;
-  
+
     .icon--circle {
       width: 2em;
       height: 2em;
@@ -19,61 +19,61 @@
       font-family: $font-family-secondary;
       @include rem('font-size', 22px);
     }
-  
-    // @include mq($from: mobile) {
-    //   margin: .75em 0;
-    //   text-align: left;
-  
-    //   &:before {
-    //     right: 1em;
-    //     top: -.85em;
-    //     transform: none;
-    //   }
-    // }
-  
-    // @include mq($from: tablet) {
-    //   margin: .75em 0;
-    //   text-align: left;
-  
-    //   &:before {
-    //     right: 1em;
-    //     top: -.85em;
-    //     transform: none;
-    //   }
-    // }
-  
-    // @include mq($until: tablet-landscape) {
-    //   .columns {
-    //     display: block;
-    //   }
-    // }
-  
+
+    @include breakpoint(xxsmall only) {
+      margin: .75em 0;
+      text-align: left;
+
+      &:before {
+        right: 1em;
+        top: -.85em;
+        transform: none;
+      }
+    }
+
+    @include breakpoint(medium) {
+      margin: .75em 0;
+      text-align: left;
+
+      &:before {
+        right: 1em;
+        top: -.85em;
+        transform: none;
+      }
+    }
+
+    @include breakpoint(medium-large) {
+      .columns {
+        display: block;
+      }
+    }
+
     h4, .h4 {
       line-height: 1.5;
     }
   }
-  
+
   .step__header {
     vertical-align: middle;
     vertical-align: -webkit-baseline-middle;
     @include rem('font-size', 16px);
-  
+
     .step__desc {
       font-family: $font-family;
     }
-  
-    // @include mq($from: mobile-wide) {
-    //   //margin: 0;
-    //   //line-height: 40px;
-    //   padding-top: .3em;
-    // }
+
+    @include breakpoint(small up) {
+      //margin: 0;
+      //line-height: 40px;
+      padding-top: .3em;
+    }
   }
-  
+
   .step__num {
     float: right;
     font-family: $font-family-secondary;
-  
-    // @include mq($until: tablet) {
-    //   margin-left: 1em;
-    // }
+
+    @include breakpoint(medium down) {
+      margin-left: 1em;
+    }
   }

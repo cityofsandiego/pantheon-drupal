@@ -188,9 +188,9 @@
     padding: 0;
     border: none;
     display: block;
-    // @include mq( $until: tablet ) {
-    //     display: none;
-    // }
+    @include breakpoint(medium down) {
+        display: none;
+    }
   }
 
   .accordion__link {
@@ -201,9 +201,9 @@
       line-height: 1.5;
     }
 
-    // @include mq($from: mobile-landscape) {
-    //   @include rem('font-size', 18px);
-    // }
+    @include breakpoint(xsmall up) {
+      @include rem('font-size', 18px);
+    }
   }
 
   .accordion__heading {
@@ -242,40 +242,40 @@
     }
   }
 
-  // @include mq($from: tablet) {
-  //   td,
-  //   th {
-  //     &:first-child {
-  //       width: 40%;
-  //     }
-  //   }
-  // }
+  @include breakpoint(medium) {
+    td,
+    th {
+      &:first-child {
+        width: 40%;
+      }
+    }
+  }
 
-  // @include mq($until: tablet) {
-  //   td,
-  //   th {
-  //     border: none;
-  //     @include span(4);
+  @include breakpoint(medium down) {
+    td,
+    th {
+      border: none;
+      // @include span(4);
 
-  //     &:nth-child(2),
-  //     &:nth-child(3) {
-  //       text-align: right;
-  //     }
-  //   }
+      &:nth-child(2),
+      &:nth-child(3) {
+        text-align: right;
+      }
+    }
 
-  //   table {
-  //     width: 100%;
-  //   }
+    table {
+      width: 100%;
+    }
 
-  //   .accordion__heading {
-  //     padding: .75em .5em;
-  //     @include rem('font-size', 18px);
-  //   }
-  // }
+    .accordion__heading {
+      padding: .75em .5em;
+      @include rem('font-size', 18px);
+    }
+  }
 
-  // @include mq($until: mobile-landscape) {
-  //   table {
-  //     width: 100%;
-  //   }
-  // }
+  @include breakpoint(xsmall) {
+    table {
+      width: 100%;
+    }
+  }
 }

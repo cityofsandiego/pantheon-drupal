@@ -8,7 +8,7 @@
     height: 198px;
   }
 
-  @include respond-to('m') {
+  @include breakpoint(medium) {
     > .row {
       padding: 5em 0 12em;
     }
@@ -27,7 +27,7 @@
       transform: none;
     }
 
-    @include respond-to('l') {
+    @include breakpoint(large) {
       position: absolute;
       right: 0;
       bottom: 0;
@@ -60,7 +60,7 @@
       //background: rgba(0, 0, 0, 0.35);
     }
 
-    @include respond-to('m') {
+    @include breakpoint(medium) {
       &:after {
         display: none;
       }
@@ -95,12 +95,12 @@
       @include rem('font-size', 10px);
     }
 
-    @include respond-to('m') {
+    @include breakpoint(medium) {
       padding: .5em 3.5em .5em 1em;
     }
   }
 
-  @include respond-to('m') {
+  @include breakpoint(medium) {
     right: 0;
     bottom: 8em;
     text-align: right;
@@ -132,24 +132,24 @@
     padding: 1.25em 2.5em;
   }
 
-  // @include mq($from: mobile-landscape) {
-  //   padding: 1.75em 2.5em;
+  @include breakpoint(xsmall) {
+    padding: 1.75em 2.5em;
 
-  //   h1 {
-  //     @include rem('font-size', 60px);
-  //   }
+    h1 {
+      @include rem('font-size', 60px);
+    }
 
-  //   p {
-  //     @include rem('font-size', 24px);
-  //   }
+    p {
+      @include rem('font-size', 24px);
+    }
 
-  //   .btn {
-  //     margin-top: 2em;
-  //     display: inline-block;
-  //   }
-  // }
+    .btn {
+      margin-top: 2em;
+      display: inline-block;
+    }
+  }
 
-  //@include mq( $from: site ) {
+  @include breakpoint(site) {
   margin: 0;
   padding: 2.75em 3.5em;
   background: rgba(0, 0, 0, 0.35);
@@ -158,11 +158,11 @@
     background: transparent;
   }
 
-  //}
+  }
 
-  //@include mq( $until: site ) {
-  //    width: auto;
-  //}
+  @include breakpoint(site down) {
+     width: auto;
+  }
 }
 
 .hero__slides--content {
@@ -172,7 +172,7 @@
 }
 
 .hero__slides--secondary {
-  @include respond-to('m') {
+  @include breakpoint(medium) {
     padding-bottom: 2em;
     min-height: 100px;
   }
@@ -189,7 +189,7 @@
   .flex-control-nav {
     display: block;
 
-    @include respond-to('m') {
+    @include breakpoint(medium) {
       bottom: 0;
     }
   }
@@ -223,7 +223,7 @@
     left: 0;
     z-index: 0;
 
-    @include respond-to('m') {
+    @include breakpoint(medium) {
       height: auto;
       min-height: 175px;
     }

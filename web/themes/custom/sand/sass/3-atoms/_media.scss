@@ -92,29 +92,31 @@ figure {
    ========================================================================== */
 
    .img-left { /* apply to element containing img, typically a <div> or <p> */
-    // @include mq( $until: tablet ) {
-    //   width: 100% !important;
-    //   text-align: center;
-    //   margin-bottom: 1em;
-    // }
-    // @include mq( $from: tablet ) {
-    //   float: left;
-    //   margin: 0 1em 1em 0;
-    // }
+
+    @include breakpoint(medium down) {
+      width: 100% !important;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+
+    @include breakpoint(medium){
+      float: left;
+      margin: 0 1em 1em 0;
+    }
   }
-  
+
   .img-right { /* apply to element containing img, typically a <div> or <p> */
-    // @include mq( $until: tablet ) {
-    //   width: 100% !important;
-    //   text-align: center;
-    //   margin-bottom: 1em;
-    // }
-    // @include mq( $from: tablet ) {
-    //   float: right;
-    //   margin: 0 0 1em 1em;
-    // }
+    @include breakpoint(medium down) {
+      width: 100% !important;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    @include breakpoint(medium){
+      float: right;
+      margin: 0 0 1em 1em;
+    }
   }
-  
+
   .photo-credit {
     text-align: right;
     line-height: 1.5;
