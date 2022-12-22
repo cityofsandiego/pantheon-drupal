@@ -26,6 +26,11 @@
           </label>
         </div>
         <div class="search-bar cell small-6 medium-3 show-for-medium">
+
+        <div class="accessibility-toggle">
+          <a href="#" data-open="accessibility-modal">Accessibility Tools</a>
+        </div>
+
           <form class="form--search">
             <div class="input-group">
               <input class="input-group-field" type="text" placeholder="Search sandiego.gov">
@@ -61,4 +66,22 @@
     </div>
   </section>
 
+  <div id="accessibility-modal" class="reveal accessibility-tools" title="Accessiblity Tools" data-reveal>
+    <h3>Accessibility Tools</h3>
+    <div>
+      <a title="Turn audio/vision assist on/off" href="javascript:;" onclick="BrowseAloud.panel.toggleBar(true,event);return false;">Turn audio/vision assist on/off</a>
+    </div>
+    <div>
+      <strong>Contrast:</strong>
+      <span class="highcontrast">
+        {{ drupal_entity('block', 'highcontrast')}}
+      </span>
+    </div>
+    <div>
+      <span><a title="More information on accessibility" href="/accessibility">More Info</a></span>
+    </div>
+    <button class="close-button" data-close aria-label="Close reveal" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 {% endif %}
