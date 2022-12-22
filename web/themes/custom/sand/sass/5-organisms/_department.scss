@@ -32,3 +32,90 @@
     }
   }
 }
+
+.department-menu {
+  padding-left: 0;
+  list-style: none;
+  margin: 0 0 2px 0;
+  font-family: $body-copy;
+
+  @include breakpoint(medium) {
+    display: flex;
+  }
+
+  li {
+    margin: 0 0.5rem 0 0;
+
+    a {
+      background: $teal;
+      color: $mercury;
+      font-size: 1rem;
+      padding: 0.2em 0.75em;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
+      width: 100%;
+
+      @include breakpoint(medium) {
+        font-size: 0.8125rem;
+        padding: 0.5em 0.75em;
+        line-height: 1.2;
+      }
+
+      &:hover {
+        color: $white;
+      }
+    }
+
+    &.active {
+      a {
+        color: $black;
+      }
+    }
+  }
+}
+
+.sub-navigation-mobile {
+  .accordion__heading {
+    color: $white;
+    background: $teal;
+
+    .accordion__link {
+      color: $white;
+      font-family: $body-copy;
+      font-weight: bold;
+
+      i {
+        color: $white;
+      }
+
+      .toggle-icon:before, .toggle-icon:after {
+        background: $white;
+      }
+    }
+  }
+
+  .accordion__drawer {
+    color: $white;
+    background: $teal;
+  }
+
+  .is-open {
+    .accordion__heading {
+      color: $spruce;
+      background: $white;
+  
+      .accordion__link {
+        color: $spruce;
+  
+        i {
+          color: $spruce;
+        }
+  
+        .toggle-icon:before, .toggle-icon:after {
+          background: $spruce;
+        }
+      }
+    }
+  }
+}

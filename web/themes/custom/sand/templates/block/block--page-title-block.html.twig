@@ -7,9 +7,26 @@
 {{ title_suffix }}
 
 {% if topmenu is defined %}
-    <ul id="department-top-menu">
-        {% for item in topmenu.items %}
-            <li{% if item.is_active == true %} class="active"{% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
-        {% endfor %}
+  <div class="hide-on-mobile">
+    <ul id="department-top-menu" class="department-menu">
+      {% for item in topmenu.items %}
+        <li{% if item.is_active == true %} class="active"{% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
+      {% endfor %}
     </ul>
+  </div>
+
+  <div class="hide-on-desktop sub-navigation-mobile white-bg l-padding-hm l-padding-ts l-padding-bs">
+	  <div class="accordions js-toggle-accordion teal-bg">
+      <div class="accordion">
+        <p class="accordion__heading"><a class="accordion__link" href="#"><i class="icon-menu l-margin-rs"></i> Site Menu  <span class="toggle-icon"> </span></a></p>
+        <div class="accordion__drawer" style="display: none;">
+          <ul id="department-top-menu" class="department-menu">
+            {% for item in topmenu.items %}
+                <li{% if item.is_active == true %} class="active"{% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>  		
 {% endif %}
