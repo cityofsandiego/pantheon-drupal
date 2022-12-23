@@ -100,10 +100,10 @@
       </div>
 
       <div class="cell medium-3 large-3">
-        <div class="l-padding-am l-padding-mobile-hd l-margin-mobile-bm light-gray-bg sidebar">
+        <div class="light-gray-bg sidebar">
             {% if sidemenu is defined %}
               <h2>{{ sidemenu.title }}</h2>
-              <ul>
+              <ul class="sidebar-menu">
                 {% for item in sidemenu.items %}
                   <li{% if item.is_active == true %} class="active"{% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
                 {% endfor %}
