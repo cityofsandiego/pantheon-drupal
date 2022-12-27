@@ -15,6 +15,7 @@ dependencies:
     - scheduler
     - scheduler_content_moderation_integration
     - smart_date
+    - term_reference_fancytree
     - text
 third_party_settings:
   field_group:
@@ -101,6 +102,7 @@ content:
         custom
       show_extra: false
       hide_date: true
+      separator: to
     third_party_settings: {  }
   field_date_type:
     type: options_select
@@ -109,17 +111,18 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_department:
-    type: options_buttons
+    type: term_reference_fancytree
     weight: 17
     region: content
-    settings: {  }
+    settings:
+      select_all: false
+      select_children: false
     third_party_settings: {  }
   field_event_date:
     type: smartdate_inline
     weight: 17
     region: content
     settings:
-      hide_date: '1'
       modal: false
       default_duration: 60
       default_duration_increments: |-
@@ -129,6 +132,8 @@ content:
         120|2 hours
         custom
       show_extra: false
+      hide_date: true
+      separator: to
     third_party_settings: {  }
   path:
     type: path

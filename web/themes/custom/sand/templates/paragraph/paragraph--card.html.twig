@@ -44,7 +44,7 @@
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     not paragraph.isPublished() ? 'paragraph--unpublished',
-    'card'
+    'featured-card'
   ]
 %}
 {% block paragraph %}
@@ -52,11 +52,11 @@
     {% block content %}
       <a href="{{ content.field_link[0]['#url'] }}">
         {{ content.field_image }}
-        <div class="card__content">
-          <h3 class="card__heading">
+        <div class="featured-card__content">
+          <h3 class="featured-card__heading">
             {{ content.field_label }}
           </h3>
-          <div class="card__body">
+          <div class="featured-card__body">
             {{ content.field_description }}
           </div>
         </div>

@@ -96,8 +96,7 @@
   display: none;
 }
 
-@include respond-to('m') {
-
+@include breakpoint(large) {
   .d-m-inline {
     display: inline;
   }
@@ -131,8 +130,7 @@
   }
 }
 
-@include respond-to('l') {
-
+@include breakpoint(medium) {
   .d-l-inline {
     display: inline;
   }
@@ -166,8 +164,7 @@
   }
 }
 
-@include respond-to('xl') {
-
+@include breakpoint(xlarge) {
   .d-xl-inline {
     display: inline;
   }
@@ -208,3 +205,187 @@
 .hide-on-desktop {
   @include hide-on-desktop;
 }
+
+/* Vertical centering inside flexbox
+   ========================================================================== */
+
+.l-flex-center-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 1em !important;
+
+  &--desktop {
+    // breakpoint(medium){
+    //   align-items: center;
+    //   display: flex;
+    //   justify-content: center;
+    //   padding: 1em !important;
+    // }
+  }
+}
+
+.l-flex-center {
+  display: flex;
+  align-items: center;
+
+  &--desktop {
+    // breakpoint(medium){
+    //   display: flex;
+    //   align-items: center;
+    // }
+  }
+}
+
+/* Widths by Percentage
+   ========================================================================== */
+.width-25 {
+  width: 25% !important;
+}
+
+.width-33 {
+  width: 33.3333333333% !important;
+}
+
+.width-50 {
+  width: 50% !important;
+  &--mobile {
+    @include breakpoint(medium down) {
+      width: 50% !important;
+    }
+  }
+}
+
+.width-66 {
+  width: 66.6666666666% !important;
+}
+
+.width-75 {
+  width: 75% !important;
+}
+
+.width-100 {
+  width: 100% !important;
+  &--mobile {
+    @include breakpoint(medium down) {
+      width: 100% !important;
+    }
+  }
+}
+
+/* Alignment
+   ========================================================================== */
+
+.pull-center {
+  margin: 0 auto;
+  display: block;
+  &--desktop {
+    // @include breakpoint(medium) {
+    //   margin: 0 auto;
+    //   display: block;
+    // }
+  }
+  &--mobile {
+    // @include breakpoint(medium down) {
+    //   margin: 0 auto;
+    //   display: block;
+    // }
+  }
+}
+
+.pull-left {
+  float: left;
+  &--desktop {
+    // @include breakpoint(medium) {
+    //   float: left;
+    // }
+  }
+  &--mobile {
+    // @include breakpoint(medium down) {
+    //   float: left;
+    // }
+  }
+}
+
+.pull-right {
+  float: right;
+  &--desktop {
+    // @include breakpoint(medium) {
+    //   float: right;
+    // }
+  }
+  &--mobile {
+    // @include breakpoint(medium down) {
+    //   float: right;
+    // }
+  }
+}
+
+.alignleft {
+  // @include breakpoint(medium) {
+  //   margin-right: 1.5em;
+  //   margin-bottom: 1.5em;
+  //   display: inline;
+  //   float: left;
+  // }
+}
+
+.alignright {
+  // @include breakpoint(medium) {
+  //   margin-left: 1.5em;
+  //   margin-bottom: 1.5em;
+  //   display: inline;
+  //   float: right;
+  // }
+}
+
+.aligncenter {
+  // @include breakpoint(medium) {
+  //   clear: both;
+  //   display: block;
+  //   margin: 0 auto;
+  // }
+}
+
+.valign-t {
+  vertical-align: top !important;
+}
+
+.valign-m {
+  vertical-align: middle !important;
+}
+
+.valign-b {
+  vertical-align: bottom !important;
+}
+
+/* Vertical centering inside flexbox
+   ========================================================================== */
+
+   .l-flex-center-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 1em !important;
+
+    &--desktop {
+      // breakpoint(medium){
+      //   align-items: center;
+      //   display: flex;
+      //   justify-content: center;
+      //   padding: 1em !important;
+      // }
+    }
+  }
+
+  .l-flex-center {
+    display: flex;
+    align-items: center;
+
+    &--desktop {
+      // breakpoint(medium){
+      //   display: flex;
+      //   align-items: center;
+      // }
+    }
+  }
