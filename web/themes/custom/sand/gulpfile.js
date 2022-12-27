@@ -6,9 +6,13 @@ We keep things pretty simple here:
 */
 var gulp = require('gulp'),
   $      = require('gulp-load-plugins')(),
-  sass   = require('gulp-sass')(require('sass'));
+  sass   = require('gulp-sass')(require('sass')),
+  gulpStylelint = require('@ronilaukkarinen/gulp-stylelint');
 
-  const gulpStylelint = require('@ronilaukkarinen/gulp-stylelint');
+var sassPaths = [
+  'node_modules/foundation-sites/scss',
+  'node_modules/motion-ui/src'
+];
 
 /*
 The main styles compliation function:
@@ -19,17 +23,30 @@ The main styles compliation function:
   5. Write the sourcemaps to the specified dir.
   6. Specify the dir as css.
 */
+
 gulp.task('styles', function(){
   return gulp.src('sass/**/*.scss')
     .pipe($.sourcemaps.init())
-    .pipe(sass())
+    .pipe(sass()
+    .on('error', sass.logError))
+    .pipe($.rename({dirname: ''}))
+    .pipe($.sourcemaps.write('./'))
+    .pipe(gulp.dest('css'))
+});
+
+gulp.task('foundation', function(){
+  return gulp.src('zurb-foundation/*.scss')
+    .pipe($.sourcemaps.init())
+    .pipe(sass({
+      includePaths: sassPaths
+    })
+    .on('error', sass.logError))
     .pipe($.rename({dirname: ''}))
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest('css'))
 });
 
 gulp.task('lint-scss', function lintCssTask() {
-
   return gulp.src('sass/**/*.scss')
     .pipe(gulpStylelint({
       reporters: [

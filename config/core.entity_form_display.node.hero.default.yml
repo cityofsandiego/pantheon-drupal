@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.hero.field_hero_sitewide
     - field.field.node.hero.field_hero_time_of_day
     - field.field.node.hero.field_image
+    - field.field.node.hero.field_vimeo_url
     - node.type.hero
   module:
     - field_group
@@ -18,6 +19,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - term_reference_fancytree
 third_party_settings:
   field_group:
     group_main_tabs:
@@ -38,6 +40,7 @@ third_party_settings:
     group_content:
       children:
         - field_image
+        - field_vimeo_url
         - field_hero_caption
         - field_hero_prefix_image_by
         - field_hero_image_by
@@ -83,10 +86,12 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_department:
-    type: options_buttons
+    type: term_reference_fancytree
     weight: 23
     region: content
-    settings: {  }
+    settings:
+      select_all: false
+      select_children: false
     third_party_settings: {  }
   field_hero_caption:
     type: string_textfield
@@ -127,7 +132,7 @@ content:
       display_label: true
     third_party_settings: {  }
   field_hero_time_of_day:
-    type: options_select
+    type: options_buttons
     weight: 19
     region: content
     settings: {  }
@@ -138,6 +143,14 @@ content:
     region: content
     settings:
       media_types: {  }
+    third_party_settings: {  }
+  field_vimeo_url:
+    type: string_textfield
+    weight: 15
+    region: content
+    settings:
+      size: 255
+      placeholder: ''
     third_party_settings: {  }
   path:
     type: path

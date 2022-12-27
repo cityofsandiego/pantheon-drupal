@@ -46,7 +46,7 @@
         "drupal/recaptcha": "^3.0",
         "drupal/rabbit_hole": "^1.0@beta",
         "drupal/pathauto": "^1.11",
-        "drupal/smart_date": "^3.6",
+        "drupal/smart_date": "^3.7@beta",
         "drupal/mediteran": "^1.27",
         "drupal/paragraphs": "^1.15",
         "drupal/password_policy": "^3.2",
@@ -70,6 +70,9 @@
         "drupal/search_api": "^1.28",
         "drupal/search_api_solr": "^4.2",
         "drupal/search_api_attachments": "^9.0",
+        "drupal/term_reference_fancytree": "^2.0@RC",
+        "drupal/hook_event_dispatcher": "^3.3",
+        "drupal/high_contrast": "^1.0@beta",
         "drupal/remote_stream_wrapper": "^2.0"
     },
     "require-dev": {
@@ -133,6 +136,11 @@
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
             "drupal/core": "-p2"
+        },
+        "patches": {
+            "drupal/mediteran": {
+                "Width for Hour select field": "https://www.drupal.org/files/issues/2022-11-17/mediteran-hourselectfieldwidth-3322239-2.patch"
+            }
         }
     },
     "autoload": {
