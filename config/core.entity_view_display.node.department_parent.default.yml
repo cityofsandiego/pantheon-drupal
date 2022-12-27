@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.department_parent.field_contact_info_grid
     - field.field.node.department_parent.field_d7_nid
     - field.field.node.department_parent.field_department
+    - field.field.node.department_parent.field_edit_notes
     - field.field.node.department_parent.field_feature_alt_text
     - field.field.node.department_parent.field_feature_video_img
     - field.field.node.department_parent.field_featured_content
@@ -20,9 +21,11 @@ dependencies:
     - field.field.node.department_parent.field_social_links
     - field.field.node.department_parent.field_summary
     - field.field.node.department_parent.field_top_content
+    - image.style.large
     - node.type.department_parent
   module:
     - entity_reference_revisions
+    - media
     - text
     - user
 id: node.department_parent.default
@@ -30,114 +33,84 @@ targetEntityType: node
 bundle: department_parent
 mode: default
 content:
-  field_category:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 11
-    region: content
   field_contact_info_grid:
     type: text_default
-    label: above
+    label: hidden
     settings: {  }
-    third_party_settings: {  }
-    weight: 13
-    region: content
-  field_department:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 5
-    region: content
-  field_feature_alt_text:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
     third_party_settings: {  }
     weight: 7
     region: content
-  field_feature_video_img:
-    type: entity_reference_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 3
-    region: content
-  field_featured_content:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 12
-    region: content
-  field_hide_news_feed:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 9
-    region: content
-  field_image:
-    type: entity_reference_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: true
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_news_alt_text:
+  field_feature_alt_text:
     type: string
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 8
+    weight: 4
     region: content
-  field_search_keymatch:
-    type: entity_reference_label
-    label: above
+  field_feature_video_img:
+    type: media_thumbnail
+    label: hidden
     settings:
-      link: true
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    weight: 10
+    weight: 2
     region: content
-  field_show_top_slider:
+  field_featured_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_hide_news_feed:
     type: boolean
-    label: above
+    label: hidden
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 6
+    weight: 10
+    region: content
+  field_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: large
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_news_alt_text:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
     region: content
   field_sidebar:
     type: text_default
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 15
+    weight: 9
     region: content
   field_single_line_title:
     type: boolean
     label: above
     settings:
-      format: default
+      format: yes-no
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 16
+    weight: 11
     region: content
   field_social_links:
     type: entity_reference_revisions_entity_view
@@ -146,21 +119,14 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 4
-    region: content
-  field_summary:
-    type: basic_string
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
   field_top_content:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 14
+    weight: 8
     region: content
   links:
     settings: {  }
@@ -168,4 +134,10 @@ content:
     weight: 0
     region: content
 hidden:
+  field_category: true
   field_d7_nid: true
+  field_department: true
+  field_edit_notes: true
+  field_search_keymatch: true
+  field_show_top_slider: true
+  field_summary: true

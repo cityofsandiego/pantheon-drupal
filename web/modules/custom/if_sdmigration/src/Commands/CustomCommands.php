@@ -10,6 +10,8 @@ use Drupal\media\Entity\Media;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\pathauto\PathautoState;
 use Drupal\if_sdmigration\TaxonomyImportTasks;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\system\Entity\Menu;
 use Drupal\taxonomy\Entity\Term;
 use Drush\Commands\DrushCommands;
 
@@ -1255,6 +1257,141 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   * Finalize outreach node import (field collection).
+   *
+   * @command import:outreach
+   *
+   * @usage import:outreach
+   */
+  public function finalizeOutreach() {
+    $nodedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/outreach.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'department' => explode('|', str_replace('`', '', $data[2])),
+          'search_keymatch' => explode('|', str_replace('`', '', $data[3])),
+          'sections' => explode('|', str_replace('`', '', $data[4])),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Load sections data.
+    $sectiondata = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field-outreach-sections-coll.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $id = str_replace('`', '', $data[0]);
+        $id = str_replace(',', '', $id);
+        $sectiondata[$id] = [
+          'image_department' => str_replace('`', '', $data[1]),
+          'image_license' => str_replace('`', '', $data[2]),
+          'image_alt' => str_replace('`', '', $data[3]),
+          'image_d7id' => str_replace('`', '', $data[4]),
+          'image_path' => str_replace('`', '', $data[5]),
+          'body' => str_replace('`', '', $data[6]),
+          'minimum_height' => str_replace('`', '', $data[7]),
+          'background_color' => str_replace('`', '', $data[8]),
+          'centered' => str_replace('`', '', $data[9]),
+          'full_width_mobile' => str_replace('`', '', $data[10]),
+          'image_scroll_ratio' => str_replace('`', '', $data[11]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'outreach')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+
+      $node->field_sections->setValue([]);
+      foreach ($data['sections'] as $section) {
+        if (!empty($sectiondata[$section]['image_path'])) {
+          $prior_image = $this->checkMediaId($sectiondata[$section]['image_d7id']);
+          if ($prior_image == NULL) {
+            $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $sectiondata[$section]['image_path']);
+            $file_data = file_get_contents($remote_file);
+            // Fixes for irregular paths.
+            $local_destination = str_replace('legacy/police/graphics', '', $sectiondata[$section]['image_path']);
+            $local_destination = str_replace('default_images', '', $local_destination);
+            $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+            $local_destination = str_replace('hero', '', $local_destination);
+            $local_destination = str_replace('public://', '', $local_destination);
+            $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+            $image_department = [$this->taxonomyImportTasks->newTid($sectiondata[$section]['image_department'], 'department')];
+
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $sectiondata[$section]['image_alt']
+              ],
+              'field_d7_mid' => $sectiondata[$section]['image_d7id'],
+            ]);
+            if (!empty($sectiondata[$section]['image_license'])) {
+              $image->field_license = $sectiondata[$section]['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+          }
+          else {
+            $image = Media::load($prior_image);
+          }
+        }
+        else {
+          $image = NULL;
+        }
+        echo '>>' . $section . PHP_EOL;
+        $paragraph = Paragraph::create([
+          'type' => 'sections',
+          'field_bg_color' => $sectiondata[$section]['background_color'],
+          'field_body' => [
+            'value' => $sectiondata[$section]['body'],
+            'format' => 'full_html',
+          ],
+          'field_centered' => $sectiondata[$section]['centered'],
+          'field_image' => $image,
+          'field_full_width_mobile' => $sectiondata[$section]['full_width_mobile'],
+          'field_image_scroll_ratio' => $sectiondata[$section]['image_scroll_ratio'],
+          'field_minimum_height' => $sectiondata[$section]['minimum_height'],
+        ]);
+        $paragraph->save();
+        $node->field_sections->appendItem($paragraph);
+      }
+
+      $node->field_department->setValue([]);
+      foreach ($data['department'] as $department) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+        $node->field_department->appendItem($term);
+      }
+
+      $node->field_search_keymatch->setValue([]);
+      foreach ($data['search_keymatch'] as $search_keymatch) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
+        $node->field_search_keymatch->appendItem($term);
+      }
+
+      $node->save();
+      echo $node->id() . PHP_EOL;
+    }
+  }
+
+  /**
    * Manual department node content fixes.
    *
    * @command import:department-fixes
@@ -1273,11 +1410,305 @@ class CustomCommands extends DrushCommands {
       \Drupal::service('entity.memory_cache')->deleteAll();
       $node = Node::load($id);
       $sidebar_html = $node->field_sidebar->value;
+      $body_html = $node->body->value;
       if (strpos($sidebar_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
-        echo $node->id(). PHP_EOL;
         $sidebar_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $sidebar_html);
         $node->field_sidebar->value = $sidebar_html;
         $node->save();
+        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
+      }
+      if (strpos($body_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
+        $body_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $body_html);
+        $node->body->value = $body_html;
+        $node->save();
+        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
+      }
+      if (strpos($body_html, 'class="row') !== FALSE || strpos($body_html, 'columns') !== FALSE) {
+        $body_html = str_replace('  ', ' ', $body_html);
+        $body_html = str_replace('class="row', 'class="grid-x grid-margin-x', $body_html);
+        $body_html = str_replace('class="one columns', 'class="cell medium-1', $body_html);
+        $body_html = str_replace('class="two columns', 'class="cell medium-2', $body_html);
+        $body_html = str_replace('class="three columns', 'class="cell medium-3', $body_html);
+        $body_html = str_replace('class="four columns', 'class="cell medium-4', $body_html);
+        $body_html = str_replace('class="five columns', 'class="cell medium-5', $body_html);
+        $body_html = str_replace('class="six columns', 'class="cell medium-6', $body_html);
+        $body_html = str_replace('class="seven columns', 'class="cell medium-7', $body_html);
+        $body_html = str_replace('class="eight columns', 'class="cell medium-8', $body_html);
+        $body_html = str_replace('class="nine columns', 'class="cell medium-9', $body_html);
+        $body_html = str_replace('class="ten columns', 'class="cell medium-10', $body_html);
+        $body_html = str_replace('class="eleven columns', 'class="cell medium-11', $body_html);
+        $body_html = str_replace('class="twelve columns', 'class="cell medium-12', $body_html);
+        $body_html = str_replace('class="sm-two columns', 'class="cell small-2', $body_html);
+        $body_html = str_replace('class="sm-three columns', 'class="cell small-3', $body_html);
+        $body_html = str_replace('class="sm-seven columns', 'class="cell small-7', $body_html);
+        $body_html = str_replace('class="sm-ten columns', 'class="cell small-10', $body_html);
+        $body_html = str_replace('class="two sm-two columns', 'class="cell medium-2 small-2', $body_html);
+        $body_html = str_replace('class="ten sm-ten columns', 'class="cell medium-10 small-10', $body_html);
+        $node->body->value = $body_html;
+        $node->save();
+        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
+      }
+    }
+  }
+
+  /**
+   * Import "reusable component" content type which are legacy D7 blocks.
+   *
+   * @command import:reusable-components
+   *
+   * @usage import:reusable-components
+   */
+  public function importReusableComponents() {
+
+    // Delete any previously imported sidebar block contexts data.
+    $query = $this->entityTypeManager
+      ->getStorage('node')
+      ->getQuery();
+    $query->condition('type', 'sidebar_block_context');
+    $nids = $query->execute();
+    foreach ($nids as $nid) {
+      $node = Node::load($nid);
+      $node->delete();
+    }
+
+    // Load exported D7 block data.
+    $reusable_components = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/blocks/block-content.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $reusable_components[str_replace('`', '', $data[1])] = [
+          'id' => str_replace('`', '', $data[0]),
+          'label' => str_replace('`', '', $data[2]),
+          'body' => str_replace('`', '', $data[3]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Process contexts mysql table dump for block placement based on taxonomy.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/blocks/contexts.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $conditions = unserialize($data[3]);
+        $departments = NULL;
+        $departments_subs = NULL;
+        $paths = NULL;
+        if (array_key_exists('node_taxonomy', $conditions)) {
+          foreach ($conditions['node_taxonomy']['values'] as $dtid) {
+            $d9_tid = $this->taxonomyImportTasks->newTid($dtid, 'department');
+            if (!empty($d9_tid)) {
+              $departments[] = $d9_tid;
+            }
+          }
+        }
+        if (array_key_exists('taxonomy_descendants_condition', $conditions)) {
+          foreach ($conditions['taxonomy_descendants_condition']['values'] as $dtid) {
+            $d9_tid = $this->taxonomyImportTasks->newTid($dtid, 'department');
+            if (!empty($d9_tid)) {
+              $departments_subs[] = $d9_tid;
+            }
+          }
+        }
+        if (array_key_exists('path', $conditions)) {
+          foreach ($conditions['path'] as $path) {
+            $paths[] = $path;
+          }
+        }
+        $blocks = unserialize($data[4]);
+        if (array_key_exists('block', $blocks) && count($blocks['block']['blocks']) > 0) {
+          $node = Node::create([
+            'type' => 'sidebar_block_context',
+            'title' => $data[0],
+            'field_department' => $departments,
+            'field_department_subs' => $departments_subs,
+            'field_path' => $paths,
+            'moderation_state' => [
+              'target_id' => 'published',
+            ],
+            'uid' => 0
+          ]);
+          foreach ($blocks['block']['blocks'] as $delta => $block) {
+            if ($block['region'] == 'sidebar' || $block['region'] == 'sidebar_bottom') {
+              if (array_key_exists($block['delta'], $reusable_components) && !empty($reusable_components[$block['delta']])) {
+                $paragraph = Paragraph::create([
+                  'type' => 'block',
+                  'field_body' => [
+                    'value' => $reusable_components[$block['delta']]['body'],
+                    'format' => 'full_html'
+                  ],
+                  'field_label' => $reusable_components[$block['delta']]['label'],
+                  'field_weight' => $block['weight'],
+                  'field_region' => $block['region'],
+                ]);
+                $paragraph->save();
+                $node->field_block->appendItem($paragraph);
+              }
+            }
+            if ($block['module'] == 'menu') {
+              if ($block['region'] == 'sidebar') {
+                $node->field_sidebar_menu_id = $block['delta'];
+              }
+              else if ($block['region'] == 'sub-navigation') {
+                $node->field_top_menu_id = $block['delta'];
+              }
+            }
+          }
+
+          // Only save node if there are actually valid blocks or a menu.
+          if (count($node->field_block->getValue()) > 0 || count($node->field_sidebar_menu_id->getValue()) > 0 || count($node->field_top_menu_id->getValue()) > 0) {
+            $node->save();
+          }
+        }
+      }
+      fclose($file);
+    }
+  }
+
+  /**
+   * Recreate D7 menus.
+   *
+   * @command import:menus
+   *
+   * @usage import:menus
+   */
+  public function importMenus() {
+    $ignore_list = [
+      'devel',
+      'features',
+      'main-menu',
+      'management',
+      'navigation',
+      'user-menu',
+    ];
+
+    // Create menu item link array first so empty menus aren't imported.
+    $menu_links = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/menu_links.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $menu_name = str_replace('`', '', $data[0]);
+        if (in_array($menu_name, $ignore_list)) {
+          continue;
+        }
+        $link_path = str_replace('`', '', $data[3]);
+        // Convert to D9 node id.
+        if (strpos($link_path, 'node/') == 0) {
+          $d7id = str_replace('node/', '', $link_path);
+          $query = $this->entityTypeManager
+            ->getStorage('node')
+            ->getQuery();
+          $query->condition('field_d7_nid', $d7id);
+          $nid = reset($query->execute());
+          if (!empty($nid)) {
+            $link_path = 'internal:/node/' . $nid;
+          }
+          else {
+            // Node not imported yet or was unpublished; ignore this link.
+            continue;
+          }
+        }
+        elseif ($link_external == 0) {
+          $link_path = 'internal:/' . $link_path;
+        }
+        $link_title = str_replace('`', '', $data[5]);
+        $link_expanded = str_replace('`', '', $data[11]);
+        $link_external = str_replace('`', '', $data[9]);
+        $link_weight = str_replace('`', '', $data[12]);
+        $link_d7id = str_replace('`', '', $data[1]);
+        $depth = str_replace('`', '', $data[13]);
+        switch ($depth) {
+          case 1:
+            $link_parent = $data[15];
+            break;
+          case 2:
+            $link_parent = $data[16];
+            break;
+          case 3:
+            $link_parent = $data[17];
+            break;
+          case 4:
+            $link_parent = $data[18];
+            break;
+          case 5:
+            $link_parent = $data[19];
+            break;
+          case 6:
+            $link_parent = $data[20];
+            break;
+          case 7:
+            $link_parent = $data[21];
+            break;
+        }
+        $link_parent = str_replace('`', '', $link_parent);
+        $menu_links[$menu_name][$link_d7id] = [
+          'path' => $link_path,
+          'title' => $link_title,
+          'expanded' => $link_expanded,
+          'external' => $link_external,
+          'weight' => $link_weight,
+          'parent' => $link_parent
+        ];
+      }
+      fclose($file);
+    }
+
+    // Note: commented out as this only needs to be run once locally to create
+    // menu config export files.
+
+//    // Get menu IDs + Labels array. Only get necessary menus.
+//    $menu = [];
+//    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/menu_custom.csv', 'r')) {
+//      fgets($file);
+//      while ($data = fgetcsv($file)) {
+//        $menu_id = str_replace('`', '', $data[0]);
+//        if (!in_array($menu_id, $ignore_list) && array_key_exists($menu_id, $menu_links)) {
+//          $menu[$menu_id] = str_replace('`', '', $data[1]);
+//        }
+//      }
+//      fclose($file);
+//    }
+//
+//    // Create menus.
+//    foreach ($menu as $menu_id => $label) {
+//      $menu_entity = $this->entityTypeManager->getStorage('menu')
+//        ->loadByProperties(['id' => $menu_id]);
+//      if (!empty($menu_entity)) {
+//        // Delete any previously migrated menu so it is recreated.
+//        $menu_entity = reset($menu_entity);
+//        $menu_entity->delete();
+//      }
+//      // Create new menu.
+//      $menu_entity = Menu::create([
+//        'id' => $menu_id,
+//        'label' => $label,
+//      ]);
+//      $menu_entity->save();
+//    }
+
+    // Populate menus.
+    $menu_d7id_uuid = [];
+    foreach ($menu_links as $menu_id => $items) {
+      foreach ($items as $d7id => $item) {
+        if ($item['parent'] == $d7id || $item['parent'] == 1) {
+          $parent = NULL;
+        }
+        else {
+          $parent = $menu_d7id_uuid[$item['parent']];
+        }
+
+        // Create menu link.
+        $menu_link = MenuLinkContent::create([
+          'title' => $item['title'],
+          'weight' => $item['weight'],
+          'link' => ['uri' => $item['path']],
+          'menu_name' => $menu_id,
+          'parent' => $parent,
+          'expanded' => $item['expanded'],
+        ]);
+        $menu_link->save();
+
+        // Save D7 ID with new D9 UUID to potentially set as parent for future.
+        $menu_d7id_uuid[$d7id] = $menu_link->getPluginId();
       }
     }
   }

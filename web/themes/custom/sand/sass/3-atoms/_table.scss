@@ -1,21 +1,110 @@
-/* ============================================================
-  Styles for tables
-  ============================================= */
-
+/* Tables
+========================================================================== */
 table {
-  font-size: 1rem;
-  width: 100%;
+  margin-bottom: 1em;
+  background: $off-white;
+  
+  tbody{
+    background: $off-white ;
+  }
 
-  p {
-    font-size: 1rem;
-    margin: 0;
+  thead {
+    tr:first-child {
+      th {
+        color: $spruce;
+      }
+    }
+  }
+
+  th {
+    padding: 0.5em 1em;
+    text-align: left;
+    word-wrap: break-word;
+    background: $mercury;
+    font-family: $font-family-secondary;
+
+    // @include breakpoint(medium) {
+    //   border-bottom: 1px solid grey;
+    // }
   }
 
   tr {
+    line-height: 1.6;
+    border-top: 0;
+    border-bottom: 0;
 
-    td,
-    th {
-      padding: 0.5rem;
+    &:first-child {
+      border-top: 0;
     }
+
+    &:nth-child(even) {
+      background: $mercury;
+    }
+    
+    &:nth-child(odd) {
+      background: $off-white;
+    }
+
+    &.subheading,
+    &:first-child {
+      background: transparent;
+    }
+
+    &.subheading {
+      color: $spruce;
+      font-family: $font-family;
+
+      td {
+        padding-left: 0;
+        // @include breakpoint(medium) {
+        //   line-height: 2.5;
+        //   @include rem("font-size", 16px);
+        // }
+      }
+    }
+
+    &.valign-m {
+      td {
+        vertical-align: middle !important;
+      }
+    }
+
+    &.valign-b {
+      td {
+        vertical-align: bottom !important;
+      }
+    }
+  }
+
+  td {
+    line-height: 1.8;
+    padding: 0.5em 1em;
+    vertical-align: top;
+    font-weight: 400;
+
+    &:first-child {
+      padding-left: 1em;
+    }
+
+    &.table--break {
+      padding-left: 0;
+    }
+  }
+
+  &.ui-datepicker-calendar {
+    tr:nth-child(even) {
+      background: #f6f6f6;
+    }
+
+    td:first-child {
+      padding-left: 0;
+    }
+  }
+}
+
+.table--thirds {
+  p {
+    margin: 0;
+    line-height: 1.7;
   }
 }
