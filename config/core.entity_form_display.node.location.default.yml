@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.location.field_amenities
     - field.field.node.location.field_d7_nid
     - field.field.node.location.field_department
+    - field.field.node.location.field_edit_notes
     - field.field.node.location.field_email
     - field.field.node.location.field_exceptions
     - field.field.node.location.field_exceptions_2
@@ -25,7 +26,7 @@ dependencies:
     - field.field.node.location.field_location_hours_notes2
     - field.field.node.location.field_location_hours_title
     - field.field.node.location.field_location_hours_title_2
-    - field.field.node.location.field_location_location_type
+    - field.field.node.location.field_location_type
     - field.field.node.location.field_partial_re_open_citywide
     - field.field.node.location.field_phone
     - field.field.node.location.field_resources
@@ -33,7 +34,6 @@ dependencies:
     - field.field.node.location.field_search_keymatch
     - field.field.node.location.field_sidebar
     - field.field.node.location.field_subtitle
-    - field.field.node.location.field_summary
     - field.field.node.location.field_title_sort
     - field.field.node.location.field_website
     - node.type.location
@@ -49,6 +49,7 @@ dependencies:
     - scheduler_content_moderation_integration
     - smart_date
     - telephone
+    - term_reference_fancytree
     - text
 third_party_settings:
   field_group:
@@ -61,7 +62,7 @@ third_party_settings:
       label: 'Main Tabs'
       region: content
       parent_name: ''
-      weight: 4
+      weight: 3
       format_type: tabs
       format_settings:
         classes: ''
@@ -72,6 +73,7 @@ third_party_settings:
     group_address_contact_info:
       children:
         - field_address
+        - field_address_pin
         - field_location_contact_name
         - field_location_contact_title
         - field_phone
@@ -136,7 +138,7 @@ third_party_settings:
     group_vocabularies:
       children:
         - field_location_bucket
-        - field_location_location_type
+        - field_location_type
         - field_department
         - field_search_keymatch
       label: Vocabularies
@@ -151,6 +153,22 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_update_notes:
+      children:
+        - field_edit_notes
+      label: 'Update Notes'
+      region: content
+      parent_name: ''
+      weight: 18
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: false
+        weight: 0
 id: node.location.default
 targetEntityType: node
 bundle: location
@@ -168,7 +186,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 7
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -180,7 +198,7 @@ content:
     third_party_settings: {  }
   field_address_pin:
     type: geofield_latlon
-    weight: 19
+    weight: 20
     region: content
     settings:
       html5_geolocation: false
@@ -221,18 +239,24 @@ content:
         duplicate: duplicate
     third_party_settings: {  }
   field_department:
-    type: entity_reference_autocomplete
+    type: term_reference_fancytree
     weight: 19
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
+      select_all: false
+      select_children: false
+    third_party_settings: {  }
+  field_edit_notes:
+    type: string_textarea
+    weight: 19
+    region: content
+    settings:
+      rows: 10
       placeholder: ''
     third_party_settings: {  }
   field_email:
     type: email_default
-    weight: 23
+    weight: 24
     region: content
     settings:
       placeholder: ''
@@ -243,8 +267,6 @@ content:
     weight: 26
     region: content
     settings:
-      show_extra: false
-      hide_date: true
       modal: false
       default_duration: 60
       default_duration_increments: |-
@@ -253,14 +275,15 @@ content:
         90
         120|2 hours
         custom
+      show_extra: false
+      hide_date: true
+      separator: to
     third_party_settings: {  }
   field_exceptions_2:
     type: smartdate_inline
     weight: 30
     region: content
     settings:
-      hide_date: '1'
-      show_extra: 0
       modal: false
       default_duration: 60
       default_duration_increments: |-
@@ -269,6 +292,9 @@ content:
         90
         120|2 hours
         custom
+      show_extra: false
+      hide_date: true
+      separator: to
     third_party_settings: {  }
   field_location_bucket:
     type: options_select
@@ -278,7 +304,7 @@ content:
     third_party_settings: {  }
   field_location_contact_name:
     type: string_textfield
-    weight: 20
+    weight: 21
     region: content
     settings:
       size: 60
@@ -286,7 +312,7 @@ content:
     third_party_settings: {  }
   field_location_contact_title:
     type: string_textfield
-    weight: 21
+    weight: 22
     region: content
     settings:
       size: 60
@@ -294,7 +320,7 @@ content:
     third_party_settings: {  }
   field_location_external_id:
     type: string_textfield
-    weight: 17
+    weight: 16
     region: content
     settings:
       size: 60
@@ -302,7 +328,7 @@ content:
     third_party_settings: {  }
   field_location_external_place_id:
     type: string_textfield
-    weight: 18
+    weight: 17
     region: content
     settings:
       size: 60
@@ -352,8 +378,8 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_location_location_type:
-    type: options_select
+  field_location_type:
+    type: options_buttons
     weight: 18
     region: content
     settings: {  }
@@ -367,7 +393,7 @@ content:
     third_party_settings: {  }
   field_phone:
     type: telephone_default
-    weight: 22
+    weight: 23
     region: content
     settings:
       placeholder: ''
@@ -436,17 +462,9 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_summary:
-    type: string_textarea
-    weight: 1
-    region: content
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
   field_title_sort:
     type: string_textfield
-    weight: 3
+    weight: 1
     region: content
     settings:
       size: 60
@@ -462,44 +480,44 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 10
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 8
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 11
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 13
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   simple_sitemap:
-    weight: 6
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 16
+    weight: 15
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 9
+    weight: 8
     region: content
     settings:
       display_label: true
@@ -514,7 +532,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -524,18 +542,18 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 12
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 14
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 15
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }

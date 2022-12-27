@@ -1,0 +1,52 @@
+uuid: 4d9789ed-bca2-4ddf-b760-34841549c565
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sections_outreach2
+    - node.type.outreach2
+    - paragraphs.paragraphs_type.sections_outreach2
+  module:
+    - entity_reference_revisions
+id: node.outreach2.field_sections_outreach2
+field_name: field_sections_outreach2
+entity_type: node
+bundle: outreach2
+label: Sections
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      sections_outreach2: sections_outreach2
+    negate: 0
+    target_bundles_drag_drop:
+      amenities_restrictions:
+        weight: 9
+        enabled: false
+      card:
+        weight: 10
+        enabled: false
+      featured_cards:
+        weight: 11
+        enabled: false
+      featured_item:
+        weight: 12
+        enabled: false
+      resources:
+        weight: 13
+        enabled: false
+      sections:
+        weight: 14
+        enabled: false
+      sections_outreach2:
+        weight: 15
+        enabled: true
+      social_links:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

@@ -24,7 +24,7 @@
 .header {
   margin-bottom: 1.5rem;
 
-  @include respond-to('m') {
+  @include breakpoint(medium) {
     display: block;
     margin-bottom: 0;
   }
@@ -33,7 +33,7 @@
   .header-second {
     background-color: $white;
 
-    @include respond-to('m') {
+    @include breakpoint(medium) {
       background: $cerulean;
     }
   }
@@ -41,7 +41,7 @@
   .header-first {
     padding: 0.5rem 0 1rem;
 
-    @include respond-to('m') {
+    @include breakpoint(medium) {
       padding: 1rem 0;
     }
 
@@ -127,14 +127,14 @@
     padding-left: 0.625rem;
     padding-right: 0.625rem;
 
-    @include respond-to('m') {
+    @include breakpoint(medium) {
       background-color: $white;
       padding: 0;
     }
 
     .main-menu {
 
-      @include respond-to('m') {
+      @include breakpoint(medium) {
         background: $white;
         display: block;
         padding: 0;
@@ -158,6 +158,8 @@
     .tbm-submenu-toggle:focus,
     .tbm .tbm-item a:hover,
     .tbm .tbm-item a:focus,
+    .tbm .tbm-item--has-dropdown a:hover:before,
+    .tbm .tbm-item--has-dropdown a:focus:before,
     .tbm .tbm-item .open {
       background-color: $tulip;
       color: $white;
@@ -171,7 +173,7 @@
 
     .tbm-main {
 
-      @include respond-to('m') {
+      @include breakpoint(medium) {
         background: $white;
       }
 
@@ -192,6 +194,15 @@
           font-weight: normal;
           text-transform: none;
         }
+      }
+
+      .tbm-item--has-dropdown a:before {
+        color: $tulip;
+        content: "\2304";
+        font-size: 1.25rem;
+        position: absolute;
+        right: 3%;
+        top: 26%;
       }
 
       .tbm-nav {
@@ -231,7 +242,7 @@
         margin: 0;
 
         li {
-          font-size: 0.875rem;
+          font-size: 0.86rem;
           list-style: none;
           text-transform: uppercase;
         }
@@ -270,9 +281,24 @@
     }
   }
 
+  .accessibility-toggle {
+    margin: 0 0 0.5rem;
+
+    a {
+      color: $white;
+      font-size: 0.75rem;
+      font-weight: bold;
+
+      &:hover {
+        color: $white;
+        text-decoration: none;
+      }
+    }
+  }
+
   .search-bar {
 
-    @include respond-to('m') {
+    @include breakpoint(medium) {
       display: block;
     }
 
@@ -286,11 +312,22 @@
     }
 
     input {
-      font-size: 0.825rem;
+      font-size: 0.86rem;
 
       &::placeholder {
         color: $spruce;
       }
     }
+  }
+}
+
+.accessibility-tools {
+
+  > div {
+    margin: 0 0 1rem;
+  }
+
+  .high-contrast-switch {
+    display: inline-block;
   }
 }
