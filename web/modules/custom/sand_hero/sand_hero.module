@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for sand_hero module.
+ */
+// start of hero
+use Drupal\user\Entity\User;
+
+/**
+ * @param string $timezone
+ * @param $latitude
+ * @param $longitude
+ *
+ * @return string[]
+ * array(2) { [0]=> string(7) "all_day" [1]=> string(3) "day" }
+ */
+function sand_hero_timesofday($timezone = "America/Los_Angeles", $latitude = 32.7157, $longitude = -117.1611) {
+  date_default_timezone_set($timezone);
+  $server_time = \Drupal::time()->getRequestTime();
+  $sun_info = date_sun_info($server_time, $latitude, $longitude);
+
+  // If we have expire enabled then we are probably using cloudflare so average
+  // out the actual time with when the page was cached with cloudflare.
+  if (function_exists('expire_menu')) {
+    $server_time -= 1200;
+  }
+  $times_of_day = array('all_day');
+
+  $sunrise = $sun_info["sunrise"];
+  $sunset = $sun_info["sunset"];
+  $dawn = array('start' => $sunrise - 3600, 'end' => $sunrise + 3600);
+  $dusk = array('start' => $sunset - 3600, 'end' => $sunset + 3600);
+
+  if ($server_time > $dawn['start'] && $server_time < $dawn['end']) {
+    $times_of_day[] = 'dawn';
+  }
+
+  if ($server_time > $dusk['start'] && $server_time < $dusk['end']) {
+    $times_of_day[] = 'dusk';
+  }
+
+  if ($sunrise < $server_time && $server_time < $sunset) {
+    $times_of_day[] = 'day';
+  }
+  else {
+    $times_of_day[] = 'night';
+  }
+
+  return $times_of_day;
+}
+
+// get variables (departments, times)
+// - variable departments is like sand_tool_department_parents
+// - variable times is date_sun_info() PHP
+// - - generate from now() dawn, dusk, day, night
+$times_of_day = sand_hero_timesofday();
+// query hero nids with department(and parents) and time_of_day(dawn,dusk,day,night)
+// pick one random hero, if empty, default image
+// apply this image to Hero background PHP programmatically
+// generate variable for this image, JS to access for this page
+// attach JS to change the page image, changes even when page is cached
+
+
+
+
+
+
+// Notes:
+// \Drupal::cache()->set('my_cache_item', $school_list, \Drupal::time()->getRequestTime() + (86400));
+// \Drupal\Core\Cache\Cache::PERMANENT
