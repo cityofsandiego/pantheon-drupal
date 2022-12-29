@@ -20,7 +20,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  *
  * @package Drupal\if_components\EventSubscriber\Preprocess
  */
-final class Department implements EventSubscriberInterface {
+final class Node implements EventSubscriberInterface {
 
   /**
    * The current route match.
@@ -110,17 +110,18 @@ final class Department implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents(): array {
     return [
-      NodePreprocessEvent::name('department') => 'preprocessDepartment',
+      NodePreprocessEvent::name() => 'preprocessNode',
       BlockPreprocessEvent::name() => 'preprocessTitleBlock',
     ];
   }
 
   public function preprocessTitleBlock(BlockPreprocessEvent $event): void {
     $variables = $event->getVariables();
+    $content_types = ['department', 'location'];
 
     if ($variables->get('base_plugin_id') == 'page_title_block') {
       $node = \Drupal::routeMatch()->getParameter('node');
-      if (isset($node) && $node instanceof NodeInterface && $node->getType() == 'department') {
+      if (isset($node) && $node instanceof NodeInterface && in_array($node->getType(), $content_types)) {
         $this->getSidebarContexts('field_department', $this->departments);
         foreach ($this->context_ids as $nid) {
           $context_node = $this->entityTypeManager->getStorage('node')->load($nid);
@@ -152,75 +153,78 @@ final class Department implements EventSubscriberInterface {
    * @param \Drupal\preprocess_event_dispatcher\Event\NodePreprocessEvent $event
    *   Event.
    */
-  public function preprocessDepartment(NodePreprocessEvent $event): void {
+  public function preprocessNode(NodePreprocessEvent $event): void {
     $variables = $event->getVariables();
     $node = $variables->getEntity();
 
-    $sidebar = [];
-    $sidebar_bottom = [];
+    if ($node->hasField('field_department')) {
 
-    $field_department = $node->field_department->getValue();
+      $sidebar = [];
+      $sidebar_bottom = [];
 
-    if (!empty($field_department)) {
-      foreach ($field_department as $department) {
-        $this->departments[] = $department['target_id'];
-      }
-      $this->getSidebarContexts('field_department', $this->departments);
-      $this->addTermDescendents($this->departments);
-      $this->getSidebarContexts('field_department_subs', $this->departments);
+      $field_department = $node->field_department->getValue();
 
-      // Load sidebar context nodes, load block content, get menu ids.
-      foreach ($this->context_ids as $nid) {
-        $context_node = $this->entityTypeManager->getStorage('node')->load($nid);
-        if (count($context_node->field_sidebar_menu_id->getValue()) > 0) {
-          $this->side_menu_id = $context_node->field_sidebar_menu_id->getValue()[0]['value'];
+      if (!empty($field_department)) {
+        foreach ($field_department as $department) {
+          $this->departments[] = $department['target_id'];
         }
-        foreach ($context_node->field_block->getValue() as $paragraph_id) {
-          $paragraph = Paragraph::load($paragraph_id['target_id']);
-          switch ($paragraph->field_region->getValue()[0]['value']) {
-            case 'sidebar':
-              $sidebar[] = [
-                'weight' => $paragraph->field_weight->getValue()[0]['value'],
-                'value' => $this->entityTypeManager->getViewBuilder('paragraph')
-                  ->view($paragraph, 'full'),
-              ];
-              break;
-            case 'sidebar_bottom':
-              $sidebar_bottom[] = [
-                'weight' => $paragraph->field_weight->getValue()[0]['value'],
-                'value' => $this->entityTypeManager->getViewBuilder('paragraph')
-                  ->view($paragraph, 'full'),
-              ];
-              break;
+        $this->getSidebarContexts('field_department', $this->departments);
+        $this->addTermDescendents($this->departments);
+        $this->getSidebarContexts('field_department_subs', $this->departments);
+
+        // Load sidebar context nodes, load block content, get menu ids.
+        foreach ($this->context_ids as $nid) {
+          $context_node = $this->entityTypeManager->getStorage('node')
+            ->load($nid);
+          if (count($context_node->field_sidebar_menu_id->getValue()) > 0) {
+            $this->side_menu_id = $context_node->field_sidebar_menu_id->getValue()[0]['value'];
+          }
+          foreach ($context_node->field_block->getValue() as $paragraph_id) {
+            $paragraph = Paragraph::load($paragraph_id['target_id']);
+            switch ($paragraph->field_region->getValue()[0]['value']) {
+              case 'sidebar':
+                $sidebar[] = [
+                  'weight' => $paragraph->field_weight->getValue()[0]['value'],
+                  'value' => $this->entityTypeManager->getViewBuilder('paragraph')
+                    ->view($paragraph, 'full'),
+                ];
+                break;
+              case 'sidebar_bottom':
+                $sidebar_bottom[] = [
+                  'weight' => $paragraph->field_weight->getValue()[0]['value'],
+                  'value' => $this->entityTypeManager->getViewBuilder('paragraph')
+                    ->view($paragraph, 'full'),
+                ];
+                break;
+            }
           }
         }
-      }
 
-      $sideTitle = NULL;
-      foreach (array_unique($this->departments) as $department) {
-        $term = Term::load($department);
-        $parent_id = $term->get('parent')->getValue()[0]['target_id'];
-        if ($parent_id != 0) {
-          $sideTitle = $term->getName();
+        $sideTitle = NULL;
+        foreach (array_unique($this->departments) as $department) {
+          $term = Term::load($department);
+          $parent_id = $term->get('parent')->getValue()[0]['target_id'];
+          if ($parent_id != 0) {
+            $sideTitle = $term->getName();
+          }
         }
+
+        // Get side menu links.
+        $this->buildMenuLinks('sidemenu');
       }
 
-      // Get side menu links.
-      $this->buildMenuLinks('sidemenu');
+      array_multisort(array_column($sidebar, 'weight'), SORT_ASC, $sidebar);
+      array_multisort(array_column($sidebar_bottom, 'weight'), SORT_ASC, $sidebar_bottom);
+      array_multisort(array_column($this->sideMenuLinkData, 'weight'), SORT_ASC, $this->sideMenuLinkData);
+      array_multisort(array_column($this->topMenuLinkData, 'weight'), SORT_ASC, $this->topMenuLinkData);
+
+      $variables->set('sidebar', $sidebar);
+      $variables->set('sidebar_bottom', $sidebar_bottom);
+      $variables->set('sidemenu', [
+        'title' => $sideTitle,
+        'items' => $this->sideMenuLinkData,
+      ]);
     }
-
-    array_multisort(array_column($sidebar, 'weight'), SORT_ASC, $sidebar);
-    array_multisort(array_column($sidebar_bottom, 'weight'), SORT_ASC, $sidebar_bottom);
-    array_multisort(array_column($this->sideMenuLinkData, 'weight'), SORT_ASC, $this->sideMenuLinkData);
-    array_multisort(array_column($this->topMenuLinkData, 'weight'), SORT_ASC, $this->topMenuLinkData);
-
-    $variables->set('sidebar', $sidebar);
-    $variables->set('sidebar_bottom', $sidebar_bottom);
-    $variables->set('sidemenu', [
-      'title' => $sideTitle,
-      'items' => $this->sideMenuLinkData,
-    ]);
-
   }
 
   /*
