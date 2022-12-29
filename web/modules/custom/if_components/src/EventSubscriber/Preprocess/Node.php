@@ -200,30 +200,30 @@ final class Node implements EventSubscriberInterface {
           }
         }
 
-        $sideTitle = NULL;
+        $side_title = NULL;
         foreach (array_unique($this->departments) as $department) {
           $term = Term::load($department);
           $parent_id = $term->get('parent')->getValue()[0]['target_id'];
           if ($parent_id != 0) {
-            $sideTitle = $term->getName();
+            $side_title = $term->getName();
           }
         }
 
         // Get side menu links.
         $this->buildMenuLinks('sidemenu');
+
+        array_multisort(array_column($sidebar, 'weight'), SORT_ASC, $sidebar);
+        array_multisort(array_column($sidebar_bottom, 'weight'), SORT_ASC, $sidebar_bottom);
+        array_multisort(array_column($this->sideMenuLinkData, 'weight'), SORT_ASC, $this->sideMenuLinkData);
+        array_multisort(array_column($this->topMenuLinkData, 'weight'), SORT_ASC, $this->topMenuLinkData);
+
+        $variables->set('sidebar', $sidebar);
+        $variables->set('sidebar_bottom', $sidebar_bottom);
+        $variables->set('sidemenu', [
+          'title' => $side_title,
+          'items' => $this->sideMenuLinkData,
+        ]);
       }
-
-      array_multisort(array_column($sidebar, 'weight'), SORT_ASC, $sidebar);
-      array_multisort(array_column($sidebar_bottom, 'weight'), SORT_ASC, $sidebar_bottom);
-      array_multisort(array_column($this->sideMenuLinkData, 'weight'), SORT_ASC, $this->sideMenuLinkData);
-      array_multisort(array_column($this->topMenuLinkData, 'weight'), SORT_ASC, $this->topMenuLinkData);
-
-      $variables->set('sidebar', $sidebar);
-      $variables->set('sidebar_bottom', $sidebar_bottom);
-      $variables->set('sidemenu', [
-        'title' => $sideTitle,
-        'items' => $this->sideMenuLinkData,
-      ]);
     }
   }
 
