@@ -1392,6 +1392,96 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   * Finalize hero node import.
+   *
+   * @command import:hero
+   *
+   * @usage import:hero
+   */
+  public function finalizeHero() {
+    $nodedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/hero.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'department' => explode('|', str_replace('`', '', $data[1])),
+          'image_department' => str_replace('`', '', $data[2]),
+          'image_license' => str_replace('`', '', $data[3]),
+          'image_alt' => str_replace('`', '', $data[4]),
+          'image_d7id' => str_replace('`', '', $data[5]),
+          'image_path' => str_replace('`', '', $data[6]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'hero')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+
+      $node->field_department->setValue([]);
+      foreach ($data['department'] as $department) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+        $node->field_department->appendItem($term);
+      }
+
+      if (!empty($data['image_path'])) {
+        $prior_image = $this->checkMediaId($data['image_d7id']);
+        if ($prior_image == NULL) {
+          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
+          $file_data = file_get_contents($remote_file);
+          // Fixes for irregular paths.
+          $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
+          $local_destination = str_replace('default_images', '', $local_destination);
+          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+          $local_destination = str_replace('hero', '', $local_destination);
+          $local_destination = str_replace('public://', '', $local_destination);
+          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+          $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
+
+          $image = Media::create([
+            'bundle' => 'image',
+            'uid' => 0,
+            'field_media_image' => [
+              'target_id' => $local_file->id(),
+              'alt' => $data['image_alt']
+            ],
+            'field_d7_mid' => $data['image_d7id'],
+          ]);
+          if (!empty($data['image_license'])) {
+            $image->field_license = $data['image_license'];
+          }
+          foreach ($image_department as $department) {
+            $image->field_department->appendItem([
+              'target_id' => $department,
+            ]);
+          }
+          $image->save();
+        }
+        else {
+          $image = Media::load($prior_image);
+        }
+      }
+      else {
+        $image = NULL;
+      }
+      $node->field_image = $image;
+
+      $node->save();
+      echo $node->id() . PHP_EOL;
+    }
+  }
+
+  /**
    * Manual department node content fixes.
    *
    * @command import:department-fixes

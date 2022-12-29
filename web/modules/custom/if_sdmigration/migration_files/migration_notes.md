@@ -19,6 +19,7 @@ lando terminus drush mi:import sd_nodes_location -- --update --force
 lando terminus drush mi:import sd_nodes_slide -- --update --force
 lando terminus drush mi:import sd_nodes_mayoral_artifact -- --update --force
 lando terminus drush mi:import sd_nodes_outreach -- --update --force
+lando terminus drush mi:import sd_nodes_hero -- --update --force
 
 Menu import:
 lando terminus drush import:menus
@@ -32,6 +33,7 @@ lando terminus drush import:location
 lando terminus drush import:mayoral-artifact
 lando terminus drush import:outreach
 lando terminus drush import:reusable-components
+lando terminus drush import:hero
 
 Data status: 9/26/2022
 Nodes:
@@ -42,6 +44,7 @@ Location
 Slide
 Mayoral artifacts
 Outreach
+Hero
 
 Field groups:
 field_bucket_events_pi_coll
