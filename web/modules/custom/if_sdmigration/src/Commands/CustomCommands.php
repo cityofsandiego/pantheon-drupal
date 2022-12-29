@@ -1565,6 +1565,44 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   * Delete D7 menus to delete all links.
+   *
+   * @command import:delete-menus
+   *
+   * @usage import:delete-menus
+   */
+  public function deleteMenus() {
+    $ignore_list = [
+      'devel',
+      'features',
+      'main-menu',
+      'management',
+      'navigation',
+      'user-menu',
+    ];
+    $menu = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/menu_custom.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $menu_id = str_replace('`', '', $data[0]);
+        if (!in_array($menu_id, $ignore_list)) {
+          $menu[$menu_id] = str_replace('`', '', $data[1]);
+        }
+      }
+      fclose($file);
+    }
+    foreach ($menu as $menu_id => $label) {
+      $menu_entity = $this->entityTypeManager->getStorage('menu')
+        ->loadByProperties(['id' => $menu_id]);
+      if (!empty($menu_entity)) {
+        // Delete menu.
+        $menu_entity = reset($menu_entity);
+        $menu_entity->delete();
+      }
+    }
+  }
+
+  /**
    * Recreate D7 menus.
    *
    * @command import:menus
@@ -1586,6 +1624,11 @@ class CustomCommands extends DrushCommands {
     if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/menu_links.csv', 'r')) {
       fgets($file);
       while ($data = fgetcsv($file)) {
+        $hidden = str_replace('`', '', $data[8]);
+        if ($hidden == 1) {
+          // This is a hidden link; ignore.
+          continue;
+        }
         $menu_name = str_replace('`', '', $data[0]);
         if (in_array($menu_name, $ignore_list)) {
           continue;
@@ -1615,31 +1658,7 @@ class CustomCommands extends DrushCommands {
         $link_external = str_replace('`', '', $data[9]);
         $link_weight = str_replace('`', '', $data[12]);
         $link_d7id = str_replace('`', '', $data[1]);
-        $depth = str_replace('`', '', $data[13]);
-        switch ($depth) {
-          case 1:
-            $link_parent = $data[15];
-            break;
-          case 2:
-            $link_parent = $data[16];
-            break;
-          case 3:
-            $link_parent = $data[17];
-            break;
-          case 4:
-            $link_parent = $data[18];
-            break;
-          case 5:
-            $link_parent = $data[19];
-            break;
-          case 6:
-            $link_parent = $data[20];
-            break;
-          case 7:
-            $link_parent = $data[21];
-            break;
-        }
-        $link_parent = str_replace('`', '', $link_parent);
+        $link_parent = str_replace('`', '', $data[2]);
         $menu_links[$menu_name][$link_d7id] = [
           'path' => $link_path,
           'title' => $link_title,
@@ -1689,7 +1708,8 @@ class CustomCommands extends DrushCommands {
     $menu_d7id_uuid = [];
     foreach ($menu_links as $menu_id => $items) {
       foreach ($items as $d7id => $item) {
-        if ($item['parent'] == $d7id || $item['parent'] == 1) {
+
+        if ($item['parent'] == $d7id || $item['parent'] == 0) {
           $parent = NULL;
         }
         else {
