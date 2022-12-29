@@ -6,7 +6,6 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Menu\MenuActiveTrail;
 use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\Core\Routing\CurrentRouteMatch;
-use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\preprocess_event_dispatcher\Event\BlockPreprocessEvent;
@@ -124,7 +123,7 @@ final class Department implements EventSubscriberInterface {
       if (isset($node) && $node instanceof NodeInterface && $node->getType() == 'department') {
         $this->getSidebarContexts('field_department', $this->departments);
         foreach ($this->context_ids as $nid) {
-          $context_node = Node::load($nid);
+          $context_node = $this->entityTypeManager->getStorage('node')->load($nid);
           if (count($context_node->field_top_menu_id->getValue()) > 0) {
             $this->top_menu_id = $context_node->field_top_menu_id->getValue()[0]['value'];
           }
@@ -172,7 +171,7 @@ final class Department implements EventSubscriberInterface {
 
       // Load sidebar context nodes, load block content, get menu ids.
       foreach ($this->context_ids as $nid) {
-        $context_node = Node::load($nid);
+        $context_node = $this->entityTypeManager->getStorage('node')->load($nid);
         if (count($context_node->field_sidebar_menu_id->getValue()) > 0) {
           $this->side_menu_id = $context_node->field_sidebar_menu_id->getValue()[0]['value'];
         }
@@ -287,7 +286,7 @@ final class Department implements EventSubscriberInterface {
         $classes[] = 'is_active';
       }
 
-      $menu_content_storage = \Drupal::entityTypeManager()->getStorage('menu_link_content');
+      $menu_content_storage = $this->entityTypeManager->getStorage('menu_link_content');
       $child_items = $menu_content_storage->loadByProperties(['parent' => $menu_item->link->getPluginId()]);
       $children = [];
 
