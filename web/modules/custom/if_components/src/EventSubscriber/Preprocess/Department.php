@@ -212,6 +212,9 @@ final class Department implements EventSubscriberInterface {
 
     array_multisort(array_column($sidebar, 'weight'), SORT_ASC, $sidebar);
     array_multisort(array_column($sidebar_bottom, 'weight'), SORT_ASC, $sidebar_bottom);
+    array_multisort(array_column($this->sideMenuLinkData, 'weight'), SORT_ASC, $this->sideMenuLinkData);
+    array_multisort(array_column($this->topMenuLinkData, 'weight'), SORT_ASC, $this->topMenuLinkData);
+
     $variables->set('sidebar', $sidebar);
     $variables->set('sidebar_bottom', $sidebar_bottom);
     $variables->set('sidemenu', [
@@ -279,17 +282,34 @@ final class Department implements EventSubscriberInterface {
 
     $menu_tree = \Drupal::menuTree()->load($menu_id, $parameters);
     foreach ($menu_tree as $delta => $menu_item) {
+      $classes = [];
       if (in_array($delta, $menu_active_trail)) {
-        $is_active = TRUE;
+        $classes[] = 'is_active';
       }
-      else {
-        $is_active = FALSE;
+
+      $menu_content_storage = \Drupal::entityTypeManager()->getStorage('menu_link_content');
+      $child_items = $menu_content_storage->loadByProperties(['parent' => $menu_item->link->getPluginId()]);
+      $children = [];
+
+      if (count($child_items) > 0) {
+        $classes[] = 'expanded';
+        // @todo may need to refactor if more than one level of children needed.
+        foreach($child_items as $child_item) {
+          $children[] = [
+            'title' => $child_item->getTitle(),
+            'url' => $child_item->getUrlObject()->toString(),
+            'weight' => $child_item->getWeight(),
+          ];
+        }
+        array_multisort(array_column($children, 'weight'), SORT_ASC, $children);
       }
 
       $item = [
         'title' => $menu_item->link->getTitle(),
         'url' => $menu_item->link->getUrlObject()->toString(),
-        'is_active' => $is_active,
+        'weight' => $menu_item->link->getWeight(),
+        'children' => $children,
+        'classes' => $classes,
       ];
 
       if ($menu == 'sidemenu') {
