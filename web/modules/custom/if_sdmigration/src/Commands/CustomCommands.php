@@ -1659,7 +1659,6 @@ class CustomCommands extends DrushCommands {
         $link_weight = str_replace('`', '', $data[12]);
         $link_d7id = str_replace('`', '', $data[1]);
         $link_parent = str_replace('`', '', $data[2]);
-        $link_parent = str_replace('`', '', $link_parent);
         $menu_links[$menu_name][$link_d7id] = [
           'path' => $link_path,
           'title' => $link_title,
