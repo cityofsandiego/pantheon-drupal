@@ -6,10 +6,12 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Menu\MenuActiveTrail;
 use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\Core\Routing\CurrentRouteMatch;
+use Drupal\file\Entity\File;
 use Drupal\node\NodeInterface;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\preprocess_event_dispatcher\Event\BlockPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\NodePreprocessEvent;
+use Drupal\preprocess_event_dispatcher\Event\PagePreprocessEvent;
 use Drupal\taxonomy\Entity\Term;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -112,7 +114,36 @@ final class Node implements EventSubscriberInterface {
     return [
       NodePreprocessEvent::name() => 'preprocessNode',
       BlockPreprocessEvent::name() => 'preprocessTitleBlock',
+      PagePreprocessEvent::name() => 'preprocessPage',
     ];
+  }
+
+  public function preprocessPage(PagePreprocessEvent $event): void {
+    $variables = $event->getVariables();
+
+    if ($variables->getNode() !== NULL) {
+      /**
+       * @todo remove or edit this.
+       * sand_hero module looks to supersede this, so I just grab a random
+       * hero image, only taking into account whether it's the front page.
+       */
+      $query = $this->entityTypeManager
+        ->getListBuilder('node')
+        ->getStorage()
+        ->getQuery();
+      $query->condition('type', 'hero')
+        ->condition('field_hero_frontpage', 0);
+      $nids = $query->execute();
+      $nid = array_rand($nids, 1);
+      $hero_node = $this->entityTypeManager->getStorage('node')->load($nid);
+      if ($hero_node !== NULL) {
+        $hero_image = $this->entityTypeManager->getStorage('media')
+          ->load($hero_node->get('field_image')->getValue()[0]['target_id']);
+        $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
+        $hero_image_file = File::load($fid);
+        $variables->set('hero_image', $hero_image_file->createFileUrl());
+      }
+    }
   }
 
   public function preprocessTitleBlock(BlockPreprocessEvent $event): void {
@@ -122,6 +153,8 @@ final class Node implements EventSubscriberInterface {
     if ($variables->get('base_plugin_id') == 'page_title_block') {
       $node = \Drupal::routeMatch()->getParameter('node');
       if (isset($node) && $node instanceof NodeInterface && in_array($node->getType(), $content_types)) {
+
+        // Top menu.
         $this->getSidebarContexts('field_department', $this->departments);
         foreach ($this->context_ids as $nid) {
           $context_node = $this->entityTypeManager->getStorage('node')->load($nid);
@@ -134,6 +167,7 @@ final class Node implements EventSubscriberInterface {
           'items' => $this->topMenuLinkData,
         ]);
 
+        // Department title.
         $department_title = NULL;
         foreach ($node->field_department->getValue() as $department) {
           $term = Term::load($department['target_id']);
@@ -223,6 +257,7 @@ final class Node implements EventSubscriberInterface {
           'title' => $side_title,
           'items' => $this->sideMenuLinkData,
         ]);
+
       }
     }
   }
