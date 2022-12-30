@@ -50,14 +50,15 @@ third_party_settings:
   field_group:
     group_main_tabs:
       children:
+        - group_main
         - group_internal_notes
-        - group_urls_source
         - group_dates
         - group_pub_not
+        - group_vocabularies
       label: 'Main tabs'
       region: content
       parent_name: ''
-      weight: 27
+      weight: 11
       format_type: tabs
       format_settings:
         classes: ''
@@ -67,31 +68,14 @@ third_party_settings:
         width_breakpoint: 640
     group_internal_notes:
       children:
-        - field_body_status
-        - field_validated
         - field_internal_notes
+        - field_validated
+        - field_body_status
+        - field_doc_type
       label: 'Internal Notes'
       region: content
       parent_name: group_main_tabs
-      weight: 22
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_urls_source:
-      children:
-        - field_document_url
-        - field_a_webc_url
-        - field_source
-        - field_source_name
-      label: 'URLs & Source'
-      region: content
-      parent_name: group_main_tabs
-      weight: 23
+      weight: 21
       format_type: tab
       format_settings:
         classes: ''
@@ -111,7 +95,7 @@ third_party_settings:
       label: Dates
       region: content
       parent_name: group_main_tabs
-      weight: 24
+      weight: 22
       format_type: tab
       format_settings:
         classes: ''
@@ -130,7 +114,53 @@ third_party_settings:
       label: 'Public Notice Information'
       region: content
       parent_name: group_main_tabs
-      weight: 25
+      weight: 23
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_main:
+      children:
+        - field_object_name
+        - field_document_url
+        - field_path
+        - field_a_webc_url
+        - field_doc_set
+        - field_r_object_id
+        - field_doc_num
+        - field_action
+        - field_pdf
+        - field_source
+        - field_source_name
+        - field_sort1
+        - field_muni_code_chapter
+        - field_committee
+        - body
+        - field_flag_text
+        - field_flag_color
+      label: Main
+      region: content
+      parent_name: group_main_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_vocabularies:
+      children:
+        - field_search_keymatch
+      label: Vocabularies
+      region: content
+      parent_name: group_main_tabs
+      weight: 24
       format_type: tab
       format_settings:
         classes: ''
@@ -146,7 +176,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 24
+    weight: 27
     region: content
     settings:
       rows: 9
@@ -170,7 +200,7 @@ content:
     third_party_settings: {  }
   field_action:
     type: string_textfield
-    weight: 21
+    weight: 20
     region: content
     settings:
       size: 60
@@ -184,7 +214,7 @@ content:
     third_party_settings: {  }
   field_body_status:
     type: string_textfield
-    weight: 32
+    weight: 42
     region: content
     settings:
       size: 60
@@ -192,7 +222,7 @@ content:
     third_party_settings: {  }
   field_committee:
     type: options_select
-    weight: 19
+    weight: 26
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -220,7 +250,7 @@ content:
     third_party_settings: {  }
   field_doc_num:
     type: string_textfield
-    weight: 14
+    weight: 19
     region: content
     settings:
       size: 60
@@ -228,7 +258,7 @@ content:
     third_party_settings: {  }
   field_doc_set:
     type: string_textfield
-    weight: 15
+    weight: 17
     region: content
     settings:
       size: 60
@@ -236,13 +266,13 @@ content:
     third_party_settings: {  }
   field_doc_type:
     type: options_select
-    weight: 16
+    weight: 43
     region: content
     settings: {  }
     third_party_settings: {  }
   field_document_url:
     type: link_default
-    weight: 15
+    weight: 14
     region: content
     settings:
       placeholder_url: ''
@@ -250,7 +280,7 @@ content:
     third_party_settings: {  }
   field_flag_color:
     type: string_textfield
-    weight: 26
+    weight: 29
     region: content
     settings:
       size: 60
@@ -258,7 +288,7 @@ content:
     third_party_settings: {  }
   field_flag_text:
     type: string_textfield
-    weight: 25
+    weight: 28
     region: content
     settings:
       size: 60
@@ -272,7 +302,7 @@ content:
     third_party_settings: {  }
   field_internal_notes:
     type: string_textfield
-    weight: 34
+    weight: 40
     region: content
     settings:
       size: 60
@@ -280,7 +310,7 @@ content:
     third_party_settings: {  }
   field_muni_code_chapter:
     type: options_select
-    weight: 20
+    weight: 25
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -294,7 +324,7 @@ content:
     third_party_settings: {  }
   field_path:
     type: string_textfield
-    weight: 18
+    weight: 15
     region: content
     settings:
       size: 60
@@ -302,7 +332,7 @@ content:
     third_party_settings: {  }
   field_pdf:
     type: media_library_widget
-    weight: 22
+    weight: 21
     region: content
     settings:
       media_types: {  }
@@ -353,7 +383,7 @@ content:
     third_party_settings: {  }
   field_r_object_id:
     type: string_textfield
-    weight: 17
+    weight: 18
     region: content
     settings:
       size: 60
@@ -361,7 +391,7 @@ content:
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete
-    weight: 28
+    weight: 15
     region: content
     settings:
       match_operator: CONTAINS
@@ -371,14 +401,14 @@ content:
     third_party_settings: {  }
   field_sort1:
     type: number
-    weight: 23
+    weight: 24
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_source:
     type: string_textfield
-    weight: 17
+    weight: 22
     region: content
     settings:
       size: 60
@@ -386,7 +416,7 @@ content:
     third_party_settings: {  }
   field_source_name:
     type: string_textfield
-    weight: 18
+    weight: 23
     region: content
     settings:
       size: 60
@@ -394,7 +424,7 @@ content:
     third_party_settings: {  }
   field_validated:
     type: options_select
-    weight: 33
+    weight: 41
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -430,7 +460,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 12
+    weight: 14
     region: content
     settings:
       display_label: true
@@ -473,7 +503,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 11
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
