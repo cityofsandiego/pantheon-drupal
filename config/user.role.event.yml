@@ -1,9 +1,19 @@
 uuid: 9e96e10a-c28a-474c-92bf-5a9795be40d4
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - node.type.event
+  module:
+    - node
 id: event
 label: Event
 weight: -4
 is_admin: null
-permissions: {  }
+permissions:
+  - 'create event content'
+  - 'delete own event content'
+  - 'edit any event content'
+  - 'edit own event content'
+  - 'revert event revisions'
+  - 'view event revisions'
