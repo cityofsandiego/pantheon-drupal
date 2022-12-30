@@ -59,6 +59,7 @@ third_party_settings:
         - group_content
         - group_hours
         - group_vocabularies
+        - group_import_in
       label: 'Main Tabs'
       region: content
       parent_name: ''
@@ -159,7 +160,7 @@ third_party_settings:
       label: 'Update Notes'
       region: content
       parent_name: ''
-      weight: 18
+      weight: 19
       format_type: details_sidebar
       format_settings:
         classes: ''
@@ -169,6 +170,22 @@ third_party_settings:
         description: ''
         required_fields: false
         weight: 0
+    group_import_in:
+      children:
+        - field_location_external_id
+        - field_location_external_place_id
+      label: 'Import Info'
+      region: hidden
+      parent_name: group_main_tabs
+      weight: 24
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
 id: node.location.default
 targetEntityType: node
 bundle: location
@@ -320,7 +337,7 @@ content:
     third_party_settings: {  }
   field_location_external_id:
     type: string_textfield
-    weight: 16
+    weight: 17
     region: content
     settings:
       size: 60
@@ -328,7 +345,7 @@ content:
     third_party_settings: {  }
   field_location_external_place_id:
     type: string_textfield
-    weight: 17
+    weight: 18
     region: content
     settings:
       size: 60
@@ -379,10 +396,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_location_type:
-    type: options_buttons
+    type: term_reference_fancytree
     weight: 18
     region: content
-    settings: {  }
+    settings:
+      select_all: false
+      select_children: false
     third_party_settings: {  }
   field_partial_re_open_citywide:
     type: boolean_checkbox
