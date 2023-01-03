@@ -45,6 +45,7 @@ dependencies:
     - node.type.event
   module:
     - address
+    - conditional_fields
     - field_group
     - link
     - media_library
@@ -448,7 +449,25 @@ content:
     settings:
       select_all: false
       select_children: false
-    third_party_settings: {  }
+    third_party_settings:
+      conditional_fields:
+        eb58daa5-40e3-4da0-85a1-e29548b3ada2:
+          entity_type: node
+          bundle: event
+          dependee: field_type_of_event
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: coldcase
+            effect: show
+            effect_options: {  }
+            selector: ''
   field_event_vendor_contact_txt:
     type: string_textfield
     weight: 49
@@ -471,14 +490,50 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      conditional_fields:
+        ea03daa7-9182-4faa-8eb6-5089146e7fc6:
+          entity_type: node
+          bundle: event
+          dependee: field_type_of_event
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: coldcase
+            effect: show
+            effect_options: {  }
+            selector: ''
   field_images:
     type: media_library_widget
     weight: 19
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      conditional_fields:
+        9c6b8992-67a2-4d67-b23b-0363d4e6da3f:
+          entity_type: node
+          bundle: event
+          dependee: field_type_of_event
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: coldcase
+            effect: show
+            effect_options: {  }
+            selector: ''
   field_search_keymatch:
     type: entity_reference_autocomplete
     weight: 27
