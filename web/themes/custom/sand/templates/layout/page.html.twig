@@ -59,8 +59,14 @@
     <header role="banner" class="header">
       {{ page.header }}
     </header>
-    {% if page.hero_image is not empty %}<div style="background: url('{{ page.hero_image }}') no-repeat top center;">{% endif %}
+    {% if page.hero_image is not empty %}
+      <div class="hero__bg hero__bg--secondary" style="background-image: url('{{ page.hero_image }}');">
+      </div>
+
+      <div class="grid-container main-grid-container page-with-hero">
+      {% else %}
       <div class="grid-container main-grid-container">
+    {% endif %}  
 
         {{ page.help }}
 
@@ -88,10 +94,9 @@
         </main>
 
       </div>{# /.grid-container #}
-    {% if page.hero_image is not empty %}</div>{% endif %}
 
     {% if page.footer %}
-    <footer role="contentinfo" class="footer">
+    <footer role="contentinfo" class="footer alto-bg">
       {{ page.footer }}
     </footer>
     {% endif %}

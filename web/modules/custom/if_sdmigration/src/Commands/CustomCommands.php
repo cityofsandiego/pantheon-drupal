@@ -906,7 +906,6 @@ class CustomCommands extends DrushCommands {
       fgets($file);
       while ($data = fgetcsv($file)) {
         $nodedata[str_replace('`', '', $data[0])] = [
-          'path' => str_replace('`', '', $data[1]),
           'street' => str_replace('`', '', $data[3]),
           'additional' => str_replace('`', '', $data[4]),
           'city' => str_replace('`', '', $data[5]),
@@ -976,23 +975,70 @@ class CustomCommands extends DrushCommands {
 
     // Exceptions + Secondary exceptions
     $exceptions = [];
-    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_location_exceptions_coll.csv', 'r')) {
+    $exceptions2 = [];
+    $nodedata_exceptions = [];
+    $nodedata_exceptions2 = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_data_field_location_exceptions_coll.csv', 'r')) {
       fgets($file);
       while ($data = fgetcsv($file)) {
-        $id = str_replace('`', '', $data[0]);
-        $id = str_replace(',', '', $id);
-        $exceptions[$id] = explode('|', str_replace('`', '', $data[1]));
+        $entity_id = str_replace('"', '', $data[3]);
+        $delta = str_replace('"', '', $data[6]);
+        $field_collection_id = str_replace('"', '', $data[7]);
+        $exceptions[$field_collection_id] = [
+          'entity_id' => $entity_id,
+          'delta' => $delta,
+        ];
       }
       fclose($file);
     }
-    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_location_exceptions_coll2.csv', 'r')) {
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_data_field_location_exceptions_coll2.csv', 'r')) {
       fgets($file);
       while ($data = fgetcsv($file)) {
-        $id = str_replace('`', '', $data[0]);
-        $id = str_replace(',', '', $id);
-        $exceptions[$id] = explode('|', str_replace('`', '', $data[1]));
+        $entity_id = str_replace('"', '', $data[3]);
+        $delta = str_replace('"', '', $data[6]);
+        $field_collection_id = str_replace('"', '', $data[7]);
+        $exceptions2[$field_collection_id] = [
+          'entity_id' => $entity_id,
+          'delta' => $delta,
+        ];
       }
       fclose($file);
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_data_field_office_exception_date.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $field_collection_id = str_replace('"', '', $data[3]);
+        if (array_key_exists($field_collection_id, $exceptions)) {
+          $extra_data = explode(';', str_replace('"', '', $data[9]));
+          $recur_interval = str_replace('RRULE:FREQ=', '', $extra_data[0]);
+          $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
+          $nodedata_exceptions[$exceptions[$field_collection_id]['entity_id']][$exceptions[$field_collection_id]['delta']] = [
+            'start' => str_replace('"', '', $data[7]),
+            'end' => str_replace('"', '', $data[8]),
+            'recur_number' => $recur_number,
+            'recur_interval' => $recur_interval,
+          ];
+        }
+      }
+      fclose($file);
+      if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_data_field_office_exception_date2.csv', 'r')) {
+        fgets($file);
+        while ($data = fgetcsv($file)) {
+          $field_collection_id = str_replace('"', '', $data[3]);
+          if (array_key_exists($field_collection_id, $exceptions2)) {
+            $extra_data = explode(';', str_replace('"', '', $data[9]));
+            $recur_interval = str_replace('RRULE:FREQ=', '', $extra_data[0]);
+            $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
+            $nodedata_exceptions2[$exceptions2[$field_collection_id]['entity_id']][$exceptions2[$field_collection_id]['delta']] = [
+              'start' => str_replace('"', '', $data[7]),
+              'end' => str_replace('"', '', $data[8]),
+              'recur_number' => $recur_number,
+              'recur_interval' => $recur_interval,
+            ];
+          }
+        }
+        fclose($file);
+      }
     }
 
     // Manually update each node.
@@ -1005,12 +1051,6 @@ class CustomCommands extends DrushCommands {
         ->condition('field_d7_nid', $d7id);
       $nid = reset($query->execute());
       $node = Node::load($nid);
-
-      // Set alias.
-      $node->path = [
-        'alias' => $data['path'],
-        'pathauto' => PathautoState::SKIP,
-      ];
 
       // Set address.
       $node->field_address = [
@@ -1108,49 +1148,29 @@ class CustomCommands extends DrushCommands {
       $node->field_location_bucket = $term;
 
       $term = Term::load($this->taxonomyImportTasks->newTid($data['location_type'], 'location'));
-      $node->field_location_location_type = $term;
+      $node->field_location_type = $term;
 
       $node->field_exceptions = [];
-      foreach ($data['exceptions'] as $exception) {
-        if (!empty($exception)) {
-          $times = $exceptions[$exception];
-          foreach ($times as $time) {
-            if (strpos($time, ' to ') !== FALSE) {
-              $timerange = explode(' to ', $time);
-              $value = strtotime($timerange[0]);
-              $end_value = strtotime($timerange[1]);
-            }
-            else {
-              $value = strtotime($time);
-              $end_value = NULL;
-            }
-            $node->field_exceptions[] = [
-              'value' => $value,
-              'end_value' => $end_value,
-            ];
-          }
+      if (array_key_exists($d7id, $nodedata_exceptions)) {
+        foreach ($nodedata_exceptions[$d7id] as $exception) {
+          $node->field_exceptions[] = [
+            'value' => strtotime($exception['start']),
+            'end_value' => strtotime($exception['end']),
+            'interval' => $exception['recur_number'],
+            'repeat' => $exception['recur_interval'],
+          ];
         }
       }
 
       $node->field_exceptions2 = [];
-      foreach ($data['secondary_exceptions'] as $exception) {
-        if (!empty($exception)) {
-          $times = $exceptions[$exception];
-          foreach ($times as $time) {
-            if (strpos($time, ' to ') !== FALSE) {
-              $timerange = explode(' to ', $time);
-              $value = strtotime($timerange[0]);
-              $end_value = strtotime($timerange[1]);
-            }
-            else {
-              $value = strtotime($time);
-              $end_value = NULL;
-            }
-            $node->field_exceptions2[] = [
-              'value' => $value,
-              'end_value' => $end_value,
-            ];
-          }
+      if (array_key_exists($d7id, $nodedata_exceptions2)) {
+        foreach ($nodedata_exceptions2[$d7id] as $exception) {
+          $node->field_exceptions2[] = [
+            'value' => strtotime($exception['start']),
+            'end_value' => strtotime($exception['end']),
+            'interval' => $exception['recur_number'],
+            'repeat' => $exception['recur_interval'],
+          ];
         }
       }
 
