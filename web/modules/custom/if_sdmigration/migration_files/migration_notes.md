@@ -26,7 +26,6 @@ lando terminus drush import:menus
 
 Entity creation and associations:
 lando terminus drush import:department
-lando terminus drush import:department-fixes
 lando terminus drush import:department-parent
 lando terminus drush import:bucket
 lando terminus drush import:location
@@ -34,6 +33,9 @@ lando terminus drush import:mayoral-artifact
 lando terminus drush import:outreach
 lando terminus drush import:reusable-components
 lando terminus drush import:hero
+
+Fix class names/HTML content cleanup:
+lando terminus drush import:class-fixes
 
 Data status: 9/26/2022
 Nodes:

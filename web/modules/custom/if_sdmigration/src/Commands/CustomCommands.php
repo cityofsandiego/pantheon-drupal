@@ -1502,24 +1502,29 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
-   * Manual department node content fixes.
+   * Manual node full_html content fixes.
    *
-   * @command import:department-fixes
+   * @command import:class-fixes
    *
-   * @usage import:department-fixes
+   * @usage import:class-fixes
    *
    */
-  public function departmentFixes() {
+  public function contentFixes() {
     // Load nodes.
     $query = $this->entityTypeManager
       ->getStorage('node')
       ->getQuery();
-    $query->condition('type', 'department');
+    $query->condition('type', ['department', 'location'], 'IN');
     $nids = $query->execute();
     foreach ($nids as $id) {
       \Drupal::service('entity.memory_cache')->deleteAll();
       $node = Node::load($id);
-      $sidebar_html = $node->field_sidebar->value;
+      if ($node->hasField('field_sidebar')) {
+        $sidebar_html = $node->field_sidebar->value;
+      }
+      else {
+        $sidebar_html = NULL;
+      }
       $body_html = $node->body->value;
       if (strpos($sidebar_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
         $sidebar_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $sidebar_html);
