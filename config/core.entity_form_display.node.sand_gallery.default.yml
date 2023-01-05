@@ -156,10 +156,14 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_sand_gallery_folderimage:
-    type: options_buttons
+    type: entity_reference_autocomplete
     weight: 15
     region: content
-    settings: {  }
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings:
       conditional_fields:
         64665548-8131-4803-b97f-0b99df00926d:
