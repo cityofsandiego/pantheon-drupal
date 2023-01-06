@@ -148,7 +148,7 @@ final class Node implements EventSubscriberInterface {
 
   public function preprocessTitleBlock(BlockPreprocessEvent $event): void {
     $variables = $event->getVariables();
-    $content_types = ['department', 'location'];
+    $content_types = ['department', 'location', 'department_document'];
 
     if ($variables->get('base_plugin_id') == 'page_title_block') {
       $node = \Drupal::routeMatch()->getParameter('node');
@@ -259,6 +259,15 @@ final class Node implements EventSubscriberInterface {
         ]);
 
       }
+    }
+
+    //Preprocess Department document file to get URL
+    if (!$node->field_attachment->isEmpty()) {
+      $attachment = $this->entityTypeManager->getStorage('media')
+        ->load( $node->get('field_attachment')->getValue()[0]['target_id']);
+      $field_id = $attachment->getSource()->getSourceFieldValue( $attachment);
+      $file_url = File::load($field_id);
+      $variables->set('attachment_url', $file_url->createFileUrl());
     }
   }
 
