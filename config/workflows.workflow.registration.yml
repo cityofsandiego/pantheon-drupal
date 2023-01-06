@@ -13,56 +13,56 @@ type_settings:
   states:
     canceled:
       label: Canceled
-      description: 'Registration has been canceled.'
+      weight: 3
       active: false
       canceled: true
       held: false
       show_on_form: false
-      weight: 3
+      description: 'Registration has been canceled.'
     complete:
       label: Complete
-      description: 'Registration has been completed.'
+      weight: 2
       active: true
       canceled: false
       held: false
       show_on_form: false
-      weight: 2
+      description: 'Registration has been completed.'
     held:
       label: Held
-      description: 'Registration is held.'
+      weight: 1
       active: false
       canceled: false
       held: true
       show_on_form: false
-      weight: 1
+      description: 'Registration is held.'
     pending:
       label: Pending
-      description: 'Registration is pending.'
+      weight: 0
       active: true
       canceled: false
       held: false
       show_on_form: false
-      weight: 0
+      description: 'Registration is pending.'
   transitions:
-    complete:
-      label: Complete
-      to: complete
-      weight: 0
-      from:
-        - pending
-        - held
-    hold:
-      label: Hold
-      to: held
-      weight: 1
-      from:
-        - pending
     cancel:
       label: Cancel
-      to: canceled
-      weight: 2
       from:
         - complete
         - pending
         - held
+      to: canceled
+      weight: 2
+    complete:
+      label: Complete
+      from:
+        - pending
+        - held
+      to: complete
+      weight: 0
+    hold:
+      label: Hold
+      from:
+        - pending
+      to: held
+      weight: 1
   default_registration_state: pending
