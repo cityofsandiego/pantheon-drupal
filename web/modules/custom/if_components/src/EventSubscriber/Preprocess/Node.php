@@ -261,13 +261,17 @@ final class Node implements EventSubscriberInterface {
       }
     }
 
-    //Preprocess Department document file to get URL
-    if (!$node->field_attachment->isEmpty()) {
-      $attachment = $this->entityTypeManager->getStorage('media')
-        ->load( $node->get('field_attachment')->getValue()[0]['target_id']);
-      $field_id = $attachment->getSource()->getSourceFieldValue( $attachment);
-      $file_url = File::load($field_id);
-      $variables->set('attachment_url', $file_url->createFileUrl());
+    // //Preprocess Department document file to get URL
+    if ($node->hasField('field_attachment')) {
+      $field_attachment = $node->field_attachment->getValue();
+      
+      if (!empty($field_attachment)) {
+        $attachment = $this->entityTypeManager->getStorage('media')
+          ->load( $node->get('field_attachment')->getValue()[0]['target_id']);
+        $field_id = $attachment->getSource()->getSourceFieldValue( $attachment);
+        $file_url = File::load($field_id);
+        $variables->set('attachment_url', $file_url->createFileUrl());
+      }
     }
   }
 
