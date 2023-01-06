@@ -7,9 +7,11 @@ dependencies:
     - field.field.node.registration.field_reg_date
     - field.field.node.registration.field_reg_display_to_role
     - field.field.node.registration.field_reg_event_location
+    - field.field.node.registration.field_reg_registration
     - node.type.registration
   module:
     - datetime
+    - registration
     - text
     - user
 id: node.registration.default
@@ -40,6 +42,13 @@ content:
       link: true
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_reg_registration:
+    type: registration_type
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
     region: content
   links:
     settings: {  }
