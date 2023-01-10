@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\sandremote\Entity;
+namespace Drupal\sand_remote\Entity;
 
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Entity\ContentEntityBase;
@@ -8,7 +8,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\sandremote\SandremoteInterface;
+use Drupal\sand_remote\SandremoteInterface;
 use Drupal\user\EntityOwnerTrait;
 
 /* For creating a "file" to pass to tika */
@@ -19,33 +19,33 @@ use Drupal\Component\Utility\Xss;
 use Recurr\Exception;
 
 /**
- * Defines the sandremote entity class.
+ * Defines the sand_remote entity class.
  *
  * @ContentEntityType(
- *   id = "sandremote",
- *   label = @Translation("Sandremote"),
+ *   id = "sand_remote",
+ *   label = @Translation("Remote Data"),
  *   label_collection = @Translation("Sandremotes"),
- *   label_singular = @Translation("sandremote"),
- *   label_plural = @Translation("sandremotes"),
+ *   label_singular = @Translation("sand_remote"),
+ *   label_plural = @Translation("sand_remotes"),
  *   label_count = @PluralTranslation(
- *     singular = "@count sandremotes",
- *     plural = "@count sandremotes",
+ *     singular = "@count sand_remotes",
+ *     plural = "@count sand_remotes",
  *   ),
  *   bundle_label = @Translation("Sandremote type"),
  *   handlers = {
- *     "list_builder" = "Drupal\sandremote\SandremoteListBuilder",
+ *     "list_builder" = "Drupal\sand_remote\SandremoteListBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
  *     "form" = {
- *       "add" = "Drupal\sandremote\Form\SandremoteForm",
- *       "edit" = "Drupal\sandremote\Form\SandremoteForm",
+ *       "add" = "Drupal\sand_remote\Form\SandremoteForm",
+ *       "edit" = "Drupal\sand_remote\Form\SandremoteForm",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
  *     "route_provider" = {
  *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
  *     }
  *   },
- *   base_table = "sandremote",
- *   admin_permission = "administer sandremote types",
+ *   base_table = "sand_remote",
+ *   admin_permission = "administer sand_remote types",
  *   entity_keys = {
  *     "id" = "id",
  *     "bundle" = "bundle",
@@ -54,15 +54,15 @@ use Recurr\Exception;
  *     "owner" = "uid",
  *   },
  *   links = {
- *     "collection" = "/admin/content/sandremote",
- *     "add-form" = "/sandremote/add/{sandremote_type}",
- *     "add-page" = "/sandremote/add",
- *     "canonical" = "/sandremote/{sandremote}",
- *     "edit-form" = "/sandremote/{sandremote}/edit",
- *     "delete-form" = "/sandremote/{sandremote}/delete",
+ *     "collection" = "/admin/content/sand_remote",
+ *     "add-form" = "/sand_remote/add/{sand_remote_type}",
+ *     "add-page" = "/sand_remote/add",
+ *     "canonical" = "/sand_remote/{sand_remote}",
+ *     "edit-form" = "/sand_remote/{sand_remote}/edit",
+ *     "delete-form" = "/sand_remote/{sand_remote}/delete",
  *   },
- *   bundle_entity_type = "sandremote_type",
- *   field_ui_base_route = "entity.sandremote_type.edit_form",
+ *   bundle_entity_type = "sand_remote_type",
+ *   field_ui_base_route = "entity.sand_remote_type.edit_form",
  * )
  */
 class Sandremote extends ContentEntityBase implements SandremoteInterface {
@@ -101,7 +101,7 @@ class Sandremote extends ContentEntityBase implements SandremoteInterface {
     try {
       $text = iconv("UTF-8", "UTF-8//IGNORE", $string);
     } catch (Exception $exception) {
-      \Drupal::logger('sandremote')
+      \Drupal::logger('sand_remote')
         ->error('Error trying to extract text on Sandremote ID: %id, on URL: %url, error: %error', ['%id' => $this->id(), '%url' => $this->field_url->value, '%error' => $exception->getMessage()]);
       $text = $string;
     }
@@ -149,7 +149,7 @@ class Sandremote extends ContentEntityBase implements SandremoteInterface {
       $extracted_data = $extractor_plugin->extract($file);
       return $this->cleanExtractedData($extracted_data);
     } catch (\Exception $e) {
-      \Drupal::logger('sandremote')
+      \Drupal::logger('sand_remote')
         ->error('Error trying to extract text on Sandremote ID: %id, on URL: %url, error: %error', ['%id' => $this->id(), '%url' => $this->field_url->value, '%error' => $e->getMessage()]);
       return '';
     }
@@ -267,7 +267,7 @@ class Sandremote extends ContentEntityBase implements SandremoteInterface {
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Authored on'))
-      ->setDescription(t('The time that the sandremote was created.'))
+      ->setDescription(t('The time that the sand_remote was created.'))
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'timestamp',
@@ -282,7 +282,7 @@ class Sandremote extends ContentEntityBase implements SandremoteInterface {
 
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
-      ->setDescription(t('The time that the sandremote was last edited.'));
+      ->setDescription(t('The time that the sand_remote was last edited.'));
 
     return $fields;
   }

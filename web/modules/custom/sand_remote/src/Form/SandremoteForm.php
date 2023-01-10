@@ -1,12 +1,12 @@
 <?php
 
-namespace Drupal\sandremote\Form;
+namespace Drupal\sand_remote\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Form controller for the sandremote entity edit forms.
+ * Form controller for the sand_remote entity edit forms.
  */
 class SandremoteForm extends ContentEntityForm {
 
@@ -26,17 +26,17 @@ class SandremoteForm extends ContentEntityForm {
 
     switch ($result) {
       case SAVED_NEW:
-        $this->messenger()->addStatus($this->t('New sandremote %label has been created.', $message_arguments));
-        $this->logger('sandremote')->notice('Created new sandremote %label', $logger_arguments);
+        $this->messenger()->addStatus($this->t('New sand_remote %label has been created.', $message_arguments));
+        $this->logger('sand_remote')->notice('Created new sand_remote %label', $logger_arguments);
         break;
 
       case SAVED_UPDATED:
-        $this->messenger()->addStatus($this->t('The sandremote %label has been updated.', $message_arguments));
-        $this->logger('sandremote')->notice('Updated sandremote %label.', $logger_arguments);
+        $this->messenger()->addStatus($this->t('The sand_remote %label has been updated.', $message_arguments));
+        $this->logger('sand_remote')->notice('Updated sand_remote %label.', $logger_arguments);
         break;
     }
 
-    $form_state->setRedirect('entity.sandremote.canonical', ['sandremote' => $entity->id()]);
+    $form_state->setRedirect('entity.sand_remote.canonical', ['sand_remote' => $entity->id()]);
 
     return $result;
   }

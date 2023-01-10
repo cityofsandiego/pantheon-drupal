@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\sandremote\Form;
+namespace Drupal\sand_remote\Form;
 
 use Drupal\Core\Entity\BundleEntityFormBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Form handler for sandremote type forms.
+ * Form handler for sand_remote type forms.
  */
 class SandremoteTypeForm extends BundleEntityFormBase {
 
@@ -19,14 +19,14 @@ class SandremoteTypeForm extends BundleEntityFormBase {
 
     $entity_type = $this->entity;
     if ($this->operation == 'edit') {
-      $form['#title'] = $this->t('Edit %label sandremote type', ['%label' => $entity_type->label()]);
+      $form['#title'] = $this->t('Edit %label sand_remote type', ['%label' => $entity_type->label()]);
     }
 
     $form['label'] = [
       '#title' => $this->t('Label'),
       '#type' => 'textfield',
       '#default_value' => $entity_type->label(),
-      '#description' => $this->t('The human-readable name of this sandremote type.'),
+      '#description' => $this->t('The human-readable name of this sand_remote type.'),
       '#required' => TRUE,
       '#size' => 30,
     ];
@@ -36,10 +36,10 @@ class SandremoteTypeForm extends BundleEntityFormBase {
       '#default_value' => $entity_type->id(),
       '#maxlength' => EntityTypeInterface::BUNDLE_MAX_LENGTH,
       '#machine_name' => [
-        'exists' => ['Drupal\sandremote\Entity\SandremoteType', 'load'],
+        'exists' => ['Drupal\sand_remote\Entity\SandremoteType', 'load'],
         'source' => ['label'],
       ],
-      '#description' => $this->t('A unique machine-readable name for this sandremote type. It must only contain lowercase letters, numbers, and underscores.'),
+      '#description' => $this->t('A unique machine-readable name for this sand_remote type. It must only contain lowercase letters, numbers, and underscores.'),
     ];
 
     return $this->protectBundleIdElement($form);
@@ -50,8 +50,8 @@ class SandremoteTypeForm extends BundleEntityFormBase {
    */
   protected function actions(array $form, FormStateInterface $form_state) {
     $actions = parent::actions($form, $form_state);
-    $actions['submit']['#value'] = $this->t('Save sandremote type');
-    $actions['delete']['#value'] = $this->t('Delete sandremote type');
+    $actions['submit']['#value'] = $this->t('Save sand_remote type');
+    $actions['delete']['#value'] = $this->t('Delete sand_remote type');
     return $actions;
   }
 
@@ -68,10 +68,10 @@ class SandremoteTypeForm extends BundleEntityFormBase {
 
     $t_args = ['%name' => $entity_type->label()];
     if ($status == SAVED_UPDATED) {
-      $message = $this->t('The sandremote type %name has been updated.', $t_args);
+      $message = $this->t('The sand_remote type %name has been updated.', $t_args);
     }
     elseif ($status == SAVED_NEW) {
-      $message = $this->t('The sandremote type %name has been added.', $t_args);
+      $message = $this->t('The sand_remote type %name has been added.', $t_args);
     }
     $this->messenger()->addStatus($message);
 
