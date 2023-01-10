@@ -906,7 +906,6 @@ class CustomCommands extends DrushCommands {
       fgets($file);
       while ($data = fgetcsv($file)) {
         $nodedata[str_replace('`', '', $data[0])] = [
-          'path' => str_replace('`', '', $data[1]),
           'street' => str_replace('`', '', $data[3]),
           'additional' => str_replace('`', '', $data[4]),
           'city' => str_replace('`', '', $data[5]),
@@ -976,23 +975,70 @@ class CustomCommands extends DrushCommands {
 
     // Exceptions + Secondary exceptions
     $exceptions = [];
-    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_location_exceptions_coll.csv', 'r')) {
+    $exceptions2 = [];
+    $nodedata_exceptions = [];
+    $nodedata_exceptions2 = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_data_field_location_exceptions_coll.csv', 'r')) {
       fgets($file);
       while ($data = fgetcsv($file)) {
-        $id = str_replace('`', '', $data[0]);
-        $id = str_replace(',', '', $id);
-        $exceptions[$id] = explode('|', str_replace('`', '', $data[1]));
+        $entity_id = str_replace('"', '', $data[3]);
+        $delta = str_replace('"', '', $data[6]);
+        $field_collection_id = str_replace('"', '', $data[7]);
+        $exceptions[$field_collection_id] = [
+          'entity_id' => $entity_id,
+          'delta' => $delta,
+        ];
       }
       fclose($file);
     }
-    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_location_exceptions_coll2.csv', 'r')) {
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_data_field_location_exceptions_coll2.csv', 'r')) {
       fgets($file);
       while ($data = fgetcsv($file)) {
-        $id = str_replace('`', '', $data[0]);
-        $id = str_replace(',', '', $id);
-        $exceptions[$id] = explode('|', str_replace('`', '', $data[1]));
+        $entity_id = str_replace('"', '', $data[3]);
+        $delta = str_replace('"', '', $data[6]);
+        $field_collection_id = str_replace('"', '', $data[7]);
+        $exceptions2[$field_collection_id] = [
+          'entity_id' => $entity_id,
+          'delta' => $delta,
+        ];
       }
       fclose($file);
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_data_field_office_exception_date.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $field_collection_id = str_replace('"', '', $data[3]);
+        if (array_key_exists($field_collection_id, $exceptions)) {
+          $extra_data = explode(';', str_replace('"', '', $data[9]));
+          $recur_interval = str_replace('RRULE:FREQ=', '', $extra_data[0]);
+          $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
+          $nodedata_exceptions[$exceptions[$field_collection_id]['entity_id']][$exceptions[$field_collection_id]['delta']] = [
+            'start' => str_replace('"', '', $data[7]),
+            'end' => str_replace('"', '', $data[8]),
+            'recur_number' => $recur_number,
+            'recur_interval' => $recur_interval,
+          ];
+        }
+      }
+      fclose($file);
+      if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field_data_field_office_exception_date2.csv', 'r')) {
+        fgets($file);
+        while ($data = fgetcsv($file)) {
+          $field_collection_id = str_replace('"', '', $data[3]);
+          if (array_key_exists($field_collection_id, $exceptions2)) {
+            $extra_data = explode(';', str_replace('"', '', $data[9]));
+            $recur_interval = str_replace('RRULE:FREQ=', '', $extra_data[0]);
+            $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
+            $nodedata_exceptions2[$exceptions2[$field_collection_id]['entity_id']][$exceptions2[$field_collection_id]['delta']] = [
+              'start' => str_replace('"', '', $data[7]),
+              'end' => str_replace('"', '', $data[8]),
+              'recur_number' => $recur_number,
+              'recur_interval' => $recur_interval,
+            ];
+          }
+        }
+        fclose($file);
+      }
     }
 
     // Manually update each node.
@@ -1005,12 +1051,6 @@ class CustomCommands extends DrushCommands {
         ->condition('field_d7_nid', $d7id);
       $nid = reset($query->execute());
       $node = Node::load($nid);
-
-      // Set alias.
-      $node->path = [
-        'alias' => $data['path'],
-        'pathauto' => PathautoState::SKIP,
-      ];
 
       // Set address.
       $node->field_address = [
@@ -1108,49 +1148,29 @@ class CustomCommands extends DrushCommands {
       $node->field_location_bucket = $term;
 
       $term = Term::load($this->taxonomyImportTasks->newTid($data['location_type'], 'location'));
-      $node->field_location_location_type = $term;
+      $node->field_location_type = $term;
 
       $node->field_exceptions = [];
-      foreach ($data['exceptions'] as $exception) {
-        if (!empty($exception)) {
-          $times = $exceptions[$exception];
-          foreach ($times as $time) {
-            if (strpos($time, ' to ') !== FALSE) {
-              $timerange = explode(' to ', $time);
-              $value = strtotime($timerange[0]);
-              $end_value = strtotime($timerange[1]);
-            }
-            else {
-              $value = strtotime($time);
-              $end_value = NULL;
-            }
-            $node->field_exceptions[] = [
-              'value' => $value,
-              'end_value' => $end_value,
-            ];
-          }
+      if (array_key_exists($d7id, $nodedata_exceptions)) {
+        foreach ($nodedata_exceptions[$d7id] as $exception) {
+          $node->field_exceptions[] = [
+            'value' => strtotime($exception['start']),
+            'end_value' => strtotime($exception['end']),
+            'interval' => $exception['recur_number'],
+            'repeat' => $exception['recur_interval'],
+          ];
         }
       }
 
       $node->field_exceptions2 = [];
-      foreach ($data['secondary_exceptions'] as $exception) {
-        if (!empty($exception)) {
-          $times = $exceptions[$exception];
-          foreach ($times as $time) {
-            if (strpos($time, ' to ') !== FALSE) {
-              $timerange = explode(' to ', $time);
-              $value = strtotime($timerange[0]);
-              $end_value = strtotime($timerange[1]);
-            }
-            else {
-              $value = strtotime($time);
-              $end_value = NULL;
-            }
-            $node->field_exceptions2[] = [
-              'value' => $value,
-              'end_value' => $end_value,
-            ];
-          }
+      if (array_key_exists($d7id, $nodedata_exceptions2)) {
+        foreach ($nodedata_exceptions2[$d7id] as $exception) {
+          $node->field_exceptions2[] = [
+            'value' => strtotime($exception['start']),
+            'end_value' => strtotime($exception['end']),
+            'interval' => $exception['recur_number'],
+            'repeat' => $exception['recur_interval'],
+          ];
         }
       }
 
@@ -1392,24 +1412,119 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
-   * Manual department node content fixes.
+   * Finalize hero node import.
    *
-   * @command import:department-fixes
+   * @command import:hero
    *
-   * @usage import:department-fixes
+   * @usage import:hero
+   */
+  public function finalizeHero() {
+    $nodedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/hero.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'department' => explode('|', str_replace('`', '', $data[1])),
+          'image_department' => str_replace('`', '', $data[2]),
+          'image_license' => str_replace('`', '', $data[3]),
+          'image_alt' => str_replace('`', '', $data[4]),
+          'image_d7id' => str_replace('`', '', $data[5]),
+          'image_path' => str_replace('`', '', $data[6]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'hero')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+
+      $node->field_department->setValue([]);
+      foreach ($data['department'] as $department) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+        $node->field_department->appendItem($term);
+      }
+
+      if (!empty($data['image_path'])) {
+        $prior_image = $this->checkMediaId($data['image_d7id']);
+        if ($prior_image == NULL) {
+          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
+          $file_data = file_get_contents($remote_file);
+          // Fixes for irregular paths.
+          $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
+          $local_destination = str_replace('default_images', '', $local_destination);
+          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+          $local_destination = str_replace('hero', '', $local_destination);
+          $local_destination = str_replace('public://', '', $local_destination);
+          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+          $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
+
+          $image = Media::create([
+            'bundle' => 'image',
+            'uid' => 0,
+            'field_media_image' => [
+              'target_id' => $local_file->id(),
+              'alt' => $data['image_alt']
+            ],
+            'field_d7_mid' => $data['image_d7id'],
+          ]);
+          if (!empty($data['image_license'])) {
+            $image->field_license = $data['image_license'];
+          }
+          foreach ($image_department as $department) {
+            $image->field_department->appendItem([
+              'target_id' => $department,
+            ]);
+          }
+          $image->save();
+        }
+        else {
+          $image = Media::load($prior_image);
+        }
+      }
+      else {
+        $image = NULL;
+      }
+      $node->field_image = $image;
+
+      $node->save();
+      echo $node->id() . PHP_EOL;
+    }
+  }
+
+  /**
+   * Manual node full_html content fixes.
+   *
+   * @command import:class-fixes
+   *
+   * @usage import:class-fixes
    *
    */
-  public function departmentFixes() {
+  public function contentFixes() {
     // Load nodes.
     $query = $this->entityTypeManager
       ->getStorage('node')
       ->getQuery();
-    $query->condition('type', 'department');
+    $query->condition('type', ['department', 'location'], 'IN');
     $nids = $query->execute();
     foreach ($nids as $id) {
       \Drupal::service('entity.memory_cache')->deleteAll();
       $node = Node::load($id);
-      $sidebar_html = $node->field_sidebar->value;
+      if ($node->hasField('field_sidebar')) {
+        $sidebar_html = $node->field_sidebar->value;
+      }
+      else {
+        $sidebar_html = NULL;
+      }
       $body_html = $node->body->value;
       if (strpos($sidebar_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
         $sidebar_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $sidebar_html);
@@ -1565,6 +1680,44 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   * Delete D7 menus to delete all links.
+   *
+   * @command import:delete-menus
+   *
+   * @usage import:delete-menus
+   */
+  public function deleteMenus() {
+    $ignore_list = [
+      'devel',
+      'features',
+      'main-menu',
+      'management',
+      'navigation',
+      'user-menu',
+    ];
+    $menu = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/menu_custom.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $menu_id = str_replace('`', '', $data[0]);
+        if (!in_array($menu_id, $ignore_list)) {
+          $menu[$menu_id] = str_replace('`', '', $data[1]);
+        }
+      }
+      fclose($file);
+    }
+    foreach ($menu as $menu_id => $label) {
+      $menu_entity = $this->entityTypeManager->getStorage('menu')
+        ->loadByProperties(['id' => $menu_id]);
+      if (!empty($menu_entity)) {
+        // Delete menu.
+        $menu_entity = reset($menu_entity);
+        $menu_entity->delete();
+      }
+    }
+  }
+
+  /**
    * Recreate D7 menus.
    *
    * @command import:menus
@@ -1586,6 +1739,11 @@ class CustomCommands extends DrushCommands {
     if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/menu_links.csv', 'r')) {
       fgets($file);
       while ($data = fgetcsv($file)) {
+        $hidden = str_replace('`', '', $data[8]);
+        if ($hidden == 1) {
+          // This is a hidden link; ignore.
+          continue;
+        }
         $menu_name = str_replace('`', '', $data[0]);
         if (in_array($menu_name, $ignore_list)) {
           continue;
@@ -1615,31 +1773,7 @@ class CustomCommands extends DrushCommands {
         $link_external = str_replace('`', '', $data[9]);
         $link_weight = str_replace('`', '', $data[12]);
         $link_d7id = str_replace('`', '', $data[1]);
-        $depth = str_replace('`', '', $data[13]);
-        switch ($depth) {
-          case 1:
-            $link_parent = $data[15];
-            break;
-          case 2:
-            $link_parent = $data[16];
-            break;
-          case 3:
-            $link_parent = $data[17];
-            break;
-          case 4:
-            $link_parent = $data[18];
-            break;
-          case 5:
-            $link_parent = $data[19];
-            break;
-          case 6:
-            $link_parent = $data[20];
-            break;
-          case 7:
-            $link_parent = $data[21];
-            break;
-        }
-        $link_parent = str_replace('`', '', $link_parent);
+        $link_parent = str_replace('`', '', $data[2]);
         $menu_links[$menu_name][$link_d7id] = [
           'path' => $link_path,
           'title' => $link_title,
@@ -1689,7 +1823,8 @@ class CustomCommands extends DrushCommands {
     $menu_d7id_uuid = [];
     foreach ($menu_links as $menu_id => $items) {
       foreach ($items as $d7id => $item) {
-        if ($item['parent'] == $d7id || $item['parent'] == 1) {
+
+        if ($item['parent'] == $d7id || $item['parent'] == 0) {
           $parent = NULL;
         }
         else {

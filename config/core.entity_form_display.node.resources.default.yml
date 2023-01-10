@@ -1,0 +1,402 @@
+uuid: 8f41368a-b9ad-4a3d-b975-07e8091d69ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.resources.body
+    - field.field.node.resources.field_address
+    - field.field.node.resources.field_category
+    - field.field.node.resources.field_company
+    - field.field.node.resources.field_contact
+    - field.field.node.resources.field_department
+    - field.field.node.resources.field_edit_notes
+    - field.field.node.resources.field_email
+    - field.field.node.resources.field_image
+    - field.field.node.resources.field_import_id
+    - field.field.node.resources.field_internet
+    - field.field.node.resources.field_laptop
+    - field.field.node.resources.field_number_of_computers
+    - field.field.node.resources.field_phone
+    - field.field.node.resources.field_phone_in_room
+    - field.field.node.resources.field_position
+    - field.field.node.resources.field_projector_big_screen
+    - field.field.node.resources.field_resource_description
+    - field.field.node.resources.field_resource_first_name
+    - field.field.node.resources.field_resource_group
+    - field.field.node.resources.field_resource_type
+    - field.field.node.resources.field_room_capacity
+    - field.field.node.resources.field_url
+    - node.type.resources
+  module:
+    - address
+    - field_group
+    - link
+    - path
+    - scheduler
+    - scheduler_content_moderation_integration
+    - telephone
+    - text
+third_party_settings:
+  field_group:
+    group_main_tabs:
+      children:
+        - group_content
+        - group_type
+        - group_vocabularies
+        - group_update_notes
+      label: 'Main Tabs'
+      region: content
+      parent_name: ''
+      weight: 14
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: horizontal
+        width_breakpoint: 640
+    group_content:
+      children:
+        - body
+        - field_resource_description
+        - field_phone
+        - field_email
+        - field_url
+        - field_address
+      label: Content
+      region: content
+      parent_name: group_main_tabs
+      weight: 15
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_type:
+      children:
+        - field_resource_type
+        - field_internet
+        - field_laptop
+        - field_projector_big_screen
+        - field_room_capacity
+        - field_phone_in_room
+        - field_number_of_computers
+        - field_company
+        - field_resource_first_name
+        - field_contact
+        - field_image
+        - field_position
+        - field_resource_group
+      label: Type
+      region: content
+      parent_name: group_main_tabs
+      weight: 16
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_vocabularies:
+      children:
+        - field_department
+        - field_category
+      label: Vocabularies
+      region: content
+      parent_name: group_main_tabs
+      weight: 17
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_update_notes:
+      children:
+        - field_edit_notes
+      label: 'Update Notes'
+      region: content
+      parent_name: group_main_tabs
+      weight: 18
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+id: node.resources.default
+targetEntityType: node
+bundle: resources
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 14
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_address:
+    type: address_default
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_category:
+    type: entity_reference_autocomplete
+    weight: 24
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_company:
+    type: string_textfield
+    weight: 23
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_contact:
+    type: string_textfield
+    weight: 25
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_department:
+    type: entity_reference_autocomplete
+    weight: 23
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_edit_notes:
+    type: string_textarea
+    weight: 22
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_email:
+    type: email_default
+    weight: 17
+    region: content
+    settings:
+      placeholder: ''
+      size: 60
+    third_party_settings: {  }
+  field_image:
+    type: entity_reference_autocomplete
+    weight: 26
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_import_id:
+    type: number
+    weight: 13
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_internet:
+    type: options_select
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_laptop:
+    type: options_select
+    weight: 18
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_number_of_computers:
+    type: number
+    weight: 22
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_phone:
+    type: telephone_default
+    weight: 16
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_phone_in_room:
+    type: options_select
+    weight: 21
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_position:
+    type: string_textfield
+    weight: 27
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_projector_big_screen:
+    type: options_select
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_resource_description:
+    type: text_textarea_with_summary
+    weight: 15
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_resource_first_name:
+    type: string_textfield
+    weight: 24
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_resource_group:
+    type: options_select
+    weight: 28
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_resource_type:
+    type: options_select
+    weight: 16
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_room_capacity:
+    type: number
+    weight: 20
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_url:
+    type: link_default
+    weight: 18
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 12
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

@@ -9,6 +9,7 @@
  */
 
 use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Url;
 
@@ -64,6 +65,15 @@ function sand_theme_suggestions_menu_alter(array &$suggestions, array $variables
 }
 
 /**
+ * Implements hook_theme_suggestions_page_alter().
+ */
+function sand_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+	  $suggestions[] = 'page__' . $node->bundle();
+  }
+}
+
+/**
  * Implements hook_preprocess_media().
  */
 function sand_preprocess_media(&$variables) {
@@ -106,6 +116,42 @@ function sand_preprocess_media(&$variables) {
     $variables['video_title'] = $video_title;
     // Create variable for image URL.
     $variables['video_thumbnail'] = $file_url;
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function sand_preprocess_paragraph(array &$variables) {
+  // Load the paragraph.
+  $paragraph = $variables['elements']['#paragraph'];
+
+  // Only do this to the image.
+  if ($paragraph->hasField('field_image') && $paragraph->get('field_image')->getValue()) {
+    // Get the media entity id.
+    $image = $paragraph->get('field_image')->first()->getValue();
+    $image = $image['target_id'];
+
+    // Load the media. TODO: Leverage Cobb LoadMedia() service.
+    $media = Media::load($image);
+
+    if (!empty($media) && $media->hasField('field_media_image')) {
+      // Get the file ID.
+      $fid = $media->field_media_image->target_id;
+      // Load it.
+      $file = File::load($fid);
+      // Get image URL.
+      $file_uri = $file->getFileUri();
+      // Create URL for image.
+      $file_url = Url::fromUri(file_create_url($file_uri))->toString();
+
+      if (!empty($file) && method_exists($file, 'getFileUri')) {
+        // Get the image URL + alt txt.
+        $variables['img_url'] = $file->getFileUri();
+        $variables['img_url_string'] = $file_url;
+        $variables['img_alt'] = $media->field_media_image->alt;
+      }
+    }
   }
 }
 

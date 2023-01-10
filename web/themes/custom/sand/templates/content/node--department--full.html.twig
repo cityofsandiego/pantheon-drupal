@@ -105,7 +105,16 @@
               <h2>{{ sidemenu.title }}</h2>
               <ul class="sidebar-menu">
                 {% for item in sidemenu.items %}
-                  <li{% if item.is_active == true %} class="active"{% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
+                  <li{% if item.classes is not empty %} class="{% for class in item.classes %}{{ class }} {% endfor %}"{% endif %}>
+                    <a href="{{ item.url }}">{{ item.title }}</a>
+                    {% if item.children is not empty %}
+                      <ul>
+                        {% for child in item.children %}
+                          <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </li>
                 {% endfor %}
               </ul>
             {% endif %}

@@ -12,7 +12,6 @@ dependencies:
     - field.field.node.business_resource.field_business_target_business
     - field.field.node.business_resource.field_business_typeof_assistance
     - field.field.node.business_resource.field_search_keymatch
-    - field.field.node.business_resource.field_summary
     - node.type.business_resource
   module:
     - field_group
@@ -30,7 +29,7 @@ third_party_settings:
       label: 'Main Tabs'
       region: content
       parent_name: ''
-      weight: 23
+      weight: 14
       format_type: tabs
       format_settings:
         classes: ''
@@ -59,7 +58,6 @@ third_party_settings:
         required_fields: true
     group_vocabularies:
       children:
-        - field_business_organization
         - field_business_typeof_assistance
         - field_business_target_business
         - field_search_keymatch
@@ -98,7 +96,7 @@ content:
     third_party_settings: {  }
   field_business_organization:
     type: entity_reference_autocomplete
-    weight: 15
+    weight: 13
     region: content
     settings:
       match_operator: CONTAINS
@@ -164,14 +162,6 @@ content:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_summary:
-    type: string_textarea
-    weight: 14
-    region: content
-    settings:
-      rows: 5
       placeholder: ''
     third_party_settings: {  }
   path:
