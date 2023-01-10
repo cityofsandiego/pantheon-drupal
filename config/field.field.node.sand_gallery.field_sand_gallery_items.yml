@@ -1,0 +1,29 @@
+uuid: 881cc721-ec04-4432-a61c-b43288a18242
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sand_gallery_items
+    - media.type.image
+    - node.type.sand_gallery
+id: node.sand_gallery.field_sand_gallery_items
+field_name: field_sand_gallery_items
+entity_type: node
+bundle: sand_gallery
+label: 'Gallery Items'
+description: "<p>Note that an image is always required so we can show that image for the album image. However, if you do not want the image to show under \"Photos\" then edit the image and add the tag \"hide\" to it.</p>\r\n<p>After Saving this new Gallery Page you will be able to add a folder image</p>"
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
