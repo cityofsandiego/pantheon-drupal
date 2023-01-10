@@ -88,15 +88,20 @@
     {{ content.body }}
 
     {% if content.field_attachment[0] %}
-      <a href={{ attachment_url }} target="_blank" class="file attachment d-flex">
-        <img class="file-icon" alt="PDF icon" title="application/pdf" src="/core/themes/classy/images/icons/application-pdf.png" />
+      <a href={{ attachment_url }} target="_blank" class="file attachment">
+        <span class="file-icon">
+          <img alt="PDF icon" title="application/pdf" src="/core/themes/classy/images/icons/application-pdf.png" />
+        </span>
         {{ label }}
       </a>
     {% endif %}
 
     {% if content.field_url[0] %}
-      <div class="file field_source d-flex"> 
-        <img class="file-icon" alt="PDF icon" title="application/pdf" src="/core/themes/classy/images/icons/application-pdf.png" />{{ content.field_url }}
+      <div class="file field_source"> 
+        <span class="file-icon">
+          <img alt="PDF icon" title="application/pdf" src="/core/themes/classy/images/icons/application-pdf.png" />
+        </span>
+        {{ content.field_url }}
       </div> 
     {% endif %}
   </div>
