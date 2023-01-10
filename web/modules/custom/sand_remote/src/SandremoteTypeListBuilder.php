@@ -1,15 +1,15 @@
 <?php
 
-namespace Drupal\sandremote;
+namespace Drupal\sand_remote;
 
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Url;
 
 /**
- * Defines a class to build a listing of sandremote type entities.
+ * Defines a class to build a listing of sand_remote type entities.
  *
- * @see \Drupal\sandremote\Entity\SandremoteType
+ * @see \Drupal\sand_remote\Entity\SandremoteType
  */
 class SandremoteTypeListBuilder extends ConfigEntityListBuilder {
 
@@ -41,8 +41,8 @@ class SandremoteTypeListBuilder extends ConfigEntityListBuilder {
     $build = parent::render();
 
     $build['table']['#empty'] = $this->t(
-      'No sandremote types available. <a href=":link">Add sandremote type</a>.',
-      [':link' => Url::fromRoute('entity.sandremote_type.add_form')->toString()]
+      'No sand_remote types available. <a href=":link">Add sand_remote type</a>.',
+      [':link' => Url::fromRoute('entity.sand_remote_type.add_form')->toString()]
     );
 
     return $build;

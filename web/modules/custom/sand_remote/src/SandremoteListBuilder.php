@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\sandremote;
+namespace Drupal\sand_remote;
 
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -10,7 +10,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a list controller for the sandremote entity type.
+ * Provides a list controller for the sand_remote entity type.
  */
 class SandremoteListBuilder extends EntityListBuilder {
 
@@ -59,7 +59,7 @@ class SandremoteListBuilder extends EntityListBuilder {
       ->count()
       ->execute();
 
-    $build['summary']['#markup'] = $this->t('Total sandremotes: @total', ['@total' => $total]);
+    $build['summary']['#markup'] = $this->t('Total sand_remotes: @total', ['@total' => $total]);
     return $build;
   }
 
@@ -80,7 +80,7 @@ class SandremoteListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /** @var \Drupal\sandremote\SandremoteInterface $entity */
+    /** @var \Drupal\sand_remote\SandremoteInterface $entity */
     $row['id'] = $entity->id();
     $row['label'] = $entity->toLink();
     $row['status'] = $entity->get('status')->value ? $this->t('Enabled') : $this->t('Disabled');
