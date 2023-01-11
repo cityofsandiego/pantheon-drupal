@@ -45,15 +45,31 @@
     'section-outreach2',
     hide_on_desktop,
     hide_on_mobile,
-    border_bottom
+    border_bottom,
+    image_style,
   ]
 %}
 
 {% block paragraph %}
   {% block content %}
-      <div {{ attributes.addClass(classes).setAttribute('style', bg_style) }}>
-        <div {{ text_attribute.addClass(text_classes)}}>
-          {{ content.field_body }}
+    {% if content.field_image.0 %}
+      <div {{ attributes.addClass(classes)
+        .setAttribute('style', bg_style)
+        .setAttribute('data-stellar-vertical-offset', vertical_offset) 
+        .setAttribute('data-stellar-background-ratio', scroll_ratio) 
+        .setAttribute('data-sand-min-height', min_height) 
+        .setAttribute('data-sand-adjustment-width', adjustment_width) 
+        .setAttribute('data-sand-adjustment-height', adjustment_height)
+        .setAttribute('data-sand-background-size', '')
+        }}  
+      >
+    {% else %}
+        <div {{ attributes.addClass(classes).setAttribute('style', bg_style) }}>
+    {% endif %}    
+        <div class="l-padding-desktop-hx l-padding-mobile-hm l-padding-vd">
+          <div {{ text_attribute.addClass(text_classes)}}>
+            {{ content.field_body }}
+          </div>
         </div>
       </div>
   {% endblock %}
