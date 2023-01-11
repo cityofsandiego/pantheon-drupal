@@ -36,13 +36,6 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
   protected $bgStyle = [];
 
   /**
-   * Background attributes.
-   *
-   * @var array
-   */
-  protected $bgAttributes = [];
-
-  /**
    * {@inheritdoc}
    */
   public static function getSubscribedEvents(): array {
@@ -68,8 +61,7 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
     $this->bgStyle = [];
     $this->textStyle = [];
 
-
-    // Set background image or background color
+    // Preprocess background image attributes and style
       if (!$paragraph->field_image->isEmpty()) {
         // Preprocess image to get URL
         $field_image = $paragraph->field_image->getValue();
@@ -77,18 +69,46 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
         // $image = $this->entityTypeManager->getStorage('media')
         // ->load( $paragraph->get('field_image')->getValue()[0]['target_id']);
         $url = 'http://san-diego-custom-code.lndo.site/sites/default/files/styles/large/public/downtown-skyline-.jpg?itok=QqEnXL6h';
-        // Use background_image
+        
+        // Build attribute style
         $this->bgStyle = [
-          'size' => 'background-size: 100%',
-          'position' => 'background-position: 50% 50%',
-          'min-height' => 'min-height: 300px',
+          // 'size' => 'background-size: 100%',
+          // 'position' => 'background-position: 50% 50%',
+          // 'min-height' => 'min-height: 300px',
           'image' => 'background-image: url(' . $url . ')',
         ];
+
+        //Create variables from field values to use them as attributes in twig template
+          $field_image_scroll_ratio = $paragraph->field_image_scroll_ratio->value;
+          $scroll_ratio = $field_image_scroll_ratio ? $field_image_scroll_ratio : '';
+          $variables->set('scroll_ratio', $scroll_ratio);
+
+          $field_vertical_offset = $paragraph->field_vertical_offset->value;
+          $vertical_offset = $field_vertical_offset ? $field_vertical_offset : '';
+          $variables->set('vertical_offset', $vertical_offset);
+
+          $field_minimum_height = $paragraph->field_minimum_height->value;
+          $min_height  = $field_minimum_height ? $field_minimum_height . 'px' : '300px';
+          $variables->set('min_height', $min_height);
+
+          $field_adjustment_width = $paragraph->field_adjustment_width->value;
+          $adjustment_width  = $field_adjustment_width ? $field_adjustment_width . 'px' : '';
+          $variables->set('adjustment_width', $adjustment_width);
+
+          $field_outreach_adjustment_height = $paragraph->field_outreach_adjustment_height->value;
+          $adjustment_height = $field_outreach_adjustment_height ? $field_outreach_adjustment_height . 'px' : '';
+          $variables->set('adjustment_height', $adjustment_height);
+
+          $field_background_size = $paragraph->field_background_size->value;
+          $sand_background_size = $field_background_size ? $field_background_size : '';
+          $variables->set('sand_background_size', $sand_background_size);
+        
+        $variables->set('image_style', 'stellar-window');
       } else {
         //Use background_color
         if ($paragraph->field_bg_color){
           $this->bgStyle = [
-            'bg-color' => 'background-color:' . $paragraph->field_bg_color->value,
+            'bg-color' => 'background-color: #' . $paragraph->field_bg_color->value,
           ];
         } else {
           $this->bgStyle = [
@@ -96,7 +116,7 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
           ];
         }
       };
-
+      $variables->set('bg_style', implode(";", $this->bgStyle));
 
     // Hide on desktop or mobile fields
       if ($paragraph->field_hide_on_desktop->value) {
@@ -118,7 +138,9 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
         $this->textStyle[] = 'no-styling';
       }
 
-    // Set border bottom (field_bottom_border)
+      $variables->set('text_classes', implode(" ", $this->textStyle));
+
+    // Create variable for border bottom (field_bottom_border)
     if (!$paragraph->field_bottom_border->isEmpty()) {
       
       $field_bottom_border = $paragraph->field_bottom_border->value;
@@ -138,9 +160,15 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
       $variables->set('border_bottom', $border);
     }
 
-    // Send array of style variables to the paragraph display.
-    $variables->set('bg_style', implode(";", $this->bgStyle));
-    $variables->set('bg_attributes', $this->bgAttributes);
-    $variables->set('text_classes', implode(" ", $this->textStyle));
+    //To-do: Ask SAND team about the use of
+    // - field_direction
+    // - field_full_width_mobile
+    // - field_horizontal
+    // - field_image_height
+    // - field_mobile_size
+    // - field_opacity
+    // - field_rate
+    // - field_repeat
+    // - field_vertical 
   }
 }
