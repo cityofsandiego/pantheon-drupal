@@ -38,19 +38,21 @@
  * @ingroup themeable
  */
 #}
+{% set text_attribute = create_attribute() %}
 
 {%
   set classes = [
     'section-outreach2',
+    hide_on_desktop,
+    hide_on_mobile,
+    border_bottom
   ]
 %}
-
-{% set text_class = content.field_centered ? 'text-center' : '' %}
 
 {% block paragraph %}
   {% block content %}
       <div {{ attributes.addClass(classes).setAttribute('style', bg_style) }}>
-        <div {{ attributes.addClass(text_class)}}>s
+        <div {{ text_attribute.addClass(text_classes)}}>
           {{ content.field_body }}
         </div>
       </div>
