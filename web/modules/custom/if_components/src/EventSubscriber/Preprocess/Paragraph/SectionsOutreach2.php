@@ -22,7 +22,7 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
   protected $entityTypeManager;
 
   /**
-   * Constructs a new Departments.
+   * Constructs a new Section.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   Entity type manager service.
@@ -81,7 +81,6 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
         $fid = $image->getSource()->getSourceFieldValue($image);
         $image_file = File::load($fid);
         $url = $image_file->createFileUrl();
-        // $url = 'http://san-diego-custom-code.lndo.site/sites/default/files/styles/large/public/downtown-skyline-.jpg?itok=QqEnXL6h';
         
         // Build attribute style
         $this->bgStyle = [
@@ -91,7 +90,7 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
           'image' => 'background-image: url(' . $url . ')',
         ];
 
-        //Create variables from field values to use them as attributes in twig template
+        //Set values for data attributes in Twig template.
           $field_image_scroll_ratio = $paragraph->field_image_scroll_ratio->value;
           $scroll_ratio = $field_image_scroll_ratio ? $field_image_scroll_ratio : '';
           $variables->set('scroll_ratio', $scroll_ratio);
@@ -131,7 +130,7 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
       };
       $variables->set('bg_style', implode(";", $this->bgStyle));
 
-    // Hide on desktop or mobile fields
+    // Hide on desktop or mobile
       if ($paragraph->field_hide_on_desktop->value) {
         $variables->set('hide_on_desktop', 'hide-on-desktop');
       } 
