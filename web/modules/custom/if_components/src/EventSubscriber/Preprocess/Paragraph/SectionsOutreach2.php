@@ -3,6 +3,7 @@
 namespace Drupal\if_components\EventSubscriber\Preprocess\Paragraph;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\file\Entity\File;
 use Drupal\preprocess_event_dispatcher\Event\ParagraphPreprocessEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -19,6 +20,16 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
+
+  /**
+   * Constructs a new Departments.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   Entity type manager service.
+   */
+  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+    $this->entityTypeManager = $entity_type_manager;
+  }
 
   /**
    * Text style.
@@ -66,9 +77,11 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
         // Preprocess image to get URL
         $field_image = $paragraph->field_image->getValue();
 
-        // $image = $this->entityTypeManager->getStorage('media')
-        // ->load( $paragraph->get('field_image')->getValue()[0]['target_id']);
-        $url = 'http://san-diego-custom-code.lndo.site/sites/default/files/styles/large/public/downtown-skyline-.jpg?itok=QqEnXL6h';
+        $image = $this->entityTypeManager->getStorage('media')->load( $paragraph->get('field_image')->getValue()[0]['target_id']);
+        $fid = $image->getSource()->getSourceFieldValue($image);
+        $image_file = File::load($fid);
+        $url = $image_file->createFileUrl();
+        // $url = 'http://san-diego-custom-code.lndo.site/sites/default/files/styles/large/public/downtown-skyline-.jpg?itok=QqEnXL6h';
         
         // Build attribute style
         $this->bgStyle = [
