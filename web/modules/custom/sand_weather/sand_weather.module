@@ -40,3 +40,14 @@ function sand_weather_cron():void {
     \Drupal::state()->set('sand_weather.next_execution', $next_execution);
   }
 }
+
+/**
+ * Implements hook_theme().
+ */
+function sand_weather_theme($existing, $type, $theme, $path) {
+  return [
+    'sand_weather_template' => [
+      'variables' => ['weather' => NULL],
+    ],
+  ];
+}
