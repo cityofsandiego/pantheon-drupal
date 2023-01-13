@@ -39,20 +39,33 @@
  */
 #}
 
+{% set text_attribute = create_attribute() %}
+
+{%
+  set classes = [
+    'section-outreach',
+    'grid-x'
+  ]
+%}
+
 {% block paragraph %}
   {% block content %}
-    {% if content.field_image[0] %}
-    <div class="grid-x stellar-window" style="background-image:url('{{ img_url_string }}'); background-color:#{{ content.field_background_color }};">
-      <div class="grid-container">
-          {{ content.field_body }}
-      </div>
-    </div>
+    {% if content.field_image.0 %}
+      <div {{ attributes.addClass(classes, 'stellar-window')
+        .setAttribute('style', bg_style)
+        .setAttribute('data-stellar-vertical-offset', vertical_offset) 
+        .setAttribute('data-stellar-background-ratio', scroll_ratio) 
+        .setAttribute('data-sand-min-height', min_height) 
+        }}  
+      >
     {% else %}
-    <div class="grid-x">
-      <div class="grid-container">
-          {{ content.field_body }}
+        <div {{ attributes.addClass(classes).setAttribute('style', bg_style) }}>
+    {% endif %}    
+        <div class="grid-container">
+          <div {{ text_attribute.addClass(text_classes)}}>
+            {{ content.field_body }}
+          </div>
+        </div>
       </div>
-    </div>
-    {% endif %}
   {% endblock %}
 {% endblock paragraph %}
