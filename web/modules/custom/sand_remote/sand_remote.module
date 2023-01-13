@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * @file
+ * Provides a sand_remote entity type.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\sand_remote\Entity\Sandremote;
+use Drupal\user\UserInterface;
+/* For creating a "file" to pass to tika */
+use Drupal\file\Entity\File;
+
+/**
+ * Implements hook_theme().
+ */
+function sand_remote_theme() {
+  return [
+    'sand_remote' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for sand_remote templates.
+ *
+ * Default template: sand_remote.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the sand_remote information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_sand_remote(array &$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function sand_remote_user_cancel($edit, UserInterface $account, $method) {
+  switch ($method) {
+    case 'user_cancel_block_unpublish':
+      // Unpublish sand_remotes.
+      $storage = \Drupal::entityTypeManager()->getStorage('sand_remote');
+      $sand_remote_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->execute();
+      foreach ($storage->loadMultiple($sand_remote_ids) as $sand_remote) {
+        $sand_remote->set('status', FALSE);
+        $sand_remote->save();
+      }
+      break;
+
+    case 'user_cancel_reassign':
+      // Anonymize sand_remotes.
+      $storage = \Drupal::entityTypeManager()->getStorage('sand_remote');
+      $sand_remote_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->execute();
+      foreach ($storage->loadMultiple($sand_remote_ids) as $sand_remote) {
+        $sand_remote->setOwnerId(0);
+        $sand_remote->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function sand_remote_user_predelete(UserInterface $account) {
+  // Delete sand_remotes.
+  $storage = \Drupal::entityTypeManager()->getStorage('sand_remote');
+  $sand_remote_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->execute();
+  $sand_remotes = $storage->loadMultiple($sand_remote_ids);
+  $storage->delete($sand_remotes);
+}
