@@ -56,9 +56,17 @@
 
 
   <section class="off-canvas-content" data-off-canvas-content>
-    <header role="banner" class="header">
-      {{ page.header }}
-    </header>
+    {% if node.field_outreach_header_type.value %}
+      {# Simple Header #}
+      <header role="banner" class="header simple-header">
+        Simple header
+      </header>
+    {% else %}
+      {# Regular Header #}
+      <header role="banner" class="header">
+        {{ page.header }}
+      </header>
+    {% endif %}
 
     <div class="l-constrained--main l-padding-mobile-hn background-white">
 
@@ -70,15 +78,23 @@
           <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
           {{ page.content }}
-
+      
       </main>
 
     </div>{# /.grid-container #}
 
     {% if page.footer %}
-    <footer role="contentinfo" class="footer">
-      {{ page.footer }}
-    </footer>
+      {% if node.field_outreach_footer_type.value %}
+        {# Simple Footer #}
+        <footer role="contentinfo" class="footer simple-footer">
+          Simple Footer
+        </footer>
+      {% else %}
+        {# Regular Footer #}
+        <footer role="contentinfo" class="footer">
+          {{ page.footer }}
+        </footer>
+      {% endif %}
     {% endif %}
   </section>
 </div>
