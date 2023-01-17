@@ -80,7 +80,7 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
   ]
 %}
-<article{{ attributes.addClass(classes) }}>
+<article {{ attributes.addClass(classes) }}>
 
   {{ title_prefix }}
   {% if not page %}
@@ -89,10 +89,10 @@
     </h2>
   {% endif %}
   {{ title_suffix }}
-{{ content }}
-  <div{{ content_attributes.addClass('node__content') }}>
-  <div class="grid-x">
+  <div {{ content_attributes.addClass('node__content') }}>
+  <div class="grid-x grid-margin-x grid-padding-x grid-padding-y">
     <div class="cell small-12 medium-auto content">
+      {{ content.body }}
       <div class="accordion" data-accordion data-allow-all-closed="true">
         <div class="accordion-item" data-accordion-item>
           {% if content.field_alt_amendities_title.0 %}
@@ -119,14 +119,23 @@
         </div>
       </div>
     </div>
-    </div>
-  {% if content.field_sidebar[0] %}
-    <div class="cell medium-4 large-4 sidebar light-gray-bg">
-      <div class="l-padding-am l-padding-mobile-hd l-margin-mobile-bm">
-        {{ content.field_sidebar }}
+    <div class="cell medium-4 sidebar">
+      <div class="l-padding-ad l-padding-mobile-hd l-margin-mobile-bm light-gray-bg">
+        <div class="l-padding-bm">
+          <h2 class="h3 heading--snug">Location</h2>
+          {{ content.field_address_pin }}
+        </div>
+        <div class="l-padding-bm address-text">
+          <div>
+            <i class="icon-map-marker icon--sm icon--circle background--cerulean"></i>
+          </div>
+          {{ content.field_address }}
+        </div>
+        <div class="l-padding-bm">
+          {{ content.field_sidebar }}
+        </div>
       </div>
     </div>
-  {% endif %}
   </div>
   </div>
 
