@@ -15,11 +15,14 @@ See individual files. Format: @todo ...
 
 ### STATUS
 Fully upgraded to D9. Note that the output name was changed to a more module specific.
-To get the output use: $response_array = \Drupal::state()->get('sand_weather.weather');
+To get the output use the block provided "sand_weather" or: 
+$text = \Drupal::state()->get('sand_weather.text');
+$icon = \Drupal::state()->get('sand_weather.icon');
+$temp = \Drupal::state()->get('sand_weather.temp');
 The array $response_array will contain:  
-    temp: "77"
-    weather: "Partly Cloudy"
+    text: "Partly Cloudy"
     icon: "icon-cloud-sun"
+    temp: "77"
 
 ---
 
