@@ -1415,10 +1415,11 @@ class CustomCommands extends DrushCommands {
    * Finalize department document node import.
    *
    * @command import:department_document
+   * @param $after_id (Node ID to resume after).
    *
    * @usage import:department_document
    */
-  public function finalizeDepartmentDocument() {
+  public function finalizeDepartmentDocument($after_id = 0) {
     $nodedata = [];
 
     // Read extra field data for manual creation/update.
@@ -1436,6 +1437,7 @@ class CustomCommands extends DrushCommands {
 
     // Manually update each node.
     foreach ($nodedata as $d7id => $data) {
+      if ($after_id > $d7id) continue; // Skip if told to.
       // Load node.
       $query = $this->entityTypeManager
         ->getStorage('node')
@@ -1466,19 +1468,24 @@ class CustomCommands extends DrushCommands {
         $local_destination = str_replace('public://', '', $local_destination);
         $local_destination = str_replace(' ', '%20', $local_destination);
         $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
-        $document = Media::create([
-          'bundle' => 'document',
-          'uid' => 0,
-          'field_media_document' => [
-            'target_id' => $local_file->id(),
-          ],
-        ]);
-        $document->save();
+        if (is_object($local_file)) {
+          $document = Media::create([
+            'bundle' => 'document',
+            'uid' => 0,
+            'field_media_document' => [
+              'target_id' => $local_file->id(),
+            ],
+          ]);
+          $document->save();
+        }
+        else {
+          $document = NULL;
+        }
         $node->field_attachment = $document;
       }
 
       $node->save();
-      echo 'Memory: ' . $this->memoryUsage(memory_get_usage(true)) . ' Node: ' . $node->id() . PHP_EOL;
+      echo 'Memory: ' . $this->memoryUsage(memory_get_usage(true)) . ' Node: ' . $node->id() . 'D7 ID: ' . $d7id . PHP_EOL;
     }
   }
 
