@@ -2996,20 +2996,25 @@ html[xmlns] .flexslider .slides {
 .featured-card-group .featured-card-group__wrapper {
   display: flex;
   flex-flow: column wrap;
-  gap: 2rem;
-}
-@media print, screen and (min-width: 48em) {
-  .featured-card-group .featured-card-group__wrapper {
-    flex-flow: row nowrap;
-  }
+  gap: 1rem;
+  justify-content: space-between;
+  flex-flow: row wrap;
 }
 
 /* Featured Card Item for D9 */
 .featured-card {
-  max-width: 700px;
   background-color: #dde2e5;
   border-radius: 2px;
-  flex: 1 100%;
+}
+@media print, screen and (min-width: 30em) {
+  .featured-card {
+    width: calc(50% - 1rem);
+  }
+}
+@media print, screen and (min-width: 48em) {
+  .featured-card {
+    width: calc(33.33% - 1rem);
+  }
 }
 .featured-card a {
   display: block;
