@@ -56,9 +56,31 @@
 
 
   <section class="off-canvas-content" data-off-canvas-content>
-    <header role="banner" class="header">
-      {{ page.header }}
-    </header>
+    {% if node.field_outreach_header_type.value %}
+      {# Simple Header #}
+      <header role="banner" class="header simple-header">
+          <div class="grid-x l-constrained">
+            <div class="small-6 cell">
+              <a href="/" class="logo">
+                <img src="/{{ directory }}/images/logo-mark-blue.png" />
+                <span>sandiego.gov</span>
+              </a>
+            </div>
+            <div class="small-6 cell translate">
+              <div class="languages">
+                <div id="google_translate_element">
+                  <span class="hide-on-mobile">Translate </span><i class="icon-translate"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+      </header>
+    {% else %}
+      {# Regular Header #}
+      <header role="banner" class="header">
+        {{ page.header }}
+      </header>
+    {% endif %}
 
     <div class="l-constrained--main l-padding-mobile-hn background-white">
 
@@ -70,15 +92,33 @@
           <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
           {{ page.content }}
-
+      
       </main>
 
     </div>{# /.grid-container #}
 
     {% if page.footer %}
-    <footer role="contentinfo" class="footer">
-      {{ page.footer }}
-    </footer>
+      {% if node.field_outreach_footer_type.value %}
+        {# Simple Footer #}
+        <footer role="contentinfo" class="footer simple-footer">
+          <div class="region--footer">
+            <div class="region--footer__privacy">
+              <ul>
+                <li><a href="/disclaimers">Disclaimers</a></li>
+                <li><a href="/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/accessibility">Accessibility</a></li>
+                <li><a href="/translation">Language Translation</a></li>
+                <li><a href="/contact">Contact the City</a></li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+      {% else %}
+        {# Regular Footer #}
+        <footer role="contentinfo" class="footer">
+          {{ page.footer }}
+        </footer>
+      {% endif %}
     {% endif %}
   </section>
 </div>
