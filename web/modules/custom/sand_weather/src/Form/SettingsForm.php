@@ -2,6 +2,7 @@
 
 namespace Drupal\sand_weather\Form;
 
+use Drupal\sand_weather\Plugin\Block\SanDiegoWeatherBlock;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -42,6 +43,7 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('The interval at which the weather is refreshed. This is in seconds.'),
       '#default_value' => $this->config('sand_weather.settings')->get('interval'),
     ];
+
     return parent::buildForm($form, $form_state);
   }
 
