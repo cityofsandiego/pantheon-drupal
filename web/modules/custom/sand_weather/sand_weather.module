@@ -25,7 +25,8 @@ function sand_weather_cron():void {
   // We usually don't want to act every time cron runs.
   $next_execution = \Drupal::state()->get('sand_weather.next_execution', 0);
   $request_time = \Drupal::time()->getRequestTime();
-  if ($request_time >= $next_execution) {
+  $time_since_last_run = $request_time - $next_execution;
+  if ($time_since_last_run > 0) {
     /** @var \Drupal\Core\Queue\DatabaseQueue $queue */
     $queue = \Drupal::service('queue')->get('sand_weather_queue');
     $item = new \stdClass();
@@ -45,9 +46,13 @@ function sand_weather_cron():void {
  * Implements hook_theme().
  */
 function sand_weather_theme($existing, $type, $theme, $path) {
-  return [
-    'sand_weather_template' => [
-      'variables' => ['weather' => NULL],
-    ],
+  $weather_text = \Drupal::state()->get('sand_weather.text');
+  $items['sand_weather'] = [
+    'variables' => [
+      'text' => NULL,
+      'temp' => NULL,
+      'icon' => NULL,
+    ]
   ];
+  return $items;
 }
