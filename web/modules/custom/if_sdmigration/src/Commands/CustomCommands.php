@@ -1481,7 +1481,7 @@ class CustomCommands extends DrushCommands {
         else {
           $document = NULL;
         }
-        $node->field_attachment = $document;
+        $node->field_attachment = ['target_id' => $document->id()];
       }
 
       $node->save();
