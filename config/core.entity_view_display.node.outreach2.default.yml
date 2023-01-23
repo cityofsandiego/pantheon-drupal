@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.outreach2.field_d7_nid
     - field.field.node.outreach2.field_department
     - field.field.node.outreach2.field_edit_notes
     - field.field.node.outreach2.field_outreach_footer_type
@@ -26,35 +27,35 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 105
+    weight: 4
     region: content
   field_edit_notes:
     type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 107
+    weight: 6
     region: content
   field_outreach_footer_type:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 103
+    weight: 2
     region: content
   field_outreach_header_type:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 102
+    weight: 1
     region: content
   field_outreach_version:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 104
+    weight: 3
     region: content
   field_search_keymatch:
     type: entity_reference_label
@@ -62,7 +63,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 106
+    weight: 5
     region: content
   field_sections_outreach2:
     type: entity_reference_revisions_entity_view
@@ -71,11 +72,12 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 108
+    weight: 7
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
-hidden: {  }
+hidden:
+  field_d7_nid: true
