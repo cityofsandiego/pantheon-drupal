@@ -1465,6 +1465,8 @@ class CustomCommands extends DrushCommands {
         $local_destination = str_replace('default_images', '', $local_destination);
         $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
         $local_destination = str_replace('hero', '', $local_destination);
+        $local_destination = str_replace('legacy/auditor/reports/fy10_pdf/pdf', '', $local_destination);
+        $local_destination = str_replace('legacy/auditor/reports/fy11_pdf/pdf', '', $local_destination);
         $local_destination = str_replace('legacy/auditor/reports/fy12_pdf/pdf', '', $local_destination);
         $local_destination = str_replace('legacy/auditor/reports/fy13_pdf/pdf', '', $local_destination);
         $local_destination = str_replace('legacy/auditor/reports/fy14_pdf/pdf', '', $local_destination);
