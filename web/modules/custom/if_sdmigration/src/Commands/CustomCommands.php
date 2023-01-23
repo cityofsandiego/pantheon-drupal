@@ -1465,6 +1465,7 @@ class CustomCommands extends DrushCommands {
         $local_destination = str_replace('default_images', '', $local_destination);
         $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
         $local_destination = str_replace('hero', '', $local_destination);
+        $local_destination = str_replace('legacy/auditor/reports/fy12_pdf/pdf', '', $local_destination);
         $local_destination = str_replace('public://', '', $local_destination);
         $local_destination = str_replace(' ', '%20', $local_destination);
         $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
