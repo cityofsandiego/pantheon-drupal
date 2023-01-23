@@ -80,6 +80,17 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
   ]
 %}
+
+{% set header_attribute = create_attribute() %}
+
+{% set header_classes = [
+    'article-header',
+    'l-padding-mobile-hm',
+  ]
+%}
+
+{% set style = bg_style %}
+
 <article{{ attributes.addClass(classes) }}>
 
   {{ title_prefix }}
@@ -91,14 +102,20 @@
   {{ title_suffix }}
 
   <div{{ content_attributes.addClass('node__content') }}>
-    <div class="article-header l-padding-mobile-hm">
-      <h1 class="">{{ label }}</h1>
+  {% if content.field_image.0 %}
+    <div class="outreach2-article-image hide-on-desktop">
+      {{ content.field_image }}
+    </div>  
+  {% endif %}
+    <div {{ header_attribute.addClass(header_classes).setAttribute('style', style) }}>
+      <h1 class="article-title">{{ label }}</h1>
       {% if content.field_subtitle.0 %}
         <p class="subtitle h3"> 
           {{ content.field_subtitle.0 }} 
         </p>
       {% endif %}
     </div>
+
     <div class="main-content l-constrained l-margin-bm l-margin-desktop-tm l-padding-mobile-hm">
         {{ content.body }}
     </div>
