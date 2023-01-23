@@ -1412,6 +1412,248 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   * Finalize department document node import.
+   *
+   * @command import:department_document
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage import:department_document
+   */
+  public function finalizeDepartmentDocument($after_id = 0) {
+    $nodedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/department-document.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'department' => explode('|', str_replace('`', '', $data[1])),
+          'category' => explode('|', str_replace('`', '', $data[2])),
+          'path' => str_replace('`', '', $data[5]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      if ($after_id > $d7id) continue; // Skip if told to.
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'department_document')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+      $node->field_department->setValue([]);
+      foreach ($data['department'] as $department) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+        $node->field_department->appendItem($term);
+      }
+      $node->field_category->setValue([]);
+      foreach ($data['category'] as $category) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($category, 'categories'));
+        $node->field_category->appendItem($term);
+      }
+      if (!empty($data['path'])) {
+        $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['path']);
+        $remote_file = str_replace(' ', '%20', $remote_file);
+        $file_data = file_get_contents($remote_file);
+        // Fixes for irregular paths.
+        $local_destination = str_replace('legacy/police/graphics', '', $data['path']);
+        $local_destination = str_replace('default_images', '', $local_destination);
+        $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+        $local_destination = str_replace('hero', '', $local_destination);
+        $local_destination = str_replace('public://', '', $local_destination);
+        $local_destination = str_replace(' ', '%20', $local_destination);
+        $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+        if (is_object($local_file)) {
+          $document = Media::create([
+            'bundle' => 'document',
+            'uid' => 0,
+            'field_media_document' => [
+              'target_id' => $local_file->id(),
+            ],
+          ]);
+          $document->save();
+        }
+        else {
+          $document = NULL;
+        }
+        $node->field_attachment = ['target_id' => $document->id()];
+      }
+
+      $node->save();
+      echo 'Memory: ' . $this->memoryUsage(memory_get_usage(true)) . ' Node: ' . $node->id() . 'D7 ID: ' . $d7id . PHP_EOL;
+    }
+  }
+
+  /**
+   * Finalize outreach2 node import.
+   *
+   * @command import:outreach2
+   *
+   * @usage import:outreach2
+   */
+  public function finalizeOutreach2() {
+    $nodedata = [];
+    $paradata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/outreach2.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'department' => explode('|', str_replace('`', '', $data[1])),
+          'search_keymatch' => explode('|', str_replace('`', '', $data[3])),
+          'sections' => explode('|', str_replace('`', '', $data[4])),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Get outreach2 paragraph data.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/fieldcollections/field-outreach-sections-coll2.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $paradata[str_replace('`', '', $data[0])] = [
+          'image_department' => explode(' |', str_replace('`', '', $data[1])),
+          'image_license' => str_replace('`', '', $data[2]),
+          'image_alt' => str_replace('`', '', $data[3]),
+          'image_d7id' => str_replace('`', '', $data[4]),
+          'image_path' => str_replace('`', '', $data[5]),
+          'body' => str_replace('`', '', $data[6]),
+          'min_height' => str_replace('`', '', $data[7]),
+          'bg_color' => str_replace('`', '', $data[8]),
+          'centered' => str_replace('`', '', $data[9]),
+          'full_width' => str_replace('`', '', $data[10]),
+          'scroll_ratio' => str_replace('`', '', $data[11]),
+          'adjustment_width' => str_replace('`', '', $data[12]),
+          'bg_size' => str_replace('`', '', $data[13]),
+          'bottom_border' => str_replace('`', '', $data[14]),
+          'direction' => str_replace('`', '', $data[15]),
+          'hide_on_mobile' => str_replace('`', '', $data[18]),
+          'horizontal' => str_replace('`', '', $data[19]),
+          'image_height' => str_replace('`', '', $data[20]),
+          'mobile_size' => str_replace('`', '', $data[21]),
+          'drop_shadow' => str_replace('`', '', $data[22]),
+          'styling' => str_replace('`', '', $data[23]),
+          'opacity' => str_replace('`', '', $data[24]),
+          'rate' => str_replace('`', '', $data[25]),
+          'repeat' => str_replace('`', '', $data[26]),
+          'vertical_offset' => str_replace('`', '', $data[27]),
+          'vertical' => str_replace('`', '', $data[28]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'outreach2')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+      $node->field_department->setValue([]);
+      foreach ($data['department'] as $department) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+        $node->field_department->appendItem($term);
+      }
+      $node->field_search_keymatch->setValue([]);
+      foreach ($data['search_keymatch'] as $search_keymatch) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
+        $node->field_search_keymatch->appendItem($term);
+      }
+      $node->field_sections_outreach2->setValue([]);
+      foreach ($data['sections'] as $section) {
+        if (array_key_exists($section, $paradata)) {
+          $p = $paradata[$section];
+          if (!empty($p['image_path'])) {
+            $prior_image = $this->checkMediaId($p['image_d7id']);
+            if ($prior_image == NULL) {
+              $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $p['image_path']);
+              $file_data = file_get_contents($remote_file);
+              // Fixes for irregular paths.
+              $local_destination = str_replace('legacy/police/graphics', '', $p['image_path']);
+              $local_destination = str_replace('default_images', '', $local_destination);
+              $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+              $local_destination = str_replace('hero', '', $local_destination);
+              $local_destination = str_replace('public://', '', $local_destination);
+              $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+              $image_department = [];
+              foreach ($p['image_department'] as $department) {
+                $image_department[] = $this->taxonomyImportTasks->newTid($department, 'department');
+              }
+
+              $image = Media::create([
+                'bundle' => 'image',
+                'uid' => 0,
+                'field_media_image' => [
+                  'target_id' => $local_file->id(),
+                  'alt' => $p['image_alt']
+                ],
+                'field_d7_mid' => $p['image_d7id'],
+              ]);
+              if (!empty($p['image_license'])) {
+                $image->field_license = $p['image_license'];
+              }
+              foreach ($image_department as $department) {
+                $image->field_department->appendItem([
+                  'target_id' => $department,
+                ]);
+              }
+              $image->save();
+            }
+            else {
+              $image = Media::load($prior_image);
+            }
+          }
+          else {
+            $image = NULL;
+          }
+          $paragraph = Paragraph::create([
+            'type' => 'sections_outreach2',
+            'field_body' => [
+              'value' => $p['body'],
+              'format' => 'full_html'
+            ],
+            'field_adjustment_width' => $p['adjustment_width'],
+            'field_background_size' => $p['bg_size'],
+            'field_bg_color' => $p['bg_color'],
+            'field_bottom_border' => $p['bottom_border'],
+            'field_centered' => $p['centered'],
+            'field_direction' => $p['direction'],
+            'field_full_width_mobile' => $p['full_width'],
+            'field_hide_on_mobile' => $p['hide_on_mobile'],
+            'field_horizontal' => $p['horizontal'],
+            'field_image_height' => $p['image_height'],
+            'field_image_scroll_ratio' => $p['scroll_ratio'],
+            'field_minimum_height' => $p['min_height'],
+            'field_mobile_size' => $p['mobile_size'],
+            'field_no_drop_shadow' => $p['drop_shadow'],
+            'field_no_styling' => $p['styling'],
+            'field_opacity' => $p['opacity'],
+            'field_rate' => $p['rate'],
+            'field_repeat' => $p['repeat'],
+            'field_vertical_offset' => $p['vertical_offset'],
+            'field_vertical' => $p['vertical'],
+            'field_image' => $image,
+          ]);
+          $paragraph->save();
+          $node->field_sections_outreach2->appendItem($paragraph);
+        }
+      }
+      $node->save();
+      echo 'Memory: ' . $this->memoryUsage(memory_get_usage(true)) . ' Node: ' . $node->id() . PHP_EOL;
+    }
+  }
+
+  /**
    * Finalize hero node import.
    *
    * @command import:hero
@@ -1903,5 +2145,10 @@ class CustomCommands extends DrushCommands {
       $node = Node::load($nid);
       $node->delete();
     }
+  }
+
+  public function memoryUsage($size) {
+    $unit=array('b','kb','mb','gb','tb','pb');
+    return @round($size/pow(1024,($i=floor(log($size,1024)))),2).' '.$unit[$i];
   }
 }

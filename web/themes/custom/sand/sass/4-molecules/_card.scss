@@ -265,20 +265,27 @@
   .featured-card-group__wrapper {
     display: flex;
     flex-flow: column wrap;
-    gap: 2rem;
+    gap: 1rem;
+    justify-content: space-between;
 
-    @include breakpoint(medium) {
-      flex-flow: row nowrap;
+    @include breakpoint(small) {
+      flex-flow: row wrap;
     }
   }
 }
 
 /* Featured Card Item for D9 */
 .featured-card {
-  max-width: 700px;
   background-color: $alto;
   border-radius: 2px;
-  flex: 1 100%;
+
+  @include breakpoint(mobile-landscape) {
+    width: calc(50% - 1rem);
+  }
+
+  @include breakpoint(medium) {
+    width: calc(33.33% - 1rem);
+  }
 
   a {
     display: block;

@@ -307,24 +307,25 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
   protected function refreshWeather(): void {
     $url = \Drupal::config('sand_weather.settings')->get('weather_url');
 
-    $results_array = [];
     try {
-      /** @var \Psr\Http\Message\ResponseInterface $response */
+      // @todo Fix dependency with Dependency Injection Container.
       $client = \Drupal::httpClient();
       $response = $client->get($url);
+      
       if ($response->getStatusCode() == 200) {
         $body = (string) $response->getBody();
         $xml = simplexml_load_string($body);
         if (isset($xml->temp_f)) {
           // Do not show .0 in the temperature in the header.
-          $results_array['temp'] = str_replace('.0', '', (string) $xml->temp_f);
+          $weather_temp = str_replace('.0', '', (string) $xml->temp_f);
+          \Drupal::state()->set('sand_weather.temp', $weather_temp);
         }
         if (isset($xml->weather)) {
-          $results_array['weather'] = (string) $xml->weather;
-          $weather = (string) $xml->weather;
-          $results_array['icon'] = $this->getWeatherIcon($weather);
+          $weather_text = (string) $xml->weather;
+          $weather_icon = $this->getWeatherIcon($weather_text);
+          \Drupal::state()->set('sand_weather.text', $weather_text);
+          \Drupal::state()->set('sand_weather.icon', $weather_icon);
         }
-        \Drupal::state()->set('sand_weather.weather', $results_array);
       }
     } catch (Exception $exception) {
       watchdog_exception('sand_weather', $exception);
