@@ -75,8 +75,6 @@ $times_of_day = sand_hero_timesofday();
  */
 function sand_hero_js_settings_build(array &$settings, &$variables) {
   $times_of_day = sand_hero_timesofday();
-  $departments = ['3335']; // [field_department] on node
-  $departmentParents = ['3335']; // [self and parents] of $departments
   if(!empty($times_of_day)) {
     $query = \Drupal::entityQuery('node');
 
@@ -84,34 +82,34 @@ function sand_hero_js_settings_build(array &$settings, &$variables) {
     foreach ($times_of_day as $time) {
       $orTimes->condition('field_hero_time_of_day', $time, '=');
     }
-    $orDepartments = $query->orConditionGroup();
-    foreach ($departments as $department) {
-      $orDepartments->condition('field_department', $department, '=');
-    }
-    $orDepartmentParents = $query->orConditionGroup();
-    foreach ($departmentParents as $departmentParent) {
-      $orDepartmentParents->condition('field_department', $departmentParent, '=');
-    }
-    $orDepartmentCascade = $query->orConditionGroup();
-    $orDepartmentCascade->condition($orDepartments);
-    $orDepartmentCascade->condition($orDepartmentParents);
-
-    $orSitewideCascade = $query->orConditionGroup();
-    $orSitewideCascade->condition($orDepartmentCascade); // departments first, sitewide if no departments
-    $orSitewideCascade->condition('field_hero_sitewide', TRUE);
 
     $query->condition('type', 'hero');
     $query->condition('status', \Drupal\node\NodeInterface::PUBLISHED);
     $query->condition($orTimes);
-    $query->condition($orSitewideCascade);
-//    $query->fields('node', ['field_image', 'field_vimeo_url']);
+    $query->condition('field_department', '3335', '=');
 
     $entity_ids = $query->execute();
     $settings['#attached']['drupalSettings']['sandHero'] = $entity_ids;
   }
 }
-// query
-// site_wide OR in_dept
 
-// return
-// node, field_department,
+///**
+// * Implements hook_page_attachments().
+// */
+//function sand_hero_page_attachments(array &$attachments) {
+//  $attachments['#attached']['html_head'][] = [
+//    [
+//      '#tag' => 'script',
+//      '#value' => 'alert("Hello!");',
+//    ],
+//    'example_inline_js',
+//  ];
+//}
+
+// Notes:
+// \Drupal::cache()->set('my_cache_item', $school_list, \Drupal::time()->getRequestTime() + (86400));
+// \Drupal\Core\Cache\Cache::PERMANENT
+// /themes/custom/sand//home-hero-1.jpg
+//background-image: url('/sites/default/files/_chicanopark4danilowicz.jpg');
+
+//->addOrderBy('rand');
