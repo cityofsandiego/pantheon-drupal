@@ -273,6 +273,36 @@ final class Node implements EventSubscriberInterface {
         $variables->set('attachment_url', $file_url->createFileUrl());
       }
     }
+
+    //Preprocess Image on Article Outreach2
+    if ($node->getType() == 'outreach_article2') {
+      $field_image = $node->field_image->getValue();
+      $bgStyle = [];
+      
+      if (!empty($field_image)) {
+        $image = $this->entityTypeManager->getStorage('media')
+          ->load( $node->get('field_image')->getValue()[0]['target_id']);
+        $fid = $image->getSource()->getSourceFieldValue($image);
+        $image_file = File::load($fid);
+        $url = $image_file->createFileUrl();
+        
+        $field_minimum_height = $node->field_outreach_minimum_height->value;
+        $min_height  = $field_minimum_height ? $field_minimum_height . 'px' : '300px';
+
+        // Build attribute style
+        $this->$bgStyle = [
+          'size' => 'background-size: cover',
+          'position' => 'background-position: center center',
+          'repeat' => 'background-repeat: no-repeat',
+          'min-height' => 'min-height:' . $min_height,
+          'image' => 'background-image: url(' . $url . ')',
+        ];
+
+        $variables->set('bg_style', implode(";", $this->$bgStyle));
+      } else {
+        $variables->set('bg_style', '');
+      }
+    }
   }
 
   /*
