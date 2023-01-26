@@ -86,6 +86,7 @@
 {% set header_classes = [
     'article-header',
     'l-padding-mobile-hm',
+    content.field_image.0 ? 'image-bg hide-on-mobile' : '',
   ]
 %}
 
@@ -105,6 +106,14 @@
   {% if content.field_image.0 %}
     <div class="outreach2-article-image hide-on-desktop">
       {{ content.field_image }}
+      <div class="article-header l-padding-mobile-hm ">
+        <h1 class="article-title">{{ label }}</h1>
+        {% if content.field_subtitle.0 %}
+          <p class="subtitle h3"> 
+            {{ content.field_subtitle.0 }} 
+          </p>
+        {% endif %}
+      </div>
     </div>  
   {% endif %}
     <div {{ header_attribute.addClass(header_classes).setAttribute('style', style) }}>
