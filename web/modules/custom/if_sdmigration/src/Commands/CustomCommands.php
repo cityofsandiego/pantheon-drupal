@@ -1478,6 +1478,11 @@ class CustomCommands extends DrushCommands {
         $local_destination = str_replace('legacy/auditor/reports/fy20_pdf/pdf', '', $local_destination);
         $local_destination = str_replace('legacy/auditor/reports/memo_pdf', '', $local_destination);
         $local_destination = str_replace('legacy/auditor/pdf', '', $local_destination);
+        $local_destination = str_replace('legacy/police/pdf/2012', '', $local_destination);
+        $local_destination = str_replace('legacy/police/pdf/2013', '', $local_destination);
+        $local_destination = str_replace('legacy/police/pdf/2015', '', $local_destination);
+        $local_destination = str_replace('legacy/development-services/pdf/industry/infobulletin', '', $local_destination);
+        $local_destination = str_replace('legacy/development-services/pdf/industry/forms', '', $local_destination);
         $local_destination = str_replace('public://', '', $local_destination);
         $local_destination = str_replace(' ', '%20', $local_destination);
         $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
@@ -1490,11 +1495,10 @@ class CustomCommands extends DrushCommands {
             ],
           ]);
           $document->save();
+          if ($document !== NULL) {
+            $node->field_attachment = ['target_id' => $document->id()];
+          }
         }
-        else {
-          $document = NULL;
-        }
-        $node->field_attachment = ['target_id' => $document->id()];
       }
 
       $node->save();
