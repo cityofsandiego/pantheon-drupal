@@ -22,7 +22,6 @@ lando terminus drush mi:import sd_nodes_outreach -- --update --force
 lando terminus drush mi:import sd_nodes_hero -- --update --force
 lando terminus drush mi:import sd_nodes_outreach2 -- --update --force
 lando terminus drush mi:import sd_nodes_department_document -- --update --force
-lando terminus drush mi:import sd_nodes_external_data -- --update --force
 
 Menu import:
 lando terminus drush import:menus
@@ -38,7 +37,7 @@ lando terminus drush import:reusable-components
 lando terminus drush import:hero
 lando terminus drush import:outreach2
 lando terminus drush import:department_document
-lando terminus drush import:external_data
+lando terminus drush import:external_data (note this does entirety of external_data node import)
 
 Fix class names/HTML content cleanup:
 lando terminus drush import:class-fixes

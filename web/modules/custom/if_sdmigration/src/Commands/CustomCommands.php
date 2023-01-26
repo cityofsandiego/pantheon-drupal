@@ -1412,6 +1412,168 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   * Import external data nodes into manageable chunks.
+   *
+   * @command import:external_data
+   * @param $import_file (Data file to work off of).
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage import:external_data
+   */
+  public function externalDataImport($import_file = NULL, $after_id = 0) {
+    if ($import_file == NULL) {
+      echo 'No input file specified.' . PHP_EOL;
+    }
+    else {
+      if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/' . $import_file, 'r')) {
+        fgets($file);
+        while ($data = fgetcsv($file)) {
+          $d7id = str_replace('`', '', $data[0]);
+          if ($d7id < $after_id) continue;
+
+          echo 'Current memory used: ' . $this->memoryUsage(memory_get_usage(true)) . '| Current D7 ID: ' . $d7id . ' ';
+
+          // Check if node is already imported.
+          $query = $this->entityTypeManager
+            ->getStorage('node')
+            ->getQuery();
+          $query->condition('type', 'external_data')
+            ->condition('field_d7_nid', $d7id);
+          $nids = $query->execute();
+          if (empty($nids)) {
+
+            // Manually fix date fields.
+            $field_back_date = str_replace('`', '', $data[5]);
+            $field_back_date = str_replace(' 00:00:00', '', $field_back_date);
+            $field_doc_date = str_replace('`', '', $data[9]);
+            $field_doc_date = str_replace(' 00:00:00', '', $field_doc_date);
+            $field_import_date = str_replace('`', '', $data[18]);
+            $field_import_date = str_replace(' ', 'T', $field_import_date);
+            $field_pn_end_date_date = str_replace('`', '', $data[27]);
+            $field_pn_end_date_date = str_replace(' 00:00:00', '', $field_pn_end_date_date);
+            $field_r_modify_date = str_replace('`', '', $data[28]);
+            $field_r_modify_date = str_replace(' ', 'T', $field_r_modify_date);
+
+            // Search Keymatch taxonomy fields.
+            $search_keymatch_tids = explode('|', str_replace('`', '', $data[1]));
+
+            // PDF File attachment.
+            $pdf_file = str_replace('`', '', $data[34]);
+            if (!empty($pdf_file)) {
+              $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $pdf_file);
+              $remote_file = str_replace(' ', '%20', $remote_file);
+              $file_data = file_get_contents($remote_file);
+              // Fixes for irregular paths.
+              $local_destination = str_replace('legacy/police/graphics', '', $pdf_file);
+              $local_destination = str_replace('default_images', '', $local_destination);
+              $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+              $local_destination = str_replace('hero', '', $local_destination);
+              $local_destination = str_replace('legacy/auditor/reports/fy10_pdf/pdf', '', $local_destination);
+              $local_destination = str_replace('legacy/auditor/reports/fy11_pdf/pdf', '', $local_destination);
+              $local_destination = str_replace('legacy/auditor/reports/fy12_pdf/pdf', '', $local_destination);
+              $local_destination = str_replace('legacy/auditor/reports/fy13_pdf/pdf', '', $local_destination);
+              $local_destination = str_replace('legacy/auditor/reports/fy14_pdf/pdf', '', $local_destination);
+              $local_destination = str_replace('legacy/auditor/reports/fy15_pdf/pdf', '', $local_destination);
+              $local_destination = str_replace('legacy/auditor/reports/fy16_pdf/pdf', '', $local_destination);
+              $local_destination = str_replace('legacy/auditor/reports/fy17_pdf/pdf', '', $local_destination);
+              $local_destination = str_replace('legacy/auditor/reports/fy18_pdf/pdf', '', $local_destination);
+              $local_destination = str_replace('legacy/auditor/reports/fy19_pdf/pdf', '', $local_destination);
+              $local_destination = str_replace('legacy/auditor/reports/fy20_pdf/pdf', '', $local_destination);
+              $local_destination = str_replace('legacy/auditor/reports/memo_pdf', '', $local_destination);
+              $local_destination = str_replace('legacy/auditor/pdf', '', $local_destination);
+              $local_destination = str_replace('legacy/police/pdf/2012', '', $local_destination);
+              $local_destination = str_replace('legacy/police/pdf/2013', '', $local_destination);
+              $local_destination = str_replace('legacy/police/pdf/2015', '', $local_destination);
+              $local_destination = str_replace('legacy/development-services/pdf/industry/infobulletin', '', $local_destination);
+              $local_destination = str_replace('legacy/development-services/pdf/industry/forms', '', $local_destination);
+              $local_destination = str_replace('public://', '', $local_destination);
+              $local_destination = str_replace(' ', '%20', $local_destination);
+              $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+              if (is_object($local_file)) {
+                $document = Media::create([
+                  'bundle' => 'document',
+                  'uid' => 0,
+                  'field_media_document' => [
+                    'target_id' => $local_file->id(),
+                  ],
+                ]);
+                $document->save();
+                if ($document !== NULL) {
+                  $pdf_file = ['target_id' => $document->id()];
+                }
+                else {
+                  $pdf_file = NULL;
+                }
+              }
+              else {
+                $pdf_file = NULL;
+              }
+            }
+            else {
+              $pdf_file = NULL;
+            }
+
+            $node = Node::create([
+              'type' => 'external_data',
+              'title' => substr(str_replace('`', '', $data[2]), 0, 255),
+              'field_d7_nid' => $d7id,
+              'field_action' => str_replace('`', '', $data[4]),
+              'field_a_webc_url' => str_replace('`', '', $data[3]),
+              'field_back_date' => $field_back_date,
+              'body' => [
+                'value' => str_replace('`', '', $data[6]),
+                'format' => 'full_html'
+              ],
+              'field_body_status' => str_replace('`', '', $data[7]),
+              'field_committee' => str_replace('`', '', $data[8]),
+              'field_doc_date' => $field_doc_date,
+              'field_doc_date_num' => str_replace('`', '', $data[10]),
+              'field_doc_date_year' => str_replace('`', '', $data[11]),
+              'field_doc_num' => str_replace('`', '', $data[12]),
+              'field_doc_set' => str_replace('`', '', $data[13]),
+              'field_doc_type' => str_replace('`', '', $data[14]),
+              'field_document_url' => str_replace('`', '', $data[15]),
+              'field_flag_color' => str_replace('`', '', $data[16]),
+              'field_flag_text' => str_replace('`', '', $data[17]),
+              'field_import_date' => $field_import_date,
+              'field_internal_notes' => str_replace('`', '', $data[19]),
+              'field_muni_code_chapter' => str_replace('`', '', $data[20]),
+              'field_object_name' => str_replace('`', '', $data[21]),
+              'field_path' => str_replace('`', '', $data[22]),
+              'field_pdf' => $pdf_file,
+              'field_pn_category' => str_replace('`', '', $data[23]),
+              'field_pn_comm_plan_group' => str_replace('`', '', $data[24]),
+              'field_pn_council_district' => str_replace('`', '', $data[25]),
+              'field_pn_end_date' => str_replace('`', '', $data[26]),
+              'field_pn_end_date_date' => $field_pn_end_date_date,
+              'field_r_modify_date' => $field_r_modify_date,
+              'field_r_object_id' => str_replace('`', '', $data[29]),
+              'field_sort1' => str_replace('`', '', $data[30]),
+              'field_source' => str_replace('`', '', $data[31]),
+              'field_source_name' => str_replace('`', '', $data[32]),
+              'field_validated' => str_replace('`', '', $data[33]),
+              'moderation_state' => [
+                'target_id' => 'published',
+              ],
+              'uid' => 0
+            ]);
+            foreach ($search_keymatch_tids as $search_keymatch) {
+              $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
+              $node->field_search_keymatch->appendItem($term);
+            }
+            $node->save();
+            echo '(imported).' . PHP_EOL;
+          }
+          else {
+            echo '(already imported; skipping).' . PHP_EOL;
+          }
+        }
+        fclose($file);
+      }
+    }
+  }
+
+  /**
    * Finalize department document node import.
    *
    * @command import:department_document
