@@ -81,19 +81,27 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
         $fid = $image->getSource()->getSourceFieldValue($image);
         $image_file = File::load($fid);
         $url = $image_file->createFileUrl();
-        
+
+        //Fixed or paralax image
+        $field_image_scroll_ratio = $paragraph->field_image_scroll_ratio->value;
+        if ($field_image_scroll_ratio != '0.0' ) {
+          $scroll_ratio = 'background-attachment: fixed';
+        } else {
+          $scroll_ratio = '';
+        }
+
         // Build attribute style
         $this->bgStyle = [
           // 'size' => 'background-size: 100%',
           // 'position' => 'background-position: 50% 50%',
           // 'min-height' => 'min-height: 300px',
+          'parallax' => $scroll_ratio,
           'image' => 'background-image: url(' . $url . ')',
         ];
 
         //Set values for data attributes in Twig template.
-          $field_image_scroll_ratio = $paragraph->field_image_scroll_ratio->value;
-          $scroll_ratio = $field_image_scroll_ratio ? $field_image_scroll_ratio : '';
-          $variables->set('scroll_ratio', $scroll_ratio);
+
+
 
           $field_vertical_offset = $paragraph->field_vertical_offset->value;
           $vertical_offset = $field_vertical_offset ? $field_vertical_offset : '';
@@ -172,15 +180,9 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
       $variables->set('border_bottom', $border);
     }
 
-    //To-do: Ask SAND team about the use of
-    // - field_direction
-    // - field_full_width_mobile
-    // - field_horizontal
-    // - field_image_height
-    // - field_mobile_size
-    // - field_opacity
-    // - field_rate
-    // - field_repeat
-    // - field_vertical 
+    //To-do: Apply this fields
+    // - field_horizontal (When background cover stops working, this determines horizontal focal point (0 is left edge, 100 is right edge))
+    // - field_mobile_size (sets background size of image in mobile view)
+    // - field_vertical (When background cover stops working, this determines vertical focal point (0 is top edge, 100 is bottom edge))
   }
 }
