@@ -82,6 +82,16 @@
 %}
 <article{{ attributes.addClass(classes) }}>
 
+  {# TODO: 
+    - Migrate blocks that are used in Outreach2 content type.
+    - Update the code to apply the blocks that belongs to the node.
+    * Mayor Tod GLoria is an example on how this should look at the end.
+   #}
+  {% if content.field_department[0]['#title'] == 'Mayor Todd Gloria' %}
+    {{ drupal_entity('block_content', '15') }}
+  {% endif %}
+  {# end TODO #}
+
   {{ title_prefix }}
   {% if not page %}
     <h2{{ title_attributes }}>
