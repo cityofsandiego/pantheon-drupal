@@ -10,6 +10,9 @@ lando terminus drush import:taxonomy categories
 lando terminus drush import:taxonomy search_keymatch
 lando terminus drush import:taxonomy location
 lando terminus drush import:taxonomy bucket
+lando terminus drush import:taxonomy business_resources_organization
+lando terminus drush import:taxonomy business_resources_target_bus
+lando terminus drush import:taxonomy business_resources_type_assist
 
 Node imports:
 lando terminus drush mi:import sd_nodes_department -- --update --force
@@ -22,7 +25,6 @@ lando terminus drush mi:import sd_nodes_outreach -- --update --force
 lando terminus drush mi:import sd_nodes_hero -- --update --force
 lando terminus drush mi:import sd_nodes_outreach2 -- --update --force
 lando terminus drush mi:import sd_nodes_department_document -- --update --force
-lando terminus drush mi:import sd_nodes_external_data -- --update --force
 
 Menu import:
 lando terminus drush import:menus
@@ -38,12 +40,14 @@ lando terminus drush import:reusable-components
 lando terminus drush import:hero
 lando terminus drush import:outreach2
 lando terminus drush import:department_document
-lando terminus drush import:external_data
+lando terminus drush import:external_data 
+* Note: this does entirety of external_data node import; need to specify specific file.  Split into 12 CSV files.
 
 Fix class names/HTML content cleanup:
 lando terminus drush import:class-fixes
 
 Data status: 9/26/2022
+
 Nodes:
 Bucket
 Department
@@ -56,6 +60,8 @@ Hero
 Outreach2
 Department document
 External data
+Date (Manually entered nodes as there were few and it was quicker to do so.)
+Business Resource (Manually entered nodes as there were few and it was quicker to do so.)
 
 Field groups:
 field_bucket_events_pi_coll
@@ -76,3 +82,6 @@ Categories
 Department
 Search KeyMatch
 Location
+Business Resources Organization
+Business Resources Target Business
+Business Resources Type of Assistance
