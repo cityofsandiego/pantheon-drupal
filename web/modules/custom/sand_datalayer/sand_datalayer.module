@@ -6,8 +6,6 @@
 
 declare(strict_types=1);
 
-use Drupal\taxonomy\Entity\Term;
-
 /**
  * Implements hook_help().
  */
@@ -60,6 +58,7 @@ function sand_datalayer_get_top_parent(int $tid, string $term_name): array {
  */
 function sand_datalayer_datalayer_alter(&$data_layer): void {
 
+  
   // Not needed for admin pages.
   if (\Drupal::service('router.admin_context')->isAdminRoute()) {
     return;
@@ -126,8 +125,7 @@ function sand_datalayer_set_webteam_term(array &$departments): void {
  * Get the default term to be used if no or multiple department terms are on this page.
  */
 function sand_datalayer_get_default_term(): int {
-  $config = \Drupal::config('sand_datalayer.settings');
-  return $config->get('default_department');
+  return \Drupal::config('sand_datalayer.settings')->get('default_department');
 }
 
 /**
