@@ -1,14 +1,10 @@
 <?php
 /**
  * @file
+ * This is all the code that affect the contrib module datalayer.
  */
 
 declare(strict_types=1);
-
-// This is the original taxonomy term for the Web Team Department.
-const WEBTEAM_TAXONOMY_ID = 3366;
-
-use Drupal\taxonomy\Entity\Term;
 
 /**
  * Implements hook_help().
@@ -62,6 +58,7 @@ function sand_datalayer_get_top_parent(int $tid, string $term_name): array {
  */
 function sand_datalayer_datalayer_alter(&$data_layer): void {
 
+  
   // Not needed for admin pages.
   if (\Drupal::service('router.admin_context')->isAdminRoute()) {
     return;
@@ -80,12 +77,12 @@ function sand_datalayer_datalayer_alter(&$data_layer): void {
   }
   else {
     // No departments on this page.
-    sand_datalayer_get_webteam_term($departments);
+    sand_datalayer_set_webteam_term($departments);
   }
 
   // If more than 1 parent Department on node, then force Webteam Department.
   if (count($departments) > 1) {
-    sand_datalayer_get_webteam_term($departments);
+    sand_datalayer_set_webteam_term($departments);
   }
 
   // Add Department Parent ID and Name to datalayer.
@@ -105,19 +102,44 @@ function sand_datalayer_datalayer_alter(&$data_layer): void {
  * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
  * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
  */
-function sand_datalayer_get_webteam_term(array &$departments): void {
-  $config = \Drupal::config('sand_datalayer.settings');
-  $default_department = $config->get('default_department');
-  $default_department = !empty($default_department) ? $default_department : WEBTEAM_TAXONOMY_ID;
+function sand_datalayer_set_webteam_term(array &$departments): void {
+  $default_department = sand_datalayer_get_default_term();
+  $departments = [];
   
   /** @var \Drupal\taxonomy\Entity\Term $term_webteam */
-  $term_webteam = \Drupal::entityTypeManager()
-    ->getStorage('taxonomy_term')
-    ->load($default_department);
+  try {
+    $term_webteam = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->load($default_department);
+  }
+  catch (Exception $exception) {
+  }
   
   // If term not found, this will return an empty department array.
-  $departments = [];
   if (!empty($term_webteam)) {
     $departments[$term_webteam->id()] = $term_webteam->getName();
+  }
+}
+
+/**
+ * Get the default term to be used if no or multiple department terms are on this page.
+ */
+function sand_datalayer_get_default_term(): int {
+  return \Drupal::config('sand_datalayer.settings')->get('default_department');
+}
+
+/**
+ * Implements hook_entity_predelete().
+ */
+function sand_datalayer_entity_predelete(\Drupal\Core\Entity\EntityInterface $entity): void {
+  if (is_a($entity, 'Drupal\taxonomy\Entity\Term')) {
+    $default_department = sand_datalayer_get_default_term();
+    $tid = $entity->id();
+    if ($default_department == $tid) {
+      $message = 'Tried to delete the Taxonomy Term associated with custom module sand_datalayer'; 
+      \Drupal::messenger()->addMessage($message);
+      \Drupal::logger('sand_datalayer')->error($message);
+      throw new Exception();
+    }
   }
 }
