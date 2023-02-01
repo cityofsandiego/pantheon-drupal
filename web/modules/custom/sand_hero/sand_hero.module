@@ -6,6 +6,7 @@
  */
 // start of hero
 use Drupal\user\Entity\User;
+use Drupal\sand_tool\terms;
 
 /**
  * @param string $timezone
@@ -54,7 +55,7 @@ function sand_hero_timesofday($timezone = "America/Los_Angeles", $latitude = 32.
 // - variable departments is like sand_tool_department_parents
 // - variable times is date_sun_info() PHP
 // - - generate from now() dawn, dusk, day, night
-$times_of_day = sand_hero_timesofday();
+//$times_of_day = sand_hero_timesofday();
 // query hero nids with department(and parents) and time_of_day(dawn,dusk,day,night)
 // pick one random hero, if empty, default image
 // apply this image to Hero background PHP programmatically
@@ -73,10 +74,9 @@ $times_of_day = sand_hero_timesofday();
 /**
  * Implements hook_js_settings_build().
  */
-function sand_hero_js_settings_build(array &$settings, &$variables) {
+function sand_hero_query_hero_ids(array $departments) {
   $times_of_day = sand_hero_timesofday();
-  $departments = ['3335']; // [field_department] on node
-  $departmentParents = ['3335']; // [self and parents] of $departments
+  $departmentParents = ['3336']; //todo: [self and parents] of $departments service
   if(!empty($times_of_day)) {
     $query = \Drupal::entityQuery('node');
 
@@ -105,9 +105,14 @@ function sand_hero_js_settings_build(array &$settings, &$variables) {
     $query->condition($orTimes);
     $query->condition($orSitewideCascade);
 //    $query->fields('node', ['field_image', 'field_vimeo_url']);
+//    $query->
 
     $entity_ids = $query->execute();
-    $settings['#attached']['drupalSettings']['sandHero'] = $entity_ids;
+//    $settings['#attached']['drupalSettings']['sandHero'] = $entity_ids;
+//    $x = \Drupal\sand_tool\SandTerms::doSomething();
+//    $settings['myName'] = 'Boone';
+//    $build['#attached']['drupalSettings']['sandHero'] = $settings;
+    return array_keys($entity_ids);
   }
 }
 // query
@@ -115,3 +120,17 @@ function sand_hero_js_settings_build(array &$settings, &$variables) {
 
 // return
 // node, field_department,
+/**
+ * Implements hook_page_attachments().
+ *
+ * Load all meta tags for this page.
+ */
+/**
+ * Implements hook_page_attachments().
+ */
+function sand_hero_page_attachments(array &$attachments) {
+  $departments = ['3336']; //todo: get the department of current node
+  $heroNodeIDs = sand_hero_query_hero_ids($departments);
+  $heroSettings['heroNodeIDs'] = $heroNodeIDs;
+  $attachments['#attached']['drupalSettings']['sandHero'] = $heroSettings;
+}
