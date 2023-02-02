@@ -1,6 +1,18 @@
 <?php
 
-use Drupal\sand_example\SandEntityTypeManager;
+/**
+ * @file
+ * This module directory contains code examples that we've done.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_help().
+ */
+function sand_example_help($route_name): ?string {
+  return sand_help_show_help(__DIR__, $route_name);
+}
 
 function sand_example_theme() {
   /*
@@ -17,12 +29,4 @@ function sand_example_theme() {
       ],
     ],
   ];
-}
-
-
-/**
- * Implements hook_datalayer_alter().
- */
-function sand_example_datalayer_alter(array &$data_layer) {
-
 }
