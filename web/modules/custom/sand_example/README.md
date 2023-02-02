@@ -1,9 +1,17 @@
-# WebTeam development
+# Sand Diego Examples and WebTeam development
 
-## Documenation
+## This module
+Trys to provide code examples of things we use or have discovered. 
+Instead of just googling the information, this provides proven examples
+in our system.
+
+## Custom Module Documenation
 Documentation for each custom module is in the module's directory.
 It is in README.md. This is also available through the GUI via the
 custom module "sand_help" and can be viewed on /admin/modules
+
+
+There are examples of useful drush commands and other things in this README file.
 
 ## Configuration
 
