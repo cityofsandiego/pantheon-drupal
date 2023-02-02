@@ -20,9 +20,9 @@ class SanDiegoExampleBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build(): array {
-    // This is a contrived example of using the service path.matcher that is decorated in SandExamplePathMatcher.
-    $pathMatcher = \Drupal::service('path.matcher');
-    $isAdmin = $pathMatcher->isAdmin();
+    // This is a contrived example of decorating the service path.matcher.
+    // The method isAdmin was added to the decorator class SandExamplePathMatcher 
+    $isAdmin = \Drupal::service('path.matcher')->isAdmin();
     if ($isAdmin) {
       $text = 'Admin Page';
     }

@@ -35,7 +35,12 @@ class SettingsForm extends ConfigFormBase {
       $term = \Drupal::entityTypeManager()
         ->getStorage('taxonomy_term')
         ->load($default_department);
-    } catch (Exception $e) {
+    } catch (Exception $exception) {
+      \Drupal::logger(__CLASS__)->warning( 'Exception when trying to get the default department tid = @tid, exception: @exception', 
+          [ '@tid' => $default_department, 
+            '@exception' => $exception,
+          ]
+        );
       $name = '';
     }
     
@@ -44,7 +49,7 @@ class SettingsForm extends ConfigFormBase {
     }
     
     $form['info'] = [
-      '#markup' => '<p>We are using the contributed module datalayer to provide information to our feedback form. In addition to the default information it provides we add the department on each page that has one full node in view mode that has one department taxonomy term. If the page does not meet this criteria then the default department term is assigned to the output. By default we are setting it originally to the Web Team term.</p>',
+      '#markup' => '<p>We are using the contributed module datalayer to provide information to our feedback form. In addition to the default information it provides we add the department on each page that has one full node in view mode that has one department taxonomy term. If the page does not meet this criteria then the default department term is assigned to the output. By default, we are setting it originally to the Web Team term.</p>',
     ];
     
     $form['default_department'] = [

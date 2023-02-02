@@ -12,33 +12,32 @@ use Drupal\Core\Routing\RouteMatchInterface;
  */
 class SandExamplePathMatcher implements PathMatcherInterface {
   
-  protected $innerService;
+  protected PathMatcher $innerService;
 
-  //public function __construct(PathMatcher $inner_service) {
   public function __construct(PathMatcher $inner_service, ConfigFactoryInterface $config_factory, RouteMatchInterface $route_match) {
     $this->innerService = $inner_service;
     $this->innerService->__construct($config_factory, $route_match);
   }
 
-  public function __call($method, $args) {
-    return call_user_func_array(array($this->innerService, $method), $args);
-  }
+//  public function __call($method, $args) {
+//    return call_user_func_array(array($this->innerService, $method), $args);
+//  }
     
   /**
    * @inheritDoc
    */
-  public function matchPath($path, $patterns) {
+  public function matchPath($path, $patterns): bool {
     return $this->innerService->matchPath($path, $patterns);
   }
 
   /**
    * @inheritDoc
    */
-  public function isFrontPage() {
+  public function isFrontPage(): bool {
     return $this->innerService->isFrontPage();
   }
   
-  public function isAdmin() {
+  public function isAdmin(): bool {
     if (\Drupal::service('router.admin_context')->isAdminRoute()) {
       return true;
     } else {
