@@ -1,0 +1,28 @@
+<?php
+
+use Drupal\sand_example\SandEntityTypeManager;
+
+function sand_example_theme() {
+  /*
+   * Desc:
+   *  This tells Drupal there is a template called "sand-weather.html.twig".
+   * Notes: 
+   *  You don't have to do this for a block and can just name the template for
+   * the block following Drupal naming convensions.
+   */
+  return [
+    'sand_example' => [
+      'variables' => [
+        'text' => NULL,
+      ],
+    ],
+  ];
+}
+
+
+/**
+ * Implements hook_datalayer_alter().
+ */
+function sand_example_datalayer_alter(array &$data_layer) {
+
+}
