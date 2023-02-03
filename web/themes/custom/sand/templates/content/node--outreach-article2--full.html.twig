@@ -131,7 +131,7 @@
     <div class="main-content l-constrained l-margin-bm l-margin-desktop-tm l-padding-mobile-hm">
         {{ content.body }}
 
-        {% if content.field_department[0]['#title'] == 'Mayor Todd Gloria' %}
+        {% if 'Mayor Todd Gloria' in content.field_department %}
           <div class="article-custom-block">
             {% if 'Press Releases' in content.field_department %}
               {{ drupal_entity('block_content', '17') }}
