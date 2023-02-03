@@ -130,7 +130,18 @@
 
     <div class="main-content l-constrained l-margin-bm l-margin-desktop-tm l-padding-mobile-hm">
         {{ content.body }}
+
+        {% if content.field_department[0]['#title'] == 'Mayor Todd Gloria' %}
+          <div class="article-custom-block">
+            {% if 'Press Releases' in content.field_department %}
+              {{ drupal_entity('block_content', '17') }}
+            {% endif %}
+            {% if 'Op-ed' in content.field_department %}
+              {{ drupal_entity('block_content', '16') }}
+            {% endif %}
+          </div>    
+        {% endif %}
+
     </div>
   </div>
-
 </article>
