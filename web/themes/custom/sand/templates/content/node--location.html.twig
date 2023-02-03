@@ -90,53 +90,134 @@
   {% endif %}
   {{ title_suffix }}
   <div {{ content_attributes.addClass('node__content') }}>
-  <div class="grid-x grid-margin-x grid-padding-x grid-padding-y">
-    <div class="cell small-12 medium-auto content">
-      {{ content.body }}
-      <div class="accordion" data-accordion data-allow-all-closed="true">
-        <div class="accordion-item" data-accordion-item>
-          {% if content.field_alt_amendities_title.0 %}
-            <a href="#" class="accordion-title">{{ content.field_alt_amendities_title }}</a>
-            {% else %}
-            <a href="#" class="accordion-title">Amenities</a>
-          {% endif %}
-          <div class="accordion-content" data-tab-content>
-            {{ content.field_amenities }}
+    <div class="grid-x grid-margin-x grid-padding-x grid-padding-y">
+      <div class="cell small-12 medium-auto content">
+        {{ content.body }}
+        <div class="accordion" data-accordion data-allow-all-closed="true">
+          <div class="accordion-item" data-accordion-item>
+            {% if content.field_alt_amendities_title.0 %}
+              <a href="#" class="accordion-title">{{ content.field_alt_amendities_title }}</a>
+              {% else %}
+              <a href="#" class="accordion-title">Amenities</a>
+            {% endif %}
+            <div class="accordion-content" data-tab-content>
+              {{ content.field_amenities }}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="accordion" data-accordion data-allow-all-closed="true">
-        <div class="accordion-item" data-accordion-item>
-          {% if content.field_alt_restrictions_title.0 %}
-            <a href="#" class="accordion-title">{{ content.field_alt_restrictions_title }}</a>
-            {% else %}
-            <a href="#" class="accordion-title">Restrictions</a>
+        <div class="accordion" data-accordion data-allow-all-closed="true">
+          <div class="accordion-item" data-accordion-item>
+            {% if content.field_alt_restrictions_title.0 %}
+              <a href="#" class="accordion-title">{{ content.field_alt_restrictions_title }}</a>
+              {% else %}
+              <a href="#" class="accordion-title">Restrictions</a>
+            {% endif %}
+            <div class="accordion-content" data-tab-content>
+              {{ content.field_restrictions }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cell medium-4 sidebar">
+        <div class="l-padding-ad l-padding-mobile-hd l-margin-mobile-bm">
+  				<div class="card l-padding-ad background-off-white l-margin-td">
+            <div class="l-padding-bm">
+              {{ content.field_sidebar }}
+              <h2 class="h3 heading--snug">Location</h2>
+              {{ content.field_address_pin }}
+            </div>
+
+            {% if content.field_address.0 %}
+              <div class="l-padding-bm address-text">
+                <div>
+                  <i class="icon-map-marker icon--sm icon--circle background--cerulean"></i>
+                </div>
+
+                {{ content.field_address }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if content.field_location_hours.0 %}
+    				<div class="card l-padding-ad background-off-white l-margin-td">
+    					<h2 class="h3 heading--snug">
+                {{ content.field_location_hours_title }}
+              </h2>
+  					  <div class="">
+                {{ content.field_location_hours_notes }}
+              </div>
+  					  <div class="l-padding-tm">
+                {{ content.field_location_hours }}
+              </div>
+  					  <div class="l-padding-tm">
+                {{ content.field_exceptions }}
+              </div>
+            </div>
           {% endif %}
-          <div class="accordion-content" data-tab-content>
-            {{ content.field_restrictions }}
-          </div>
+
+          {% if content.field_location_hours2.0 %}
+    				<div class="card l-padding-ad background-off-white l-margin-td">
+    					<h2 class="h3 heading--snug">
+                {{ content.field_location_hours_title_2 }}
+              </h2>
+  					  <div class="">
+                {{ content.field_location_hours_notes2 }}
+              </div>
+  					  <div class="l-padding-tm">
+                {{ content.field_location_hours2 }}
+              </div>
+  					  <div class="l-padding-tm">
+                {{ content.field_exceptions_2 }}
+              </div>
+            </div>
+          {% endif %}
+
+          {% if content.field_location_contact_name.0 %}
+    				<div class="card l-padding-ad background-off-white l-margin-td">
+    					<h2 class="h3 heading--snug">Contact Info</h2>
+              <div class="grid-x l-margin-td">
+      					<div class="cell small-2">
+      						<i class="icon-user icon--sm icon--circle background--cerulean"></i>
+      					</div>
+      					<div class="cell small-10">
+      						<address class="l-margin-an">
+                    {{ content.field_location_contact_name }}
+                    {{ content.field_location_contact_title }}
+      						</address>
+                </div>
+              </div>
+              <div class="grid-x l-margin-td">
+      					<div class="cell small-2">
+      						<i class="icon-telephone icon--sm icon--circle background--cerulean"></i>
+      					</div>
+      					<div class="cell small-10">
+      						<address class="l-margin-an">
+      							<strong><span itemprop="telephone">{{ content.field_phone.0 }}</span></strong>
+      						</address>
+                </div>
+              </div>
+              <div class="grid-x l-margin-td">
+      					<div class="cell small-2">
+      						<i class="icon-at-sign icon--sm icon--circle background--cerulean"></i>
+      					</div>
+      					<div class="cell small-10">
+      						<address class="l-margin-an">
+      							<strong><a href="mailto:">{{ content.field_email.0 }}</span></strong>
+      						</address>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+
         </div>
       </div>
+      {% if content.field_resources.0 %}
+        <div class="cell small-12 l-padding-desktop-hd l-padding-mobile-hm l-padding-tm l-padding-bd background-off-white">
+          {{ content.field_resources }}
+        </div>
+        {% endif %}
     </div>
-    <div class="cell medium-4 sidebar">
-      <div class="l-padding-ad l-padding-mobile-hd l-margin-mobile-bm light-gray-bg">
-        <div class="l-padding-bm">
-          <h2 class="h3 heading--snug">Location</h2>
-          {{ content.field_address_pin }}
-        </div>
-        <div class="l-padding-bm address-text">
-          <div>
-            <i class="icon-map-marker icon--sm icon--circle background--cerulean"></i>
-          </div>
-          {{ content.field_address }}
-        </div>
-        <div class="l-padding-bm">
-          {{ content.field_sidebar }}
-        </div>
-      </div>
-    </div>
-  </div>
   </div>
 
 </article>
