@@ -22,6 +22,7 @@ dependencies:
   module:
     - field_group
     - link
+    - media_library
     - path
     - scheduler
     - scheduler_content_moderation_integration
@@ -184,14 +185,11 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_feature_video_img:
-    type: entity_reference_autocomplete
+    type: media_library_widget
     weight: 17
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      media_types: {  }
     third_party_settings: {  }
   field_keywords:
     type: string_textfield
