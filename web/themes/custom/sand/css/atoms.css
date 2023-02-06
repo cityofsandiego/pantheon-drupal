@@ -2945,12 +2945,7 @@ table.ui-datepicker-calendar td:first-child {
   margin: 0;
   overflow: hidden;
   background: #f6f6f6;
-  border: 1px solid #dde2e5;
-}
-@media print, screen and (min-width: 60em) {
-  .tabs-list {
-    border-bottom: none;
-  }
+  display: flex;
 }
 
 .tabs-list__item {
@@ -2960,39 +2955,16 @@ table.ui-datepicker-calendar td:first-child {
   border-top: none;
   background: white;
   display: inline-block;
+  border-bottom: 1px solid #dde2e5;
   font-size: 14px;
   font-size: 0.875rem;
+  border-left: 1px solid #dde2e5;
 }
-@media print, screen and (min-width: 30em) {
-  .tabs-list__item:last-child {
-    border-right: none;
-  }
+.tabs-list__item:first-child {
+  border-left: none;
 }
-@media print, screen and (min-width: 64em) {
-  .tabs-list__item {
-    border: 1px solid #dde2e5;
-    border-top: none;
-    border-right: none;
-  }
-  .tabs-list__item:last-child {
-    border-bottom: none;
-    border-right: 1px solid #dde2e5;
-  }
-}
-@media print, screen and (min-width: 60em) {
-  .tabs-list__item {
-    border-left: 1px solid #dde2e5;
-    border-bottom: 1px solid #dde2e5;
-  }
-  .tabs-list__item:last-child {
-    border-right: 1px solid #dde2e5;
-  }
-  .tabs-list__item:first-child {
-    border-left: none;
-  }
-  .tabs-list__item.is-active {
-    border-bottom: 1px solid white;
-  }
+.tabs-list__item.is-active {
+  border-bottom: 1px solid white;
 }
 
 .tabs-list__link {
