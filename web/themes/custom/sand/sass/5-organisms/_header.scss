@@ -195,7 +195,7 @@
         }
       }
 
-      .tbm-item--has-dropdown a:before {
+      .tbm-item--has-dropdown > div > a:before {
         color: $tulip;
         content: "\2304";
         font-size: 1.25rem;
@@ -256,7 +256,7 @@
       margin: 0;
     }
 
-    .border {
+    .menu-border {
       border-bottom: 1px dashed $alto;
       margin-bottom: 0.5em;
       padding-bottom: 0.5em;
@@ -351,7 +351,7 @@
       border: 0 !important;
       font-size: .6rem;
 
-      &:nth-child(5) {
+      &:nth-child(2) {
         display: none;
       }
     }
@@ -365,6 +365,7 @@
     text-align: right;
 
     .form-submit {
+      padding: 0;
       width: 2rem;
     }
 
@@ -373,12 +374,59 @@
       margin: 0;
     }
 
+    .input-group-submit {
+      display: flex;
+    }
 
     input {
       font-size: 0.86rem;
 
       &::placeholder {
         color: $spruce;
+      }
+    }
+  }
+
+  &.simple-header {
+    padding: 0.5em 1em 0.6rem;
+
+    .logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 37px;
+        height: auto;
+      }
+
+      span {
+        color: $spruce;
+        font-size: 0.8125rem;
+        display: block;
+        padding-left: 0.8rem;
+        padding-top:0.5rem;
+      }
+    }
+
+    .translate {
+      text-align: right;
+
+      .languages {
+        color: $spruce;
+        margin: 0.2rem 0 0;
+
+        @include breakpoint(medium) {
+          margin: 0.5rem 0 0;
+        }
+
+        i {
+          font-size: 1.8rem;
+
+          @include breakpoint(medium) {
+            font-size: 0.75rem;
+          }
+        }
       }
     }
   }

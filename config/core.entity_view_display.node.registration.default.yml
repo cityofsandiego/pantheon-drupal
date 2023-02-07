@@ -10,7 +10,6 @@ dependencies:
     - field.field.node.registration.field_reg_registration
     - node.type.registration
   module:
-    - datetime
     - registration
     - text
     - user
@@ -24,31 +23,14 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 3
-    region: content
-  field_reg_date:
-    type: datetime_default
-    label: hidden
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_reg_event_location:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
     weight: 1
     region: content
   field_reg_registration:
-    type: registration_type
+    type: registration_form
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 2
     region: content
   links:
     settings: {  }
@@ -56,4 +38,6 @@ content:
     weight: 0
     region: content
 hidden:
+  field_reg_date: true
   field_reg_display_to_role: true
+  field_reg_event_location: true
