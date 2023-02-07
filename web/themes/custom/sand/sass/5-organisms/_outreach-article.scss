@@ -1,0 +1,45 @@
+.node--type-outreach-article2 {
+  .main-content {
+    max-width: 800px;
+  }
+  .article-header {
+    text-align: center;
+    & > * {
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    } 
+
+    h1 {
+      text-align: center;
+      font-size: 2.25rem;
+
+      @include breakpoint(large) {
+        font-size: 2.5rem;
+      }
+    }
+
+    .subtitle{
+      margin-bottom: 1em;
+    }
+
+    &.image-bg {
+      display: none;
+
+      @include breakpoint(medium) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    
+      h1 {
+        color: $white;
+        text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black;
+      }
+    }
+  }
+
+  .article-custom-block {
+    margin-top: 2em;
+  }
+}
