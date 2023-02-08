@@ -38,7 +38,8 @@
  * @ingroup themeable
  */
 #}
-{% set text_attribute = create_attribute() %}
+{% set text_attributes = create_attribute() %}
+{% set img_attributes = create_attribute() %}
 
 {%
   set classes = [
@@ -46,28 +47,50 @@
     hide_on_desktop,
     hide_on_mobile,
     border_bottom,
-    image_style,
+  ]
+%}
+
+{%
+  set img_classes = [
+    'stellar-window',
+    repeat
   ]
 %}
 
 {% block paragraph %}
   {% block content %}
+    <div {{ attributes.addClass(classes)}}>
+    <!-- This section HAS an image -->
     {% if content.field_image.0 %}
-      <div {{ attributes.addClass(classes)
-        .setAttribute('style', bg_style)
-        .setAttribute('data-stellar-vertical-offset', vertical_offset)  
+      <div {{ img_attributes.addClass(img_classes)
+        .setAttribute('id', 'img-' ~ paragraph.id())
+        .setAttribute('style', 
+          'background-size' ~ background_size ~ '; ' ~ 
+          'background-position-x' ~ horizontal ~ '; ' ~
+          'background-image:url(' ~ image_url ~ '); ' ~
+          'background-color:' ~ bg_color ~ ';' ~
+          full_width_mobile
+        )
+        .setAttribute('data-stellar-vertical-offset', vertical_offset)
+        .setAttribute('data-stellar-background-ratio', scroll_ratio)
         .setAttribute('data-sand-min-height', min_height) 
         .setAttribute('data-sand-adjustment-width', adjustment_width) 
         .setAttribute('data-sand-adjustment-height', adjustment_height)
-        .setAttribute('data-sand-background-size', '')
+        .setAttribute('data-sand-background-size', background_size)
         }}  
       >
-    {% else %}
-        <div {{ attributes.addClass(classes).setAttribute('style', bg_style) }}>
-    {% endif %}    
-          <div {{ text_attribute.addClass(text_classes)}}>
-            {{ content.field_body }}
-          </div>
+        <div {{ text_attributes.addClass(text_classes)}}>
+            {{ content.field_body }}   
+        </div>
       </div>
+    {% else %}
+    <!-- This section does NOT have an image -->
+      <div {{ img_attributes.addClass(img_classes).setAttribute('style', 'background-color:' ~ bg_color ~ ';') }}>
+        <div {{ text_attributes.addClass(text_classes)}}>
+          {{ content.field_body }}
+        </div>
+      </div>
+    {% endif %}    
+    </div>
   {% endblock %}
 {% endblock paragraph %}
