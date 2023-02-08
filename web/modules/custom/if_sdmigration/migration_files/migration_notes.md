@@ -13,6 +13,8 @@ lando terminus drush import:taxonomy bucket
 lando terminus drush import:taxonomy business_resources_organization
 lando terminus drush import:taxonomy business_resources_target_bus
 lando terminus drush import:taxonomy business_resources_type_assist
+lando terminus drush import:taxonomy event
+lando terminus drush import:taxonomy registration
 
 Node imports:
 lando terminus drush mi:import sd_nodes_department -- --update --force
@@ -25,6 +27,7 @@ lando terminus drush mi:import sd_nodes_outreach -- --update --force
 lando terminus drush mi:import sd_nodes_hero -- --update --force
 lando terminus drush mi:import sd_nodes_outreach2 -- --update --force
 lando terminus drush mi:import sd_nodes_department_document -- --update --force
+lando terminus drush mi:import sd_nodes_blog -- --update --force
 
 Menu import:
 lando terminus drush import:menus
@@ -41,7 +44,8 @@ lando terminus drush import:hero
 lando terminus drush import:outreach2
 lando terminus drush import:department_document
 lando terminus drush import:external_data 
-* Note: this does entirety of external_data node import; need to specify specific file.  Split into 12 CSV files.
+  * Note: this does entirety of external_data node import; need to specify specific file.  Split into 12 CSV files.
+lando terminus drush import:blog
 
 Fix class names/HTML content cleanup:
 lando terminus drush import:class-fixes
@@ -62,6 +66,11 @@ Department document
 External data
 Date (Manually entered nodes as there were few and it was quicker to do so.)
 Business Resource (Manually entered nodes as there were few and it was quicker to do so.)
+
+Data status: 2/6/2023
+
+Nodes:
+Blog
 
 Field groups:
 field_bucket_events_pi_coll
@@ -85,3 +94,5 @@ Location
 Business Resources Organization
 Business Resources Target Business
 Business Resources Type of Assistance
+Registration
+Event
