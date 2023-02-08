@@ -115,7 +115,7 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
     $variables->set('scroll_ratio', $field_image_scroll_ratio);
 
     if ($paragraph->field_repeat->value) {
-      $variables->set('repeat', 'repeat');
+      $variables->set('repeat', 'repeat-x');
     } 
 
     // Hide on desktop or mobile
