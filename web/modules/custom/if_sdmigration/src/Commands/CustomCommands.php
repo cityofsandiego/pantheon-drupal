@@ -2028,6 +2028,13 @@ class CustomCommands extends DrushCommands {
       }
       $node->field_feature_video_img = $image;
       $node->save();
+
+      // Set most recent revision to published.
+      $latest_vid = $this->entityTypeManager->getStorage('node')->getLatestRevisionId($node->id());
+      $latest_revision = $this->entityTypeManager->getStorage('node')->loadRevision($latest_vid);
+      if ($latest_revision->moderation_state->value == 'draft') {
+        $latest_revision->set('moderation_state', 'published')->save();
+      }
       echo $node->id() . PHP_EOL;
     }
   }
