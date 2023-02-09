@@ -1926,10 +1926,11 @@ class CustomCommands extends DrushCommands {
    * Finalize blog import.
    *
    * @command import:blog
+   * @param $after_id (D7 Node ID to resume after).
    *
    * @usage import:blog
    */
-  public function finalizeBlog() {
+  public function finalizeBlog($after_id = 0) {
     // Read extra field data for manual creation/update.
     if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/blog.csv', 'r')) {
       fgets($file);
@@ -1950,6 +1951,7 @@ class CustomCommands extends DrushCommands {
 
     // Manually update each node.
     foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) continue;
       // Load node.
       $query = $this->entityTypeManager
         ->getStorage('node')
