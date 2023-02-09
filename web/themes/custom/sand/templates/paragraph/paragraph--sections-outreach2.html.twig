@@ -65,11 +65,11 @@
       <div {{ img_attributes.addClass(img_classes)
         .setAttribute('id', 'img-' ~ paragraph.id())
         .setAttribute('style', 
-          'background-size' ~ background_size ~ '; ' ~ 
-          'background-position-x' ~ percent_horizontal ~ '; ' ~
-          'background-position-y' ~ percent_vertical ~ '; ' ~
-          'background-image:url(' ~ image_url ~ '); ' ~
-          'background-color:' ~ bg_color ~ ';' ~
+          'background-size: ' ~ background_size ~ '; ' ~ 
+          'background-position-x: ' ~ percent_horizontal ~ '%; ' ~
+          'background-position-y: ' ~ percent_vertical ~ '%; ' ~
+          'background-image: url(' ~ image_url ~ '); ' ~
+          'background-color: ' ~ bg_color ~ ';' ~
           full_width_mobile
         )
         .setAttribute('data-stellar-vertical-offset', vertical_offset)
@@ -87,7 +87,7 @@
       </div>
     {% else %}
     <!-- This section does NOT have an image -->
-      <div {{ img_attributes.addClass(img_classes).setAttribute('style', 'background-color:' ~ bg_color ~ ';') }}>
+      <div {{ img_attributes.addClass('no-image l-padding-desktop-hx l-padding-mobile-hm l-padding-vd').setAttribute('style', 'background-color:' ~ bg_color ~ ';') }}>
         <div {{ text_attributes.addClass(text_classes)}}>
           {{ content.field_body }}
         </div>
