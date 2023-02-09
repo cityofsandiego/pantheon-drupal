@@ -66,7 +66,8 @@
         .setAttribute('id', 'img-' ~ paragraph.id())
         .setAttribute('style', 
           'background-size' ~ background_size ~ '; ' ~ 
-          'background-position-x' ~ horizontal ~ '; ' ~
+          'background-position-x' ~ percent_horizontal ~ '; ' ~
+          'background-position-y' ~ percent_vertical ~ '; ' ~
           'background-image:url(' ~ image_url ~ '); ' ~
           'background-color:' ~ bg_color ~ ';' ~
           full_width_mobile
@@ -77,6 +78,7 @@
         .setAttribute('data-sand-adjustment-width', adjustment_width) 
         .setAttribute('data-sand-adjustment-height', adjustment_height)
         .setAttribute('data-sand-background-size', background_size)
+        .setAttribute('data-sand-full-width-on-mobile', full_width_mobile)
         }}  
       >
         <div {{ text_attributes.addClass(text_classes)}}>
