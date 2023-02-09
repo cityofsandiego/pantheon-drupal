@@ -38,14 +38,6 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
    */
   protected $textStyle = [];
 
-
-  /**
-   * Background image styles.
-   *
-   * @var array
-   */
-  protected $bgStyle = [];
-
   /**
    * {@inheritdoc}
    */
@@ -80,8 +72,12 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
 
     //Set values for image attributes in Twig template.
     $field_horizontal = $paragraph->field_horizontal->value;
-    $horizontal = $field_horizontal ? $field_horizontal : '';
-    $variables->set('horizontal', $horizontal);
+    $horizontal = $field_horizontal ? $field_horizontal : '50';
+    $variables->set('percent_horizontal', $horizontal);
+
+    $field_vertical = $paragraph->field_vertical->value;
+    $vertical = $field_vertical ? $field_vertical : '50';
+    $variables->set('percent_vertical', $vertical);
 
     $field_vertical_offset = $paragraph->field_vertical_offset->value;
     $vertical_offset = $field_vertical_offset ? $field_vertical_offset : '';
@@ -106,17 +102,25 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
     $field_bg_color = $paragraph->field_bg_color->value;
     $background_color = $field_bg_color ? '#' . $field_bg_color : '#FFF';
     $variables->set('bg_color', $background_color);
-    
-    $field_full_width_mobile = $paragraph->field_full_width_mobile->value;
-    $full_width_mobile =  $field_full_width_mobile ? 'background-size: 100% auto' : '';
-    $variables->set('full_width_mobile', $full_width_mobile);
 
     $field_image_scroll_ratio = $paragraph->field_image_scroll_ratio->value;
     $variables->set('scroll_ratio', $field_image_scroll_ratio);
 
+    // This should override full_width_mobile if that is set.
+    if ($paragraph->field_mobile_size->value) {
+      $field_mobile_size = $paragraph->field_mobile_size->value;
+      $variables->set('full_width_mobile', $field_mobile_size);
+    } else {
+      $field_full_width_mobile = $paragraph->field_full_width_mobile->value;
+      $full_width_mobile =  $field_full_width_mobile ? 'background-size: 100% auto' : '';
+      $variables->set('full_width_mobile', $full_width_mobile);
+    }
+
     if ($paragraph->field_repeat->value) {
       $variables->set('repeat', 'repeat-x');
     } 
+
+    
 
     // Hide on desktop or mobile
     if ($paragraph->field_hide_on_desktop->value) {
@@ -162,9 +166,5 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
       };
       $variables->set('border_bottom', $border);
     }
-
-    // To-do: Ask SAND's team where this fields are in used in the D7 site.
-    // - field_mobile_size (sets background size of image in mobile view)
-    // - field_vertical (When background cover stops working, this determines vertical focal point (0 is top edge, 100 is bottom edge))
   }
 }
