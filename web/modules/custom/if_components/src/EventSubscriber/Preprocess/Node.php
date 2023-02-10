@@ -136,12 +136,14 @@ final class Node implements EventSubscriberInterface {
       $nids = $query->execute();
       $nid = array_rand($nids, 1);
       $hero_node = $this->entityTypeManager->getStorage('node')->load($nid);
-      if ($hero_node !== NULL) {
+      if ($hero_node !== NULL && $hero_node->get('field_image')->getValue() !== NULL) {
         $hero_image = $this->entityTypeManager->getStorage('media')
           ->load($hero_node->get('field_image')->getValue()[0]['target_id']);
-        $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
-        $hero_image_file = File::load($fid);
-        $variables->set('hero_image', $hero_image_file->createFileUrl());
+        if ($hero_image !== NULL) {
+          $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
+          $hero_image_file = File::load($fid);
+          $variables->set('hero_image', $hero_image_file->createFileUrl());
+        }
       }
     }
   }
@@ -153,6 +155,12 @@ final class Node implements EventSubscriberInterface {
     if ($variables->get('base_plugin_id') == 'page_title_block') {
       $node = \Drupal::routeMatch()->getParameter('node');
       if (isset($node) && $node instanceof NodeInterface && in_array($node->getType(), $content_types)) {
+
+        // Get current departments.
+        $field_department = $node->field_department->getValue();
+        foreach ($field_department as $department) {
+          $this->departments[] = $department['target_id'];
+        }
 
         // Top menu.
         $this->getSidebarContexts('field_department', $this->departments);
@@ -311,8 +319,7 @@ final class Node implements EventSubscriberInterface {
   public function getSidebarContexts($field, $terms): void {
     foreach ($terms as $term) {
       $query = $this->entityTypeManager
-        ->getListBuilder('node')
-        ->getStorage()
+        ->getStorage('node')
         ->getQuery();
       $query->condition('type', 'sidebar_block_context')
         ->condition($field, [$term], 'IN');
