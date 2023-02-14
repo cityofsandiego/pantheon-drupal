@@ -131,6 +131,11 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
       $variables->set('no_shadow', 'no-shadow');
     }
 
+    $field_no_styling = $paragraph->field_no_styling->value;
+    $no_styling = $field_no_styling ? true : false;
+    $variables->set('no_styling', $no_styling);
+
+
     // Create variable for border bottom (field_bottom_border)
     if (!$paragraph->field_bottom_border->isEmpty()) {  
       $field_bottom_border = $paragraph->field_bottom_border->value;
