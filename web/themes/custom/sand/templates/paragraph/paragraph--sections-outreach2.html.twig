@@ -38,7 +38,8 @@
  * @ingroup themeable
  */
 #}
-{% set text_attributes = create_attribute() %}
+{% set body_attributes = create_attribute() %}
+{% set no_img_attributes = create_attribute() %}
 {% set img_attributes = create_attribute() %}
 
 {%
@@ -56,6 +57,23 @@
     repeat
   ]
 %}
+{%
+  set body_classes = [
+    text_center,
+    no_shadow,
+    'l-padding-vd'
+  ]
+%}
+
+{%
+  set no_img_classes = [
+    'l-padding-desktop-hx'
+    'l-padding-mobile-hm'
+    'l-padding-vd',
+    text_center
+  ]
+%}
+
 
 {% block paragraph %}
   {% block content %}
@@ -81,14 +99,22 @@
         .setAttribute('data-sand-full-width-on-mobile', full_width_mobile)
         }}  
       >
-        <div {{ text_attributes.addClass(text_classes)}}>
+        {% if content.field_no_styling %}
+          <div>
+        {% else %}
+          <div {{ body_attributes.addClass(body_classes)}}>
+        {% endif %}
             {{ content.field_body }}   
         </div>
       </div>
     {% else %}
     <!-- This section does NOT have an image -->
-      <div {{ img_attributes.addClass('no-image l-padding-desktop-hx l-padding-mobile-hm l-padding-vd').setAttribute('style', 'background-color:' ~ bg_color ~ ';') }}>
-        <div {{ text_attributes.addClass(text_classes)}}>
+      <div {{ img_attributes.addClass('no-image').setAttribute('style', 'background-color:' ~ bg_color ~ ';') }}>
+        {% if content.field_no_styling %}
+          <div>
+        {% else %}
+          <div {{ body_attributes.addClass(no_img_classes)}}>
+        {% endif %}
           {{ content.field_body }}
         </div>
       </div>
