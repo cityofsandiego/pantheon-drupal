@@ -37,11 +37,7 @@
   margin: 0;
   overflow: hidden;
   background: $off-white;
-  border: 1px solid $alto;
-
-  @include breakpoint(site) {
-    border-bottom: none;
-  }
+  display: flex;
 }
 
 .tabs-list__item {
@@ -51,39 +47,14 @@
   border-top: none;
   background: white;
   display: inline-block;
+  border-bottom: 1px solid $alto;
   @include rem("font-size", 14px);
-
-  @include breakpoint(mobile-landscape) {
-    // @include span(6 no-gutters);
-    &:last-child {
-      border-right: none;
-    }
+  border-left: 1px solid $alto;
+  &:first-child {
+    border-left: none;
   }
-
-  @include breakpoint(medium-large) {
-    border: 1px solid $alto;
-    border-top: none;
-    border-right: none;
-    // @include span(4 no-gutters);
-    &:last-child {
-      border-bottom: none;
-      border-right: 1px solid $alto;
-    }
-  }
-
-  @include breakpoint(site) {
-    border-left: 1px solid $alto;
-    border-bottom: 1px solid $alto;
-    &:last-child {
-      border-right: 1px solid $alto;
-    }
-    // @include span(1 of 5 no-gutters);
-    &:first-child {
-      border-left: none;
-    }
-    &.is-active {
-      border-bottom: 1px solid white;
-    }
+  &.is-active {
+    border-bottom: 1px solid white;
   }
 }
 

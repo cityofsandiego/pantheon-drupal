@@ -35,7 +35,7 @@
         }
       });
       var counter = '<li class="flex-counter"><span class="current-slide">1</span> / <span class="total-slides"></span></li>';
-      $('.flexslider .flex-control-nav').append( counter );
+      $('.flexslider .flex-control-nav').html( counter );
       var index = $('.flexslider li:has(.flex-active)').index('.flex-control-nav li')+1;
       var total = $('.flexslider .flex-control-nav li').length;
       $('.flexslider--thumbnails').flexslider({
