@@ -136,23 +136,31 @@ final class Node implements EventSubscriberInterface {
       $nids = $query->execute();
       $nid = array_rand($nids, 1);
       $hero_node = $this->entityTypeManager->getStorage('node')->load($nid);
-      if ($hero_node !== NULL) {
+      if ($hero_node !== NULL && $hero_node->get('field_image')->getValue() !== NULL) {
         $hero_image = $this->entityTypeManager->getStorage('media')
           ->load($hero_node->get('field_image')->getValue()[0]['target_id']);
-        $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
-        $hero_image_file = File::load($fid);
-        $variables->set('hero_image', $hero_image_file->createFileUrl());
+        if ($hero_image !== NULL) {
+          $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
+          $hero_image_file = File::load($fid);
+          $variables->set('hero_image', $hero_image_file->createFileUrl());
+        }
       }
     }
   }
 
   public function preprocessTitleBlock(BlockPreprocessEvent $event): void {
     $variables = $event->getVariables();
-    $content_types = ['department', 'location', 'department_document'];
+    $content_types = ['department', 'location', 'department_document', 'article', 'blog'];
 
     if ($variables->get('base_plugin_id') == 'page_title_block') {
       $node = \Drupal::routeMatch()->getParameter('node');
       if (isset($node) && $node instanceof NodeInterface && in_array($node->getType(), $content_types)) {
+
+        // Get current departments.
+        $field_department = $node->field_department->getValue();
+        foreach ($field_department as $department) {
+          $this->departments[] = $department['target_id'];
+        }
 
         // Top menu.
         $this->getSidebarContexts('field_department', $this->departments);
@@ -264,13 +272,43 @@ final class Node implements EventSubscriberInterface {
     // //Preprocess Department document file to get URL
     if ($node->hasField('field_attachment')) {
       $field_attachment = $node->field_attachment->getValue();
-      
+
       if (!empty($field_attachment)) {
         $attachment = $this->entityTypeManager->getStorage('media')
           ->load( $node->get('field_attachment')->getValue()[0]['target_id']);
         $field_id = $attachment->getSource()->getSourceFieldValue( $attachment);
         $file_url = File::load($field_id);
         $variables->set('attachment_url', $file_url->createFileUrl());
+      }
+    }
+
+    //Preprocess Image on Article Outreach2
+    if ($node->getType() == 'outreach_article2') {
+      $field_image = $node->field_image->getValue();
+      $bgStyle = [];
+      
+      if (!empty($field_image)) {
+        $image = $this->entityTypeManager->getStorage('media')
+          ->load( $node->get('field_image')->getValue()[0]['target_id']);
+        $fid = $image->getSource()->getSourceFieldValue($image);
+        $image_file = File::load($fid);
+        $url = $image_file->createFileUrl();
+        
+        $field_minimum_height = $node->field_outreach_minimum_height->value;
+        $min_height  = $field_minimum_height ? $field_minimum_height . 'px' : '300px';
+
+        // Build attribute style
+        $this->$bgStyle = [
+          'size' => 'background-size: cover',
+          'position' => 'background-position: center center',
+          'repeat' => 'background-repeat: no-repeat',
+          'min-height' => 'min-height:' . $min_height,
+          'image' => 'background-image: url(' . $url . ')',
+        ];
+
+        $variables->set('bg_style', implode(";", $this->$bgStyle));
+      } else {
+        $variables->set('bg_style', '');
       }
     }
   }
@@ -281,8 +319,7 @@ final class Node implements EventSubscriberInterface {
   public function getSidebarContexts($field, $terms): void {
     foreach ($terms as $term) {
       $query = $this->entityTypeManager
-        ->getListBuilder('node')
-        ->getStorage()
+        ->getStorage('node')
         ->getQuery();
       $query->condition('type', 'sidebar_block_context')
         ->condition($field, [$term], 'IN');

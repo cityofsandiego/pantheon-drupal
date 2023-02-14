@@ -10,6 +10,11 @@ lando terminus drush import:taxonomy categories
 lando terminus drush import:taxonomy search_keymatch
 lando terminus drush import:taxonomy location
 lando terminus drush import:taxonomy bucket
+lando terminus drush import:taxonomy business_resources_organization
+lando terminus drush import:taxonomy business_resources_target_bus
+lando terminus drush import:taxonomy business_resources_type_assist
+lando terminus drush import:taxonomy event
+lando terminus drush import:taxonomy registration
 
 Node imports:
 lando terminus drush mi:import sd_nodes_department -- --update --force
@@ -20,6 +25,9 @@ lando terminus drush mi:import sd_nodes_slide -- --update --force
 lando terminus drush mi:import sd_nodes_mayoral_artifact -- --update --force
 lando terminus drush mi:import sd_nodes_outreach -- --update --force
 lando terminus drush mi:import sd_nodes_hero -- --update --force
+lando terminus drush mi:import sd_nodes_outreach2 -- --update --force
+lando terminus drush mi:import sd_nodes_department_document -- --update --force
+lando terminus drush mi:import sd_nodes_blog -- --update --force
 
 Menu import:
 lando terminus drush import:menus
@@ -33,11 +41,17 @@ lando terminus drush import:mayoral-artifact
 lando terminus drush import:outreach
 lando terminus drush import:reusable-components
 lando terminus drush import:hero
+lando terminus drush import:outreach2
+lando terminus drush import:department_document
+lando terminus drush import:external_data 
+  * Note: this does entirety of external_data node import; need to specify specific file.  Split into 12 CSV files.
+lando terminus drush import:blog
 
 Fix class names/HTML content cleanup:
 lando terminus drush import:class-fixes
 
 Data status: 9/26/2022
+
 Nodes:
 Bucket
 Department
@@ -47,6 +61,16 @@ Slide
 Mayoral artifacts
 Outreach
 Hero
+Outreach2
+Department document
+External data
+Date (Manually entered nodes as there were few and it was quicker to do so.)
+Business Resource (Manually entered nodes as there were few and it was quicker to do so.)
+
+Data status: 2/6/2023
+
+Nodes:
+Blog
 
 Field groups:
 field_bucket_events_pi_coll
@@ -56,9 +80,10 @@ field_dept_resources_coll
 field_dept_par_social_links_coll
 field_location_exceptions_coll
 field_location_exceptions_coll2
-field_location_amenities
-field_location_restrictions
+field_location_amenities_coll
+field_location_restrictions_coll
 field_outreach_sections_coll
+field_outreach_sections_coll2
 
 Taxonomies:
 Bucket
@@ -66,3 +91,8 @@ Categories
 Department
 Search KeyMatch
 Location
+Business Resources Organization
+Business Resources Target Business
+Business Resources Type of Assistance
+Registration
+Event

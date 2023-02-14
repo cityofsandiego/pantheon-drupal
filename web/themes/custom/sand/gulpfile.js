@@ -6,7 +6,7 @@ We keep things pretty simple here:
 */
 var gulp = require('gulp'),
   $      = require('gulp-load-plugins')(),
-  sass   = require('gulp-sass')(require('sass')),
+  sass   = require('gulp-sass')(require('node-sass')),
   gulpStylelint = require('@ronilaukkarinen/gulp-stylelint');
 
 var sassPaths = [
@@ -27,7 +27,9 @@ The main styles compliation function:
 gulp.task('styles', function(){
   return gulp.src('sass/**/*.scss')
     .pipe($.sourcemaps.init())
-    .pipe(sass()
+    .pipe(sass({
+      includePaths: ['node_modules/susy/sass']
+    })
     .on('error', sass.logError))
     .pipe($.rename({dirname: ''}))
     .pipe($.sourcemaps.write('./'))
