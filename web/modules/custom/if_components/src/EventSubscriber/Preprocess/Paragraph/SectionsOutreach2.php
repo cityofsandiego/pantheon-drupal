@@ -32,21 +32,6 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
   }
 
   /**
-   * Text style.
-   *
-   * @var array
-   */
-  protected $textStyle = [];
-
-
-  /**
-   * Background image styles.
-   *
-   * @var array
-   */
-  protected $bgStyle = [];
-
-  /**
    * {@inheritdoc}
    */
   public static function getSubscribedEvents(): array {
@@ -67,94 +52,92 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
 
     $paragraph = $variables->getParagraph();
 
-    // Reset styles since they seem to stick when there are multiple
-    // sections paragraphs on the page.
-    $this->bgStyle = [];
-    $this->textStyle = [];
+    // Preprocess image to get URL
+    if (!$paragraph->field_image->isEmpty()) {
+      $field_image = $paragraph->field_image->getValue();
 
-    // Preprocess background image attributes and style
-      if (!$paragraph->field_image->isEmpty()) {
-        // Preprocess image to get URL
-        $field_image = $paragraph->field_image->getValue();
+      $image = $this->entityTypeManager->getStorage('media')->load( $paragraph->get('field_image')->getValue()[0]['target_id']);
+      $fid = $image->getSource()->getSourceFieldValue($image);
+      $image_file = File::load($fid);
+      $url = $image_file->createFileUrl();
+      $variables->set('image_url', $url);
+    }
 
-        $image = $this->entityTypeManager->getStorage('media')->load( $paragraph->get('field_image')->getValue()[0]['target_id']);
-        $fid = $image->getSource()->getSourceFieldValue($image);
-        $image_file = File::load($fid);
-        $url = $image_file->createFileUrl();
-        
-        // Build attribute style
-        $this->bgStyle = [
-          // 'size' => 'background-size: 100%',
-          // 'position' => 'background-position: 50% 50%',
-          // 'min-height' => 'min-height: 300px',
-          'image' => 'background-image: url(' . $url . ')',
-        ];
+    //Set values for image attributes in Twig template.
+    $field_horizontal = $paragraph->field_horizontal->value;
+    $horizontal = $field_horizontal ? $field_horizontal : '50';
+    $variables->set('percent_horizontal', $horizontal);
 
-        //Set values for data attributes in Twig template.
-          $field_image_scroll_ratio = $paragraph->field_image_scroll_ratio->value;
-          $scroll_ratio = $field_image_scroll_ratio ? $field_image_scroll_ratio : '';
-          $variables->set('scroll_ratio', $scroll_ratio);
+    $field_vertical = $paragraph->field_vertical->value;
+    $vertical = $field_vertical ? $field_vertical : '50';
+    $variables->set('percent_vertical', $vertical);
 
-          $field_vertical_offset = $paragraph->field_vertical_offset->value;
-          $vertical_offset = $field_vertical_offset ? $field_vertical_offset : '';
-          $variables->set('vertical_offset', $vertical_offset);
+    $field_vertical_offset = $paragraph->field_vertical_offset->value;
+    $vertical_offset = $field_vertical_offset ? $field_vertical_offset : '';
+    $variables->set('vertical_offset', $vertical_offset);
 
-          $field_minimum_height = $paragraph->field_minimum_height->value;
-          $min_height  = $field_minimum_height ? $field_minimum_height . 'px' : '300px';
-          $variables->set('min_height', $min_height);
+    $field_minimum_height = $paragraph->field_minimum_height->value;
+    $min_height  = $field_minimum_height ? $field_minimum_height . 'px' : '300px';
+    $variables->set('min_height', $min_height);
 
-          $field_adjustment_width = $paragraph->field_adjustment_width->value;
-          $adjustment_width  = $field_adjustment_width ? $field_adjustment_width . 'px' : '';
-          $variables->set('adjustment_width', $adjustment_width);
+    $field_adjustment_width = $paragraph->field_adjustment_width->value;
+    $adjustment_width  = $field_adjustment_width ? $field_adjustment_width . 'px' : '';
+    $variables->set('adjustment_width', $adjustment_width);
 
-          $field_outreach_adjustment_height = $paragraph->field_outreach_adjustment_height->value;
-          $adjustment_height = $field_outreach_adjustment_height ? $field_outreach_adjustment_height . 'px' : '';
-          $variables->set('adjustment_height', $adjustment_height);
+    $field_outreach_adjustment_height = $paragraph->field_outreach_adjustment_height->value;
+    $adjustment_height = $field_outreach_adjustment_height ? $field_outreach_adjustment_height . 'px' : '';
+    $variables->set('adjustment_height', $adjustment_height);
 
-          $field_background_size = $paragraph->field_background_size->value;
-          $sand_background_size = $field_background_size ? $field_background_size : '';
-          $variables->set('sand_background_size', $sand_background_size);
-        
-        $variables->set('image_style', 'stellar-window');
-      } else {
-        //Use background_color
-        if ($paragraph->field_bg_color){
-          $this->bgStyle = [
-            'bg-color' => 'background-color: #' . $paragraph->field_bg_color->value,
-          ];
-        } else {
-          $this->bgStyle = [
-            'bg-color' => 'background-color: #FFF',
-          ];
-        }
-      };
-      $variables->set('bg_style', implode(";", $this->bgStyle));
+    $field_background_size = $paragraph->field_background_size->value;
+    $background_size = $field_background_size ? $field_background_size : '';
+    $variables->set('background_size', $background_size);
+
+    $field_bg_color = $paragraph->field_bg_color->value;
+    $background_color = $field_bg_color ? '#' . $field_bg_color : '#FFF';
+    $variables->set('bg_color', $background_color);
+
+    $field_image_scroll_ratio = $paragraph->field_image_scroll_ratio->value;
+    $variables->set('scroll_ratio', $field_image_scroll_ratio);
+
+    // This should override full_width_mobile if that is set.
+    if ($paragraph->field_mobile_size->value) {
+      $field_mobile_size = $paragraph->field_mobile_size->value;
+      $variables->set('full_width_mobile', $field_mobile_size);
+    } else {
+      $field_full_width_mobile = $paragraph->field_full_width_mobile->value;
+      $full_width_mobile =  $field_full_width_mobile ? 'background-size: 100% auto' : '';
+      $variables->set('full_width_mobile', $full_width_mobile);
+    }
+
+    if ($paragraph->field_repeat->value) {
+      $variables->set('repeat', 'repeat-x');
+    } 
+
 
     // Hide on desktop or mobile
-      if ($paragraph->field_hide_on_desktop->value) {
-        $variables->set('hide_on_desktop', 'hide-on-desktop');
-      } 
+    if ($paragraph->field_hide_on_desktop->value) {
+      $variables->set('hide_on_desktop', 'hide-on-desktop');
+    } 
 
-      if ($paragraph->field_hide_on_mobile->value) {
-        $variables->set('hide_on_mobile', 'hide-on-mobile');
-      } 
+    if ($paragraph->field_hide_on_mobile->value) {
+      $variables->set('hide_on_mobile', 'hide-on-mobile');
+    } 
 
-    // Set text styles (field_centered, field_no_drop_shadow, field_no_styling)
-      if ($paragraph->field_centered->value) {
-        $this->textStyle[] = 'text-center';
-      } 
-      if ($paragraph->field_no_drop_shadow->value) {
-        $this->textStyle[] = 'no-shadow';
-      }
-      if ($paragraph->field_no_styling->value) {
-        $this->textStyle[] = 'no-styling';
-      }
+    //Set text styles
+    if ($paragraph->field_centered->value) {
+      $variables->set('text_center', 'text-center');
+    } 
+    if ($paragraph->field_no_drop_shadow->value) {
+      $variables->set('no_shadow', 'no-shadow');
+    }
 
-      $variables->set('text_classes', implode(" ", $this->textStyle));
+    $field_no_styling = $paragraph->field_no_styling->value;
+    $no_styling = $field_no_styling ? true : false;
+    $variables->set('no_styling', $no_styling);
+
 
     // Create variable for border bottom (field_bottom_border)
-    if (!$paragraph->field_bottom_border->isEmpty()) {
-      
+    if (!$paragraph->field_bottom_border->isEmpty()) {  
       $field_bottom_border = $paragraph->field_bottom_border->value;
       switch ($field_bottom_border) {
         case '0':
@@ -171,16 +154,5 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
       };
       $variables->set('border_bottom', $border);
     }
-
-    //To-do: Ask SAND team about the use of
-    // - field_direction
-    // - field_full_width_mobile
-    // - field_horizontal
-    // - field_image_height
-    // - field_mobile_size
-    // - field_opacity
-    // - field_rate
-    // - field_repeat
-    // - field_vertical 
   }
 }
