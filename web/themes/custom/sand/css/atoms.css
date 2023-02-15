@@ -1575,6 +1575,31 @@ textarea {
 /*
  * General Mixins (put specific ones in component files where applicable)
 */
+.form--newsletter {
+  /*
+   * Clearfix: contain floats
+   *
+   * For modern browsers
+   * 1. The space content is one way to avoid an Opera bug when the
+   *    `contenteditable` attribute is included anywhere else in the document.
+   *    Otherwise it causes space to appear at the top and bottom of elements
+   *    that receive the `clearfix` class.
+   * 2. The use of `table` rather than `block` is only necessary if using
+   *    `:before` to contain the top-margins of child elements.
+   */
+  /*
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+  *zoom: 1; }
+  .form--newsletter:before, .form--newsletter:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  .form--newsletter:after {
+    clear: both; }
+
 /* ============================================================
   Placeholders for repeat styles.
   ============================================================ */
@@ -1827,6 +1852,13 @@ textarea {
   text-transform: capitalize;
   padding: 0.75em 1em; }
 
+/* Webforms
+   ========================================================================== */
+.webform-component-file .form-managed-file input[value="Upload"] {
+  display: none; }
+
+/* General
+   ========================================================================== */
 ::-webkit-input-placeholder {
   color: #5d676f; }
 
@@ -1840,6 +1872,25 @@ textarea {
 
 :-ms-input-placeholder {
   color: #5d676f; }
+
+.form select {
+  display: block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  border: none;
+  background: #e4e9eb;
+  /*outline: none;*/
+  padding: .5em;
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  font-size:  calc($unitless-value / $baseline-px)rem;
+  /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */ }
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .form select select {
+      padding-right: 18px; } }
 
 input,
 textarea {
@@ -1859,7 +1910,9 @@ input[type="text"],
 input[type="email"],
 textarea {
   background-color: white;
-  border-width: inherit; }
+  border-width: inherit;
+  border: 1px solid #a7abad;
+  border-radius: 4px; }
 
 input:focus,
 textarea:focus,
@@ -1913,60 +1966,178 @@ input[type="radio"] {
   width: auto;
   margin-right: .5em; }
 
-.form--search {
-  margin-bottom: 0px; }
-  .form--search .views-exposed-widgets {
-    margin-bottom: 0px; }
-  .form--search input.search-type,
-  .form--search input[type="text"] {
-    border-right: none;
-    border-radius: 4px 0 0 4px;
-    margin-bottom: 0; }
-  .form--search input[type="submit"] {
+.form-type-radio, .form-type-checkbox {
+  display: table-row; }
+  .form-type-radio input.form-radio, .form-type-checkbox input.form-radio {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin-left: 0; }
+  .form-type-radio input.form-checkbox, .form-type-checkbox input.form-checkbox {
+    display: inline-block;
+    border-radius: 4px;
+    width: 13px;
+    height: 13px;
+    margin-left: 0;
+    margin-right: 0.5rem; }
+  .form-type-radio label.option, .form-type-checkbox label.option {
+    display: table-cell;
+    padding-bottom: .5em; }
+
+.form-radios, .form-checkboxes {
+  margin-top: .5em; }
+
+label.element-invisible + div.form-radios, label.element-invisible + div.form-checkboxes {
+  margin-top: 0; }
+
+legend {
+  font-weight: 600;
+  padding: 0 .5em;
+  font-size: 13px;
+  font-size:  calc($unitless-value / $baseline-px)rem;
+  font-family: "Merriweather", serif; }
+  @media print, screen and (min-width: 48em) {
+    legend {
+      font-size: 14px;
+      font-size:  calc($unitless-value / $baseline-px)rem; } }
+  @media print, screen and (min-width: 80em) {
+    legend {
+      font-size: 16px;
+      font-size:  calc($unitless-value / $baseline-px)rem; } }
+
+.form-error {
+  color: #c51313;
+  font-size: 11px;
+  font-size:  calc($unitless-value / $baseline-px)rem; }
+
+@media print, screen and (max-width: 63.99875em) {
+  .form--general .form-actions .form-submit {
     width: 100%;
-    color: #0098db;
-    display: block;
-    padding: .75em;
-    text-indent: -9999px;
-    border-radius: 0 4px 4px 0;
-    border: 1px solid #e4e9eb;
-    background-image: url(../img/search-icon.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-color: #e4e9eb;
-    font-size: 13px;
+    padding: 1.25em 0; } }
+
+.form {
+  overflow: hidden; }
+  .form input[type="email"],
+  .form input.search-type,
+  .form input[type="search"] {
+    width: auto;
+    color: #656667;
+    border: none;
+    margin-bottom: 0;
+    padding: .25em .5em;
+    background: #f6f6f6;
+    font-size: 16px;
     font-size:  calc($unitless-value / $baseline-px)rem; }
-    .form--search input[type="submit"]:hover {
-      background-color: #0fb6ff;
-      border-color: #0fb6ff; }
-  .form--search .form-item {
-    width: 85%; }
-  .form--search .views-submit-button,
-  .form--search .form-actions {
-    width: 15%; }
-  .form--search .views-submit-button,
-  .form--search .form-item,
-  .form--search .form-actions {
-    float: left; }
-  .form--search.form--directory {
-    margin-bottom: 1em; }
-  .form--search input {
-    border-color: white; }
-    .form--search input:focus {
-      border-top-color: white;
-      border-left-color: white; }
-    .form--search input.apachesolr-autocomplete {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0; }
-  .form--search input[type="submit"] {
-    border-left: none;
-    border-color: #e4e9eb;
-    background-color: #e4e9eb;
-    background-image: url(../images/search-icon-blue.png); }
-    .form--search input[type="submit"]:hover {
-      border-color: #d5dde0;
-      border-bottom-color: #a7abad;
-      background-color: #d5dde0; }
+    @media print, screen and (min-width: 48em) {
+      .form input[type="email"],
+      .form input.search-type,
+      .form input[type="search"] {
+        float: left;
+        width: 80%;
+        min-height: 40px;
+        margin-right: .5em; } }
+  .form button[type="submit"] {
+    color: white;
+    background-color: #ffa02f; }
+    .form button[type="submit"] i {
+      font-size: 24px;
+      font-size:  calc($unitless-value / $baseline-px)rem; }
+    @media print, screen and (min-width: 48em) {
+      .form button[type="submit"] {
+        min-height: 40px;
+        padding: .25em .5em; } }
+    .form button[type="submit"]:hover {
+      background: #ffb762; }
+  .form label {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-size:  calc($unitless-value / $baseline-px)rem; }
+  .form .select-wrap {
+    position: relative; }
+  .form .select-wrap:after {
+    content: '';
+    color: #ffa02f;
+    background: url(../img/select-arrow.png) no-repeat;
+    display: block;
+    width: 8px;
+    height: 18px;
+    right: 10%;
+    top: 30%;
+    line-height: .6;
+    padding: 0 0 2px;
+    position: absolute;
+    pointer-events: none; }
+  .form .select-wrap:before {
+    content: '';
+    right: 6px;
+    top: 0px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    pointer-events: none;
+    display: block; }
+
+.form--homesearch button[type="submit"] {
+  width: 100%;
+  margin-top: 1.25em; }
+
+.form--signup input[type="email"] {
+  margin: 0;
+  width: auto;
+  color: white;
+  background: #fb8800; }
+  @media print, screen and (min-width: 48em) {
+    .form--signup input[type="email"] {
+      min-height: 48px; } }
+
+.form--signup button[type="submit"] {
+  color: #ffa02f; }
+  @media print, screen and (min-width: 48em) {
+    .form--signup button[type="submit"] {
+      min-height: 48px;
+      padding: .25em 1.5em; } }
+  .form--signup button[type="submit"]:hover {
+    background: white; }
+
+@media print, screen and (min-width: 48em) {
+  .form--comments .form-actions {
+    text-align: right; } }
+
+.form--comments .form-actions input[type="submit"] {
+  font-size: 13px;
+  font-size:  calc($unitless-value / $baseline-px)rem; }
+
+.form--newsletter .form-item,
+.form--newsletter .form-actions {
+  padding-left: .5em;
+  padding-right: .5em; }
+
+.form--newsletter input {
+  margin: 0; }
+
+.form--newsletter input[type="submit"] {
+  width: 100%;
+  font-size: 13px;
+  font-size:  calc($unitless-value / $baseline-px)rem; }
+
+.views-submit-button input[type="submit"] {
+  background-color: #0098db;
+  color: white; }
+
+@media print, screen and (max-width: 63.99875em) {
+  .views-submit-button {
+    clear: left; } }
+
+.form-actions {
+  padding: 0px;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  border-top: 0;
+  width: auto;
+  z-index: 0;
+  background-color: transparent; }
 
 /* ============================================================
   Styles for heading typography.
@@ -2475,5 +2646,8 @@ dd {
   font-size: 20px;
   font-size:  calc($unitless-value / $baseline-px)rem;
   font-family: "Merriweather", serif; }
+
+span.extlink {
+  font-size: 12px; }
 
 /*# sourceMappingURL=atoms.css.map */
