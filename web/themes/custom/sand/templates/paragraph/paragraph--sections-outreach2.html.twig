@@ -38,7 +38,9 @@
  * @ingroup themeable
  */
 #}
-{% set text_attribute = create_attribute() %}
+{% set body_attributes = create_attribute() %}
+{% set no_img_attributes = create_attribute() %}
+{% set img_attributes = create_attribute() %}
 
 {%
   set classes = [
@@ -46,31 +48,77 @@
     hide_on_desktop,
     hide_on_mobile,
     border_bottom,
-    image_style,
   ]
 %}
 
+{%
+  set img_classes = [
+    'stellar-window',
+    repeat
+  ]
+%}
+{%
+  set body_classes = [
+    text_center,
+    no_shadow,
+    'l-padding-vd'
+  ]
+%}
+
+{%
+  set no_img_classes = [
+    'l-padding-desktop-hx',
+    'l-padding-mobile-hm',
+    'l-padding-vd',
+    text_center
+  ]
+%}
+
+
 {% block paragraph %}
   {% block content %}
+    <div {{ attributes.addClass(classes)}}>
+    <!-- This section HAS an image -->
     {% if content.field_image.0 %}
-      <div {{ attributes.addClass(classes)
-        .setAttribute('style', bg_style)
-        .setAttribute('data-stellar-vertical-offset', vertical_offset) 
-        .setAttribute('data-stellar-background-ratio', scroll_ratio) 
+      <div {{ img_attributes.addClass(img_classes)
+        .setAttribute('id', 'img-' ~ paragraph.id())
+        .setAttribute('style', 
+          'background-size: ' ~ background_size ~ '; ' ~ 
+          'background-position-x: ' ~ percent_horizontal ~ '%; ' ~
+          'background-position-y: ' ~ percent_vertical ~ '%; ' ~
+          'background-image: url(' ~ image_url ~ '); ' ~
+          'background-color: ' ~ bg_color ~ ';' ~
+          full_width_mobile
+        )
+        .setAttribute('data-stellar-vertical-offset', vertical_offset)
+        .setAttribute('data-stellar-background-ratio', scroll_ratio)
         .setAttribute('data-sand-min-height', min_height) 
         .setAttribute('data-sand-adjustment-width', adjustment_width) 
         .setAttribute('data-sand-adjustment-height', adjustment_height)
-        .setAttribute('data-sand-background-size', '')
+        .setAttribute('data-sand-background-size', background_size)
+        .setAttribute('data-sand-full-width-on-mobile', full_width_mobile)
         }}  
       >
-    {% else %}
-        <div {{ attributes.addClass(classes).setAttribute('style', bg_style) }}>
-    {% endif %}    
-        <div class="l-padding-desktop-hx l-padding-mobile-hm l-padding-vd">
-          <div {{ text_attribute.addClass(text_classes)}}>
-            {{ content.field_body }}
-          </div>
+        {% if no_styling %}
+          <div>
+        {% else %}
+          <div {{ body_attributes.addClass(body_classes)}}>
+        {% endif %}
+            {{ content.field_body }}   
         </div>
       </div>
+    {% else %}
+    <!-- This section does NOT have an image -->
+      <div {{ img_attributes.addClass('no-image').setAttribute('style', 'background-color:' ~ bg_color ~ ';') }}>
+        {% if no_styling %}
+          <div>
+        {% else %}
+          <div {{ body_attributes.addClass(no_img_classes)}}>
+        {% endif %}
+          {{ content.field_body }}
+        </div>
+      </div>
+    {% endif %}    
+    </div>
   {% endblock %}
 {% endblock paragraph %}
