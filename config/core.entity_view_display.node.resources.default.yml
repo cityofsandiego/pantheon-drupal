@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.resources.body
     - field.field.node.resources.field_address
     - field.field.node.resources.field_category
     - field.field.node.resources.field_company
@@ -11,7 +10,6 @@ dependencies:
     - field.field.node.resources.field_department
     - field.field.node.resources.field_edit_notes
     - field.field.node.resources.field_email
-    - field.field.node.resources.field_image
     - field.field.node.resources.field_import_id
     - field.field.node.resources.field_internet
     - field.field.node.resources.field_laptop
@@ -31,7 +29,6 @@ dependencies:
     - address
     - link
     - options
-    - telephone
     - text
     - user
 id: node.resources.default
@@ -39,13 +36,6 @@ targetEntityType: node
 bundle: resources
 mode: default
 content:
-  body:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 101
-    region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
@@ -62,7 +52,7 @@ content:
     type: entity_reference_label
     label: above
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     weight: 119
     region: content
@@ -86,7 +76,7 @@ content:
     type: entity_reference_label
     label: inline
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     weight: 109
     region: content
@@ -98,19 +88,11 @@ content:
     weight: 123
     region: content
   field_email:
-    type: email_mailto
+    type: basic_string
     label: inline
     settings: {  }
     third_party_settings: {  }
     weight: 116
-    region: content
-  field_image:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 114
     region: content
   field_import_id:
     type: number_integer
@@ -145,10 +127,10 @@ content:
     weight: 108
     region: content
   field_phone:
-    type: telephone_link
+    type: string
     label: inline
     settings:
-      title: ''
+      link_to_entity: false
     third_party_settings: {  }
     weight: 115
     region: content
@@ -217,7 +199,7 @@ content:
     label: inline
     settings:
       trim_length: 255
-      url_only: false
+      url_only: true
       url_plain: false
       rel: '0'
       target: '0'
