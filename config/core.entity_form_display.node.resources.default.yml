@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.resources.body
     - field.field.node.resources.field_address
     - field.field.node.resources.field_category
     - field.field.node.resources.field_company
@@ -11,7 +10,6 @@ dependencies:
     - field.field.node.resources.field_department
     - field.field.node.resources.field_edit_notes
     - field.field.node.resources.field_email
-    - field.field.node.resources.field_image
     - field.field.node.resources.field_import_id
     - field.field.node.resources.field_internet
     - field.field.node.resources.field_laptop
@@ -33,7 +31,6 @@ dependencies:
     - content_moderation
     - field_group
     - link
-    - media_library
     - path
     - scheduler
     - scheduler_content_moderation_integration
@@ -142,16 +139,6 @@ targetEntityType: node
 bundle: resources
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 14
-    region: content
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
   created:
     type: datetime_timestamp
     weight: 3
@@ -213,13 +200,6 @@ content:
     settings:
       placeholder: ''
       size: 60
-    third_party_settings: {  }
-  field_image:
-    type: media_library_widget
-    weight: 26
-    region: content
-    settings:
-      media_types: {  }
     third_party_settings: {  }
   field_import_id:
     type: number
