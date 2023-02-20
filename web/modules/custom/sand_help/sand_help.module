@@ -35,7 +35,7 @@ This file: '. $directory . '/' . $filename;
   
   switch ($route_name) {
     case 'help.page.cofsd':
-    case (preg_match('/help.page.sand_.*/', $route_name) ? true : false) :
+    case (bool) preg_match('/help.page.sand_.*/', $route_name) :
       /** @var string $text */
       $text = file_get_contents($directory . '/' . $filename);
       if (!\Drupal::moduleHandler()->moduleExists('markdown')) {

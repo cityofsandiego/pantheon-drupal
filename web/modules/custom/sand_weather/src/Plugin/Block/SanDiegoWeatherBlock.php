@@ -2,6 +2,7 @@
 
 namespace Drupal\sand_weather\Plugin\Block;
 
+use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 
 /**
@@ -18,7 +19,7 @@ class SanDiegoWeatherBlock extends BlockBase {
   /**
    * {@inheritdoc}
    */
-  public function build() {
+  public function build(): array {
     
     $weather_text = \Drupal::state()->get('sand_weather.text');
     $weather_icon = \Drupal::state()->get('sand_weather.icon');
@@ -40,8 +41,5 @@ class SanDiegoWeatherBlock extends BlockBase {
       ];
     }
 
-//    $build['content'] = [
-//      '#markup' => $weather,
-//    ];
   }
 }

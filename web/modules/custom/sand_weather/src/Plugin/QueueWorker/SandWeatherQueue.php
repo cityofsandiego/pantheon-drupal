@@ -327,7 +327,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
           \Drupal::state()->set('sand_weather.icon', $weather_icon);
         }
       }
-    } catch (Exception $exception) {
+    } catch (\Exception $exception) {
       watchdog_exception('sand_weather', $exception);
     }
   }
