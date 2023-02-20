@@ -164,7 +164,7 @@ class Sandremote extends ContentEntityBase implements SandremoteInterface {
    * 
    * @return void
    */
-  private function setDescription() {
+  private function setDescription(): void {
     // Decide the entity has been changed based on custom logic.
     if ($this->changed()) {
       $url = $this->field_url->value;
