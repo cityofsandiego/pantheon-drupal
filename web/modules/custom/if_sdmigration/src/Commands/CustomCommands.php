@@ -113,28 +113,28 @@ class CustomCommands extends DrushCommands {
    * Import fields: field_resources, field_search_keymatch, field_image, field_category, field_department, path
    *
    * @command import:department
+   * @param $after_id (Node ID to resume after).
    *
    * @usage import:department
    */
-  public function finalizeDepartment() {
+  public function finalizeDepartment($after_id = 0) {
     $nodedata = [];
     $resourcedata = [];
 
     // Read extra field data for manual creation/update.
-    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/departments-small.csv', 'r')) {
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/departments.csv', 'r')) {
       fgets($file);
       while ($data = fgetcsv($file)) {
         $nodedata[str_replace('`', '', $data[0])] = [
-          'path' => str_replace('`', '', $data[1]),
-          'resources' => str_replace('`', '', $data[2]),
-          'department' => str_replace('`', '', $data[3]),
-          'category' => str_replace('`', '', $data[4]),
-          'search_keymatch' => str_replace('`', '', $data[5]),
-          'image_department' => str_replace('`', '', $data[6]),
-          'image_license' => str_replace('`', '', $data[7]),
-          'image_alt' => str_replace('`', '', $data[8]),
-          'image_d7id' => str_replace('`', '', $data[9]),
-          'image_path' => str_replace('`', '', $data[10]),
+          'resources' => str_replace('`', '', $data[6]),
+          'department' => str_replace('`', '', $data[7]),
+          'category' => str_replace('`', '', $data[9]),
+          'search_keymatch' => str_replace('`', '', $data[15]),
+          'image_department' => str_replace('`', '', $data[16]),
+          'image_license' => str_replace('`', '', $data[17]),
+          'image_alt' => str_replace('`', '', $data[18]),
+          'image_d7id' => str_replace('`', '', $data[19]),
+          'image_path' => str_replace('`', '', $data[20]),
         ];
       }
       fclose($file);
@@ -157,6 +157,8 @@ class CustomCommands extends DrushCommands {
 
     // Manually update each node.
     foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) continue;
+      echo 'Current memory used: ' . $this->memoryUsage(memory_get_usage(true)) . '| Current D7 ID: ' . $d7id . PHP_EOL;
       // Load node.
       $query = $this->entityTypeManager
         ->getStorage('node')
@@ -166,11 +168,6 @@ class CustomCommands extends DrushCommands {
       $nid = reset($query->execute());
       $node = Node::load($nid);
 
-      // Set alias.
-      $node->path = [
-        'alias' => $data['path'],
-        'pathauto' => PathautoState::SKIP,
-      ];
 
       // Create and set resource paragraph.
       if (!empty($data['resources']) && isset($resourcedata[$data['resources']])) {
@@ -200,34 +197,40 @@ class CustomCommands extends DrushCommands {
           $local_destination = str_replace('public://', '', $local_destination);
           $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
           $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
-
-          $image = Media::create([
-            'bundle' => 'image',
-            'uid' => 0,
-            'field_media_image' => [
-              'target_id' => $local_file->id(),
-              'alt' => $data['image_alt']
-            ],
-            'field_d7_mid' => $data['image_d7id'],
-          ]);
-          if (!empty($data['image_license'])) {
-            $image->field_license = $data['image_license'];
-          }
-          foreach ($image_department as $department) {
-            $image->field_department->appendItem([
-              'target_id' => $department,
+          if (is_object($local_file)) {
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $data['image_alt']
+              ],
+              'field_d7_mid' => $data['image_d7id'],
             ]);
+            if (!empty($data['image_license'])) {
+              $image->field_license = $data['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+            echo 'Image saved.' . PHP_EOL;
           }
-          $image->save();
+          else {
+            $image = NULL;
+          }
         }
         else {
           $image = Media::load($prior_image);
+          echo 'Image re-used.' . PHP_EOL;
         }
         $node->field_image = $image;
       }
       // Set three taxonomies.
       $node->field_department->setValue([]);
-      foreach (explode(' |', $data['department']) as $department) {
+      foreach (explode('|', $data['department']) as $department) {
         $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
         $node->field_department->appendItem($term);
       }
@@ -1918,6 +1921,125 @@ class CustomCommands extends DrushCommands {
       $node->field_image = $image;
 
       $node->save();
+      echo $node->id() . PHP_EOL;
+    }
+  }
+
+  /**
+   * Finalize blog import.
+   *
+   * @command import:blog
+   * @param $after_id (D7 Node ID to resume after).
+   *
+   * @usage import:blog
+   */
+  public function finalizeBlog($after_id = 0) {
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/blog.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'department' => explode('|', str_replace('`', '', $data[1])),
+          'category' => explode('|', str_replace('`', '', $data[2])),
+          'search_keymatch' => explode('|', str_replace('`', '', $data[3])),
+          'image_department' => str_replace('`', '', $data[16]),
+          'image_license' => str_replace('`', '', $data[17]),
+          'image_alt' => str_replace('`', '', $data[18]),
+          'image_d7id' => str_replace('`', '', $data[19]),
+          'image_path' => str_replace('`', '', $data[20]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) continue;
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'blog')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+
+      $node->field_department->setValue([]);
+      foreach ($data['department'] as $department) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+        $node->field_department->appendItem($term);
+      }
+
+      $node->field_category->setValue([]);
+      foreach ($data['category'] as $category) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($category, 'category'));
+        $node->field_category->appendItem($term);
+      }
+
+      $node->field_search_keymatch->setValue([]);
+      foreach ($data['search_keymatch'] as $search_keymatch) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
+        $node->field_search_keymatch->appendItem($term);
+      }
+
+      $image = NULL;
+
+      if (!empty($data['image_path'])) {
+        if (str_starts_with($data['image_path'], 'youtube://')) {
+          $youtube = str_replace('youtube://v/', 'https://www.youtube.com/watch?v=', $data['image_path']);
+          $image = Media::create([
+            'bundle' => 'remote_video',
+            'uid' => 0,
+            'field_media_oembed_video' => $youtube,
+          ]);
+          $image->save();
+        }
+        else {
+          $prior_image = $this->checkMediaId($data['image_d7id']);
+          if ($prior_image == NULL) {
+            $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
+            $file_data = file_get_contents($remote_file);
+            $local_destination = explode('/', $data['image_path']);
+            $local_destination = $local_destination[count($local_destination) - 1];
+            $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+            $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
+
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $data['image_alt']
+              ],
+              'field_d7_mid' => $data['image_d7id'],
+            ]);
+            if (!empty($data['image_license'])) {
+              $image->field_license = $data['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+          }
+          else {
+            $image = Media::load($prior_image);
+          }
+        }
+      }
+      else {
+        $image = NULL;
+      }
+      $node->field_feature_video_img = $image;
+      $node->save();
+
+      // Set most recent revision to published.
+      $latest_vid = $this->entityTypeManager->getStorage('node')->getLatestRevisionId($node->id());
+      $latest_revision = $this->entityTypeManager->getStorage('node')->loadRevision($latest_vid);
+      if ($latest_revision->moderation_state->value == 'draft') {
+        $latest_revision->set('moderation_state', 'published')->save();
+      }
       echo $node->id() . PHP_EOL;
     }
   }

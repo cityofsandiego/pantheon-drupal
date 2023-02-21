@@ -1,7 +1,12 @@
 .field--name-field-featured-items {
   @include xy-grid;
-  justify-content: center;
   text-align: center;
+  justify-content: unset;
+  row-gap: 1rem;
+
+  @include breakpoint(medium) {
+    justify-content: center;
+  }
 
   > .field__item {
     @include xy-cell(6);
@@ -14,6 +19,12 @@
 }
 
 .featured-items {
+
+  a,
+  a:hover {
+    color: $spruce;
+  }
+
   .field--name-field-license {
     display: none;
   }

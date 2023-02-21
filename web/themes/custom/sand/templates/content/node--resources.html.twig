@@ -15,7 +15,7 @@
  *   Calling other methods, such as node.delete(), will result in an exception.
  *   See \Drupal\node\Entity\Node for a full list of public properties and
  *   methods for the node object.
- * - label: (optional) The title of the node.
+ * - label: The title of the node.
  * - content: All node items. Use {{ content }} to print them all,
  *   or print a subset such as {{ content.field_example }}. Use
  *   {{ content|without('field_example') }} to temporarily suppress the printing
@@ -23,8 +23,8 @@
  * - author_picture: The node author user entity, rendered using the "compact"
  *   view mode.
  * - metadata: Metadata for this node.
- * - date: (optional) Themed creation date field.
- * - author_name: (optional) Themed author name field.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
  * - url: Direct URL of the current node.
  * - display_submitted: Whether submission information should be displayed.
  * - attributes: HTML attributes for the containing element.
@@ -65,6 +65,9 @@
  *
  * @see template_preprocess_node()
  *
+ * @todo Remove the id attribute (or make it a class), because if that gets
+ *   rendered twice on a page this is invalid CSS for example: two lists
+ *   in different view modes.
  */
 #}
 {%
@@ -88,34 +91,40 @@
   {{ title_suffix }}
 
   <div{{ content_attributes.addClass('node__content') }}>
-  <div class="grid-x">
-    <div class="cell medium-3 large-3 sidebar light-gray-bg">
-      <div class="l-padding-am l-padding-mobile-hd l-margin-mobile-bm">
-        <a class="btn btn--icon-left back-button" href="/business-resources"><i class="icon-chevron-left"></i> Back to Results</a>
-        {{ content.field_business_typeof_assistance }}
-        {{ content.field_business_target_business }}
-      </div>
-    </div>
-    <div class="cell small-12 medium-auto content">
-      <div class="l-padding-am grid-margin-x">
+    <div class="grid-x">
+      <div class="cell small-12 slide-title l-padding-ad l-padding-desktop-hx">
         <h1>{{ label }}</h1>
-
-        {% if content.field_business_short_description[0] %}
-        <h3>Why you should apply:</h3>
-        {{ content.field_business_short_description }}
-        {% endif %}
-
-        {% if content.body[0] %}
-        <h3>Description:</h3>
-        {{ content.body }}
-        {% endif %}
-
-        {% if content.field_business_resource_link[0] %}
-        <a class="btn btn--icon-right" href="{{ content.field_business_resource_link[0]['#url'] }}">Apply <i class="icon-chevron-right"></i></a>
-        {% endif %}
       </div>
     </div>
-  </div>
+    <div class="grid-x">
+      {% if content.field_resource_description.0 %}
+      <div class="cell small-12 medium-6 background-off-white">
+        <div class="l-padding-ad l-padding-desktop-hx l-margin-vd fields-container">
+          {{ content.field_resource_description }}
+          {{ content.field_category }}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if content.field_resource_description.0 %}
+        <div class="cell small-12 medium-6 background-off-white resource-content">
+      {% else %}
+      <div class="cell small-12 background-off-white resource-content">
+      {% endif %}
+        <div class="l-padding-ad l-padding-desktop-hx l-margin-vd fields-container">
+          {{ content.field_contact }}
+          {{ content.field_department }}
+          {{ content.field_company }}
+          {{ content.field_phone }}
+          {{ content.field_email }}
+          {{ content.field_url }}
+          <div class="field__label">
+            <strong>Address</strong>
+          </div>
+          <div class="field__item">{{ content.field_address.0 }}</div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </article>

@@ -4,6 +4,9 @@
 
 .accordion {
   margin: 0 0 1em 0;
+  -webkit-transition: border 0.25s;
+  -moz-transition: border 0.25s;
+  transition: border 0.25s;
 
   .accordion-title {
     color: $mercury;
@@ -101,11 +104,8 @@
   right: 1em;
   top: 50%;
   overflow: hidden;
-
-  .csstransforms3d & {
-    // @include transform(rotate( 0deg ));
-    // @include transition(transform .25s);
-  }
+  transform: rotate(0deg);
+  transition: transform .25s;
 
   &:before,
   &:after {
@@ -113,14 +113,11 @@
     position: absolute;
     display: block;
     background: $chateau;
-
-    .csstransforms3d & {
       top: 50%;
       // left: 50%;
-      // @include transform(translate3d(0, -50%, 0));
-      // @include transition(transform .25s, opacity .25s);
+      transform: translate3d(0, -50%, 0);
+      transition: transform .25s, opacity .25s;
     }
-  }
 
   &:before {
     margin-top: -1px;
@@ -148,31 +145,31 @@
 
 .is-open {
   &.accordion {
-  }
 
-  > .accordion__heading {
-    font-weight: 700;
-    background: white;
-    border: 1px solid $chateau;
-    border-bottom: none;
-  }
-
-  .toggle-icon.open {
-    -webkit-transition: -webkit-transform .25s;
-    -moz-transition: -moz-transform .25s;
-    transition: transform .25s;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
-    &::before,
-    &::after {
-      background: $cerulean;
+    > .accordion__heading {
+      font-weight: 700;
+      background: white;
+      border: 1px solid $chateau;
+      border-bottom: none;
     }
-  }
-  .accordion__link {
-    font-weight: bold;
+
+    .toggle-icon.open {
+      -webkit-transition: -webkit-transform .25s;
+      -moz-transition: -moz-transform .25s;
+      transition: transform .25s;
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+      &::before,
+      &::after {
+        background: $cerulean;
+      }
+    }
+    .accordion__link {
+      font-weight: bold;
+    }
   }
 }
 
@@ -221,6 +218,9 @@
     height: 1em;
     vertical-align: middle;
     font-size: 2rem;
+    transform: rotate(0deg);
+    transform: all 25s;
+
 
     &:after,
     &:before {
@@ -238,7 +238,7 @@
     }
 
     .toggle-icon {
-      // @include transform(rotate(180deg));
+      transform: rotate(180deg);
     }
   }
 

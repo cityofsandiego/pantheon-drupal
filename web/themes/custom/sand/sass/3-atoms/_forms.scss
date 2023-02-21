@@ -1,4 +1,21 @@
 
+
+// ==========================================================================
+// Forms
+// ==========================================================================
+
+
+/* Webforms
+   ========================================================================== */
+
+// Hide the file Upload button on all webforms.
+.webform-component-file .form-managed-file input[value="Upload"] {
+    display: none;
+}
+
+
+/* General
+   ========================================================================== */
 ::-webkit-input-placeholder {
     color: $shuttle;
 }
@@ -53,6 +70,8 @@ input[type="email"],
 textarea {
     background-color: white;
     border-width: inherit;
+    border: 1px solid #a7abad;
+    border-radius: 4px;
 }
 
 input:focus,
@@ -100,92 +119,318 @@ button {
     // @include transition( all .15s );
 }
 
+
 /**
  * Normalize sets as 'content-box'
  */
-input.search-type,
-input[type="search"] {
-    margin: 0;
-    @include box-sizing( border-box ); /* 1 */
+ input.search-type,
+ input[type="search"] {
+     margin: 0;
+     @include box-sizing( border-box ); /* 1 */
+ }
+ 
+ input[type="radio"] {
+     width: auto;
+     margin-right: .5em;
+ }
+ 
+ .form-type-radio, .form-type-checkbox {
+     display: table-row;
+ 
+     input.form-radio{
+         display: inline-block;
+         width: 13px;
+         height: 13px;
+         margin-left: 0;
+     }
+
+    input.form-checkbox {
+        display: inline-block;
+        border-radius: 4px;
+        width: 13px;
+        height: 13px;
+        margin-left: 0;
+        margin-right: 0.5rem;
+    }
+ 
+     label.option {
+         display: table-cell;
+         padding-bottom: .5em;
+     }
+ }
+ 
+ .form-radios, .form-checkboxes {
+     margin-top: .5em;
+ }
+ 
+ label.element-invisible + div.form-radios, label.element-invisible + div.form-checkboxes {
+     margin-top: 0;
+ }
+ 
+ textarea {
+ }
+ 
+ legend {
+     font-weight: 600;
+     padding: 0 .5em;
+     @include rem( 'font-size', 13px );
+     font-family: $font-family-secondary;
+ 
+     @include breakpoint(medium) {
+         @include rem( 'font-size', 14px );
+     }
+ 
+     @include breakpoint(large) {
+         @include rem( 'font-size', 16px );
+     }
+ }
+ 
+ .form-error {
+     color: $error;
+     @include rem( 'font-size', 11px );
+ }
+ 
+ .form--general {
+ 
+     .form-actions {
+ 
+         .form-submit {
+             @include breakpoint(medium down) {
+                 width: 100%;
+                 padding: 1.25em 0;
+             }
+         }
+     }
+ }
+ 
+ .form {
+     overflow: hidden;
+     input[type="email"],
+     input.search-type,
+     input[type="search"] {
+         width: auto;
+         color: $gray;
+         border: none;
+         margin-bottom: 0;
+         padding: .25em .5em;
+         background: $off-white;
+         @include rem( 'font-size', 16px );
+         @include breakpoint(medium) {
+             float: left;
+             width: 80%;
+             min-height: 40px;
+             margin-right: .5em;
+         }
+     }
+     button[type="submit"] {
+         color: white;
+         background-color: $sunshade;
+         i {
+             @include rem( 'font-size', 24px );
+         }
+         @include breakpoint(medium)  {
+             min-height: 40px;
+             padding: .25em .5em;
+         }
+         &:hover {
+             background: lighten( $sunshade, 10% );
+         }
+     }
+     label {
+         font-weight: 600;
+         text-transform: uppercase;
+         @include rem( 'font-size', 12px );
+     }
+     select {
+         @extend %select;
+     }
+     .select-wrap {
+         position: relative;
+     }
+     .select-wrap:after {
+         content:'';
+         color: $sunshade;
+         background: url(../img/select-arrow.png) no-repeat;
+         display: block;
+         width: 8px;
+         height: 18px;
+         // -webkit-transform:rotate(90deg) translateX(-50%);
+         // -moz-transform:rotate(90deg) translateX(-50%);
+         // -ms-transform:rotate(90deg) translateX(-50%);
+         // transform:rotate(90deg) translateX(-50%);
+         right:10%; top:30%;
+         line-height: .6;
+         padding:0 0 2px;
+         position:absolute;
+         pointer-events:none;
+     }
+     .select-wrap:before {
+         content:'';
+         right:6px; top:0px;
+         width:20px; height:20px;
+         position:absolute;
+         pointer-events:none;
+         display:block;
+     }
+ }
+ 
+ .form--homesearch {
+     button[type="submit"] {
+         width: 100%;
+         margin-top: 1.25em;
+     }
+ }
+ 
+ .form--signup {
+     input[type="email"] {
+         margin: 0;
+         width: auto;
+         color: white;
+         background: darken( $sunshade, 10% );
+         @include breakpoint(medium)  {
+             min-height: 48px;
+         }
+     }
+     button[type="submit"] {
+         color: $sunshade;
+         @include breakpoint(medium) {
+             min-height: 48px;
+             padding: .25em 1.5em;
+         }
+         &:hover {
+             background: white;
+         }
+     }
+ }
+ 
+ .form--comments {
+     .form-actions {
+         @include breakpoint(medium) {
+             text-align: right;
+         }
+ 
+         input[type="submit"] {
+             @include rem( 'font-size', 13px );
+         }
+     }
+ }
+ 
+ .form--newsletter {
+     @extend %clearfix;
+ 
+     .form-item,
+     .form-actions {
+         padding-left: .5em;
+         padding-right: .5em;
+     }
+ 
+     input {
+         margin: 0;
+     }
+ 
+     input[type="submit"] {
+         width: 100%;
+         @include rem( 'font-size', 13px );
+     }
+ 
+ }
+ 
+ .views-submit-button {
+     input[type="submit"] {
+         background-color:$cerulean;
+         color: white;
+     }
+     @include breakpoint(medium down) {
+         clear: left;
+     }
+ }
+ 
+ @mixin form--search {
+    .form--search {
+         border-radius: 4px;
+         box-shadow: 0 3px 0px -1px rgba(0, 0, 0, 0.15);
+         margin-bottom: 0px;
+ 
+         // So drop shadow aligns for views-exposed search filter
+         .views-exposed-widgets {
+             margin-bottom: 0px;
+         }
+ 
+         input.search-type,
+         input[type="text"] {
+             border-right: none;
+             border-radius: 4px 0 0 4px;
+             margin-bottom: 0;
+         }
+ 
+         input[type="submit"] {
+             width: 100%;
+             color: $cerulean;
+             display: block;
+             padding: .75em;
+             text-indent: -9999px;
+             border-radius: 0 4px 4px 0;
+             border: 1px solid $mercury;
+             background-image: url(../img/search-icon.png);
+             background-repeat: no-repeat;
+             background-position: center center;
+             background-color: $mercury;
+             @include rem( 'font-size', 13px );
+             &:hover {
+                 background-color: lighten( $cerulean, 10% );
+                 border-color: lighten( $cerulean, 10% );
+             }
+         }
+ 
+         .form-item {
+             width: 85%;
+         }
+         .views-submit-button,
+         .form-actions {
+             width: 15%;
+         }
+         .views-submit-button,
+         .form-item,
+         .form-actions {
+             float: left;
+         }
+ 
+         &.form--directory {
+             margin-bottom: 1em;
+         }
+ 
+         input {
+             border-color: white;
+             &:focus {
+                 border-top-color: white;
+                 border-left-color: white;
+             }
+             &.apachesolr-autocomplete {
+                 border-top-right-radius: 0;
+                 border-bottom-right-radius: 0;
+             }
+         }
+         input[type="submit"] {
+             border-left: none;
+             border-color: $mercury;
+             background-color: $mercury;
+             background-image: url(../img/search-icon-blue.png);
+             &:hover {
+                 border-color: darken( $mercury, 5% );
+                 border-bottom-color: $chateau;
+                 background-color: darken( $mercury, 5% );
+             }
+         }
+    }
 }
 
-input[type="radio"] {
+.form-actions {
+    padding: 0px;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    border-top: 0;
     width: auto;
-    margin-right: .5em;
-}
-
-
-.form--search {
-    margin-bottom: 0px;
-
-    // So drop shadow aligns for views-exposed search filter
-    .views-exposed-widgets {
-        margin-bottom: 0px;
-    }
-
-    input.search-type,
-    input[type="text"] {
-        border-right: none;
-        border-radius: 4px 0 0 4px;
-        margin-bottom: 0;
-    }
-
-    input[type="submit"] {
-        width: 100%;
-        color: $cerulean;
-        display: block;
-        padding: .75em;
-        text-indent: -9999px;
-        border-radius: 0 4px 4px 0;
-        border: 1px solid $mercury;
-        background-image: url(../img/search-icon.png);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-color: $mercury;
-        @include rem( 'font-size', 13px );
-        &:hover {
-            background-color: lighten( $cerulean, 10% );
-            border-color: lighten( $cerulean, 10% );
-        }
-    }
-
-    .form-item {
-        width: 85%;
-    }
-    .views-submit-button,
-    .form-actions {
-        width: 15%;
-    }
-    .views-submit-button,
-    .form-item,
-    .form-actions {
-        float: left;
-    }
-
-    &.form--directory {
-        margin-bottom: 1em;
-    }
-
-    input {
-        border-color: white;
-        &:focus {
-            border-top-color: white;
-            border-left-color: white;
-        }
-        &.apachesolr-autocomplete {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-    }
-    input[type="submit"] {
-        border-left: none;
-        border-color: $mercury;
-        background-color: $mercury;
-        background-image: url(../images/search-icon-blue.png);
-        &:hover {
-            border-color: darken( $mercury, 5% );
-            border-bottom-color: $chateau;
-            background-color: darken( $mercury, 5% );
-        }
-    }
+    z-index: 0; 
+    background-color: transparent; 
 }
