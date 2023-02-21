@@ -1706,13 +1706,13 @@ textarea {
     .csstransforms3d .toggle-icon:after {
       margin-left: auto; }
 
-.is-open > .accordion__heading {
+.is-open.accordion > .accordion__heading {
   font-weight: 700;
   background: white;
   border: 1px solid #a7abad;
   border-bottom: none; }
 
-.is-open .toggle-icon.open {
+.is-open.accordion .toggle-icon.open {
   -webkit-transition: -webkit-transform .25s;
   -moz-transition: -moz-transform .25s;
   transition: transform .25s;
@@ -1721,10 +1721,10 @@ textarea {
   -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg); }
-  .is-open .toggle-icon.open::before, .is-open .toggle-icon.open::after {
+  .is-open.accordion .toggle-icon.open::before, .is-open.accordion .toggle-icon.open::after {
     background: #0098db; }
 
-.is-open .accordion__link {
+.is-open.accordion .accordion__link {
   font-weight: bold; }
 
 .table__accordion {
@@ -1769,6 +1769,8 @@ textarea {
       line-height: 1; }
   .table__accordion .is-open .accordion__heading {
     border-bottom: none; }
+  .table__accordion .is-open .toggle-icon {
+    transform: rotate(180deg); }
   @media print, screen and (min-width: 48em) {
     .table__accordion td:first-child,
     .table__accordion th:first-child {
@@ -2557,6 +2559,10 @@ textarea {
         width: calc(16.66667% - 1.875rem);
         margin-left: 0.9375rem;
         margin-right: 0.9375rem; } }
+
+.featured-items a,
+.featured-items a:hover {
+  color: #37424a; }
 
 .featured-items .field--name-field-license {
   display: none; }
