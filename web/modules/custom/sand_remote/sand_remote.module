@@ -84,3 +84,11 @@ function sand_remote_user_predelete(UserInterface $account) {
   $sand_remotes = $storage->loadMultiple($sand_remote_ids);
   $storage->delete($sand_remotes);
 }
+
+function sand_remote_search_api_backend_info_alter(array &$backend_info) {
+  $x = 1;
+//  foreach ($backend_info as $id => $info) {
+//    $backend_info[$id]['class'] = '\Drupal\my_module\MyBackendDecorator';
+//    $backend_info[$id]['example_original_class'] = $info['class'];
+//  }
+}
