@@ -14,6 +14,9 @@ use Drupal\user\EntityOwnerTrait;
 /* For creating a "file" to pass to tika */
 use Drupal\file\Entity\File;
 
+/* for getting config */
+use Drupal\Core\Config\ImmutableConfig;
+
 /* for Xss::filter */ 
 use Drupal\Component\Utility\Xss;
 use Recurr\Exception;
@@ -129,10 +132,13 @@ class Sandremote extends ContentEntityBase implements SandremoteInterface {
   }
   
   private function extractText($url) {
+
+
+    /** @var ImmutableConfig $config */
     
-    $extractor_plugin_id = 'tika_extractor';
+    $extractor_plugin_id = \Drupal::config("search_api_attachments.admin_config")->get("extraction_method");
     $config_of_search_api_attachments = \Drupal::configFactory()
-      ->getEditable('search_api_attachments.admin_config');
+      ->get('search_api_attachments.admin_config');
     $configuration = $config_of_search_api_attachments->get($extractor_plugin_id . '_configuration');
     /** @var \Drupal\search_api_attachments\Plugin\search_api_attachments\TikaExtractor $extractor_plugin */
     $extractor_plugin = \Drupal::service('plugin.manager.search_api_attachments.text_extractor')
@@ -150,7 +156,7 @@ class Sandremote extends ContentEntityBase implements SandremoteInterface {
       return $this->cleanExtractedData($extracted_data);
     } catch (\Exception $e) {
       \Drupal::logger('sand_remote')
-        ->error('Error trying to extract text on Sandremote ID: %id, on URL: %url, error: %error', ['%id' => $this->id(), '%url' => $this->field_url->value, '%error' => $e->getMessage()]);
+        ->error('Error trying to extract text on Sandremote ID: %id, on URL: %url, error: %error, cmd: %cmd', ['%id' => $this->id(), '%url' => $this->field_url->value, '%error' => $e->getMessage(), '%cmd' => $GLOBALS['_sand_remote_cmd']]);
       return '';
     }
   }
@@ -180,7 +186,11 @@ class Sandremote extends ContentEntityBase implements SandremoteInterface {
       }
       else {
         // Extract the text from the URL.
-        $this->description->value = $this->extractText($url);
+        $extracted_text = $this->extractText($url);
+        // If the description is different from the extracted text, update it.
+        if ($this->description->value != $extracted_text) {
+          $this->description->value = $extracted_text;
+        }
       }  
     }
   }
