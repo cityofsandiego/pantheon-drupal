@@ -8,6 +8,8 @@ use Drupal\Component\Utility\Xss;
 use Drupal\file\Entity\File;
 use Recurr\Exception;
 
+use Drupal\Core\Entity\ContentEntityBase;
+
 /**
  * Service description.
  */
@@ -164,7 +166,6 @@ class ExtractText {
     return $text;
   }
 
-
   public function setText(): bool {
     $changed = FALSE;
     $entity = \Drupal::entityTypeManager()
@@ -213,5 +214,58 @@ class ExtractText {
     return $changed;
     
   }
-  
+
+  private function getSourceUrlField(ContentEntityBase $entity, $field_name = 'field_source_name'): string {
+    $url_field = '';
+    if ($entity->hasField($field_name)) {
+      $source_name = $entity->get($field_name)->value;
+      $url_field = match ($source_name) {
+        'sire', 'onbase' => 'field_a_webc_url',
+        'documentum', 'external' => 'field_document_url',
+        default => '',
+      };
+    }
+    if (empty($url_field)) {
+      \Drupal::logger(__CLASS__)
+        ->notice(
+          'Could not get a source field for entity: %entity id: %id',
+          [ '%entity' => $entity->getEntityType(), '%id' => $entity->id()]
+        );
+    }
+    return $url_field;
+  }
+
+
+  function queueEntityForTextExtract($entity_type, $entity): void {
+    // See if we are in the process of setting a field equal to it's extracted text, then skip the update to avoid a loop.
+    $source_field = $this->getSourceUrlField($entity);
+    $target_field = 'field_body';
+
+    if (empty($source_field)) {
+      return;
+    }
+
+    /** @var \Drupal\Core\TempStore\PrivateTempStore $tempstore */
+    $tempstore = \Drupal::service('tempstore.private');
+    $store = $tempstore->get('extracting_text');
+    $is_processing = $store->get('entity_type_id');
+
+    if ($is_processing) {
+      return;
+    }
+
+    $queue = \Drupal::service('queue')->get('sand_remote_queue');
+    $item = new \Drupal\sand\ExtractText();
+    $item->setEntityType($entity_type);
+    $item->setEntityId($entity->id());
+    $item->setSourceField($source_field);
+    $item->setTargetField($target_field);
+
+    try {
+      $queue->createItem($item);
+    } catch (Exception $exception) {
+      watchdog_exception(__CLASS__, $exception);
+    }
+  }
+
 }

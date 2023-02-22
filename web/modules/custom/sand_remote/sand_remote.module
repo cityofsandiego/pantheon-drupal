@@ -5,14 +5,9 @@
  * Provides a sand_remote entity type.
  */
 
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Render\Element;
-use Drupal\sand_remote\Entity\Sandremote;
 use Drupal\user\UserInterface;
-/* For creating a "file" to pass to tika */
-use Drupal\file\Entity\File;
-use Drupal\Core\Cache\MemoryCache\MemoryCache;
-use Drupal\Core\TempStore;
+use Drupal\sand\ExtractText;
 
 /**
  * Implements hook_theme().
@@ -92,76 +87,14 @@ function sand_remote_user_predelete(UserInterface $account) {
  * Implements hook_entity_insert().
  */
 function sand_remote_sand_remote_insert(\Drupal\Core\Entity\EntityInterface $entity): void {
-  sand_remote_queue_for_text_extraction('sand_remote', $entity);
+  /** @var ExtractText $extract_text */
+  $extract_text = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('sand_remote', $entity);
 }
 
 /**
  * Implements hook_ENTITY_TYPE_update().
  */
 function sand_remote_sand_remote_update(\Drupal\Core\Entity\EntityInterface $entity): void {
-  sand_remote_queue_for_text_extraction('sand_remote', $entity);
-}
-
-/**
- * Add an item to the sand_remote_queue to get processed from a file into text.
- * 
- * @param $entity_type
- * @param $entity_id
- * @param $source_field
- * @param $target_field
- *
- * @return void
- */
-function sand_remote_queue_for_text_extraction($entity_type, $entity): void {
-  // See if we are in the process of setting a field equal to it's extracted text, then skip the update to avoid a loop.
-  $source_field = sand_remote_get_url_field($entity);
-  $target_field = 'field_body';
-  
-  if (empty($source_field)) {
-    return;
-  }
-
-  /** @var \Drupal\Core\TempStore\PrivateTempStore $tempstore */
-  $tempstore = \Drupal::service('tempstore.private');
-  $store = $tempstore->get('extracting_text');
-  $is_processing = $store->get('entity_type_id');
-  
-  if ($is_processing) {
-   return; 
-  }
-  
-  $queue = \Drupal::service('queue')->get('sand_remote_queue');
-  $item = new \Drupal\sand\ExtractText();
-  $item->setEntityType($entity_type);
-  $item->setEntityId($entity->id());
-  $item->setSourceField($source_field);
-  $item->setTargetField($target_field);
-
-  try {
-    $queue->createItem($item);
-  }
-  catch (Exception $exception) {
-    watchdog_exception('sand_remote', $exception);
-  } 
-}
-
-
-function sand_remote_get_url_field(Drupal\Core\Entity\ContentEntityBase $entity, $field_name = 'field_source_name'): string {
-  $url_field = '';
-  if ($entity->hasField($field_name)) {
-    $source_name = $entity->get($field_name)->value;
-    $url_field = match ($source_name) {
-      'sire', 'onbase' => 'field_a_webc_url',
-      'documentum', 'external' => 'field_document_url',
-      default => '',
-    };
-  }
-  if (empty($url_field)) {
-    \Drupal::logger('sand_remote')
-      ->notice(
-        'Could not get a source field for entity: %entity id: %id',
-        [ '%entity' => $entity->getEntityType(), '%id' => $entity->id()]
-      );
-  }
-  return $url_field;
+  /** @var ExtractText $extract_text */
+  $extract_text = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('sand_remote', $entity);
 }
