@@ -8,6 +8,7 @@
 use Drupal\Core\Render\Element;
 use Drupal\user\UserInterface;
 use Drupal\sand\ExtractText;
+use Drupal\sand\Sand;
 
 /**
  * Implements hook_theme().
@@ -87,14 +88,30 @@ function sand_remote_user_predelete(UserInterface $account) {
  * Implements hook_entity_insert().
  */
 function sand_remote_sand_remote_insert(\Drupal\Core\Entity\EntityInterface $entity): void {
-  /** @var ExtractText $extract_text */
-  $extract_text = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('sand_remote', $entity);
+  $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('sand_remote', $entity);
 }
 
 /**
  * Implements hook_ENTITY_TYPE_update().
  */
 function sand_remote_sand_remote_update(\Drupal\Core\Entity\EntityInterface $entity): void {
-  /** @var ExtractText $extract_text */
-  $extract_text = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('sand_remote', $entity);
+  $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('sand_remote', $entity);
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function sand_remote_node_insert(\Drupal\node\NodeInterface $node): void {
+  if ($node->getType() == 'external_data') {
+    $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('node', $node);
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function sand_remote_node_update(\Drupal\node\NodeInterface $node): void {
+  if ($node->getType() == 'external_data') {
+    $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('node', $node);
+  }
 }

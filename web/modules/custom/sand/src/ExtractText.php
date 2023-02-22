@@ -10,6 +10,11 @@ use Recurr\Exception;
 
 use Drupal\Core\Entity\ContentEntityBase;
 
+use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+use Drupal\sand\Sand;
+
 /**
  * Service description.
  */
@@ -89,7 +94,7 @@ class ExtractText {
     $entity = \Drupal::entityTypeManager()
       ->getStorage($this->getEntityType())
       ->load($this->getEntityId());
-    $url = $entity->{$this->getSourceField()}->value;
+    $url = $this->getUrlValue($entity);
     
     // If the field is empty then return nothing.
     if (empty($url)) {
@@ -179,9 +184,13 @@ class ExtractText {
     $tempstore = \Drupal::service('tempstore.private');
     $store = $tempstore->get('extracting_text');
     $store->set('entity_type_id', $this->getEntityType() . ':' . $this->getEntityId());
+
+    // Source field.
+    $url = $this->getUrlValue($entity);
     
-    $url = $entity->{$this->getSourceField()}->value;
-    $target_value = $entity->{$this->getTargetField()}->value;
+    // Target field.
+    $target_field = $this->getTargetField();
+    $target_value = $entity->$target_field->value;
 
     // If source and target are empty then just return.
     if (empty($url) && empty($target_value)) {
@@ -190,7 +199,7 @@ class ExtractText {
     
     // If the source url is empty then clear out the target field.
     if (empty($url)) {
-      $entity->{$this->getTargetField()}->value = '';
+      $entity->$target_field->value = '';
       $changed = TRUE;
     }
 
@@ -198,7 +207,7 @@ class ExtractText {
     $extracted_text = $this->extractText();
     // If the extracted text is different than the current value, update it.
     if ($target_value !== $extracted_text) {
-      $entity->{$this->getTargetField()}->value = $extracted_text;
+      $entity->$target_field->value = $extracted_text;
       $changed = TRUE;
     }
     
@@ -234,15 +243,39 @@ class ExtractText {
     }
     return $url_field;
   }
+  
+  private function getUrlValue($entity) {
+    // Source field.
+    $source_field = $this->getSourceField();
+    if ($entity->hasField($source_field)) {
+      $source_field_type = $entity->$source_field->getFieldDefinition()->getType();
+      if ($source_field_type === 'link') {
+        $url = $entity->$source_field->uri;
+      } else {
+        $url = $entity->$source_field->value;
+      }
+      return $url;
+    }
+    else {
+      return '';
+    }
+  }
 
+  private function getTargetFieldName(ContentEntityBase $entity): string {
+    if ($entity->getEntityTypeId() === 'node') {
+      return 'body';      
+    } else {
+      return 'field_body';    
+    }
+  }
 
-  function queueEntityForTextExtract($entity_type, $entity): void {
+  function queueEntityForTextExtract($entity_type, $entity): bool {
     // See if we are in the process of setting a field equal to it's extracted text, then skip the update to avoid a loop.
     $source_field = $this->getSourceUrlField($entity);
-    $target_field = 'field_body';
+    $target_field = $this->getTargetFieldName($entity);
 
     if (empty($source_field)) {
-      return;
+      return FALSE;
     }
 
     /** @var \Drupal\Core\TempStore\PrivateTempStore $tempstore */
@@ -251,7 +284,7 @@ class ExtractText {
     $is_processing = $store->get('entity_type_id');
 
     if ($is_processing) {
-      return;
+      return FALSE;
     }
 
     $queue = \Drupal::service('queue')->get('sand_remote_queue');
@@ -266,6 +299,8 @@ class ExtractText {
     } catch (Exception $exception) {
       watchdog_exception(__CLASS__, $exception);
     }
+    
+    return TRUE;
   }
 
 }
