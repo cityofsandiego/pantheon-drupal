@@ -11,16 +11,6 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\sand_remote\SandremoteInterface;
 use Drupal\user\EntityOwnerTrait;
 
-/* For creating a "file" to pass to tika */
-use Drupal\file\Entity\File;
-
-/* for getting config */
-use Drupal\Core\Config\ImmutableConfig;
-
-/* for Xss::filter */ 
-use Drupal\Component\Utility\Xss;
-use Recurr\Exception;
-
 /**
  * Defines the sand_remote entity class.
  *
@@ -73,52 +63,6 @@ class Sandremote extends ContentEntityBase implements SandremoteInterface {
   use EntityChangedTrait;
   use EntityOwnerTrait;
 
-//  protected function apachesolr_clean_text($text) {
-//    // Remove invisible content.
-//    $text = preg_replace('@<(applet|audio|canvas|command|embed|iframe|map|menu|noembed|noframes|noscript|script|style|svg|video)[^>]*>.*</\1>@siU', ' ', $text);
-//    // Add spaces before stripping tags to avoid running words together.
-//    $text =  str_replace(array('<', '>'), array(' <', '> '), $text);
-//    // Use D9 Xss filter.
-//    $text =  Xss::filter($text, array());
-//    // Decode entities and then make safe any < or > characters.
-//    $text = htmlspecialchars(html_entity_decode($text, ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8');
-//    // Remove extra spaces.
-//    $text = preg_replace('/\s+/s', ' ', $text);
-//    // Remove white spaces around punctuation marks probably added
-//    // by the safety operations above. This is not a world wide perfect solution,
-//    // but a rough attempt for at least US and Western Europe.
-//    // Pc: Connector punctuation
-//    // Pd: Dash punctuation
-//    // Pe: Close punctuation
-//    // Pf: Final punctuation
-//    // Pi: Initial punctuation
-//    // Po: Other punctuation, including ¿?¡!,.:;
-//    // Ps: Open punctuation
-//    $text = preg_replace('/\s(\p{Pc}|\p{Pd}|\p{Pe}|\p{Pf}|!|\?|,|\.|:|;)/s', '$1', $text);
-//    $text = preg_replace('/(\p{Ps}|¿|¡)\s/s', '$1', $text);
-//    return $text;
-//  } 
-//  
-//  protected function cleanExtractedData(string $string): string {
-//    // Convert to valid UTF8.
-//    try {
-//      $text = iconv("UTF-8", "UTF-8//IGNORE", $string);
-//    } catch (Exception $exception) {
-//      \Drupal::logger('sand_remote')
-//        ->error('Error trying to extract text on Sandremote ID: %id, on URL: %url, error: %error', ['%id' => $this->id(), '%url' => $this->field_url->value, '%error' => $exception->getMessage()]);
-//      $text = $string;
-//    }
-//    //$text = Unicode::convertToUtf8($string);
-//    // Convert to 3 character UTF8 @todo we can remove this if our DB supports 4 byte UTF8. 
-//    $text = preg_replace('/[\x{10000}-\x{10FFFF}]/u', "\xEF\xBF\xBD", $text);
-//    // Use clean up routine originally found in D7 apachesolr.
-//    $text = trim($this->apachesolr_clean_text($text));
-//    // Many of our documents have table of contents with . . . , pull those out.
-//    $text = preg_replace('/\. \. \./', ' ', $text);
-//    $text = preg_replace('/\.\.\./', ' ', $text);
-//    return $text;
-//  }
-
   /**
    * {@inheritdoc}
    */
@@ -127,73 +71,6 @@ class Sandremote extends ContentEntityBase implements SandremoteInterface {
     if (!$this->getOwnerId()) {
       // If no owner has been set explicitly, make the anonymous user the owner.
       $this->setOwnerId(0);
-    }
-    //$this->setDescription();
-  }
-
-
-//  /**
-//   * Extract text from a URL string that will contain a PDF.
-//   * 
-//   * @param $url
-//   *
-//   * @return string
-//   */
-//  public function extractText($url): string {
-//    $extractor_plugin_id = \Drupal::config("search_api_attachments.admin_config")->get("extraction_method");
-//    $config_of_search_api_attachments = \Drupal::configFactory()
-//      ->get('search_api_attachments.admin_config');
-//    $configuration = $config_of_search_api_attachments->get($extractor_plugin_id . '_configuration');
-//    /** @var \Drupal\search_api_attachments\Plugin\search_api_attachments\TikaExtractor $extractor_plugin */
-//    $extractor_plugin = \Drupal::service('plugin.manager.search_api_attachments.text_extractor')
-//      ->createInstance($extractor_plugin_id, $configuration);
-//    
-//    $file = File::create([
-//      'filename' => $url,
-//      'uri' => $url,
-//      'status' => 1,
-//      'uid' => 1,
-//    ]);
-//    
-//    try {
-//      $extracted_data = $extractor_plugin->extract($file);
-//      return $this->cleanExtractedData($extracted_data);
-//    } catch (\Exception $e) {
-//      \Drupal::logger('sand_remote')
-//        ->error('Error trying to extract text on Sandremote ID: %id, on URL: %url, error: %error, cmd: %cmd', ['%id' => $this->id(), '%url' => $this->field_url->value, '%error' => $e->getMessage(), '%cmd' => $GLOBALS['_sand_remote_cmd']]);
-//      return '';
-//    }
-//  }
-  
-
-
-  /**
-   * Set the Description to the extracted text.
-   * 
-   * @return void
-   */
-  public function setText(): void {
-    // Decide the entity has been changed based on custom logic.
-    if ($this->changed()) {
-      $url = $this->field_url->value;
-      $description = $this->description->value;
-      // If no URL and no Description, nothing to do just return.
-      if (empty($url) && empty($description)) {
-        return;
-      }
-      
-      if (empty($url)) {
-        // Blank out the description.
-        $this->description->value = '';
-      }
-      else {
-        // Extract the text from the URL.
-        $extracted_text = $this->extractText($url);
-        // If the description is different from the extracted text, update it.
-        if ($this->description->value != $extracted_text) {
-          $this->description->value = $extracted_text;
-        }
-      }  
     }
   }
 
