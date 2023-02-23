@@ -45,14 +45,14 @@ function sand_weather_cron():void {
 /**
  * Implements hook_theme().
  */
-function sand_weather_theme($existing, $type, $theme, $path) {
-  $weather_text = \Drupal::state()->get('sand_weather.text');
-  $items['sand_weather'] = [
-    'variables' => [
-      'text' => NULL,
-      'temp' => NULL,
-      'icon' => NULL,
-    ]
+function sand_weather_theme(): array {
+  return [
+    'sand_weather' => [
+      'variables' => [
+        'text' => NULL,
+        'temp' => NULL,
+        'icon' => NULL,
+      ],
+    ],
   ];
-  return $items;
 }
