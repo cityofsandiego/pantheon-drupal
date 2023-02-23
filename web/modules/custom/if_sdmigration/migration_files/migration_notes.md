@@ -28,6 +28,7 @@ lando terminus drush mi:import sd_nodes_hero -- --update --force
 lando terminus drush mi:import sd_nodes_outreach2 -- --update --force
 lando terminus drush mi:import sd_nodes_department_document -- --update --force
 lando terminus drush mi:import sd_nodes_blog -- --update --force
+lando terminus drush mi:import sd_nodes_outreach2_article -- --update --force
 
 Menu import:
 lando terminus drush import:menus
@@ -46,6 +47,7 @@ lando terminus drush import:department_document
 lando terminus drush import:external_data 
   * Note: this does entirety of external_data node import; need to specify specific file.  Split into 12 CSV files.
 lando terminus drush import:blog
+lando terminus drush import:outreach2_article
 
 Fix class names/HTML content cleanup:
 lando terminus drush import:class-fixes
@@ -71,6 +73,7 @@ Data status: 2/6/2023
 
 Nodes:
 Blog
+Outreach2 Article
 
 Field groups:
 field_bucket_events_pi_coll
