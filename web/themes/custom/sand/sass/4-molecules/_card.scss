@@ -260,6 +260,8 @@
 
   h2 {
     font-family: $headline;
+    font-size: 1.6875rem;
+    margin: 1em 0 0.8em 0;
   }
 
   .featured-card-group__wrapper {
@@ -297,18 +299,21 @@
     height: auto;
   }
 
+  img {
+    border-radius: 4px 4px 0 0;
+  }
+
   .featured-card__content {
     color: $charcoal;
-    padding: 1rem;
+    @include breakpoint(medium) {
+      font-size: .8125rem;
+    }
+    padding: 1.5em;
 
     .featured-card__heading {
       font-family: $headline;
       font-size: 1rem;
-      margin-top: 0.5rem;
-    }
-
-    .featured-card__body {
-      margin: 1rem 0;
+      margin: 0 0 0.75em;
     }
   }
 }
