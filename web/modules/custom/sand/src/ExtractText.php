@@ -9,6 +9,7 @@ use Drupal\file\Entity\File;
 use Recurr\Exception;
 
 use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\Core\Entity\EntityInterface;
 
 use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -32,38 +33,86 @@ class ExtractText {
   public $source_field;
   public $target_field;
 
-  public function getEntityType() {
+  /**
+   * Getter
+   * 
+   * @return string
+   */
+  public function getEntityType(): string {
     return $this->entity_type;
   }
 
-  public function setEntityType($entity_type) {
+  /**
+   * Setter
+   * 
+   * @param $entity_type
+   *
+   * @return $this
+   */
+  public function setEntityType(string $entity_type): ExtractText {
     $this->entity_type = $entity_type;
     return $this;
   }
 
-  public function getEntityId() {
+  /**
+   * Getter
+   * 
+   * @return int $entity_id
+   */
+  public function getEntityId(): int {
     return $this->entity_id;
   }
 
-  public function setEntityId($entity_id) {
+  /**
+   * Setter
+   * 
+   * @param int $entity_id
+   *
+   * @return $this
+   */
+  public function setEntityId(int $entity_id): ExtractText {
     $this->entity_id = $entity_id;
     return $this;
   }
 
-  public function getSourceField() {
+  /**
+   * Getter
+   * 
+   * @return string $source_field
+   */
+  public function getSourceField(): string {
     return $this->source_field;
   }
 
-  public function setSourceField($source_field) {
+  /**
+   * Setter
+   * 
+   * @param string $source_field
+   *
+   * @return $this
+   */
+  public function setSourceField(string $source_field): ExtractText {
     $this->source_field = $source_field;
     return $this;
   }
 
-  public function getTargetField() {
+  /**
+   * Getter
+   * 
+   * @return string $target_field
+   */
+  public function getTargetField(): string {
     return $this->target_field;
   }
 
-  public function setTargetField($target_field) {
+  /**
+   * Setter
+   * 
+   * @param string $target_field
+   *
+   * @return $this
+   */
+  public function setTargetField(string $target_field): ExtractText {
     $this->target_field = $target_field;
     return $this;
   }
@@ -79,6 +128,13 @@ class ExtractText {
   //    $this->container = $container;
   //  }
 
+  /**
+   * Get text extracted from the PDF of the source field of this class.
+   * 
+   * @return string
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
   public function extractText(): string {
 
     $extractor_plugin_id = \Drupal::config("search_api_attachments.admin_config")
@@ -125,7 +181,14 @@ class ExtractText {
 
   }
 
-  protected function apachesolr_clean_text($text) {
+  /**
+   * Clean up text, Stolen from D7 apachesolr function.
+   * 
+   * @param string $text
+   *
+   * @return string
+   */
+  protected function apachesolr_clean_text(string $text): string {
     // Remove invisible content.
     $text = preg_replace('@<(applet|audio|canvas|command|embed|iframe|map|menu|noembed|noframes|noscript|script|style|svg|video)[^>]*>.*</\1>@siU', ' ', $text);
     // Add spaces before stripping tags to avoid running words together.
@@ -136,21 +199,22 @@ class ExtractText {
     $text = htmlspecialchars(html_entity_decode($text, ENT_QUOTES, 'UTF-8'), ENT_QUOTES, 'UTF-8');
     // Remove extra spaces.
     $text = preg_replace('/\s+/s', ' ', $text);
-    // Remove white spaces around punctuation marks probably added
-    // by the safety operations above. This is not a world wide perfect solution,
+    // Remove white spaces around punctuation marks. This is not a perfect solution,
     // but a rough attempt for at least US and Western Europe.
-    // Pc: Connector punctuation
-    // Pd: Dash punctuation
-    // Pe: Close punctuation
-    // Pf: Final punctuation
-    // Pi: Initial punctuation
-    // Po: Other punctuation, including ¿?¡!,.:;
-    // Ps: Open punctuation
+    // Pc: Connector punctuation, Pd: Dash punctuation, Pe: Close punctuation, Pf: Final punctuation,
+    // Pi: Initial punctuation, Po: Other punctuation, including ¿?¡!,.:;, Ps: Open punctuation
     $text = preg_replace('/\s(\p{Pc}|\p{Pd}|\p{Pe}|\p{Pf}|!|\?|,|\.|:|;)/s', '$1', $text);
     $text = preg_replace('/(\p{Ps}|¿|¡)\s/s', '$1', $text);
     return $text;
   }
 
+  /**
+   * Clean up text and convert to 3 character UTF8
+   * 
+   * @param string $string
+   *
+   * @return string
+   */
   protected function cleanExtractedData(string $string): string {
     // Convert to valid UTF8.
     try {
@@ -171,24 +235,33 @@ class ExtractText {
     return $text;
   }
 
+  /**
+   * Set the target field of this class the text extracted from the PDF source.
+   * 
+   * @return bool
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
   public function setText(): bool {
+    // Has this the target text changed, so we know if we should save or not.
     $changed = FALSE;
+    
+    // Load the Entity. Currently, node or sand_remote entity type.
     $entity = \Drupal::entityTypeManager()
       ->getStorage($this->getEntityType())
       ->load($this->getEntityId());
 
-    // Set variable to say we are setting the Text so don't fire our hooks
-    // for insert and update.
-    
+    // Set variable to say we are setting the Text so don't fire our hooks for insert and update.
     /** @var \Drupal\Core\TempStore\PrivateTempStore $tempstore */
     $tempstore = \Drupal::service('tempstore.private');
     $store = $tempstore->get('extracting_text');
     $store->set('entity_type_id', $this->getEntityType() . ':' . $this->getEntityId());
 
-    // Source field.
+    // Get the URL from the Source field.
     $url = $this->getUrlValue($entity);
     
-    // Target field.
+    // Target field name and value.
     $target_field = $this->getTargetField();
     $target_value = $entity->$target_field->value;
 
@@ -205,7 +278,8 @@ class ExtractText {
 
     // Extract the text from the URL.
     $extracted_text = $this->extractText();
-    // If the extracted text is different than the current value, update it.
+    
+    // If the extracted text is different from the current value, update it.
     if ($target_value !== $extracted_text) {
       $entity->$target_field->value = $extracted_text;
       $changed = TRUE;
@@ -216,7 +290,8 @@ class ExtractText {
       $entity->save();
     }
     
-    // Delete out the variable that says we are processing it.
+    // Delete out the variable that says we are processing it. This was set so
+    // in the *_update or *_insert hooks don't loop endlessly.
     $store->delete('entity_type_id');
     
     // Return if we changed the entity or not.
