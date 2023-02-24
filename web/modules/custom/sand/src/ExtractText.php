@@ -152,11 +152,12 @@ class ExtractText {
       ->load($this->getEntityId());
     $url = $this->getUrlValue($entity);
     
-    // If the field is empty then return nothing.
+    // If the URL field is empty then return nothing.
     if (empty($url)) {
       return '';
     }
 
+    //@todo Make sure that this File object is temporary or just in memory.
     $file = File::create([
       'filename' => $url,
       'uri' => $url,
@@ -267,13 +268,18 @@ class ExtractText {
 
     // If source and target are empty then just return.
     if (empty($url) && empty($target_value)) {
+      $store->delete('entity_type_id');
       return FALSE;
     }
     
     // If the source url is empty then clear out the target field.
     if (empty($url)) {
       $entity->$target_field->value = '';
-      $changed = TRUE;
+      //@todo Rewrite the logic of this function so that it's cleaner with the 
+      //saves and deleting the temp variable entity_type_id.
+//      $changed = TRUE;
+      $entity->save();
+      $store->delete('entity_type_id');
     }
 
     // Extract the text from the URL.
