@@ -2602,4 +2602,164 @@ class CustomCommands extends DrushCommands {
     $unit=array('b','kb','mb','gb','tb','pb');
     return @round($size/pow(1024,($i=floor(log($size,1024)))),2).' '.$unit[$i];
   }
+
+  /**
+   * Generate docdate file to cut down on time to fix external_data nodes.
+   *
+   * SHOULD ONLY BE EXECUTED LOCALLY.
+   *
+   * @command external_data:doc_date:generatecsv
+   *
+   * @usage external_data:doc_date:generatecsv
+   */
+  public function generateDocDateCSV() {
+    $docdate = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_0.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 0. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_1.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 1. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_2.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 2. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_3.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 3. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_4.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 4. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_5.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 5. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_6.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 6. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_7.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 7. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_8.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 8. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_9.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 9. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_10.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 10. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_11.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 11. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_12.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 12. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    $module_path = \Drupal::service('extension.path.resolver')->getPath('module', 'if_sdmigration');
+    file_put_contents($module_path . '/migration_files/nodes/external_data/docdates.json', json_encode($docdate));
+    echo 'Generated JSON file.' . PHP_EOL;
+  }
+
+  /**
+   * Properly add doc date to external_data nodes.
+   *
+   * @command external_data:doc_date:fixnodes
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage external_data:doc_date:fixnodes
+   */
+  public function addDocDate($after_id = 0) {
+    $module_path = \Drupal::service('extension.path.resolver')->getPath('module', 'if_sdmigration');
+    $docdate = json_decode(file_get_contents($module_path . '/migration_files/nodes/external_data/docdates.json'));
+    $editdate = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/editdates.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $editdate[str_replace('`', '', $data[0])] = [
+          'created' => strtotime(str_replace('`', '', $data[1])),
+          'changed' => strtotime(str_replace('`', '', $data[2])),
+        ];
+      }
+      fclose($file);
+      echo 'Processed node creation dates. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    foreach ($docdate as $d7id => $date) {
+      if ($d7id < $after_id) continue;
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'external_data')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+      $node->set('field_doc_date', rtrim($date, ' '));
+      $node->set('created', $editdate[$d7id]['created']);
+      $node->set('changed', $editdate[$d7id]['changed']);
+      $node->save();
+      echo 'Saved D7 id: ' . $d7id . ' D9 id: ' . $node->id() . ' Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+  }
 }
