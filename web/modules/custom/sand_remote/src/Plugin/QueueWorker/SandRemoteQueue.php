@@ -92,6 +92,7 @@ class SandRemoteQueue extends QueueWorkerBase implements ContainerFactoryPluginI
    * @throws \Exception
    */
   public function processItem($data) {
+    // $data is actually an object of ExtractText type.
     /** @var ExtractText $data */
     $was_updated = $data->setText();
   }
