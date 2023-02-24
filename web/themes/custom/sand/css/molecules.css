@@ -2244,11 +2244,21 @@ textarea {
   text-align: center;
   position: relative;
   background-color: rgba(0, 0, 0, 0.35); }
+  @media print, screen and (min-width: 48em) {
+    .main__message {
+      padding: 2.5em 1em; }
+      .node-type-article .main__message {
+        padding: 3em 0; } }
+  @media print, screen and (max-width: 63.99875em) {
+    .main__message {
+      padding: 1.5em 1em; } }
   .main__message .main__heading {
     margin: 0;
     color: white;
-    font-size: 48px;
-    font-size:  calc($unitless-value / $baseline-px)rem; }
+    font-size: 3rem; }
+    @media print, screen and (max-width: 63.99875em) {
+      .main__message .main__heading {
+        font-size: 2rem; } }
     @media print {
       .main__message .main__heading {
         font-size: 2em; } }
@@ -2264,6 +2274,10 @@ textarea {
     line-height: 1rem;
     background-color: transparent;
     text-shadow: 0 0 #555, 0 2px 0.5em black, 2px 0 0.5em black, 0 0 black; }
+    @media print, screen and (max-width: 63.99875em) {
+      .main__message .main__tagline {
+        text-align: center;
+        font-weight: normal; } }
     @media print {
       .main__message .main__tagline {
         font-size: 2em; } }
