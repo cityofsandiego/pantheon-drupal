@@ -2,35 +2,27 @@
 
 namespace Drupal\sand;
 
-//use Symfony\Component\DependencyInjection\ContainerInterface;
-
 use Drupal\Component\Utility\Xss;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\file\Entity\File;
 use Recurr\Exception;
-
 use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\Core\Entity\EntityInterface;
-
-use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
-use Drupal\sand\Sand;
 
 /**
  * Service description.
  */
 class ExtractText {
 
-  //  /**
-  //   * The container.
-  //   *
-  //   * @var \Symfony\Component\DependencyInjection\ContainerInterface
-  //   */
-  //  protected $container;
-
+  // This will be 'node' or 'sand_remote'.
   public $entity_type;
+  // This will be the entity id.
   public $entity_id;
-  public $source_field;
+  // This is the source of the data (i.e. documentum).
+  public $source;
+  // This is the field that contains the URL to fetch.
+  public $url_field;
+  // This is the field to set the text to (i.e. field_body). 
   public $target_field;
 
   /**
@@ -77,23 +69,72 @@ class ExtractText {
 
   /**
    * Getter
-   * 
-   * @return string $source_field
+   *
+   * @return string $source_name
    */
-  public function getSourceField(): string {
-    return $this->source_field;
+  public function getSource(): string {
+    return $this->source;
+  }
+
+  /**
+   * Setter
+   *
+   * @param string $source_name
+   * 
+   * @return $this
+   */
+  public function setSource(string $source): ExtractText {
+    $this->source = $source; 
+    return $this;
+  }
+
+
+  /**
+   * Getter
+   * 
+   * @return string $url_field
+   */
+  public function getUrlField(): string {
+    return $this->url_field;
   }
 
   /**
    * Setter
    * 
-   * @param string $source_field
+   * @param EntityInterface $entity
    *
    * @return $this
    */
-  public function setSourceField(string $source_field): ExtractText {
-    $this->source_field = $source_field;
-    return $this;
+  public function setUrlField(ContentEntityBase $entity, string $source): bool {
+    /**
+     * get name of field that holds source name from the config
+     * lookup the url field based on the source name from the config
+     */
+    $url = '';
+    $mappings = \Drupal::config('sand_remote.settings')->get('mappings');
+    foreach ($mappings as $mapping) {
+      if ($mapping['source'] === $source) {
+        $url_field = $mapping['url_field'];
+        if ($entity->hasField($url_field)) {
+          $url = $entity->$url_field->value;
+          if (!empty($mapping['from'])) {
+            $url = str_replace($mapping['from'], $mapping['to'], $url);
+          }
+        }
+      }
+    }
+    
+    if (empty($url)) {
+      \Drupal::logger(__CLASS__)
+        ->notice(
+          'Could not get a source field for entity: %entity id: %id',
+          [ '%entity' => $entity->getEntityType(), '%id' => $entity->id()]
+        );
+      return FALSE;
+    }
+    
+    $this->url_field = $url;
+    return TRUE;
   }
 
   /**
@@ -117,19 +158,8 @@ class ExtractText {
     return $this;
   }
 
-
-  //  /**
-  //   * Constructs an ExtractText object.
-  //   *
-  //   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-  //   *   The container.
-  //   */
-  //  public function __construct(ContainerInterface $container) {
-  //    $this->container = $container;
-  //  }
-
   /**
-   * Get text extracted from the PDF of the source field of this class.
+   * Get text extracted from the PDF of the url field of this class.
    * 
    * @return string
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
@@ -137,6 +167,14 @@ class ExtractText {
    */
   public function extractText(): string {
 
+    $url = $this->getUrlField();
+
+    // If the URL field is empty then return nothing.
+    if (empty($url)) {
+      return '';
+    }
+
+    // Get extractor plugin.
     $extractor_plugin_id = \Drupal::config("search_api_attachments.admin_config")
       ->get("extraction_method");
     $config_of_search_api_attachments = \Drupal::configFactory()
@@ -146,18 +184,7 @@ class ExtractText {
     $extractor_plugin = \Drupal::service('plugin.manager.search_api_attachments.text_extractor')
       ->createInstance($extractor_plugin_id, $configuration);
 
-    // Load the entity could be a node or a sand_remote object or something else.
-    $entity = \Drupal::entityTypeManager()
-      ->getStorage($this->getEntityType())
-      ->load($this->getEntityId());
-    $url = $this->getUrlValue($entity);
-    
-    // If the URL field is empty then return nothing.
-    if (empty($url)) {
-      return '';
-    }
-
-    //@todo Make sure that this File object is temporary or just in memory.
+    // Create a file object since the extractor needs it. It's a temp file.
     $file = File::create([
       'filename' => $url,
       'uri' => $url,
@@ -167,7 +194,9 @@ class ExtractText {
 
     try {
       $extracted_data = $extractor_plugin->extract($file);
-      return $this->cleanExtractedData($extracted_data);
+      $cleaned_data = $this->cleanExtractedData($extracted_data);
+      // @todo interface with Boone's tesserac server if the cleaned data is empty
+      return $cleaned_data;
     } catch (\Exception $e) {
       \Drupal::logger('sand_remote')
         ->error('Error trying to extract text on %entity_type ID: %id, on URL: %url, error: %error', [
@@ -259,8 +288,7 @@ class ExtractText {
     $store = $tempstore->get('extracting_text');
     $store->set('entity_type_id', $this->getEntityType() . ':' . $this->getEntityId());
 
-    // Get the URL from the Source field.
-    $url = $this->getUrlValue($entity);
+    $url = $this->getUrlField();
     
     // Target field name and value.
     $target_field = $this->getTargetField();
@@ -273,13 +301,9 @@ class ExtractText {
     }
     
     // If the source url is empty then clear out the target field.
-    if (empty($url)) {
+    if (empty($url) && !empty($target_field)) {
       $entity->$target_field->value = '';
-      //@todo Rewrite the logic of this function so that it's cleaner with the 
-      //saves and deleting the temp variable entity_type_id.
-//      $changed = TRUE;
-      $entity->save();
-      $store->delete('entity_type_id');
+      $changed = TRUE;
     }
 
     // Extract the text from the URL.
@@ -293,6 +317,8 @@ class ExtractText {
     
     // If we changed something, save it.
     if ($changed) {
+      // @todo when saving to NOT update the entity's update time so it can be sorted with other nodes.
+      // @todo maybe set a status field and extraction time.
       $entity->save();
     }
     
@@ -300,10 +326,19 @@ class ExtractText {
     // in the *_update or *_insert hooks don't loop endlessly.
     $store->delete('entity_type_id');
     
-    // Return if we changed the entity or not.
+    // Return if we $changed to say if we updated the entity or not.
     return $changed;
     
   }
+  private function getSourceFromEntity(ContentEntityBase $entity): ?string {
+    $source_field = \Drupal::config('sand_remote.settings')->get('source_field');
+    if ($entity->hasField($source_field)) {
+      return $entity->$source_field->value;
+    } else {
+      return NULL;
+    }
+  }
+  
 
   private function getSourceUrlField(ContentEntityBase $entity, $field_name = 'field_source_name'): string {
     $url_field = '';
@@ -335,6 +370,12 @@ class ExtractText {
       } else {
         $url = $entity->$source_field->value;
       }
+      $mappings = \Drupal::config('sand_remote.settings')->get('mappings');
+      foreach($mappings as $mapping) {
+        if ($mapping['source_name'] === $this->getSourceName()) {
+          $url = str_replace($mapping['from'], $mapping['to'], $url);
+        }
+      }
       return $url;
     }
     else {
@@ -342,7 +383,7 @@ class ExtractText {
     }
   }
 
-  private function getTargetFieldName(ContentEntityBase $entity): string {
+  private function getTargetFromEntity(EntityInterface $entity): string {
     if ($entity->getEntityTypeId() === 'node') {
       return 'body';      
     } else {
@@ -351,11 +392,10 @@ class ExtractText {
   }
 
   function queueEntityForTextExtract($entity_type, $entity): bool {
-    // See if we are in the process of setting a field equal to it's extracted text, then skip the update to avoid a loop.
-    $source_field = $this->getSourceUrlField($entity);
-    $target_field = $this->getTargetFieldName($entity);
+    $source = $this->getSourceFromEntity($entity);
 
-    if (empty($source_field)) {
+    // If there is nothing in the source field, there is nothing we can do.
+    if (empty($source)) {
       return FALSE;
     }
 
@@ -364,6 +404,7 @@ class ExtractText {
     $store = $tempstore->get('extracting_text');
     $is_processing = $store->get('entity_type_id');
 
+    // See if we are in the process of setting a field equal to it's extracted text, then skip the update to avoid a loop.
     if ($is_processing) {
       return FALSE;
     }
@@ -372,8 +413,9 @@ class ExtractText {
     $item = new \Drupal\sand\ExtractText();
     $item->setEntityType($entity_type);
     $item->setEntityId($entity->id());
-    $item->setSourceField($source_field);
-    $item->setTargetField($target_field);
+    $item->setSource($source);
+    $item->setUrlField($entity, $source);
+    $item->setTargetField($this->getTargetFromEntity($entity));
 
     try {
       $queue->createItem($item);
@@ -385,3 +427,4 @@ class ExtractText {
   }
 
 }
+

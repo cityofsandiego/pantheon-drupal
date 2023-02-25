@@ -29,79 +29,92 @@ class SettingsForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-
-
-    //    $form['example'] = [
-    //      '#type' => 'textfield',
-    //      '#title' => $this->t('Example'),
-    //      '#default_value' => $this->config('sand_remote.settings')->get('example'),
-    //    ];
-    
-    
+    $config = $this->config('sand_remote.settings');
     $form['#tree'] = TRUE;
-
-    $form['contacts'] = array(
-      '#type' => 'table',
-      '#caption' => $this->t('Sample Table'),
-      '#header' => array(
-        $this->t('MyName'),
-        $this->t('MyPhone'),
-      ),
-    );
-    for ($i = 1; $i <= 2; $i++) {
-      $form['contacts'][$i]['name'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('MyName'),
-        '#title_display' => 'invisible',
-      );
-      $form['contacts'][$i]['phone'] = array(
-        '#type' => 'tel',
-        '#title' => $this->t('MyPhone'),
-        '#title_display' => 'invisible',
-      );
-    }
-
 
     // Gather the number of names in the form already.
     $num_names = $form_state->get('num_names');
-    // We have to ensure that there is at least one name field.
+    $source_field = $config->get('source_field');
+    $mappings = $config->get('mappings');
+
+    // We have to ensure that there is at least one name field. If the config has
+    // more than one field then use that for the number of sources and populate it
+    // from the config.
     if ($num_names === NULL) {
-      $name_field = $form_state->set('num_names', 1);
-      $num_names = 1;
+      // Get previously saved mappings
+      $name_field = $form_state->set('num_names', count($mappings));
+      $num_names = count($mappings);
     }
 
-    $form['names_fieldset'] = [
+    // This is the field that is used to get the source of the data from the entity.
+    $form['source_field'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Source Field'),
+      '#required' => TRUE,
+      '#default_value' => $source_field,
+      '#description' => $this->t('This is the field of the entity we get the source name from (i.e. documentum)')
+    );
+
+    // Container for the AJAX callback. Everything inside this will be updated.
+    $form['mappings_fieldset'] = [
       '#type' => 'fieldset',
-      '#caption' => $this->t('People coming to picnic'),
       '#prefix' => '<div id="names-fieldset-wrapper">',
       '#suffix' => '</div>',
     ];
 
-    for ($i = 0; $i < $num_names; $i++) {
-      $form['names_row'.$i] = [
-        '#type' => 'fieldset',
-        '#caption' => $this->t('Row'),
-        '#prefix' => '<div id="names--row-fieldset-wrapper">',
-        '#suffix' => '</div>',
-      ];
-      $form['names_fieldset']['names_row'.$i]['name'][$i] = [
+    // Table definition.
+    $form['mappings_fieldset']['mappings'] = array(
+      '#type' => 'table',
+      '#caption' => $this->t('<h3>URL Mappings for different data sources</h3>'),
+      '#prefix' => '<div id="names-fieldset-wrapper">',
+      '#suffix' => '</div>',
+      '#header' => array(
+        $this->t('Source'),
+        $this->t('URL Field' ),
+        $this->t('From URL'),
+        $this->t('To URL'),
+      ),
+    );
+    
+    
+    // Table rows
+    for ($i = 1; $i <= $num_names; $i++) {
+      $form['mappings_fieldset']['mappings'][$i]['source'] = array(
         '#type' => 'textfield',
-        '#title' => $this->t('Name'),
-        '#size' => 20,
-      ];
-      $form['names_fieldset']['names_row'.$i]['name2'][$i] = [
+        '#title' => $this->t('Source'),
+        '#title_display' => 'invisible',
+        '#required' => TRUE,
+        '#default_value' => $mappings[$i]['source'],
+      );
+      $form['mappings_fieldset']['mappings'][$i]['url_field'] = array(
         '#type' => 'textfield',
-        '#title' => $this->t('Name2'),
-        '#size' => 20,
-        '#suffix' => '- ',
-      ];
+        '#title' => $this->t('URL Field'),
+        '#title_display' => 'invisible',
+        '#required' => TRUE,
+        '#default_value' => $mappings[$i]['url_field'],
+      );
+      $form['mappings_fieldset']['mappings'][$i]['from'] = array(
+        '#type' => 'textfield',
+        '#title' => $this->t('From URL'),
+        '#title_display' => 'invisible',
+        '#required' => TRUE,
+        '#default_value' => $mappings[$i]['from'],
+      );
+      $form['mappings_fieldset']['mappings'][$i]['to'] = array(
+        '#type' => 'textfield',
+        '#title' => $this->t('To URL'),
+        '#title_display' => 'invisible',
+        '#required' => TRUE,
+        '#default_value' => $mappings[$i]['to'],
+      );
     }
 
-    $form['names_fieldset']['actions'] = [
+    // Container for the AJAX buttons.
+    $form['mappings_fieldset']['actions'] = [
       '#type' => 'actions',
     ];
     
-    $form['names_fieldset']['actions']['add_name'] = [
+    $form['mappings_fieldset']['actions']['add_name'] = [
       '#type' => 'submit',
       '#value' => $this->t('Add one more'),
       '#submit' => ['::addOne'],
@@ -112,7 +125,7 @@ class SettingsForm extends ConfigFormBase {
     ];
     // If there is more than one name, add the remove button.
     if ($num_names > 1) {
-      $form['names_fieldset']['actions']['remove_name'] = [
+      $form['mappings_fieldset']['actions']['remove_name'] = [
         '#type' => 'submit',
         '#value' => $this->t('Remove one'),
         '#submit' => ['::removeCallback'],
@@ -132,7 +145,7 @@ class SettingsForm extends ConfigFormBase {
    * Selects and returns the fieldset with the names in it.
    */
   public function addmoreCallback(array &$form, FormStateInterface $form_state) {
-    return $form['names_fieldset'];
+    return $form['mappings_fieldset'];
   }
 
 
@@ -162,6 +175,9 @@ class SettingsForm extends ConfigFormBase {
       $remove_button = $name_field - 1;
       $form_state->set('num_names', $remove_button);
     }
+    // @todo Tried to not have the required fields checked on removeCallback but not working!    
+    //    $form_state->setLimitValidationErrors(NULL);
+    
     // Since our buildForm() method relies on the value of 'num_names' to
     // generate 'name' form elements, we have to tell the form to rebuild. If we
     // don't do this, the form builder will not call buildForm().
@@ -173,20 +189,19 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-//    if ($form_state->getValue('example') != 'example') {
-//      $form_state->setErrorByName('example', $this->t('The value is not correct.'));
-//    }
-    parent::validateForm($form, $form_state);
+      parent::validateForm($form, $form_state);
   }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $mappings = $form_state->getValue(['mappings_fieldset','mappings']);
+    $source_field = $form_state->getValue(['source_field']);
     $this->config('sand_remote.settings')
-      ->set('example', $form_state->getValue('example'))
+      ->set('source_field', $source_field)
+      ->set('mappings', $mappings)
       ->save();
-    $values = $form_state->getValue(['names_fieldset', 'name']);
     parent::submitForm($form, $form_state);
   }
 
