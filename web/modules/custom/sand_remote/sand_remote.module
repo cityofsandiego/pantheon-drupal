@@ -6,6 +6,7 @@
  */
 use Drupal\Core\Render\Element;
 use Drupal\user\UserInterface;
+use Drupal\sand\RemoteETL;
 
 /**
  * Implements hook_theme().
@@ -118,8 +119,9 @@ function sand_remote_entity_presave(\Drupal\Core\Entity\EntityInterface $entity)
   $is_sand_remote_entity = ($entity->getEntityTypeId() === 'sand_remote'); 
   
   if ($is_external_data_node || $is_sand_remote_entity) {
-    $entity->field_doc_type = \Drupal\sand\RemoteETL::setDocType($entity);
-    $entity->field_doc_type = \Drupal\sand\RemoteETL::setCommittee($entity);
-    $entity->field_doc_type = \Drupal\sand\RemoteETL::setDocDateYear($entity);
+    RemoteETL::setDocType($entity);
+    RemoteETL::setCommittee($entity);
+    RemoteETL::setDocDateYear($entity);
+    RemoteETL::setMuniCodeChapter($entity);
   }
 }

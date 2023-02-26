@@ -14,7 +14,6 @@ use Drupal\user\EntityOwnerInterface;
  */
 class RemoteETL extends ContentEntityBase { 
 
-
   /**
    * Get the key to the field_doc_type based on field_path in external data.
    *
@@ -161,7 +160,7 @@ class RemoteETL extends ContentEntityBase {
    * @return string
    */
   //function sand_search_get_committee_from_path(\Drupal\Core\Entity\EntityInterface $entity)
-  public static function setCommittee(\Drupal\Core\Entity\EntityInterface $entity):void {
+  public static function setCommittee(\Drupal\Core\Entity\EntityInterface $entity): void {
     $field_path = 'field_path';
     $field_committee = 'field_committee';
     if (!$entity->hasField($field_path) || !$entity->hasField($field_committee)) {
@@ -261,16 +260,24 @@ class RemoteETL extends ContentEntityBase {
     }
   }
   
-  public static function setDocDateYear(\Drupal\Core\Entity\EntityInterface $entity) {
+  public static function setDocDateYear(\Drupal\Core\Entity\EntityInterface $entity): void {
     $field_doc_date_num = 'field_doc_date_num';
     $field_doc_date_year = 'field_doc_date_year';
     if (!$entity->hasField($field_doc_date_year) || !$entity->hasField($field_doc_date_year)) {
       return;
     }
     
-    $year = substr($entity->$field_doc_date_num->value, 0, 4);
-    $entity->$field_doc_date_year->setValue($year);
+    if (is_numeric($entity->$field_doc_date_num->value)) {
+      $year = substr($entity->$field_doc_date_num->value, 0, 4);
+      $entity->$field_doc_date_year->setValue($year);
+    }
   }
 
+  public static function setMuniCodeChapter(\Drupal\Core\Entity\EntityInterface $entity): void {
+    $return = FALSE;
+    $field_doc_num = $entity->field_doc_num->value;
+    if (!empty($field_doc_num) && (substr($field_doc_num, 0, 2) == 'Ch') && strlen($field_doc_num) >= 4) {
+      $entity->field_muni_code_chapter->setValue(substr($entity->field_doc_num->value, 0, 4));
+    }
+  }
 }
-
