@@ -30,7 +30,7 @@ class ExtractText {
    * 
    * @return string
    */
-  public function getEntityType(): string {
+  public function getEntityType(): ?string {
     return $this->entity_type;
   }
 
@@ -51,7 +51,7 @@ class ExtractText {
    * 
    * @return int $entity_id
    */
-  public function getEntityId(): int {
+  public function getEntityId(): ?int {
     return $this->entity_id;
   }
 
@@ -72,7 +72,7 @@ class ExtractText {
    *
    * @return string $source_name
    */
-  public function getSource(): string {
+  public function getSource(): ?string {
     return $this->source;
   }
 
@@ -94,7 +94,7 @@ class ExtractText {
    * 
    * @return string $url_field
    */
-  public function getUrlField(): string {
+  public function getUrlField(): ?string {
     return $this->url_field;
   }
 
@@ -125,7 +125,7 @@ class ExtractText {
     }
     
     if (empty($url)) {
-      \Drupal::logger(__CLASS__)
+      \Drupal::logger('sand')
         ->notice(
           'Could not get a source field for entity: %entity id: %id',
           [ '%entity' => $entity->getEntityType(), '%id' => $entity->id()]
@@ -351,7 +351,7 @@ class ExtractText {
       };
     }
     if (empty($url_field)) {
-      \Drupal::logger(__CLASS__)
+      \Drupal::logger('sand')
         ->notice(
           'Could not get a source field for entity: %entity id: %id',
           [ '%entity' => $entity->getEntityType(), '%id' => $entity->id()]
