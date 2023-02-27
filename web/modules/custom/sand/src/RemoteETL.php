@@ -3,11 +3,6 @@
 namespace Drupal\sand;
 
 use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\Core\Entity\EntityBase;
-use Drupal\Core\Entity\EntityChangedInterface;
-use Drupal\user\EntityOwnerInterface;
-
 
 /**
  * Service description.
@@ -167,8 +162,8 @@ class RemoteETL extends ContentEntityBase {
       return;
     }
 
-    if (strpos($field_path, 'cc') === 0) {
-      switch ($field_path) {
+    if (strpos($entity->$field_path->value, 'cc') === 0) {
+      switch ($entity->$field_path->value) {
         case 'ccagenda_covid':
         case 'ccaction_covid':
           $field_committee_value = 'covid';
@@ -274,10 +269,14 @@ class RemoteETL extends ContentEntityBase {
   }
 
   public static function setMuniCodeChapter(\Drupal\Core\Entity\EntityInterface $entity): void {
-    $return = FALSE;
-    $field_doc_num = $entity->field_doc_num->value;
-    if (!empty($field_doc_num) && (substr($field_doc_num, 0, 2) == 'Ch') && strlen($field_doc_num) >= 4) {
-      $entity->field_muni_code_chapter->setValue(substr($entity->field_doc_num->value, 0, 4));
+    $field_doc_num = 'field_doc_num';
+    $field_muni_code_chapter = 'field_muni_code_chapter';
+    if (!$entity->hasField($field_doc_num) || !$entity->hasField($field_muni_code_chapter)) {
+      return;
+    }
+    
+    if (!empty($entity->$field_doc_num->value) && (str_starts_with($entity->$field_doc_num->value, 'Ch')) && strlen($entity->$field_doc_num->value) >= 4) {
+      $entity->$field_muni_code_chapter->setValue(substr($entity->$field_doc_num->value, 0, 4));
     }
   }
 }
