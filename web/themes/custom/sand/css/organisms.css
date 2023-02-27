@@ -2127,6 +2127,8 @@ textarea {
   @media print, screen and (min-width: 48em) {
     .header .header-first {
       padding: 1rem 0; } }
+  .header .header-first .grid-x {
+    align-items: center; }
   .header .header-first .button {
     margin-bottom: 0; }
     .header .header-first .button::after {
@@ -2202,6 +2204,7 @@ textarea {
       font-size: .8125rem;
       font-weight: bold;
       position: relative;
+      text-decoration: none;
       text-transform: uppercase; }
     .header .header-second .tbm-main a[title]:after {
       content: attr(title);
@@ -2218,7 +2221,8 @@ textarea {
   .header .header-second .tbm-main .tbm-nav {
     justify-content: space-between; }
     .header .header-second .tbm-main .tbm-nav .tbm-item {
-      flex-grow: 1; }
+      flex-grow: 1;
+      margin: 0; }
       .header .header-second .tbm-main .tbm-nav .tbm-item.level-1:first-child {
         border-left: 1px solid rgba(0, 0, 0, 0.2); }
   .header .header-second .tbm-submenu {
@@ -2583,25 +2587,19 @@ textarea {
 .node--type-bucket .resources {
   background-color: #e4e9eb; }
 
-.node--type-bucket .field--name-field-description {
-  font-size: .8125rem; }
+.node-type-location .main__message {
+  border-bottom: 0.5rem solid #eaeeef; }
 
-.address-text {
+.node-type-location .field--type-address {
+  font-weight: bold; }
+
+.node-type-location .contact-info .grid-x {
+  align-items: center; }
+
+.node-type-location .address-text {
   display: flex; }
-  .address-text i {
+  .node-type-location .address-text i {
     margin-right: 1rem; }
-
-#bwOutput .event__date {
-  flex: 1 1 0;
-  width: auto;
-  margin-left: 0.625rem;
-  margin-right: 0.625rem; }
-
-#bwOutput .event__info {
-  flex: 0 0 auto;
-  width: calc(75% - 1.25rem);
-  margin-left: 0.625rem;
-  margin-right: 0.625rem; }
 
 .node--type-outreach-article2 .main-content {
   max-width: 800px; }
