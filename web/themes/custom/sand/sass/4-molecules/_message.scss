@@ -7,23 +7,24 @@
   position: relative;
   background-color: rgba(0, 0, 0, 0.35);
 
-  // @include breakpoint(medium) {
-  //   padding: 2.5em 1em;
-  //   .node-type-article & {
-  //     padding: 3em 0;
-  //   }
-  // }
-  // @include breakpoint(medium down) {
-  //   padding: 1.5em 1em;
-  // }
+  @include breakpoint(medium) {
+    padding: 2.5em 1em;
+    .node-type-article & {
+      padding: 3em 0;
+    }
+  }
+  @include breakpoint(medium down) {
+    padding: 1.5em 1em;
+  }
 
   .main__heading {
     margin: 0;
     color: white;
-    @include rem("font-size", 48px);
-    // @include breakpoint(medium down) {
-    //   font-size: 2rem;
-    // }
+    // @include rem("font-size", 48px);
+    font-size: 3rem; 
+    @include breakpoint(medium down) {
+      font-size: 2rem;
+    }
     @media print {
       font-size: 2em;
     }
@@ -34,10 +35,10 @@
     margin-top: 10px;
     color: white;
     @include rem("font-size", 16px);
-    // @include breakpoint(medium down) {
-    //   text-align: center;
-    //   font-weight: normal;
-    // }
+    @include breakpoint(medium down) {
+      text-align: center;
+      font-weight: normal;
+    }
     @media print {
       font-size: 2em;
     }
