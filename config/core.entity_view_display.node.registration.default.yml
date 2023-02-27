@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.registration.body
+    - field.field.node.registration.field_d7_nid
     - field.field.node.registration.field_reg_date
     - field.field.node.registration.field_reg_display_to_role
     - field.field.node.registration.field_reg_event_location
@@ -23,26 +24,27 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    weight: -20
+    weight: 0
     region: content
   field_reg_registration:
     type: registration_form
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
+  field_d7_nid: true
   field_reg_date: true
   field_reg_display_to_role: true
   field_reg_event_location: true
