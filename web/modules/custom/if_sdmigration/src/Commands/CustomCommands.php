@@ -110,6 +110,117 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   *
+   * @command import:registration
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage import:registration
+   */
+  public function finalizeRegistration($after_id = 0) {
+    $nodedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/registration.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'display_to' => explode('|', str_replace('`', '', $data[4])),
+          'event_location' => str_replace('`', '', $data[5]),
+          'updated' => str_replace('`', '', $data[8]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) continue;
+      echo 'Current memory used: ' . $this->memoryUsage(memory_get_usage(true)) . '| Current D7 ID: ' . $d7id . PHP_EOL;
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'registration')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+      if ($data['event_location'] == 4256) {
+        $event_location = 5069;
+      }
+      elseif ($data['event_location'] == 4257) {
+        $event_location = 5068;
+      }
+      else {
+        $event_location = NULL;
+      }
+      $term = Term::load($event_location);
+      $node->field_reg_event_location->setValue([]);
+      $node->field_reg_event_location->appendItem($term);
+      $node->set('changed', strtotime($data['updated']));
+      $node->set('field_reg_display_to_role', $data['display_to']);
+      $node->save();
+    }
+  }
+
+  /**
+   *
+   * @command import:business_resource
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage import:business_resource
+   */
+  public function finalizeBusinessResource($after_id = 0) {
+    $nodedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/business-resource.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'organization' => explode('|', str_replace('`', '', $data[3])),
+          'target_business' => explode('|', str_replace('`', '', $data[8])),
+          'type_of_assistance' => explode('|', str_replace('`', '', $data[9])),
+          'updated' => str_replace('`', '', $data[11]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) continue;
+      echo 'Current memory used: ' . $this->memoryUsage(memory_get_usage(true)) . '| Current D7 ID: ' . $d7id . PHP_EOL;
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'business_resource')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+
+      // Set three taxonomies.
+      $node->field_business_organization->setValue([]);
+      foreach ($data['organization'] as $organization) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($organization, 'business_resources_organization'));
+        $node->field_business_organization->appendItem($term);
+      }
+      $node->field_business_target_business->setValue([]);
+      foreach ($data['target_business'] as $target_business) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($target_business, 'business_resources_target_bus'));
+        $node->field_business_target_business->appendItem($term);
+      }
+      $node->field_business_typeof_assistance->setValue([]);
+      foreach ($data['type_of_assistance'] as $type_of_assistance) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($type_of_assistance, 'business_resources_type_assist'));
+        $node->field_business_typeof_assistance->appendItem($term);
+      }
+      $node->set('changed', strtotime($data['updated']));
+      $node->save();
+    }
+  }
+
+  /**
    * Import fields: field_search_keymatch, field_image, field_category, field_department
    *
    * @command import:outreach2_article
@@ -2756,8 +2867,12 @@ class CustomCommands extends DrushCommands {
       $nid = reset($query->execute());
       $node = Node::load($nid);
       $node->set('field_doc_date', rtrim($date, ' '));
-      $node->set('created', $editdate[$d7id]['created']);
-      $node->set('changed', $editdate[$d7id]['changed']);
+      if (NULL !== $editdate[$d7id]['created']) {
+        $node->set('created', $editdate[$d7id]['created']);
+      }
+      if (NULL !== $editdate[$d7id]['changed']) {
+        $node->set('changed', $editdate[$d7id]['changed']);
+      }
       $node->save();
       echo 'Saved D7 id: ' . $d7id . ' D9 id: ' . $node->id() . ' Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
     }
