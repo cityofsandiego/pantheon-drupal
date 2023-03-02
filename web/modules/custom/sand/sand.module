@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for San Diego Decorator and Service Module module.
+ */
+
+/**
+ * Implements hook_entity_bundle_info_alter().
+ */
+function sand_entity_bundle_info_alter(array &$bundles): void {
+  if (isset($bundles['node']['hero'])) {
+    $bundles['node']['hero']['class'] = \Drupal\sand\Entity\Bundle\HeroBundle::class;
+  }
+}
+
+/**
+ * Implements hook_entity_bundle_info_alter().
+ */
+function sand_entity_bundle_info_alter(array &$bundles): void {
+  if (isset($bundles['node']['external_data'])) {
+    $bundles['node']['external_data']['class'] = \Drupal\sand\Entity\Bundle\ExternalDataBundle::class;
+  }
+}

@@ -7,12 +7,31 @@
 
 declare(strict_types=1);
 
+// Bundle Classes.
+use Drupal\sand_example\Entity\Bundle\Hero;
+use Drupal\sand_example\Entity\Bundle\Article;
+
 /**
  * Implements hook_help().
  */
 function sand_example_help($route_name): ?string {
   return sand_help_show_help(__DIR__, $route_name);
 }
+
+/**
+ * Implements hook_entity_bundle_info_alter().
+ */
+function sand_example_entity_bundle_info_alter(array &$bundles): void {
+  //$implemented_bundles = ['article','hero'];
+
+  if (isset($bundles['node']['article'])) {
+    $bundles['node']['article']['class'] = Article::class;
+  }
+  if (isset($bundles['node']['hero'])) {
+    $bundles['node']['hero']['class'] = Hero::class;
+  }
+}
+
 
 function sand_example_theme(): array {
   /*
