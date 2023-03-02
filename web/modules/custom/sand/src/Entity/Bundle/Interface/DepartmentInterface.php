@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\sand_example\Entity\Bundle;
+namespace Drupal\sand\Entity\Bundle\Interface;
 
 interface DepartmentInterface {
 
