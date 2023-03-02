@@ -1,2 +1,16 @@
 <?php
 
+// Bundle Classes.
+use Drupal\sand\Entity\Bundle\Article;
+use Drupal\sand\Entity\Bundle\Department;
+
+function sand_entity_bundle_info_alter(array &$bundles): void {
+  //$implemented_bundles = ['article','hero'];
+
+  if (isset($bundles['node']['article'])) {
+    $bundles['node']['article']['class'] = Article::class;
+  }
+  if (isset($bundles['node']['department'])) {
+    $bundles['node']['department']['class'] = Department::class;
+  }
+}

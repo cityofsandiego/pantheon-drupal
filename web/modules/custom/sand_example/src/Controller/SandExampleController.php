@@ -4,14 +4,18 @@ namespace Drupal\sand_example\Controller;
 
 use Drupal\node\Entity\Node;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\sand\Entity\Bundle\Department;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 // Bundle Interfaces.
-use Drupal\sand_example\Entity\Bundle\DepartmentInterface;
+use Drupal\sand\Entity\Bundle\Interface\DepartmentInterface;
 
 // Bundle Classes.
-use Drupal\sand_example\Entity\Bundle\Article;
-use Drupal\sand_example\Entity\Bundle\Hero;
+use Drupal\sand\Entity\Bundle\Article;
+use Drupal\sand\Query\Bundle\ArticleQuery;
+
+// Query Classes
+
 
 /**
  * Returns responses for Sand hero routes.
@@ -52,17 +56,17 @@ class SandExampleController extends ControllerBase {
     // Example of node query.
     $nids = \Drupal::entityQuery('node')
       ->condition('status', 1)
-      ->condition('type', ['article','hero'], 'in')
-      ->range(0,100)
+      ->condition('type', ['article','hero', 'department'], 'in')
+      ->range(0,200)
       ->execute();
     $nodes = Node::loadMultiple($nids);
 
 
     // Table example with Headers and Rows.
     $header = [
-      'title' => t('Title'),
-      'content' => t('Content'),
-      'time_type' => t('Hero Time / Article Type'),
+      'title' => t('Node ID'),
+      'content' => t('Title'),
+      'time_type' => t('Hero / Article / External'),
       'dept' => t('Departments'),
     ];
 
@@ -70,9 +74,12 @@ class SandExampleController extends ControllerBase {
     foreach ($nodes as $node) {
       $time_type = '';
       $dept = '';
-      if ($node instanceof Hero) {
-        $time_type = $node->getTimeOfDay();
-      }
+      // The Hero Class is works because of the concept of bundle classes introduced
+      // in 9.3. You have to have a hook tell Drupal about the class, then of course
+      // define the class. The hook is: sand_example_entity_bundle_info_alter. 
+      // Remember you can test for the Bundle Class OR the Interface Class. See
+      // Hero.php for more details.
+
       if ($node instanceof Article) {
         $time_type = $node->getArticleType();
       }
@@ -94,6 +101,12 @@ class SandExampleController extends ControllerBase {
       '#header' => $header,
       '#rows' => $rows,
       '#empty' => t('No content has been found.'),
+    ];
+    
+    $ids_array = ArticleQuery::getIds();
+    
+    $build['article_ids'] = [
+      '#markup' => 'Aricle Ids: ' . implode(',', $ids_array),
     ];
     
     return $build;
