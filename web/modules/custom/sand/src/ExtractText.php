@@ -4,7 +4,6 @@ namespace Drupal\sand;
 
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\file\Entity\File;
 use Recurr\Exception;
 use Drupal\Core\Entity\ContentEntityBase;
@@ -362,7 +361,7 @@ class ExtractText {
   
   private function getUrlValue($entity) {
     // Source field.
-    $source_field = $this->getSourceField();
+    $source_field = $this->getSourceUrlField($entity);
     if ($entity->hasField($source_field)) {
       $source_field_type = $entity->$source_field->getFieldDefinition()->getType();
       if ($source_field_type === 'link') {
@@ -372,7 +371,7 @@ class ExtractText {
       }
       $mappings = \Drupal::config('sand_remote.settings')->get('mappings');
       foreach($mappings as $mapping) {
-        if ($mapping['source_name'] === $this->getSourceName()) {
+        if ($mapping['source_name'] === $this->getSourceUrlField($entity)) {
           $url = str_replace($mapping['from'], $mapping['to'], $url);
         }
       }
