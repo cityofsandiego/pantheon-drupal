@@ -35,6 +35,9 @@ function sand_hours_entity_display_build_alter(&$build, $context) {
         $week_start = date('m-d-Y', strtotime('-'.$day.' days'));
         $office_hours = &$build["field_location_hours"][$key]["#office_hours"];
         $build['entity_display_build_alter']['#markup'] = 'Content added in hook_entity_display_build_alter for entity id ' . $entity->id();
+        
+        // Now query the field_date_date field to see if any starting dates (only date part) matches any of our days in the array
+        // if so, then apply the "closed" to the matching date
       }
     }
     
