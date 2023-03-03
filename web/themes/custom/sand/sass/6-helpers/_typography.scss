@@ -125,23 +125,25 @@ textarea {
 
 a {
   text-decoration: underline;
-  color: $link-color;
+  color: $teal;
   // @include transition-property(color, background, border);
   // @include transition-duration(0.15s);
-  &:hover {
-    color: lighten($link-color, 10%);
+  &:hover,
+  &:focus {
+    color: lighten($teal, 10%);
+    text-decoration: underline;
   }
 }
 
 blockquote {
   margin: 0;
-  color: $font-color;
+  color: $spruce;
   // font-style: italic;
   // font-family: $font-family-secondary;
   @include rem("font-size", 18px);
   .author {
     margin: 1em 0;
-    color: $font-color;
+    color: $spruce;
     display: block;
     font-weight: 600;
     text-align: right;
@@ -208,7 +210,7 @@ dd {
 }
 
 .heading--subcolor {
-  color: $teal;
+  color: $teal !important;
 }
 
 /* Subheadline
