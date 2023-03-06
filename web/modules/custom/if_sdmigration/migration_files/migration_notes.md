@@ -31,6 +31,7 @@ lando terminus drush mi:import sd_nodes_blog -- --update --force
 lando terminus drush mi:import sd_nodes_outreach2_article -- --update --force
 lando terminus drush mi:import sd_nodes_business_resource -- --update --force
 lando terminus drush mi:import sd_nodes_registration -- --update --force
+lando terminus drush mi:import sd_nodes_event -- --update --force
 
 Menu import:
 lando terminus drush import:menus
@@ -56,13 +57,9 @@ lando terminus drush import:registration
 Fix class names/HTML content cleanup:
 lando terminus drush import:class-fixes
 
-Data status: 9/26/2022
-
-Nodes:
+Node data status:
+**9/26/2022
 Bucket
-Department
-Department parent
-Location
 Slide
 Mayoral artifacts
 Outreach
@@ -72,22 +69,25 @@ Department document
 External data
 Date (Manually entered nodes as there were few and it was quicker to do so.)
 
-Data status: 2/6/2023
-
-Nodes:
-Blog
-Outreach2 Article
+**2/6/2023
 Business Resource
 Digital Archives Photos
-Event
 Gallery
 Registration
+
+**3/2/2023
+Blog
+Department
+Department parent
+Location
+Outreach2 Article
+Event
 
 Field groups:
 field_bucket_events_pi_coll
 field_bucket_featured_cards_coll
 field_bucket_featured_coll
-field_dept_resources_coll
+field_dept_resources_coll (updated 3/2)
 field_dept_par_social_links_coll
 field_location_exceptions_coll
 field_location_exceptions_coll2

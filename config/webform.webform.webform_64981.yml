@@ -1,0 +1,135 @@
+uuid: b7b39a4d-18cf-496a-9865-7dc24d614b86
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 50
+template: false
+archive: false
+id: webform_64981
+title: 'Request a Free Tree SD'
+description: null
+category: null
+elements: |
+  fieldset_owner_occupant_full_name:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Owner/Occupant Contact Information' 
+    '#description': ""
+    owner_occupant_first_name_12:
+      '#type': textfield
+      '#title': 'First Name:' 
+      '#description': ""
+      '#required': true
+    owner_occupant_last_name_12:
+      '#type': textfield
+      '#title': 'Last Name:' 
+      '#description': ""
+      '#required': true
+    email_address_12:
+      '#type': email
+      '#size': 20
+      '#title': 'Email Address' 
+      '#description': ""
+      '#required': true
+    phone_12:
+      '#type': textfield
+      '#title': 'Phone Number (format 999-999-9999)' 
+      '#description': ""
+      '#required': true
+    fieldset_address_where_tree_may_be_planted_12:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Address where tree may be planted' 
+      '#description': ""
+      street_3:
+        '#type': textfield
+        '#title': 'Street' 
+        '#description': ""
+        '#required': true
+      zip_code_3:
+        '#type': textfield
+        '#title': 'zip code' 
+        '#description': ""
+        '#required': true
+  fieldset_conditions_of_agreement:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Conditions of Agreement' 
+    '#description': "* You must accept the conditions of agreement to submit this request for a free tree. By clicking the box below, you agree to the watering schedule noted above AND that the property for which you are requesting a tree, is in the City of San Diego limits.\n\n"
+    accept_agreement_13:
+      '#description': "<span style='color:#ff0000;'>*</span> Yes, I accept the conditions of agreement \n"
+      '#type': checkbox
+      '#options':
+        accept_agreement : '<span style="color:#ff0000;">*</span> Yes, I accept the conditions of agreement'
+      '#multiple': true
+      '#title_display': invisible
+      '#title': 'Yes, I accept ' 
+      '#description': ""
+      '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<p>Thank you for your interest in the free tree program.&nbsp; Someone will contact you at the email address provided.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Request a tree'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: tsw_freetrees@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email_address:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '[webform_submission:values:owner_occupant_first_name:raw]'
+      body: |
+        Submitted on [webform_submission:date:long]
+
+        Submitted values are:
+        [webform_submission:values]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

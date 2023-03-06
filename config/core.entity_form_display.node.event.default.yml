@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.node.event.body
+    - field.field.node.event.field_address_pin
+    - field.field.node.event.field_d7_nid
     - field.field.node.event.field_department
     - field.field.node.event.field_edit_notes
     - field.field.node.event.field_event_activity_desc
@@ -43,10 +45,13 @@ dependencies:
     - field.field.node.event.field_type_of_event
     - field.field.node.event.field_website
     - node.type.event
+    - workflows.workflow.editorial
   module:
     - address
     - conditional_fields
+    - content_moderation
     - field_group
+    - geofield
     - link
     - media_library
     - path
@@ -97,6 +102,7 @@ third_party_settings:
     group_location:
       children:
         - field_event_location
+        - field_address_pin
         - field_event_do_not_show_map
         - field_event_no_show_social_media
         - field_event_no_show_add_to_cal
@@ -171,7 +177,7 @@ third_party_settings:
       label: 'Update Notes'
       region: content
       parent_name: ''
-      weight: 51
+      weight: 17
       format_type: details_sidebar
       format_settings:
         classes: ''
@@ -202,6 +208,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_address_pin:
+    type: geofield_latlon
+    weight: 20
+    region: content
+    settings:
+      html5_geolocation: false
+    third_party_settings: {  }
   field_department:
     type: term_reference_fancytree
     weight: 25
@@ -220,7 +233,7 @@ content:
     third_party_settings: {  }
   field_event_activity_desc:
     type: string_textarea
-    weight: 40
+    weight: 41
     region: content
     settings:
       rows: 5
@@ -228,14 +241,14 @@ content:
     third_party_settings: {  }
   field_event_activity_seq_num:
     type: number
-    weight: 34
+    weight: 35
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_event_activity_type_cd:
     type: options_select
-    weight: 35
+    weight: 36
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -247,7 +260,7 @@ content:
     third_party_settings: {  }
   field_event_cost_txt:
     type: string_textfield
-    weight: 39
+    weight: 40
     region: content
     settings:
       size: 60
@@ -281,7 +294,7 @@ content:
           YEARLY: YEARLY
   field_event_do_not_show_map:
     type: boolean_checkbox
-    weight: 20
+    weight: 21
     region: content
     settings:
       display_label: true
@@ -295,21 +308,21 @@ content:
     third_party_settings: {  }
   field_event_expected_attendance:
     type: number
-    weight: 41
+    weight: 42
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_event_expected_participant:
     type: number
-    weight: 42
+    weight: 43
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_event_host_nm:
     type: string_textfield
-    weight: 44
+    weight: 45
     region: content
     settings:
       size: 60
@@ -323,7 +336,7 @@ content:
     third_party_settings: {  }
   field_event_location_txt:
     type: string_textarea
-    weight: 37
+    weight: 38
     region: content
     settings:
       rows: 5
@@ -331,7 +344,7 @@ content:
     third_party_settings: {  }
   field_event_management_cd:
     type: string_textfield
-    weight: 36
+    weight: 37
     region: content
     settings:
       size: 60
@@ -339,7 +352,7 @@ content:
     third_party_settings: {  }
   field_event_media_contact_txt:
     type: string_textfield
-    weight: 48
+    weight: 49
     region: content
     settings:
       size: 60
@@ -347,28 +360,28 @@ content:
     third_party_settings: {  }
   field_event_no_show_add_to_cal:
     type: boolean_checkbox
-    weight: 22
+    weight: 23
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_event_no_show_social_media:
     type: boolean_checkbox
-    weight: 21
+    weight: 22
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_event_no_show_time:
     type: boolean_checkbox
-    weight: 23
+    weight: 24
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_event_non_public_contact:
     type: string_textfield
-    weight: 47
+    weight: 48
     region: content
     settings:
       size: 60
@@ -376,7 +389,7 @@ content:
     third_party_settings: {  }
   field_event_organizer_nm:
     type: string_textfield
-    weight: 45
+    weight: 46
     region: content
     settings:
       size: 60
@@ -384,7 +397,7 @@ content:
     third_party_settings: {  }
   field_event_public_contact_txt:
     type: string_textfield
-    weight: 46
+    weight: 47
     region: content
     settings:
       size: 60
@@ -392,21 +405,21 @@ content:
     third_party_settings: {  }
   field_event_public_visibility:
     type: boolean_checkbox
-    weight: 50
+    weight: 51
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_event_seq_num:
     type: number
-    weight: 33
+    weight: 34
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_event_setup_dt:
     type: smartdate_inline
-    weight: 43
+    weight: 44
     region: content
     settings:
       modal: false
@@ -423,14 +436,14 @@ content:
     third_party_settings: {  }
   field_event_setup_end_time_ind:
     type: boolean_checkbox
-    weight: 31
+    weight: 32
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_event_setup_start_time_ind:
     type: boolean_checkbox
-    weight: 32
+    weight: 33
     region: content
     settings:
       display_label: true
@@ -470,7 +483,7 @@ content:
             selector: ''
   field_event_vendor_contact_txt:
     type: string_textfield
-    weight: 49
+    weight: 50
     region: content
     settings:
       size: 60
@@ -478,7 +491,7 @@ content:
     third_party_settings: {  }
   field_evet_pin_address:
     type: string_textfield
-    weight: 38
+    weight: 39
     region: content
     settings:
       size: 60
@@ -568,7 +581,7 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -651,4 +664,5 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_d7_nid: true
