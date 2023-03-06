@@ -1,0 +1,715 @@
+uuid: ed495a68-c20b-4083-a237-8e9160c5796c
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_60683
+title: 'Get It Done - DSD'
+description: null
+category: null
+elements: |
+  get_it_done:
+    '#type': hidden
+    '#default_value': 'TRUE' 
+    '#title': 'get_it_done' 
+    '#description': ""
+  fieldset_step_1:
+    '#type': fieldset
+    '#open': true
+    '#title': 'I Need To...' 
+    '#description': ""
+    i_need_to_2:
+      '#type': select
+      '#options':
+        apply: 'Apply for'
+        find: 'Find/View'
+        pay: 'Pay'
+        register: 'Register'
+        report: 'Report'
+        request: 'Request'
+        contact: 'Contact'
+        schedule: 'Schedule'
+      '#default_value': 'apply' 
+      '#title_display': invisible
+      '#title': 'I need to' 
+      '#description': ""
+  fieldset_apply_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Apply for...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: apply
+          
+    apply_4:
+      '#type': select
+      '#options':
+        apply_permit: 'Permit'
+        apply_permit_ext: 'Permit Extension'
+        apply_permit_appl_ext: 'Permit Application Extension'
+      '#default_value': 'apply_permit' 
+      '#title_display': invisible
+      '#title': 'Apply for' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: apply
+            
+  fieldset_find_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Find/View...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: find
+          
+    find_45:
+      '#type': select
+      '#options':
+        find_building_records: 'Building Records'
+        find_ceqa: 'CEQA/Environmental'
+        find_code_enf_cases: 'Code Enforcement Cases'
+        find_fee_schedules: 'Fee Schedules'
+        find_forms: 'Forms'
+        find_permits: 'Existing Permits'
+        find_historical_reviews: 'Historical Reviews'
+        find_info_bulletins: 'Information Bulletins'
+        find_Invoices: 'Invoices'
+        find_hours: 'Office Hours'
+        find_office_locations: 'Office Locations'
+        find_plan_templates: 'Plan Templates'
+        find_projects: 'Projects'
+        find_special_inspections: 'Special Inspections'
+        find_submittal_reqs: 'Submittal Requirements'
+        zoning_info: 'Zoning Information for Properties'
+      '#default_value': 'find_building_records' 
+      '#title_display': invisible
+      '#title': 'Find' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: find
+            
+  fieldset_pay_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Pay...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: pay
+          
+    pay_8:
+      '#type': select
+      '#options':
+        pay_invoice: 'Invoice'
+        pay_property_fee: 'Property Value & Protection Ordinance Registration Fee'
+      '#default_value': 'pay_invoice' 
+      '#title_display': invisible
+      '#title': 'Pay' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: pay
+            
+  fieldset_register_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Register...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: register
+          
+    register_99:
+      '#type': select
+      '#options':
+        reg_certification: 'Certification'
+        reg_pvpor: 'Property Value and Protection Ordinance Registration'
+        reg_special_inspector: 'Special Inspector'
+      '#default_value': 'reg_certification' 
+      '#title_display': invisible
+      '#title': 'Register' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: register
+            
+  fieldset_report_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Report...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: report
+          
+    report_12:
+      '#type': select
+      '#options':
+        report_code_violation: 'Code Violation'
+      '#default_value': 'report_code_violation' 
+      '#title_display': invisible
+      '#title': 'Report' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: report
+            
+  fieldset_request_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Request...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: request
+          
+    request_109:
+      '#type': select
+      '#options':
+        project_status: 'Project Status'
+        refund: 'Refund'
+      '#default_value': 'project_status' 
+      '#title_display': invisible
+      '#title': 'Request' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: request
+            
+  fieldset_contact_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: contact
+          
+    contact_14:
+      '#type': select
+      '#options':
+        contact_inspector: 'Inspector'
+        contact_plan_reviewer: 'Plan Reviewer'
+        contact_staff: 'Staff Member'
+      '#default_value': 'contact_staff' 
+      '#title_display': invisible
+      '#title': 'Contact' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: contact
+            
+  fieldset_schedule_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Schedule...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: schedule
+          
+    schedule_86:
+      '#type': select
+      '#options':
+        schedule_appointment: 'Appointment'
+        schedule_inspection: 'Inspection'
+        schedule_enhanced: 'Enhanced Inspection'
+      '#default_value': 'schedule_appointment' 
+      '#title_display': invisible
+      '#title': 'Schedule' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: schedule
+            
+  fieldset_apply_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Apply Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: apply
+          
+    apply_permit_18:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Apply for a permit</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' href='/development-services/permits'>Apply<span class='visuallyhidden'> for a permit</span> Now</a></div>\n</div>"
+      '#title': 'Permit' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: apply_permit
+            
+    apply_permit_ext_18:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='twelve columns'>\n<p class='l-padding-desktop-ts'>Please select:</p>\n<ul>\n<li><a href='/sites/default/files/dsdib117.pdf'>Building Permit Extension</a></li>\n<li><a href='/sites/default/files/legacy/development-services/pdf/industry/forms/ds340.pdf'>Grading/Right-of-Way Permit Extension</a></li>\n</ul>\n</div>\n</div>"
+      '#title': 'Permit Extension' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: apply_permit_ext
+            
+    apply_appl_permit_ext_18:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='twelve columns'>\n<p class='l-padding-desktop-ts'>Please select:</p>\n<ul>\n<li><a href='/sites/default/files/dsdds4102.pdf'>Building Permit Application Extension</a></li>\n<li><a href='/sites/default/files/dsdds4100.pdf'>Grading/Right-of Way/Mapping Application Extension</a></li>\n</ul>\n</div>\n</div>"
+      '#title': 'Permit Application Extension' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: apply_permit_appl_ext
+            
+  fieldset_find_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Find/View Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: find
+          
+    find_projects_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Find current project information</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Find current project information' href='/development-services/records'>Find Now</a></div>\n</div>"
+      '#title': 'Projects' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_projects
+            
+    find_ceqa_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Learn about the City's environmental review process in accordance with the California Environmental Quality Act (CEQA) and view Draft and Final Environmental Documents</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Learn about the City's environmental review process' href='/development-services/industry/erp'>View Now</a></div>\n</div>"
+      '#title': 'CEQA/Environmental' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_ceqa
+            
+    find_zoninginfo_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n	<div class='eight columns'>\n		<p class='l-padding-desktop-ts'>Find current zoning information for properties</p>\n	</div>\n\n	<div class='four columns'><a class='btn btn--wide' href='https://sandiego.maps.arcgis.com/apps/webappviewer/index.html?id=3057676023954a828ad92ef22b5ff349' title='Find zoning information for properties'>Find Now</a></div>\n</div>\n"
+      '#title': 'Zoning Information for Properties ' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: zoning_info
+            
+    find_building_records_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Find existing building records</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Find existing building records' href='/development-services/records/request-form'>Find Now</a></div>\n</div>"
+      '#title': 'Building Records' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_building_records
+            
+    find_fee_schedules_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>View fee schedules from Development Services</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='View fee schedules from Development Services' href='/development-services/fees'>View Now</a></div>\n</div>"
+      '#title': 'Fee Schedules' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_fee_schedules
+            
+    find_existing_permits_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Find existing permit information</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Find existing permit information' href='/development-services/permits'>Find Now</a></div>\n</div>"
+      '#title': 'Existing Permits' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_permits
+            
+    find_code_enf_cases_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Find code enforcement cases</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Find code enforcement cases' href='https://opendsd.sandiego.gov/web/cecases/'>Find Now</a></div>\n</div>"
+      '#title': 'Code Enforcement Cases' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_code_enf_cases
+            
+    find_plan_templates_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>View plan templates</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='View plan templates' href='/development-services/forms-publications/design-guidelines-templates'>View Now</a></div>\n</div>"
+      '#title': 'Plan Templates' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_plan_templates
+            
+    find_submittal_reqs_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Find submittal requirements for permits</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Find submittal requirements for permits' href='/development-services/codes-regulations/project-submittal-manual'>Find Now</a></div>\n</div>"
+      '#title': 'Submittal Requirements' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_submittal_reqs
+            
+    find_info_bulletins_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Find information bulletins from Development Services</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Find information bulletins from Development Services' href='/development-services/forms-publications/information-bulletins'>Find Now</a></div>\n</div>"
+      '#title': 'Information Bulletins' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_info_bulletins
+            
+    find_forms_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Find a Development Services or Code Enforcement form</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Find a form' href='/development-services/forms-publications/forms'>Find Now</a></div>\n</div>"
+      '#title': 'Forms' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_forms
+            
+    find_office_locs_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>View office locations</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='View office locations' href='/development-services/locations-hours'>View Now</a></div>\n</div>"
+      '#title': 'Office Locations' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_office_locations
+            
+    find_office_hours_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>View office hours</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='View office hours' href='/development-services/locations-hours'>View Now</a></div>\n</div>"
+      '#title': 'Office Hours' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_hours
+            
+    find_invoices_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Find invoices for permits</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Find invoices for permits' href='https://opendsd.sandiego.gov/web/invoices/'>Find Now</a></div>\n</div>"
+      '#title': 'Invoices' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_Invoices
+            
+    find_special_inspection_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>View information about Special Inspections</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='View information about Special Inspections' href='/development-services/inspections/special'>View Now</a></div>\n</div>"
+      '#title': 'Special Inspection' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_special_inspections
+            
+    find_historical_reviews_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>View current Historical Reviews</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='View current historical reviews' href='/development-services/news-programs/historical-resources/reviews-over-45'>View Now</a></div>\n</div>"
+      '#title': 'Historical Reviews' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_historical_reviews
+            
+  fieldset_payment_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Pay Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: pay
+          
+    pay_property_fee_26:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Pay Property Value &amp; Protection Ordinance (PVPO) Registration Fee</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Pay Property Value &amp; Proteciton Ordinance (PVPO) Registration Fee' href='/sites/default/files/legacy/ced/pdf/pvporegform.pdf '>Pay Now</a></div>\n</div>"
+      '#title': 'Property Value & Protection Ordinance Registration Fee' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="pay_8"]':
+            value: pay_property_fee
+            
+    pay_invoices_26:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Pay invoices for permits</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Pay invoices for permits' href='/development-services/fees'>Pay Now</a></div>\n</div>"
+      '#title': 'Invoices' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="pay_8"]':
+            value: pay_invoice
+            
+  fieldset_register_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Register Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: register
+          
+    reg_pvpor_101:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Register property per the Property Value and Protection Ordinance (PVPO) requirements</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' href='/sites/default/files/legacy/ced/pdf/pvporegform.pdf'>Register<span class='visuallyhidden'> property per the Property Value and Protection Ordinance (PVPO) requirements</span> Now</a></div>\n</div>"
+      '#title': 'Property Value and Protection Ordinance Registration' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="register_99"]':
+            value: reg_pvpor
+            
+    reg_special_inspector_101:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Register as a special inspector, renew registration, or add new classification</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' href='/sites/default/files/dsdds320.pdf'>Register<span class='visuallyhidden'> as a special inspector, renew registration, or add new classification</span> Now</a></div>\n</div>"
+      '#title': 'Special Inspector ' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="register_99"]':
+            value: reg_special_inspector
+            
+    reg_certification_101:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='twelve columns'>\n<p class='l-padding-desktop-ts'>Register for professional certification for:</p>\n<ul class='l-margin-bd'>\n<li>Discretionary Completeness Review</li>\n<li>Solar Photovoltaic Plan Review</li>\n</ul>\n<p class='text-center'><a class='btn' href='/development-services/news/events'>Register<span class='visuallyhidden'> for professional certification</span> Now</a></p>\n</div>\n</div>"
+      '#title': 'Certification' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="register_99"]':
+            value: reg_certification
+            
+  fieldset_report_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Report Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: report
+          
+    report_code_violation_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Report a code violation (building or zoning) on private property</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Report a code violation (building or zoning) on private property' href='/development-services/code-enforcement'>Report Now</a></div>\n</div>"
+      '#title': 'Code Violation' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: report_code_violation
+            
+  fieldset_request_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Request Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: request
+          
+    request_project_status_111:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Request the status of a project</p>\n</div>\n<div class='four columns'><a class='btn btn--wide popup-modal' title='Request the status of a project' href='#project-modal'>Request Now</a></div>\n</div>"
+      '#title': 'Project Status' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="request_109"]':
+            value: project_status
+            
+    request_refund_111:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Request a refund for fees charged</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Request a refund for fees charged' href='https://sandiego.seamlessdocs.com/f/ds721'>Request Now</a></div>\n</div>"
+      '#title': 'Refund' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="request_109"]':
+            value: refund
+            
+  fieldset_contact_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: contact
+          
+    contact_staff_member_34:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Contact a staff member in Development Services</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Contact a staff member in Development Services' href='http://webapps.sandiego.gov/DSD/DSDEmployeeDirectory.aspx' target='_blank'>View Staff Directory</a></div>\n</div>"
+      '#title': 'Staff Member' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="contact_14"]':
+            value: contact_staff
+            
+    contact_plan_reviewer_34:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Contact a plan reviewer in Development Services</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Contact a plan reviewer in Development Services' href='http://webapps.sandiego.gov/DSD/DSDEmployeeDirectory.aspx' target='_blank'>View Staff Directory</a></div>\n</div>"
+      '#title': 'Plan Reviewer' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="contact_14"]':
+            value: contact_plan_reviewer
+            
+    contact_inspector_34:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Contact an inspector in Development Services</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Contact an inspector in Development Services' href='http://webapps.sandiego.gov/DSD/DSDEmployeeDirectory.aspx' target='_blank'>View Staff Directory</a></div>\n</div>"
+      '#title': 'Inspector' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="contact_14"]':
+            value: contact_inspector
+            
+  fieldset_schedule_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Schedule Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: schedule
+          
+    schedule_inspection_94:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Schedule an inspection</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Schedule an inspection' href='/development-services/inspections'>Schedule Now</a></div>\n</div>"
+      '#title': 'Inspection' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="schedule_86"]':
+            value: schedule_inspection
+            
+    schedule_appointment_94:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='twelve columns'>\n<p class='l-padding-desktop-ts'>Call <strong>619-446-5300</strong></p>\n<p>NOTE: The following services require appointments:</p>\n<ul>\n<li>permits for single-family room additions</li>\n<li>master plans</li>\n<li>plan re-checks (please call the phone number listed on your 'Issues Report')</li>\n</ul>\n</div>\n</div>"
+      '#title': 'Appointment' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="schedule_86"]':
+            value: schedule_appointment
+            
+    schedule_enhanced_94:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n	<div class='eight columns'>\n		<p class='l-padding-desktop-ts'>Schedule an Enhanced Inspection</p>\n	</div>\n\n	<div class='four columns'><a class='btn btn--wide' href='https://sandiego.seamlessdocs.com/f/ds167' title='Schedule an enhanced inspection'>Schedule Now</a></div>\n</div>\n"
+      '#title': 'Enhanced Inspection' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="schedule_86"]':
+            value: schedule_enhanced
+            
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers: {  }
+variants: {  }
