@@ -484,22 +484,21 @@ class CustomCommands extends DrushCommands {
       fgets($file);
       while ($data = fgetcsv($file)) {
         $nodedata[str_replace('`', '', $data[0])] = [
-          'path' => str_replace('`', '', $data[1]),
-          'resources' => str_replace('`', '', $data[2]),
-          'department' => str_replace('`', '', $data[3]),
-          'category' => str_replace('`', '', $data[4]),
-          'search_keymatch' => str_replace('`', '', $data[5]),
-          'image_department' => str_replace('`', '', $data[6]),
-          'image_license' => str_replace('`', '', $data[7]),
-          'image_alt' => str_replace('`', '', $data[8]),
-          'image_d7id' => str_replace('`', '', $data[9]),
-          'image_path' => str_replace('`', '', $data[10]),
-          'social_links' => str_replace('`', '', $data[15]),
-          'featured_image_department' => str_replace('`', '', $data[16]),
-          'featured_image_license' => str_replace('`', '', $data[17]),
-          'featured_image_alt' => str_replace('`', '', $data[18]),
-          'featured_image_d7id' => str_replace('`', '', $data[19]),
-          'featured_image_path' => str_replace('`', '', $data[20]),
+          'resources' => str_replace('`', '', $data[1]),
+          'department' => explode('|', str_replace('`', '', $data[2])),
+          'category' => explode('|', str_replace('`', '', $data[3])),
+          'search_keymatch' => explode('|', str_replace('`', '', $data[4])),
+          'image_department' => str_replace('`', '', $data[5]),
+          'image_license' => str_replace('`', '', $data[6]),
+          'image_alt' => str_replace('`', '', $data[7]),
+          'image_d7id' => str_replace('`', '', $data[8]),
+          'image_path' => str_replace('`', '', $data[9]),
+          'social_links' => str_replace('`', '', $data[14]),
+          'featured_image_department' => str_replace('`', '', $data[15]),
+          'featured_image_license' => str_replace('`', '', $data[16]),
+          'featured_image_alt' => str_replace('`', '', $data[17]),
+          'featured_image_d7id' => str_replace('`', '', $data[18]),
+          'featured_image_path' => str_replace('`', '', $data[19]),
         ];
       }
       fclose($file);
@@ -545,12 +544,6 @@ class CustomCommands extends DrushCommands {
       $nid = reset($query->execute());
       $node = Node::load($nid);
 
-      // Set alias.
-      $node->path = [
-        'alias' => $data['path'],
-        'pathauto' => PathautoState::SKIP,
-      ];
-
       // Create and set resource paragraph.
       if (!empty($data['resources']) && isset($resourcedata[$data['resources']])) {
         $resource = $resourcedata[$data['resources']];
@@ -590,96 +583,131 @@ class CustomCommands extends DrushCommands {
 
       // Create (if not pre-existing) and set image.
       if (!empty($data['image_path'])) {
-        $prior_image = $this->checkMediaId($data['image_d7id']);
-        if ($prior_image == NULL) {
-          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
-          $file_data = file_get_contents($remote_file);
-          // Fixes for irregular paths.
-          $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
-          $local_destination = str_replace('default_images', '', $local_destination);
-          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
-          $local_destination = str_replace('public://', '', $local_destination);
-          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
-          $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
-
+        $image = NULL;
+        if (str_starts_with($data['image_path'], 'youtube://')) {
+          $youtube = str_replace('youtube://v/', 'https://www.youtube.com/watch?v=', $data['image_path']);
           $image = Media::create([
-            'bundle' => 'image',
+            'bundle' => 'remote_video',
             'uid' => 0,
-            'field_media_image' => [
-              'target_id' => $local_file->id(),
-              'alt' => $data['image_alt']
-            ],
-            'field_d7_mid' => $data['image_d7id'],
+            'field_media_oembed_video' => $youtube,
           ]);
-          if (!empty($data['image_license'])) {
-            $image->field_license = $data['image_license'];
-          }
-          foreach ($image_department as $department) {
-            $image->field_department->appendItem([
-              'target_id' => $department,
-            ]);
-          }
           $image->save();
         }
         else {
-          $image = Media::load($prior_image);
+          $prior_image = $this->checkMediaId($data['image_d7id']);
+          if ($prior_image == NULL) {
+            $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
+            $file_data = file_get_contents($remote_file);
+            // Fixes for irregular paths.
+            $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
+            $local_destination = str_replace('default_images', '', $local_destination);
+            $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+            $local_destination = str_replace('public://', '', $local_destination);
+            $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+            $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
+
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $data['image_alt']
+              ],
+              'field_d7_mid' => $data['image_d7id'],
+            ]);
+            if (!empty($data['image_license'])) {
+              $image->field_license = $data['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+          }
+          else {
+            $image = Media::load($prior_image);
+          }
         }
         $node->field_image = $image;
       }
       // Create (if not pre-existing) and set image.
-      if (!empty($data['featured_image_path']) && strpos('youtube://', $data['featured_image_path']) < 0) {
-        // TODO: Youtube?
-        $prior_image = $this->checkMediaId($data['featured_image_d7id']);
-        if ($prior_image == NULL) {
-          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['featured_image_path']);
-          $file_data = file_get_contents($remote_file);
-          // Fixes for irregular paths.
-          $local_destination = str_replace('legacy/police/graphics', '', $data['featured_image_path']);
-          $local_destination = str_replace('default_images', '', $local_destination);
-          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
-          $local_destination = str_replace('public://', '', $local_destination);
-          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
-          $image_department = [$this->taxonomyImportTasks->newTid($data['featured_image_department'], 'department')];
-
+      if (!empty($data['featured_image_path'])) {
+        $image = NULL;
+        if (str_starts_with($data['featured_image_path'], 'youtube://')) {
+          $youtube = str_replace('youtube://v/', 'https://www.youtube.com/watch?v=', $data['featured_image_path']);
           $image = Media::create([
-            'bundle' => 'image',
+            'bundle' => 'remote_video',
             'uid' => 0,
-            'field_media_image' => [
-              'target_id' => $local_file->id(),
-              'alt' => $data['featured_image_alt']
-            ],
-            'field_d7_mid' => $data['featured_image_d7id'],
+            'field_media_oembed_video' => $youtube,
           ]);
-          if (!empty($data['featured_image_license'])) {
-            $image->field_license = $data['featured_image_license'];
-          }
-          foreach ($image_department as $department) {
-            $image->field_department->appendItem([
-              'target_id' => $department,
-            ]);
-          }
           $image->save();
         }
         else {
-          $image = Media::load($prior_image);
+          $prior_image = $this->checkMediaId($data['featured_image_d7id']);
+          if ($prior_image == NULL) {
+            $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['featured_image_path']);
+            $file_data = file_get_contents($remote_file);
+            // Fixes for irregular paths.
+            $local_destination = str_replace('legacy/police/graphics', '', $data['featured_image_path']);
+            $local_destination = str_replace('legacy/humanresources/graphics', '', $local_destination);
+            $local_destination = str_replace('legacy/riskmanagement/graphics', '', $local_destination);
+            $local_destination = str_replace('legacy/empopp/graphics', '', $local_destination);
+            $local_destination = str_replace('legacy/petcopark/graphics', '', $local_destination);
+            $local_destination = str_replace('legacy/planning-commission/graphics', '', $local_destination);
+            $local_destination = str_replace('default_images', '', $local_destination);
+            $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+            $local_destination = str_replace('legacy/parkandrecboard/graphics', '', $local_destination);
+            $local_destination = str_replace('public://', '', $local_destination);
+            $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+            $image_department = [$this->taxonomyImportTasks->newTid($data['featured_image_department'], 'department')];
+
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $data['featured_image_alt']
+              ],
+              'field_d7_mid' => $data['featured_image_d7id'],
+            ]);
+            if (!empty($data['featured_image_license'])) {
+              $image->field_license = $data['featured_image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+          }
+          else {
+            $image = Media::load($prior_image);
+          }
         }
         $node->field_feature_video_img = $image;
       }
       // Set three taxonomies.
       $node->field_department->setValue([]);
-      foreach (explode(' |', $data['department']) as $department) {
-        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
-        $node->field_department->appendItem($term);
+      if (!empty($data['department'])) {
+        foreach ($data['department'] as $department) {
+          $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+          $node->field_department->appendItem($term);
+        }
       }
       $node->field_category->setValue([]);
-      foreach (explode('|', $data['category']) as $category) {
-        $term = Term::load($this->taxonomyImportTasks->newTid($category, 'categories'));
-        $node->field_category->appendItem($term);
+      if (!empty($data['category'])) {
+        foreach ($data['category'] as $category) {
+          $term = Term::load($this->taxonomyImportTasks->newTid($category, 'categories'));
+          $node->field_category->appendItem($term);
+        }
       }
       $node->field_search_keymatch->setValue([]);
-      foreach (explode('|', $data['search_keymatch']) as $search_keymatch) {
-        $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
-        $node->field_search_keymatch->appendItem($term);
+      if (!empty($data['search_keymatch'])) {
+        foreach ($data['search_keymatch'] as $search_keymatch) {
+          $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
+          $node->field_search_keymatch->appendItem($term);
+        }
       }
 
       $node->save();
@@ -1231,14 +1259,16 @@ class CustomCommands extends DrushCommands {
         $field_collection_id = str_replace('"', '', $data[3]);
         if (array_key_exists($field_collection_id, $exceptions)) {
           $extra_data = explode(';', str_replace('"', '', $data[9]));
-          $recur_interval = str_replace('RRULE:FREQ=', '', $extra_data[0]);
-          $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
-          $nodedata_exceptions[$exceptions[$field_collection_id]['entity_id']][$exceptions[$field_collection_id]['delta']] = [
-            'start' => str_replace('"', '', $data[7]),
-            'end' => str_replace('"', '', $data[8]),
-            'recur_number' => $recur_number,
-            'recur_interval' => $recur_interval,
-          ];
+          if (array_key_exists(1, $extra_data)) {
+            $recur_interval = str_replace('RRULE:FREQ=', '', $extra_data[0]);
+            $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
+            $nodedata_exceptions[$exceptions[$field_collection_id]['entity_id']][$exceptions[$field_collection_id]['delta']] = [
+              'start' => str_replace('"', '', $data[7]),
+              'end' => str_replace('"', '', $data[8]),
+              'recur_number' => $recur_number,
+              'recur_interval' => $recur_interval,
+            ];
+          }
         }
       }
       fclose($file);
@@ -1248,14 +1278,16 @@ class CustomCommands extends DrushCommands {
           $field_collection_id = str_replace('"', '', $data[3]);
           if (array_key_exists($field_collection_id, $exceptions2)) {
             $extra_data = explode(';', str_replace('"', '', $data[9]));
-            $recur_interval = str_replace('RRULE:FREQ=', '', $extra_data[0]);
-            $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
-            $nodedata_exceptions2[$exceptions2[$field_collection_id]['entity_id']][$exceptions2[$field_collection_id]['delta']] = [
-              'start' => str_replace('"', '', $data[7]),
-              'end' => str_replace('"', '', $data[8]),
-              'recur_number' => $recur_number,
-              'recur_interval' => $recur_interval,
-            ];
+            if (array_key_exists(1, $extra_data)) {
+              $recur_interval = str_replace('RRULE:FREQ=', '', $extra_data[0]);
+              $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
+              $nodedata_exceptions2[$exceptions2[$field_collection_id]['entity_id']][$exceptions2[$field_collection_id]['delta']] = [
+                'start' => str_replace('"', '', $data[7]),
+                'end' => str_replace('"', '', $data[8]),
+                'recur_number' => $recur_number,
+                'recur_interval' => $recur_interval,
+              ];
+            }
           }
         }
         fclose($file);
@@ -1287,70 +1319,86 @@ class CustomCommands extends DrushCommands {
       $hours = [];
       foreach ($data['hours'] as $hour_row) {
         $hour_row = explode(';', $hour_row);
-        $day = $hour_row[0];
-        $hour_row = explode('~', $hour_row[1]);
-        $starthours = str_replace(':', '', $hour_row[0]);
-        $endhours = str_replace(':', '', $hour_row[1]);
-        $hours[] = [
-          'day' => $day,
-          'starthours' => $starthours,
-          'endhours' => $endhours,
-          'comment' => '',
-        ];
+        if (array_key_exists(1, $hour_row)) {
+          $day = $hour_row[0];
+          $hour_row = explode('~', $hour_row[1]);
+          $starthours = str_replace(':', '', $hour_row[0]);
+          $endhours = str_replace(':', '', $hour_row[1]);
+          $hours[] = [
+            'day' => $day,
+            'starthours' => $starthours,
+            'endhours' => $endhours,
+            'comment' => '',
+          ];
+        }
       }
       $secondary_hours = [];
       foreach ($data['secondary_hours'] as $hour_row) {
         $hour_row = explode(';', $hour_row);
-        $day = $hour_row[0];
-        $hour_row = explode('~', $hour_row[1]);
-        $starthours = str_replace(':', '', $hour_row[0]);
-        $endhours = str_replace(':', '', $hour_row[1]);
-        $secondary_hours[] = [
-          'day' => $day,
-          'starthours' => $starthours,
-          'endhours' => $endhours,
-          'comment' => '',
-        ];
+        if (array_key_exists(1, $hour_row)) {
+          $day = $hour_row[0];
+          $hour_row = explode('~', $hour_row[1]);
+          $starthours = str_replace(':', '', $hour_row[0]);
+          $endhours = str_replace(':', '', $hour_row[1]);
+          $secondary_hours[] = [
+            'day' => $day,
+            'starthours' => $starthours,
+            'endhours' => $endhours,
+            'comment' => '',
+          ];
+        }
       }
       $node->field_location_hours = $hours;
       $node->field_location_hours2 = $secondary_hours;
 
       $node->field_restrictions = [];
       foreach ($data['restrictions'] as $restriction) {
-        $paragraph = Paragraph::create([
-          'type' => 'amenities_restrictions',
-          'field_description' => $ardata[$restriction]['description'],
-          'field_icon' => $ardata[$restriction]['icon'],
-          'field_title' => $ardata[$restriction]['title'],
-        ]);
-        $paragraph->save();
-        $node->field_restrictions[] = $paragraph;
+        if (array_key_exists($restriction, $ardata)) {
+          $paragraph = Paragraph::create([
+            'type' => 'amenities_restrictions',
+            'field_description' => $ardata[$restriction]['description'],
+            'field_icon' => $ardata[$restriction]['icon'],
+            'field_title' => $ardata[$restriction]['title'],
+          ]);
+          $paragraph->save();
+          $node->field_restrictions[] = $paragraph;
+        }
       }
 
       $node->field_amenities = [];
       foreach ($data['amenities'] as $amenity) {
-        $paragraph = Paragraph::create([
-          'type' => 'amenities_restrictions',
-          'field_description' => $ardata[$amenity]['description'],
-          'field_icon' => $ardata[$amenity]['icon'],
-          'field_title' => $ardata[$amenity]['title'],
-        ]);
-        $paragraph->save();
-        $node->field_amenities[] = $paragraph;
+        if (array_key_exists($amenity, $ardata)) {
+          $paragraph = Paragraph::create([
+            'type' => 'amenities_restrictions',
+            'field_description' => $ardata[$amenity]['description'],
+            'field_icon' => $ardata[$amenity]['icon'],
+            'field_title' => $ardata[$amenity]['title'],
+          ]);
+          $paragraph->save();
+          $node->field_amenities[] = $paragraph;
+        }
       }
 
       $node->field_resources = [];
       foreach ($data['resources'] as $resource) {
-        $paragraph = Paragraph::create([
-          'type' => 'resources',
-          'field_icon' => $resourcedata[$resource]['icon'],
-          'field_label' => $resourcedata[$resource]['label'],
-          'field_link' => [
-            'uri' => $resourcedata[$resource]['url'],
-          ],
-        ]);
-        $paragraph->save();
-        $node->field_resources[] = $paragraph;
+        if (array_key_exists($resource, $resourcedata)) {
+          if ($resourcedata[$resource]['url'] !== NULL) {
+            $uri = $resourcedata[$resource]['url'];
+            if (!str_starts_with($uri, 'http') && !str_starts_with($uri, '//')) {
+              $uri = 'internal:' . $uri;
+            }
+            $paragraph = Paragraph::create([
+              'type' => 'resources',
+              'field_icon' => $resourcedata[$resource]['icon'],
+              'field_label' => $resourcedata[$resource]['label'],
+              'field_link' => [
+                'uri' => $uri,
+              ],
+            ]);
+            $paragraph->save();
+            $node->field_resources[] = $paragraph;
+          }
+        }
       }
 
       $node->field_department->setValue([]);
