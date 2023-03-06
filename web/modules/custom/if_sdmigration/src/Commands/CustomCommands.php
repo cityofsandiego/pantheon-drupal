@@ -13,6 +13,7 @@ use Drupal\if_sdmigration\TaxonomyImportTasks;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\system\Entity\Menu;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\user\Entity\User;
 use Drush\Commands\DrushCommands;
 
 /**
@@ -2924,5 +2925,161 @@ class CustomCommands extends DrushCommands {
       $node->save();
       echo 'Saved D7 id: ' . $d7id . ' D9 id: ' . $node->id() . ' Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
     }
+  }
+
+  /**
+   * Import users
+   *
+   * @command import:users
+   *
+   * @usage import:users
+   */
+  public function importUsers() {
+    // Role mapping.
+    $roles = [];
+    $roles['content owner'] = 'content_owner';
+    $roles['Locations'] = 'locations';
+    $roles['administrator'] = 'administrator';
+    $roles['content editor'] = 'content_editor';
+    $roles['Outreach2 Article'] = 'outreach2_article';
+    $roles['Event'] = 'event';
+    $roles['Digital Archives Photos'] = 'digital_archives_photos';
+    $roles['webform results (view only)'] = 'webform_results';
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/users.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $users[str_replace('`', '', $data[0])] = [
+          'name' => str_replace('`', '', $data[1]),
+          'mail' => str_replace('`', '', $data[3]),
+          'created' => str_replace('`', '', $data[2]),
+          'roles' => explode('|', str_replace('`', '', $data[4])),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually add or update each user.
+    foreach ($users as $d7id => $userdata) {
+      // Load user (if existing).
+      $query = $this->entityTypeManager
+        ->getStorage('user')
+        ->getQuery();
+      $query->condition('field_d7_uid', $d7id);
+      $uid = reset($query->execute());
+      if (!empty($uid)) {
+        // user exists; update.
+        $user = $this->entityTypeManager->getStorage('user')->load($uid);
+        $user->setEmail($userdata['mail']);
+        $user->setUsername($userdata['name']);
+        $user->set('created', strtotime($userdata['created']));
+      }
+      else {
+        $user = User::create([
+          'name' => $userdata['name'],
+          'mail' => $userdata['mail'],
+          'field_d7_uid' => $d7id,
+          'created' => strtotime($userdata['created']),
+        ]);
+      }
+
+      // Manage user roles and department entity fields.
+      $user->set('field_department', []);
+      foreach($userdata['roles'] as $role_id) {
+        if (array_key_exists($role_id, $roles)) {
+          $user->addRole($roles[$role_id]);
+        }
+        if (str_starts_with($role_id, 'department - ')) {
+          $department = str_replace('department - ', '', $role_id);
+          // Switches because role name =/= taxonomy name.
+          if ($department == 'Homeless Services') {
+            $department = 'Homelessness Strategies and Solutions';
+          }
+          elseif ($department == 'Real Estate Assets') {
+            $department = 'Real Estate and Airport Management';
+          }
+          elseif ($department == 'City Council Offices') {
+            $department = 'City Council';
+          }
+          elseif ($department == 'Park and Recreation') {
+            $department = 'Parks & Recreation';
+          }
+          elseif ($department == 'Library') {
+            $department = 'Public Library';
+          }
+          elseif ($department == 'Personnel') {
+            $department = 'Personnel Department';
+          }
+          elseif ($department == 'Capital Improvements Program') {
+            $department = 'Capital Improvements Program (CIP)';
+          }
+          elseif ($department == 'Citizens\' Review Board on Police Practices') {
+            $department = 'Commission on Police Practices';
+          }
+          elseif ($department == 'Storm Water') {
+            $department = 'Stormwater';
+          }
+          elseif ($department == 'Homeland Security (Office of)') {
+            $department = 'Office of Emergency Services';
+          }
+          elseif ($department == 'Airports') {
+            $department = 'Airport Management';
+          }
+          elseif ($department == 'Public Works') {
+            $department = 'Z-Public Works (DO NOT USE)';
+          }
+          elseif ($department == 'San Diego Unmanned Aircraft Systems') {
+            $department = 'Z-San Diego Unmanned Aircraft Systems (DO NOT USE)';
+          }
+          elseif ($department == 'Reservoir Lakes') {
+            $department = 'Reservoirs and Lakes';
+          }
+          elseif ($department == 'Citizens Advisory Board On Police/Community Relatio') {
+            $department = 'Citizens Advisory Board On Police/Community Relations';
+          }
+          elseif ($department == 'Financial Management') {
+            $department = 'Z-Financial Management (DO NOT USE)';
+          }
+          elseif ($department == 'Office of the City Comptroller') {
+            $department = 'Z-Office of the City Comptroller (DO NOT USE)';
+          }
+          elseif ($department == 'A Department Taxonomy') {
+            continue;
+          }
+          if ($this->getTidByName($department) != 0) {
+            $user->field_department->appendItem($this->getTidByName($department));
+          }
+        }
+      }
+
+      // Save.
+      $user->save();
+    }
+  }
+
+  /**
+   * Utility: find term by name and vid.
+   *
+   * @param string $name
+   *   Term name.
+   *
+   * @param string $vid
+   *   Vocabulary id (default to department).
+   *
+   * @return int
+   *   Term id, or 0 if none.
+   */
+  public static function getTidByName($name = NULL, $vid = 'department') {
+    if (empty($name)) {
+      return 0;
+    }
+    $properties = [
+      'name' => $name,
+      'vid' => $vid,
+    ];
+    $terms = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term')->loadByProperties($properties);
+    $term = reset($terms);
+    return !empty($term) ? $term->id() : 0;
   }
 }
