@@ -3065,7 +3065,7 @@ class CustomCommands extends DrushCommands {
    *
    * @usage import:node-set-author
    */
-  public function setAuthor() {
+  public function setAuthor($d9id = 0) {
     // Get D9 and D7 UID lookup table.
     $uids = [];
     $query = $this->entityTypeManager
@@ -3097,9 +3097,11 @@ class CustomCommands extends DrushCommands {
     $query = $this->entityTypeManager
       ->getStorage('node')
       ->getQuery();
-    $query->condition('type', 'external_data', 'NOT IN');
+    $query->condition('type', 'external_data', 'NOT IN')
+      ->sort('nid', 'ASC');
     $nids = $query->execute();
     foreach ($nids as $nid) {
+      if ($nid < $d9id) continue;
       $node = Node::load($nid);
       if (!$node->hasField('field_d7_nid') || !array_key_exists(0, $node->get('field_d7_nid')->getValue())) {
         continue;
