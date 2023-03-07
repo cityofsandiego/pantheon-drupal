@@ -8,7 +8,7 @@ use Drupal\preprocess_event_dispatcher\Event\ParagraphPreprocessEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Preprocess paragraph: Sections
+ * Preprocess paragraph: Sections Outreach
  *
  * @package Drupal\if_components\EventSubscriber\Preprocess
  */
@@ -41,7 +41,7 @@ final class Sections implements EventSubscriberInterface {
   }
 
   /**
-   * Implements hook_preprocess_paragraph() for the section outreach 2.
+   * Implements hook_preprocess_paragraph() for the section Outreach.
    *
    *
    * @param \Drupal\preprocess_event_dispatcher\Event\ParagraphPreprocessEvent $event
@@ -64,9 +64,26 @@ final class Sections implements EventSubscriberInterface {
     }
 
     //Set values for image attributes in Twig template.
-    $field_minimum_height = $paragraph->field_minimum_height->value;
-    $min_height  = $field_minimum_height ? $field_minimum_height . 'px' : '300px';
+    $horizontal = '50';
+    $variables->set('percent_horizontal', $horizontal);
+
+    $vertical = '50';
+    $variables->set('percent_vertical', $vertical);
+
+    $vertical_offset = '';
+    $variables->set('vertical_offset', $vertical_offset);
+    
+    $min_height  =  '300px';
     $variables->set('min_height', $min_height);
+    
+    $adjustment_width  = '';
+    $variables->set('adjustment_width', $adjustment_width);
+    
+    $adjustment_height = '';
+    $variables->set('adjustment_height', $adjustment_height);
+    
+    $background_size = '';
+    $variables->set('background_size', $background_size);
 
     $field_bg_color = $paragraph->field_bg_color->value;
     $background_color = $field_bg_color ? '#' . $field_bg_color : '#FFF';
@@ -75,20 +92,10 @@ final class Sections implements EventSubscriberInterface {
     $field_image_scroll_ratio = $paragraph->field_image_scroll_ratio->value;
     $variables->set('scroll_ratio', $field_image_scroll_ratio);
 
-    // This should override full_width_mobile if that is set.
-    if ($paragraph->field_mobile_size->value) {
-      $field_mobile_size = $paragraph->field_mobile_size->value;
-      $variables->set('full_width_mobile', $field_mobile_size);
-    } else {
-      $field_full_width_mobile = $paragraph->field_full_width_mobile->value;
-      $full_width_mobile =  $field_full_width_mobile ? 'background-size: 100% auto' : '';
-      $variables->set('full_width_mobile', $full_width_mobile);
-    }
+    $field_full_width_mobile = $paragraph->field_full_width_mobile->value;
+    $full_width_mobile =  $field_full_width_mobile ? 'background-size: 100% auto' : '';
+    $variables->set('full_width_mobile', $full_width_mobile);
 
-    if ($paragraph->field_repeat->value) {
-      $variables->set('repeat', 'repeat-x');
-    } 
-  
     //Set text styles
     if ($paragraph->field_centered->value) {
       $variables->set('text_center', 'text-center');
