@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\sand;
+namespace Drupal\sand_remote;
 
 use Drupal\Core\Entity\ContentEntityBase;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\sand;
+namespace Drupal\sand_remote;
 
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Entity\EntityInterface;
@@ -409,7 +409,7 @@ class ExtractText {
     }
 
     $queue = \Drupal::service('queue')->get('sand_remote_queue');
-    $item = new \Drupal\sand\ExtractText();
+    $item = new ExtractText();
     $item->setEntityType($entity_type);
     $item->setEntityId($entity->id());
     $item->setSource($source);
