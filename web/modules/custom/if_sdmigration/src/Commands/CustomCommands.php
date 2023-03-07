@@ -3059,6 +3059,72 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   * Set author and remove &#44; from node titles.
+   *
+   * @command import:node-set-author
+   *
+   * @usage import:node-set-author
+   */
+  public function setAuthor() {
+    // Get D9 and D7 UID lookup table.
+    $uids = [];
+    $query = $this->entityTypeManager
+      ->getStorage('user')
+      ->getQuery();
+    $alluids = $query->execute();
+    foreach ($alluids as $uid) {
+      $user = User::load($uid);
+      if (!array_key_exists(0, $user->get('field_d7_uid')->getValue())) {
+        continue;
+      }
+      $d7id = $user->get('field_d7_uid')->getValue()[0]['value'];
+      $uids[$d7id] = $user->id();
+    }
+
+    // Read node author data
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/node-authors.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $authors[str_replace('`', '', $data[0])] = [
+          'd7_uid' => str_replace('`', '', $data[1]),
+          'updated' => str_replace('`', '', $data[2]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Update each node (except external data).
+    $query = $this->entityTypeManager
+      ->getStorage('node')
+      ->getQuery();
+    $query->condition('type', 'external_data', 'NOT IN');
+    $nids = $query->execute();
+    foreach ($nids as $nid) {
+      $node = Node::load($nid);
+      if (!$node->hasField('field_d7_nid') || !array_key_exists(0, $node->get('field_d7_nid')->getValue())) {
+        continue;
+      }
+      $d7id = $node->get('field_d7_nid')->getValue()[0]['value'];
+      $original_title = $node->getTitle();
+      $updated_title = str_replace('&#44;', ',', $original_title);
+      if ($original_title !== $updated_title || array_key_exists($d7id, $authors)) {
+        if ($original_title !== $updated_title) {
+          $node->setTitle($updated_title);
+        }
+        if (array_key_exists($d7id, $authors)) {
+          $author_info = $authors[$d7id];
+          $author_id = $uids[$author_info['d7_uid']];
+          $updated = strtotime($author_info['updated']);
+          $node->set('uid', $author_id);
+          $node->set('changed', $updated);
+        }
+        $node->save();
+        echo 'Saved: D7: ' . $d7id . ' | D9: ' . $node->id() . ' | Author ID: ' . $author_id . PHP_EOL;
+      }
+    }
+  }
+
+  /**
    * Utility: find term by name and vid.
    *
    * @param string $name
