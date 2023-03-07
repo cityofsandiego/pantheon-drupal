@@ -12,7 +12,7 @@ use Drupal\Core\Queue\QueueWorkerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Drupal\sand_remote\Entity\Sandremote;
-use Drupal\sand\ExtractText;
+use Drupal\sand_remote\ExtractText;
 
 /**
  * SandRemoteQueue Queue Worker.
