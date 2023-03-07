@@ -64,10 +64,10 @@ final class Sections implements EventSubscriberInterface {
     }
 
     //Set values for image attributes in Twig template.
-    $horizontal = '50';
+    $horizontal = '0';
     $variables->set('percent_horizontal', $horizontal);
 
-    $vertical = '50';
+    $vertical = '0';
     $variables->set('percent_vertical', $vertical);
 
     $vertical_offset = '';
