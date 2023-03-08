@@ -6,8 +6,11 @@ dependencies:
     - filter.format.full_html
     - node.type.slide
     - taxonomy.vocabulary.department
+    - user.role.administrator
   module:
+    - field_permissions
     - filter
+    - masquerade
     - node
     - taxonomy
 _core:
@@ -17,6 +20,9 @@ label: Administrator
 weight: 5
 is_admin: false
 permissions:
+  - 'create field_bucket'
+  - 'create field_d7_uid'
+  - 'create field_department'
   - 'create slide content'
   - 'create terms in department'
   - 'delete any slide content'
@@ -24,8 +30,21 @@ permissions:
   - 'delete slide revisions'
   - 'delete terms in department'
   - 'edit any slide content'
+  - 'edit field_bucket'
+  - 'edit field_d7_uid'
+  - 'edit field_department'
+  - 'edit own field_bucket'
+  - 'edit own field_d7_uid'
+  - 'edit own field_department'
   - 'edit own slide content'
   - 'edit terms in department'
+  - 'masquerade as administrator'
   - 'revert slide revisions'
   - 'use text format full_html'
+  - 'view field_bucket'
+  - 'view field_d7_uid'
+  - 'view field_department'
+  - 'view own field_bucket'
+  - 'view own field_d7_uid'
+  - 'view own field_department'
   - 'view slide revisions'
