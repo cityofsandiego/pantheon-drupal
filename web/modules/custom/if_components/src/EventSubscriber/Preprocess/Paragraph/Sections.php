@@ -8,7 +8,7 @@ use Drupal\preprocess_event_dispatcher\Event\ParagraphPreprocessEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Preprocess paragraph: Sections
+ * Preprocess paragraph: Sections Outreach
  *
  * @package Drupal\if_components\EventSubscriber\Preprocess
  */
@@ -32,21 +32,6 @@ final class Sections implements EventSubscriberInterface {
   }
 
   /**
-   * Text style.
-   *
-   * @var array
-   */
-  protected $textStyle = [];
-
-
-  /**
-   * Background image styles.
-   *
-   * @var array
-   */
-  protected $bgStyle = [];
-
-  /**
    * {@inheritdoc}
    */
   public static function getSubscribedEvents(): array {
@@ -56,7 +41,7 @@ final class Sections implements EventSubscriberInterface {
   }
 
   /**
-   * Implements hook_preprocess_paragraph() for the section outreach 2.
+   * Implements hook_preprocess_paragraph() for the section Outreach.
    *
    *
    * @param \Drupal\preprocess_event_dispatcher\Event\ParagraphPreprocessEvent $event
@@ -67,62 +52,53 @@ final class Sections implements EventSubscriberInterface {
 
     $paragraph = $variables->getParagraph();
 
-    // Reset styles since they seem to stick when there are multiple
-    // sections paragraphs on the page.
-    $this->bgStyle = [];
-    $this->textStyle = [];
+    // Preprocess image to get URL
+    if (!$paragraph->field_image->isEmpty()) {
+      $field_image = $paragraph->field_image->getValue();
 
-    // Preprocess background image attributes and style
-      if (!$paragraph->field_image->isEmpty()) {
-        // Preprocess image to get URL
-        $field_image = $paragraph->field_image->getValue();
+      $image = $this->entityTypeManager->getStorage('media')->load( $paragraph->get('field_image')->getValue()[0]['target_id']);
+      $fid = $image->getSource()->getSourceFieldValue($image);
+      $image_file = File::load($fid);
+      $url = $image_file->createFileUrl();
+      $variables->set('image_url', $url);
+    }
 
-        $image = $this->entityTypeManager->getStorage('media')->load( $paragraph->get('field_image')->getValue()[0]['target_id']);
-        $fid = $image->getSource()->getSourceFieldValue($image);
-        $image_file = File::load($fid);
-        $url = $image_file->createFileUrl();
-        
-        // Build attribute style
-        $this->bgStyle = [
-          // 'size' => 'background-size: 100%',
-          // 'position' => 'background-position: 50% 50%',
-          // 'min-height' => 'min-height: 300px',
-          'image' => 'background-image: url(' . $url . ')',
-        ];
+    //Set values for image attributes in Twig template.
+    $horizontal = '0';
+    $variables->set('percent_horizontal', $horizontal);
 
-        //Set values for data attributes in Twig template.
-          $field_image_scroll_ratio = $paragraph->field_image_scroll_ratio->value;
-          $scroll_ratio = $field_image_scroll_ratio ? $field_image_scroll_ratio : '';
-          $variables->set('scroll_ratio', $scroll_ratio);
+    $vertical = '0';
+    $variables->set('percent_vertical', $vertical);
 
-          $field_minimum_height = $paragraph->field_minimum_height->value;
-          $min_height  = $field_minimum_height ? $field_minimum_height . 'px' : '300px';
-          $variables->set('min_height', $min_height);
-        
-        $variables->set('image_style', 'stellar-window');
-      } else {
-        //Use background_color
-        if ($paragraph->field_bg_color){
-          $this->bgStyle = [
-            'bg-color' => 'background-color: #' . $paragraph->field_bg_color->value,
-          ];
-        } else {
-          $this->bgStyle = [
-            'bg-color' => 'background-color: #FFF',
-          ];
-        }
-      };
-      $variables->set('bg_style', implode(";", $this->bgStyle));
+    $vertical_offset = '';
+    $variables->set('vertical_offset', $vertical_offset);
+    
+    $min_height  =  '300px';
+    $variables->set('min_height', $min_height);
+    
+    $adjustment_width  = '';
+    $variables->set('adjustment_width', $adjustment_width);
+    
+    $adjustment_height = '';
+    $variables->set('adjustment_height', $adjustment_height);
+    
+    $background_size = '';
+    $variables->set('background_size', $background_size);
 
-    // Set text styles (field_centered)
-      if ($paragraph->field_centered->value) {
-        $this->textStyle[] = 'text-center';
-      } 
+    $field_bg_color = $paragraph->field_bg_color->value;
+    $background_color = $field_bg_color ? '#' . $field_bg_color : '#FFF';
+    $variables->set('bg_color', $background_color);
 
-      $variables->set('text_classes', implode(" ", $this->textStyle));
+    $field_image_scroll_ratio = $paragraph->field_image_scroll_ratio->value;
+    $variables->set('scroll_ratio', $field_image_scroll_ratio);
 
-    //To-do: Ask SAND team about the use of
-    // - field_full_width_mobile
-    // - field_minimum_height
+    $field_full_width_mobile = $paragraph->field_full_width_mobile->value;
+    $full_width_mobile =  $field_full_width_mobile ? 'background-size: 100% auto' : '';
+    $variables->set('full_width_mobile', $full_width_mobile);
+
+    //Set text styles
+    if ($paragraph->field_centered->value) {
+      $variables->set('text_center', 'text-center');
+    }
   }
 }
