@@ -366,7 +366,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
       return 'icon-cloud-hailstones';
     }
 
-    \Drupal::logger('sand')
+    \Drupal::logger('sand_weather')
       ->error('Weather type: %val not found from weather.gov', ['%val' => $val]);
     return '';
   }
