@@ -4,11 +4,9 @@
  * @file
  * Provides a sand_remote entity type.
  */
-
 use Drupal\Core\Render\Element;
 use Drupal\user\UserInterface;
-use Drupal\sand\ExtractText;
-use Drupal\sand\Sand;
+use Drupal\sand_remote\RemoteETL;
 
 /**
  * Implements hook_theme().
@@ -113,5 +111,17 @@ function sand_remote_node_insert(\Drupal\node\NodeInterface $node): void {
 function sand_remote_node_update(\Drupal\node\NodeInterface $node): void {
   if ($node->getType() == 'external_data') {
     $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('node', $node);
+  }
+}
+
+function sand_remote_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
+  $is_external_data_node = ($entity->getEntityTypeId() === 'node' && $entity->bundle() === 'external_data'); 
+  $is_sand_remote_entity = ($entity->getEntityTypeId() === 'sand_remote');
+
+  if ($is_external_data_node || $is_sand_remote_entity) {
+    RemoteETL::setDocType($entity);
+    RemoteETL::setCommittee($entity);
+    RemoteETL::setDocDateYear($entity);
+    RemoteETL::setMuniCodeChapter($entity);
   }
 }

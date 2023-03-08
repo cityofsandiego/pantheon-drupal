@@ -1,13 +1,12 @@
 <?php
 
-namespace Drupal\sand;
+namespace Drupal\sand_type;
 
 use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
-class Sand {
-
+class SandType {
 
   /**
    * The currently active container object, or NULL if not initialized yet.
@@ -40,9 +39,4 @@ class Sand {
     return static::$container;
   }
 
-  public static function extract() {
-    return static::getContainer()->get('sand.extract_text');
-  }
-  
-  
 }
