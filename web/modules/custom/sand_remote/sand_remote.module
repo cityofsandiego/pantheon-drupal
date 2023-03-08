@@ -116,8 +116,8 @@ function sand_remote_node_update(\Drupal\node\NodeInterface $node): void {
 
 function sand_remote_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
   $is_external_data_node = ($entity->getEntityTypeId() === 'node' && $entity->bundle() === 'external_data'); 
-  $is_sand_remote_entity = ($entity->getEntityTypeId() === 'sand_remote'); 
-  
+  $is_sand_remote_entity = ($entity->getEntityTypeId() === 'sand_remote');
+
   if ($is_external_data_node || $is_sand_remote_entity) {
     RemoteETL::setDocType($entity);
     RemoteETL::setCommittee($entity);

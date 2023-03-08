@@ -124,7 +124,7 @@ class ExtractText {
     }
     
     if (empty($url)) {
-      \Drupal::logger('sand')
+      \Drupal::logger('sand_remote')
         ->notice(
           'Could not get a source field for entity: %entity id: %id',
           [ '%entity' => $entity->getEntityType(), '%id' => $entity->id()]
@@ -350,7 +350,7 @@ class ExtractText {
       };
     }
     if (empty($url_field)) {
-      \Drupal::logger('sand')
+      \Drupal::logger('sand_remote')
         ->notice(
           'Could not get a source field for entity: %entity id: %id',
           [ '%entity' => $entity->getEntityType(), '%id' => $entity->id()]
