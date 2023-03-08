@@ -12,7 +12,7 @@ use Drupal\Core\Queue\QueueWorkerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Drupal\sand_remote\Entity\Sandremote;
-use Drupal\sand\ExtractText;
+use Drupal\sand_remote\ExtractText;
 
 /**
  * SandRemoteQueue Queue Worker.
@@ -92,6 +92,7 @@ class SandRemoteQueue extends QueueWorkerBase implements ContainerFactoryPluginI
    * @throws \Exception
    */
   public function processItem($data) {
+    // $data is actually an object of ExtractText type.
     /** @var ExtractText $data */
     $was_updated = $data->setText();
   }
