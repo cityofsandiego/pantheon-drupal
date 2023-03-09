@@ -48,16 +48,11 @@
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
       <p>
-
-{% set paragraph_parent = paragraph.getParentEntity() %}
-{% set restrictions = paragraph_parent.field_restrictions %}
-
-{% if restrictions.attributes.hasClass('field--name-field-restrictions') %}
-          <i class="{{ content.field_icon.0 }} icon-do-not icon--md"></i> 
-{% else %}
-          <i class="{{ content.field_icon.0 }} icon--circle icon--sm background--cerulean"></i> 
-{% endif %}        
-        
+        {% if is_restriction %}
+          <i class="{{ content.field_icon.0 }} icon-do-not icon--md"></i>
+        {% else %}
+          <i class="{{ content.field_icon.0 }} icon--circle icon--sm background--cerulean"></i>
+        {% endif %}
         <span class="amenities-restrictions--title">{{ content.field_title.0 }}</span>{% if content.field_amend_restrict_description.0 %} - {{ content.field_amend_restrict_description.0 }}{% endif %}
       </p>
     {% endblock %}
