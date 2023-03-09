@@ -49,14 +49,17 @@ final class AmenitiesRestrictions implements EventSubscriberInterface {
   public function preprocessAmenitiesRestrictions(ParagraphPreprocessEvent $event): void {
 
     $variables = $event->getVariables();
-
     $paragraph = $variables->getParagraph();
-
+    $paragraph_id = $paragraph->id();
     $node = $paragraph->getParentEntity();
+    $is_restriction = FALSE;
 
-    // Preprocess Restrictions to change class names
-    if (!$node->field_restrictions->isEmpty()) {
-      $variables->set('restrictions', $node->field_restrictions->getValue()[0]['value']);
+    foreach ($node->get('field_restrictions')->getValue() as $restriction) {
+      if ($restriction['target_id'] == $paragraph_id) {
+        $is_restriction = TRUE;
+      }
     }
+
+    $variables->set('is_restriction', $is_restriction);
   }
 }
