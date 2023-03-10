@@ -47,9 +47,11 @@
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <p>
         {% if is_restriction %}
-          <i class="{{ content.field_icon.0 }} icon-do-not icon--md"></i>
+          <p style="display: flex;align-items: center;">
+            <i class="icon-do-not icon--md">
+              <i class="{{ content.field_icon.0 }}"></i>
+            </i>
         {% else %}
           <i class="{{ content.field_icon.0 }} icon--circle icon--sm background--cerulean"></i>
         {% endif %}
