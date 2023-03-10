@@ -150,6 +150,7 @@
 
     .home-button {
       color: $spruce;
+      text-decoration: none;
 
       &:focus,
       &:hover {
@@ -198,6 +199,7 @@
         &.tbm-link {
           font-size: .8125rem;
           font-weight: 600;
+          line-height: 1.6;
           position: relative;
           text-decoration: none;
           text-transform: uppercase;
@@ -211,9 +213,8 @@
         }
       }
 
-      .tbm-item--has-dropdown > div > a:before {
-        color: $tulip;
-        content: "\2304";
+      .tbm-item--has-dropdown > div > a > i {
+        color: $sunshade;
         font-size: 1.25rem;
         position: absolute;
         right: 3%;
@@ -229,6 +230,15 @@
 
           &.level-1:first-child {
             border-left: 1px solid rgba(0,0,0,0.2);
+            
+            &:before {
+              content: '';
+              width: 1px;
+              height: 100%;
+              position: absolute;
+              background: inear-gradient(top, #fff 0%, #d4d4d4 100%);
+            }
+    
           }
         }
       }
