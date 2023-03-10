@@ -225,20 +225,23 @@
         justify-content: space-between;
 
         .tbm-item {
+          border: none;
           flex-grow: 1;
           margin: 0;
 
-          &.level-1:first-child {
-            border-left: 1px solid rgba(0,0,0,0.2);
-            
-            &:before {
-              content: '';
-              width: 1px;
-              height: 100%;
-              position: absolute;
-              background: inear-gradient(top, #fff 0%, #d4d4d4 100%);
-            }
-    
+          &:before {
+            content: '';
+            width: 1px;
+            height: 100%;
+            position: absolute;
+            background: -moz-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #d4d4d4));
+            background: -webkit-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+            background: -o-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+            background: -ms-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+            background: linear,to bottom,#fff 0%,#d4d4d4 100%;
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d4d4d4',GradientType=0 );
+            z-index: 9;
           }
         }
       }
