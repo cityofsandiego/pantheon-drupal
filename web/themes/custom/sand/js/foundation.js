@@ -18,6 +18,8 @@
   Drupal.behaviors.foundation = {
     attach: function (context, settings) {
       $(document).foundation();
+
+      $('.header .header-second .tbm-main .tbm-item--has-dropdown > div > a').once().prepend('<i class="icon-chevron-down hide-on-mobile"></i>');
     }
   };
 
