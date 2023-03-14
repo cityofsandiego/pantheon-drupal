@@ -144,11 +144,10 @@
             </div>
 
             {% if content.field_address.0 %}
-              <div class="l-padding-bm address-text">
+              <div class="address-text">
                 <div>
                   <i class="icon-map-marker icon--sm icon--circle background--cerulean"></i>
                 </div>
-
                 {{ content.field_address }}
               </div>
             {% endif %}
@@ -188,43 +187,50 @@
             </div>
           {% endif %}
 
-          {% if content.field_location_contact_name.0 %}
+          {% if content.field_location_contact_name.0 or content.field_location_contact_name.0 or field_location_contact_title.0 or content.field_phone.0 or content.field_email.0 %}
     				<div class="l-padding-ad background-off-white l-margin-td contact-info">
     					<h2 class="h3 heading--snug">Contact Info</h2>
-              <div class="grid-x l-margin-td">
-      					<div class="cell small-2">
-      						<i class="icon-user icon--sm icon--circle background--cerulean"></i>
-      					</div>
-      					<div class="cell small-10">
-      						<address class="l-margin-an">
-                    {{ content.field_location_contact_name }}
-                    {{ content.field_location_contact_title }}
-      						</address>
+              {% if content.field_location_contact_name.0 or content.field_location_contact_title.0 %}
+                <div class="grid-x l-margin-td">
+                  <div class="cell small-2">
+                    <i class="icon-user icon--sm icon--circle background--cerulean"></i>
+                  </div>
+                  <div class="cell small-10">
+                    <div class="l-margin-an">
+                      <span>
+                        <strong>{{ content.field_location_contact_name }}</strong>
+                      </span>
+                      {{ content.field_location_contact_title }}
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="grid-x l-margin-td">
-      					<div class="cell small-2">
-      						<i class="icon-telephone icon--sm icon--circle background--cerulean"></i>
-      					</div>
-      					<div class="cell small-10">
-      						<address class="l-margin-an">
-      							<strong><span itemprop="telephone">{{ content.field_phone.0 }}</span></strong>
-      						</address>
+              {% endif %}
+              {% if content.field_phone.0 %}
+                <div class="grid-x l-margin-td">
+                  <div class="cell small-2">
+                    <i class="icon-telephone icon--sm icon--circle background--cerulean"></i>
+                  </div>
+                  <div class="cell small-10">
+                    <address class="l-margin-an">
+                      <strong><span itemprop="telephone">{{ content.field_phone.0 }}</span></strong>
+                    </address>
+                  </div>
                 </div>
-              </div>
-              <div class="grid-x l-margin-td">
-      					<div class="cell small-2">
-      						<i class="icon-at-sign icon--sm icon--circle background--cerulean"></i>
-      					</div>
-      					<div class="cell small-10">
-      						<address class="l-margin-an">
-      							<strong>{{ content.field_email.0 }}</strong>
-      						</address>
+              {% endif %}
+              {% if content.field_email.0 %}
+                <div class="grid-x l-margin-td">
+                  <div class="cell small-2">
+                    <i class="icon-at-sign icon--sm icon--circle background--cerulean"></i>
+                  </div>
+                  <div class="cell small-10">
+                    <address class="l-margin-an">
+                      <strong>{{ content.field_email.0 }}</strong>
+                    </address>
+                  </div>
                 </div>
-              </div>
+              {% endif %}
             </div>
           {% endif %}
-
         </div>
       </div>
       {% if content.field_resources.0 %}

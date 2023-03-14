@@ -256,6 +256,9 @@ textarea {
 /* ============================================================
   Styles for fonts/typefaces.
   ============================================================ */
+/*
+ * General Mixins (put specific ones in component files where applicable)
+*/
 @font-face {
   font-family: 'icomoon';
   font-style: normal;
@@ -1533,7 +1536,7 @@ textarea {
   padding: 0.3em; }
 
 .icon-do-not {
-  color: #e28327;
+  color: #c51313;
   font-size: 1.8rem;
   position: relative;
   z-index: 5; }
@@ -1575,9 +1578,6 @@ textarea {
     .icon-do-not.icon--xl [class*=' icon-'] {
       font-size: 2.75rem; }
 
-/*
- * General Mixins (put specific ones in component files where applicable)
-*/
 /* ============================================================
   Placeholders for repeat styles.
   ============================================================ */
@@ -2107,7 +2107,8 @@ textarea {
       border-bottom: 1px solid #37424a;
       color: #fff;
       display: block;
-      padding: 1rem; }
+      padding: 1rem;
+      text-decoration: none; }
 
 @media print, screen and (min-width: 48em) {
   .header {
@@ -2176,6 +2177,22 @@ textarea {
       padding: 0; } }
   .header .header-second .main-menu .full-width {
     width: 100%; }
+  .header .header-second .home-button-container .cell {
+    display: table;
+    width: 56px; }
+    .header .header-second .home-button-container .cell .home-button {
+      color: #37424a;
+      display: table-cell;
+      padding-top: 1.25rem;
+      text-decoration: none; }
+      .header .header-second .home-button-container .cell .home-button:focus, .header .header-second .home-button-container .cell .home-button:hover {
+        background-color: #e89e3b;
+        color: #fff;
+        text-decoration: none; }
+      .header .header-second .home-button-container .cell .home-button i {
+        display: block;
+        font-size: 24px;
+        text-align: center; }
   .header .header-second .tbm-submenu-toggle,
   .header .header-second .tbm .tbm-item {
     background-color: #fff; }
@@ -2202,7 +2219,8 @@ textarea {
     color: #37424a; }
     .header .header-second .tbm-main a.tbm-link {
       font-size: .8125rem;
-      font-weight: bold;
+      font-weight: 600;
+      line-height: 1.6;
       position: relative;
       text-decoration: none;
       text-transform: uppercase; }
@@ -2211,9 +2229,8 @@ textarea {
       font-size: 0.6875rem;
       font-weight: normal;
       text-transform: none; }
-  .header .header-second .tbm-main .tbm-item--has-dropdown > div > a:before {
-    color: #e89e3b;
-    content: "\2304";
+  .header .header-second .tbm-main .tbm-item--has-dropdown > div > a > i {
+    color: #ffa02f;
     font-size: 1.25rem;
     position: absolute;
     right: 3%;
@@ -2221,10 +2238,22 @@ textarea {
   .header .header-second .tbm-main .tbm-nav {
     justify-content: space-between; }
     .header .header-second .tbm-main .tbm-nav .tbm-item {
+      border: none;
       flex-grow: 1;
       margin: 0; }
-      .header .header-second .tbm-main .tbm-nav .tbm-item.level-1:first-child {
-        border-left: 1px solid rgba(0, 0, 0, 0.2); }
+      .header .header-second .tbm-main .tbm-nav .tbm-item:before {
+        content: '';
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        background: -moz-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #d4d4d4));
+        background: -webkit-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+        background: -o-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+        background: -ms-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+        background: linear,to bottom,#fff 0%,#d4d4d4 100%;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d4d4d4',GradientType=0 );
+        z-index: 9; }
   .header .header-second .tbm-submenu {
     border-color: transparent; }
     .header .header-second .tbm-submenu h4 {
