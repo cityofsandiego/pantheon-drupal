@@ -3144,4 +3144,90 @@ class CustomCommands extends DrushCommands {
     $term = reset($terms);
     return !empty($term) ? $term->id() : 0;
   }
+
+
+  /**
+   *
+   * @command import:event
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage import:event
+   */
+  public function finalizeEvent($after_id = 0) {
+    $nodedata = [];
+
+    $node = Node::load(220952);
+    print_r($node->get('field_event_date')->getValue());
+    die;
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/event.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'event_type' => str_replace('`', '', $data[7]),
+          'event_start' => str_replace('`', '', $data[13]),
+          'event_end' => str_replace('`', '', $data[14]),
+          'event_repeat' => str_replace('`', '', $data[15]),
+          'department' => explode('|', str_replace('`', '', $data[16])),
+          'image' => str_replace('`', '', $data[40]),
+          'support_images' => explode('|', str_replace('`', '', $data[41])),
+          'location_address1' => str_replace('`', '', $data[54]),
+          'location_address2' => str_replace('`', '', $data[45]),
+          'location_city' => str_replace('`', '', $data[46]),
+          'location_name' => str_replace('`', '', $data[51]),
+          'location_postal_code' => str_replace('`', '', $data[52]),
+          'location_province' => str_replace('`', '', $data[53]),
+          'updated' => str_replace('`', '', $data[8]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) {
+        continue;
+      }
+      echo 'Current memory used: ' . $this->memoryUsage(memory_get_usage(TRUE)) . '| Current D7 ID: ' . $d7id . PHP_EOL;
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'event')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+      // Set three taxonomies.
+      $node->field_department->setValue([]);
+      foreach ($data['department'] as $department) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+        $node->field_department->appendItem($term);
+      }
+      $node->field_event_type->setValue([]);
+      if ($data['event_type'] == 6068) {
+        $term = Term::load(5005);
+        $node->field_event_type->appendItem($term);
+      }
+      elseif ($data['event_type'] == 6069) {
+        $term = Term::load(5006);
+        $node->field_event_type->appendItem($term);
+      }
+      $node->field_event_location = [
+        'country_code' => 'US',
+        'organization' => $data['location_name'],
+        'address_line1' => $data['location_address1'],
+        'address_line2' => $data['location_address2'],
+        'locality' => $data['location_city'],
+        'administrative_area' => $data['location_province'],
+        'postal_code' => str_pad($data['location_postal_code'], 5, '0', STR_PAD_LEFT),
+      ];
+      $node->set('changed', strtotime($data['updated']));
+      // image
+      // support images
+      // event time
+      // optional start date
+    }
+  }
+
 }
