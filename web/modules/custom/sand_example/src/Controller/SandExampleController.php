@@ -4,18 +4,17 @@ namespace Drupal\sand_example\Controller;
 
 use Drupal\node\Entity\Node;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\sand\Entity\Bundle\Department;
+use Drupal\sand_example\SandExampleServiceInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 // Bundle Interfaces.
-use Drupal\sand\Entity\Bundle\Interface\DepartmentInterface;
+use Drupal\sand_type\Entity\Bundle\Interface\DepartmentInterface;
 
 // Bundle Classes.
-use Drupal\sand\Entity\Bundle\Article;
-use Drupal\sand\Query\Bundle\ArticleQuery;
+use Drupal\sand_type\Entity\Bundle\Article;
 
 // Query Classes
-
+use Drupal\sand_type\Query\Bundle\ArticleQuery;
 
 /**
  * Returns responses for Sand hero routes.
@@ -28,6 +27,8 @@ class SandExampleController extends ControllerBase {
    * @var \Symfony\Component\DependencyInjection\ContainerInterface
    */
   protected $container;
+  
+  protected $myService;
 
   /**
    * The controller constructor.
@@ -35,8 +36,9 @@ class SandExampleController extends ControllerBase {
    * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
    *   The container.
    */
-  public function __construct(ContainerInterface $container) {
+  public function __construct(ContainerInterface $container, SandExampleServiceInterface $myService) {
     $this->container = $container;
+    $this->myService = $myService;
   }
 
   /**
@@ -44,7 +46,8 @@ class SandExampleController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('service_container')
+      $container->get('service_container'),
+      $container->get('sand_example.service1'),
     );
   }
 
@@ -52,6 +55,11 @@ class SandExampleController extends ControllerBase {
    * Builds the response.
    */
   public function build() {
+    
+    $build['service_example'] = [
+      '#markup' => $this->t('From myService doSomething: ') . $this->myService->doSomething(),
+    ];
+
 
     // Example of node query.
     $nids = \Drupal::entityQuery('node')
@@ -108,7 +116,7 @@ class SandExampleController extends ControllerBase {
     $build['article_ids'] = [
       '#markup' => 'Aricle Ids: ' . implode(',', $ids_array),
     ];
-    
+
     return $build;
   }
 
