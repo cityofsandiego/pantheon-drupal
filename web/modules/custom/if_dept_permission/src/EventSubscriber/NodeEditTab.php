@@ -60,23 +60,25 @@ class NodeEditTab implements EventSubscriberInterface {
    */
   public function alterLocalTasks(MenuLocalTasksAlterEvent $event) {
     $node_url = $event->getData()['tabs'][0]['entity.node.canonical']['#link']['url'];
-    $node_id = $node_url->getRouteParameters()['node'];
-    $node = $this->entityTypeManager->getStorage('node')->load($node_id);
-    if (in_array('content_owner', $this->userInformation->userRoles())) {
-      $access = FALSE;
-      if ($node->hasField('field_department')) {
-        foreach ($node->get('field_department')->getValue() as $tid) {
-          if (in_array($tid['target_id'], $this->userInformation->userDepartments())) {
-            $access = TRUE;
+    if ($node_url !== NULL) {
+      $node_id = $node_url->getRouteParameters()['node'];
+      $node = $this->entityTypeManager->getStorage('node')->load($node_id);
+      if (in_array('content_owner', $this->userInformation->userRoles())) {
+        $access = FALSE;
+        if ($node->hasField('field_department')) {
+          foreach ($node->get('field_department')->getValue() as $tid) {
+            if (in_array($tid['target_id'], $this->userInformation->userDepartments())) {
+              $access = TRUE;
+            }
           }
         }
-      }
-      if ($access == FALSE) {
-        // This hides the edit and revision tabs for content owners when the
-        // node does not have a department taxonomy set which the user has
-        // access to.
-        unset($event->getData()['tabs'][0]['entity.node.edit_form']);
-        unset($event->getData()['tabs'][0]['entity.node.version_history']);
+        if ($access == FALSE) {
+          // This hides the edit and revision tabs for content owners when the
+          // node does not have a department taxonomy set which the user has
+          // access to.
+          unset($event->getData()['tabs'][0]['entity.node.edit_form']);
+          unset($event->getData()['tabs'][0]['entity.node.version_history']);
+        }
       }
     }
   }
