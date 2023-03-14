@@ -67,6 +67,9 @@
  *
  */
 #}
+
+{{ attach_library('sand/imagezoom') }}
+
 {%
   set classes = [
     'node',
@@ -77,22 +80,22 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
   ]
 %}
+
+{% set image = node.field_image | file_uri | image_style('large') %}
+
+{% set imagezoom = node.field_image | file_url %}
+
 <article{{ attributes.addClass(classes) }}>
-
-  {{ title_prefix }}
-  {% if not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
-
   <div{{ content_attributes.addClass('node__content') }}>
   <div class="grid-x">
     <div class="cell small-12 medium-auto content">
       <div class="l-padding-am grid-x grid-margin-x">
-        <div class="cell small-6">
-          {{ content.field_image }}
+        <div class="cell small-12">
+          <h1>{{ label }}</h1>
+        </div>
+        <div class="cell medium-6" id="main_image">
+          <img id="main-image" src="{{ image }}" data-zoom-image="{{ imagezoom }}"/>
+          <p class="fine-print"><em>Magnify by hovering your mouse over the image. Zoom in/out with the mousewheel.</em></p>
         </div>
         <div class="cell auto">
           {{ content.body }}
