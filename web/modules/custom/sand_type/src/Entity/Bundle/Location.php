@@ -55,47 +55,22 @@ class Location extends Node implements DepartmentInterface {
         break;
       }
       if (!empty($event->date)) {
-        // Reformat date, Strip off Day first comma separated value which is the day (i.e. Saturday).
-        // Create Date object for easy formatting. Previously formatting with date of June 23, 2019, now 06/23/2019
-        $date = preg_replace('/^.*?, /', '', $event->date);
-        $date = \DateTime::createFromFormat('F jS, Y', $date);
-
-        if (!$date) {
-          $date = (string) $event->date;
-          $date = \DateTime::createFromFormat('m/d/Y', $date);
-        }
-
-        // Output just month abbreviation and the day of the month.
-        if (empty($date)) {
-          $date_text = '';
-        } 
-        else {
-          $today = new \DateTime();
-          if ($today->format('M j') == $date->format('M j')) {
-            // If today, then say so.
-            $date_text = 'Today';
-          }
-          else {
-            $date_text = $date->format('M j');
-          }
-        }
-        $rows[$kount]['date'] = $date_text;
-
+        $rows[$kount]['date'] = Location::getDateText($event);
         // Add time but take off even hours (:00).
         if (!empty($event->time)) {
           $rows[$kount]['time'] = str_replace(':00', '', $event->time);
         }
       }
-      
-      // Now add Title and link to event link if we have one.
-      $rows[$kount]['title']  = $event->eventTitle;
+
+      // Now add Title and link to event if we have a link.
+      $rows[$kount]['title'] = $event->eventTitle;
       if (!empty($event->eventLink)) {
         $rows[$kount]['link'] = Url::fromUri($event->eventLink);
       }
 
       // If closing event, say so.
       if ($event->eventType == 'Closing') {
-        $rows[$kount]['closing']  = 'Closing';
+        $rows[$kount]['closing'] = 'Closing';
       }
 
       // Add ageGroups info.
@@ -105,11 +80,50 @@ class Location extends Node implements DepartmentInterface {
       }
     }
 
+    // Render the output using twig.
     $render_array = [
       '#theme' => 'Bundle/Location/sand_location_library_xml',
       '#rows' => $rows,
     ];
     return \Drupal::service('renderer')->renderPlain($render_array);
   }
-  
+
+  /**
+   * Get the date from the library XML event and format it.
+   * 
+   * @param $event
+   *
+   * @return string|null
+   */
+  private static function getDateText($event): ?string {
+    if (empty($event->date)) {
+      return '';
+    }
+
+    // Reformat date, Strip off Day first comma separated value which is the day (i.e. Saturday).
+    // Create Date object for easy formatting. Previously formatting with date of June 23, 2019, now 06/23/2019
+    $date = preg_replace('/^.*?, /', '', $event->date);
+    $date = \DateTime::createFromFormat('F jS, Y', $date);
+
+    if (!$date) {
+      $date = (string) $event->date;
+      $date = \DateTime::createFromFormat('m/d/Y', $date);
+    }
+
+    if (empty($date)) {
+      return '';
+    }
+
+    // Output just month abbreviation and the day of the month.
+    $today = new \DateTime();
+    if ($today->format('M j') == $date->format('M j')) {
+      // If today, then say so.
+      $date_text = 'Today';
+    }
+    else {
+      $date_text = $date->format('M j');
+    }
+    return $date_text;
+  }
+
 }
