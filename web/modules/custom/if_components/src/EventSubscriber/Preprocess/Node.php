@@ -150,7 +150,7 @@ final class Node implements EventSubscriberInterface {
 
   public function preprocessTitleBlock(BlockPreprocessEvent $event): void {
     $variables = $event->getVariables();
-    $content_types = ['department', 'location', 'department_document', 'article', 'blog'];
+    $content_types = ['department', 'location', 'department_document', 'article', 'blog', 'department_parent', 'mayoral_artifacts'];
 
     if ($variables->get('base_plugin_id') == 'page_title_block') {
       $node = \Drupal::routeMatch()->getParameter('node');

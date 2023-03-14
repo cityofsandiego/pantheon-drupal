@@ -15,10 +15,10 @@ rules:
     fid: library_xml_feed
     name: embed_libxml
     description: '/\[libxml=(.*?)\]/i'
-    enabled: false
+    enabled: true
     matches: null
     pattern: '/\[libxml=([^,]*?)\]/i'
-    replacement: "$result = sand_tool_format_library_xml($matches[1]);\r\n"
+    replacement: '$result = \Drupal\sand_type\Entity\Bundle\Location::formatLibraryXML($matches[1]);'
     code: true
     weight: 0
   embed_libxml_with_limit:
@@ -27,9 +27,9 @@ rules:
     fid: library_xml_feed
     name: embed_libxml_with_limit
     description: 'Same as embed_libxml but with an additional argument'
-    enabled: false
+    enabled: true
     matches: null
     pattern: '/\[libxml=(.*?),(\d+?)\]/i'
-    replacement: "$result = sand_tool_format_library_xml($matches[1], $matches[2]);\r\n"
+    replacement: '$result = \Drupal\sand_type\Entity\Bundle\Location::formatLibraryXML($matches[1], $matches[2]);'
     code: true
     weight: 0
