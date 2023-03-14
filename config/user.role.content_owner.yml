@@ -12,13 +12,20 @@ dependencies:
     - node.type.location
     - node.type.registration
     - node.type.resources
+    - workflows.workflow.editorial
   module:
+    - content_moderation
     - node
+    - system
+    - toolbar
 id: content_owner
 label: 'Content Owner'
 weight: -7
 is_admin: null
 permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access toolbar'
   - 'create article content'
   - 'create blog content'
   - 'create department content'
@@ -42,12 +49,18 @@ permissions:
   - 'edit own registration content'
   - 'edit own resources content'
   - 'revert registration revisions'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition needs_review'
+  - 'use editorial transition publish'
+  - 'view any unpublished content'
   - 'view article revisions'
   - 'view blog revisions'
   - 'view department revisions'
   - 'view department_document revisions'
   - 'view department_parent revisions'
   - 'view event revisions'
+  - 'view latest version'
   - 'view location revisions'
   - 'view registration revisions'
   - 'view resources revisions'
+  - 'view the administration theme'
