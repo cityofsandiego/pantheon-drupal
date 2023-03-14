@@ -10,7 +10,6 @@ dependencies:
     - field.field.node.registration.field_reg_event_location
     - field.field.node.registration.field_reg_registration
     - node.type.registration
-    - workflows.workflow.editorial
   module:
     - content_moderation
     - datetime
@@ -64,6 +63,13 @@ content:
     region: content
     settings:
       hide_register_tab: true
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
