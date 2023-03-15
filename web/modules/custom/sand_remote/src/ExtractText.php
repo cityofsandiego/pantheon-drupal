@@ -334,6 +334,11 @@ class ExtractText {
     if ($entity->hasField($source_field)) {
       return $entity->$source_field->value;
     } else {
+      \Drupal::logger('sand_remote')
+        ->notice(
+          'Could not get a source for entity: %entity id: %id',
+          [ '%entity' => $entity->getEntityType(), '%id' => $entity->id()]
+        );
       return NULL;
     }
   }
