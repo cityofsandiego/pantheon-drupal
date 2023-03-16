@@ -12,6 +12,7 @@ use Drupal\sand_type\Entity\Bundle\Interface\DepartmentInterface;
 
 // Bundle Classes.
 use Drupal\sand_type\Entity\Bundle\Article;
+use Drupal\sand_type\Entity\Bundle\Hero;
 
 // Query Classes
 use Drupal\sand_type\Query\Bundle\ArticleQuery;
@@ -64,7 +65,7 @@ class SandExampleController extends ControllerBase {
     // Example of node query.
     $nids = \Drupal::entityQuery('node')
       ->condition('status', 1)
-      ->condition('type', ['article','hero', 'department'], 'in')
+      ->condition('type', ['article','hero'], 'in')
       ->range(0,200)
       ->execute();
     $nodes = Node::loadMultiple($nids);
@@ -88,6 +89,9 @@ class SandExampleController extends ControllerBase {
       // Remember you can test for the Bundle Class OR the Interface Class. See
       // Hero.php for more details.
 
+      if ($node instanceof Hero) {
+        $time_type = 'Hero Time';
+      }
       if ($node instanceof Article) {
         $time_type = $node->getArticleType();
       }
