@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.resources.field_department
     - field.field.node.resources.field_edit_notes
     - field.field.node.resources.field_email
+    - field.field.node.resources.field_image
     - field.field.node.resources.field_import_id
     - field.field.node.resources.field_internet
     - field.field.node.resources.field_laptop
@@ -93,6 +94,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 116
+    region: content
+  field_image:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 124
     region: content
   field_import_id:
     type: number_integer
@@ -211,4 +220,5 @@ content:
     third_party_settings: {  }
     weight: 100
     region: content
-hidden: {  }
+hidden:
+  search_api_excerpt: true
