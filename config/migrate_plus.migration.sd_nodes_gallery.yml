@@ -1,0 +1,66 @@
+uuid: bad3455e-ecb8-415c-afd0-dcc9cb6ae7d8
+langcode: en
+status: true
+dependencies: {  }
+id: sd_nodes_gallery
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: gallery_group
+label: 'Custom Blog node migration'
+source:
+  plugin: csv
+  path: modules/custom/if_sdmigration/migration_files/nodes/gallery.csv
+  delimiter: ','
+  enclosure: '`'
+  escape: \
+  header_row_count: 1
+  ids:
+    - 'D7 ID'
+process:
+  title: Title
+  body/0/value: Body
+  body/0/format:
+    plugin: default_value
+    default_value: full_html
+  field_body_bottom/0/value: 'Body Bottom'
+  field_body_bottom/0/format:
+    plugin: default_value
+    default_value: full_html
+  field_sand_gallery_no_events: 'Display other Albums when showing these photos'
+  field_sand_gallery_display_as: 'Display Photos as a'
+  field_sand_gallery_display: 'Photo Display Type'
+  field_d7_nid: 'D7 ID'
+  status:
+    -
+      plugin: default_value
+      default_value: 1
+  moderation_state:
+    plugin: default_value
+    default_value: published
+  changed:
+    plugin: format_date
+    source: 'Updated date'
+    from_format: 'Y-m-d H:i:s'
+    to_format: U
+    from_timezone: UTC
+    to_timezone: UTC
+  created:
+    plugin: format_date
+    source: 'Post date'
+    from_format: 'Y-m-d H:i:s'
+    to_format: U
+    from_timezone: UTC
+    to_timezone: UTC
+  path/pathauto:
+    plugin: default_value
+    default_value: 0
+  path/alias:
+    plugin: concat
+    source:
+      - Path
+destination:
+  plugin: 'entity:node'
+  default_bundle: sand_gallery
+migration_dependencies: null

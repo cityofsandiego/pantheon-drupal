@@ -9,6 +9,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 //use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\Entity\Node;
+use Drupal\Core\Entity\EntityFieldManager;
 use Drupal\sand_remote\SandremoteInterface;
 
 /**
@@ -36,8 +37,26 @@ class migAction extends ViewsBulkOperationsActionBase {
     $sand_remote = Sandremote::create([
       'type' => 'sand_remote',
       'bundle' => 'external',
-      'label' => $entity->id(),
+      'label' => $entity->getTitle(),
+      'field_title_long' => $entity->getTitle(),
     ]);
+    foreach ($entity->getFields() as $name => $property) {
+      if ($name === 'body' || strpos($name, 'field') === 0) {
+        $value = $property->getValue();
+        if (!empty($value)) {
+          if ($name === 'body' && isset($value[0]['value'])) {
+            $sand_remote->field_body->setValue($value[0]["value"]);
+          }
+          elseif ($name === 'field_document_url' && isset($value[0]['uri'])) {
+            $sand_remote->{$name}->setValue($value[0]["uri"]);
+          }
+          elseif (isset($value[0]['value'])) {
+            $final_value = $value[0]['value'];
+            $sand_remote->{$name}->setValue($final_value);
+          }
+        }
+      }
+    }
     $sand_remote->save();
   }
     

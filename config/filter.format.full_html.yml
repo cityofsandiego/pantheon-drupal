@@ -3,8 +3,12 @@ langcode: en
 status: true
 dependencies:
   module:
+    - customfilter
     - editor
+    - embed_block
+    - insert_block
     - insert_view
+    - insert_view_adv
     - media
 _core:
   default_config_hash: WNeK5FbcY8pXgEpbD_KgRzlF1-5PL3BJXwqaBctPTqw
@@ -85,3 +89,46 @@ filters:
       default_view_mode: default
       allowed_view_modes: {  }
       allowed_media_types: {  }
+  filter_insert_block:
+    id: filter_insert_block
+    provider: insert_block
+    status: true
+    weight: 0
+    settings:
+      check_roles: '1'
+  insert_view_adv:
+    id: insert_view_adv
+    provider: insert_view_adv
+    status: true
+    weight: 0
+    settings:
+      allowed_views: {  }
+      render_as_empty: 0
+      hide_argument_input: false
+  customfilter_insert_search_solr_field:
+    id: customfilter_insert_search_solr_field
+    provider: customfilter
+    status: true
+    weight: 0
+    settings:
+      id: insert_search_solr_field
+  customfilter_library_xml_feed:
+    id: customfilter_library_xml_feed
+    provider: customfilter
+    status: true
+    weight: 0
+    settings:
+      id: library_xml_feed
+  customfilter_retag_pdf:
+    id: customfilter_retag_pdf
+    provider: customfilter
+    status: true
+    weight: 0
+    settings:
+      id: retag_pdf
+  embed_block:
+    id: embed_block
+    provider: embed_block
+    status: true
+    weight: 0
+    settings: {  }

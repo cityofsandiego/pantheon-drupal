@@ -5,6 +5,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.event.body
+    - field.field.node.event.field_address_pin
+    - field.field.node.event.field_d7_nid
     - field.field.node.event.field_department
     - field.field.node.event.field_edit_notes
     - field.field.node.event.field_event_activity_desc
@@ -60,12 +62,19 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }
     weight: 100
     region: content
 hidden:
+  field_address_pin: true
+  field_d7_nid: true
   field_department: true
   field_edit_notes: true
   field_event_activity_desc: true
@@ -104,3 +113,4 @@ hidden:
   field_subtitle: true
   field_type_of_event: true
   field_website: true
+  search_api_excerpt: true

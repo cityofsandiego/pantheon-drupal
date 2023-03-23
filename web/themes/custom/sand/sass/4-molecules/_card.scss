@@ -68,10 +68,12 @@
     width: 100%;
 
     @include breakpoint(medium) {
-      margin: 0;
-      padding: .75em;
       display: -webkit-flex; /* Safari */
       display: flex;
+      margin: 0;
+      padding-left: 1.0416588541%;
+      padding-right: 1.0416588541%;
+      width: 33.333333%;
 
       .card {
         flex: 0 1 auto;
@@ -260,6 +262,8 @@
 
   h2 {
     font-family: $headline;
+    font-size: 1.6875rem;
+    margin: 1em 0 0.8em 0;
   }
 
   .featured-card-group__wrapper {
@@ -277,7 +281,7 @@
 /* Featured Card Item for D9 */
 .featured-card {
   background-color: $mercury;
-  border-radius: 2px;
+  border-radius: 4px;
 
   @include breakpoint(mobile-landscape) {
     width: calc(50% - 1rem);
@@ -297,17 +301,21 @@
     height: auto;
   }
 
+  img {
+    border-radius: 4px 4px 0 0;
+  }
+
   .featured-card__content {
     color: $charcoal;
-    padding: 1rem;
+    @include breakpoint(medium) {
+      font-size: .8125rem;
+    }
+    padding: 1.5em;
 
     .featured-card__heading {
       font-family: $headline;
       font-size: 1rem;
-    }
-
-    .featured-card__body {
-      margin: 1rem 0;
+      margin: 0 0 0.75em;
     }
   }
 }

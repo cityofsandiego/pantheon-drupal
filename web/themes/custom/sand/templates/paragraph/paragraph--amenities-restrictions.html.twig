@@ -41,13 +41,22 @@
 {%
   set classes = [
     'paragraph--type--' ~ paragraph.bundle|clean_class,
-    'amendities-restrictions'
+    'amenities-restrictions'
   ]
 %}
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <p><i class="{{ content.field_icon.0 }} icon--circle icon--sm background--cerulean"></i> <span class="amendities-restrictions--title">{{ content.field_title.0 }}</span>{% if content.field_amend_restrict_description.0 %} - {{ content.field_amend_restrict_description.0 }}{% endif %}</p>
+        {% if is_restriction %}
+          <p style="display: flex;align-items: center;">
+            <i class="icon-do-not icon--md">
+              <i class="{{ content.field_icon.0 }}"></i>
+            </i>
+        {% else %}
+          <i class="{{ content.field_icon.0 }} icon--circle icon--sm background--cerulean"></i>
+        {% endif %}
+        <span class="amenities-restrictions--title">{{ content.field_title.0 }}</span>{% if content.field_amend_restrict_description.0 %} - {{ content.field_amend_restrict_description.0 }}{% endif %}
+      </p>
     {% endblock %}
     </a>
   </div>

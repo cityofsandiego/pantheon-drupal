@@ -37,6 +37,23 @@ process:
     -
       plugin: default_value
       default_value: 1
+  moderation_state:
+    plugin: default_value
+    default_value: published
+  changed:
+    plugin: format_date
+    source: 'Updated date'
+    from_format: 'Y-m-d H:i:s'
+    to_format: U
+    from_timezone: UTC
+    to_timezone: UTC
+  created:
+    plugin: format_date
+    source: 'Post date'
+    from_format: 'Y-m-d H:i:s'
+    to_format: U
+    from_timezone: UTC
+    to_timezone: UTC
   path/pathauto:
     plugin: default_value
     default_value: 0

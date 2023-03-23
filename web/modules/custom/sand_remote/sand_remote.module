@@ -4,12 +4,9 @@
  * @file
  * Provides a sand_remote entity type.
  */
-
 use Drupal\Core\Render\Element;
-use Drupal\sand_remote\Entity\Sandremote;
 use Drupal\user\UserInterface;
-/* For creating a "file" to pass to tika */
-use Drupal\file\Entity\File;
+use Drupal\sand_remote\RemoteETL;
 
 /**
  * Implements hook_theme().
@@ -83,4 +80,48 @@ function sand_remote_user_predelete(UserInterface $account) {
     ->execute();
   $sand_remotes = $storage->loadMultiple($sand_remote_ids);
   $storage->delete($sand_remotes);
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function sand_remote_sand_remote_insert(\Drupal\Core\Entity\EntityInterface $entity): void {
+  $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('sand_remote', $entity);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function sand_remote_sand_remote_update(\Drupal\Core\Entity\EntityInterface $entity): void {
+  $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('sand_remote', $entity);
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function sand_remote_node_insert(\Drupal\node\NodeInterface $node): void {
+  if ($node->getType() == 'external_data') {
+    $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('node', $node);
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function sand_remote_node_update(\Drupal\node\NodeInterface $node): void {
+  if ($node->getType() == 'external_data') {
+    $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('node', $node);
+  }
+}
+
+function sand_remote_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
+  $is_external_data_node = ($entity->getEntityTypeId() === 'node' && $entity->bundle() === 'external_data'); 
+  $is_sand_remote_entity = ($entity->getEntityTypeId() === 'sand_remote');
+
+  if ($is_external_data_node || $is_sand_remote_entity) {
+    RemoteETL::setDocType($entity);
+    RemoteETL::setCommittee($entity);
+    RemoteETL::setDocDateYear($entity);
+    RemoteETL::setMuniCodeChapter($entity);
+  }
 }

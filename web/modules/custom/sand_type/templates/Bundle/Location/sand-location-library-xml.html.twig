@@ -1,0 +1,25 @@
+<div>
+    {% for row in rows %}
+        <div class="row l-margin-bd">
+            <div class="event__date">
+                {% if row.date is not empty %}
+                    <span class="l-margin-bs nocase">{{ row.date }}</span>
+                    <span class="nocase">{{ row.time }}</span>
+                {% endif %}
+            </div>
+            <div class="event__info">
+                {% if row.link is empty %}
+                    <p class="h4 heading--snug l-margin-bn">{{ row.title }}</p>
+                {% else %}
+                    <p class="h4 heading--snug l-margin-bn">{{ link(row.title, row.link) }}</p>
+                {% endif %}
+                {% if row.closing is not empty %}
+                    <p class="fine-print">{{ row.closing }}</p>
+                {% endif %}
+                {% if row.age_groups is not empty %}
+                   <p class="fine-print l-margin-bn">{{ row.age_groups }}</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

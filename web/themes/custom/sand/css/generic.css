@@ -253,6 +253,47 @@ textarea {
 /* ============================================================
   Styles for fonts/typefaces.
   ============================================================ */
+/*
+ * General Mixins (put specific ones in component files where applicable)
+*/
+.l-constrained, .l-constrained--site, .l-constrained--wide, .l-constrained--desktop, .l-container, .field--name-body .row,
+.node__content .row,
+.field--name-field-sections-outreach2 .row {
+  /*
+   * Clearfix: contain floats
+   *
+   * For modern browsers
+   * 1. The space content is one way to avoid an Opera bug when the
+   *    `contenteditable` attribute is included anywhere else in the document.
+   *    Otherwise it causes space to appear at the top and bottom of elements
+   *    that receive the `clearfix` class.
+   * 2. The use of `table` rather than `block` is only necessary if using
+   *    `:before` to contain the top-margins of child elements.
+   */
+  /*
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+  *zoom: 1; }
+  .l-constrained:before, .l-constrained--site:before, .l-constrained--wide:before, .l-constrained--desktop:before, .l-container:before, .field--name-body .row:before,
+  .node__content .row:before,
+  .field--name-field-sections-outreach2 .row:before, .l-constrained:after, .l-constrained--site:after, .l-constrained--wide:after, .l-constrained--desktop:after, .l-container:after, .field--name-body .row:after,
+  .node__content .row:after,
+  .field--name-field-sections-outreach2 .row:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  .l-constrained:after, .l-constrained--site:after, .l-constrained--wide:after, .l-constrained--desktop:after, .l-container:after, .field--name-body .row:after,
+  .node__content .row:after,
+  .field--name-field-sections-outreach2 .row:after {
+    clear: both; }
+
+.l-constrained, .l-constrained--site, .l-constrained--wide, .l-constrained--desktop {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px; }
+
 @font-face {
   font-family: 'icomoon';
   font-style: normal;
@@ -1530,7 +1571,7 @@ textarea {
   padding: 0.3em; }
 
 .icon-do-not {
-  color: #e28327;
+  color: #c51313;
   font-size: 1.8rem;
   position: relative;
   z-index: 5; }
@@ -1571,43 +1612,6 @@ textarea {
     .icon-do-not.icon--xl > [class^='icon-'],
     .icon-do-not.icon--xl [class*=' icon-'] {
       font-size: 2.75rem; }
-
-/*
- * General Mixins (put specific ones in component files where applicable)
-*/
-.l-constrained, .l-constrained--site, .l-constrained--wide, .l-constrained--desktop, .l-container, .field--name-body .row,
-.field--name-field-sections-outreach2 .row {
-  /*
-   * Clearfix: contain floats
-   *
-   * For modern browsers
-   * 1. The space content is one way to avoid an Opera bug when the
-   *    `contenteditable` attribute is included anywhere else in the document.
-   *    Otherwise it causes space to appear at the top and bottom of elements
-   *    that receive the `clearfix` class.
-   * 2. The use of `table` rather than `block` is only necessary if using
-   *    `:before` to contain the top-margins of child elements.
-   */
-  /*
-   * For IE 6/7 only
-   * Include this rule to trigger hasLayout and contain floats.
-   */
-  *zoom: 1; }
-  .l-constrained:before, .l-constrained--site:before, .l-constrained--wide:before, .l-constrained--desktop:before, .l-container:before, .field--name-body .row:before,
-  .field--name-field-sections-outreach2 .row:before, .l-constrained:after, .l-constrained--site:after, .l-constrained--wide:after, .l-constrained--desktop:after, .l-container:after, .field--name-body .row:after,
-  .field--name-field-sections-outreach2 .row:after {
-    content: " ";
-    /* 1 */
-    display: table;
-    /* 2 */ }
-  .l-constrained:after, .l-constrained--site:after, .l-constrained--wide:after, .l-constrained--desktop:after, .l-container:after, .field--name-body .row:after,
-  .field--name-field-sections-outreach2 .row:after {
-    clear: both; }
-
-.l-constrained, .l-constrained--site, .l-constrained--wide, .l-constrained--desktop {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1200px; }
 
 /* ============================================================
   Placeholders for repeat styles.
@@ -1788,7 +1792,10 @@ address {
   font-style: normal; }
 
 .main-grid-container {
-  padding: 0; }
+  max-width: 1200px; }
+  @media print, screen and (min-width: 48em) {
+    .main-grid-container {
+      padding: 0; } }
 
 /* request by Ron */
 div.l-section {
@@ -2205,6 +2212,7 @@ button {
 /* Legacy D7 Grid using Susy 3.0.8
    ========================================================================== */
 .field--name-body,
+.node__content,
 .field--name-field-sections-outreach2 {
   /**
    * Float last column in row to the right
@@ -2213,308 +2221,384 @@ button {
    * Output column classes
    */ }
   .field--name-body .row--center .columns,
+  .node__content .row--center .columns,
   .field--name-field-sections-outreach2 .row--center .columns {
     margin: 0 auto;
     float: none; }
   .field--name-body .columns,
+  .node__content .columns,
   .field--name-field-sections-outreach2 .columns {
     word-wrap: break-word;
     min-height: 1px; }
     @media print, screen and (min-width: 48em) {
       .field--name-body .columns,
+      .node__content .columns,
       .field--name-field-sections-outreach2 .columns {
         position: relative;
         float: left; } }
   @media print, screen and (min-width: 30em) {
     .field--name-body [class*="grid__col"] + [class*="grid__col"]:last-child,
+    .node__content [class*="grid__col"] + [class*="grid__col"]:last-child,
     .field--name-field-sections-outreach2 [class*="grid__col"] + [class*="grid__col"]:last-child {
       float: right; } }
   @media only screen {
     .field--name-body .sm-one,
+    .node__content .sm-one,
     .field--name-field-sections-outreach2 .sm-one {
       width: 6.77966%; }
       .field--name-body .sm-one.no-gutters,
+      .node__content .sm-one.no-gutters,
       .field--name-field-sections-outreach2 .sm-one.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media only screen {
     .field--name-body .sm-two,
+    .node__content .sm-two,
     .field--name-field-sections-outreach2 .sm-two {
       width: 15.25424%; }
       .field--name-body .sm-two.no-gutters,
+      .node__content .sm-two.no-gutters,
       .field--name-field-sections-outreach2 .sm-two.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media only screen {
     .field--name-body .sm-three,
+    .node__content .sm-three,
     .field--name-field-sections-outreach2 .sm-three {
       width: 23.72881%; }
       .field--name-body .sm-three.no-gutters,
+      .node__content .sm-three.no-gutters,
       .field--name-field-sections-outreach2 .sm-three.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media only screen {
     .field--name-body .sm-four,
+    .node__content .sm-four,
     .field--name-field-sections-outreach2 .sm-four {
       width: 32.20339%; }
       .field--name-body .sm-four.no-gutters,
+      .node__content .sm-four.no-gutters,
       .field--name-field-sections-outreach2 .sm-four.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media only screen {
     .field--name-body .sm-five,
+    .node__content .sm-five,
     .field--name-field-sections-outreach2 .sm-five {
       width: 40.67797%; }
       .field--name-body .sm-five.no-gutters,
+      .node__content .sm-five.no-gutters,
       .field--name-field-sections-outreach2 .sm-five.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media only screen {
     .field--name-body .sm-six,
+    .node__content .sm-six,
     .field--name-field-sections-outreach2 .sm-six {
       width: 49.15254%; }
       .field--name-body .sm-six.no-gutters,
+      .node__content .sm-six.no-gutters,
       .field--name-field-sections-outreach2 .sm-six.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media only screen {
     .field--name-body .sm-seven,
+    .node__content .sm-seven,
     .field--name-field-sections-outreach2 .sm-seven {
       width: 57.62712%; }
       .field--name-body .sm-seven.no-gutters,
+      .node__content .sm-seven.no-gutters,
       .field--name-field-sections-outreach2 .sm-seven.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media only screen {
     .field--name-body .sm-eight,
+    .node__content .sm-eight,
     .field--name-field-sections-outreach2 .sm-eight {
       width: 66.10169%; }
       .field--name-body .sm-eight.no-gutters,
+      .node__content .sm-eight.no-gutters,
       .field--name-field-sections-outreach2 .sm-eight.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media only screen {
     .field--name-body .sm-nine,
+    .node__content .sm-nine,
     .field--name-field-sections-outreach2 .sm-nine {
       width: 74.57627%; }
       .field--name-body .sm-nine.no-gutters,
+      .node__content .sm-nine.no-gutters,
       .field--name-field-sections-outreach2 .sm-nine.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media only screen {
     .field--name-body .sm-ten,
+    .node__content .sm-ten,
     .field--name-field-sections-outreach2 .sm-ten {
       width: 83.05085%; }
       .field--name-body .sm-ten.no-gutters,
+      .node__content .sm-ten.no-gutters,
       .field--name-field-sections-outreach2 .sm-ten.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media only screen {
     .field--name-body .sm-eleven,
+    .node__content .sm-eleven,
     .field--name-field-sections-outreach2 .sm-eleven {
       width: 91.52542%; }
       .field--name-body .sm-eleven.no-gutters,
+      .node__content .sm-eleven.no-gutters,
       .field--name-field-sections-outreach2 .sm-eleven.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media only screen {
     .field--name-body .sm-twelve,
+    .node__content .sm-twelve,
     .field--name-field-sections-outreach2 .sm-twelve {
       width: 100%; }
       .field--name-body .sm-twelve.no-gutters,
+      .node__content .sm-twelve.no-gutters,
       .field--name-field-sections-outreach2 .sm-twelve.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media print, screen and (min-width: 48em) {
     .field--name-body .one,
+    .node__content .one,
     .field--name-field-sections-outreach2 .one {
       width: 6.77966%;
       padding-left: 1.0416588541%;
       padding-right: 1.0416588541%; }
       .field--name-body .one.no-gutters,
+      .node__content .one.no-gutters,
       .field--name-field-sections-outreach2 .one.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media print, screen and (min-width: 48em) {
     .field--name-body .two,
+    .node__content .two,
     .field--name-field-sections-outreach2 .two {
       width: 15.25424%;
       padding-left: 1.0416588541%;
       padding-right: 1.0416588541%; }
       .field--name-body .two.no-gutters,
+      .node__content .two.no-gutters,
       .field--name-field-sections-outreach2 .two.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media print, screen and (min-width: 48em) {
     .field--name-body .three,
+    .node__content .three,
     .field--name-field-sections-outreach2 .three {
       width: 23.72881%;
       padding-left: 1.0416588541%;
       padding-right: 1.0416588541%; }
       .field--name-body .three.no-gutters,
+      .node__content .three.no-gutters,
       .field--name-field-sections-outreach2 .three.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media print, screen and (min-width: 48em) {
     .field--name-body .four,
+    .node__content .four,
     .field--name-field-sections-outreach2 .four {
       width: 32.20339%;
       padding-left: 1.0416588541%;
       padding-right: 1.0416588541%; }
       .field--name-body .four.no-gutters,
+      .node__content .four.no-gutters,
       .field--name-field-sections-outreach2 .four.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media print, screen and (min-width: 48em) {
     .field--name-body .five,
+    .node__content .five,
     .field--name-field-sections-outreach2 .five {
       width: 40.67797%;
       padding-left: 1.0416588541%;
       padding-right: 1.0416588541%; }
       .field--name-body .five.no-gutters,
+      .node__content .five.no-gutters,
       .field--name-field-sections-outreach2 .five.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media print, screen and (min-width: 48em) {
     .field--name-body .six,
+    .node__content .six,
     .field--name-field-sections-outreach2 .six {
       width: 49.15254%;
       padding-left: 1.0416588541%;
       padding-right: 1.0416588541%; }
       .field--name-body .six.no-gutters,
+      .node__content .six.no-gutters,
       .field--name-field-sections-outreach2 .six.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media print, screen and (min-width: 48em) {
     .field--name-body .seven,
+    .node__content .seven,
     .field--name-field-sections-outreach2 .seven {
       width: 57.62712%;
       padding-left: 1.0416588541%;
       padding-right: 1.0416588541%; }
       .field--name-body .seven.no-gutters,
+      .node__content .seven.no-gutters,
       .field--name-field-sections-outreach2 .seven.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media print, screen and (min-width: 48em) {
     .field--name-body .eight,
+    .node__content .eight,
     .field--name-field-sections-outreach2 .eight {
       width: 66.10169%;
       padding-left: 1.0416588541%;
       padding-right: 1.0416588541%; }
       .field--name-body .eight.no-gutters,
+      .node__content .eight.no-gutters,
       .field--name-field-sections-outreach2 .eight.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media print, screen and (min-width: 48em) {
     .field--name-body .nine,
+    .node__content .nine,
     .field--name-field-sections-outreach2 .nine {
       width: 74.57627%;
       padding-left: 1.0416588541%;
       padding-right: 1.0416588541%; }
       .field--name-body .nine.no-gutters,
+      .node__content .nine.no-gutters,
       .field--name-field-sections-outreach2 .nine.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media print, screen and (min-width: 48em) {
     .field--name-body .ten,
+    .node__content .ten,
     .field--name-field-sections-outreach2 .ten {
       width: 83.05085%;
       padding-left: 1.0416588541%;
       padding-right: 1.0416588541%; }
       .field--name-body .ten.no-gutters,
+      .node__content .ten.no-gutters,
       .field--name-field-sections-outreach2 .ten.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media print, screen and (min-width: 48em) {
     .field--name-body .eleven,
+    .node__content .eleven,
     .field--name-field-sections-outreach2 .eleven {
       width: 91.52542%;
       padding-left: 1.0416588541%;
       padding-right: 1.0416588541%; }
       .field--name-body .eleven.no-gutters,
+      .node__content .eleven.no-gutters,
       .field--name-field-sections-outreach2 .eleven.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   @media print, screen and (min-width: 48em) {
     .field--name-body .twelve,
+    .node__content .twelve,
     .field--name-field-sections-outreach2 .twelve {
       width: 100%;
       padding-left: 1.0416588541%;
       padding-right: 1.0416588541%; }
       .field--name-body .twelve.no-gutters,
+      .node__content .twelve.no-gutters,
       .field--name-field-sections-outreach2 .twelve.no-gutters {
         padding-left: 0;
         padding-right: 0; } }
   .field--name-body .push-one,
+  .node__content .push-one,
   .field--name-field-sections-outreach2 .push-one {
     margin-left: pre(1 of 12); }
   .field--name-body .pull-one,
+  .node__content .pull-one,
   .field--name-field-sections-outreach2 .pull-one {
     margin-right: post(1 of 12); }
   .field--name-body .push-two,
+  .node__content .push-two,
   .field--name-field-sections-outreach2 .push-two {
     margin-left: pre(2 of 12); }
   .field--name-body .pull-two,
+  .node__content .pull-two,
   .field--name-field-sections-outreach2 .pull-two {
     margin-right: post(2 of 12); }
   .field--name-body .push-three,
+  .node__content .push-three,
   .field--name-field-sections-outreach2 .push-three {
     margin-left: pre(3 of 12); }
   .field--name-body .pull-three,
+  .node__content .pull-three,
   .field--name-field-sections-outreach2 .pull-three {
     margin-right: post(3 of 12); }
   .field--name-body .push-four,
+  .node__content .push-four,
   .field--name-field-sections-outreach2 .push-four {
     margin-left: pre(4 of 12); }
   .field--name-body .pull-four,
+  .node__content .pull-four,
   .field--name-field-sections-outreach2 .pull-four {
     margin-right: post(4 of 12); }
   .field--name-body .push-five,
+  .node__content .push-five,
   .field--name-field-sections-outreach2 .push-five {
     margin-left: pre(5 of 12); }
   .field--name-body .pull-five,
+  .node__content .pull-five,
   .field--name-field-sections-outreach2 .pull-five {
     margin-right: post(5 of 12); }
   .field--name-body .push-six,
+  .node__content .push-six,
   .field--name-field-sections-outreach2 .push-six {
     margin-left: pre(6 of 12); }
   .field--name-body .pull-six,
+  .node__content .pull-six,
   .field--name-field-sections-outreach2 .pull-six {
     margin-right: post(6 of 12); }
   .field--name-body .push-seven,
+  .node__content .push-seven,
   .field--name-field-sections-outreach2 .push-seven {
     margin-left: pre(7 of 12); }
   .field--name-body .pull-seven,
+  .node__content .pull-seven,
   .field--name-field-sections-outreach2 .pull-seven {
     margin-right: post(7 of 12); }
   .field--name-body .push-eight,
+  .node__content .push-eight,
   .field--name-field-sections-outreach2 .push-eight {
     margin-left: pre(8 of 12); }
   .field--name-body .pull-eight,
+  .node__content .pull-eight,
   .field--name-field-sections-outreach2 .pull-eight {
     margin-right: post(8 of 12); }
   .field--name-body .push-nine,
+  .node__content .push-nine,
   .field--name-field-sections-outreach2 .push-nine {
     margin-left: pre(9 of 12); }
   .field--name-body .pull-nine,
+  .node__content .pull-nine,
   .field--name-field-sections-outreach2 .pull-nine {
     margin-right: post(9 of 12); }
   .field--name-body .push-ten,
+  .node__content .push-ten,
   .field--name-field-sections-outreach2 .push-ten {
     margin-left: pre(10 of 12); }
   .field--name-body .pull-ten,
+  .node__content .pull-ten,
   .field--name-field-sections-outreach2 .pull-ten {
     margin-right: post(10 of 12); }
   .field--name-body .push-eleven,
+  .node__content .push-eleven,
   .field--name-field-sections-outreach2 .push-eleven {
     margin-left: pre(11 of 12); }
   .field--name-body .pull-eleven,
+  .node__content .pull-eleven,
   .field--name-field-sections-outreach2 .pull-eleven {
     margin-right: post(11 of 12); }
   .field--name-body .push-twelve,
+  .node__content .push-twelve,
   .field--name-field-sections-outreach2 .push-twelve {
     margin-left: pre(12 of 12); }
   .field--name-body .pull-twelve,
+  .node__content .pull-twelve,
   .field--name-field-sections-outreach2 .pull-twelve {
     margin-right: post(12 of 12); }
 
