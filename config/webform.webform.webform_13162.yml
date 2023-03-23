@@ -1,0 +1,365 @@
+uuid: e160fe67-a575-43ad-a539-496866d1fcd2
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 1
+template: false
+archive: false
+id: webform_13162
+title: 'Get It Done - Leisure'
+description: null
+category: null
+elements: |
+  get_it_done:
+    '#type': hidden
+    '#default_value': 'TRUE' 
+    '#title': 'get_it_done' 
+    '#description': ""
+  fieldset_step_1:
+    '#type': fieldset
+    '#open': true
+    '#title': 'I Need To...' 
+    '#description': ""
+    i_need_to_26:
+      '#type': select
+      '#options':
+        find: 'Find'
+        pay: 'Pay'
+        report: 'Report'
+        request: 'Request'
+        view: 'View'
+      '#default_value': 'find' 
+      '#title_display': invisible
+      '#title': 'I need to' 
+      '#description': ""
+  fieldset_find_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Find...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_26"]':
+          value: find
+          
+    find_2:
+      '#type': select
+      '#options':
+        wifi: 'Free Wi-Fi'
+        handwash: 'Handwash Station'
+        rec_info: 'Recreational Programs'
+        restroom: 'Restroom'
+      '#default_value': 'wifi' 
+      '#title_display': invisible
+      '#title': 'Find' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_26"]':
+            value: find
+            
+  fieldset_apply_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Apply...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_26"]':
+          value: pay
+          
+    apply_4:
+      '#type': select
+      '#options':
+        library_card: 'Library Card'
+        park_permits: 'Park Permits'
+      '#default_value': 'library_card' 
+      '#title_display': invisible
+      '#title': 'Apply' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_26"]':
+            value: pay
+            
+  fieldset_register_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Register...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_26"]':
+          value: report
+          
+    register_6:
+      '#type': select
+      '#options':
+        park_activities: 'Park and Recreation Activities'
+      '#default_value': 'park_activities' 
+      '#title_display': invisible
+      '#title': 'Register' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_26"]':
+            value: report
+            
+  fieldset_request_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Request...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_26"]':
+          value: request
+          
+    request_8:
+      '#type': select
+      '#options':
+        request_park_facility: 'Park Facility Availability'
+        request_fire_tour: 'Fire Station Tour'
+      '#default_value': 'request_park_facility' 
+      '#title_display': invisible
+      '#title': 'Request' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_26"]':
+            value: request
+            
+  fieldset_view_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'View...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_26"]':
+          value: view
+          
+    view_10:
+      '#type': select
+      '#options':
+        civic_art: 'Civic Art Collection'
+        library_account: 'Library Account'
+        map_gallery: 'Map Gallery'
+        park_map: 'Park Facilities Map'
+      '#default_value': 'civic_art' 
+      '#title_display': invisible
+      '#title': 'View' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_26"]':
+            value: view
+            
+  fieldset_find_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Find Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_26"]':
+          value: find
+          
+    find_1_12:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Find information about recreational activities and programs at City parks</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Find information about recreational activities' href='/park-and-recreation/activities'>Find Now</a></div>\n</div>"
+      '#title': 'Recreational Programs' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_2"]':
+            value: rec_info
+            
+    find_wifi_12:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Find free Wi-Fi in San Diego</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Find free wi-fi in San Diego' href='/sdaccess'>Find Now</a></div>\n</div>"
+      '#title': 'Free Wi-Fi' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_2"]':
+            value: wifi
+            
+    find_handwash_12:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Find a handwash station.</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Find a handwash station' href='/handwash'>Find Now</a></div>\n</div>"
+      '#title': 'Handwash Station' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_2"]':
+            value: handwash
+            
+    find_restroom_12:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Find a restroom.</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Find a restroom' href='/handwash'>Find Now</a></div>\n</div>"
+      '#title': 'Restroom' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="find_2"]':
+            value: restroom
+            
+  fieldset_apply_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Apply Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_26"]':
+          value: pay
+          
+    pay_1_14:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Apply for a City library card</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Apply for a library card' href='/public-library/services/lending/librarycard'>Apply Now</a></div>\n</div>"
+      '#title': 'Library Card' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: library_card
+            
+    pay_2_14:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Apply for a permit to hold an event at a City park</p>\n</div>\n<div class='four columns'><a title='Apply for a park permit' href='/park-and-recreation/parks/permits'>Apply Now</a></div>\n</div>"
+      '#title': 'Park Permit' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: park_permits
+            
+  fieldset_register_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Register Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_26"]':
+          value: report
+          
+    register_1_16:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Register recreational activities at City parks and recreation centers</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Register for recreation activities' href='https://apm.activecommunities.com/sdparkandrec/Activity_Search'>Register Now</a></div>\n</div>"
+      '#title': 'Park and Recreation Activities' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="register_6"]':
+            value: park_activities
+            
+  fieldset_request_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Request Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_26"]':
+          value: request
+          
+    request_1_20:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Request information about the availability of City park facilities</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Request park facility availability' href='https://apm.activecommunities.com/sdparkandrec/Facility_Search'>Request Now</a></div>\n</div>"
+      '#title': 'Park Facility Availability' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="request_8"]':
+            value: request_park_facility
+            
+  fieldset_view_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'View Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_26"]':
+          value: view
+          
+    view_1_23:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>View and manage your library account</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='View library account' href='https://sandiego.bibliocommons.com/user/login'>View Now</a></div>\n</div>"
+      '#title': 'Library Account' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="view_10"]':
+            value: library_account
+            
+    view_2_23:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>View various City maps</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='View various City maps' href='http://sandiego.maps.arcgis.com/apps/PublicGallery/index.html?appid=99ca3e0f7a9a42e3a0667c4682bd78dc'>View Now</a></div>\n</div>"
+      '#title': 'Map Gallery' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="view_10"]':
+            value: map_gallery
+            
+    view_3_23:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>View a map of City park facilities</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='View a map of City park facilities' href='/park-and-recreation/centers/map'>View Now</a></div>\n</div>"
+      '#title': 'Park Facilities Map' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="view_10"]':
+            value: park_map
+            
+    view_4_23:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>View artwork that are exhibited primarily in the working environments of municipal buildings</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='View civic art collection' href='https://www.sdcivicartcollection.com/portals/civic-art-collection/'>View Now</a></div>\n</div>"
+      '#title': 'Civic Art Collection' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="view_10"]':
+            value: civic_art
+            
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers: {  }
+variants: {  }

@@ -13,6 +13,7 @@ use Drupal\if_sdmigration\TaxonomyImportTasks;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\system\Entity\Menu;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\user\Entity\User;
 use Drush\Commands\DrushCommands;
 
 /**
@@ -110,31 +111,249 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   *
+   * @command import:registration
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage import:registration
+   */
+  public function finalizeRegistration($after_id = 0) {
+    $nodedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/registration.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'display_to' => explode('|', str_replace('`', '', $data[4])),
+          'event_location' => str_replace('`', '', $data[5]),
+          'updated' => str_replace('`', '', $data[8]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) continue;
+      echo 'Current memory used: ' . $this->memoryUsage(memory_get_usage(true)) . '| Current D7 ID: ' . $d7id . PHP_EOL;
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'registration')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+      if ($data['event_location'] == 4256) {
+        $event_location = 5069;
+      }
+      elseif ($data['event_location'] == 4257) {
+        $event_location = 5068;
+      }
+      else {
+        $event_location = NULL;
+      }
+      $term = Term::load($event_location);
+      $node->field_reg_event_location->setValue([]);
+      $node->field_reg_event_location->appendItem($term);
+      $node->set('changed', strtotime($data['updated']));
+      $node->set('field_reg_display_to_role', $data['display_to']);
+      $node->save();
+    }
+  }
+
+  /**
+   *
+   * @command import:business_resource
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage import:business_resource
+   */
+  public function finalizeBusinessResource($after_id = 0) {
+    $nodedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/business-resource.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'organization' => explode('|', str_replace('`', '', $data[3])),
+          'target_business' => explode('|', str_replace('`', '', $data[8])),
+          'type_of_assistance' => explode('|', str_replace('`', '', $data[9])),
+          'updated' => str_replace('`', '', $data[11]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) continue;
+      echo 'Current memory used: ' . $this->memoryUsage(memory_get_usage(true)) . '| Current D7 ID: ' . $d7id . PHP_EOL;
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'business_resource')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+
+      // Set three taxonomies.
+      $node->field_business_organization->setValue([]);
+      foreach ($data['organization'] as $organization) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($organization, 'business_resources_organization'));
+        $node->field_business_organization->appendItem($term);
+      }
+      $node->field_business_target_business->setValue([]);
+      foreach ($data['target_business'] as $target_business) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($target_business, 'business_resources_target_bus'));
+        $node->field_business_target_business->appendItem($term);
+      }
+      $node->field_business_typeof_assistance->setValue([]);
+      foreach ($data['type_of_assistance'] as $type_of_assistance) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($type_of_assistance, 'business_resources_type_assist'));
+        $node->field_business_typeof_assistance->appendItem($term);
+      }
+      $node->set('changed', strtotime($data['updated']));
+      $node->save();
+    }
+  }
+
+  /**
+   * Import fields: field_search_keymatch, field_image, field_category, field_department
+   *
+   * @command import:outreach2_article
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage import:outreach2_article
+   */
+  public function finalizeOutreach2Article($after_id = 0) {
+    $nodedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/outreach2-article.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'department' => str_replace('`', '', $data[1]),
+          'category' => str_replace('`', '', $data[2]),
+          'search_keymatch' => str_replace('`', '', $data[3]),
+          'image_department' => str_replace('`', '', $data[11]),
+          'image_license' => str_replace('`', '', $data[12]),
+          'image_alt' => str_replace('`', '', $data[13]),
+          'image_d7id' => str_replace('`', '', $data[14]),
+          'image_path' => str_replace('`', '', $data[15]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) continue;
+      echo 'Current memory used: ' . $this->memoryUsage(memory_get_usage(true)) . '| Current D7 ID: ' . $d7id . PHP_EOL;
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'outreach_article2')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+
+      // Create (if not pre-existing) and set image.
+      if (!empty($data['image_path'])) {
+        $prior_image = $this->checkMediaId($data['image_d7id']);
+        if ($prior_image == NULL) {
+          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
+          $file_data = file_get_contents($remote_file);
+          // Fixes for irregular paths.
+          $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
+          $local_destination = str_replace('default_images', '', $local_destination);
+          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+          $local_destination = str_replace('public://', '', $local_destination);
+          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+          $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
+          if (is_object($local_file)) {
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $data['image_alt']
+              ],
+              'field_d7_mid' => $data['image_d7id'],
+            ]);
+            if (!empty($data['image_license'])) {
+              $image->field_license = $data['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+            echo 'Image saved.' . PHP_EOL;
+          }
+          else {
+            $image = NULL;
+          }
+        }
+        else {
+          $image = Media::load($prior_image);
+          echo 'Image re-used.' . PHP_EOL;
+        }
+        $node->field_image = $image;
+      }
+      // Set three taxonomies.
+      $node->field_department->setValue([]);
+      foreach (explode('|', $data['department']) as $department) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+        $node->field_department->appendItem($term);
+      }
+      $node->field_category->setValue([]);
+      foreach (explode('|', $data['category']) as $category) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($category, 'categories'));
+        $node->field_category->appendItem($term);
+      }
+      $node->field_search_keymatch->setValue([]);
+      foreach (explode('|', $data['search_keymatch']) as $search_keymatch) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
+        $node->field_search_keymatch->appendItem($term);
+      }
+
+      $node->save();
+    }
+  }
+
+  /**
    * Import fields: field_resources, field_search_keymatch, field_image, field_category, field_department, path
    *
    * @command import:department
+   * @param $after_id (Node ID to resume after).
    *
    * @usage import:department
    */
-  public function finalizeDepartment() {
+  public function finalizeDepartment($after_id = 0) {
     $nodedata = [];
     $resourcedata = [];
 
     // Read extra field data for manual creation/update.
-    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/departments-small.csv', 'r')) {
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/departments.csv', 'r')) {
       fgets($file);
       while ($data = fgetcsv($file)) {
         $nodedata[str_replace('`', '', $data[0])] = [
-          'path' => str_replace('`', '', $data[1]),
-          'resources' => str_replace('`', '', $data[2]),
-          'department' => str_replace('`', '', $data[3]),
-          'category' => str_replace('`', '', $data[4]),
-          'search_keymatch' => str_replace('`', '', $data[5]),
-          'image_department' => str_replace('`', '', $data[6]),
-          'image_license' => str_replace('`', '', $data[7]),
-          'image_alt' => str_replace('`', '', $data[8]),
-          'image_d7id' => str_replace('`', '', $data[9]),
-          'image_path' => str_replace('`', '', $data[10]),
+          'resources' => str_replace('`', '', $data[6]),
+          'department' => str_replace('`', '', $data[7]),
+          'category' => str_replace('`', '', $data[9]),
+          'search_keymatch' => str_replace('`', '', $data[15]),
+          'image_department' => str_replace('`', '', $data[16]),
+          'image_license' => str_replace('`', '', $data[17]),
+          'image_alt' => str_replace('`', '', $data[18]),
+          'image_d7id' => str_replace('`', '', $data[19]),
+          'image_path' => str_replace('`', '', $data[20]),
         ];
       }
       fclose($file);
@@ -157,6 +376,8 @@ class CustomCommands extends DrushCommands {
 
     // Manually update each node.
     foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) continue;
+      echo 'Current memory used: ' . $this->memoryUsage(memory_get_usage(true)) . '| Current D7 ID: ' . $d7id . PHP_EOL;
       // Load node.
       $query = $this->entityTypeManager
         ->getStorage('node')
@@ -166,11 +387,6 @@ class CustomCommands extends DrushCommands {
       $nid = reset($query->execute());
       $node = Node::load($nid);
 
-      // Set alias.
-      $node->path = [
-        'alias' => $data['path'],
-        'pathauto' => PathautoState::SKIP,
-      ];
 
       // Create and set resource paragraph.
       if (!empty($data['resources']) && isset($resourcedata[$data['resources']])) {
@@ -200,34 +416,40 @@ class CustomCommands extends DrushCommands {
           $local_destination = str_replace('public://', '', $local_destination);
           $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
           $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
-
-          $image = Media::create([
-            'bundle' => 'image',
-            'uid' => 0,
-            'field_media_image' => [
-              'target_id' => $local_file->id(),
-              'alt' => $data['image_alt']
-            ],
-            'field_d7_mid' => $data['image_d7id'],
-          ]);
-          if (!empty($data['image_license'])) {
-            $image->field_license = $data['image_license'];
-          }
-          foreach ($image_department as $department) {
-            $image->field_department->appendItem([
-              'target_id' => $department,
+          if (is_object($local_file)) {
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $data['image_alt']
+              ],
+              'field_d7_mid' => $data['image_d7id'],
             ]);
+            if (!empty($data['image_license'])) {
+              $image->field_license = $data['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+            echo 'Image saved.' . PHP_EOL;
           }
-          $image->save();
+          else {
+            $image = NULL;
+          }
         }
         else {
           $image = Media::load($prior_image);
+          echo 'Image re-used.' . PHP_EOL;
         }
         $node->field_image = $image;
       }
       // Set three taxonomies.
       $node->field_department->setValue([]);
-      foreach (explode(' |', $data['department']) as $department) {
+      foreach (explode('|', $data['department']) as $department) {
         $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
         $node->field_department->appendItem($term);
       }
@@ -263,22 +485,21 @@ class CustomCommands extends DrushCommands {
       fgets($file);
       while ($data = fgetcsv($file)) {
         $nodedata[str_replace('`', '', $data[0])] = [
-          'path' => str_replace('`', '', $data[1]),
-          'resources' => str_replace('`', '', $data[2]),
-          'department' => str_replace('`', '', $data[3]),
-          'category' => str_replace('`', '', $data[4]),
-          'search_keymatch' => str_replace('`', '', $data[5]),
-          'image_department' => str_replace('`', '', $data[6]),
-          'image_license' => str_replace('`', '', $data[7]),
-          'image_alt' => str_replace('`', '', $data[8]),
-          'image_d7id' => str_replace('`', '', $data[9]),
-          'image_path' => str_replace('`', '', $data[10]),
-          'social_links' => str_replace('`', '', $data[15]),
-          'featured_image_department' => str_replace('`', '', $data[16]),
-          'featured_image_license' => str_replace('`', '', $data[17]),
-          'featured_image_alt' => str_replace('`', '', $data[18]),
-          'featured_image_d7id' => str_replace('`', '', $data[19]),
-          'featured_image_path' => str_replace('`', '', $data[20]),
+          'resources' => str_replace('`', '', $data[1]),
+          'department' => explode('|', str_replace('`', '', $data[2])),
+          'category' => explode('|', str_replace('`', '', $data[3])),
+          'search_keymatch' => explode('|', str_replace('`', '', $data[4])),
+          'image_department' => str_replace('`', '', $data[5]),
+          'image_license' => str_replace('`', '', $data[6]),
+          'image_alt' => str_replace('`', '', $data[7]),
+          'image_d7id' => str_replace('`', '', $data[8]),
+          'image_path' => str_replace('`', '', $data[9]),
+          'social_links' => str_replace('`', '', $data[14]),
+          'featured_image_department' => str_replace('`', '', $data[15]),
+          'featured_image_license' => str_replace('`', '', $data[16]),
+          'featured_image_alt' => str_replace('`', '', $data[17]),
+          'featured_image_d7id' => str_replace('`', '', $data[18]),
+          'featured_image_path' => str_replace('`', '', $data[19]),
         ];
       }
       fclose($file);
@@ -324,12 +545,6 @@ class CustomCommands extends DrushCommands {
       $nid = reset($query->execute());
       $node = Node::load($nid);
 
-      // Set alias.
-      $node->path = [
-        'alias' => $data['path'],
-        'pathauto' => PathautoState::SKIP,
-      ];
-
       // Create and set resource paragraph.
       if (!empty($data['resources']) && isset($resourcedata[$data['resources']])) {
         $resource = $resourcedata[$data['resources']];
@@ -369,96 +584,131 @@ class CustomCommands extends DrushCommands {
 
       // Create (if not pre-existing) and set image.
       if (!empty($data['image_path'])) {
-        $prior_image = $this->checkMediaId($data['image_d7id']);
-        if ($prior_image == NULL) {
-          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
-          $file_data = file_get_contents($remote_file);
-          // Fixes for irregular paths.
-          $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
-          $local_destination = str_replace('default_images', '', $local_destination);
-          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
-          $local_destination = str_replace('public://', '', $local_destination);
-          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
-          $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
-
+        $image = NULL;
+        if (str_starts_with($data['image_path'], 'youtube://')) {
+          $youtube = str_replace('youtube://v/', 'https://www.youtube.com/watch?v=', $data['image_path']);
           $image = Media::create([
-            'bundle' => 'image',
+            'bundle' => 'remote_video',
             'uid' => 0,
-            'field_media_image' => [
-              'target_id' => $local_file->id(),
-              'alt' => $data['image_alt']
-            ],
-            'field_d7_mid' => $data['image_d7id'],
+            'field_media_oembed_video' => $youtube,
           ]);
-          if (!empty($data['image_license'])) {
-            $image->field_license = $data['image_license'];
-          }
-          foreach ($image_department as $department) {
-            $image->field_department->appendItem([
-              'target_id' => $department,
-            ]);
-          }
           $image->save();
         }
         else {
-          $image = Media::load($prior_image);
+          $prior_image = $this->checkMediaId($data['image_d7id']);
+          if ($prior_image == NULL) {
+            $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
+            $file_data = file_get_contents($remote_file);
+            // Fixes for irregular paths.
+            $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
+            $local_destination = str_replace('default_images', '', $local_destination);
+            $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+            $local_destination = str_replace('public://', '', $local_destination);
+            $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+            $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
+
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $data['image_alt']
+              ],
+              'field_d7_mid' => $data['image_d7id'],
+            ]);
+            if (!empty($data['image_license'])) {
+              $image->field_license = $data['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+          }
+          else {
+            $image = Media::load($prior_image);
+          }
         }
         $node->field_image = $image;
       }
       // Create (if not pre-existing) and set image.
-      if (!empty($data['featured_image_path']) && strpos('youtube://', $data['featured_image_path']) < 0) {
-        // TODO: Youtube?
-        $prior_image = $this->checkMediaId($data['featured_image_d7id']);
-        if ($prior_image == NULL) {
-          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['featured_image_path']);
-          $file_data = file_get_contents($remote_file);
-          // Fixes for irregular paths.
-          $local_destination = str_replace('legacy/police/graphics', '', $data['featured_image_path']);
-          $local_destination = str_replace('default_images', '', $local_destination);
-          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
-          $local_destination = str_replace('public://', '', $local_destination);
-          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
-          $image_department = [$this->taxonomyImportTasks->newTid($data['featured_image_department'], 'department')];
-
+      if (!empty($data['featured_image_path'])) {
+        $image = NULL;
+        if (str_starts_with($data['featured_image_path'], 'youtube://')) {
+          $youtube = str_replace('youtube://v/', 'https://www.youtube.com/watch?v=', $data['featured_image_path']);
           $image = Media::create([
-            'bundle' => 'image',
+            'bundle' => 'remote_video',
             'uid' => 0,
-            'field_media_image' => [
-              'target_id' => $local_file->id(),
-              'alt' => $data['featured_image_alt']
-            ],
-            'field_d7_mid' => $data['featured_image_d7id'],
+            'field_media_oembed_video' => $youtube,
           ]);
-          if (!empty($data['featured_image_license'])) {
-            $image->field_license = $data['featured_image_license'];
-          }
-          foreach ($image_department as $department) {
-            $image->field_department->appendItem([
-              'target_id' => $department,
-            ]);
-          }
           $image->save();
         }
         else {
-          $image = Media::load($prior_image);
+          $prior_image = $this->checkMediaId($data['featured_image_d7id']);
+          if ($prior_image == NULL) {
+            $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['featured_image_path']);
+            $file_data = file_get_contents($remote_file);
+            // Fixes for irregular paths.
+            $local_destination = str_replace('legacy/police/graphics', '', $data['featured_image_path']);
+            $local_destination = str_replace('legacy/humanresources/graphics', '', $local_destination);
+            $local_destination = str_replace('legacy/riskmanagement/graphics', '', $local_destination);
+            $local_destination = str_replace('legacy/empopp/graphics', '', $local_destination);
+            $local_destination = str_replace('legacy/petcopark/graphics', '', $local_destination);
+            $local_destination = str_replace('legacy/planning-commission/graphics', '', $local_destination);
+            $local_destination = str_replace('default_images', '', $local_destination);
+            $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+            $local_destination = str_replace('legacy/parkandrecboard/graphics', '', $local_destination);
+            $local_destination = str_replace('public://', '', $local_destination);
+            $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+            $image_department = [$this->taxonomyImportTasks->newTid($data['featured_image_department'], 'department')];
+
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $data['featured_image_alt']
+              ],
+              'field_d7_mid' => $data['featured_image_d7id'],
+            ]);
+            if (!empty($data['featured_image_license'])) {
+              $image->field_license = $data['featured_image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+          }
+          else {
+            $image = Media::load($prior_image);
+          }
         }
         $node->field_feature_video_img = $image;
       }
       // Set three taxonomies.
       $node->field_department->setValue([]);
-      foreach (explode(' |', $data['department']) as $department) {
-        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
-        $node->field_department->appendItem($term);
+      if (!empty($data['department'])) {
+        foreach ($data['department'] as $department) {
+          $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+          $node->field_department->appendItem($term);
+        }
       }
       $node->field_category->setValue([]);
-      foreach (explode('|', $data['category']) as $category) {
-        $term = Term::load($this->taxonomyImportTasks->newTid($category, 'categories'));
-        $node->field_category->appendItem($term);
+      if (!empty($data['category'])) {
+        foreach ($data['category'] as $category) {
+          $term = Term::load($this->taxonomyImportTasks->newTid($category, 'categories'));
+          $node->field_category->appendItem($term);
+        }
       }
       $node->field_search_keymatch->setValue([]);
-      foreach (explode('|', $data['search_keymatch']) as $search_keymatch) {
-        $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
-        $node->field_search_keymatch->appendItem($term);
+      if (!empty($data['search_keymatch'])) {
+        foreach ($data['search_keymatch'] as $search_keymatch) {
+          $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
+          $node->field_search_keymatch->appendItem($term);
+        }
       }
 
       $node->save();
@@ -1010,14 +1260,16 @@ class CustomCommands extends DrushCommands {
         $field_collection_id = str_replace('"', '', $data[3]);
         if (array_key_exists($field_collection_id, $exceptions)) {
           $extra_data = explode(';', str_replace('"', '', $data[9]));
-          $recur_interval = str_replace('RRULE:FREQ=', '', $extra_data[0]);
-          $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
-          $nodedata_exceptions[$exceptions[$field_collection_id]['entity_id']][$exceptions[$field_collection_id]['delta']] = [
-            'start' => str_replace('"', '', $data[7]),
-            'end' => str_replace('"', '', $data[8]),
-            'recur_number' => $recur_number,
-            'recur_interval' => $recur_interval,
-          ];
+          if (array_key_exists(1, $extra_data)) {
+            $recur_interval = str_replace('RRULE:FREQ=', '', $extra_data[0]);
+            $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
+            $nodedata_exceptions[$exceptions[$field_collection_id]['entity_id']][$exceptions[$field_collection_id]['delta']] = [
+              'start' => str_replace('"', '', $data[7]),
+              'end' => str_replace('"', '', $data[8]),
+              'recur_number' => $recur_number,
+              'recur_interval' => $recur_interval,
+            ];
+          }
         }
       }
       fclose($file);
@@ -1027,14 +1279,16 @@ class CustomCommands extends DrushCommands {
           $field_collection_id = str_replace('"', '', $data[3]);
           if (array_key_exists($field_collection_id, $exceptions2)) {
             $extra_data = explode(';', str_replace('"', '', $data[9]));
-            $recur_interval = str_replace('RRULE:FREQ=', '', $extra_data[0]);
-            $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
-            $nodedata_exceptions2[$exceptions2[$field_collection_id]['entity_id']][$exceptions2[$field_collection_id]['delta']] = [
-              'start' => str_replace('"', '', $data[7]),
-              'end' => str_replace('"', '', $data[8]),
-              'recur_number' => $recur_number,
-              'recur_interval' => $recur_interval,
-            ];
+            if (array_key_exists(1, $extra_data)) {
+              $recur_interval = str_replace('RRULE:FREQ=', '', $extra_data[0]);
+              $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
+              $nodedata_exceptions2[$exceptions2[$field_collection_id]['entity_id']][$exceptions2[$field_collection_id]['delta']] = [
+                'start' => str_replace('"', '', $data[7]),
+                'end' => str_replace('"', '', $data[8]),
+                'recur_number' => $recur_number,
+                'recur_interval' => $recur_interval,
+              ];
+            }
           }
         }
         fclose($file);
@@ -1066,70 +1320,86 @@ class CustomCommands extends DrushCommands {
       $hours = [];
       foreach ($data['hours'] as $hour_row) {
         $hour_row = explode(';', $hour_row);
-        $day = $hour_row[0];
-        $hour_row = explode('~', $hour_row[1]);
-        $starthours = str_replace(':', '', $hour_row[0]);
-        $endhours = str_replace(':', '', $hour_row[1]);
-        $hours[] = [
-          'day' => $day,
-          'starthours' => $starthours,
-          'endhours' => $endhours,
-          'comment' => '',
-        ];
+        if (array_key_exists(1, $hour_row)) {
+          $day = $hour_row[0];
+          $hour_row = explode('~', $hour_row[1]);
+          $starthours = str_replace(':', '', $hour_row[0]);
+          $endhours = str_replace(':', '', $hour_row[1]);
+          $hours[] = [
+            'day' => $day,
+            'starthours' => $starthours,
+            'endhours' => $endhours,
+            'comment' => '',
+          ];
+        }
       }
       $secondary_hours = [];
       foreach ($data['secondary_hours'] as $hour_row) {
         $hour_row = explode(';', $hour_row);
-        $day = $hour_row[0];
-        $hour_row = explode('~', $hour_row[1]);
-        $starthours = str_replace(':', '', $hour_row[0]);
-        $endhours = str_replace(':', '', $hour_row[1]);
-        $secondary_hours[] = [
-          'day' => $day,
-          'starthours' => $starthours,
-          'endhours' => $endhours,
-          'comment' => '',
-        ];
+        if (array_key_exists(1, $hour_row)) {
+          $day = $hour_row[0];
+          $hour_row = explode('~', $hour_row[1]);
+          $starthours = str_replace(':', '', $hour_row[0]);
+          $endhours = str_replace(':', '', $hour_row[1]);
+          $secondary_hours[] = [
+            'day' => $day,
+            'starthours' => $starthours,
+            'endhours' => $endhours,
+            'comment' => '',
+          ];
+        }
       }
       $node->field_location_hours = $hours;
       $node->field_location_hours2 = $secondary_hours;
 
       $node->field_restrictions = [];
       foreach ($data['restrictions'] as $restriction) {
-        $paragraph = Paragraph::create([
-          'type' => 'amenities_restrictions',
-          'field_description' => $ardata[$restriction]['description'],
-          'field_icon' => $ardata[$restriction]['icon'],
-          'field_title' => $ardata[$restriction]['title'],
-        ]);
-        $paragraph->save();
-        $node->field_restrictions[] = $paragraph;
+        if (array_key_exists($restriction, $ardata)) {
+          $paragraph = Paragraph::create([
+            'type' => 'amenities_restrictions',
+            'field_description' => $ardata[$restriction]['description'],
+            'field_icon' => $ardata[$restriction]['icon'],
+            'field_title' => $ardata[$restriction]['title'],
+          ]);
+          $paragraph->save();
+          $node->field_restrictions[] = $paragraph;
+        }
       }
 
       $node->field_amenities = [];
       foreach ($data['amenities'] as $amenity) {
-        $paragraph = Paragraph::create([
-          'type' => 'amenities_restrictions',
-          'field_description' => $ardata[$amenity]['description'],
-          'field_icon' => $ardata[$amenity]['icon'],
-          'field_title' => $ardata[$amenity]['title'],
-        ]);
-        $paragraph->save();
-        $node->field_amenities[] = $paragraph;
+        if (array_key_exists($amenity, $ardata)) {
+          $paragraph = Paragraph::create([
+            'type' => 'amenities_restrictions',
+            'field_description' => $ardata[$amenity]['description'],
+            'field_icon' => $ardata[$amenity]['icon'],
+            'field_title' => $ardata[$amenity]['title'],
+          ]);
+          $paragraph->save();
+          $node->field_amenities[] = $paragraph;
+        }
       }
 
       $node->field_resources = [];
       foreach ($data['resources'] as $resource) {
-        $paragraph = Paragraph::create([
-          'type' => 'resources',
-          'field_icon' => $resourcedata[$resource]['icon'],
-          'field_label' => $resourcedata[$resource]['label'],
-          'field_link' => [
-            'uri' => $resourcedata[$resource]['url'],
-          ],
-        ]);
-        $paragraph->save();
-        $node->field_resources[] = $paragraph;
+        if (array_key_exists($resource, $resourcedata)) {
+          if ($resourcedata[$resource]['url'] !== NULL) {
+            $uri = $resourcedata[$resource]['url'];
+            if (!str_starts_with($uri, 'http') && !str_starts_with($uri, '//')) {
+              $uri = 'internal:' . $uri;
+            }
+            $paragraph = Paragraph::create([
+              'type' => 'resources',
+              'field_icon' => $resourcedata[$resource]['icon'],
+              'field_label' => $resourcedata[$resource]['label'],
+              'field_link' => [
+                'uri' => $uri,
+              ],
+            ]);
+            $paragraph->save();
+            $node->field_resources[] = $paragraph;
+          }
+        }
       }
 
       $node->field_department->setValue([]);
@@ -2031,13 +2301,7 @@ class CustomCommands extends DrushCommands {
       $node->field_feature_video_img = $image;
       $node->save();
 
-      // Set most recent revision to published.
-      $latest_vid = $this->entityTypeManager->getStorage('node')->getLatestRevisionId($node->id());
-      $latest_revision = $this->entityTypeManager->getStorage('node')->loadRevision($latest_vid);
-      if ($latest_revision->moderation_state->value == 'draft') {
-        $latest_revision->set('moderation_state', 'published')->save();
-      }
-      echo $node->id() . PHP_EOL;
+      echo 'D7 ID | ' . $d7id . PHP_EOL;
     }
   }
 
@@ -2492,4 +2756,879 @@ class CustomCommands extends DrushCommands {
     $unit=array('b','kb','mb','gb','tb','pb');
     return @round($size/pow(1024,($i=floor(log($size,1024)))),2).' '.$unit[$i];
   }
+
+  /**
+   * Generate docdate file to cut down on time to fix external_data nodes.
+   *
+   * SHOULD ONLY BE EXECUTED LOCALLY.
+   *
+   * @command external_data:doc_date:generatecsv
+   *
+   * @usage external_data:doc_date:generatecsv
+   */
+  public function generateDocDateCSV() {
+    $docdate = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_0.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 0. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_1.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 1. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_2.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 2. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_3.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 3. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_4.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 4. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_5.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 5. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_6.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 6. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_7.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 7. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_8.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 8. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_9.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 9. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_10.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 10. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_11.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 11. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/external_data_12.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $docdate[str_replace('`', '', $data[0])] = str_replace(' 00:00:00', '', str_replace('`', '', $data[9]));
+      }
+      fclose($file);
+      echo 'Processed file 12. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    $module_path = \Drupal::service('extension.path.resolver')->getPath('module', 'if_sdmigration');
+    file_put_contents($module_path . '/migration_files/nodes/external_data/docdates.json', json_encode($docdate));
+    echo 'Generated JSON file.' . PHP_EOL;
+  }
+
+  /**
+   * Properly add doc date to external_data nodes.
+   *
+   * @command external_data:doc_date:fixnodes
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage external_data:doc_date:fixnodes
+   */
+  public function addDocDate($after_id = 0) {
+    $module_path = \Drupal::service('extension.path.resolver')->getPath('module', 'if_sdmigration');
+    $docdate = json_decode(file_get_contents($module_path . '/migration_files/nodes/external_data/docdates.json'));
+    $editdate = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/external_data/editdates.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $editdate[str_replace('`', '', $data[0])] = [
+          'created' => strtotime(str_replace('`', '', $data[1])),
+          'changed' => strtotime(str_replace('`', '', $data[2])),
+        ];
+      }
+      fclose($file);
+      echo 'Processed node creation dates. Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+    foreach ($docdate as $d7id => $date) {
+      if ($d7id < $after_id) continue;
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'external_data')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+      $node->set('field_doc_date', rtrim($date, ' '));
+      if (NULL !== $editdate[$d7id]['created']) {
+        $node->set('created', $editdate[$d7id]['created']);
+      }
+      if (NULL !== $editdate[$d7id]['changed']) {
+        $node->set('changed', $editdate[$d7id]['changed']);
+      }
+      $node->save();
+      echo 'Saved D7 id: ' . $d7id . ' D9 id: ' . $node->id() . ' Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
+    }
+  }
+
+  /**
+   * Import users
+   *
+   * @command import:users
+   *
+   * @usage import:users
+   */
+  public function importUsers() {
+    // Role mapping.
+    $roles = [];
+    $roles['content owner'] = 'content_owner';
+    $roles['Locations'] = 'locations';
+    $roles['administrator'] = 'administrator';
+    $roles['content editor'] = 'content_editor';
+    $roles['Outreach2 Article'] = 'outreach2_article';
+    $roles['Event'] = 'event';
+    $roles['Digital Archives Photos'] = 'digital_archives_photos';
+    $roles['webform results (view only)'] = 'webform_results';
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/users.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $users[str_replace('`', '', $data[0])] = [
+          'name' => str_replace('`', '', $data[1]),
+          'mail' => str_replace('`', '', $data[3]),
+          'created' => str_replace('`', '', $data[2]),
+          'roles' => explode('|', str_replace('`', '', $data[4])),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually add or update each user.
+    foreach ($users as $d7id => $userdata) {
+      // Load user (if existing).
+      $query = $this->entityTypeManager
+        ->getStorage('user')
+        ->getQuery();
+      $query->condition('field_d7_uid', $d7id);
+      $uid = reset($query->execute());
+      if (!empty($uid)) {
+        // user exists; update.
+        $user = $this->entityTypeManager->getStorage('user')->load($uid);
+        $user->setEmail($userdata['mail']);
+        $user->setUsername($userdata['name']);
+        $user->set('created', strtotime($userdata['created']));
+      }
+      else {
+        $user = User::create([
+          'name' => $userdata['name'],
+          'mail' => $userdata['mail'],
+          'field_d7_uid' => $d7id,
+          'created' => strtotime($userdata['created']),
+        ]);
+      }
+
+      // Manage user roles and department entity fields.
+      $user->set('field_department', []);
+      foreach($userdata['roles'] as $role_id) {
+        if (array_key_exists($role_id, $roles)) {
+          $user->addRole($roles[$role_id]);
+        }
+        if (str_starts_with($role_id, 'department - ')) {
+          $department = str_replace('department - ', '', $role_id);
+          // Switches because role name =/= taxonomy name.
+          if ($department == 'Homeless Services') {
+            $department = 'Homelessness Strategies and Solutions';
+          }
+          elseif ($department == 'Real Estate Assets') {
+            $department = 'Real Estate and Airport Management';
+          }
+          elseif ($department == 'City Council Offices') {
+            $department = 'City Council';
+          }
+          elseif ($department == 'Park and Recreation') {
+            $department = 'Parks & Recreation';
+          }
+          elseif ($department == 'Library') {
+            $department = 'Public Library';
+          }
+          elseif ($department == 'Personnel') {
+            $department = 'Personnel Department';
+          }
+          elseif ($department == 'Capital Improvements Program') {
+            $department = 'Capital Improvements Program (CIP)';
+          }
+          elseif ($department == 'Citizens\' Review Board on Police Practices') {
+            $department = 'Commission on Police Practices';
+          }
+          elseif ($department == 'Storm Water') {
+            $department = 'Stormwater';
+          }
+          elseif ($department == 'Homeland Security (Office of)') {
+            $department = 'Office of Emergency Services';
+          }
+          elseif ($department == 'Airports') {
+            $department = 'Airport Management';
+          }
+          elseif ($department == 'Public Works') {
+            $department = 'Z-Public Works (DO NOT USE)';
+          }
+          elseif ($department == 'San Diego Unmanned Aircraft Systems') {
+            $department = 'Z-San Diego Unmanned Aircraft Systems (DO NOT USE)';
+          }
+          elseif ($department == 'Reservoir Lakes') {
+            $department = 'Reservoirs and Lakes';
+          }
+          elseif ($department == 'Citizens Advisory Board On Police/Community Relatio') {
+            $department = 'Citizens Advisory Board On Police/Community Relations';
+          }
+          elseif ($department == 'Financial Management') {
+            $department = 'Z-Financial Management (DO NOT USE)';
+          }
+          elseif ($department == 'Office of the City Comptroller') {
+            $department = 'Z-Office of the City Comptroller (DO NOT USE)';
+          }
+          elseif ($department == 'A Department Taxonomy') {
+            continue;
+          }
+          if ($this->getTidByName($department) != 0) {
+            $user->field_department->appendItem($this->getTidByName($department));
+          }
+        }
+      }
+
+      // Save.
+      $user->save();
+    }
+  }
+
+  /**
+   * Set author and remove &#44; from node titles.
+   *
+   * @command import:node-set-author
+   *
+   * @usage import:node-set-author
+   */
+  public function setAuthor($d9id = 0) {
+    // Get D9 and D7 UID lookup table.
+    $uids = [];
+    $query = $this->entityTypeManager
+      ->getStorage('user')
+      ->getQuery();
+    $alluids = $query->execute();
+    foreach ($alluids as $uid) {
+      $user = User::load($uid);
+      if (!array_key_exists(0, $user->get('field_d7_uid')->getValue())) {
+        continue;
+      }
+      $d7id = $user->get('field_d7_uid')->getValue()[0]['value'];
+      $uids[$d7id] = $user->id();
+    }
+
+    // Read node author data
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/node-authors.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $authors[str_replace('`', '', $data[0])] = [
+          'd7_uid' => str_replace('`', '', $data[1]),
+          'updated' => str_replace('`', '', $data[2]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Update each node (except external data).
+    $query = $this->entityTypeManager
+      ->getStorage('node')
+      ->getQuery();
+    $query->condition('type', 'external_data', 'NOT IN')
+      ->sort('nid', 'ASC');
+    $nids = $query->execute();
+    foreach ($nids as $nid) {
+      if ($nid < $d9id) continue;
+      $node = Node::load($nid);
+      if (!$node->hasField('field_d7_nid') || !array_key_exists(0, $node->get('field_d7_nid')->getValue())) {
+        continue;
+      }
+      $d7id = $node->get('field_d7_nid')->getValue()[0]['value'];
+      $original_title = $node->getTitle();
+      $updated_title = str_replace('&#44;', ',', $original_title);
+      if ($original_title !== $updated_title || array_key_exists($d7id, $authors)) {
+        if ($original_title !== $updated_title) {
+          $node->setTitle($updated_title);
+        }
+        if (array_key_exists($d7id, $authors)) {
+          $author_info = $authors[$d7id];
+          $author_id = $uids[$author_info['d7_uid']];
+          $updated = strtotime($author_info['updated']);
+          $node->set('uid', $author_id);
+          $node->set('changed', $updated);
+        }
+        $node->save();
+        echo 'Saved: D7: ' . $d7id . ' | D9: ' . $node->id() . ' | Author ID: ' . $author_id . PHP_EOL;
+      }
+    }
+  }
+
+  /**
+   * Utility: find term by name and vid.
+   *
+   * @param string $name
+   *   Term name.
+   *
+   * @param string $vid
+   *   Vocabulary id (default to department).
+   *
+   * @return int
+   *   Term id, or 0 if none.
+   */
+  public static function getTidByName($name = NULL, $vid = 'department') {
+    if (empty($name)) {
+      return 0;
+    }
+    $properties = [
+      'name' => $name,
+      'vid' => $vid,
+    ];
+    $terms = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term')->loadByProperties($properties);
+    $term = reset($terms);
+    return !empty($term) ? $term->id() : 0;
+  }
+
+
+  /**
+   *
+   * @command import:event
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage import:event
+   */
+  public function finalizeEvent($after_id = 0) {
+    $nodedata = [];
+    $imagedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/event.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'event_type' => str_replace('`', '', $data[7]),
+          'event_start' => str_replace(' ', 'T', str_replace('`', '', $data[13])) . ':00',
+          'event_end' =>  str_replace(' ', 'T', str_replace('`', '', $data[14])) . ':00',
+          'event_repeat' => str_replace('`', '', $data[15]),
+          'setup_date' => str_replace(' ', 'T', str_replace('`', '', $data[36])) . ':00',
+          'department' => explode('|', str_replace('`', '', $data[16])),
+          'image' => str_replace('`', '', $data[40]),
+          'support_images' => explode('|', str_replace('`', '', $data[41])),
+          'location_address1' => str_replace('`', '', $data[54]),
+          'location_address2' => str_replace('`', '', $data[45]),
+          'location_city' => str_replace('`', '', $data[46]),
+          'location_name' => str_replace('`', '', $data[51]),
+          'location_postal_code' => str_replace('`', '', $data[52]),
+          'location_province' => str_replace('`', '', $data[53]),
+          'updated' => str_replace('`', '', $data[8]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Get image data.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/image-media.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $imagedata[str_replace('`', '', $data[3])] = [
+          'image_department' => str_replace('`', '', $data[0]),
+          'image_license' => str_replace('`', '', $data[1]),
+          'image_alt' => str_replace('`', '', $data[2]),
+          'image_path' => str_replace('`', '', $data[4]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) {
+        continue;
+      }
+      echo 'Current memory used: ' . $this->memoryUsage(memory_get_usage(TRUE)) . '| Current D7 ID: ' . $d7id . PHP_EOL;
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'event')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+      // Set three taxonomies.
+      $node->field_department->setValue([]);
+      foreach ($data['department'] as $department) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+        $node->field_department->appendItem($term);
+      }
+      $node->field_event_type->setValue([]);
+      if ($data['event_type'] == 6068) {
+        $term = Term::load(5005);
+        $node->field_event_type->appendItem($term);
+      }
+      elseif ($data['event_type'] == 6069) {
+        $term = Term::load(5006);
+        $node->field_event_type->appendItem($term);
+      }
+      $node->field_event_location = [
+        'country_code' => 'US',
+        'organization' => $data['location_name'],
+        'address_line1' => $data['location_address1'],
+        'address_line2' => $data['location_address2'],
+        'locality' => $data['location_city'],
+        'administrative_area' => $data['location_province'],
+        'postal_code' => str_pad($data['location_postal_code'], 5, '0', STR_PAD_LEFT),
+      ];
+      $node->set('changed', strtotime($data['updated']));
+      $node->field_event_setup_dt = $data['setup_date'];
+
+      $recur_interval = '';
+      $recur_number = '';
+      if (!empty($data['event_repeat'])) {
+        $extra_data = explode(';', str_replace('"', '', $data['event_repeat']));
+
+        if (array_key_exists(1, $extra_data)) {
+          $recur_interval = str_replace('RRULE:FREQ=', '', $extra_data[0]);
+          $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
+        }
+      }
+      $node->field_event_date = [
+        'value' => strtotime($data['event_start']),
+        'end_value' => strtotime($data['event_end']),
+        'rrule_index' => $recur_number,
+        'rrule' => $recur_interval,
+      ];
+
+      if (!empty($data['image'])) {
+        $image = NULL;
+        $prior_image = $this->checkMediaId($data['image']);
+        if ($prior_image == NULL) {
+          $image_info = $imagedata[$data['image']];
+          if ($image_info == NULL) continue;
+          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $image_info['image_path']);
+          $file_data = file_get_contents($remote_file);
+          // Fixes for irregular paths.
+          $local_destination = str_replace('legacy/police/graphics', '', $image_info['image_path']);
+          $local_destination = str_replace('default_images', '', $local_destination);
+          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+          $local_destination = str_replace('public://', '', $local_destination);
+          $local_destination = str_replace('events/image_main', '', $local_destination);
+          $local_destination = str_replace('events/image_support', '', $local_destination);
+          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+          $image_department = [$this->taxonomyImportTasks->newTid($image_info['image_department'], 'department')];
+          if (is_object($local_file)) {
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $image_info['image_alt']
+              ],
+              'field_d7_mid' => $data['image'],
+            ]);
+            if (!empty($image_info['image_license'])) {
+              $image->field_license = $image_info['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+            echo 'Image saved.' . PHP_EOL;
+          }
+          else {
+            $image = NULL;
+          }
+        }
+        else {
+          $image = Media::load($prior_image);
+          echo 'Image re-used.' . PHP_EOL;
+        }
+        $node->field_image = $image;
+      }
+
+      if (!empty($data['support_images'])) {
+        $node->field_images->setValue([]);
+        foreach ($data['support_images'] as $support_image) {
+          $prior_image = $this->checkMediaId($support_image);
+          if ($prior_image == NULL) {
+            $image_info = $imagedata[$support_image];
+            $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $image_info['image_path']);
+            $file_data = file_get_contents($remote_file);
+            // Fixes for irregular paths.
+            $local_destination = str_replace('legacy/police/graphics', '', $image_info['image_path']);
+            $local_destination = str_replace('default_images', '', $local_destination);
+            $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+            $local_destination = str_replace('public://', '', $local_destination);
+            $local_destination = str_replace('events/image_main', '', $local_destination);
+            $local_destination = str_replace('events/image_support', '', $local_destination);
+            $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+            $image_department = [$this->taxonomyImportTasks->newTid($image_info['image_department'], 'department')];
+            if (is_object($local_file)) {
+              $image = Media::create([
+                'bundle' => 'image',
+                'uid' => 0,
+                'field_media_image' => [
+                  'target_id' => $local_file->id(),
+                  'alt' => $image_info['image_alt']
+                ],
+                'field_d7_mid' => $support_image,
+              ]);
+              if (!empty($image_info['image_license'])) {
+                $image->field_license = $image_info['image_license'];
+              }
+              foreach ($image_department as $department) {
+                $image->field_department->appendItem([
+                  'target_id' => $department,
+                ]);
+              }
+              $image->save();
+              echo 'Image saved.' . PHP_EOL;
+            }
+            else {
+              $image = NULL;
+            }
+          }
+          else {
+            $image = Media::load($prior_image);
+            echo 'Image re-used.' . PHP_EOL;
+          }
+          $node->field_images->appendItem($image);
+        }
+      }
+
+      $node->save();
+    }
+  }
+
+  /**
+   *
+   * @command import:gallery
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage import:gallery
+   */
+  public function finalizeGallery($after_id = 0) {
+    $nodedata = [];
+    $imagedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/gallery.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'department' => str_replace('`', '', $data[1]),
+          'folder_image' => str_replace('`', '', $data[8]),
+          'gallery_items' => explode('|', str_replace('`', '', $data[9])),
+          'updated' => str_replace('`', '', $data[8]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Get image data.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/image-media.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $imagedata[str_replace('`', '', $data[3])] = [
+          'image_department' => str_replace('`', '', $data[0]),
+          'image_license' => str_replace('`', '', $data[1]),
+          'image_alt' => str_replace('`', '', $data[2]),
+          'image_path' => str_replace('`', '', $data[4]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) {
+        continue;
+      }
+      echo 'Current memory used: ' . $this->memoryUsage(memory_get_usage(TRUE)) . '| Current D7 ID: ' . $d7id . PHP_EOL;
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'sand_gallery')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+      $term = Term::load($this->taxonomyImportTasks->newTid($data['department'], 'department'));
+      $node->field_department->setValue([]);
+      $node->field_department->appendItem($term);
+
+      if (!empty($data['folder_image'])) {
+        $image = NULL;
+        $prior_image = $this->checkMediaId($data['folder_image']);
+        if ($prior_image == NULL) {
+          $image_info = $imagedata[$data['folder_image']];
+          if ($image_info == NULL) continue;
+          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $image_info['image_path']);
+          $file_data = file_get_contents($remote_file);
+          // Fixes for irregular paths.
+          $local_destination = str_replace('legacy/police/graphics', '', $image_info['image_path']);
+          $local_destination = str_replace('default_images', '', $local_destination);
+          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+          $local_destination = str_replace('sand_gallery', '', $local_destination);
+          $local_destination = str_replace('public://', '', $local_destination);
+          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+          $image_department = [$this->taxonomyImportTasks->newTid($image_info['image_department'], 'department')];
+          if (is_object($local_file)) {
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $image_info['image_alt']
+              ],
+              'field_d7_mid' => $data['folder_image'],
+            ]);
+            if (!empty($image_info['image_license'])) {
+              $image->field_license = $image_info['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+            echo 'Image saved.' . PHP_EOL;
+          }
+          else {
+            $image = NULL;
+          }
+        }
+        else {
+          $image = Media::load($prior_image);
+          echo 'Image re-used.' . PHP_EOL;
+        }
+        $node->field_sand_gallery_folderimage = $image;
+      }
+
+      if (!empty($data['gallery_items'])) {
+        $node->field_sand_gallery_items->setValue([]);
+        foreach ($data['gallery_items'] as $support_image) {
+          $image = NULL;
+          $prior_image = $this->checkMediaId($support_image);
+          if ($prior_image == NULL) {
+            $image_info = $imagedata[$support_image];
+            $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $image_info['image_path']);
+            if ($remote_file == NULL) continue;
+            $file_data = file_get_contents($remote_file);
+            // Fixes for irregular paths.
+            $local_destination = str_replace('legacy/police/graphics', '', $image_info['image_path']);
+            $local_destination = str_replace('default_images', '', $local_destination);
+            $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+            $local_destination = str_replace('public://', '', $local_destination);
+            $local_destination = str_replace('sand_gallery', '', $local_destination);
+            $local_destination = str_replace('legacy/digitalarchives/graphics', '', $local_destination);
+            $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+            $image_department = [$this->taxonomyImportTasks->newTid($image_info['image_department'], 'department')];
+            if (is_object($local_file)) {
+              $image = Media::create([
+                'bundle' => 'image',
+                'uid' => 0,
+                'field_media_image' => [
+                  'target_id' => $local_file->id(),
+                  'alt' => $image_info['image_alt']
+                ],
+                'field_d7_mid' => $support_image,
+              ]);
+              if (!empty($image_info['image_license'])) {
+                $image->field_license = $image_info['image_license'];
+              }
+              foreach ($image_department as $department) {
+                $image->field_department->appendItem([
+                  'target_id' => $department,
+                ]);
+              }
+              $image->save();
+              echo 'Image saved.' . PHP_EOL;
+            }
+            else {
+              $image = NULL;
+            }
+          }
+          else {
+            $image = Media::load($prior_image);
+            echo 'Image re-used.' . PHP_EOL;
+          }
+          $node->field_sand_gallery_items->appendItem($image);
+        }
+      }
+      $node->set('changed', strtotime($data['updated']));
+      $node->save();
+    }
+  }
+
+  /**
+   *
+   * @command import:digital_archives_photos
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage import:digital_archives_photos
+   */
+  public function finalizeDigitalArchivesPhotos($after_id = 0) {
+    $nodedata = [];
+    $imagedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/digital-archives-photos.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'category' => explode('|', str_replace('`', '', $data[1])),
+          'image' => str_replace('`', '', $data[4]),
+          'updated' => str_replace('`', '', $data[13]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Get image data.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/image-media.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $imagedata[str_replace('`', '', $data[3])] = [
+          'image_department' => str_replace('`', '', $data[0]),
+          'image_license' => str_replace('`', '', $data[1]),
+          'image_alt' => str_replace('`', '', $data[2]),
+          'image_path' => str_replace('`', '', $data[4]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) {
+        continue;
+      }
+      echo 'Current memory used: ' . $this->memoryUsage(memory_get_usage(TRUE)) . '| Current D7 ID: ' . $d7id . PHP_EOL;
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'digital_archives_photos')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+
+      $node->field_category->setValue([]);
+      foreach ($data['category'] as $category) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($category, 'categories'));
+        $node->field_category->appendItem($term);
+      }
+
+      if (!empty($data['image'])) {
+        $image = NULL;
+        $prior_image = $this->checkMediaId($data['image']);
+        if ($prior_image == NULL) {
+          $image_info = $imagedata[$data['image']];
+          if ($image_info == NULL) continue;
+          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $image_info['image_path']);
+          $file_data = file_get_contents($remote_file);
+          // Fixes for irregular paths.
+          $local_destination = str_replace('legacy/police/graphics', '', $image_info['image_path']);
+          $local_destination = str_replace('default_images', '', $local_destination);
+          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+          $local_destination = str_replace('sand_gallery', '', $local_destination);
+          $local_destination = str_replace('digital-archives-photos', '', $local_destination);
+          $local_destination = str_replace('public://', '', $local_destination);
+          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+          $image_department = [$this->taxonomyImportTasks->newTid($image_info['image_department'], 'department')];
+          if (is_object($local_file)) {
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $image_info['image_alt']
+              ],
+              'field_d7_mid' => $data['image'],
+            ]);
+            if (!empty($image_info['image_license'])) {
+              $image->field_license = $image_info['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+            echo 'Image saved.' . PHP_EOL;
+          }
+          else {
+            $image = NULL;
+          }
+        }
+        else {
+          $image = Media::load($prior_image);
+          echo 'Image re-used.' . PHP_EOL;
+        }
+        $node->field_image = $image;
+      }
+
+      $node->set('changed', strtotime($data['updated']));
+      $node->save();
+    }
+  }
+
 }

@@ -16,6 +16,7 @@
         color: $white;
         display: block;
         padding: 1rem;
+        text-decoration: none;
       }
     }
   }
@@ -42,6 +43,10 @@
 
     @include breakpoint(medium) {
       padding: 1rem 0;
+    }
+
+    .grid-x {
+      align-items: center;
     }
 
     .button {
@@ -144,6 +149,31 @@
       }
     }
 
+    .home-button-container .cell {
+      display: table;
+      width: 56px;
+
+      .home-button {
+        color: $spruce;
+        display:table-cell;
+        padding-top: 1.25rem;
+        text-decoration: none;
+
+        &:focus,
+        &:hover {
+          background-color: $tulip;
+          color: $white;
+          text-decoration: none;
+        }
+
+        i {
+          display: block;
+          font-size:24px;
+          text-align: center;
+        }
+      }
+    }
+
     .tbm-submenu-toggle,
     .tbm .tbm-item {
       background-color: $white;
@@ -182,8 +212,10 @@
 
         &.tbm-link {
           font-size: .8125rem;
-          font-weight: bold;
+          font-weight: 600;
+          line-height: 1.6;
           position: relative;
+          text-decoration: none;
           text-transform: uppercase;
         }
 
@@ -195,9 +227,8 @@
         }
       }
 
-      .tbm-item--has-dropdown > div > a:before {
-        color: $tulip;
-        content: "\2304";
+      .tbm-item--has-dropdown > div > a > i {
+        color: $sunshade;
         font-size: 1.25rem;
         position: absolute;
         right: 3%;
@@ -208,10 +239,23 @@
         justify-content: space-between;
 
         .tbm-item {
+          border: none;
           flex-grow: 1;
+          margin: 0;
 
-          &.level-1:first-child {
-            border-left: 1px solid rgba(0,0,0,0.2);
+          &:before {
+            content: '';
+            width: 1px;
+            height: 100%;
+            position: absolute;
+            background: -moz-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #d4d4d4));
+            background: -webkit-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+            background: -o-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+            background: -ms-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+            background: linear,to bottom,#fff 0%,#d4d4d4 100%;
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d4d4d4',GradientType=0 );
+            z-index: 9;
           }
         }
       }

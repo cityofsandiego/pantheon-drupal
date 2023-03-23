@@ -255,6 +255,34 @@ textarea {
 /* ============================================================
   Styles for fonts/typefaces.
   ============================================================ */
+/*
+ * General Mixins (put specific ones in component files where applicable)
+*/
+.comment-list article.comment-body footer, .leave-feedback {
+  /*
+   * Clearfix: contain floats
+   *
+   * For modern browsers
+   * 1. The space content is one way to avoid an Opera bug when the
+   *    `contenteditable` attribute is included anywhere else in the document.
+   *    Otherwise it causes space to appear at the top and bottom of elements
+   *    that receive the `clearfix` class.
+   * 2. The use of `table` rather than `block` is only necessary if using
+   *    `:before` to contain the top-margins of child elements.
+   */
+  /*
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+  *zoom: 1; }
+  .comment-list article.comment-body footer:before, .leave-feedback:before, .comment-list article.comment-body footer:after, .leave-feedback:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  .comment-list article.comment-body footer:after, .leave-feedback:after {
+    clear: both; }
+
 @font-face {
   font-family: 'icomoon';
   font-style: normal;
@@ -1532,7 +1560,7 @@ textarea {
   padding: 0.3em; }
 
 .icon-do-not {
-  color: #e28327;
+  color: #c51313;
   font-size: 1.8rem;
   position: relative;
   z-index: 5; }
@@ -1573,34 +1601,6 @@ textarea {
     .icon-do-not.icon--xl > [class^='icon-'],
     .icon-do-not.icon--xl [class*=' icon-'] {
       font-size: 2.75rem; }
-
-/*
- * General Mixins (put specific ones in component files where applicable)
-*/
-.comment-list article.comment-body footer, .leave-feedback {
-  /*
-   * Clearfix: contain floats
-   *
-   * For modern browsers
-   * 1. The space content is one way to avoid an Opera bug when the
-   *    `contenteditable` attribute is included anywhere else in the document.
-   *    Otherwise it causes space to appear at the top and bottom of elements
-   *    that receive the `clearfix` class.
-   * 2. The use of `table` rather than `block` is only necessary if using
-   *    `:before` to contain the top-margins of child elements.
-   */
-  /*
-   * For IE 6/7 only
-   * Include this rule to trigger hasLayout and contain floats.
-   */
-  *zoom: 1; }
-  .comment-list article.comment-body footer:before, .leave-feedback:before, .comment-list article.comment-body footer:after, .leave-feedback:after {
-    content: " ";
-    /* 1 */
-    display: table;
-    /* 2 */ }
-  .comment-list article.comment-body footer:after, .leave-feedback:after {
-    clear: both; }
 
 /* ============================================================
   Placeholders for repeat styles.
@@ -1687,9 +1687,10 @@ textarea {
     content: "";
     position: absolute;
     display: block;
-    background: #a7abad; }
-    .csstransforms3d .toggle-icon:before, .csstransforms3d .toggle-icon:after {
-      top: 50%; }
+    background: #a7abad;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+    transition: transform .25s, opacity .25s; }
   .toggle-icon:before {
     margin-top: -1px;
     width: 100%;
@@ -1705,13 +1706,13 @@ textarea {
     .csstransforms3d .toggle-icon:after {
       margin-left: auto; }
 
-.is-open > .accordion__heading {
+.is-open.accordion > .accordion__heading {
   font-weight: 700;
   background: white;
   border: 1px solid #a7abad;
   border-bottom: none; }
 
-.is-open .toggle-icon.open {
+.is-open.accordion .toggle-icon.open {
   -webkit-transition: -webkit-transform .25s;
   -moz-transition: -moz-transform .25s;
   transition: transform .25s;
@@ -1720,10 +1721,10 @@ textarea {
   -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg); }
-  .is-open .toggle-icon.open::before, .is-open .toggle-icon.open::after {
+  .is-open.accordion .toggle-icon.open::before, .is-open.accordion .toggle-icon.open::after {
     background: #0098db; }
 
-.is-open .accordion__link {
+.is-open.accordion .accordion__link {
   font-weight: bold; }
 
 .table__accordion {
@@ -1768,6 +1769,8 @@ textarea {
       line-height: 1; }
   .table__accordion .is-open .accordion__heading {
     border-bottom: none; }
+  .table__accordion .is-open .toggle-icon {
+    transform: rotate(180deg); }
   @media print, screen and (min-width: 48em) {
     .table__accordion td:first-child,
     .table__accordion th:first-child {
@@ -1809,7 +1812,7 @@ textarea {
   .alert .alert__content {
     padding: 0 .75em; }
 
-.amendities-restrictions--title {
+.amenities-restrictions--title {
   font-weight: bold;
   padding-left: 0.5rem; }
 
@@ -1867,11 +1870,13 @@ textarea {
     width: 100%; }
     @media print, screen and (min-width: 48em) {
       .card__container .card__wrap, .card__container .card--wrap {
-        margin: 0;
-        padding: .75em;
         display: -webkit-flex;
         /* Safari */
-        display: flex; }
+        display: flex;
+        margin: 0;
+        padding-left: 1.0416588541%;
+        padding-right: 1.0416588541%;
+        width: 33.333333%; }
         .card__container .card__wrap .card, .card__container .card--wrap .card {
           flex: 0 1 auto; } }
   .card__container .card__wrap_s, .card__container .card--wrap-s {
@@ -2006,7 +2011,9 @@ textarea {
 .featured-card-group {
   padding: 1rem 0; }
   .featured-card-group h2 {
-    font-family: "Merriweather", serif; }
+    font-family: "Merriweather", serif;
+    font-size: 1.6875rem;
+    margin: 1em 0 0.8em 0; }
   .featured-card-group .featured-card-group__wrapper {
     display: flex;
     flex-flow: column wrap;
@@ -2017,7 +2024,7 @@ textarea {
 /* Featured Card Item for D9 */
 .featured-card {
   background-color: #e4e9eb;
-  border-radius: 2px; }
+  border-radius: 4px; }
   @media print, screen and (min-width: 30em) {
     .featured-card {
       width: calc(50% - 1rem); } }
@@ -2030,14 +2037,18 @@ textarea {
   .featured-card .image {
     width: 100%;
     height: auto; }
+  .featured-card img {
+    border-radius: 4px 4px 0 0; }
   .featured-card .featured-card__content {
     color: #333332;
-    padding: 1rem; }
+    padding: 1.5em; }
+    @media print, screen and (min-width: 48em) {
+      .featured-card .featured-card__content {
+        font-size: .8125rem; } }
     .featured-card .featured-card__content .featured-card__heading {
       font-family: "Merriweather", serif;
-      font-size: 1rem; }
-    .featured-card .featured-card__content .featured-card__body {
-      margin: 1rem 0; }
+      font-size: 1rem;
+      margin: 0 0 0.75em; }
 
 .comments-title {
   color: #37424a;
@@ -2235,11 +2246,21 @@ textarea {
   text-align: center;
   position: relative;
   background-color: rgba(0, 0, 0, 0.35); }
+  @media print, screen and (min-width: 48em) {
+    .main__message {
+      padding: 2.5em 1em; }
+      .node-type-article .main__message {
+        padding: 3em 0; } }
+  @media print, screen and (max-width: 63.99875em) {
+    .main__message {
+      padding: 1.5em 1em; } }
   .main__message .main__heading {
     margin: 0;
     color: white;
-    font-size: 48px;
-    font-size:  calc($unitless-value / $baseline-px)rem; }
+    font-size: 3rem; }
+    @media print, screen and (max-width: 63.99875em) {
+      .main__message .main__heading {
+        font-size: 2rem; } }
     @media print {
       .main__message .main__heading {
         font-size: 2em; } }
@@ -2255,6 +2276,10 @@ textarea {
     line-height: 1rem;
     background-color: transparent;
     text-shadow: 0 0 #555, 0 2px 0.5em black, 2px 0 0.5em black, 0 0 black; }
+    @media print, screen and (max-width: 63.99875em) {
+      .main__message .main__tagline {
+        text-align: center;
+        font-weight: normal; } }
     @media print {
       .main__message .main__tagline {
         font-size: 2em; } }
@@ -2384,45 +2409,17 @@ textarea {
       width: 2rem;
       padding-left: 0.5rem; }
 
-.section-outreach2 {
-  /* Stellar
-   ========================================================================== */ }
-  .section-outreach2.border-bottom-none {
-    border-bottom: none; }
-  .section-outreach2.border-bottom-thin {
-    border-bottom: 1px solid #dde2e5; }
-  .section-outreach2.border-bottom-thick {
-    border-bottom: 5px solid #dde2e5; }
-  .section-outreach2 a {
-    text-decoration: none; }
-  .section-outreach2 .stellar-window {
-    background-size: 100% auto;
-    background-attachment: fixed;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    position: relative; }
-    @media print, screen and (min-width: 48em) {
-      .section-outreach2 .stellar-window {
-        min-height: 300px;
-        background-size: 100% auto; } }
-    @media print, screen and (max-width: 63.99875em) {
-      .section-outreach2 .stellar-window {
-        min-height: 150px;
-        background-size: auto 100%; } }
-    @media print, screen and (min-width: 48em) {
-      .section-outreach2 .stellar-window.repeat-x {
-        background-size: auto auto;
-        background-repeat: repeat-x; } }
-    .section-outreach2 .stellar-window h1, .section-outreach2 .stellar-window h2, .section-outreach2 .stellar-window h3, .section-outreach2 .stellar-window h4, .section-outreach2 .stellar-window p {
-      color: white;
-      text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black; }
-    .section-outreach2 .stellar-window .no-shadow h1, .section-outreach2 .stellar-window .no-shadow h2, .section-outreach2 .stellar-window .no-shadow h3, .section-outreach2 .stellar-window .no-shadow h4, .section-outreach2 .stellar-window .no-shadow p,
-    .section-outreach2 .stellar-window .no-styling h1,
-    .section-outreach2 .stellar-window .no-styling h2,
-    .section-outreach2 .stellar-window .no-styling h3,
-    .section-outreach2 .stellar-window .no-styling h4,
-    .section-outreach2 .stellar-window .no-styling p {
-      text-shadow: none; }
+.section-outreach2.border-bottom-none {
+  border-bottom: none; }
+
+.section-outreach2.border-bottom-thin {
+  border-bottom: 1px solid #dde2e5; }
+
+.section-outreach2.border-bottom-thick {
+  border-bottom: 5px solid #dde2e5; }
+
+.section-outreach2 a {
+  text-decoration: none; }
 
 /* ============================================================
   Styles for social links.
@@ -2556,7 +2553,49 @@ textarea {
         margin-left: 0.9375rem;
         margin-right: 0.9375rem; } }
 
+.featured-items h6 {
+  font-size: 1rem; }
+
+.featured-items a,
+.featured-items a:hover {
+  color: #37424a; }
+
+.featured-items .featured-item-label {
+  display: block;
+  margin: 1em 0 0.5em 0; }
+
 .featured-items .field--name-field-license {
   display: none; }
+
+/* Stellar
+   ========================================================================== */
+.stellar-window {
+  background-size: 100% auto;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  position: relative; }
+  @media print, screen and (min-width: 48em) {
+    .stellar-window {
+      min-height: 300px;
+      background-size: 100% auto; } }
+  @media print, screen and (max-width: 63.99875em) {
+    .stellar-window {
+      min-height: 150px;
+      background-size: auto 100%; } }
+  @media print, screen and (min-width: 48em) {
+    .stellar-window.repeat-x {
+      background-size: auto auto;
+      background-repeat: repeat-x; } }
+  .stellar-window h1, .stellar-window h2, .stellar-window h3, .stellar-window h4, .stellar-window p {
+    color: white;
+    text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black; }
+  .stellar-window .no-shadow h1, .stellar-window .no-shadow h2, .stellar-window .no-shadow h3, .stellar-window .no-shadow h4, .stellar-window .no-shadow p,
+  .stellar-window .no-styling h1,
+  .stellar-window .no-styling h2,
+  .stellar-window .no-styling h3,
+  .stellar-window .no-styling h4,
+  .stellar-window .no-styling p {
+    text-shadow: none; }
 
 /*# sourceMappingURL=molecules.css.map */

@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.digital_archives_photos.body
     - field.field.node.digital_archives_photos.field_category
+    - field.field.node.digital_archives_photos.field_d7_nid
     - field.field.node.digital_archives_photos.field_da_featured
     - field.field.node.digital_archives_photos.field_da_high_quality_url
     - field.field.node.digital_archives_photos.field_da_location
@@ -27,7 +28,12 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
     region: content
   field_da_high_quality_url:
     type: string
@@ -35,7 +41,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 6
+    weight: 7
     region: content
   field_da_location:
     type: string
@@ -43,7 +49,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   field_da_photo_date:
     type: string
@@ -51,7 +57,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   field_da_photographer:
     type: string
@@ -59,7 +65,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
   field_image:
     type: entity_reference_entity_view
@@ -68,15 +74,17 @@ content:
       view_mode: default
       link: true
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   field_category: true
+  field_d7_nid: true
   field_da_featured: true
   field_record_id: true
   field_search_keymatch: true
+  search_api_excerpt: true

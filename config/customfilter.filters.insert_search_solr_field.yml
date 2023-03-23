@@ -1,0 +1,23 @@
+uuid: 86907b14-af61-4076-966e-16da37c6c82c
+langcode: en
+status: true
+dependencies: {  }
+id: insert_search_solr_field
+name: 'Insert Solr Search Field'
+cache: false
+description: 'Insert a search field and button that will go to the given search page'
+shorttip: 'To insert a search block: [search-block:<search-path>{=<field_name1:<value1>,<value2>+<field_name2:<value1>,<value2>}]'
+longtip: 'To insert a search block: [search-block:<search-path>{=<field_name1:<value1>,<value2>+<field_name2:<value1>,<value2>}]'
+rules:
+  insert_search_form_url_and_facets:
+    rid: insert_search_form_url_and_facets
+    prid: ''
+    fid: insert_search_solr_field
+    name: insert_search_form_url_and_facets
+    description: 'Insert the rendered form using just search page url and facets in the form =<field_name>:<value1,value2>'
+    enabled: false
+    matches: null
+    pattern: '/\[search-block:(.*?)]/i'
+    replacement: '$result = sand_search_show_form($matches[1]);'
+    code: true
+    weight: 0

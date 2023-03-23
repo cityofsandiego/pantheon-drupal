@@ -36,7 +36,7 @@ class SettingsForm extends ConfigFormBase {
         ->getStorage('taxonomy_term')
         ->load($default_department);
     } catch (Exception $exception) {
-      \Drupal::logger(__CLASS__)->warning( 'Exception when trying to get the default department tid = @tid, exception: @exception', 
+      \Drupal::logger('sand_datalayer')->warning( 'Exception when trying to get the default department tid = @tid, exception: @exception', 
           [ '@tid' => $default_department, 
             '@exception' => $exception,
           ]

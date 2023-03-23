@@ -1,0 +1,59 @@
+uuid: 5ce959b5-98df-4467-8c67-f1cd6962cdee
+langcode: en
+status: true
+dependencies: {  }
+id: sd_nodes_registration
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: event_group
+label: 'Custom Registration node migration'
+source:
+  plugin: csv
+  path: modules/custom/if_sdmigration/migration_files/nodes/registration.csv
+  delimiter: ','
+  enclosure: '`'
+  escape: \
+  header_row_count: 1
+  ids:
+    - 'D7 ID'
+process:
+  title: Title
+  body/0/value: Body
+  body/0/format:
+    plugin: default_value
+    default_value: full_html
+  field_d7_nid: 'D7 ID'
+  field_reg_date: Date
+  status:
+    plugin: default_value
+    default_value: 1
+  moderation_state:
+    plugin: default_value
+    default_value: published
+  changed:
+    plugin: format_date
+    source: 'Updated date'
+    from_format: 'Y-m-d H:i:s'
+    to_format: U
+    from_timezone: UTC
+    to_timezone: UTC
+  created:
+    plugin: format_date
+    source: 'Post date'
+    from_format: 'Y-m-d H:i:s'
+    to_format: U
+    from_timezone: UTC
+    to_timezone: UTC
+  path/pathauto:
+    plugin: default_value
+    default_value: 0
+  path/alias:
+    plugin: concat
+    source:
+      - Path
+destination:
+  plugin: 'entity:node'
+  default_bundle: registration
+migration_dependencies: null
