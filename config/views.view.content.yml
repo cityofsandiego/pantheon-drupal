@@ -4,7 +4,30 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_department
+    - node.type.article
+    - node.type.blog
+    - node.type.bucket
+    - node.type.business_resource
+    - node.type.date
+    - node.type.department
+    - node.type.department_document
+    - node.type.department_parent
+    - node.type.digital_archives_photos
+    - node.type.event
     - node.type.external_data
+    - node.type.hero
+    - node.type.location
+    - node.type.mayoral_artifacts
+    - node.type.notification
+    - node.type.outreach
+    - node.type.outreach2
+    - node.type.outreach_article2
+    - node.type.registration
+    - node.type.resources
+    - node.type.sand_gallery
+    - node.type.sidebar_block_context
+    - node.type.slide
+    - node.type.webform
   module:
     - hierarchical_term_formatter
     - history
@@ -512,9 +535,33 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
-          operator: 'not in'
+          operator: in
           value:
+            all: all
+            article: article
+            blog: blog
+            bucket: bucket
+            business_resource: business_resource
+            date: date
+            department: department
+            department_document: department_document
+            department_parent: department_parent
+            digital_archives_photos: digital_archives_photos
+            event: event
             external_data: external_data
+            sand_gallery: sand_gallery
+            hero: hero
+            location: location
+            mayoral_artifacts: mayoral_artifacts
+            notification: notification
+            outreach: outreach
+            outreach_article2: outreach_article2
+            outreach2: outreach2
+            registration: registration
+            resources: resources
+            sidebar_block_context: sidebar_block_context
+            slide: slide
+            webform: webform
           group: 1
           exposed: true
           expose:
