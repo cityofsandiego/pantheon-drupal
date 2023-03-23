@@ -32,6 +32,8 @@ lando terminus drush mi:import sd_nodes_outreach2_article -- --update --force
 lando terminus drush mi:import sd_nodes_business_resource -- --update --force
 lando terminus drush mi:import sd_nodes_registration -- --update --force
 lando terminus drush mi:import sd_nodes_event -- --update --force
+lando terminus drush mi:import sd_nodes_gallery -- --update --force
+lando terminus drush mi:import sd_nodes_digital_archives_photos -- --update --force
 
 Menu import:
 lando terminus drush import:menus
@@ -53,6 +55,9 @@ lando terminus drush import:blog
 lando terminus drush import:outreach2_article
 lando terminus drush import:business_resource
 lando terminus drush import:registration
+lando terminus drush import:event
+lando terminus drush import:gallery
+lando terminus drush import:digital_archives_photos
 
 Fix class names/HTML content cleanup:
 lando terminus drush import:class-fixes
