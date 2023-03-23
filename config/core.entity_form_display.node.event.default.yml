@@ -50,6 +50,7 @@ dependencies:
     - address
     - conditional_fields
     - content_moderation
+    - datetime
     - field_group
     - geofield
     - link
@@ -58,6 +59,7 @@ dependencies:
     - scheduler
     - scheduler_content_moderation_integration
     - smart_date
+    - smart_date_recur
     - term_reference_fancytree
     - text
 third_party_settings:
@@ -233,7 +235,7 @@ content:
     third_party_settings: {  }
   field_event_activity_desc:
     type: string_textarea
-    weight: 41
+    weight: 40
     region: content
     settings:
       rows: 5
@@ -241,14 +243,14 @@ content:
     third_party_settings: {  }
   field_event_activity_seq_num:
     type: number
-    weight: 35
+    weight: 34
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_event_activity_type_cd:
     type: options_select
-    weight: 36
+    weight: 35
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -260,7 +262,7 @@ content:
     third_party_settings: {  }
   field_event_cost_txt:
     type: string_textfield
-    weight: 40
+    weight: 39
     region: content
     settings:
       size: 60
@@ -308,21 +310,21 @@ content:
     third_party_settings: {  }
   field_event_expected_attendance:
     type: number
-    weight: 42
+    weight: 41
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_event_expected_participant:
     type: number
-    weight: 43
+    weight: 42
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_event_host_nm:
     type: string_textfield
-    weight: 45
+    weight: 44
     region: content
     settings:
       size: 60
@@ -336,7 +338,7 @@ content:
     third_party_settings: {  }
   field_event_location_txt:
     type: string_textarea
-    weight: 38
+    weight: 37
     region: content
     settings:
       rows: 5
@@ -344,7 +346,7 @@ content:
     third_party_settings: {  }
   field_event_management_cd:
     type: string_textfield
-    weight: 37
+    weight: 36
     region: content
     settings:
       size: 60
@@ -352,7 +354,7 @@ content:
     third_party_settings: {  }
   field_event_media_contact_txt:
     type: string_textfield
-    weight: 49
+    weight: 48
     region: content
     settings:
       size: 60
@@ -381,7 +383,7 @@ content:
     third_party_settings: {  }
   field_event_non_public_contact:
     type: string_textfield
-    weight: 48
+    weight: 47
     region: content
     settings:
       size: 60
@@ -389,7 +391,7 @@ content:
     third_party_settings: {  }
   field_event_organizer_nm:
     type: string_textfield
-    weight: 46
+    weight: 45
     region: content
     settings:
       size: 60
@@ -397,7 +399,7 @@ content:
     third_party_settings: {  }
   field_event_public_contact_txt:
     type: string_textfield
-    weight: 47
+    weight: 46
     region: content
     settings:
       size: 60
@@ -405,45 +407,34 @@ content:
     third_party_settings: {  }
   field_event_public_visibility:
     type: boolean_checkbox
-    weight: 51
+    weight: 50
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_event_seq_num:
     type: number
-    weight: 34
+    weight: 33
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_event_setup_dt:
-    type: smartdate_inline
-    weight: 44
+    type: datetime_default
+    weight: 43
     region: content
-    settings:
-      modal: false
-      default_duration: 60
-      default_duration_increments: |-
-        30
-        60|1 hour
-        90
-        120|2 hours
-        custom
-      show_extra: false
-      hide_date: true
-      separator: to
+    settings: {  }
     third_party_settings: {  }
   field_event_setup_end_time_ind:
     type: boolean_checkbox
-    weight: 32
+    weight: 31
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_event_setup_start_time_ind:
     type: boolean_checkbox
-    weight: 33
+    weight: 32
     region: content
     settings:
       display_label: true
@@ -483,7 +474,7 @@ content:
             selector: ''
   field_event_vendor_contact_txt:
     type: string_textfield
-    weight: 50
+    weight: 49
     region: content
     settings:
       size: 60
@@ -491,7 +482,7 @@ content:
     third_party_settings: {  }
   field_evet_pin_address:
     type: string_textfield
-    weight: 39
+    weight: 38
     region: content
     settings:
       size: 60
