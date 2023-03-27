@@ -83,19 +83,18 @@
             <div class="grid-x">
               <div class="cell small-12 get-it-done">
                 <h2>Get It Done</h2>
-              </div>
-              <div class="cell small-12 homepage-featured-items alto-bg">
-                <div class="text-center l-padding-vm l-padding-mobile-td l-padding-mobile-bn">
-                  <h2>Featured items</h2>
-                </div>
+                {{ drupal_entity('webform', 'webform_13161') }}
+                {{ drupal_block('block_content:7500dd99-1c24-428f-97a2-2581f90d4d96') }}
+                {{ drupal_block('block_content:0c0583e3-04f3-429f-98d0-494fc9d45b24') }}
               </div>
             </div>
             <div class="grid-x">
               <div class="cell medium-9">
-                <h2>Our Sand Diego</h2>
+                <h2>Our San Diego</h2>
               </div>
               <div class="cell medium-3">
-                <h2>Notification</h2>
+                {{ drupal_block('block_content:6d133883-9e8e-45de-8c27-faaf776dae64') }}
+                {{ drupal_block('block_content:4134a824-c052-4c61-af3a-2720cdb9e660') }}
               </div>
             </div>
 
@@ -104,10 +103,10 @@
                 <h2>Calendar</h2>
               </div>
               <div class="cell medium-6">
-                <h3>Meetings</h3>
-                </div>
+                {{ drupal_view('events', 'meetings')}}
+              </div>
               <div class="cell medium-6">
-                <h3>Events</h3>
+                {{ drupal_view('events', 'events')}}
               </div>
             </div>
           </div>{# /.layout-content #}
