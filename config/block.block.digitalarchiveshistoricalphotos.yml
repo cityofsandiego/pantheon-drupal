@@ -1,0 +1,33 @@
+uuid: a69c70c0-2730-4ae8-ac34-b1ef9a6ef2fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.sub-3052-historical-photos
+  module:
+    - node
+    - system
+  theme:
+    - sand
+id: digitalarchiveshistoricalphotos
+theme: sand
+region: content
+weight: 0
+provider: null
+plugin: 'system_menu_block:sub-3052-historical-photos'
+settings:
+  id: 'system_menu_block:sub-3052-historical-photos'
+  label: 'Digital Archives|Historical Photos'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      digital_archives_photos: digital_archives_photos

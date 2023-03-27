@@ -1,0 +1,182 @@
+.node--type-digital-archives-photos {
+  h1 {
+    font-size: 2.25rem;
+    margin: 0.5em 0
+  }
+
+  h2 {
+    font-size: 1.6875rem;
+  }
+
+  .photographer-date {
+    text-align: center;
+    
+    @include breakpoint(medium) {
+      font-size: .8125rem;
+      text-align: left;
+    }
+  }
+
+  .fine-print {
+    font-size: .75rem;
+  }
+
+  .field--name-body {
+    text-align: center;
+
+    @include breakpoint(medium) {
+      text-align: left;
+    }
+  }
+  .sidebar {
+    border-left: 1px solid $white;
+    margin: 1rem 2rem 2rem;
+    padding: 2em;
+
+    @include breakpoint(medium) {
+      margin: 0;
+      height: 100%;
+      padding: 1.5em;
+    }
+
+    & > h2 {
+      margin-top: 0;
+
+      @include breakpoint(medium) {
+        margin-top: 1.5rem;
+      }
+    }
+
+    ul {
+      padding: 0;
+      list-style-type: none;
+      margin: 0;
+
+      li {
+        margin-bottom: 1rem;
+
+        .btn {
+          font-size: 0.938rem;
+        }
+      }
+
+
+      &.sidebar-menu {
+        list-style: circle;
+        margin: 0 0 2em 1.2rem;
+
+        li {
+          padding: 0.2em 0.5em 0 0;
+          margin: 0 0 0.3rem 0;
+          line-height: 1.2;
+
+          a {
+            font-size: .8125rem;
+          }
+
+          ul {
+            list-style: circle;
+            margin-left: 1.1rem;
+          }
+        }
+      }
+    }
+
+  }
+
+  .resources {
+    display: block;
+  }
+}
+
+.department-menu {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+  font-family: $body-copy;
+
+  @include breakpoint(medium) {
+    display: flex;
+  }
+
+  li {
+    margin: 0 0.5rem 0 0;
+
+    a {
+      background: $teal;
+      color: $mercury;
+      font-size: 1rem;
+      padding: 0.2em 0.75em;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
+      width: 100%;
+
+      @include breakpoint(medium) {
+        font-size: 0.8125rem;
+        padding: 0.5em 0.75em;
+        line-height: 1.2;
+        height: 100%;
+      }
+
+      &:hover {
+        color: $white;
+      }
+
+      &.is-active {
+          color: $black;
+      }
+    }
+
+    &.active {
+      a {
+        color: $black;
+      }
+    }
+  }
+}
+
+.sub-navigation-mobile {
+  .accordion__heading {
+    color: $white;
+    background: $teal;
+
+    .accordion__link {
+      color: $white;
+      font-family: $body-copy;
+      font-weight: bold;
+
+      i {
+        color: $white;
+      }
+
+      .toggle-icon:before, .toggle-icon:after {
+        background: $white;
+      }
+    }
+  }
+
+  .accordion__drawer {
+    color: $white;
+    background: $teal;
+  }
+
+  .is-open {
+    .accordion__heading {
+      color: $spruce;
+      background: $white;
+  
+      .accordion__link {
+        color: $spruce;
+  
+        i {
+          color: $spruce;
+        }
+  
+        .toggle-icon:before, .toggle-icon:after {
+          background: $spruce;
+        }
+      }
+    }
+  }
+}
