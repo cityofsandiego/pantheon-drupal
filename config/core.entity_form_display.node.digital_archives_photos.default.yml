@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.digital_archives_photos.field_da_location
     - field.field.node.digital_archives_photos.field_da_photo_date
     - field.field.node.digital_archives_photos.field_da_photographer
+    - field.field.node.digital_archives_photos.field_department
     - field.field.node.digital_archives_photos.field_image
     - field.field.node.digital_archives_photos.field_record_id
     - field.field.node.digital_archives_photos.field_search_keymatch
@@ -23,6 +24,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - term_reference_fancytree
     - text
 third_party_settings:
   field_group:
@@ -63,6 +65,7 @@ third_party_settings:
         required_fields: true
     group_vocabularies:
       children:
+        - field_department
         - field_search_keymatch
         - field_category
       label: Vocabularies
@@ -100,7 +103,7 @@ content:
     third_party_settings: {  }
   field_category:
     type: entity_reference_autocomplete
-    weight: 22
+    weight: 28
     region: content
     settings:
       match_operator: CONTAINS
@@ -147,6 +150,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_department:
+    type: term_reference_fancytree
+    weight: 26
+    region: content
+    settings:
+      select_all: false
+      select_children: false
+    third_party_settings: {  }
   field_image:
     type: media_library_widget
     weight: 14
@@ -164,7 +175,7 @@ content:
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete
-    weight: 21
+    weight: 27
     region: content
     settings:
       match_operator: CONTAINS
