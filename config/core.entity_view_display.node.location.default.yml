@@ -76,7 +76,7 @@ content:
     settings:
       map_dimensions:
         width: 100%
-        height: 450px
+        height: 250px
       map_empty:
         empty_behaviour: '0'
         empty_message: 'No Geofield Value entered for this field'
@@ -86,13 +86,14 @@ content:
         center_force: false
       map_zoom_and_pan:
         zoom:
-          initial: 6
+          initial: 15
           force: false
           min: 1
           max: 22
           finer: 0
-        scrollwheel: true
-        draggable: true
+        gestureHandling: auto
+        scrollwheel: false
+        draggable: false
         map_reset_position: TOP_RIGHT
         map_reset: false
       map_controls:
@@ -100,18 +101,22 @@ content:
         map_type_id: roadmap
         map_type_control: true
         map_type_control_options_type_ids:
-          roadmap: roadmap
+          roadmap: '0'
           satellite: satellite
-          hybrid: hybrid
-          terrain: terrain
+          hybrid: '0'
+          terrain: '0'
         scale_control: true
-        street_view_control: true
-        fullscreen_control: true
+        street_view_control: false
+        fullscreen_control: false
         disable_default_ui: false
       map_marker_and_infowindow:
         icon_image_mode: icon_file
         icon_file_wrapper:
-          icon_file: ''
+          icon_file:
+            fids: ''
+            upload: ''
+            is_svg: false
+          image_style: geofield_map_default_icon_style
         icon_image_path: ''
         infowindow_field: title
         view_mode: full
@@ -120,33 +125,40 @@ content:
         force_open: false
       map_oms:
         map_oms_control: true
-        map_oms_options: '{"markersWontMove": "true", "markersWontHide": "true", "basicFormatEvents": "true", "nearbyDistance": 3}'
+        map_oms_options: '{"markersWontMove":"true","markersWontHide":"true","basicFormatEvents":"true","nearbyDistance":3}'
       map_additional_options: ''
-      map_geometries_options: '{"strokeColor":"black","strokeOpacity":"0.8","strokeWeight":2,"fillColor":"blue","fillOpacity":"0.1", "clickable": false}'
+      map_geometries_options: '{"strokeColor":"black","strokeOpacity":"0.8","strokeWeight":2,"fillColor":"blue","fillOpacity":"0.1","clickable":false}'
       custom_style_map:
         custom_style_name: ''
         custom_style_options: ''
         custom_style_control: false
         custom_style_default: false
       map_markercluster:
-        markercluster_additional_options: '{"maxZoom":12, "gridSize":50}'
+        markercluster_additional_options: '{"maxZoom":12,"gridSize":50}'
         markercluster_control: false
       map_geocoder:
         control: 0
         settings:
-          providers: {  }
+          providers:
+            googlemaps:
+              weight: 0
+              checked: false
           min_terms: 4
           delay: 800
           options: ''
           zoom: 16
           infowindow: false
-          position: topright
+          position: TOP_LEFT
           input_size: 25
-      map_additional_libraries: {  }
+      map_additional_libraries:
+        places: false
+        drawing: false
+        geometry: false
+        visualization: false
       map_lazy_load:
         lazy_load: false
       gmap_api_key: ''
-      weight: null
+      weight: ''
     third_party_settings: {  }
     weight: 6
     region: content
