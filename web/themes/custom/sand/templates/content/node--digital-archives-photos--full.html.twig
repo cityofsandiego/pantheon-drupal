@@ -80,31 +80,44 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
   ]
 %}
+
 <article{{ attributes.addClass(classes) }}>
 
-  {{ title_prefix }}
-  {% if not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
-
   <div{{ content_attributes.addClass('node__content') }}>
-  <div class="grid-y">
-    <div class="cell small-6 background-white">
-      <div class="main__message main__message--white">
-        <h1 class="main__heading">{{ label }}</h1>
+    <div class="grid-x">
+      <div class="cell small-12 medium-auto content">
+        <div class="l-padding-desktop-am l-padding-mobile-vm">
+          <h1>{{ label }}</h1>
+
+          {% if content.field_subtitle[0] %}
+            <h2>{{ content.field_subtitle }}</h2>
+          {% endif %}
+
+          <div class="grid-x grid-padding-x grid-padding-y">
+            <div class="cell medium-7">
+              {{ content.field_image }}
+            </div>
+            <div class="cell medium-5">
+              <p class="photographer-date">
+                <em>{{ content.field_da_photographer.0 }}, 
+                {{ content.field_da_photo_date.0 }}</em>
+              </p>
+              {{ content.body }}
+             <p><i class="icon-bubble-text"></i> <a href="#feedback" class="popup-modal fine-print">Provide feedback for this photo</a></p> 
+             {% if content.field_da_high_quality_url[0] %}
+              <p><i class="icon-picture"></i> <a class="fine-print" href="{{ content.field_da_high_quality_url.0 }}">Download high resolution photo</a></p>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cell medium-3 large-3">
+        <div class="light-gray-bg sidebar">
+              {{ drupal_menu('digital-archives') }}
+        </div>
       </div>
     </div>
-  </div>
-  <div class="grid-y background-off-white">
-    <div class="cell small-12 content">
-      <div class="l-padding-am grid-margin-x">
-        {{ content }}
-      </div>
-    </div>
-  </div>
   </div>
 
 </article>
