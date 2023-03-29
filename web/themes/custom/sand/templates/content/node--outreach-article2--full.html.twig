@@ -103,7 +103,9 @@
   {{ title_suffix }}
 
   {# Custom block: Mayor Todd Gloria Top Navigation #}
-  {{ drupal_entity('block_content', '15') }}
+  {% if mayor_todd_gloria %}
+    {{ drupal_entity('block_content', '15') }}
+  {% endif %}
 
   <div{{ content_attributes.addClass('node__content') }}>
   {% if content.field_image.0 %}
@@ -120,9 +122,9 @@
     </div>  
   {% endif %}
     <div {{ header_attribute.addClass(header_classes).setAttribute('style', style) }}>
-      <h1 class="article-title">{{ label }}</h1>
+      <h1 class="article-title heading--center heading--snug l-margin-bm l-margin-desktop-tm l-padding-mobile-hm">{{ label }}</h1>
       {% if content.field_subtitle.0 %}
-        <p class="subtitle h3"> 
+        <p class="subtitle h3 heading--center l-margin-bd"> 
           {{ content.field_subtitle.0 }} 
         </p>
       {% endif %}
@@ -131,17 +133,16 @@
     <div class="main-content l-constrained l-margin-bm l-margin-desktop-tm l-padding-mobile-hm">
         {{ content.body }}
 
-        {% if 'Mayor Todd Gloria' in content.field_department %}
+        {% if mayor_todd_gloria %}
           <div class="article-custom-block">
-            {% if 'Press Releases' in content.field_department %}
+            {% if press_releases %}
               {{ drupal_entity('block_content', '17') }}
             {% endif %}
-            {% if 'Op-ed' in content.field_department %}
+            {% if op_ed %}
               {{ drupal_entity('block_content', '16') }}
             {% endif %}
           </div>    
         {% endif %}
-
     </div>
   </div>
 </article>
