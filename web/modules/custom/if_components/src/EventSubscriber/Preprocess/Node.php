@@ -310,6 +310,12 @@ final class Node implements EventSubscriberInterface {
       } else {
         $variables->set('bg_style', '');
       }
+
+      foreach ($node->field_department->getValue() as $department) {
+        $term = Term::load($department['target_id']);
+        $department_name = preg_replace('/[\- ]/', '_', $term->getName());
+        $variables->set(strtolower($department_name), $term->getName());
+      }
     }
   }
 
