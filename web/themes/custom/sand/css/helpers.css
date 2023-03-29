@@ -1859,6 +1859,16 @@ textarea {
   border-left: none;
   border-top: none; }
 
+@media print, screen and (min-width: 48em) {
+  .border--right--desktop {
+    border-bottom: none;
+    border-left: none;
+    border-top: none; } }
+
+@media print, screen and (max-width: 63.99875em) {
+  .no-border-on-mobile {
+    border: none !important; } }
+
 .border-radius {
   border-radius: 4px; }
 
@@ -2330,7 +2340,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  margin: 1em 0 0.5em 0;
+  padding: 1em 0 0.5em 0;
   color: #37424a;
   font-weight: normal;
   font-family: "Merriweather", serif; }
@@ -2534,8 +2544,7 @@ span[class^="text-"] {
 /* Text Formatting
    ========================================================================== */
 .fine-print {
-  font-size: 12px;
-  font-size:  calc($unitless-value / $baseline-px)rem; }
+  font-size: .75rem; }
 
 .text-accent {
   font-size: 22px;
