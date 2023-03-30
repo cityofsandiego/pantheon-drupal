@@ -70,6 +70,9 @@
  *   in different view modes.
  */
 #}
+
+{{ attach_library('sand/imagezoom') }}
+
 {%
   set classes = [
     'node',
@@ -81,23 +84,25 @@
   ]
 %}
 
-<article{{ attributes.addClass(classes) }}>
+{% set image = node.field_image | file_uri | image_style('large') %}
 
+{% set imagezoom = node.field_image | file_url %}
+
+<article{{ attributes.addClass(classes) }}>
   <div{{ content_attributes.addClass('node__content') }}>
     <div class="grid-x">
       <div class="cell small-12 medium-auto content">
         <div class="l-padding-desktop-am l-padding-mobile-vm">
-          <h1>{{ label }}</h1>
-
-          {% if content.field_subtitle[0] %}
-            <h2>{{ content.field_subtitle }}</h2>
-          {% endif %}
-
           <div class="grid-x grid-padding-x grid-padding-y">
-            <div class="cell medium-7">
-              {{ content.field_image }}
+            <div class="cell small-12">
+              <h1>{{ label }}</h1>
             </div>
-            <div class="cell medium-5">
+
+            <div class="cell medium-7 text-center">
+              <p><img id="main-image" src="{{ image }}" data-zoom-image="{{ imagezoom }}"/></p>
+              <p class="fine-print"><em>Magnify by hovering your mouse over the image. Zoom in/out with the mousewheel.</em></p>
+            </div>
+            <div class="cell medium-5 photo-content">
               <p class="photographer-date">
                 <em>{{ content.field_da_photographer.0 }}, 
                 {{ content.field_da_photo_date.0 }}</em>
@@ -112,9 +117,12 @@
         </div>
       </div>
 
-      <div class="cell medium-3 large-3">
-        <div class="light-gray-bg sidebar">
-              {{ drupal_menu('digital-archives') }}
+      <div class="cell medium-3 large-3 background-off-white">
+        <div class="sidebar">
+          <div class="widget l-padding-hs l-margin-bd">
+            <h2 class="block block-menu contextual-links-region">Historical Photos</h2>
+            {{ drupal_entity('block_content', '22') }}
+          </div>
         </div>
       </div>
     </div>
