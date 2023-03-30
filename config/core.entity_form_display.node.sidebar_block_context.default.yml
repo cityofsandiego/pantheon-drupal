@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.sidebar_block_context.field_top_menu_id
     - node.type.sidebar_block_context
   module:
+    - content_moderation
     - paragraphs
 id: node.sidebar_block_context.default
 targetEntityType: node
@@ -78,6 +79,13 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default

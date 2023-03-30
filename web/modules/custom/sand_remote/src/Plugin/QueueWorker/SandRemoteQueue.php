@@ -20,7 +20,7 @@ use Drupal\sand_remote\ExtractText;
  * @QueueWorker(
  *   id = "sand_remote_queue",
  *   title = @Translation("Sand Remote Queue"),
- *   cron = {"time" = 60}
+ *   cron = {"time" = 40}
  * )
  */
 class SandRemoteQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface {
