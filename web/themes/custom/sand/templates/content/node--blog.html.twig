@@ -82,18 +82,10 @@
 %}
 <article{{ attributes.addClass(classes) }}>
 
-  {{ title_prefix }}
-  {% if not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
-
   <div {{ content_attributes.addClass('node__content') }}>
     <div class="grid-x l-margin-ts l-margin-bd l-padding-desktop-hm">
-      <div class="cell small-12 medium-auto blog-title l-padding-ad l-padding-desktop-hx text-center">
-        <h1 class="main__heading blog-title l-padding-desktop-hd">{{ label.0 }}</h1>
+      <div class="cell small-12 medium-auto main__message main__message--white l-padding-mobile-hm">
+        <h1 class="main__heading l-padding-desktop-hd">{{ label.0 }}</h1>
 
         {% if content.field_subtitle[0] %}
         <div class="main__content subheading l-padding-desktop-hd">
