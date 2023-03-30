@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.mayoral_artifacts.field_search_keymatch
     - node.type.mayoral_artifacts
   module:
+    - content_moderation
     - field_group
     - media_library
     - path
@@ -170,6 +171,13 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
