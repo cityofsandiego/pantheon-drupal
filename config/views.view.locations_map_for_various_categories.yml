@@ -32,7 +32,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Locations Map for Various Categories'
+      title: ''
       fields:
         title:
           id: title
@@ -406,10 +406,10 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
-        field_location_location_type_target_id:
-          id: field_location_location_type_target_id
-          table: node__field_location_location_type
-          field: field_location_location_type_target_id
+        field_location_type_target_id:
+          id: field_location_type_target_id
+          table: node__field_location_type
+          field: field_location_type_target_id
           relationship: none
           group_type: group
           admin_label: ''
@@ -454,6 +454,90 @@ display:
           error_message: true
       style:
         type: geofield_google_map
+        options:
+          data_source:
+            field_address_pin: field_address_pin
+          entity_source: __base_table
+          map_dimensions:
+            width: 100%
+            height: 450px
+          map_empty:
+            empty_behaviour: '0'
+          map_center:
+            center_force: '1'
+            lat: '32.7929316'
+            lon: '-117.028228'
+            geocode: 'Find my location'
+          map_zoom_and_pan:
+            zoom:
+              initial: '10'
+              force: 0
+              min: '1'
+              max: '22'
+              finer: '0'
+            gestureHandling: auto
+            scrollwheel: '1'
+            draggable: '1'
+            map_reset: 0
+            map_reset_position: TOP_RIGHT
+          map_controls:
+            disable_default_ui: 0
+            zoom_control: 1
+            map_type_id: roadmap
+            map_type_control: 1
+            map_type_control_options_type_ids:
+              roadmap: roadmap
+              satellite: satellite
+              hybrid: hybrid
+              terrain: terrain
+            scale_control: 1
+            street_view_control: 1
+            fullscreen_control: 1
+          map_marker_and_infowindow:
+            icon_image_path: ''
+            infowindow_field: field_website
+            multivalue_split: 0
+            view_mode: full
+            tooltip_field: title
+            theming:
+              plugin_id: none
+              plugins_descriptions:
+                table: ''
+          weight: ''
+          map_additional_options: ''
+          map_additional_libraries:
+            places: 0
+            drawing: 0
+            geometry: 0
+            visualization: 0
+          map_geometries_options: '{"strokeColor":"black","strokeOpacity":"0.8","strokeWeight":2,"fillColor":"blue","fillOpacity":"0.1","clickable":false}'
+          map_oms:
+            map_oms_control: 1
+            map_oms_options: '{"markersWontMove":"true","markersWontHide":"true","basicFormatEvents":"true","nearbyDistance":3}'
+          custom_style_map:
+            custom_style_control: 0
+            custom_style_name: ''
+            custom_style_options: ''
+            custom_style_default: 0
+          map_markercluster:
+            markercluster_control: 0
+            markercluster_additional_options: '{"maxZoom":12,"gridSize":50}'
+          map_geocoder:
+            control: 0
+            settings:
+              position: TOP_LEFT
+              input_size: '25'
+              providers:
+                googlemaps:
+                  weight: '0'
+                  checked: 0
+              min_terms: '4'
+              delay: '800'
+              zoom: '16'
+              infowindow: 0
+              options: ''
+          map_lazy_load:
+            lazy_load: 0
       row:
         type: fields
       query:
