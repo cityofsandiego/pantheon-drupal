@@ -2305,113 +2305,113 @@ class CustomCommands extends DrushCommands {
     }
   }
 
-  /**
-   * Manual node full_html content fixes.
-   *
-   * @command import:class-fixes
-   *
-   * @usage import:class-fixes
-   *
-   */
-  public function contentFixes() {
-    // Load nodes.
-    $query = $this->entityTypeManager
-      ->getStorage('node')
-      ->getQuery();
-    $query->condition('type', ['department', 'location'], 'IN');
-    $nids = $query->execute();
-    foreach ($nids as $id) {
-      \Drupal::service('entity.memory_cache')->deleteAll();
-      $node = Node::load($id);
-      if ($node->hasField('field_sidebar')) {
-        $sidebar_html = $node->field_sidebar->value;
-      }
-      else {
-        $sidebar_html = NULL;
-      }
-      $body_html = $node->body->value;
-      if (strpos($sidebar_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
-        $sidebar_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $sidebar_html);
-        $node->field_sidebar->value = $sidebar_html;
-        $node->save();
-        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
-      }
-      if (strpos($body_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
-        $body_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $body_html);
-        $node->body->value = $body_html;
-        $node->save();
-        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
-      }
-      if (strpos($body_html, 'class="row') !== FALSE || strpos($body_html, 'columns') !== FALSE) {
-        $body_html = str_replace('  ', ' ', $body_html);
-        $body_html = str_replace('class="row', 'class="grid-x grid-margin-x', $body_html);
-        $body_html = str_replace('class="one columns', 'class="cell medium-1', $body_html);
-        $body_html = str_replace('class="two columns', 'class="cell medium-2', $body_html);
-        $body_html = str_replace('class="three columns', 'class="cell medium-3', $body_html);
-        $body_html = str_replace('class="four columns', 'class="cell medium-4', $body_html);
-        $body_html = str_replace('class="five columns', 'class="cell medium-5', $body_html);
-        $body_html = str_replace('class="six columns', 'class="cell medium-6', $body_html);
-        $body_html = str_replace('class="seven columns', 'class="cell medium-7', $body_html);
-        $body_html = str_replace('class="eight columns', 'class="cell medium-8', $body_html);
-        $body_html = str_replace('class="nine columns', 'class="cell medium-9', $body_html);
-        $body_html = str_replace('class="ten columns', 'class="cell medium-10', $body_html);
-        $body_html = str_replace('class="eleven columns', 'class="cell medium-11', $body_html);
-        $body_html = str_replace('class="twelve columns', 'class="cell medium-12', $body_html);
-        $body_html = str_replace('class="sm-two columns', 'class="cell small-2', $body_html);
-        $body_html = str_replace('class="sm-three columns', 'class="cell small-3', $body_html);
-        $body_html = str_replace('class="sm-seven columns', 'class="cell small-7', $body_html);
-        $body_html = str_replace('class="sm-ten columns', 'class="cell small-10', $body_html);
-        $body_html = str_replace('class="two sm-two columns', 'class="cell medium-2 small-2', $body_html);
-        $body_html = str_replace('class="ten sm-ten columns', 'class="cell medium-10 small-10', $body_html);
-        $node->body->value = $body_html;
-        $node->save();
-        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
-      }
-    }
-
-    // Load paragraphs.
-    $query = $this->entityTypeManager
-      ->getStorage('paragraph')
-      ->getQuery();
-    $query->condition('type', ['sections_outreach2'], 'IN');
-    $pids = $query->execute();
-    foreach ($pids as $id) {
-      \Drupal::service('entity.memory_cache')->deleteAll();
-      $paragraph = Paragraph::load($id);
-      $body_html = $paragraph->field_body->value;
-      if (strpos($body_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
-        $body_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $body_html);
-        $paragraph->field_body->value = $body_html;
-        $paragraph->save();
-        echo 'Paragraph #' . $paragraph->id() . ' updated.' . PHP_EOL;
-      }
-      if (strpos($body_html, 'class="row') !== FALSE || strpos($body_html, 'columns') !== FALSE) {
-        $body_html = str_replace('  ', ' ', $body_html);
-        $body_html = str_replace('class="row', 'class="grid-x grid-margin-x', $body_html);
-        $body_html = str_replace('class="one columns', 'class="cell medium-1', $body_html);
-        $body_html = str_replace('class="two columns', 'class="cell medium-2', $body_html);
-        $body_html = str_replace('class="three columns', 'class="cell medium-3', $body_html);
-        $body_html = str_replace('class="four columns', 'class="cell medium-4', $body_html);
-        $body_html = str_replace('class="five columns', 'class="cell medium-5', $body_html);
-        $body_html = str_replace('class="six columns', 'class="cell medium-6', $body_html);
-        $body_html = str_replace('class="seven columns', 'class="cell medium-7', $body_html);
-        $body_html = str_replace('class="eight columns', 'class="cell medium-8', $body_html);
-        $body_html = str_replace('class="nine columns', 'class="cell medium-9', $body_html);
-        $body_html = str_replace('class="ten columns', 'class="cell medium-10', $body_html);
-        $body_html = str_replace('class="eleven columns', 'class="cell medium-11', $body_html);
-        $body_html = str_replace('class="twelve columns', 'class="cell medium-12', $body_html);
-        $body_html = str_replace('class="sm-two columns', 'class="cell small-2', $body_html);
-        $body_html = str_replace('class="sm-three columns', 'class="cell small-3', $body_html);
-        $body_html = str_replace('class="sm-seven columns', 'class="cell small-7', $body_html);
-        $body_html = str_replace('class="sm-ten columns', 'class="cell small-10', $body_html);
-        $body_html = str_replace('class="two sm-two columns', 'class="cell medium-2 small-2', $body_html);
-        $body_html = str_replace('class="ten sm-ten columns', 'class="cell medium-10 small-10', $body_html);
-        $paragraph->field_body->value = $body_html;
-        $paragraph->save();
-        echo 'Paragraph #' . $paragraph->id() . ' updated.' . PHP_EOL;
-      }
-    }
-  }
+//  /**
+//   * Manual node full_html content fixes.
+//   *
+//   * @command import:class-fixes
+//   *
+//   * @usage import:class-fixes
+//   *
+//   */
+//  public function contentFixes() {
+//    // Load nodes.
+//    $query = $this->entityTypeManager
+//      ->getStorage('node')
+//      ->getQuery();
+//    $query->condition('type', ['department', 'location'], 'IN');
+//    $nids = $query->execute();
+//    foreach ($nids as $id) {
+//      \Drupal::service('entity.memory_cache')->deleteAll();
+//      $node = Node::load($id);
+//      if ($node->hasField('field_sidebar')) {
+//        $sidebar_html = $node->field_sidebar->value;
+//      }
+//      else {
+//        $sidebar_html = NULL;
+//      }
+//      $body_html = $node->body->value;
+//      if (strpos($sidebar_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
+//        $sidebar_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $sidebar_html);
+//        $node->field_sidebar->value = $sidebar_html;
+//        $node->save();
+//        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
+//      }
+//      if (strpos($body_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
+//        $body_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $body_html);
+//        $node->body->value = $body_html;
+//        $node->save();
+//        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
+//      }
+//      if (strpos($body_html, 'class="row') !== FALSE || strpos($body_html, 'columns') !== FALSE) {
+//        $body_html = str_replace('  ', ' ', $body_html);
+//        $body_html = str_replace('class="row', 'class="grid-x grid-margin-x', $body_html);
+//        $body_html = str_replace('class="one columns', 'class="cell medium-1', $body_html);
+//        $body_html = str_replace('class="two columns', 'class="cell medium-2', $body_html);
+//        $body_html = str_replace('class="three columns', 'class="cell medium-3', $body_html);
+//        $body_html = str_replace('class="four columns', 'class="cell medium-4', $body_html);
+//        $body_html = str_replace('class="five columns', 'class="cell medium-5', $body_html);
+//        $body_html = str_replace('class="six columns', 'class="cell medium-6', $body_html);
+//        $body_html = str_replace('class="seven columns', 'class="cell medium-7', $body_html);
+//        $body_html = str_replace('class="eight columns', 'class="cell medium-8', $body_html);
+//        $body_html = str_replace('class="nine columns', 'class="cell medium-9', $body_html);
+//        $body_html = str_replace('class="ten columns', 'class="cell medium-10', $body_html);
+//        $body_html = str_replace('class="eleven columns', 'class="cell medium-11', $body_html);
+//        $body_html = str_replace('class="twelve columns', 'class="cell medium-12', $body_html);
+//        $body_html = str_replace('class="sm-two columns', 'class="cell small-2', $body_html);
+//        $body_html = str_replace('class="sm-three columns', 'class="cell small-3', $body_html);
+//        $body_html = str_replace('class="sm-seven columns', 'class="cell small-7', $body_html);
+//        $body_html = str_replace('class="sm-ten columns', 'class="cell small-10', $body_html);
+//        $body_html = str_replace('class="two sm-two columns', 'class="cell medium-2 small-2', $body_html);
+//        $body_html = str_replace('class="ten sm-ten columns', 'class="cell medium-10 small-10', $body_html);
+//        $node->body->value = $body_html;
+//        $node->save();
+//        echo 'Node #' . $node->id() . ' updated.' . PHP_EOL;
+//      }
+//    }
+//
+//    // Load paragraphs.
+//    $query = $this->entityTypeManager
+//      ->getStorage('paragraph')
+//      ->getQuery();
+//    $query->condition('type', ['sections_outreach2'], 'IN');
+//    $pids = $query->execute();
+//    foreach ($pids as $id) {
+//      \Drupal::service('entity.memory_cache')->deleteAll();
+//      $paragraph = Paragraph::load($id);
+//      $body_html = $paragraph->field_body->value;
+//      if (strpos($body_html, 'src="/modules/file/icons/application-pdf.png"') !== FALSE) {
+//        $body_html = str_replace('src="/modules/file/icons/application-pdf.png"', 'src="/core/themes/classy/images/icons/application-pdf.png"', $body_html);
+//        $paragraph->field_body->value = $body_html;
+//        $paragraph->save();
+//        echo 'Paragraph #' . $paragraph->id() . ' updated.' . PHP_EOL;
+//      }
+//      if (strpos($body_html, 'class="row') !== FALSE || strpos($body_html, 'columns') !== FALSE) {
+//        $body_html = str_replace('  ', ' ', $body_html);
+//        $body_html = str_replace('class="row', 'class="grid-x grid-margin-x', $body_html);
+//        $body_html = str_replace('class="one columns', 'class="cell medium-1', $body_html);
+//        $body_html = str_replace('class="two columns', 'class="cell medium-2', $body_html);
+//        $body_html = str_replace('class="three columns', 'class="cell medium-3', $body_html);
+//        $body_html = str_replace('class="four columns', 'class="cell medium-4', $body_html);
+//        $body_html = str_replace('class="five columns', 'class="cell medium-5', $body_html);
+//        $body_html = str_replace('class="six columns', 'class="cell medium-6', $body_html);
+//        $body_html = str_replace('class="seven columns', 'class="cell medium-7', $body_html);
+//        $body_html = str_replace('class="eight columns', 'class="cell medium-8', $body_html);
+//        $body_html = str_replace('class="nine columns', 'class="cell medium-9', $body_html);
+//        $body_html = str_replace('class="ten columns', 'class="cell medium-10', $body_html);
+//        $body_html = str_replace('class="eleven columns', 'class="cell medium-11', $body_html);
+//        $body_html = str_replace('class="twelve columns', 'class="cell medium-12', $body_html);
+//        $body_html = str_replace('class="sm-two columns', 'class="cell small-2', $body_html);
+//        $body_html = str_replace('class="sm-three columns', 'class="cell small-3', $body_html);
+//        $body_html = str_replace('class="sm-seven columns', 'class="cell small-7', $body_html);
+//        $body_html = str_replace('class="sm-ten columns', 'class="cell small-10', $body_html);
+//        $body_html = str_replace('class="two sm-two columns', 'class="cell medium-2 small-2', $body_html);
+//        $body_html = str_replace('class="ten sm-ten columns', 'class="cell medium-10 small-10', $body_html);
+//        $paragraph->field_body->value = $body_html;
+//        $paragraph->save();
+//        echo 'Paragraph #' . $paragraph->id() . ' updated.' . PHP_EOL;
+//      }
+//    }
+//  }
 
   /**
    * Import "reusable component" content type which are legacy D7 blocks.
@@ -3247,12 +3247,27 @@ class CustomCommands extends DrushCommands {
           $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
         }
       }
+      if (strtotime($data['event_start']) == strtotime($data['event_end'])) {
+        $event_start = explode('T', $data['event_start']);
+        $event_start = strtotime($event_start[0] . 'T00:00:00');
+        $event_end = explode('T', $data['event_end']);
+        $event_end = strtotime($event_end[0] . 'T23:59:00');
+        $duration = 1439;
+        echo 'Set duration of ' . $node->id() . ' to all day.' . PHP_EOL;
+      }
+      else {
+        $event_start = strtotime($data['event_start']);
+        $event_end = strtotime($data['event_end']);
+        $duration = 0;
+      }
       $node->field_event_date = [
-        'value' => strtotime($data['event_start']),
-        'end_value' => strtotime($data['event_end']),
+        'value' => $event_start,
+        'end_value' => $event_end,
         'rrule_index' => $recur_number,
         'rrule' => $recur_interval,
+        'duration' => $duration,
       ];
+
 
       if (!empty($data['image'])) {
         $image = NULL;
