@@ -1,0 +1,31 @@
+uuid: 35687beb-7f99-45d5-ad11-266676fabe7d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.sand_remote.field_search_keymatch
+    - sand_remote.sand_remote_type.external
+    - taxonomy.vocabulary.search_keymatch
+_core:
+  default_config_hash: 5slw0HyVAvBm5s1WYuJKbY-pASjneCi3ULFbzEtg51U
+id: sand_remote.external.field_search_keymatch
+field_name: field_search_keymatch
+entity_type: sand_remote
+bundle: external
+label: 'Search KeyMatch'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      search_keymatch: search_keymatch
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

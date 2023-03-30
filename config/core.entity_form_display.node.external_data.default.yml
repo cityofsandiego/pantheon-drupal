@@ -39,6 +39,7 @@ dependencies:
     - field.field.node.external_data.field_validated
     - node.type.external_data
   module:
+    - content_moderation
     - datetime
     - field_group
     - link
@@ -428,6 +429,13 @@ content:
     weight: 41
     region: content
     settings: {  }
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default

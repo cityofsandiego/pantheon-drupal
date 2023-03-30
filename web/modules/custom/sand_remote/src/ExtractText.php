@@ -195,15 +195,33 @@ class ExtractText {
       $extracted_data = $extractor_plugin->extract($file);
       $cleaned_data = $this->cleanExtractedData($extracted_data);
       // @todo interface with Boone's tesserac server if the cleaned data is empty
-      return $cleaned_data;
-    } catch (\Exception $e) {
       \Drupal::logger('sand_remote')
-        ->error('Error trying to extract text on %entity_type ID: %id, on URL: %url, error: %error', [
+        ->error('Got %size text when extracting text on %entity_type ID: %id, on URL: %url, error: %error', [
+          '%size' => strlen($cleaned_data) / 1024 . 'KB',
           '%entity_type' => $this->getEntityType(),
           '%id' => $this->getEntityId(),
           '%url' => $url,
           '%error' => $e->getMessage(),
         ]);
+      return $cleaned_data;
+    } catch (\Exception $e) {
+      if ($e->getMessage() === 'Tika Extractor is not available.') {
+        \Drupal::logger('sand_remote')
+          ->error('Got NO text when trying to extract text on %entity_type ID: %id, on URL: %url, error: %error', [
+            '%entity_type' => $this->getEntityType(),
+            '%id' => $this->getEntityId(),
+            '%url' => $url,
+            '%error' => $e->getMessage(),
+          ]);
+      } else {
+        \Drupal::logger('sand_remote')
+          ->error('Some Error trying to extract text on %entity_type ID: %id, on URL: %url, error: %error', [
+            '%entity_type' => $this->getEntityType(),
+            '%id' => $this->getEntityId(),
+            '%url' => $url,
+            '%error' => $e->getMessage(),
+          ]);
+      }
       return '';
 
     }
@@ -308,8 +326,12 @@ class ExtractText {
     // Extract the text from the URL.
     $extracted_text = $this->extractText();
     
+    // If both are NULL/empty string then nothing to do.
+    if (empty($target_value) && empty($extracted_text)) {
+      $changed = FALSE;
+    }
     // If the extracted text is different from the current value, update it.
-    if ($target_value !== $extracted_text) {
+    elseif ($target_value !== $extracted_text) {
       $entity->$target_field->value = $extracted_text;
       $changed = TRUE;
     }
@@ -334,6 +356,11 @@ class ExtractText {
     if ($entity->hasField($source_field)) {
       return $entity->$source_field->value;
     } else {
+      \Drupal::logger('sand_remote')
+        ->notice(
+          'Could not get a source for entity: %entity id: %id',
+          [ '%entity' => $entity->getEntityType(), '%id' => $entity->id()]
+        );
       return NULL;
     }
   }
