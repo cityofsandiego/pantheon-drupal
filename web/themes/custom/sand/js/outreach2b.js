@@ -9,6 +9,7 @@
 
 function resizedw(label) {
   $(".stellar-window").each(function () {
+    console.log('outreach2b');
     var divWidth = $(this).width();
     var javaScriptSelector = $(this).attr("id");
     var selector = "#" + $(this).attr("id");
@@ -41,6 +42,7 @@ function resizedw(label) {
     }
     else {
       // We are on a smaller screen
+      console.log('else outreach2b');
       min_height = "200px";
       background_size = "auto 100%";
       // If they have entered a full width on mobile use that other wise auto 100%.
@@ -67,6 +69,7 @@ var resizeIt = true;
 jQuery(function () {
   // Just resize for non-mobile every 200ms so that we don't fire while dragging.
   if (!Modernizr.touch) {
+    console.log('outreach2b !Modernizr.touch');
     resizedw("page-load");
     window.onresize = function () {
       if (resizeIt) {
