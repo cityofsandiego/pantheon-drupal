@@ -133,16 +133,14 @@
     <div class="main-content l-constrained l-margin-bm l-margin-desktop-tm l-padding-mobile-hm">
         {{ content.body }}
 
-        {% if mayor_todd_gloria %}
-          <div class="article-custom-block">
-            {% if press_releases %}
-              {{ drupal_entity('block_content', '17') }}
-            {% endif %}
-            {% if op_ed %}
-              {{ drupal_entity('block_content', '16') }}
-            {% endif %}
-          </div>    
-        {% endif %}
+        <div class="article-custom-block">
+          {% if press_releases %}
+            {{ drupal_entity('block_content', '17') }}
+          {% endif %}
+          {% if op_ed %}
+            {{ drupal_entity('block_content', '16') }}
+          {% endif %}
+        </div>    
     </div>
   </div>
 </article>
