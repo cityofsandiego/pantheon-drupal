@@ -2192,6 +2192,14 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '0';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['newline_token'] = '1';
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 1;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Image (field_image:fid) */
   $handler->display->display_options['relationships']['field_image_fid']['id'] = 'field_image_fid';
@@ -2380,6 +2388,14 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '0';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['newline_token'] = '1';
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 1;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -3068,6 +3084,10 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['fields']['street']['table'] = 'location';
   $handler->display->display_options['fields']['street']['field'] = 'street';
   $handler->display->display_options['fields']['street']['style'] = 'street';
+  /* Field: Content: Event Date */
+  $handler->display->display_options['fields']['field_event_date_3']['id'] = 'field_event_date_3';
+  $handler->display->display_options['fields']['field_event_date_3']['table'] = 'field_data_field_event_date';
+  $handler->display->display_options['fields']['field_event_date_3']['field'] = 'field_event_date';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published status */
