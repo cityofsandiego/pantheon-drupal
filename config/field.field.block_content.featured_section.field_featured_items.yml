@@ -1,0 +1,55 @@
+uuid: 5dd85f5b-fe58-4718-be47-9a882d6daf6b
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.featured_section
+    - field.storage.block_content.field_featured_items
+    - paragraphs.paragraphs_type.featured_item
+  module:
+    - entity_reference_revisions
+id: block_content.featured_section.field_featured_items
+field_name: field_featured_items
+entity_type: block_content
+bundle: featured_section
+label: 'Featured Items'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      featured_item: featured_item
+    negate: 0
+    target_bundles_drag_drop:
+      amenities_restrictions:
+        weight: 10
+        enabled: false
+      block:
+        weight: 11
+        enabled: false
+      card:
+        weight: 12
+        enabled: false
+      featured_cards:
+        weight: 13
+        enabled: false
+      featured_item:
+        weight: 14
+        enabled: true
+      resources:
+        weight: 15
+        enabled: false
+      sections:
+        weight: 16
+        enabled: false
+      sections_outreach2:
+        weight: 17
+        enabled: false
+      social_links:
+        weight: 18
+        enabled: false
+field_type: entity_reference_revisions
