@@ -2411,7 +2411,7 @@ class CustomCommands extends DrushCommands {
       else {
         $image = NULL;
       }
-      $node->field_feature_video_img = $image;
+      $node->field_image = $image;
       $node->save();
 
       echo 'D7 ID | ' . $d7id . PHP_EOL;
