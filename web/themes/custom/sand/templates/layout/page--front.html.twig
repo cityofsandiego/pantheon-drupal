@@ -55,12 +55,12 @@
   {% endif %}
 
 
-  <section class="off-canvas-content homepage" data-off-canvas-content>
+  <section class="homepage" data-off-canvas-content>
     <header role="banner" class="header">
       {{ page.header }}
     </header>
     <div class="hero__slides">
-      {# Slide will go here #}
+      {{ drupal_view('homepage_slide')}}
     </div>
 
     <div class="grid-container main-grid-container">
@@ -69,7 +69,7 @@
       {{ page.content_top }}
 
 
-      <main role="main" class="row  white-bg l-padding-hd l-padding-desktop-td">
+      <main role="main" class="row white-bg l-padding-hd l-padding-desktop-td homepage-content">
           <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
 
@@ -95,8 +95,7 @@
             <div class="grid-x">
               <div class="cell medium-9">
                 <h2>Our San Diego</h2>
-                {# {{ drupal_entity('block', 'views_block__blog_cards_block_1') }} #}
-                                {{ drupal_view('blog_cards')}}
+                {{ drupal_view('blog_cards')}}
               </div>
               <div class="cell medium-3">
                 <div class="notifications">
