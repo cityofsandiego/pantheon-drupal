@@ -2421,9 +2421,66 @@ textarea {
 .section-outreach2 a {
   text-decoration: none; }
 
+.section-outreach2 h1, .section-outreach2 h2 {
+  padding: 0; }
+
 /* ============================================================
   Styles for social links.
   ============================================================ */
+.socials {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .socials li {
+    margin: 0 0.1em;
+    display: inline-block;
+    vertical-align: bottom; }
+    .socials li:first-child {
+      margin-left: 0; }
+    .socials li:last-child {
+      margin-right: 0; }
+  .socials a {
+    color: #37424a;
+    display: block;
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+    text-align: center;
+    border-radius: 2px;
+    text-decoration: none;
+    background: #f6f6f6;
+    font-size: 16px;
+    font-size:  calc($unitless-value / $baseline-px)rem; }
+    .socials a i {
+      height: 1.5em;
+      line-height: 1.5em;
+      display: block;
+      vertical-align: middle; }
+
+@media print {
+  .social-share__wrap {
+    display: none; } }
+
+.social-share__wrap .department-socials {
+  list-style-type: none; }
+  .social-share__wrap .department-socials .socials-item {
+    display: inline-block;
+    background-size: cover; }
+  .social-share__wrap .department-socials .socials-link {
+    font-size: 1.2rem;
+    background: rgba(246, 246, 246, 0.8); }
+
+.social-share__wrap span[class^="st"] {
+  background-size: cover; }
+
+.social-share__wrap .stButton {
+  margin: 0; }
+  .social-share__wrap .stButton .stLarge {
+    width: 27px;
+    height: 27px; }
+    .social-share__wrap .stButton .stLarge:hover {
+      background-position: top left; }
+
 .social-links {
   display: flex;
   list-style: none;
@@ -2432,7 +2489,7 @@ textarea {
 
 .social-links__item {
   list-style: none;
-  margin: 0 .25rem;
+  margin: 0 0.25rem;
   padding: 0; }
   .social-links__item:first-child {
     margin: 0; }

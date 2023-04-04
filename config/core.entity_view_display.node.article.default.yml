@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.article.field_article_type
     - field.field.node.article.field_body_no_margin
     - field.field.node.article.field_category
+    - field.field.node.article.field_d7_nid
     - field.field.node.article.field_department
     - field.field.node.article.field_image
     - field.field.node.article.field_search_keymatch
@@ -27,19 +28,19 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    weight: -20
+    weight: 0
     region: content
   field_body_no_margin:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
   field_image:
     type: entity_reference_entity_view
@@ -48,14 +49,14 @@ content:
       view_mode: article_100
       link: false
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   field_sidebar:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   field_subtitle:
     type: string
@@ -63,17 +64,18 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   field_article_exclude: true
   field_article_type: true
   field_category: true
+  field_d7_nid: true
   field_department: true
   field_search_keymatch: true
   langcode: true
