@@ -34,6 +34,7 @@ lando terminus drush mi:import sd_nodes_registration -- --update --force
 lando terminus drush mi:import sd_nodes_event -- --update --force
 lando terminus drush mi:import sd_nodes_gallery -- --update --force
 lando terminus drush mi:import sd_nodes_digital_archives_photos -- --update --force
+lando terminus drush mi:import sd_nodes_article -- --update --force
 
 Menu import:
 lando terminus drush import:menus
@@ -57,7 +58,8 @@ lando terminus drush import:business_resource
 lando terminus drush import:registration
 lando terminus drush import:event
 lando terminus drush import:gallery
-lando terminus drush import:digital_archives_photos
+lando terminus drush import:digital_archives_photos 
+lando terminus drush import:article
 
 Fix class names/HTML content cleanup:
 lando terminus drush import:class-fixes
@@ -87,6 +89,7 @@ Department parent
 Location
 Outreach2 Article
 Event
+Article
 
 Field groups:
 field_bucket_events_pi_coll

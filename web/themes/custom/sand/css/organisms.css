@@ -1809,9 +1809,6 @@ textarea {
       padding: 1.5em; } }
   .node--type-department .sidebar > h2 {
     margin-top: 0; }
-    @media print, screen and (min-width: 48em) {
-      .node--type-department .sidebar > h2 {
-        margin-top: 1.5rem; } }
   .node--type-department .sidebar ul {
     padding: 0;
     list-style-type: none;
@@ -1830,6 +1827,8 @@ textarea {
         .node--type-department .sidebar ul.sidebar-menu li ul {
           list-style: circle;
           margin-left: 1.1rem; }
+        .node--type-department .sidebar ul.sidebar-menu li.is_active a {
+          color: #0a0a0a; }
 
 .node--type-department .resources {
   display: block; }
@@ -1863,7 +1862,7 @@ textarea {
         color: #fff; }
       .department-menu li a.is-active {
         color: #0a0a0a; }
-    .department-menu li.active a {
+    .department-menu li.is_active a {
       color: #0a0a0a; }
 
 .sub-navigation-mobile .accordion__heading {
@@ -1902,7 +1901,12 @@ textarea {
   font-size: 13px;
   font-size:  calc($unitless-value / $baseline-px)rem;
   border: 1px solid #d1d4d3;
-  border-top: 5px solid #ffa02f; }
+  border-top: 5px solid #ffa02f;
+  width: 20%;
+  margin-right: 0.75rem; }
+  .event__date .event--day {
+    padding-top: 0.3em;
+    margin-top: 0.3em; }
   .event__date span {
     display: block;
     text-transform: uppercase; }
@@ -1922,14 +1926,14 @@ textarea {
   border-left: 5px solid #fcd900 !important;
   margin-left: .5em; }
 
-.event__info h6 {
-  margin-top: 0; }
-
-.event__info p {
-  line-height: 1.4; }
-
-.event__info .date-display-range {
-  display: inline; }
+.event__info {
+  width: 75%; }
+  .event__info h6 {
+    margin-top: 0; }
+  .event__info p {
+    line-height: 1.4; }
+  .event__info .date-display-range {
+    display: inline; }
 
 /* ============================================================
   Styles for external data content type.
@@ -1949,10 +1953,14 @@ textarea {
     text-decoration: none; }
   .footer .region--footer {
     margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0; }
     @media print, screen and (min-width: 48em) {
       .footer .region--footer {
-        font-size: 0.8125rem; } }
+        font-size: 0.8125rem;
+        padding-right: 0.9375rem;
+        padding-left: 0.9375rem; } }
     @media print, screen and (min-width: 80em) {
       .footer .region--footer {
         font-size: 1rem; } }
@@ -2391,9 +2399,11 @@ textarea {
   position: relative; }
   .theme-citynet .hero__slides {
     height: 198px; }
+  .hero__slides > .grid-x {
+    padding: 1em 1em 3em 1em; }
   @media print, screen and (min-width: 48em) {
-    .hero__slides > .row {
-      padding: 5em 0 12em; } }
+    .hero__slides > .grid-x {
+      padding: 5em 0.9375rem 12em; } }
   .hero__slides .flex-control-nav,
   .hero__slides .flex-direction-nav {
     display: none; }
@@ -2463,9 +2473,10 @@ textarea {
 .hero__content {
   z-index: 4;
   color: white;
-  margin: 0 0 3em;
+  margin: 0 0 0;
   padding: 1.5em;
-  position: relative; }
+  position: relative;
+  background: rgba(0, 0, 0, 0.35); }
   .hero__content h1 {
     margin: 0;
     color: white;
@@ -2494,9 +2505,8 @@ textarea {
         display: inline-block; } }
   @media print, screen and (min-width: 60em) {
     .hero__content {
-      margin: 0;
-      padding: 2.75em 3.5em;
-      background: rgba(0, 0, 0, 0.35); }
+      margin: 0 0 2em;
+      padding: 2.75em 3.5em; }
       .hero__content.no-sides {
         background: transparent; } }
   @media print, screen and (max-width: 74.99875em) {
@@ -2573,15 +2583,157 @@ textarea {
       margin-top: -16rem; } }
 
 .homepage .hero__slides {
-  min-height: 300px;
   background-color: #5d676f;
   z-index: 1; }
+  @media print, screen and (min-width: 48em) {
+    .homepage .hero__slides {
+      min-height: 300px; } }
 
-.homepage .main-grid-container {
-  margin-top: -100px;
-  padding: 1em;
+.homepage-content {
+  margin-top: 0px;
   z-index: 5;
   position: relative; }
+  @media print, screen and (min-width: 48em) {
+    .homepage-content {
+      margin-top: -100px; } }
+
+.homepage .view-display-id-meetings {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding-bottom: 1rem; }
+  @media print, screen and (min-width: 48em) {
+    .homepage .view-display-id-meetings {
+      border-right: 1px solid #dde2e5; } }
+  .homepage .view-display-id-meetings h3 {
+    padding: 0; }
+  .homepage .view-display-id-meetings .field-content {
+    display: flex; }
+    .homepage .view-display-id-meetings .field-content .event__date {
+      border-top: 5px solid #0098db; }
+
+.homepage .view-id-events {
+  margin-left: 1rem;
+  margin-right: 1rem; }
+  .homepage .view-id-events h3 {
+    padding: 0; }
+  .homepage .view-id-events .field-content {
+    display: flex; }
+
+.homepage .get-it-done-app p {
+  margin-bottom: 0; }
+
+.homepage .featured-item {
+  margin-bottom: 1.5rem; }
+  .homepage .featured-item a {
+    text-decoration: none; }
+
+.homepage h2 {
+  margin: 1em 0 .5em 0;
+  padding: 0; }
+
+@media print, screen and (min-width: 20em) {
+  .homepage .view-blog-cards .slides {
+    flex-wrap: wrap;
+    display: flex; } }
+
+.homepage .view-blog-cards .slides .card__wrap {
+  width: 100%; }
+  @media print, screen and (min-width: 20em) {
+    .homepage .view-blog-cards .slides .card__wrap {
+      width: 47%; } }
+  @media print, screen and (min-width: 48em) {
+    .homepage .view-blog-cards .slides .card__wrap {
+      width: 33%; } }
+
+.webform-submission-webform-13161-form {
+  margin-bottom: 1rem; }
+  @media print, screen and (min-width: 48em) {
+    .webform-submission-webform-13161-form {
+      display: grid;
+      grid-template-columns: 25% 25% 1fr;
+      grid-template-rows: auto 45px;
+      gap: 1rem; } }
+  .webform-submission-webform-13161-form .webform-type-fieldset {
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #222;
+    margin-bottom: 2.5em;
+    padding: 2em 1em 1em; }
+    @media print, screen and (min-width: 48em) {
+      .webform-submission-webform-13161-form .webform-type-fieldset {
+        width: 100%;
+        margin-bottom: 0; } }
+    .webform-submission-webform-13161-form .webform-type-fieldset .form-item {
+      margin-bottom: 0;
+      font-size: 0.8125rem; }
+      .webform-submission-webform-13161-form .webform-type-fieldset .form-item .form-select {
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%; }
+    .webform-submission-webform-13161-form .webform-type-fieldset:after {
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      border-style: solid;
+      border-width: 10px 16px 0 16px;
+      border-color: #222 transparent transparent transparent;
+      bottom: -10px;
+      left: 50%;
+      -ms-transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%); }
+      @media print, screen and (min-width: 48em) {
+        .webform-submission-webform-13161-form .webform-type-fieldset:after {
+          border-width: 16px 0 16px 10px;
+          border-color: transparent transparent transparent #222;
+          bottom: auto;
+          left: auto;
+          top: 55%;
+          right: -10px;
+          -ms-transform: translateY(-50%);
+          -webkit-transform: translateY(-50%);
+          transform: translateY(-50%); } }
+    .webform-submission-webform-13161-form .webform-type-fieldset legend {
+      margin-top: -2rem;
+      padding: 0.5rem; }
+      .webform-submission-webform-13161-form .webform-type-fieldset legend .fieldset-legend {
+        color: #222;
+        text-transform: capitalize;
+        font-size: 1rem; }
+        .webform-submission-webform-13161-form .webform-type-fieldset legend .fieldset-legend:before {
+          content: "";
+          width: 2em;
+          height: 2em;
+          line-height: 1.75em;
+          text-align: center;
+          background: #00c7b2;
+          color: #fff;
+          font-family: "Merriweather", serif;
+          display: inline-block;
+          border-radius: 50%;
+          margin-right: 0.5rem; }
+  .webform-submission-webform-13161-form .step-1 legend .fieldset-legend:before {
+    content: "1"; }
+  .webform-submission-webform-13161-form .step-2 legend .fieldset-legend:before {
+    content: "2"; }
+  .webform-submission-webform-13161-form .step-3 legend .fieldset-legend:before {
+    content: "3"; }
+  .webform-submission-webform-13161-form .step-3 label {
+    display: none; }
+  @media print, screen and (min-width: 48em) {
+    .webform-submission-webform-13161-form .step-3 .row {
+      display: flex;
+      justify-content: space-between; } }
+  .webform-submission-webform-13161-form .step-3:after {
+    display: none; }
+  @media print, screen and (min-width: 48em) {
+    .webform-submission-webform-13161-form .form-actions {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      display: block;
+      grid-column: 1/4;
+      grid-row: 2/3; } }
 
 .sidebar h2 {
   font-family: "Merriweather", serif;

@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.sand_gallery.field_sidebar
     - node.type.sand_gallery
   module:
+    - media
     - options
     - text
     - user
@@ -75,20 +76,21 @@ content:
     weight: 5
     region: content
   field_sand_gallery_folderimage:
-    type: entity_reference_entity_view
+    type: entity_reference_label
     label: hidden
     settings:
-      view_mode: default
       link: false
     third_party_settings: {  }
     weight: 4
     region: content
   field_sand_gallery_items:
-    type: entity_reference_entity_view
-    label: hidden
+    type: media_thumbnail
+    label: above
     settings:
-      view_mode: default
-      link: false
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 3
     region: content
