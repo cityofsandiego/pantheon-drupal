@@ -22,10 +22,6 @@
 
     & > h2 {
       margin-top: 0;
-
-      @include breakpoint(medium) {
-        margin-top: 1.5rem;
-      }
     }
 
     ul {
@@ -56,6 +52,12 @@
           ul {
             list-style: circle;
             margin-left: 1.1rem;
+          }
+
+          &.is_active {
+            a {
+              color: $black;
+            }
           }
         }
       }
@@ -107,7 +109,7 @@
       }
     }
 
-    &.active {
+    &.is_active {
       a {
         color: $black;
       }
