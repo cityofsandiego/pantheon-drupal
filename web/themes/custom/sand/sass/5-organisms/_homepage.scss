@@ -1,14 +1,21 @@
 .homepage {
   .hero__slides {
-    min-height: 300px;
     background-color: $shuttle;
     z-index: 1;
+
+    @include breakpoint(medium) {
+      min-height: 300px;
+    }
   }
 
   &-content {
-    margin-top: -100px;
+    margin-top: 0px;
     z-index: 5;
     position: relative;
+
+    @include breakpoint(medium) {
+      margin-top: -100px;
+    }
   }
 
   .view-display-id-meetings {
@@ -63,6 +70,27 @@
   h2 {
     margin: 1em 0 .5em 0;
     padding: 0;
+  }
+
+  .view-blog-cards {
+    .slides {
+      @include breakpoint(mobile) {
+        flex-wrap: wrap;
+        display: flex;
+      }
+
+      .card__wrap {
+        width: 100%;
+
+        @include breakpoint(mobile) {
+          width: 47%;
+        }
+
+        @include breakpoint(medium) {
+          width: 33%;
+        }
+      }
+    }
   }
 }
 

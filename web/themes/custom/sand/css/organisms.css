@@ -1954,10 +1954,14 @@ textarea {
     text-decoration: none; }
   .footer .region--footer {
     margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0; }
     @media print, screen and (min-width: 48em) {
       .footer .region--footer {
-        font-size: 0.8125rem; } }
+        font-size: 0.8125rem;
+        padding-right: 0.9375rem;
+        padding-left: 0.9375rem; } }
     @media print, screen and (min-width: 80em) {
       .footer .region--footer {
         font-size: 1rem; } }
@@ -2396,9 +2400,11 @@ textarea {
   position: relative; }
   .theme-citynet .hero__slides {
     height: 198px; }
+  .hero__slides > .grid-x {
+    padding: 1em 1em 3em 1em; }
   @media print, screen and (min-width: 48em) {
     .hero__slides > .grid-x {
-      padding: 5em 0 12em; } }
+      padding: 5em 0.9375rem 12em; } }
   .hero__slides .flex-control-nav,
   .hero__slides .flex-direction-nav {
     display: none; }
@@ -2468,9 +2474,10 @@ textarea {
 .hero__content {
   z-index: 4;
   color: white;
-  margin: 0 0 3em;
+  margin: 0 0 0;
   padding: 1.5em;
-  position: relative; }
+  position: relative;
+  background: rgba(0, 0, 0, 0.35); }
   .hero__content h1 {
     margin: 0;
     color: white;
@@ -2499,9 +2506,8 @@ textarea {
         display: inline-block; } }
   @media print, screen and (min-width: 60em) {
     .hero__content {
-      margin: 0;
-      padding: 2.75em 3.5em;
-      background: rgba(0, 0, 0, 0.35); }
+      margin: 0 0 2em;
+      padding: 2.75em 3.5em; }
       .hero__content.no-sides {
         background: transparent; } }
   @media print, screen and (max-width: 74.99875em) {
@@ -2578,14 +2584,19 @@ textarea {
       margin-top: -16rem; } }
 
 .homepage .hero__slides {
-  min-height: 300px;
   background-color: #5d676f;
   z-index: 1; }
+  @media print, screen and (min-width: 48em) {
+    .homepage .hero__slides {
+      min-height: 300px; } }
 
 .homepage-content {
-  margin-top: -100px;
+  margin-top: 0px;
   z-index: 5;
   position: relative; }
+  @media print, screen and (min-width: 48em) {
+    .homepage-content {
+      margin-top: -100px; } }
 
 .homepage .view-display-id-meetings {
   margin-left: 1rem;
@@ -2620,6 +2631,20 @@ textarea {
 .homepage h2 {
   margin: 1em 0 .5em 0;
   padding: 0; }
+
+@media print, screen and (min-width: 20em) {
+  .homepage .view-blog-cards .slides {
+    flex-wrap: wrap;
+    display: flex; } }
+
+.homepage .view-blog-cards .slides .card__wrap {
+  width: 100%; }
+  @media print, screen and (min-width: 20em) {
+    .homepage .view-blog-cards .slides .card__wrap {
+      width: 47%; } }
+  @media print, screen and (min-width: 48em) {
+    .homepage .view-blog-cards .slides .card__wrap {
+      width: 33%; } }
 
 .webform-submission-webform-13161-form {
   margin-bottom: 1rem; }

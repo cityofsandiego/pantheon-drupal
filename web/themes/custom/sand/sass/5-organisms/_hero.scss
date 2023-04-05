@@ -8,9 +8,13 @@
     height: 198px;
   }
 
+  > .grid-x {
+    padding: 1em 1em 3em 1em;
+  }
+
   @include breakpoint(medium) {
     > .grid-x {
-      padding: 5em 0 12em;
+      padding: 5em 0.9375rem 12em;
     }
   }
 
@@ -110,9 +114,10 @@
 .hero__content {
   z-index: 4;
   color: white;
-  margin: 0 0 3em;
+  margin: 0 0 0;
   padding: 1.5em;
   position: relative;
+  background: rgba(0, 0, 0, 0.35);
 
   h1 {
     margin: 0;
@@ -150,14 +155,12 @@
   }
 
   @include breakpoint(site) {
-  margin: 0;
-  padding: 2.75em 3.5em;
-  background: rgba(0, 0, 0, 0.35);
+    margin: 0 0 2em;
+    padding: 2.75em 3.5em;
 
-  &.no-sides {
-    background: transparent;
-  }
-
+    &.no-sides {
+      background: transparent;
+    }
   }
 
   @include breakpoint(site down) {
