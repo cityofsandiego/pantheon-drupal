@@ -10,7 +10,7 @@
   <div class="hide-on-mobile top-menu">
     <ul id="department-top-menu" class="department-menu">
       {% for item in topmenu.items %}
-        <li{% if item.is_active == true %} class="active"{% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
+        <li class={{ item.classes[0]}}><a href="{{ item.url }}">{{ item.title }}</a></li>
       {% endfor %}
     </ul>
   </div>
@@ -22,7 +22,7 @@
         <div class="accordion__drawer" style="display: none;">
           <ul id="department-top-menu" class="department-menu">
             {% for item in topmenu.items %}
-                <li{% if item.is_active == true %} class="active"{% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
+                <li class={{ item.classes[0]}}><a href="{{ item.url }}">{{ item.title }}</a></li>
             {% endfor %}
           </ul>
         </div>
