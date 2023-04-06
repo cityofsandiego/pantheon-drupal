@@ -256,3 +256,33 @@
     margin-top: -16rem;
   }
 }
+
+.custom-navigation {
+
+  a {
+    z-index: 10;
+    color: white;
+    padding: 0 .25em;
+    background: $cerulean;
+    text-decoration: none;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    @include rem('font-size', 28px);
+
+    &.flex-next {
+      left: auto;
+      right: 0;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: darken($cerulean, 10%);
+    }
+  }
+
+}
