@@ -127,7 +127,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: "<div class=\"card--notification row\">\r\n<div class=\"twelve columns\">\r\n<p>No notifications at this time.</p>\r\n</div>\r\n</div>\r\n<hr class=\"hr--dashed\">"
+          content: "<div class=\"card--notification row\">\r\n<div class=\"cell small-12\">\r\n<p>No notifications at this time.</p>\r\n</div>\r\n</div>\r\n<hr class=\"hr--dashed l-margin-bn\">"
           tokenize: false
       sorts:
         created:
@@ -165,7 +165,7 @@ display:
         type: default
         options:
           row_class: ''
-          default_row_class: true
+          default_row_class: false
           uses_fields: false
       row:
         type: 'entity:node'
@@ -342,7 +342,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card--notification row\">\r\n<div class=\"icon two columns text-center l-margin-mobile-bd\">\r\n <i class=\"[field_notif_icon] background--[field_notif_icon_color]\"></i>\r\n </div>\r\n<div class=\"ten columns\">"
+            text: "<div class=\"card--notification grid-x\">\r\n<div class=\"icon cell small-2 text-center l-margin-mobile-bd\">\r\n <i class=\"{{ field_icon }} background--{{ field_notif_icon_color }} \"></i>\r\n </div>\r\n<div class=\"cell small-10 l-padding-ls\">"
             make_link: false
             path: ''
             absolute: false
@@ -480,9 +480,9 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "[title]\r\n</div>\r\n</div>\r\n<hr class=\"hr--dashed\">"
+            text: "{{ title_1 }}\r\n</div>\r\n</div>\r\n<hr class=\"hr--dashed\">"
             make_link: true
-            path: '[field_notif_link]'
+            path: '{{ field_url }}'
             absolute: false
             external: false
             replace_spaces: false
