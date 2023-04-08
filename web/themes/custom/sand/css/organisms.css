@@ -2107,7 +2107,9 @@ textarea {
   background: #222;
   top: auto; }
   .off-canvas-wrapper .off-canvas-main-menu ul {
-    margin: 0; }
+    margin: 0;
+    list-style-type: none;
+    padding: 0; }
     .off-canvas-wrapper .off-canvas-main-menu ul a {
       border-bottom: 1px solid #37424a;
       color: #fff;
@@ -2182,22 +2184,25 @@ textarea {
       padding: 0; } }
   .header .header-second .main-menu .full-width {
     width: 100%; }
-  .header .header-second .home-button-container {
-    display: table;
-    width: 56px; }
-    .header .header-second .home-button-container .home-button {
-      color: #37424a;
-      display: table-cell;
-      padding-top: 1.25rem;
+  .header .header-second .home-link {
+    width: 56px;
+    color: #37424a;
+    display: table-cell;
+    padding-top: 1.25rem;
+    text-decoration: none; }
+    .header .header-second .home-link:focus, .header .header-second .home-link:hover {
+      background-color: #e89e3b;
+      color: #fff;
       text-decoration: none; }
-      .header .header-second .home-button-container .home-button:focus, .header .header-second .home-button-container .home-button:hover {
-        background-color: #e89e3b;
-        color: #fff;
-        text-decoration: none; }
-      .header .header-second .home-button-container .home-button i {
-        display: block;
-        font-size: 24px;
-        text-align: center; }
+    .header .header-second .home-link i {
+      display: block;
+      font-size: 24px;
+      text-align: center; }
+  .header .header-second .tbm-link-container {
+    align-items: baseline;
+    background-color: #fff; }
+    .header .header-second .tbm-link-container:hover, .header .header-second .tbm-link-container:focus {
+      background-color: #e89e3b; }
   .header .header-second .tbm-submenu-toggle,
   .header .header-second .tbm .tbm-item {
     background-color: #fff; }
@@ -2213,6 +2218,9 @@ textarea {
     background-color: #e89e3b;
     color: #fff;
     text-decoration: none; }
+  .header .header-second .tbm .tbm-item--has-dropdown a:hover i,
+  .header .header-second .tbm .tbm-item--has-dropdown a:focus i {
+    color: #fff; }
   .header .header-second .tbm .nav li.dropdown.active > .dropdown-toggle .caret {
     border-top-color: #e89e3b;
     border-bottom-color: #e89e3b; }
@@ -2220,7 +2228,6 @@ textarea {
     .header .header-second .tbm-main {
       background: #fff; } }
   .header .header-second .tbm-main a {
-    background-color: #fff;
     color: #37424a; }
     .header .header-second .tbm-main a.tbm-link {
       font-size: .8125rem;
@@ -2229,6 +2236,9 @@ textarea {
       position: relative;
       text-decoration: none;
       text-transform: uppercase; }
+    .header .header-second .tbm-main a.tbm-link.level-1 {
+      align-items: baseline;
+      padding: 1em; }
     .header .header-second .tbm-main a[title]:after {
       content: attr(title);
       font-size: 0.6875rem;
@@ -2238,8 +2248,7 @@ textarea {
     color: #ffa02f;
     font-size: 1.25rem;
     position: absolute;
-    right: 3%;
-    top: 26%; }
+    right: 0; }
   .header .header-second .tbm-main .tbm-nav {
     justify-content: space-between; }
     .header .header-second .tbm-main .tbm-nav .tbm-item {
