@@ -10,6 +10,8 @@
 
     ul {
       margin: 0;
+      list-style-type: none;
+      padding: 0;
 
       a {
         border-bottom: 1px solid $spruce;
@@ -149,28 +151,34 @@
       }
     }
 
-    .home-button-container {
-      display: table;
+    .home-link {
+      color: $spruce;
+      display:table-cell;
+      padding-top: 1.25rem;
+      text-decoration: none;
       width: 56px;
 
-      .home-button {
-        color: $spruce;
-        display:table-cell;
-        padding-top: 1.25rem;
+      &:focus,
+      &:hover {
+        background-color: $tulip;
+        color: $white;
         text-decoration: none;
+      }
 
-        &:focus,
-        &:hover {
-          background-color: $tulip;
-          color: $white;
-          text-decoration: none;
-        }
+      i {
+        display: block;
+        font-size:24px;
+        text-align: center;
+      }
+    }
 
-        i {
-          display: block;
-          font-size:24px;
-          text-align: center;
-        }
+    .tbm-link-container {
+      align-items: baseline;
+      background-color: $white;
+
+      &:hover,
+      &:focus {
+        background-color: $tulip;
       }
     }
 
@@ -195,6 +203,11 @@
       text-decoration: none;
     }
 
+    .tbm .tbm-item--has-dropdown a:hover i,
+    .tbm .tbm-item--has-dropdown a:focus i {
+      color: $white;
+    }
+
     .tbm .nav li.dropdown.active > .dropdown-toggle .caret {
       border-top-color: $tulip;
       border-bottom-color: $tulip;
@@ -207,7 +220,6 @@
       }
 
       a {
-        background-color: $white;
         color: $spruce;
 
         &.tbm-link {
@@ -217,6 +229,11 @@
           position: relative;
           text-decoration: none;
           text-transform: uppercase;
+        }
+
+        &.tbm-link.level-1 {
+          align-items: baseline;
+          padding: 1em;
         }
 
         &[title]:after {
@@ -231,8 +248,7 @@
         color: $sunshade;
         font-size: 1.25rem;
         position: absolute;
-        right: 3%;
-        top: 26%;
+        right: 0;
       }
 
       .tbm-nav {
