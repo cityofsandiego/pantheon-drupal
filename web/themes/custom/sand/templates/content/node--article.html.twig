@@ -92,16 +92,22 @@
 
   <div {{ content_attributes.addClass('node__content') }}>
     <div class="grid-x">
-      <div class="cell small-12 medium-auto content l-padding-ad l-padding-mobile-hd l-margin-mobile-bm">
-        <h2 class="h1 l-margin-desktop-td l-margin-desktop-bs l-margin-mobile-ts l-padding-desktop-hd l-margin-mobile-bd heading--trim">{{ content.field_subtitle }}</h2>
-        {{ content.field_image }}
-        {{ content.field_body_no_margin }}
-        {{ content.body }}
+      <div class="cell small-12 medium-auto content l-margin-mobile-bm l-padding-mobile-hm l-padding-desktop-hm white-bg">
+        <h2 class="h1 l-margin-desktop-td l-margin-desktop-bs l-margin-mobile-ts l-margin-mobile-bd heading--trim">{{ label }}</h2>
+
+        {% if content.field_subtitle.0 %}
+          <h3 class="l-padding-desktop-hs">{{ content.field_subtitle }}</h3>
+        {% endif %}
+
+        <div class="l-margin-vm">
+          {{ content.field_image }}
+          {{ content.field_body_no_margin }}
+          {{ content.body }}
+        </div>
       </div>
-      <div class="cell medium-4 sidebar light-gray-bg">
-        <div class="l-padding-ad l-padding-mobile-hd l-margin-mobile-bm">
+      <div class="cell medium-3 sidebar">
+        <div class="l-padding-ad l-padding-mobile-hd l-margin-mobile-as light-gray-bg sidebar-inner">
           <div class="l-padding-bm">
-          {{ drupal_menu('inside-san-diego') }}
             {{ content.field_sidebar }}
           {# {{ drupal_view('article_archives_list') }} #}
 
