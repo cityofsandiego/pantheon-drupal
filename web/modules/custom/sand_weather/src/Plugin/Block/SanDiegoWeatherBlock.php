@@ -28,9 +28,9 @@ class SanDiegoWeatherBlock extends BlockBase {
     if (empty($weather_text) || empty($weather_icon) || empty($weather_temp)) {
       return [
         '#theme' => 'sand_weather',
-        '#weather-text' => "",
-        '#weather-icon' => "",
-        '#weather-temp' => "",
+        '#text' => "",
+        '#icon' => "",
+        '#temp' => "",
       ];
     } else {
       return [

@@ -196,12 +196,11 @@ class ExtractText {
       $cleaned_data = $this->cleanExtractedData($extracted_data);
       // @todo interface with Boone's tesserac server if the cleaned data is empty
       \Drupal::logger('sand_remote')
-        ->error('Got %size text when extracting text on %entity_type ID: %id, on URL: %url, error: %error', [
+        ->error('Got %size text when extracting text on %entity_type ID: %id, on URL: %url', [
           '%size' => strlen($cleaned_data) / 1024 . 'KB',
           '%entity_type' => $this->getEntityType(),
           '%id' => $this->getEntityId(),
           '%url' => $url,
-          '%error' => $e->getMessage(),
         ]);
       return $cleaned_data;
     } catch (\Exception $e) {
@@ -452,5 +451,31 @@ class ExtractText {
     return TRUE;
   }
 
+
+  function queueEntityDelete($entity_type, $entity): bool {
+    $source = $this->getSourceFromEntity($entity);
+
+    // If there is nothing in the source field, there is nothing we can do.
+    if (empty($source)) {
+      return FALSE;
+    }
+
+    $queue = \Drupal::service('queue')->get('sand_remote_queue');
+    $item = new ExtractText();
+    $item->setEntityType($entity_type);
+    $item->setEntityId($entity->id());
+    $item->setSource($source);
+    $item->setUrlField($entity, $source);
+    $item->setTargetField($this->getTargetFromEntity($entity));
+
+    try {
+      $queue->deleteItem($item);
+    } catch (Exception $exception) {
+      watchdog_exception(__CLASS__, $exception);
+    }
+
+    return TRUE;
+  }
+  
 }
 
