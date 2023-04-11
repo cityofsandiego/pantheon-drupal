@@ -82,6 +82,12 @@ function sand_remote_user_predelete(UserInterface $account) {
   $storage->delete($sand_remotes);
 }
 
+///**
+// * Implements hook_entity_delete().
+// */
+//function sand_remote_sand_remote_delete(\Drupal\Core\Entity\EntityInterface $entity): void {
+//  $deleted_from_queue = \Drupal::service('sand.extract_text')->queueEntityDelete('sand_remote', $entity);
+//}
 /**
  * Implements hook_entity_insert().
  */
@@ -95,6 +101,15 @@ function sand_remote_sand_remote_insert(\Drupal\Core\Entity\EntityInterface $ent
 function sand_remote_sand_remote_update(\Drupal\Core\Entity\EntityInterface $entity): void {
   $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('sand_remote', $entity);
 }
+//
+///**
+// * Implements hook_node_delete().
+// */
+//function sand_remote_node_delete(\Drupal\node\NodeInterface $node): void {
+//  if ($node->getType() == 'external_data') {
+//    $deleted_from_queue = \Drupal::service('sand.extract_text')->queueEntityDelete('node', $node);
+//  }
+//}
 
 /**
  * Implements hook_node_insert().
