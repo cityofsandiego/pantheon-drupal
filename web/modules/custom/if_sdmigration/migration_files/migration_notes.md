@@ -66,12 +66,10 @@ lando terminus drush import:class-fixes
 
 Node data status:
 **9/26/2022
-Bucket
+Bucket (Note: manually updating these as there are few and content type is complex)
 Slide
 Mayoral artifacts
-Outreach
 Hero
-Outreach2
 Department document
 External data
 Date (Manually entered nodes as there were few and it was quicker to do so.)
@@ -90,6 +88,8 @@ Location
 Outreach2 Article
 Event
 Article
+Outreach2
+Outreach
 
 Field groups:
 field_bucket_events_pi_coll

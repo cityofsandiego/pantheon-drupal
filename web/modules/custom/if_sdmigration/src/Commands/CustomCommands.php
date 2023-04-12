@@ -1371,7 +1371,7 @@ class CustomCommands extends DrushCommands {
         if (array_key_exists($amenity, $ardata)) {
           $paragraph = Paragraph::create([
             'type' => 'amenities_restrictions',
-            'field_description' => $ardata[$amenity]['description'],
+            'field_amend_restrict_description' => $ardata[$amenity]['description'],
             'field_icon' => $ardata[$amenity]['icon'],
             'field_title' => $ardata[$amenity]['title'],
           ]);
