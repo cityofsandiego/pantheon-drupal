@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\Entity\File;
 use Recurr\Exception;
 use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Service description.
@@ -337,7 +338,6 @@ class ExtractText {
     
     // If we changed something, save it.
     if ($changed) {
-      // @todo when saving to NOT update the entity's update time so it can be sorted with other nodes.
       // @todo maybe set a status field and extraction time.
       $entity->save();
     }
@@ -417,6 +417,12 @@ class ExtractText {
   }
 
   function queueEntityForTextExtract($entity_type, $entity): bool {
+    
+    $queue = \Drupal::config('sand_remote.settings')->get('queue');
+    if (!empty($queue)) {
+      return false;
+    }
+    
     $source = $this->getSourceFromEntity($entity);
 
     // If there is nothing in the source field, there is nothing we can do.
