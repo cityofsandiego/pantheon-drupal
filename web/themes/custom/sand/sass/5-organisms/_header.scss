@@ -130,6 +130,7 @@
 
   .header-second {
     background-color: $off-white;
+    box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
     padding-left: 0.625rem;
     padding-right: 0.625rem;
 
@@ -139,6 +140,7 @@
     }
 
     .main-menu {
+      box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
 
       @include breakpoint(medium) {
         background: $white;
@@ -173,12 +175,13 @@
     }
 
     .tbm-link-container {
-      align-items: baseline;
+      align-items: stretch;
       background-color: $white;
 
       &:hover,
       &:focus {
         background-color: $tulip;
+        color: $white;
       }
     }
 
@@ -232,12 +235,13 @@
         }
 
         &.tbm-link.level-1 {
-          align-items: baseline;
+          display: block;
           padding: 1em;
         }
 
         &[title]:after {
           content: attr(title);
+          display: block;
           font-size: 0.6875rem;
           font-weight: normal;
           text-transform: none;
@@ -272,6 +276,12 @@
             background: linear,to bottom,#fff 0%,#d4d4d4 100%;
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d4d4d4',GradientType=0 );
             z-index: 9;
+          }
+
+          &:first-child {
+            &:before {
+              width: 0;
+            }
           }
         }
       }
