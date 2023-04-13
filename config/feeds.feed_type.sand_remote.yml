@@ -21,27 +21,28 @@ dependencies:
     - field.field.sand_remote.external.field_title_long
     - sand_remote.sand_remote_type.external
   module:
+    - feeds_log
     - feeds_tamper
     - sand_remote
 third_party_settings:
   feeds_tamper:
-    tampers:
-      23b9735e-33e9-4939-a402-40d5a1694a91:
-        default_value: documentum
-        only_if_empty: false
-        uuid: 23b9735e-33e9-4939-a402-40d5a1694a91
-        plugin: default_value
-        source: tamper_source
-        weight: 0
-        label: documentum
-      be77c54c-eb8c-4d2e-86c2-36ad8854f496:
-        default_value: no-source-name
-        only_if_empty: false
-        uuid: be77c54c-eb8c-4d2e-86c2-36ad8854f496
-        plugin: default_value
-        source: tamper_source_name
-        weight: 0
-        label: no-source-name
+    tampers: {  }
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+    source: true
 label: 'Sand Remote'
 id: sand_remote
 description: 'Sand Remote External Data'
@@ -152,6 +153,11 @@ custom_sources:
     value: TAMPER_SORT1
     label: TAMPER_SORT1
     machine_name: tamper_sort1
+    type: blank
+  feed_source:
+    value: FEED_SOURCE
+    label: FEED_SOURCE
+    machine_name: feed_source
     type: blank
 mappings:
   -
