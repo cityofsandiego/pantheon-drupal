@@ -153,10 +153,12 @@
       }
     }
 
-    .home-link {
+    .tb-megamenu .tb-megamenu-item > .home-link {
       color: $spruce;
-      display:table-cell;
-      padding-top: 1.25rem;
+      display:block;
+      height: 100%;
+      padding: 1.25rem 1em 1em;
+
       text-decoration: none;
       width: 56px;
 
@@ -174,7 +176,12 @@
       }
     }
 
-    .tbm-link-container {
+    .tb-megamenu .nav > li > a,
+    .tb-megamenu .nav > li > span.tb-megamenu-no-link {
+      border: none;
+    }
+
+    .tb-megamenu-main .tb-megamenu-item > a {
       align-items: stretch;
       background-color: $white;
 
@@ -184,58 +191,71 @@
         color: $white;
       }
     }
-
-    .tbm-submenu-toggle,
-    .tbm .tbm-item {
+  
+    .tb-megamenu .nav li.dropdown.active > .dropdown-toggle,
+    .tb-megamenu .nav li.dropdown.open.active > .dropdown-toggle,
+    .tb-megamenu-submenu-toggle,
+    .tb-megamenu .tb-megamenu-item {
       background-color: $white;
+      color: $spruce;
     }
 
-    .tbm-submenu-toggle {
+    .tb-megamenu-submenu-toggle {
       color: $tulip;
     }
 
-    .tbm-submenu-toggle:hover,
-    .tbm-submenu-toggle:focus,
-    .tbm .tbm-item a:hover,
-    .tbm .tbm-item a:focus,
-    .tbm .tbm-item--has-dropdown a:hover:before,
-    .tbm .tbm-item--has-dropdown a:focus:before,
-    .tbm .tbm-item .open {
+    .tb-megamenu .nav > li.dropdown.open.active > a:hover, .tb-megamenu .nav > li.dropdown.open.active > span.tb-megamenu-no-link:hover,
+    .tb-megamenu-submenu-toggle:hover,
+    .tb-megamenu-submenu-toggle:focus,
+    .tb-megamenu .tb-megamenu-item > a:hover,
+    .tb-megamenu .tb-megamenu-item > a:focus,
+    .tb-megamenu .dropdown-toggle:hover:before,
+    .tb-megamenu .dropdown-toggle:focus:before,
+    .tb-megamenu .tb-megamenu-item .open {
       background-color: $tulip;
       color: $white;
       text-decoration: none;
     }
 
-    .tbm .tbm-item--has-dropdown a:hover i,
-    .tbm .tbm-item--has-dropdown a:focus i {
+    .tb-megamenu .nav > li > a:focus,
+    .tb-megamenu .nav > li > a:hover,
+    .tb-megamenu .nav > li > span.tb-megamenu-no-link:focus,
+    .tb-megamenu .nav > li > span.tb-megamenu-no-link:hover {
       color: $white;
     }
 
-    .tbm .nav li.dropdown.active > .dropdown-toggle .caret {
+    .tb-megamenu .dropdown-toggle:hover i,
+    .tb-megamenu .dropdown-toggle:focus i {
+      color: $white;
+    }
+
+    .tb-megamenu .nav li.dropdown.open > .dropdown-toggle .caret {
       border-top-color: $tulip;
       border-bottom-color: $tulip;
     }
 
-    .tbm-main {
+    .tb-megamenu-main {
 
       @include breakpoint(medium) {
         background: $white;
       }
 
-      a {
+      .tb-megamenu .nav li.dropdown.open > .dropdown-toggle {
+        color: #e54e4b;
+      }
+
+      .tb-megamenu-item > a {
         color: $spruce;
+        font-size: .8125rem;
+        font-weight: 600;
+        line-height: 1.6;
+        position: relative;
+        text-decoration: none;
+        text-transform: uppercase;
 
-        &.tbm-link {
-          font-size: .8125rem;
-          font-weight: 600;
-          line-height: 1.6;
-          position: relative;
-          text-decoration: none;
-          text-transform: uppercase;
-        }
-
-        &.tbm-link.level-1 {
+        &.dropdown-toggle {
           display: block;
+          height: 100%;
           padding: 1em;
         }
 
@@ -248,17 +268,22 @@
         }
       }
 
-      .tbm-item--has-dropdown > div > a > i {
+      .dropdown > a > i {
         color: $sunshade;
         font-size: 1.25rem;
         position: absolute;
         right: 0;
       }
 
-      .tbm-nav {
+      .tb-megamenu-nav {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        margin: 0;
+        padding: 0;
         justify-content: space-between;
 
-        .tbm-item {
+        .tb-megamenu-item {
           border: none;
           flex-grow: 1;
           margin: 0;
@@ -287,14 +312,18 @@
       }
     }
 
-    .tbm-submenu {
+    .tb-megamenu-submenu {
       border-color: transparent;
+      padding: 1rem;
 
       h4 {
         font-size: 1.125rem;
 
           a {
+            line-height: inherit;
+            padding: 0;
             text-decoration: underline;
+            white-space: normal;
 
           &:hover {
             text-decoration: none;
@@ -322,7 +351,7 @@
       }
     }
 
-    .tbm-button {
+    .tb-megamenu-button {
       margin: 0;
     }
 
@@ -346,6 +375,7 @@
 
       a {
         color: $cerulean;
+        padding: 0;
       }
     }
   }
