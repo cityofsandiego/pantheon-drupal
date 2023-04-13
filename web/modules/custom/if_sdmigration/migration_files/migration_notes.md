@@ -35,6 +35,7 @@ lando terminus drush mi:import sd_nodes_event -- --update --force
 lando terminus drush mi:import sd_nodes_gallery -- --update --force
 lando terminus drush mi:import sd_nodes_digital_archives_photos -- --update --force
 lando terminus drush mi:import sd_nodes_article -- --update --force
+lando terminus drush mi:import sd_bean -- --update --force
 
 Menu import:
 lando terminus drush import:menus
@@ -90,6 +91,7 @@ Event
 Article
 Outreach2
 Outreach
+Reusable Content (bean custom blocks)
 
 Field groups:
 field_bucket_events_pi_coll
