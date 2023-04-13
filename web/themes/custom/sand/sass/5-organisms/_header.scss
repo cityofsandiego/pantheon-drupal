@@ -193,7 +193,7 @@
     }
   
     .tb-megamenu .nav li.dropdown.active > .dropdown-toggle,
-    .tb-megamenu .nav li.dropdown.open.active > .dropdown-toggle,
+    .tb-megamenu .nav li.dropdown.open > .dropdown-toggle,
     .tb-megamenu-submenu-toggle,
     .tb-megamenu .tb-megamenu-item {
       background-color: $white;
@@ -204,6 +204,8 @@
       color: $tulip;
     }
 
+    .tb-megamenu .nav li.dropdown.active > .dropdown-toggle:hover,
+    .tb-megamenu .nav li.dropdown.open > .dropdown-toggle:hover,
     .tb-megamenu .nav > li.dropdown.open.active > a:hover, .tb-megamenu .nav > li.dropdown.open.active > span.tb-megamenu-no-link:hover,
     .tb-megamenu-submenu-toggle:hover,
     .tb-megamenu-submenu-toggle:focus,
@@ -238,10 +240,6 @@
 
       @include breakpoint(medium) {
         background: $white;
-      }
-
-      .tb-megamenu .nav li.dropdown.open > .dropdown-toggle {
-        color: #e54e4b;
       }
 
       .tb-megamenu-item > a {
