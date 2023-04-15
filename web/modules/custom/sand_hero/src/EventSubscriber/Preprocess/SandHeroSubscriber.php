@@ -139,15 +139,19 @@ class SandHeroSubscriber implements EventSubscriberInterface {
       if (!empty($departments_on_node)) {
         $nids = sand_hero_query_hero_ids($departments_on_node);
       }
-      $nid = array_rand($nids, 1);
-      $hero_node = $this->entityTypeManager->getStorage('node')->load($nid);
-      if ($hero_node !== NULL && $hero_node->get('field_image')->getValue() !== NULL) {
-        $hero_image = $this->entityTypeManager->getStorage('media')
-          ->load($hero_node->get('field_image')->getValue()[0]['target_id']);
-        if ($hero_image !== NULL) {
-          $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
-          $hero_image_file = File::load($fid);
-          $variables->set('hero_image', $hero_image_file->createFileUrl());
+      if (!empty($nids)) {
+        $nid = $nids[array_rand($nids)];
+        $hero_node = $this->entityTypeManager->getStorage('node')->load($nid);
+        if ($hero_node !== NULL && $hero_node->get('field_image')
+            ->getValue() !== NULL) {
+          $hero_image = $this->entityTypeManager->getStorage('media')
+            ->load($hero_node->get('field_image')->getValue()[0]['target_id']);
+          if ($hero_image !== NULL) {
+            $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
+            $hero_image_file = File::load($fid);
+            $x = $hero_image_file->createFileUrl();
+            $variables->set('hero_image', $hero_image_file->createFileUrl());
+          }
         }
       }
     }
