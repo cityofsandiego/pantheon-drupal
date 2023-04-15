@@ -4,12 +4,34 @@
  * @file
  * Primary module hooks for sand_hero module.
  */
-// start of hero
-//use Drupal\user\Entity\User;
-//use Drupal\sand_tool\terms;
-//use Drupal\taxonomy\TermStorageInterface;
+declare(strict_types=1);
 
-// ...
+/**
+ * Implements hook_help().
+ */
+function sand_datalayer_help($route_name): ?string {
+  return sand_help_show_help(__DIR__, $route_name);
+}
+///**
+// * Implements hook_page_attachments().
+// */
+//function sand_hero_page_attachments(array &$attachments) {
+//  // Your PHP array to pass to JavaScript.
+//  $php_array = [
+//    'key1' => 'value1',
+//    'key2' => 'value2',
+//  ];
+//
+//  // Attach the array to DrupalSettings.
+//  $attachments['#attached']['drupalSettings']['sand_hero']['php_array'] = $php_array;
+//}
+use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
+use Drupal\file\Entity\File;
+use Drupal\node\NodeInterface;
+use Drupal\preprocess_event_dispatcher\Event\PagePreprocessEvent;
+use Drupal\taxonomy\TermInterface;
+
 
 /**
  * Retrieves the parent terms for a given term.
@@ -20,29 +42,31 @@
  * @return array
  *   An array of parent term objects.
  */
-function sand_hero_get_term_parents($tid) {
+function sand_hero_get_term_parents(int $tid): array {
   /** @var \Drupal\taxonomy\TermStorageInterface $term_storage */
-  $term_storage = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term');
+  try {
+    $term_storage = Drupal::service('entity_type.manager')
+      ->getStorage('taxonomy_term');
+  } catch (InvalidPluginDefinitionException|PluginNotFoundException) {
+  }
   $field = $term_storage->loadAllParents($tid);
-  $new_terms = [];
-  $new_terms = array_map(function (\Drupal\taxonomy\TermInterface $term) {
+  $new_terms = array_map(function (TermInterface $term) {
     return $term->label();
   }, $field);
-  $term_keys = array_keys($new_terms);
-  return $term_keys;
+  return array_keys($new_terms);
 }
 
 /**
  * @param string $timezone
- * @param $latitude
- * @param $longitude
+ * @param float $latitude
+ * @param float $longitude
  *
  * @return string[]
  * array(2) { [0]=> string(7) "all_day" [1]=> string(3) "day" }
  */
-function sand_hero_timesofday($timezone = "America/Los_Angeles", $latitude = 32.7157, $longitude = -117.1611) {
+function sand_hero_timesofday(string $timezone = "America/Los_Angeles", float $latitude = 32.7157, float $longitude = -117.1611): array {
   date_default_timezone_set($timezone);
-  $server_time = \Drupal::time()->getRequestTime();
+  $server_time = Drupal::time()->getRequestTime();
   $sun_info = date_sun_info($server_time, $latitude, $longitude);
 
   // If we have expire enabled then we are probably using cloudflare so average
@@ -98,7 +122,7 @@ function sand_hero_timesofday($timezone = "America/Los_Angeles", $latitude = 32.
 /**
  * Implements hook_js_settings_build().
  */
-function sand_hero_query_hero_ids(array $departments) {
+function sand_hero_query_hero_ids(array $departments): int|array {
   /** @var \Drupal\taxonomy\TermStorageInterface $term_storage */
   if(empty($departments)){
     return [];
@@ -114,7 +138,7 @@ function sand_hero_query_hero_ids(array $departments) {
   foreach ($departments as $department) {
     $term_storage[] = array_values(sand_hero_get_term_parents($department));
   }
-//  $term_storage = array_unique($term_storage);
+  //  $term_storage = array_unique($term_storage);
   $departmentParents = [];
   foreach ($term_storage as $r) {
     foreach ($r as $k) {
@@ -122,10 +146,10 @@ function sand_hero_query_hero_ids(array $departments) {
     }
   }
   $departmentParents = array_unique($departmentParents);
-//  = $term_storage;
+  //  = $term_storage;
 
   if(!empty($times_of_day)) {
-    $query = \Drupal::entityQuery('node');
+    $query = Drupal::entityQuery('node');
 
     $orTimes = $query->orConditionGroup();
     foreach ($times_of_day as $time) {
@@ -148,24 +172,24 @@ function sand_hero_query_hero_ids(array $departments) {
     $orSitewideCascade->condition('field_hero_sitewide', TRUE);
 
     $query->condition('type', 'hero');
-    $query->condition('status', \Drupal\node\NodeInterface::PUBLISHED);
+    $query->condition('status', NodeInterface::PUBLISHED);
     $query->condition($orTimes);
     $query->condition($orSitewideCascade);
-//    $query->fields('node', ['field_image', 'field_vimeo_url']);
-//    $query->
+    //    $query->fields('node', ['field_image', 'field_vimeo_url']);
+    //    $query->
 
     $entity_ids = $query->execute();
-//    $settings['#attached']['drupalSettings']['sandHero'] = $entity_ids;
-//    $x = \Drupal\sand_tool\SandTerms::doSomething();
-//    $settings['myName'] = 'Boone';
-//    $build['#attached']['drupalSettings']['sandHero'] = $settings;
+    //    $settings['#attached']['drupalSettings']['sandHero'] = $entity_ids;
+    //    $x = \Drupal\sand_tool\SandTerms::doSomething();
+    //    $settings['myName'] = 'Boone';
+    //    $build['#attached']['drupalSettings']['sandHero'] = $settings;
     return array_values($entity_ids);
     // @todo: 3 queries instead of one
-//    query sitewide
-//    query departments
-//    if !empty($departments) merge with sitwide, return
-//    else query departmentparents
-//    if !empty($departmentParents) merge with stewide, return
+    //    query sitewide
+    //    query departments
+    //    if !empty($departments) merge with sitwide, return
+    //    else query departmentparents
+    //    if !empty($departmentParents) merge with stewide, return
     // @todo: on hero save, cache state varible
     // state variable
     // check state, if no, do querys, update state
@@ -178,6 +202,8 @@ function sand_hero_query_hero_ids(array $departments) {
 
 // return
 // node, field_department,
+
+
 /**
  * Implements hook_page_attachments().
  *
@@ -186,7 +212,7 @@ function sand_hero_query_hero_ids(array $departments) {
 /**
  * Implements hook_page_attachments().
  */
-function sand_hero_page_attachments(array &$attachments) {
+function sand_hero_page_attachments(array &$attachments): void {
   //  $node = \Drupal::routeMatch()->getParameter('node');
   //  if ($node instanceof \Drupal\node\NodeInterface) {
   //    $department_terms = $node->get('field_department')->referencedEntities();
@@ -197,8 +223,8 @@ function sand_hero_page_attachments(array &$attachments) {
   //    }
   //  }
   $departments_on_node = [];
-  $node = \Drupal::routeMatch()->getParameter('node');
-  if ($node instanceof \Drupal\node\NodeInterface) {
+  $node = Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof NodeInterface) {
     $department_terms = $node->get('field_department')->getValue();
     if (!empty($department_terms)) {
       foreach ($department_terms as $department_term) {
@@ -210,8 +236,8 @@ function sand_hero_page_attachments(array &$attachments) {
 
   if (!empty($departments_on_node)) {
     $heroNodeIDs = sand_hero_query_hero_ids($departments_on_node);
-//@todo:    load nodes and grab URLs for images in array
-    $heroSettings['heroNodeIDs'] = $heroNodeIDs;
-    $attachments['#attached']['drupalSettings']['sandHero'] = $heroSettings;
+    //@todo:    load nodes and grab URLs for images in array
+    $attachments['#attached']['drupalSettings']['sandHero'] = $heroNodeIDs;
+    $x =0;
   }
 }

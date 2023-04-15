@@ -114,39 +114,39 @@ final class Node implements EventSubscriberInterface {
     return [
       NodePreprocessEvent::name() => 'preprocessNode',
       BlockPreprocessEvent::name() => 'preprocessTitleBlock',
-      PagePreprocessEvent::name() => 'preprocessPage',
+//      PagePreprocessEvent::name() => 'preprocessPage',
     ];
   }
-
-  public function preprocessPage(PagePreprocessEvent $event): void {
-    $variables = $event->getVariables();
-
-    if ($variables->getNode() !== NULL) {
-      /**
-       * @todo remove or edit this.
-       * sand_hero module looks to supersede this, so I just grab a random
-       * hero image, only taking into account whether it's the front page.
-       */
-      $query = $this->entityTypeManager
-        ->getListBuilder('node')
-        ->getStorage()
-        ->getQuery();
-      $query->condition('type', 'hero')
-        ->condition('field_hero_frontpage', 0);
-      $nids = $query->execute();
-      $nid = array_rand($nids, 1);
-      $hero_node = $this->entityTypeManager->getStorage('node')->load($nid);
-      if ($hero_node !== NULL && $hero_node->get('field_image')->getValue() !== NULL) {
-        $hero_image = $this->entityTypeManager->getStorage('media')
-          ->load($hero_node->get('field_image')->getValue()[0]['target_id']);
-        if ($hero_image !== NULL) {
-          $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
-          $hero_image_file = File::load($fid);
-          $variables->set('hero_image', $hero_image_file->createFileUrl());
-        }
-      }
-    }
-  }
+//
+//  public function preprocessPage(PagePreprocessEvent $event): void {
+//    $variables = $event->getVariables();
+//
+//    if ($variables->getNode() !== NULL) {
+//      /**
+//       * @todo remove or edit this.
+//       * sand_hero module looks to supersede this, so I just grab a random
+//       * hero image, only taking into account whether it's the front page.
+//       */
+//      $query = $this->entityTypeManager
+//        ->getListBuilder('node')
+//        ->getStorage()
+//        ->getQuery();
+//      $query->condition('type', 'hero')
+//        ->condition('field_hero_frontpage', 0);
+//      $nids = $query->execute();
+//      $nid = array_rand($nids, 1);
+//      $hero_node = $this->entityTypeManager->getStorage('node')->load($nid);
+//      if ($hero_node !== NULL && $hero_node->get('field_image')->getValue() !== NULL) {
+//        $hero_image = $this->entityTypeManager->getStorage('media')
+//          ->load($hero_node->get('field_image')->getValue()[0]['target_id']);
+//        if ($hero_image !== NULL) {
+//          $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
+//          $hero_image_file = File::load($fid);
+//          $variables->set('hero_image', $hero_image_file->createFileUrl());
+//        }
+//      }
+//    }
+//  }
 
   public function preprocessTitleBlock(BlockPreprocessEvent $event): void {
     $variables = $event->getVariables();
