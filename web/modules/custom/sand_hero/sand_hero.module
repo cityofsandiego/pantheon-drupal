@@ -183,7 +183,7 @@ function sand_hero_query_hero_ids(array $departments): int|array {
     //    $x = \Drupal\sand_tool\SandTerms::doSomething();
     //    $settings['myName'] = 'Boone';
     //    $build['#attached']['drupalSettings']['sandHero'] = $settings;
-    return array_values($entity_ids);
+    return array_map('intval', array_values($entity_ids));
     // @todo: 3 queries instead of one
     //    query sitewide
     //    query departments
