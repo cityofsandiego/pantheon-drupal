@@ -12,19 +12,7 @@ declare(strict_types=1);
 function sand_datalayer_help($route_name): ?string {
   return sand_help_show_help(__DIR__, $route_name);
 }
-///**
-// * Implements hook_page_attachments().
-// */
-//function sand_hero_page_attachments(array &$attachments) {
-//  // Your PHP array to pass to JavaScript.
-//  $php_array = [
-//    'key1' => 'value1',
-//    'key2' => 'value2',
-//  ];
-//
-//  // Attach the array to DrupalSettings.
-//  $attachments['#attached']['drupalSettings']['sand_hero']['php_array'] = $php_array;
-//}
+
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\file\Entity\File;
@@ -99,26 +87,6 @@ function sand_hero_timesofday(string $timezone = "America/Los_Angeles", float $l
   return $times_of_day;
 }
 
-// get variables (departments, times)
-// - variable departments is like sand_tool_department_parents
-// - variable times is date_sun_info() PHP
-// - - generate from now() dawn, dusk, day, night
-//$times_of_day = sand_hero_timesofday();
-// query hero nids with department(and parents) and time_of_day(dawn,dusk,day,night)
-// pick one random hero, if empty, default image
-// apply this image to Hero background PHP programmatically
-// generate variable for this image, JS to access for this page
-// attach JS to change the page image, changes even when page is cached
-
-//function sand_hero_page_attachments(array &$page) {
-////  if (!\Drupal::currentUser()->hasPermission('access contextual links')) {
-////    return;
-////  }
-//
-//  $page['#attached']['library'][] = 'sand_hero/hero_js';
-//}
-//
-
 /**
  * Implements hook_js_settings_build().
  */
@@ -146,7 +114,10 @@ function sand_hero_query_hero_ids(array $departments): int|array {
     }
   }
   $departmentParents = array_unique($departmentParents);
-  //  = $term_storage;
+  $departmentParents = array_diff($departmentParents, $departments);
+  if(empty($departmentParents)) {
+    $departmentParents[] = 0;
+  }
 
   if(!empty($times_of_day)) {
     $query = Drupal::entityQuery('node');
@@ -155,54 +126,44 @@ function sand_hero_query_hero_ids(array $departments): int|array {
     foreach ($times_of_day as $time) {
       $orTimes->condition('field_hero_time_of_day', $time, '=');
     }
+
     $orDepartments = $query->orConditionGroup();
     foreach ($departments as $department) {
       $orDepartments->condition('field_department', $department, '=');
     }
+
     $orDepartmentParents = $query->orConditionGroup();
     foreach ($departmentParents as $departmentParent) {
       $orDepartmentParents->condition('field_department', $departmentParent, '='); //todo: think there is something wrong with this?
     }
-    $orDepartmentCascade = $query->orConditionGroup();
-    $orDepartmentCascade->condition($orDepartments);
-    $orDepartmentCascade->condition($orDepartmentParents);
 
-    $orSitewideCascade = $query->orConditionGroup();
-    $orSitewideCascade->condition($orDepartmentCascade); // departments first, sitewide if no departments
-    $orSitewideCascade->condition('field_hero_sitewide', TRUE);
+    $sharedConditions = $query->andConditionGroup();
+    $sharedConditions->condition('type', 'hero');
+    $sharedConditions->condition('status', NodeInterface::PUBLISHED);
+    $sharedConditions->condition($orTimes);
 
-    $query->condition('type', 'hero');
-    $query->condition('status', NodeInterface::PUBLISHED);
-    $query->condition($orTimes);
-    $query->condition($orSitewideCascade);
-    //    $query->fields('node', ['field_image', 'field_vimeo_url']);
-    //    $query->
-
+    $query->condition($sharedConditions);
+    $query->condition($orDepartments);
     $entity_ids = $query->execute();
-    //    $settings['#attached']['drupalSettings']['sandHero'] = $entity_ids;
-    //    $x = \Drupal\sand_tool\SandTerms::doSomething();
-    //    $settings['myName'] = 'Boone';
-    //    $build['#attached']['drupalSettings']['sandHero'] = $settings;
-    return array_map('intval', array_values($entity_ids));
-    // @todo: 3 queries instead of one
-    //    query sitewide
-    //    query departments
-    //    if !empty($departments) merge with sitwide, return
-    //    else query departmentparents
-    //    if !empty($departmentParents) merge with stewide, return
-    // @todo: on hero save, cache state varible
-    // state variable
-    // check state, if no, do querys, update state
 
+    if(empty($entity_ids)) {
+      $query = Drupal::entityQuery('node');
+      $query->condition($sharedConditions);
+      $query->condition($orDepartmentParents);
+      $entity_ids = $query->execute();
+    }
+
+    if(empty($entity_ids)) {
+      $query = Drupal::entityQuery('node');
+      $query->condition($sharedConditions);
+      $query->condition('field_hero_sitewide', TRUE);
+      $entity_ids = $query->execute();
+    }
+
+    return array_map('intval', array_values($entity_ids));
   }
   return [];
 }
-// query
-// site_wide OR in_dept
-
-// return
-// node, field_department,
-
 
 /**
  * Implements hook_page_attachments().
@@ -213,15 +174,6 @@ function sand_hero_query_hero_ids(array $departments): int|array {
  * Implements hook_page_attachments().
  */
 function sand_hero_page_attachments(array &$attachments): void {
-  //  $node = \Drupal::routeMatch()->getParameter('node');
-  //  if ($node instanceof \Drupal\node\NodeInterface) {
-  //    $department_terms = $node->get('field_department')->referencedEntities();
-  //    if (!empty($department_terms)) {
-  //      $department_terms = reset($department_terms);
-  //      // do something with department term
-  //      $a = $department_terms[0]->values["tid"]["x-default"];
-  //    }
-  //  }
   $departments_on_node = [];
   $node = Drupal::routeMatch()->getParameter('node');
   if ($node instanceof NodeInterface) {
@@ -236,8 +188,6 @@ function sand_hero_page_attachments(array &$attachments): void {
 
   if (!empty($departments_on_node)) {
     $heroNodeIDs = sand_hero_query_hero_ids($departments_on_node);
-    //@todo:    load nodes and grab URLs for images in array
     $attachments['#attached']['drupalSettings']['sandHero'] = $heroNodeIDs;
-    $x =0;
   }
 }
