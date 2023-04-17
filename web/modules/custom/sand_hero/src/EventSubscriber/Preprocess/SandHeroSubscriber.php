@@ -3,6 +3,8 @@
 namespace Drupal\sand_hero\EventSubscriber\Preprocess;
 
 use Drupal;
+use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Menu\MenuActiveTrail;
 use Drupal\Core\Routing\CurrentRouteMatch;
@@ -149,10 +151,15 @@ class SandHeroSubscriber implements EventSubscriberInterface {
           }
         }
       }
-      $x = 0;
-      $variables->set('hero_image', $fileUrls[array_rand($fileUrls)]);
-      $tempstore = \Drupal::service('tempstore.private')->get('sand_hero');
-      $tempstore->set('hero_image_js', $fileUrls);
+      if(empty($fileUrls)) {
+        // default image if no image is found
+        $fileUrls = ["/sites/default/files/downtown-skyline-.jpg"];
+      }
+      if(!empty($fileUrls)){
+        $variables->set('hero_image', $fileUrls[array_rand($fileUrls)]);
+        $tempstore = \Drupal::service('tempstore.private')->get('sand_hero');
+        $tempstore->set('hero_image_js', $fileUrls);
+      }
     }
   }
 
