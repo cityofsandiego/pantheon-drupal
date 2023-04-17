@@ -3,7 +3,6 @@ services:
     class: Drupal\sand_hero\EventSubscriber\Preprocess\SandHeroSubscriber
     arguments:
       - '@current_route_match'
-      - '@menu.active_trail'
       - '@entity_type.manager'
     tags:
       - { name: event_subscriber }

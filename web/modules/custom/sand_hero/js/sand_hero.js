@@ -3,16 +3,15 @@
  * sand_hero.js
  *
  */
+const heroURLs = drupalSettings.sandHero;
 
-(function ($, Drupal) {
-  Drupal.behaviors.heroBgImage = {
-    attach: function (context, settings) {
-      var myVariable = drupalSettings.sandHero.heroNodeIDs;
-      console.log("outside Once");
-      $('#hero-bg-image', context).once('heroBgImage').each(function () {
-        console.log(myVariable);
-        $(this).append("<script>console.log('Hello from Hero Rotation!')</script>");
-      });
-    }
-  };
-})(jQuery, Drupal);
+if (typeof heroURLs !== 'undefined' && heroURLs.length >= 2) {
+  const randomIndex = Math.floor(Math.random() * heroURLs.length);
+  const heroURL = heroURLs[randomIndex];
+  console.log('Available Hero Images: ' + heroURLs);
+  console.log('Random Hero Image: ' + heroURL);
+  jQuery("#hero-bg-image").css("background-image", "url(" + heroURL + ")");
+} else {
+  console.log('Only one Hero Image Available');
+  // can put a default image here
+}
