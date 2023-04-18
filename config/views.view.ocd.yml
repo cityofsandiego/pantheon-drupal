@@ -5,17 +5,20 @@ dependencies:
   config:
     - field.storage.node.field_a_webc_url
     - field.storage.node.field_doc_date
+    - field.storage.node.field_doc_date_year
     - field.storage.node.field_doc_num
     - field.storage.node.field_document_url
     - field.storage.node.field_pn_end_date_date
     - node.type.external_data
   module:
+    - better_exposed_filters
     - datetime
     - link
     - node
     - options
     - semanticviews
     - user
+    - views_selective_filters
 id: ocd
 label: 'Official City Documents'
 module: views
@@ -493,15 +496,35 @@ display:
             offset_label: Offset
           quantity: 9
       exposed_form:
-        type: basic
+        type: bef
         options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
+          submit_button: Search
+          reset_button: true
+          reset_button_label: 'Show All'
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: basic_html
+          bef:
+            general:
+              autosubmit: true
+              autosubmit_exclude_textfield: false
+              autosubmit_textfield_delay: 500
+              autosubmit_hide: false
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Advanced options'
+              secondary_open: false
+              reset_button_always_show: true
+            filter:
+              title:
+                plugin_id: default
+                advanced:
+                  placeholder_text: ''
+                  collapsible: false
+                  is_secondary: false
       access:
         type: perm
         options:
@@ -1009,7 +1032,7 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-          label: ''
+          label: Title
           exclude: false
           alter:
             alter_text: true
@@ -1043,6 +1066,69 @@ display:
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_doc_date_year:
+          id: field_doc_date_year
+          table: node__field_doc_date_year
+          field: field_doc_date_year
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Doc Date Year'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -1192,27 +1278,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        field_doc_date_year_value:
-          id: field_doc_date_year_value
+        field_doc_date_year_value_selective:
+          id: field_doc_date_year_value_selective
           table: node__field_doc_date_year
-          field: field_doc_date_year_value
+          field: field_doc_date_year_value_selective
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: string
-          operator: '='
-          value: ''
+          plugin_id: views_selective_filters_filter
+          operator: in
+          value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: field_doc_date_year_value_op
+            operator_id: ''
             label: Year
             description: ''
             use_operator: false
-            operator: field_doc_date_year_value_op
+            operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_doc_date_year_value
+            identifier: field_doc_date_year_value_selective
             required: false
             remember: false
             multiple: false
@@ -1232,7 +1318,7 @@ display:
               if_administrator: '0'
               administrator: '0'
               locations: '0'
-            placeholder: ''
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -1245,6 +1331,10 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+          selective_display_field: field_doc_date_year
+          selective_display_sort: KDESC
+          selective_aggregated_fields: ''
+          selective_items_limit: 100
         field_doc_set_value:
           id: field_doc_set_value
           table: node__field_doc_set
@@ -1300,6 +1390,7 @@ display:
             edit_node: edit_node
             field_doc_num: field_doc_num
             title: title
+            field_doc_date_year: field_doc_date_year
           default: '-1'
           info:
             field_doc_date_1:
@@ -1326,9 +1417,16 @@ display:
               default_sort_order: asc
               align: ''
               separator: ''
-              empty_column: false
+              empty_column: true
               responsive: ''
             title:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_doc_date_year:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -1370,6 +1468,7 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.field_doc_date'
+        - 'config:field.storage.node.field_doc_date_year'
         - 'config:field.storage.node.field_doc_num'
         - 'config:field.storage.node.field_document_url'
   councilmeetings:
@@ -1978,7 +2077,11 @@ display:
       style:
         type: table
         options:
-          grouping: {  }
+          grouping:
+            -
+              field: field_doc_date_1
+              rendered: true
+              rendered_strip: false
           row_class: ''
           default_row_class: true
           columns:
@@ -3717,58 +3820,11 @@ display:
         groups:
           1: AND
       style:
-        type: table
+        type: default
         options:
           grouping: {  }
           row_class: ''
           default_row_class: true
-          columns:
-            field_doc_date_1: field_doc_date_1
-            field_document_url: field_document_url
-            edit_node: edit_node
-            field_doc_num: field_doc_num
-            title: title
-          default: '-1'
-          info:
-            field_doc_date_1:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_document_url:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            edit_node:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_doc_num:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            title:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          override: true
-          sticky: false
-          summary: ''
-          empty_table: false
-          caption: ''
-          description: ''
       row:
         type: fields
         options:
@@ -3817,7 +3873,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: Date
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -4003,11 +4059,11 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-          label: Title
+          label: ''
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{{ field_document_url }}">{{ title }}</a>'
+            text: '<a href="{{ field_document_url }}"><span><img class="file-icon" alt="PDF icon" title="application/pdf" src="/modules/file/icons/application-pdf.png"></span> {{ title }}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -4280,58 +4336,11 @@ display:
         groups:
           1: AND
       style:
-        type: table
+        type: default
         options:
           grouping: {  }
           row_class: ''
           default_row_class: true
-          columns:
-            field_doc_date_1: field_doc_date_1
-            field_document_url: field_document_url
-            edit_node: edit_node
-            field_doc_num: field_doc_num
-            title: title
-          default: '-1'
-          info:
-            field_doc_date_1:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_document_url:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            edit_node:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_doc_num:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            title:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          override: true
-          sticky: false
-          summary: ''
-          empty_table: false
-          caption: ''
-          description: ''
       row:
         type: fields
         options:
