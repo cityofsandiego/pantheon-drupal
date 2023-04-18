@@ -171,6 +171,7 @@ final class Node implements EventSubscriberInterface {
           }
         }
         $this->buildMenuLinks('topmenu');
+        array_multisort(array_column($this->topMenuLinkData, 'weight'), SORT_ASC, $this->topMenuLinkData);
         $variables->set('topmenu', [
           'items' => $this->topMenuLinkData,
         ]);

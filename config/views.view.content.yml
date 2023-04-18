@@ -28,6 +28,7 @@ dependencies:
     - node.type.sidebar_block_context
     - node.type.slide
     - node.type.webform
+    - taxonomy.vocabulary.department
   module:
     - hierarchical_term_formatter
     - history
@@ -298,14 +299,15 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: true
-        field_department:
-          id: field_department
-          table: node__field_department
-          field: field_department
+        term_node_tid:
+          id: term_node_tid
+          table: node_field_data
+          field: term_node_tid
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
+          entity_type: node
+          plugin_id: taxonomy_index_tid
           label: Department
           exclude: false
           alter:
@@ -347,20 +349,21 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: true
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
+          type: separator
           separator: ', '
-          field_api_classes: false
+          link_to_taxonomy: false
+          limit: true
+          vids:
+            department: department
+            bucket: '0'
+            business_resources_organization: '0'
+            business_resources_target_bus: '0'
+            business_resources_type_assist: '0'
+            categories: '0'
+            event: '0'
+            location: '0'
+            registration: '0'
+            search_keymatch: '0'
         field_department_1:
           id: field_department_1
           table: node__field_department
@@ -750,10 +753,100 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_department_target_id:
+          id: field_department_target_id
+          table: node__field_department
+          field: field_department_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: empty
+          value: {  }
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: department
+          type: textfield
+          hierarchy: false
+          limit: true
+          error_message: true
+        delta:
+          id: delta
+          table: node__field_department
+          field: delta
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: numeric
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: '1'
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
           1: AND
+          2: OR
       style:
         type: table
         options:
