@@ -5,9 +5,15 @@ namespace Drupal\sand_remote;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\Entity\File;
+use Drupal\webform\WebformSubmissionInterface;
+use GuzzleHttp\Exception\RequestException;
 use Recurr\Exception;
 use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\Exception\FileException;
+use Drupal\Core\File\Exception\InvalidStreamWrapperException;
+use GuzzleHttp\Exception\TransferException;
+
 
 /**
  * Service description.
@@ -25,6 +31,10 @@ class ExtractText {
   // This is the field to set the text to (i.e. field_body). 
   public $target_field;
 
+  private $get_file_first;
+  
+  private $file;
+  
   /**
    * Getter
    * 
@@ -158,6 +168,10 @@ class ExtractText {
     return $this;
   }
 
+  public function setupFile() {
+    
+  }
+  
   /**
    * Get text extracted from the PDF of the url field of this class.
    * 
@@ -185,15 +199,15 @@ class ExtractText {
       ->createInstance($extractor_plugin_id, $configuration);
 
     // Create a file object since the extractor needs it. It's a temp file.
-    $file = File::create([
-      'filename' => $url,
-      'uri' => $url,
-      'status' => 1,
-      'uid' => 1,
-    ]);
+//    $file = File::create([
+//      'filename' => $url,
+//      'uri' => $url,
+//      'status' => 1,
+//      'uid' => 1,
+//    ]);
 
     try {
-      $extracted_data = $extractor_plugin->extract($file);
+      $extracted_data = $extractor_plugin->extract($this->getFile());
       $cleaned_data = $this->cleanExtractedData($extracted_data);
       // @todo interface with Boone's tesserac server if the cleaned data is empty
       \Drupal::logger('sand_remote')
@@ -207,7 +221,7 @@ class ExtractText {
     } catch (\Exception $e) {
       if ($e->getMessage() === 'Tika Extractor is not available.') {
         \Drupal::logger('sand_remote')
-          ->error('Got NO text when trying to extract text on %entity_type ID: %id, on URL: %url, error: %error', [
+          ->error('Tika Extractor is not available  when trying to extract text on %entity_type ID: %id, on URL: %url, error: %error', [
             '%entity_type' => $this->getEntityType(),
             '%id' => $this->getEntityId(),
             '%url' => $url,
@@ -228,6 +242,69 @@ class ExtractText {
 
   }
 
+  public function getRemoteFile() {
+    try {
+      $url = $this->getUrlField();
+      $client = \Drupal::httpClient();
+      $request = $client->get($url, [
+        'verify' => FALSE,
+      ]);
+      $file = $request->getBody();
+    }
+    catch (RequestException $exception) {
+     return FALSE;
+    }
+    return $file;
+  }
+
+  // $client = \Drupal::service('http_client_factory')->fromOptions(array('verify' => FALSE));
+  function retrieveFile($destination = NULL, $managed = FALSE, $replace = FileSystemInterface::EXISTS_RENAME) {
+    $url = $this->getUrlField();
+    $parsed_url = parse_url($url);
+    /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+    $file_system = \Drupal::service('file_system');
+    if (!isset($destination)) {
+      $path = $file_system->basename($parsed_url['path']);
+      $path = \Drupal::config('system.file')->get('default_scheme') . '://' . $path;
+      $path = \Drupal::service('stream_wrapper_manager')->normalizeUri($path);
+    }
+    else {
+      if (is_dir($file_system->realpath($destination))) {
+        // Prevent URIs with triple slashes when glueing parts together.
+        $path = str_replace('///', '//', "$destination/") . \Drupal::service('file_system')->basename($parsed_url['path']);
+      }
+      else {
+        $path = $destination;
+      }
+    }
+    try {
+      $data = (string) \Drupal::httpClient()
+        ->get($url)
+        ->getBody();
+      if ($managed) {
+        /** @var \Drupal\file\FileRepositoryInterface $file_repository */
+        $file_repository = \Drupal::service('file.repository');
+        $local = $file_repository->writeData($data, $path, $replace);
+      }
+      else {
+        $local = $file_system->saveData($data, $path, $replace);
+      }
+    }
+    catch (TransferException $exception) {
+      \Drupal::messenger()->addError(t('Failed to fetch file due to error "%error"', ['%error' => $exception->getMessage()]));
+      return FALSE;
+    }
+    catch (FileException | InvalidStreamWrapperException $e) {
+      \Drupal::messenger()->addError(t('Failed to save file due to error "%error"', ['%error' => $e->getMessage()]));
+      return FALSE;
+    }
+    if (!$local) {
+      \Drupal::messenger()->addError(t('@remote could not be saved to @path.', ['@remote' => $url, '@path' => $path]));
+    }
+
+    return $local;
+  }
+  
   /**
    * Clean up text, Stolen from D7 apachesolr function.
    * 
@@ -324,7 +401,30 @@ class ExtractText {
     }
 
     // Extract the text from the URL.
+
+    // Create a file object since the extractor needs it. It's a temp file.
+    $file = File::create([
+      'filename' => $url,
+      'uri' => $url,
+      'status' => 1,
+      'uid' => 1,
+    ]);
+    $this->setFile($file);
     $extracted_text = $this->extractText();
+    if (empty($extracted_text)) {
+      
+//      use GuzzleHttp\Client;
+//      $client = new Client(['verify' => false]);
+//      $response = $client->get('https://example.com/');
+      
+      $file->getRemoteFile();
+      $file = system_retrieve_file($url, 'private://', TRUE, FileSystemInterface::EXISTS_RENAME);
+      
+      if ($file instanceof File) {
+        $this->setFile($file);
+        $extracted_text = $this->extractText();   
+      }
+    }
     
     // If both are NULL/empty string then nothing to do.
     if (empty($target_value) && empty($extracted_text)) {
@@ -363,7 +463,21 @@ class ExtractText {
       return NULL;
     }
   }
-  
+
+  /**
+   * @return mixed
+   */
+  public function getFile() {
+    return $this->file;
+  }
+
+  /**
+   * @param mixed $file
+   */
+  public function setFile($file): void {
+    $this->file = $file;
+  }
+
 
   private function getSourceUrlField(ContentEntityBase $entity, $field_name = 'field_source_name'): string {
     $url_field = '';
