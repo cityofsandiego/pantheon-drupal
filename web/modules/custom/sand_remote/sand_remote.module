@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\Url;
+
 /**
  * @file
  * Provides a sand_remote entity type.
@@ -7,6 +9,42 @@
 use Drupal\Core\Render\Element;
 use Drupal\user\UserInterface;
 use Drupal\sand_remote\RemoteETL;
+
+/**
+ * Implements hook_requirements().
+ */
+function sand_remote_requirements($phase) {
+  // Only check requirements during the run-time (aka Status Report).
+  if ($phase != 'runtime') {
+    return [];
+  }
+
+
+  $queue = \Drupal::config('sand_remote.settings')->get('queue');
+  if (!empty($queue)) {
+    $requirements['sand_remote'] = [
+      'title' => t('San Diego<br> Remote Text Extraction'),
+      'value' => t('Queuing NOT enabled for remote extraction. <a href=":url">You can change it here</a>.', [
+        ':url' => Url::fromRoute('sand_remote.settings')->setAbsolute()->toString(),
+      ]),
+      'severity' => REQUIREMENT_WARNING,
+    ];  
+  } else {
+    $requirements['sand_remote'] = [
+      'title' => t('San Diego Remote Text Extraction'),
+      'value' => t('Queuing is enabled for remote extraction. <a href=":url">You can change it here</a>.', [
+        ':url' => Url::fromRoute('sand_remote.settings')->setAbsolute()->toString(),
+      ]),
+      'severity' => REQUIREMENT_INFO,
+    ];
+  }
+    
+
+
+  
+  return $requirements;
+  
+}
 
 /**
  * Implements hook_theme().
