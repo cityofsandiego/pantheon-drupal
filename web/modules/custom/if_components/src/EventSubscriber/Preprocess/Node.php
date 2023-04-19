@@ -132,12 +132,13 @@ final class Node implements EventSubscriberInterface {
     $variables = $event->getVariables();
     $departments_on_node = [];
     $nids = [];
+    $defaultBGImageURL = '/sites/default/files/downtown-skyline-.jpg'; // default background image
 
     $is_front = $this->if_components_hero_set_is_front($variables);
 
-    if ($is_front) {
+    if ($is_front) {  // if front page of sandiego.gov
       $nids = $this->if_components_hero_query_hero_home_page();
-    } else {
+    } else {  // load departments on node
       if ($variables->getNode() !== NULL) {
         $node = Drupal::routeMatch()->getParameter('node');
         if ($node instanceof NodeInterface) {
@@ -148,43 +149,40 @@ final class Node implements EventSubscriberInterface {
             }
           }
         }
-
-        if (!empty($departments_on_node)) {
+        if (!empty($departments_on_node)) { // load heros with node departments
           $nids = $this->if_components_hero_query_hero_ids($departments_on_node);
         }
       }
     }
-    if (!empty($nids)) {
-      foreach ($nids as $nid) {
-        $hero_node = $this->entityTypeManager->getStorage('node')->load($nid);
-        if ($hero_node !== NULL) {
-          $hero_info = [];
-          if ($hero_node->get('field_image')->getValue() !== NULL) {
-            $hero_image = $this->entityTypeManager
-              ->getStorage('media')
-              ->load($hero_node->get('field_image')
-                ->getValue()[0]['target_id']);
-            if ($hero_image !== NULL) {
-              $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
-              $hero_image_file = File::load($fid);
-              if(!empty($hero_image_file->createFileUrl())) {
-                $variables->set('hero_image', $hero_image_file->createFileUrl());
-              } else {
-                // default image
-                $variables->set('hero_image', '/sites/default/files/downtown-skyline-.jpg');
-              }
+
+    if (!empty($nids)) { // pick a random hero, and set TWIG variables
+      $nid = $nids[array_rand($nids)];
+      $hero_node = $this->entityTypeManager->getStorage('node')->load($nid);
+      if ($hero_node !== NULL) {
+        if ($hero_node->get('field_image')->getValue() !== NULL) {
+          $hero_image = $this->entityTypeManager
+            ->getStorage('media')
+            ->load($hero_node->get('field_image')
+              ->getValue()[0]['target_id']);
+          if ($hero_image !== NULL) {
+            $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
+            $hero_image_file = File::load($fid);
+            if(!empty($hero_image_file->createFileUrl())) {
+              $variables->set('hero_image', $hero_image_file->createFileUrl());
+            } else {
+              $variables->set('hero_image', $defaultBGImageURL);
             }
           }
-          if(!empty($hero_node->get('field_hero_image_by')->value)) {
-            $variables->set('hero_image_by', $hero_node->get('field_hero_image_by')->value);
-          }
-          if(!empty($hero_node->get('field_hero_prefix_image_by')->value)) {
-            $variables->set('hero_prefix_image_by', $hero_node->get('field_hero_prefix_image_by')->value);
-          }
+        }
+        if(!empty($hero_node->get('field_hero_image_by')->value)) {
+          $variables->set('hero_image_by', $hero_node->get('field_hero_image_by')->value);
+        }
+        if(!empty($hero_node->get('field_hero_prefix_image_by')->value)) {
+          $variables->set('hero_prefix_image_by', $hero_node->get('field_hero_prefix_image_by')->value);
         }
       }
-    } else {
-      $variables->set('hero_image', '/sites/default/files/downtown-skyline-.jpg');
+    } else { // default background image if no department found on node
+      $variables->set('hero_image', $defaultBGImageURL);
     }
   }
 
