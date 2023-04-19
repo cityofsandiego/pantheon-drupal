@@ -32,27 +32,19 @@ class SettingsForm extends ConfigFormBase {
     $config = $this->config('sand_remote.settings');
     $form['#tree'] = TRUE;
 
-    // Gather the number of names in the form already.
-    $num_names = $form_state->get('num_names');
-    $source_field = $config->get('source_field');
-    $queue = $config->get('queue');
-    $mappings = $config->get('mappings');
-
-    // We have to ensure that there is at least one name field. If the config has
-    // more than one field then use that for the number of sources and populate it
-    // from the config.
-    if ($num_names === NULL) {
-      // Get previously saved mappings
-      $name_field = $form_state->set('num_names', count($mappings));
-      $num_names = count($mappings);
-    }
-
     // This is the field that is used to get the source of the data from the entity.
     $form['queue'] = array(
       '#type' => 'checkbox',
       '#title' => $this->t('Turn Off Queuing for PDF Text'),
-      '#default_value' => $queue,
+      '#default_value' => $config->get('queue'),
       '#description' => $this->t('Check this box if you do not want to queue each updated Or inserted item for PDF extraction')
+    );
+
+    $form['fetch'] = array(
+      '#type' => 'checkbox',
+      '#title' => $this->t('Fetch remote file'),
+      '#default_value' => $config->get('fetch'),
+      '#description' => $this->t('Check this box if you want to fetch the remote file for PDF extraction if we get no text from the initial attempt to extract it remotely.')
     );
 
     // This is the field that is used to get the source of the data from the entity.
@@ -60,7 +52,7 @@ class SettingsForm extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Source Field'),
       '#required' => TRUE,
-      '#default_value' => $source_field,
+      '#default_value' => $config->get('source_field'),
       '#description' => $this->t('This is the field of the entity we get the source name from (i.e. documentum)')
     );
 
@@ -84,7 +76,19 @@ class SettingsForm extends ConfigFormBase {
         $this->t('To URL'),
       ),
     );
+
+    // Gather the number of names in the form already.
+    $mappings = $config->get('mappings');
     
+    // We have to ensure that there is at least one name field. If the config has
+    // more than one field then use that for the number of sources and populate it
+    // from the config.
+    $num_names = $form_state->get('num_names');
+    if ($num_names === NULL) {
+      // Get previously saved mappings
+      $name_field = $form_state->set('num_names', count($mappings));
+      $num_names = count($mappings);
+    } 
     
     // Table rows
     for ($i = 1; $i <= $num_names; $i++) {
@@ -157,7 +161,6 @@ class SettingsForm extends ConfigFormBase {
     return $form['mappings_fieldset'];
   }
 
-
   /**
    * Submit handler for the "add-one-more" button.
    *
@@ -205,13 +208,11 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $mappings = $form_state->getValue(['mappings_fieldset','mappings']);
-    $source_field = $form_state->getValue(['source_field']);
-    $queue = $form_state->getValue(['queue']);
     $this->config('sand_remote.settings')
-      ->set('queue', $queue)
-      ->set('source_field', $source_field)
-      ->set('mappings', $mappings)
+      ->set('queue', $form_state->getValue(['queue']))
+      ->set('fetch', $form_state->getValue(['fetch']))
+      ->set('source_field', $form_state->getValue(['source_field']))
+      ->set('mappings', $form_state->getValue(['mappings_fieldset','mappings']))
       ->save();
     parent::submitForm($form, $form_state);
   }
