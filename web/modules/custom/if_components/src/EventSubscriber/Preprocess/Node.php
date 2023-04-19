@@ -122,12 +122,16 @@ final class Node implements EventSubscriberInterface {
     ];
   }
 
-
+  /**
+   * Preprocess node.
+   *
+   * @param \Drupal\node\NodeEvent $node_event
+   *   The node event.
+   */
   public function preprocessPage(PagePreprocessEvent $event): void {
     $variables = $event->getVariables();
     $departments_on_node = [];
     $nids = [];
-    $heroImages = [];
 
     $is_front = $this->if_components_hero_set_is_front($variables);
 
@@ -167,7 +171,7 @@ final class Node implements EventSubscriberInterface {
                 $variables->set('hero_image', $hero_image_file->createFileUrl());
               } else {
                 // default image
-                $variables->set('hero_image', '/sites/default/files/home-hero-1.jpg');
+                $variables->set('hero_image', '/sites/default/files/downtown-skyline-.jpg');
               }
             }
           }
@@ -179,6 +183,8 @@ final class Node implements EventSubscriberInterface {
           }
         }
       }
+    } else {
+      $variables->set('hero_image', '/sites/default/files/downtown-skyline-.jpg');
     }
   }
 
@@ -377,7 +383,6 @@ final class Node implements EventSubscriberInterface {
 
     return $is_front;
   }
-
 
   public function preprocessTitleBlock(BlockPreprocessEvent $event): void {
     $variables = $event->getVariables();
