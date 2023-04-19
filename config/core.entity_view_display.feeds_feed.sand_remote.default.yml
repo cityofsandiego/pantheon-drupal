@@ -4,9 +4,7 @@ status: true
 dependencies:
   config:
     - feeds.feed_type.sand_remote
-    - field.field.feeds_feed.sand_remote.feeds_item
     - field.field.feeds_feed.sand_remote.field_sort1
-    - field.field.feeds_feed.sand_remote.field_source
     - field.field.feeds_feed.sand_remote.field_source_name
   module:
     - feeds
@@ -23,15 +21,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 5
-    region: content
-  field_source:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 6
+    weight: 3
     region: content
   field_source_name:
     type: string
@@ -39,7 +29,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 4
+    weight: 2
     region: content
   imported:
     type: timestamp_ago
@@ -49,7 +39,7 @@ content:
       past_format: '@interval ago'
       granularity: 2
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
   item_count:
     type: number_integer
@@ -58,7 +48,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 1
+    weight: 0
     region: content
   next:
     type: timestamp
@@ -68,15 +58,14 @@ content:
       custom_date_format: ''
       timezone: ''
     third_party_settings: {  }
-    weight: 3
+    weight: 1
     region: content
   source:
     type: feeds_uri_link
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: -3
     region: content
 hidden:
-  feeds_item: true
   search_api_excerpt: true
