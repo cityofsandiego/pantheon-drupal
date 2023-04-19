@@ -21,28 +21,29 @@ dependencies:
     - field.field.sand_remote.external.field_title_long
     - sand_remote.sand_remote_type.external
   module:
+    - feeds_log
     - feeds_tamper
     - sand_remote
 third_party_settings:
   feeds_tamper:
-    tampers:
-      23b9735e-33e9-4939-a402-40d5a1694a91:
-        default_value: documentum
-        only_if_empty: false
-        uuid: 23b9735e-33e9-4939-a402-40d5a1694a91
-        plugin: default_value
-        source: tamper_source
-        weight: 0
-        label: documentum
-      be77c54c-eb8c-4d2e-86c2-36ad8854f496:
-        default_value: no-source-name
-        only_if_empty: false
-        uuid: be77c54c-eb8c-4d2e-86c2-36ad8854f496
-        plugin: default_value
-        source: tamper_source_name
-        weight: 0
-        label: no-source-name
-label: 'Sand Remote'
+    tampers: {  }
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+    source: true
+label: 'Sand Remote Feed Type'
 id: sand_remote
 description: 'Sand Remote External Data'
 help: ''
@@ -138,20 +139,20 @@ custom_sources:
     label: BACK_DATE
     machine_name: back_date
     type: csv
-  tamper_source:
-    value: TAMPER_SOURCE
-    label: TAMPER_SOURCE
-    machine_name: tamper_source
+  sand_tamper_set_sort1:
+    value: SAND_TAMPER_SET_SORT1
+    label: SAND_TAMPER_SET_SORT1
+    machine_name: sand_tamper_set_sort1
     type: blank
-  tamper_source_name:
-    value: TAMPER_SOURCE_NAME
-    label: TAMPER_SOURCE_NAME
-    machine_name: tamper_source_name
+  sand_tamper_set_source:
+    value: SAND_TAMPER_SET_SOURCE
+    label: SAND_TAMPER_SET_SOURCE
+    machine_name: sand_tamper_set_source
     type: blank
-  tamper_sort1:
-    value: TAMPER_SORT1
-    label: TAMPER_SORT1
-    machine_name: tamper_sort1
+  sand_tamper_set_source_name:
+    value: SAND_TAMPER_SET_SOURCE_NAME
+    label: SAND_TAMPER_SET_SOURCE_NAME
+    machine_name: sand_tamper_set_source_name
     type: blank
 mappings:
   -
@@ -254,28 +255,21 @@ mappings:
   -
     target: field_sort1
     map:
-      value: ''
+      value: sand_tamper_set_sort1
     settings:
       language: null
     unique: {  }
   -
     target: field_source
     map:
-      value: tamper_source
+      value: sand_tamper_set_source
     settings:
       language: null
     unique: {  }
   -
     target: field_source_name
     map:
-      value: tamper_source_name
-    settings:
-      language: null
-    unique: {  }
-  -
-    target: field_sort1
-    map:
-      value: tamper_sort1
+      value: sand_tamper_set_source_name
     settings:
       language: null
     unique: {  }
