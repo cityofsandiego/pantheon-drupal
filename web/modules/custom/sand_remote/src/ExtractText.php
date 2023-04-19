@@ -3,6 +3,7 @@
 namespace Drupal\sand_remote;
 
 use Drupal\Component\Utility\Xss;
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\Entity\File;
 use Recurr\Exception;
@@ -376,6 +377,11 @@ class ExtractText {
     $entity = \Drupal::entityTypeManager()
       ->getStorage($this->getEntityType())
       ->load($this->getEntityId());
+    
+    // Check and make sure entity loaded.
+    if (!$entity instanceof ContentEntityInterface) {
+      return FALSE;
+    }
 
     // Set variable to say we are setting the Text so don't fire our hooks for insert and update.
     /** @var \Drupal\Core\TempStore\PrivateTempStore $tempstore */
