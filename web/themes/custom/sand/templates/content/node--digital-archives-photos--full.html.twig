@@ -104,7 +104,7 @@
             </div>
             <div class="cell medium-5 photo-content">
               <p class="photographer-date">
-                <em>{{ content.field_da_photographer.0 }}, 
+                <em>Photo by {{ content.field_da_photographer.0 }}, 
                 {{ content.field_da_photo_date.0 }}</em>
               </p>
               {{ content.body }}
@@ -128,4 +128,8 @@
     </div>
   </div>
 
+  <div id="feedback" class="white-popup mfp-hide">
+    <h2>Provide feedback for "{{label}}"</h2>
+    {{ drupal_entity('webform', 'webform_42765') }}
+  </div>
 </article>
