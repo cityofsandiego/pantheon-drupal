@@ -17,8 +17,6 @@ use Drupal\node\Entity\Node;
 use Drupal\sand_type\Entity\Bundle\Interface\DepartmentInterface;
 use Drupal\sand_type\Entity\Bundle\Traits\DepartmentTraits;
 
-class BusinessResource extends Node implements DepartmentInterface {
-
-  use DepartmentTraits;
+class BusinessResource extends Node {
 
 }
