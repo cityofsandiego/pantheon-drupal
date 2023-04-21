@@ -60,7 +60,7 @@ class NodeEditTab implements EventSubscriberInterface {
    */
   public function alterLocalTasks(MenuLocalTasksAlterEvent $event) {
     $tabs = $event->getData()['tabs'];
-    if ($tabs !== NULL) {
+    if ($tabs !== NULL && array_key_exists('entity.node.canonical', $tabs[0])) {
       $node_url = $tabs[0]['entity.node.canonical']['#link']['url'];
       if ($node_url !== NULL) {
         $node_id = $node_url->getRouteParameters()['node'];
