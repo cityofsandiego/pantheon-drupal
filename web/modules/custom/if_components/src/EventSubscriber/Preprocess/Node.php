@@ -74,6 +74,13 @@ final class Node implements EventSubscriberInterface {
   public array $topMenuLinkData = [];
 
   /**
+   * Special top menu link data for Mayoral Artifacts.
+   *
+   * @var array
+   */
+  public array $maMenuLinkData = [];
+
+  /**
    * Side menu id.
    *
    * @var string
@@ -175,6 +182,11 @@ final class Node implements EventSubscriberInterface {
         $variables->set('topmenu', [
           'items' => $this->topMenuLinkData,
         ]);
+        if ($node->getType() == 'mayoral_artifacts') {
+          $this->buildMenuLinks('mayoral_artifacts');
+          array_multisort(array_column($this->maMenuLinkData, 'weight'), SORT_ASC, $this->maMenuLinkData);
+          $variables->set('topmenu', ['items' => $this->maMenuLinkData]);
+        }
 
         // Department title.
         $department_title = NULL;
@@ -186,6 +198,9 @@ final class Node implements EventSubscriberInterface {
           }
         }
         $variables->set('department_title', $department_title);
+        if ($node->getType() == 'mayoral_artifacts') {
+          $variables->set('department_title', 'Office of the City Clerk');
+        }
       }
     }
   }
@@ -369,6 +384,9 @@ final class Node implements EventSubscriberInterface {
     elseif ($menu == 'sidemenu') {
       $menu_id = $this->side_menu_id;
     }
+    elseif ($menu == 'mayoral_artifacts') {
+      $menu_id = 'city-clerk';
+    }
 
     $parameters = new MenuTreeParameters();
     $parameters->onlyEnabledLinks();
@@ -412,6 +430,9 @@ final class Node implements EventSubscriberInterface {
       }
       elseif ($menu == 'topmenu') {
         $this->topMenuLinkData[] = $item;
+      }
+      elseif ($menu == 'mayoral_artifacts') {
+        $this->maMenuLinkData[] = $item;
       }
 
     }
