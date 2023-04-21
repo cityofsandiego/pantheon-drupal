@@ -2865,6 +2865,25 @@ class CustomCommands extends DrushCommands {
     }
   }
 
+  /**
+   * Change owner to user 1 for all media entities.
+   *
+   * @command media:owner
+   *
+   * @usafe media:owner
+   */
+  public function mediaOwner() {
+    $query = $this->entityTypeManager
+      ->getStorage('media')
+      ->getQuery();
+    $mids = $query->execute();
+    foreach ($mids as $mid) {
+      $media = Media::load($mid);
+      $media->set('uid', 1);
+      $media->save();
+    }
+  }
+
   public function memoryUsage($size) {
     $unit=array('b','kb','mb','gb','tb','pb');
     return @round($size/pow(1024,($i=floor(log($size,1024)))),2).' '.$unit[$i];
