@@ -36,6 +36,8 @@ class ExtractText {
 
   private $file;
   
+  private $file_size;
+  
   /**
    * Getter
    * 
@@ -200,11 +202,12 @@ class ExtractText {
       $cleaned_data = $this->cleanExtractedData($extracted_data);
       // @todo interface with Boone's tesserac server if the cleaned data is empty
       \Drupal::logger('sand_remote')
-        ->info('Got %size text when extracting text on %entity_type ID: %id, on URL: %url', [
+        ->info('Got %size text extracting from %entity_type ID: %id, on URL: %url, File Size: %filesize', [
           '%size' => round(strlen($cleaned_data) / 1024, 2) . 'KB',
           '%entity_type' => $this->getEntityType(),
           '%id' => $this->getEntityId(),
           '%url' => $url,
+          '%filesize' => $this->getFileSize() ? round($this->getFileSize() / 1024, 2) . 'KB' : 'Unknown',  
         ]);
       return $cleaned_data;
     } catch (\Exception $e) {
@@ -407,23 +410,25 @@ class ExtractText {
       $changed = TRUE;
     }
 
-    // Extract the text from the URL.
-
-    // Create a file object since the extractor needs it. It's a temp file.
-    $file = $this->createURLFile($url);
-    $this->setFile($file);
-    $extracted_text = $this->extractText();
-    // If we failed to get any text try bringing the file locally and try again.
-    if (empty($extracted_text)) {
+      // See if the configuration wants us to bring the file locally first.
       $fetch = \Drupal::config('sand_remote.settings')->get('fetch');
       if ($fetch) {
-        $file = $this->getRemoteFile('temporary://',TRUE, FileSystemInterface::EXISTS_RENAME);
-        if ($file instanceof File) {
+          $file = $this->getRemoteFile('temporary://', TRUE, FileSystemInterface::EXISTS_RENAME);
+          if ($file instanceof File) {
+              // For some reason it set the file to permanent minute even know the destination is temporary, resetting it here.
+              $file->setTemporary();
+              $file->save();                  
+              $this->setFile($file);
+              $this->setFileSize($file->getSize());
+              $extracted_text = $this->extractText();
+          }
+      } else {
+          // Create a file object since the extractor needs it. It's a temp file.
+          $file = $this->createURLFile($url);
           $this->setFile($file);
           $extracted_text = $this->extractText();
-        }        
       }
-    }
+
     
     // If both are NULL/empty string then nothing to do.
     if (empty($target_value) && empty($extracted_text)) {
@@ -513,7 +518,7 @@ class ExtractText {
       }
       // If Updating see is it's this entity id.
       [, $entity_id] = explode(':', $is_processing);
-      if ((int)$entity_id === $entity->id()) {
+      if ($entity_id === $entity->id()) {
         return FALSE;
       }
     }
@@ -560,6 +565,22 @@ class ExtractText {
 
     return TRUE;
   }
-  
+
+    /**
+     * @return mixed
+     */
+    public function getFileSize()
+    {
+        return $this->file_size;
+    }
+
+    /**
+     * @param mixed $file_size
+     */
+    public function setFileSize($file_size): void
+    {
+        $this->file_size = $file_size;
+    }
+
 }
 
