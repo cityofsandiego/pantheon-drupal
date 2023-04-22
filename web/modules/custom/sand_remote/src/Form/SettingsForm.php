@@ -42,9 +42,9 @@ class SettingsForm extends ConfigFormBase {
 
     $form['fetch'] = array(
       '#type' => 'checkbox',
-      '#title' => $this->t('Fetch remote file'),
+      '#title' => $this->t('Fetch remote file before extracting text?'),
       '#default_value' => $config->get('fetch'),
-      '#description' => $this->t('Check this box if you want to fetch the remote file for PDF extraction if we get no text from the initial attempt to extract it remotely.')
+      '#description' => $this->t('Check this box if you want to fetch the remote file for PDF extraction before extracting text.')
     );
 
     // This is the field that is used to get the source of the data from the entity.
