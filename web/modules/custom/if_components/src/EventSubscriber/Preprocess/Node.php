@@ -2,7 +2,6 @@
 
 namespace Drupal\if_components\EventSubscriber\Preprocess;
 
-use Drupal;
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -135,63 +134,67 @@ final class Node implements EventSubscriberInterface {
    * @param \Drupal\node\NodeEvent $node_event
    *   The node event.
    */
+  /**
+   * Preprocess node.
+   *
+   * @param \Drupal\node\NodeEvent $node_event
+   *   The node event.
+   */
   public function preprocessPage(PagePreprocessEvent $event): void {
     $variables = $event->getVariables();
-    $departments_on_node = [];
-    $nids = [];
     $defaultBGImageURL = '/sites/default/files/downtown-skyline-.jpg'; // default background image
+    $is_front = $variables->get('is_front') ?? \Drupal::service('path.matcher')->isFrontPage();
+    $nids = [];
 
-    $is_front = $this->if_components_hero_set_is_front($variables);
-
-    if ($is_front) {  // if front page of sandiego.gov
+    if ($is_front) {
       $nids = $this->if_components_hero_query_hero_home_page();
-    } else {  // load departments on node
-      if ($variables->getNode() !== NULL) {
-        $node = Drupal::routeMatch()->getParameter('node');
-        if ($node instanceof NodeInterface) {
-          $department_terms = $node->get('field_department')->getValue();
-          if (!empty($department_terms)) {
-            foreach ($department_terms as $department_term) {
-              $departments_on_node[] = $department_term["target_id"];
-            }
-          }
-        }
-        if (!empty($departments_on_node)) { // load heros with node departments
+    } elseif ($node = $variables->getNode()) {
+      if ($node instanceof NodeInterface) {
+        $department_terms = $node->get('field_department')->getValue();
+        if (!empty($department_terms)) {
+          $departments_on_node = array_column($department_terms, "target_id");
           $nids = $this->if_components_hero_query_hero_ids($departments_on_node);
         }
       }
     }
 
-    if (!empty($nids)) { // pick a random hero, and set TWIG variables
-      $nid = $nids[array_rand($nids)];
-      $hero_node = $this->entityTypeManager->getStorage('node')->load($nid);
-      if ($hero_node !== NULL) {
-        if ($hero_node->get('field_image')->getValue() !== NULL) {
-          $hero_image = $this->entityTypeManager
-            ->getStorage('media')
-            ->load($hero_node->get('field_image')
-              ->getValue()[0]['target_id']);
-          if ($hero_image !== NULL) {
-            $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
-            $hero_image_file = File::load($fid);
-            if(!empty($hero_image_file->createFileUrl())) {
-              $variables->set('hero_image', $hero_image_file->createFileUrl());
-            } else {
-              $variables->set('hero_image', $defaultBGImageURL);
-            }
+    $variables->set('hero_image', $defaultBGImageURL);
+    if (!empty($nids)) {
+      $hero_nodes = $this->entityTypeManager->getStorage('node')->loadMultiple($nids);
+      $hero_js_array = array_filter(array_map(function ($hero_node) {
+        if ($hero_image = $hero_node->get('field_image')->entity) {
+          $hero_image_file = $hero_image->getSource()
+            ->getSourceFieldValue($hero_image);
+          $file = File::load($hero_image_file);
+
+          if ($file && ($file_url = $file->createFileUrl())) {
+            return [
+              $file_url,
+              $hero_node->get('field_hero_image_by')->value,
+              $hero_node->get('field_hero_prefix_image_by')->value,
+            ];
           }
         }
-        if(!empty($hero_node->get('field_hero_image_by')->value)) {
-          $variables->set('hero_image_by', $hero_node->get('field_hero_image_by')->value);
-        }
-        if(!empty($hero_node->get('field_hero_prefix_image_by')->value)) {
-          $variables->set('hero_prefix_image_by', $hero_node->get('field_hero_prefix_image_by')->value);
-        }
+        return null;
+      }, $hero_nodes));
+
+      if (!empty($hero_js_array)) {
+        $unique_hero_js_array = array_map('unserialize', array_unique(array_map('serialize', $hero_js_array)));
+        $hero_one_time = $unique_hero_js_array[array_rand($unique_hero_js_array)];
+        $variables->set('hero_image', $hero_one_time[0]);
+        $variables->set('hero_image_by', $hero_one_time[1] ?? null);
+        $variables->set('hero_prefix_image_by', $hero_one_time[2] ?? null);
+//        if (!empty($unique_hero_js_array) && count($unique_hero_js_array) >= 2) {
+//          $unique_hero_js_array_json = json_encode($unique_hero_js_array);
+//          return [
+//            '#markup' => '<script>var X="/sites/default/files/pools-header.jpg"; echo X;</script>',
+//            '#allowed_tags' => ['script'],
+//          ];
+//        }
       }
-    } else { // default background image if no department found on node
-      $variables->set('hero_image', $defaultBGImageURL);
     }
   }
+
 
   /**
    * Retrieves the parent terms for a given term.
@@ -203,18 +206,26 @@ final class Node implements EventSubscriberInterface {
    *   An array of parent term objects.
    */
   protected function if_components_hero_get_term_parents(int $tid): array {
-    /** @var \Drupal\taxonomy\TermStorageInterface $term_storage */
     try {
-      $term_storage = Drupal::service('entity_type.manager')
+      /** @var \Drupal\taxonomy\TermStorageInterface $term_storage */
+      $term_storage = \Drupal::service('entity_type.manager')
         ->getStorage('taxonomy_term');
-    } catch (InvalidPluginDefinitionException|PluginNotFoundException) {
+    } catch (InvalidPluginDefinitionException | PluginNotFoundException) {
+      return [];
     }
-    $field = $term_storage->loadAllParents($tid);
-    $new_terms = array_map(function (Term $term) {
-      return $term->label();
-    }, $field);
-    return array_keys($new_terms);
+
+    $parent_terms = $term_storage->loadAllParents($tid);
+    $parent_term_labels = [];
+
+    foreach ($parent_terms as $parent_term) {
+      if ($parent_term instanceof Term) {
+        $parent_term_labels[$parent_term->id()] = $parent_term->label();
+      }
+    }
+
+    return $parent_term_labels;
   }
+
 
   /**
    * @param string $timezone
@@ -225,169 +236,128 @@ final class Node implements EventSubscriberInterface {
    * array(2) { [0]=> string(7) "all_day" [1]=> string(3) "day" }
    */
   protected function if_components_hero_timesofday(string $timezone = "America/Los_Angeles", float $latitude = 32.7157, float $longitude = -117.1611): array {
-    date_default_timezone_set($timezone);
-    $server_time = Drupal::time()->getRequestTime();
-    $sun_info = date_sun_info($server_time, $latitude, $longitude);
+    $cache = \Drupal::cache()->get('if_components_hero_timesofday_cache');
 
-    // If we have expire enabled then we are probably using cloudflare so average
-    // out the actual time with when the page was cached with cloudflare.
-    if (function_exists('expire_menu')) {
-      $server_time -= 1200;
+    if ($cache) {
+      return $cache->data;
     }
-    $times_of_day = ['all_day'];
+
+    date_default_timezone_set($timezone);
+    $server_time = \Drupal::time()->getRequestTime();
+    $sun_info = date_sun_info($server_time, $latitude, $longitude);
 
     $sunrise = $sun_info["sunrise"];
     $sunset = $sun_info["sunset"];
     $dawn = ['start' => $sunrise - 3600, 'end' => $sunrise + 3600];
     $dusk = ['start' => $sunset - 3600, 'end' => $sunset + 3600];
 
-    if ($server_time > $dawn['start'] && $server_time < $dawn['end']) {
-      $times_of_day[] = 'dawn';
-    }
+    $times_of_day = [
+      'all_day',
+      ($server_time > $dawn['start'] && $server_time < $dawn['end']) ? 'dawn' : null,
+      ($server_time > $dusk['start'] && $server_time < $dusk['end']) ? 'dusk' : null,
+      ($sunrise < $server_time && $server_time < $sunset) ? 'day' : 'night'
+    ];
 
-    if ($server_time > $dusk['start'] && $server_time < $dusk['end']) {
-      $times_of_day[] = 'dusk';
-    }
+    // Remove null values
+    $times_of_day = array_filter($times_of_day);
 
-    if ($sunrise < $server_time && $server_time < $sunset) {
-      $times_of_day[] = 'day';
-    }
-    else {
-      $times_of_day[] = 'night';
-    }
+    // Set cache for 5 minutes (300 seconds)
+    \Drupal::cache()->set('if_components_hero_timesofday_cache', $times_of_day, time() + 300);
 
     return $times_of_day;
   }
 
+
+
+
   /**
    * Implements hook_js_settings_build().
    */
-  protected function if_components_hero_query_hero_home_page(): int|array {
-    /** @var \Drupal\taxonomy\TermStorageInterface $term_storage */
-
+  protected function if_components_hero_query_hero_home_page(): array {
     $times_of_day = $this->if_components_hero_timesofday();
 
-    if (!empty($times_of_day)) {
-      $query = Drupal::entityQuery('node');
-
-      $orTimes = $query->orConditionGroup();
-      foreach ($times_of_day as $time) {
-        $orTimes->condition('field_hero_time_of_day', $time, '=');
-      }
-
-      $sharedConditions = $query->andConditionGroup();
-      $sharedConditions->condition('type', 'hero');
-      $sharedConditions->condition('status', NodeInterface::PUBLISHED);
-      $sharedConditions->condition($orTimes);
-
-      $query->condition($sharedConditions);
-      $query->condition('field_hero_frontpage', TRUE);
-      $entity_ids = $query->execute();
-
-      return array_map('intval', array_values($entity_ids));
+    if (empty($times_of_day)) {
+      return [];
     }
-    return [];
+
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'hero')
+      ->condition('status', NodeInterface::PUBLISHED)
+      ->condition('field_hero_frontpage', TRUE)
+      ->condition('field_hero_time_of_day', $times_of_day, 'IN');
+
+    $entity_ids = $query->execute();
+
+    return array_map('intval', array_values($entity_ids));
   }
 
 
+
   /**
    * Implements hook_js_settings_build().
    */
-  protected function if_components_hero_query_hero_ids(array $departments): int|array {
-    /** @var \Drupal\taxonomy\TermStorageInterface $term_storage */
+  protected function if_components_hero_query_hero_ids(array $departments): array {
     if (empty($departments)) {
       return [];
     }
-    $tmp = [];
-    foreach ($departments as $department) {
-      $tmp[] = (int) $department;
-    }
-    $departments = $tmp;
-    $times_of_day = $this->if_components_hero_timesofday();
 
-    $term_storage = [];
-    foreach ($departments as $department) {
-      $term_storage[] = array_values($this->if_components_hero_get_term_parents($department));
+    $departments = array_map('intval', $departments);
+    $times_of_day = $this->if_components_hero_timesofday();
+    if (empty($times_of_day)) {
+      return [];
     }
-    //  $term_storage = array_unique($term_storage);
-    $departmentParents = [];
-    foreach ($term_storage as $r) {
-      foreach ($r as $k) {
-        $departmentParents[] = $k;
-      }
-    }
-    $departmentParents = array_unique($departmentParents);
+
+    $term_storage = array_map(function($department) {
+      return $this->if_components_hero_get_term_parents($department);
+    }, $departments);
+
+    $departmentParents = array_unique(array_merge(...$term_storage));
     $departmentParents = array_diff($departmentParents, $departments);
     if (empty($departmentParents)) {
       $departmentParents[] = 0;
     }
 
-    if (!empty($times_of_day)) {
-      $query = Drupal::entityQuery('node');
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'hero')
+      ->condition('status', NodeInterface::PUBLISHED)
+      ->condition('field_hero_time_of_day', $times_of_day, 'IN');
 
-      $orTimes = $query->orConditionGroup();
-      foreach ($times_of_day as $time) {
-        $orTimes->condition('field_hero_time_of_day', $time, '=');
-      }
+    $query->condition($query->orConditionGroup()
+      ->condition('field_department', $departments, 'IN')
+      ->condition('field_department', $departmentParents, 'IN')
+    );
 
-      $orDepartments = $query->orConditionGroup();
-      foreach ($departments as $department) {
-        $orDepartments->condition('field_department', $department, '=');
-      }
+    $entity_ids = $query->execute();
 
-      $orDepartmentParents = $query->orConditionGroup();
-      foreach ($departmentParents as $departmentParent) {
-        $orDepartmentParents->condition('field_department', $departmentParent, '='); //todo: think there is something wrong with this?
-      }
-
-      $sharedConditions = $query->andConditionGroup();
-      $sharedConditions->condition('type', 'hero');
-      $sharedConditions->condition('status', NodeInterface::PUBLISHED);
-      $sharedConditions->condition($orTimes);
-
-      $query->condition($sharedConditions);
-      $query->condition($orDepartments);
+    if (empty($entity_ids)) {
+      $query->condition('field_hero_sitewide', TRUE);
       $entity_ids = $query->execute();
-
-      if (empty($entity_ids)) {
-        $query = Drupal::entityQuery('node');
-        $query->condition($sharedConditions);
-        $query->condition($orDepartmentParents);
-        $entity_ids = $query->execute();
-      }
-
-      if (empty($entity_ids)) {
-        $query = Drupal::entityQuery('node');
-        $query->condition($sharedConditions);
-        $query->condition('field_hero_sitewide', TRUE);
-        $entity_ids = $query->execute();
-      }
-
-      return array_map('intval', array_values($entity_ids));
-    }
-    return [];
-  }
-
-  /**
-   * Implements hook_preprocess_HOOK() for page templates.
-   */
-  function if_components_hero_set_is_front(&$variables): bool {
-    $is_front = FALSE;
-
-    // Get the current path.
-    $current_path = \Drupal::service('path.current')->getPath();
-
-    // Get the front page path.
-    $front_uri = \Drupal::config('system.site')->get('page.front');
-    $front_path = Url::fromUri("internal:" . $front_uri)->toString();
-
-    // Compare the current path with the front page path.
-    if ($current_path === $front_path) {
-      $is_front = TRUE;
     }
 
-    return $is_front;
+    return array_map('intval', array_values($entity_ids));
   }
+
+  //
+//  /**
+//   * Implements hook_preprocess_HOOK() for page templates.
+//   */
+//  function if_components_hero_set_is_front(&$variables): bool {
+//    $is_front = FALSE;
+//
+//    // Get the current path.
+//    $current_path = \Drupal::service('path.current')->getPath();
+//
+//    // Get the front page path.
+//    $front_uri = \Drupal::config('system.site')->get('page.front');
+//    $front_path = Url::fromUri("internal:" . $front_uri)->toString();
+//
+//    // Compare the current path with the front page path.
+//    if ($current_path === $front_path) {
+//      $is_front = TRUE;
+//    }
+//
+//    return $is_front;
+//  }
 
   public function preprocessTitleBlock(BlockPreprocessEvent $event): void {
     $variables = $event->getVariables();
