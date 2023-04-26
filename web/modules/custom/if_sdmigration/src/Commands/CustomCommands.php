@@ -5,6 +5,7 @@ namespace Drupal\if_sdmigration\Commands;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ExtensionList;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
 use Drupal\media\Entity\Media;
 use Drupal\paragraphs\Entity\Paragraph;
@@ -2863,6 +2864,27 @@ class CustomCommands extends DrushCommands {
     foreach ($nids as $nid) {
       $node = Node::load($nid);
       $node->delete();
+    }
+  }
+
+  /**
+   * Change owner to user 1 for all file entities.
+   *
+   * @command file:owner
+   * @param int $file_id (File id to start after).
+   *
+   * @usage file:owner
+   */
+  public function fileOwner($file_id = 0): void {
+    $query = \Drupal::entityQuery('file');
+    $query->condition('fid', $file_id, '>')
+      ->sort('fid', 'ASC');
+    $entity_ids = $query->execute();
+    foreach ($entity_ids as $fid) {
+      $file = File::load($fid);
+      $file->set('uid', 1);
+      $file->save();
+      echo $fid . PHP_EOL;
     }
   }
 
