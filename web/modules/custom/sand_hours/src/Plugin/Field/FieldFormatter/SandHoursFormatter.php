@@ -69,6 +69,9 @@ class SandHoursFormatter extends OfficeHoursFormatterBase {
       // The office hours of array always starts on sunday with the key of zero.
       $days_of_this_week = [];
       foreach ($office_hours as $key => $office_hour) {
+          if ($key > 6) {
+              continue;
+          }
           $days_from_today = $key < $today ? $key -$today + 7 : $key - $today;
           $office_hours[$key]['days_from_today'] = $days_from_today;
           $date = date('U', strtotime('+'.($days_from_today).' days', $u_start_of_today));
@@ -88,6 +91,9 @@ class SandHoursFormatter extends OfficeHoursFormatterBase {
       foreach ($result as $row) {
          $field_date_date_value = $row->field_date_date_value;
          foreach ($office_hours as $key => $office_hour) {
+             if ($key > 6) {
+                 continue;
+             }
              if ($office_hour['date'] == $field_date_date_value) {
                 $office_hours[$key]['formatted_slots'] = $office_hour['closed'];
                 $node = Node::load($row->entity_id);
