@@ -17,6 +17,7 @@ use Drupal\preprocess_event_dispatcher\Event\NodePreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\PagePreprocessEvent;
 use Drupal\taxonomy\Entity\Term;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Drupal\Core\Cache\CacheableMetadata;
 
 /**
  * Class Department.
@@ -125,6 +126,7 @@ final class Node implements EventSubscriberInterface {
       NodePreprocessEvent::name() => 'preprocessNode',
       BlockPreprocessEvent::name() => 'preprocessTitleBlock',
       PagePreprocessEvent::name() => 'preprocessPage',
+      BlockPreprocessEvent::name() => 'preprocessHeroBlock',
     ];
   }
 
@@ -184,13 +186,21 @@ final class Node implements EventSubscriberInterface {
         $variables->set('hero_image', $hero_one_time[0]);
         $variables->set('hero_image_by', $hero_one_time[1] ?? null);
         $variables->set('hero_prefix_image_by', $hero_one_time[2] ?? null);
-//        if (!empty($unique_hero_js_array) && count($unique_hero_js_array) >= 2) {
-//          $unique_hero_js_array_json = json_encode($unique_hero_js_array);
-//          return [
-//            '#markup' => '<script>var X="/sites/default/files/pools-header.jpg"; echo X;</script>',
-//            '#allowed_tags' => ['script'],
-//          ];
-//        }
+        $attached = $variables->get('#attached');
+        $attached['drupalSettings']['hero'] = $unique_hero_js_array;
+        $variables->set('#attached', $attached);
+        $current_url = Url::fromRoute('<current>');
+        $cid = 'if_components:unique_hero_js_array:' . $current_url->toString();
+        // Create a cacheable data object.
+        $cacheable_data = new CacheableMetadata();
+        $cacheable_data->setCacheTags(['if_components:unique_hero_js_array']);
+        $cacheable_data->setCacheContexts(['url']);
+
+        // Set cache max age to 10 seconds.
+        $cache_max_age = 10;
+        $serialized_array = json_encode(array_values($unique_hero_js_array));
+        // Save the data to cache.
+        \Drupal::cache()->set($cid, $serialized_array, time() + $cache_max_age, $cacheable_data->getCacheTags());
       }
     }
   }
@@ -215,17 +225,12 @@ final class Node implements EventSubscriberInterface {
     }
 
     $parent_terms = $term_storage->loadAllParents($tid);
-    $parent_term_labels = [];
+    $parent_term_labels = array_map(function (Term $term) {
+      return $term->label();
+    }, $parent_terms);
 
-    foreach ($parent_terms as $parent_term) {
-      if ($parent_term instanceof Term) {
-        $parent_term_labels[$parent_term->id()] = $parent_term->label();
-      }
-    }
-
-    return $parent_term_labels;
+    return array_keys($parent_term_labels);
   }
-
 
   /**
    * @param string $timezone
@@ -267,9 +272,6 @@ final class Node implements EventSubscriberInterface {
     return $times_of_day;
   }
 
-
-
-
   /**
    * Implements hook_js_settings_build().
    */
@@ -291,8 +293,6 @@ final class Node implements EventSubscriberInterface {
     return array_map('intval', array_values($entity_ids));
   }
 
-
-
   /**
    * Implements hook_js_settings_build().
    */
@@ -307,57 +307,44 @@ final class Node implements EventSubscriberInterface {
       return [];
     }
 
-    $term_storage = array_map(function($department) {
-      return $this->if_components_hero_get_term_parents($department);
-    }, $departments);
+    $term_storage = [];
+    foreach ($departments as $department) {
+      $term_storage[] = array_values($this->if_components_hero_get_term_parents($department));
+    }
 
     $departmentParents = array_unique(array_merge(...$term_storage));
     $departmentParents = array_diff($departmentParents, $departments);
-    if (empty($departmentParents)) {
-      $departmentParents[] = 0;
+
+    $entity_ids = [];
+    if (!empty($departments)) {
+      $query = \Drupal::entityQuery('node')
+        ->condition('type', 'hero')
+        ->condition('status', NodeInterface::PUBLISHED)
+        ->condition('field_hero_time_of_day', $times_of_day, 'IN')
+        ->condition('field_department', $departments, 'IN');
+      $entity_ids = $query->execute();
     }
 
-    $query = \Drupal::entityQuery('node')
-      ->condition('type', 'hero')
-      ->condition('status', NodeInterface::PUBLISHED)
-      ->condition('field_hero_time_of_day', $times_of_day, 'IN');
-
-    $query->condition($query->orConditionGroup()
-      ->condition('field_department', $departments, 'IN')
-      ->condition('field_department', $departmentParents, 'IN')
-    );
-
-    $entity_ids = $query->execute();
+    if (empty($entity_ids) && !empty($departmentParents)) {
+      $query = \Drupal::entityQuery('node')
+        ->condition('type', 'hero')
+        ->condition('status', NodeInterface::PUBLISHED)
+        ->condition('field_hero_time_of_day', $times_of_day, 'IN')
+        ->condition('field_department', $departmentParents, 'IN');
+      $entity_ids = $query->execute();
+    }
 
     if (empty($entity_ids)) {
-      $query->condition('field_hero_sitewide', TRUE);
+      $query = \Drupal::entityQuery('node')
+        ->condition('type', 'hero')
+        ->condition('status', NodeInterface::PUBLISHED)
+        ->condition('field_hero_time_of_day', $times_of_day, 'IN')
+        ->condition('field_hero_sitewide', TRUE);
       $entity_ids = $query->execute();
     }
 
     return array_map('intval', array_values($entity_ids));
   }
-
-  //
-//  /**
-//   * Implements hook_preprocess_HOOK() for page templates.
-//   */
-//  function if_components_hero_set_is_front(&$variables): bool {
-//    $is_front = FALSE;
-//
-//    // Get the current path.
-//    $current_path = \Drupal::service('path.current')->getPath();
-//
-//    // Get the front page path.
-//    $front_uri = \Drupal::config('system.site')->get('page.front');
-//    $front_path = Url::fromUri("internal:" . $front_uri)->toString();
-//
-//    // Compare the current path with the front page path.
-//    if ($current_path === $front_path) {
-//      $is_front = TRUE;
-//    }
-//
-//    return $is_front;
-//  }
 
   public function preprocessTitleBlock(BlockPreprocessEvent $event): void {
     $variables = $event->getVariables();
@@ -405,6 +392,35 @@ final class Node implements EventSubscriberInterface {
         if ($node->getType() == 'mayoral_artifacts') {
           $variables->set('department_title', 'Office of the City Clerk');
         }
+      }
+    }
+  }
+
+  public function preprocessHeroBlock(BlockPreprocessEvent $event): void {
+    $variables = $event->getVariables();
+
+    if ($variables->get('base_plugin_id') == 'hero_block') {
+      $current_url = Url::fromRoute('<current>');
+      $cid = 'if_components:unique_hero_js_array:' . $current_url->toString();
+
+      // Retrieve the cached data.
+      $cache = \Drupal::cache()->get($cid);
+      if ($cache) {
+        $unique_hero_js_array = $cache->data;
+
+        $content = $variables->get('content');
+
+//        $myMarkup = '<script>var hero_array = ' . $unique_hero_js_array . ';console.log(hero_array)</script>';
+//        $myMarkup = '<script>console.log(' . $unique_hero_js_array . '[Math.floor(Math.random() * ' . $unique_hero_js_array . '.length)][0]);</script>';
+        $myMarkup = "<script>const arr=" . $unique_hero_js_array . ";const randomIndex = Math.floor(Math.random() * arr.length);const selectedArray = arr[randomIndex];const firstElement = selectedArray[0];const heroBgImage = document.getElementById('hero-bg-image');heroBgImage.style.backgroundImage = heroBgImage.style.backgroundImage.replace(/url\(.*?\)/i, 'url(' + firstElement + ')');console.log(firstElement);</script>";
+
+        if (isset($content['#markup'])) {
+          $content['#markup'] .= $myMarkup;
+        } else {
+          $content['#markup'] = $myMarkup;
+        }
+
+        $variables->set('content', $content);
       }
     }
   }
