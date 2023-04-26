@@ -193,21 +193,25 @@ final class Node implements EventSubscriberInterface {
         $variables->set('hero_image', $hero_one_time[0]);
         $variables->set('hero_image_by', $hero_one_time[1] ?? null);
         $variables->set('hero_prefix_image_by', $hero_one_time[2] ?? null);
-        $attached = $variables->get('#attached');
-        $attached['drupalSettings']['hero'] = $unique_hero_js_array;
-        $variables->set('#attached', $attached);
-        $current_url = Url::fromRoute('<current>');
-        $cid = 'if_components:unique_hero_js_array:' . $current_url->toString();
-        // Create a cacheable data object.
-        $cacheable_data = new CacheableMetadata();
-        $cacheable_data->setCacheTags(['if_components:unique_hero_js_array']);
-        $cacheable_data->setCacheContexts(['url']);
 
-        // Set cache max age to 10 seconds.
-        $cache_max_age = 10;
-        $serialized_array = json_encode(array_values($unique_hero_js_array));
-        // Save the data to cache.
-        \Drupal::cache()->set($cid, $serialized_array, time() + $cache_max_age, $cacheable_data->getCacheTags());
+        if (count($unique_hero_js_array) >= 2) {
+          $attached = $variables->get('#attached');
+          $attached['drupalSettings']['hero'] = $unique_hero_js_array;
+          $variables->set('#attached', $attached);
+          $current_url = Url::fromRoute('<current>');
+          $cid = 'if_components:unique_hero_js_array:' . $current_url->toString();
+          // Create a cacheable data object.
+          $cacheable_data = new CacheableMetadata();
+          $cacheable_data->setCacheTags(['if_components:unique_hero_js_array']);
+          $cacheable_data->setCacheContexts(['url']);
+
+          // Set cache max age to 10 seconds.
+          $cache_max_age = 10;
+          $serialized_array = json_encode(array_values($unique_hero_js_array));
+          // Save the data to cache.
+          \Drupal::cache()
+            ->set($cid, $serialized_array, time() + $cache_max_age, $cacheable_data->getCacheTags());
+        }
       }
     }
   }
