@@ -2008,6 +2008,7 @@ class CustomCommands extends DrushCommands {
         ->condition('field_d7_nid', $d7id);
       $nid = reset($query->execute());
       $node = Node::load($nid);
+      if ($node == NULL) continue;
       $node->field_department->setValue([]);
       foreach ($data['department'] as $department) {
         $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
