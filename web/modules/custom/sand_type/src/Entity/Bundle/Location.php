@@ -82,7 +82,7 @@ class Location extends Node implements DepartmentInterface {
 
     // Render the output using twig.
     $render_array = [
-      '#theme' => 'Bundle/Location/sand_location_library_xml',
+      '#theme' => 'sand_location_library_xml',
       '#rows' => $rows,
     ];
     return \Drupal::service('renderer')->renderPlain($render_array);
