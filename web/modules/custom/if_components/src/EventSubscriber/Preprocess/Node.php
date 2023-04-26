@@ -84,6 +84,13 @@ final class Node implements EventSubscriberInterface {
   public array $maMenuLinkData = [];
 
   /**
+   * Special top menu link data for Digital Archives Photos.
+   *
+   * @var array
+   */
+  public array $dapMenuLinkData = [];
+
+  /**
    * Side menu id.
    *
    * @var string
@@ -391,6 +398,11 @@ final class Node implements EventSubscriberInterface {
           array_multisort(array_column($this->maMenuLinkData, 'weight'), SORT_ASC, $this->maMenuLinkData);
           $variables->set('topmenu', ['items' => $this->maMenuLinkData]);
         }
+        if ($node->getType() == 'digital_archives_photos') {
+          $this->buildMenuLinks('digital_archives_photos');
+          array_multisort(array_column($this->dapMenuLinkData, 'weight'), SORT_ASC, $this->dapMenuLinkData);
+          $variables->set('topmenu', ['items' => $this->dapMenuLinkData]);
+        }
 
         // Department title.
         $department_title = NULL;
@@ -404,6 +416,9 @@ final class Node implements EventSubscriberInterface {
         $variables->set('department_title', $department_title);
         if ($node->getType() == 'mayoral_artifacts') {
           $variables->set('department_title', 'Office of the City Clerk');
+        }
+        if ($node->getType() == 'digital_archives_photos') {
+          $variables->set('department_title', 'Digital Archives');
         }
       }
     }
@@ -591,6 +606,9 @@ final class Node implements EventSubscriberInterface {
     elseif ($menu == 'mayoral_artifacts') {
       $menu_id = 'city-clerk';
     }
+    elseif ($menu == 'digital_archives_photos') {
+      $menu_id = 'digital-archives';
+    }
 
     $parameters = new MenuTreeParameters();
     $parameters->onlyEnabledLinks();
@@ -637,6 +655,9 @@ final class Node implements EventSubscriberInterface {
       }
       elseif ($menu == 'mayoral_artifacts') {
         $this->maMenuLinkData[] = $item;
+      }
+      elseif ($menu == 'digital_archives_photos') {
+        $this->dapMenuLinkData[] = $item;
       }
 
     }
