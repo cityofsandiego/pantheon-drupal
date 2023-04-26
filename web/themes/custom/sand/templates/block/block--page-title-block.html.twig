@@ -7,7 +7,7 @@
 {{ title_suffix }}
 {{ attach_library('sand_hero/hero_js_async') }}
 
-{% if topmenu is defined %}
+{% if (topmenu is defined) and (department_title != 'Inside San Diego') %}
   <div class="hide-on-mobile top-menu">
     <ul id="department-top-menu" class="department-menu">
       {% for item in topmenu.items %}
@@ -32,7 +32,6 @@
   </div>
   {% endif %}
 {% endif %}
-
 
 {% if department_title == 'Inside San Diego' %}
   {{ drupal_menu('inside-san-diego') }}
