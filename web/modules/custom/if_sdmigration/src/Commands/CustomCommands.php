@@ -3805,4 +3805,44 @@ class CustomCommands extends DrushCommands {
     }
   }
 
-}
+  /**
+   *
+   * @command import:fix-doc-urls
+   *
+   * @usage import:fix-doc-urls
+   */
+  public function fixDocUrls() {
+    $query = \Drupal::database()->select('node__field_url', 'f')
+      ->fields('f', ['field_url_uri'])
+      ->condition('field_url_uri', 'http%', 'NOT LIKE')
+      ->condition('field_url_uri', '/%', 'LIKE');
+    $internal_links = $query->execute();
+
+    while ($result = $internal_links->fetchAssoc()) {
+      $internal_uri = 'internal:' . $result['field_url_uri'];
+      \Drupal::database()->update('node__field_url')
+        ->condition('field_url_uri', $result['field_url_uri'])
+        ->fields([
+          'field_url_uri' => $internal_uri,
+        ])
+        ->execute();
+    }
+
+    $query = \Drupal::database()->select('node__field_url', 'f')
+      ->fields('f', ['field_url_uri'])
+      ->condition('field_url_uri', 'http%', 'NOT LIKE')
+      ->condition('field_url_uri', 'internal:%', 'NOT LIKE');
+    $public_links = $query->execute();
+
+    while ($result = $public_links->fetchAssoc()) {
+      $public_uri = 'public:' . $result['field_url_uri'];
+      \Drupal::database()->update('node__field_url')
+        ->condition('field_url_uri', $result['field_url_uri'])
+        ->fields([
+          'field_url_uri' => $public_uri,
+        ])
+        ->execute();
+    }
+  }
+
+  }
