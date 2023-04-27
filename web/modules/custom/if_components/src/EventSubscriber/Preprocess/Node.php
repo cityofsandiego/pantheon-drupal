@@ -429,9 +429,7 @@ final class Node implements EventSubscriberInterface {
 
         $content = $variables->get('content');
 
-//        $myMarkup = '<script>var hero_array = ' . $unique_hero_js_array . ';console.log(hero_array)</script>';
-//        $myMarkup = '<script>console.log(' . $unique_hero_js_array . '[Math.floor(Math.random() * ' . $unique_hero_js_array . '.length)][0]);</script>';
-        $myMarkup = "<script>const arr=" . $unique_hero_js_array . ";const randomIndex = Math.floor(Math.random() * arr.length);const selectedArray = arr[randomIndex];const firstElement = selectedArray[0];const heroBgImage = document.getElementById('hero-bg-image');heroBgImage.style.backgroundImage = heroBgImage.style.backgroundImage.replace(/url\(.*?\)/i, 'url(' + firstElement + ')');console.log(firstElement);</script>";
+        $myMarkup = "<script>const arr=" . $unique_hero_js_array . ";const randomIndex=Math.floor(Math.random()*arr.length);const selectedArray=arr[randomIndex];const heroBgImage=document.getElementById('hero-bg-image');heroBgImage.style.backgroundImage=heroBgImage.style.backgroundImage.replace(/url\(.*?\)/i,'url('+selectedArray[0]+')');const bg_credit=document.getElementById('hero-bg-credit');if(bg_credit){bg_credit.textContent=selectedArray[2]+' '+selectedArray[1];};if(bg_credit.textContent.includes('null')){bg_credit.remove();};console.log(selectedArray);</script>";
 
         if (isset($content['#markup'])) {
           $content['#markup'] .= $myMarkup;
