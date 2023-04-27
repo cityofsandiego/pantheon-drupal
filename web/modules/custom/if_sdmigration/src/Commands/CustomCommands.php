@@ -5,6 +5,7 @@ namespace Drupal\if_sdmigration\Commands;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ExtensionList;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
 use Drupal\media\Entity\Media;
 use Drupal\paragraphs\Entity\Paragraph;
@@ -2008,6 +2009,7 @@ class CustomCommands extends DrushCommands {
         ->condition('field_d7_nid', $d7id);
       $nid = reset($query->execute());
       $node = Node::load($nid);
+      if ($node == NULL) continue;
       $node->field_department->setValue([]);
       foreach ($data['department'] as $department) {
         $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
@@ -2862,6 +2864,27 @@ class CustomCommands extends DrushCommands {
     foreach ($nids as $nid) {
       $node = Node::load($nid);
       $node->delete();
+    }
+  }
+
+  /**
+   * Change owner to user 1 for all file entities.
+   *
+   * @command file:owner
+   * @param int $file_id (File id to start after).
+   *
+   * @usage file:owner
+   */
+  public function fileOwner($file_id = 0): void {
+    $query = \Drupal::entityQuery('file');
+    $query->condition('fid', $file_id, '>')
+      ->sort('fid', 'ASC');
+    $entity_ids = $query->execute();
+    foreach ($entity_ids as $fid) {
+      $file = File::load($fid);
+      $file->set('uid', 1);
+      $file->save();
+      echo $fid . PHP_EOL;
     }
   }
 
@@ -3782,4 +3805,44 @@ class CustomCommands extends DrushCommands {
     }
   }
 
-}
+  /**
+   *
+   * @command import:fix-doc-urls
+   *
+   * @usage import:fix-doc-urls
+   */
+  public function fixDocUrls() {
+    $query = \Drupal::database()->select('node__field_url', 'f')
+      ->fields('f', ['field_url_uri'])
+      ->condition('field_url_uri', 'http%', 'NOT LIKE')
+      ->condition('field_url_uri', '/%', 'LIKE');
+    $internal_links = $query->execute();
+
+    while ($result = $internal_links->fetchAssoc()) {
+      $internal_uri = 'internal:' . $result['field_url_uri'];
+      \Drupal::database()->update('node__field_url')
+        ->condition('field_url_uri', $result['field_url_uri'])
+        ->fields([
+          'field_url_uri' => $internal_uri,
+        ])
+        ->execute();
+    }
+
+    $query = \Drupal::database()->select('node__field_url', 'f')
+      ->fields('f', ['field_url_uri'])
+      ->condition('field_url_uri', 'http%', 'NOT LIKE')
+      ->condition('field_url_uri', 'internal:%', 'NOT LIKE');
+    $public_links = $query->execute();
+
+    while ($result = $public_links->fetchAssoc()) {
+      $public_uri = 'public:' . $result['field_url_uri'];
+      \Drupal::database()->update('node__field_url')
+        ->condition('field_url_uri', $result['field_url_uri'])
+        ->fields([
+          'field_url_uri' => $public_uri,
+        ])
+        ->execute();
+    }
+  }
+
+  }
