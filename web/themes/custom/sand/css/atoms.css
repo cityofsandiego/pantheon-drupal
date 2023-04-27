@@ -2262,14 +2262,16 @@ h5 {
       font-size: 1.5rem; } }
 
 .node h1,
-.node .h1,
 .node h2,
-.node .h2,
 .node h3,
-.node .h3,
 .node h4,
-.node .h4,
 .node h5 {
+  color: #37424a; }
+
+.h1,
+.h2,
+.h3,
+.h4 {
   color: #37424a; }
 
 /* ============================================================
@@ -2435,12 +2437,12 @@ figure figcaption {
   padding: 0;
   list-style: none;
   text-align: center; }
-  .pager li {
-    margin: 0;
+  .pager .pager-item {
+    display: inline-block;
     font-weight: bold;
-    display: inline-block; }
+    margin: 0 0.5em; }
     @media print, screen and (min-width: 48em) {
-      .pager li {
+      .pager .pager-item {
         font-size: 13px;
         font-size:  calc($unitless-value / $baseline-px)rem; } }
   .pager a {
@@ -2449,20 +2451,6 @@ figure figcaption {
     text-transform: lowercase; }
     .pager a:hover {
       color: #00638f; }
-  .pager__items {
-    text-align: center;
-    padding-bottom: 2rem; }
-    .pager__items .pager__item {
-      padding: 0; }
-      .pager__items .pager__item.is-active {
-        background-color: transparent;
-        color: #37424a;
-        border: none; }
-        .pager__items .pager__item.is-active a {
-          color: #37424a; }
-      .pager__items .pager__item a {
-        background-color: transparent;
-        border: none; }
 
 /* Tables
 ========================================================================== */
@@ -2618,17 +2606,24 @@ table {
   Styles for general typography and links.
   ============================================================ */
 .paragraph ul,
-.paragraph ol {
-  line-height: 1.5; }
+.paragraph ol,
+.accordion__drawer ul,
+.accordion__drawer ol {
+  line-height: 1.5;
+  padding-inline-start: 40px; }
   .paragraph ul li,
-  .paragraph ol li {
+  .paragraph ol li,
+  .accordion__drawer ul li,
+  .accordion__drawer ol li {
     margin: 0.5rem 0 0.5rem 1rem;
     padding: 0 0 0 0.5rem; }
 
-.paragraph ul li {
+.paragraph ul li,
+.accordion__drawer ul li {
   list-style: disc; }
 
-.paragraph ol li {
+.paragraph ol li,
+.accordion__drawer ol li {
   list-style: decimal; }
 
 .text-accent {

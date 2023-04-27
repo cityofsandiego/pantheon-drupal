@@ -5,10 +5,11 @@
     list-style: none;
     text-align: center;
   
-    li {
-      margin: 0;
-      font-weight: bold;
+    .pager-item {
       display: inline-block;
+      font-weight: bold;
+      margin: 0 0.5em;
+
       @include breakpoint(medium) {
         @include rem('font-size', 13px);
       }
@@ -21,30 +22,6 @@
   
       &:hover {
         color: darken($cerulean, 15%);
-      }
-    }
-
-    &__items {
-      text-align: center;
-      padding-bottom: 2rem;
-
-      .pager__item {
-        padding: 0;
-
-        &.is-active {
-          background-color: transparent;
-          color: $spruce;
-          border:none;
-        
-          a{
-            color: $spruce;
-          }
-        }
-
-        a {
-          background-color: transparent;
-          border:none;
-        }
       }
     }
   }
