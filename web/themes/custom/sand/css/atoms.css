@@ -2433,22 +2433,33 @@ figure figcaption {
 
 /* Pagination
    ========================================================================== */
+.item-list ul.pager,
 .pager {
   padding: 0;
   list-style: none;
   text-align: center; }
+  .item-list ul.pager li,
+  .item-list ul.pager .pager-item,
+  .pager li,
   .pager .pager-item {
     display: inline-block;
     font-weight: bold;
+    list-style: none;
     margin: 0 0.5em; }
     @media print, screen and (min-width: 48em) {
+      .item-list ul.pager li,
+      .item-list ul.pager .pager-item,
+      .pager li,
       .pager .pager-item {
         font-size: 13px;
         font-size:  calc($unitless-value / $baseline-px)rem; } }
+  .item-list ul.pager a,
   .pager a {
     color: #0098db;
+    font-weight: bold;
     text-decoration: none;
     text-transform: lowercase; }
+    .item-list ul.pager a:hover,
     .pager a:hover {
       color: #00638f; }
 
