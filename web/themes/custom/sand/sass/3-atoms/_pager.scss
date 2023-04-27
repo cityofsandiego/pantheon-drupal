@@ -1,27 +1,32 @@
 /* Pagination
    ========================================================================== */
-   .pager {
-    padding: 0;
-    list-style: none;
-    text-align: center;
-  
-    .pager-item {
-      display: inline-block;
-      font-weight: bold;
-      margin: 0 0.5em;
 
-      @include breakpoint(medium) {
-        @include rem('font-size', 13px);
-      }
-    }
-  
-    a {
-      color: $cerulean;
-      text-decoration: none;
-      text-transform: lowercase;
-  
-      &:hover {
-        color: darken($cerulean, 15%);
-      }
+.item-list ul.pager,
+.pager {
+  padding: 0;
+  list-style: none;
+  text-align: center;
+
+  li, 
+  .pager-item {
+    display: inline-block;
+    font-weight: bold;
+    list-style: none;
+    margin: 0 0.5em;
+
+    @include breakpoint(medium) {
+      @include rem('font-size', 13px);
     }
   }
+
+  a {
+    color: $cerulean;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: lowercase;
+
+    &:hover {
+      color: darken($cerulean, 15%);
+    }
+  }
+}
