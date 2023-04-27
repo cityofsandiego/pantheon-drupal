@@ -95,29 +95,31 @@
 </div> #}
 
 
-<div class="hero__slides">
-  <div class="l-constrained grid-x l-padding-mobile-bm">
-    <div class="cell medium-6 small-12 hero__content l-margin-mobile-bd">
-      <div id="hero__slides--primary" class="hero__slides--content">
-          {{ content.field_image }}
-          {{ content.field_caption }}
-          <a href="{{ content.field_link[0]['#url'] }}" alt="{{ content.field_link_text.0 }}">{{ content.field_url_text.0 }}</a>
-      </div>
-      <div class="custom-navigation custom-navigation--primary hidden">
-        <a href="#" class="flex-prev"><i class="icon-chevron-left"></i></a>
-        <a href="#" class="flex-next"><i class="icon-chevron-right"></i></a>
+{% if content.field_image[0] %}
+  <div class="hero__slides">
+    <div class="l-constrained grid-x l-padding-mobile-bm">
+      <div class="cell medium-6 small-12 hero__content l-margin-mobile-bd">
+        <div id="hero__slides--primary" class="hero__slides--content">
+            {{ content.field_image }}
+            {{ content.field_caption }}
+            <a href="{{ content.field_link[0]['#url'] }}" alt="{{ content.field_link_text.0 }}">{{ content.field_url_text.0 }}</a>
+        </div>
+        <div class="custom-navigation custom-navigation--primary hidden">
+          <a href="#" class="flex-prev"><i class="icon-chevron-left"></i></a>
+          <a href="#" class="flex-next"><i class="icon-chevron-right"></i></a>
+        </div>
       </div>
     </div>
+    <div class="hero__slides--img">
+      <ul class="slides">
+        <li>
+          <div class="hero__bg" style="background-image:url('');"></div>
+          <div class="hero--credit">
+            <p>Image by Cindy Devin</p>
+          </div>
+          <script>hero_put_bg_credit();</script>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div class="hero__slides--img">
-    <ul class="slides">
-      <li>
-        <div class="hero__bg" style="background-image:url('/sites/default/files/_sd_rivermouth.jpg');"></div>
-        <div class="hero--credit">
-          <p>Image by Cindy Devin</p>
-        </div>
-        <script>hero_put_bg_credit();</script>
-      </li>
-    </ul>
-  </div>
-</div>
+{% endif %}
