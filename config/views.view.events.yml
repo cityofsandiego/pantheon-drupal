@@ -9,6 +9,7 @@ dependencies:
     - field.storage.node.field_website
     - node.type.event
     - taxonomy.vocabulary.department
+    - taxonomy.vocabulary.event
   content:
     - 'taxonomy_term:department:46777169-53b6-4104-8fcf-cdaad14d9bed'
     - 'taxonomy_term:department:7db4fc8c-5aed-46ff-bd11-cae0b9768458'
@@ -3395,14 +3396,14 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_event_date_1:
-          id: field_event_date_1
+        field_event_date_value:
+          id: field_event_date_value
           table: node__field_event_date
-          field: field_event_date
+          field: field_event_date_value
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
+          plugin_id: date
           label: ''
           exclude: true
           alter:
@@ -3444,25 +3445,9 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: smartdate_default
-          settings:
-            timezone_override: ''
-            format: time_only
-            force_chronological: false
-            add_classes: false
-            time_wrapper: false
-            localize: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
+          date_format: custom
+          custom_date_format: 'g:i a'
+          timezone: ''
         view_node:
           id: view_node
           table: node
@@ -3597,7 +3582,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"event__date\" style=\"border-top-color:#0098db\">\r\n  <span class=\"event--month\">{{ field_event_date }} </span>\r\n  <span class=\"event--day\">{{ field_event_date_1 }} </span>\r\n</div>\r\n<div class=\"event__info\">\r\n  <p class=\"l-padding-ls l-margin-bn\"><a href=\"{{ field_website }}\">{{ title }}</a></p>\r\n</div>"
+            text: "<div class=\"event__date\" style=\"border-top-color:#0098db\">\r\n  <span class=\"event--month\">{{ field_event_date }} </span>\r\n  <span class=\"event--day\">{{ field_event_date_value }} </span>\r\n</div>\r\n<div class=\"event__info\">\r\n  <p class=\"l-padding-ls l-margin-bn\"><a href=\"{{ field_website }}\">{{ title }}</a></p>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -3762,7 +3747,7 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          vid: department
+          vid: event
           type: select
           hierarchy: false
           limit: true
