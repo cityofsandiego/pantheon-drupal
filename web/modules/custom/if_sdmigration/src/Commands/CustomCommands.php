@@ -5,13 +5,13 @@ namespace Drupal\if_sdmigration\Commands;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ExtensionList;
 use Drupal\Core\File\FileSystemInterface;
-use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
 use Drupal\media\Entity\Media;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\pathauto\PathautoState;
 use Drupal\if_sdmigration\TaxonomyImportTasks;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\redirect\Entity\Redirect;
 use Drupal\system\Entity\Menu;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
@@ -1845,6 +1845,66 @@ class CustomCommands extends DrushCommands {
   }
 
   /**
+   * Import redirects (from D7 redirect table dump).
+   *
+   * @command import:redirect
+   * @param $after_id (Redirect ID to resume after).
+   *
+   * @usage import:redirect
+   */
+  public function importRedirects($after_id = 0) {
+    $previous = [];
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/redirect.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        if ($data[0] < $after_id) continue;
+        $source = $data[4];
+        $redirect = $data[6];
+        if (!str_starts_with($redirect, 'file/')) {
+          // ignore direct file redirects
+          // now convert to D9 node ID
+          if (str_starts_with($redirect, 'node/')) {
+            $d7id = str_replace('node/', '', $redirect);
+            $query = $this->entityTypeManager
+              ->getStorage('node')
+              ->getQuery();
+            $query->condition('field_d7_nid', $d7id);
+            $nid = reset($query->execute());
+            $redirect = 'internal:/node/' . $nid;
+          }
+          // now convert D9 taxo ID
+          elseif (str_starts_with($redirect, 'taxonomy/term/')) {
+            $d7id = str_replace('taxonomy/term/', '', $redirect);
+            $query = $this->entityTypeManager
+              ->getStorage('taxonomy_term')
+              ->getQuery();
+            $query->condition('field_field_d7_tid', $d7id);
+            $tid = reset($query->execute());
+            $redirect = 'internal:/taxonomy/term/' . $tid;
+          }
+          // if internal link, remove prepended frontslash, add internal:
+          elseif (str_starts_with($redirect, '/')) {
+            $redirect = 'internal:' . $redirect;
+          }
+          elseif (!str_starts_with($redirect, 'http')) {
+            $redirect = 'internal:/' . $redirect;
+          }
+          if (!in_array($redirect, $previous)) {
+            Redirect::create([
+              'redirect_source' => $source,
+              'redirect_redirect' => $redirect,
+              'status_code' => 301,
+            ])->save();
+            $previous[] = $redirect;
+            echo $data[0] . ' saved.' . PHP_EOL;
+          }
+        }
+      }
+      fclose($file);
+    }
+  }
+
+  /**
    * Finalize department document node import.
    *
    * @command import:department_document
@@ -2009,7 +2069,6 @@ class CustomCommands extends DrushCommands {
         ->condition('field_d7_nid', $d7id);
       $nid = reset($query->execute());
       $node = Node::load($nid);
-      if ($node == NULL) continue;
       $node->field_department->setValue([]);
       foreach ($data['department'] as $department) {
         $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
@@ -2864,27 +2923,6 @@ class CustomCommands extends DrushCommands {
     foreach ($nids as $nid) {
       $node = Node::load($nid);
       $node->delete();
-    }
-  }
-
-  /**
-   * Change owner to user 1 for all file entities.
-   *
-   * @command file:owner
-   * @param int $file_id (File id to start after).
-   *
-   * @usage file:owner
-   */
-  public function fileOwner($file_id = 0): void {
-    $query = \Drupal::entityQuery('file');
-    $query->condition('fid', $file_id, '>')
-      ->sort('fid', 'ASC');
-    $entity_ids = $query->execute();
-    foreach ($entity_ids as $fid) {
-      $file = File::load($fid);
-      $file->set('uid', 1);
-      $file->save();
-      echo $fid . PHP_EOL;
     }
   }
 
@@ -3802,6 +3840,46 @@ class CustomCommands extends DrushCommands {
 
       $node->set('changed', strtotime($data['updated']));
       $node->save();
+    }
+  }
+
+  /**
+   *
+   * @command import:fix-doc-urls
+   *
+   * @usage import:fix-doc-urls
+   */
+  public function fixDocUrls() {
+    $query = \Drupal::database()->select('node__field_url', 'f')
+      ->fields('f', ['field_url_uri'])
+      ->condition('field_url_uri', 'http%', 'NOT LIKE')
+      ->condition('field_url_uri', '/%', 'LIKE');
+    $internal_links = $query->execute();
+
+    while ($result = $internal_links->fetchAssoc()) {
+      $internal_uri = 'internal:' . $result['field_url_uri'];
+      \Drupal::database()->update('node__field_url')
+        ->condition('field_url_uri', $result['field_url_uri'])
+        ->fields([
+          'field_url_uri' => $internal_uri,
+        ])
+        ->execute();
+    }
+
+    $query = \Drupal::database()->select('node__field_url', 'f')
+      ->fields('f', ['field_url_uri'])
+      ->condition('field_url_uri', 'http%', 'NOT LIKE')
+      ->condition('field_url_uri', 'internal:%', 'NOT LIKE');
+    $public_links = $query->execute();
+
+    while ($result = $public_links->fetchAssoc()) {
+      $public_uri = 'public:' . $result['field_url_uri'];
+      \Drupal::database()->update('node__field_url')
+        ->condition('field_url_uri', $result['field_url_uri'])
+        ->fields([
+          'field_url_uri' => $public_uri,
+        ])
+        ->execute();
     }
   }
 
