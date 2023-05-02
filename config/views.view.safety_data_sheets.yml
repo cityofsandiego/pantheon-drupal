@@ -12,6 +12,11 @@ dependencies:
     - taxonomy.vocabulary.department
   content:
     - 'taxonomy_term:categories:e7bfae8d-9e3f-4fbe-a326-1506a42352b1'
+    - 'taxonomy_term:department:1cf5d404-76c1-485f-be24-1ef0e6d19d64'
+    - 'taxonomy_term:department:7c5ea5b6-e158-499c-a1de-bb1b0199d7a6'
+    - 'taxonomy_term:department:98c68405-7463-4dc2-b0f2-82a3d8826bd3'
+    - 'taxonomy_term:department:a01698c6-6030-40fc-8f73-5e75fc0c21c8'
+    - 'taxonomy_term:department:b2b102a5-3f26-4792-be2a-07d78c2a1be6'
   module:
     - link
     - node
@@ -112,7 +117,7 @@ display:
           label: Attachment
           exclude: true
           alter:
-            alter_text: false
+            alter_text: true
             text: ''
             make_link: false
             path: ''
@@ -146,7 +151,7 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
-          empty: ''
+          empty: '{{ field_url }}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -536,7 +541,12 @@ display:
           admin_label: ''
           plugin_id: taxonomy_index_tid
           operator: or
-          value: {  }
+          value:
+            4534: 4534
+            4767: 4767
+            4827: 4827
+            4855: 4855
+            4900: 4900
           group: 1
           exposed: true
           expose:
@@ -563,12 +573,11 @@ display:
               webform_results: '0'
               webform_results_photos_only: '0'
               outreach2_article: '0'
-              department_: '0'
-              program_: '0'
               sand_admin: '0'
               if_administrator: '0'
               administrator: '0'
-            reduce: false
+              locations: '0'
+            reduce: true
           is_grouped: false
           group_info:
             label: ''
@@ -618,8 +627,8 @@ display:
         - 'config:field.storage.node.field_attachment'
         - 'config:field.storage.node.field_department'
         - 'config:field.storage.node.field_url'
-  block_1:
-    id: block_1
+  block:
+    id: block
     display_title: Block
     display_plugin: block
     position: 1

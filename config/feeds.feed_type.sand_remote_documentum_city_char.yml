@@ -1,4 +1,4 @@
-uuid: 75e4a6a6-2c16-4af6-9e40-566d7d1c2e81
+uuid: 72fe68bc-d6e4-4ffc-8c8b-128dfbb92fd0
 langcode: en
 status: true
 dependencies:
@@ -26,60 +26,6 @@ dependencies:
 third_party_settings:
   feeds_tamper:
     tampers:
-      28adda1b-1477-4b21-aff3-9ee97a2b078c:
-        words: |-
-          2009-04-14
-          2009-04-15
-          2009-04-16
-          2009-04-17
-          2009-04-18
-          2009-04-19
-          2009-04-2
-          2009-04-3
-          2010
-          2011
-          2012
-          2013
-          2014
-          2015
-          2016
-          2017
-          2018
-          2019
-          202
-          203
-        word_boundaries: false
-        exact: false
-        case_sensitive: false
-        invert: true
-        word_list:
-          - '2009-04-14'
-          - '2009-04-15'
-          - '2009-04-16'
-          - '2009-04-17'
-          - '2009-04-18'
-          - '2009-04-19'
-          - '2009-04-2'
-          - '2009-04-3'
-          - '2010'
-          - '2011'
-          - '2012'
-          - '2013'
-          - '2014'
-          - '2015'
-          - '2016'
-          - '2017'
-          - '2018'
-          - '2019'
-          - '202'
-          - '203'
-        regex: false
-        function: mb_stripos
-        uuid: 28adda1b-1477-4b21-aff3-9ee97a2b078c
-        plugin: keyword_filter
-        source: doc_date
-        weight: 0
-        label: 'Exclude dates after 2009-04-13'
       23b9735e-33e9-4939-a402-40d5a1694a91:
         default_value: documentum
         only_if_empty: false
@@ -88,24 +34,46 @@ third_party_settings:
         source: tamper_source
         weight: 0
         label: documentum
-      4e90942d-fc7e-45fb-990e-274cb09f53ab:
-        default_value: documentum_council_dockets
+      be77c54c-eb8c-4d2e-86c2-36ad8854f496:
+        default_value: no-source-name
         only_if_empty: false
-        uuid: 4e90942d-fc7e-45fb-990e-274cb09f53ab
+        uuid: be77c54c-eb8c-4d2e-86c2-36ad8854f496
         plugin: default_value
         source: tamper_source_name
         weight: 0
-        label: documentum_council_dockets
-label: 'External Data Documentum Dockets'
-id: external_data_documentum_dockets
-description: 'External Data Documentum Dockets Source CSV'
+        label: no-source-name
+      1d7ad273-5f28-476a-b9dd-2695c4fcc787:
+        words: charter_amendments/
+        word_boundaries: false
+        exact: false
+        case_sensitive: true
+        invert: true
+        word_list:
+          - charter_amendments/
+        regex: false
+        function: mb_strpos
+        uuid: 1d7ad273-5f28-476a-b9dd-2695c4fcc787
+        plugin: keyword_filter
+        source: document_url
+        weight: 0
+        label: 'Keyword filter: Do not include ones with charter_amendments'
+      c511adcd-36b6-4a57-a769-3e1a59bb1442:
+        invert: false
+        uuid: c511adcd-36b6-4a57-a769-3e1a59bb1442
+        plugin: required
+        source: document_url
+        weight: 1
+        label: Required
+label: 'Sand Remote Documentum City Charter'
+id: sand_remote_documentum_city_char
+description: 'Sand Remote External Data'
 help: ''
 import_period: -1
 fetcher: http
 fetcher_configuration:
   auto_detect_feeds: false
   use_pubsubhubbub: false
-  always_download: false
+  always_download: true
   fallback_hub: ''
   request_timeout: 30
 parser: csv
@@ -192,11 +160,6 @@ custom_sources:
     label: BACK_DATE
     machine_name: back_date
     type: csv
-  tamper:
-    value: TAMPER
-    label: TAMPER
-    machine_name: tamper
-    type: blank
   tamper_source:
     value: TAMPER_SOURCE
     label: TAMPER_SOURCE
@@ -206,6 +169,11 @@ custom_sources:
     value: TAMPER_SOURCE_NAME
     label: TAMPER_SOURCE_NAME
     machine_name: tamper_source_name
+    type: blank
+  tamper_sort1:
+    value: TAMPER_SORT1
+    label: TAMPER_SORT1
+    machine_name: tamper_sort1
     type: blank
 mappings:
   -
@@ -308,7 +276,7 @@ mappings:
   -
     target: field_sort1
     map:
-      value: tamper
+      value: ''
     settings:
       language: null
     unique: {  }
@@ -323,6 +291,13 @@ mappings:
     target: field_source_name
     map:
       value: tamper_source_name
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_sort1
+    map:
+      value: tamper_sort1
     settings:
       language: null
     unique: {  }

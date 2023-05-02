@@ -1,0 +1,71 @@
+uuid: 7ac4f46c-682d-4cbc-8e9a-2486537709e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - feeds.feed_type.sand_remote
+    - field.field.feeds_feed.sand_remote.feeds_item
+    - field.field.feeds_feed.sand_remote.field_sort1
+    - field.field.feeds_feed.sand_remote.field_source
+    - field.field.feeds_feed.sand_remote.field_source_name
+id: feeds_feed.sand_remote.default
+targetEntityType: feeds_feed
+bundle: sand_remote
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  feeds_log:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_sort1:
+    type: number
+    weight: 4
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_source:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_source_name:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  feeds_item: true

@@ -74,6 +74,20 @@ final class Node implements EventSubscriberInterface {
   public array $topMenuLinkData = [];
 
   /**
+   * Special top menu link data for Mayoral Artifacts.
+   *
+   * @var array
+   */
+  public array $maMenuLinkData = [];
+
+  /**
+   * Special top menu link data for Digital Archives Photos.
+   *
+   * @var array
+   */
+  public array $dapMenuLinkData = [];
+
+  /**
    * Side menu id.
    *
    * @var string
@@ -114,39 +128,39 @@ final class Node implements EventSubscriberInterface {
     return [
       NodePreprocessEvent::name() => 'preprocessNode',
       BlockPreprocessEvent::name() => 'preprocessTitleBlock',
-      PagePreprocessEvent::name() => 'preprocessPage',
+//      PagePreprocessEvent::name() => 'preprocessPage',
     ];
   }
-
-  public function preprocessPage(PagePreprocessEvent $event): void {
-    $variables = $event->getVariables();
-
-    if ($variables->getNode() !== NULL) {
-      /**
-       * @todo remove or edit this.
-       * sand_hero module looks to supersede this, so I just grab a random
-       * hero image, only taking into account whether it's the front page.
-       */
-      $query = $this->entityTypeManager
-        ->getListBuilder('node')
-        ->getStorage()
-        ->getQuery();
-      $query->condition('type', 'hero')
-        ->condition('field_hero_frontpage', 0);
-      $nids = $query->execute();
-      $nid = array_rand($nids, 1);
-      $hero_node = $this->entityTypeManager->getStorage('node')->load($nid);
-      if ($hero_node !== NULL && $hero_node->get('field_image')->getValue() !== NULL) {
-        $hero_image = $this->entityTypeManager->getStorage('media')
-          ->load($hero_node->get('field_image')->getValue()[0]['target_id']);
-        if ($hero_image !== NULL) {
-          $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
-          $hero_image_file = File::load($fid);
-          $variables->set('hero_image', $hero_image_file->createFileUrl());
-        }
-      }
-    }
-  }
+//
+//  public function preprocessPage(PagePreprocessEvent $event): void {
+//    $variables = $event->getVariables();
+//
+//    if ($variables->getNode() !== NULL) {
+//      /**
+//       * @todo remove or edit this.
+//       * sand_hero module looks to supersede this, so I just grab a random
+//       * hero image, only taking into account whether it's the front page.
+//       */
+//      $query = $this->entityTypeManager
+//        ->getListBuilder('node')
+//        ->getStorage()
+//        ->getQuery();
+//      $query->condition('type', 'hero')
+//        ->condition('field_hero_frontpage', 0);
+//      $nids = $query->execute();
+//      $nid = array_rand($nids, 1);
+//      $hero_node = $this->entityTypeManager->getStorage('node')->load($nid);
+//      if ($hero_node !== NULL && $hero_node->get('field_image')->getValue() !== NULL) {
+//        $hero_image = $this->entityTypeManager->getStorage('media')
+//          ->load($hero_node->get('field_image')->getValue()[0]['target_id']);
+//        if ($hero_image !== NULL) {
+//          $fid = $hero_image->getSource()->getSourceFieldValue($hero_image);
+//          $hero_image_file = File::load($fid);
+//          $variables->set('hero_image', $hero_image_file->createFileUrl());
+//        }
+//      }
+//    }
+//  }
 
   public function preprocessTitleBlock(BlockPreprocessEvent $event): void {
     $variables = $event->getVariables();
@@ -171,9 +185,20 @@ final class Node implements EventSubscriberInterface {
           }
         }
         $this->buildMenuLinks('topmenu');
+        array_multisort(array_column($this->topMenuLinkData, 'weight'), SORT_ASC, $this->topMenuLinkData);
         $variables->set('topmenu', [
           'items' => $this->topMenuLinkData,
         ]);
+        if ($node->getType() == 'mayoral_artifacts') {
+          $this->buildMenuLinks('mayoral_artifacts');
+          array_multisort(array_column($this->maMenuLinkData, 'weight'), SORT_ASC, $this->maMenuLinkData);
+          $variables->set('topmenu', ['items' => $this->maMenuLinkData]);
+        }
+        if ($node->getType() == 'digital_archives_photos') {
+          $this->buildMenuLinks('digital_archives_photos');
+          array_multisort(array_column($this->dapMenuLinkData, 'weight'), SORT_ASC, $this->dapMenuLinkData);
+          $variables->set('topmenu', ['items' => $this->dapMenuLinkData]);
+        }
 
         // Department title.
         $department_title = NULL;
@@ -185,6 +210,12 @@ final class Node implements EventSubscriberInterface {
           }
         }
         $variables->set('department_title', $department_title);
+        if ($node->getType() == 'mayoral_artifacts') {
+          $variables->set('department_title', 'Office of the City Clerk');
+        }
+        if ($node->getType() == 'digital_archives_photos') {
+          $variables->set('department_title', 'Digital Archives');
+        }
       }
     }
   }
@@ -368,6 +399,12 @@ final class Node implements EventSubscriberInterface {
     elseif ($menu == 'sidemenu') {
       $menu_id = $this->side_menu_id;
     }
+    elseif ($menu == 'mayoral_artifacts') {
+      $menu_id = 'city-clerk';
+    }
+    elseif ($menu == 'digital_archives_photos') {
+      $menu_id = 'digital-archives';
+    }
 
     $parameters = new MenuTreeParameters();
     $parameters->onlyEnabledLinks();
@@ -411,6 +448,12 @@ final class Node implements EventSubscriberInterface {
       }
       elseif ($menu == 'topmenu') {
         $this->topMenuLinkData[] = $item;
+      }
+      elseif ($menu == 'mayoral_artifacts') {
+        $this->maMenuLinkData[] = $item;
+      }
+      elseif ($menu == 'digital_archives_photos') {
+        $this->dapMenuLinkData[] = $item;
       }
 
     }

@@ -54,12 +54,20 @@
       justify-content: flex-start;
       -webkit-flex-wrap: wrap;
       flex-wrap: wrap;
-
     }
   }
 
   &.mobile-flexslider {
     height: 100% !important;
+  }
+
+  // this gets used on gallery pages
+  &.flexslider--mobile {
+    .slides {
+      .card__wrap {
+        margin: 0 !important;
+      }
+    }
   }
 
   .card__wrap, .card--wrap {
@@ -266,7 +274,6 @@
     display: flex;
     flex-flow: column wrap;
     gap: 1rem;
-    justify-content: space-between;
 
     @include breakpoint(small) {
       flex-flow: row wrap;
@@ -278,13 +285,10 @@
 .featured-card {
   background-color: $mercury;
   border-radius: 4px;
+  width: calc(50% - .5rem);
 
-  @include breakpoint(mobile-landscape) {
-    width: calc(50% - 1rem);
-  }
-
-  @include breakpoint(medium) {
-    width: calc(33.33% - 1rem);
+  @include breakpoint(site) {
+    width: calc(32.1%)
   }
 
   a {
