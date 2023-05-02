@@ -10,7 +10,7 @@ declare(strict_types=1);
 /**
  * Implements hook_help().
  */
-function sand_views_help($route_name): ?string {
+function cofsd_help($route_name): ?string {
   return sand_help_show_help(__DIR__, $route_name);
 }
 
@@ -19,7 +19,7 @@ function sand_views_help($route_name): ?string {
  *
  * @todo Switch all the below occurrences to the generic one.
  */
-function sand_views_views_pre_build($view): void {
+function cofsd_views_pre_build($view): void {
   $view_name = $view->id();
   $view_display = $view->current_display;
 

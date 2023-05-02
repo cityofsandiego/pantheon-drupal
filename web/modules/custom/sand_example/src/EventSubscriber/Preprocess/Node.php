@@ -20,6 +20,27 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Drupal\Core\Cache\CacheableMetadata;
 
 /**
+ * This gives an example of how to use the Preprocess
+ *
+ * __construct() and getSubscribedEvents() make the order of the preprocess events
+ * passing data from the first event to the second event can be done with a cache
+ * $cid is the cache id for the specific page, so it can be used to retrieve the page data for building blocks
+ *
+ * in this example. we have a preprocessPage that can set twig variables.
+ * and we have preprocessBlock that can put inline javascript into the page.
+ * passing the data from the preprocessPage event to the preprocessBlock event with cache id $cid
+ */
+
+
+
+
+
+
+
+
+
+
+/**
  * Class Department.
  *
  * Preprocess Department content type node.
@@ -131,11 +152,24 @@ final class Node implements EventSubscriberInterface {
   public static function getSubscribedEvents(): array {
     return [
       NodePreprocessEvent::name() => 'preprocessNode',
-      PagePreprocessEvent::name() => 'preprocessPage',
       BlockPreprocessEvent::name() => 'preprocessTitleBlock',
+      PagePreprocessEvent::name() => 'preprocessPage',
+      BlockPreprocessEvent::name() => 'preprocessHeroBlock',
     ];
   }
 
+  /**
+   * Preprocess node.
+   *
+   * @param \Drupal\node\NodeEvent $node_event
+   *   The node event.
+   */
+  /**
+   * Preprocess node.
+   *
+   * @param \Drupal\node\NodeEvent $node_event
+   *   The node event.
+   */
   public function preprocessPage(PagePreprocessEvent $event): void {
     $variables = $event->getVariables();
     $defaultBGImageURL = '/sites/default/files/downtown-skyline-.jpg'; // default background image
@@ -182,9 +216,13 @@ final class Node implements EventSubscriberInterface {
         $variables->set('hero_prefix_image_by', $hero_one_time[2] ?? null);
 
         if (count($unique_hero_js_array) >= 2) {
+          // The $variables #attached is not used. It is only available at Document Ready. So no good for Inline JS.
+          // I kept it here just in case we need it later by accessing drupalsettings['hero'].
           $attached = $variables->get('#attached');
           $attached['drupalSettings']['hero'] = $unique_hero_js_array;
           $variables->set('#attached', $attached);
+
+          // generate cache key for this page based on URL
           $current_url = Url::fromRoute('<current>');
           $cid = 'if_components:unique_hero_js_array:' . $current_url->toString();
           // Create a cacheable data object.
@@ -398,28 +436,6 @@ final class Node implements EventSubscriberInterface {
         if ($node->getType() == 'digital_archives_photos') {
           $variables->set('department_title', 'Digital Archives');
         }
-      }
-    }
-    if ($variables->get('base_plugin_id') == 'hero_block') {
-      $current_url = Url::fromRoute('<current>');
-      $cid = 'if_components:unique_hero_js_array:' . $current_url->toString();
-
-      // Retrieve the cached data.
-      $cache = \Drupal::cache()->get($cid);
-      if ($cache) {
-        $unique_hero_js_array = $cache->data;
-
-        $content = $variables->get('content');
-        $is_front = $variables->get('is_front') ?? \Drupal::service('path.matcher')->isFrontPage();
-
-        if ($is_front) {
-          $myMarkup = "<script>const arr=" . $unique_hero_js_array . ";const randomIndex=Math.floor(Math.random()*arr.length);const selectedArray=arr[randomIndex];const heroBgImage=document.getElementById('hero-bg-image');heroBgImage.style.backgroundImage=heroBgImage.style.backgroundImage.replace(/url\(.*?\)/i,'url('+selectedArray[0]+')');const bg_credit=document.getElementById('hero-bg-credit');if(bg_credit){bg_credit.textContent=selectedArray[2]+' '+selectedArray[1];};if(bg_credit.textContent.includes('null')){bg_credit.remove();};console.log(arr);console.log(selectedArray);</script>";
-        } else {
-          $myMarkup = "<script>const arr=" . $unique_hero_js_array . ";const randomIndex=Math.floor(Math.random()*arr.length);const selectedArray=arr[randomIndex];const heroBgImage=document.getElementById('hero-bg-image');heroBgImage.style.backgroundImage=heroBgImage.style.backgroundImage.replace(/url\(.*?\)/i,'url('+selectedArray[0]+')');console.log(arr);console.log(selectedArray);</script>";
-        }
-        $content['#markup'] = $myMarkup;
-
-        $variables->set('content', $content);
       }
     }
   }

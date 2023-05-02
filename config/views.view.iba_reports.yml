@@ -594,8 +594,8 @@ display:
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_url'
-  block_1:
-    id: block_1
+  block_category:
+    id: block_category
     display_title: 'by Category'
     display_plugin: block
     position: 1
@@ -652,14 +652,14 @@ display:
             format: default_summary
           specify_validation: true
           validate:
-            type: 'entity:taxonomy_term'
+            type: taxonomy_term_name_into_id
             fail: empty
           validate_options:
             bundles:
               categories: categories
             access: false
             operation: view
-            multiple: 0
+            transform: false
           break_phrase: false
           not: false
       filters:
@@ -814,15 +814,15 @@ display:
     position: 1
     display_options:
       arguments:
-        created_fulldate:
-          id: created_fulldate
+        created_year:
+          id: created_year
           table: node_field_data
-          field: created_fulldate
+          field: created_year
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
-          plugin_id: date_fulldate
+          plugin_id: date_year
           default_action: empty
           exception:
             value: all
