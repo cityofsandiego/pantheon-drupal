@@ -131,24 +131,11 @@ final class Node implements EventSubscriberInterface {
   public static function getSubscribedEvents(): array {
     return [
       NodePreprocessEvent::name() => 'preprocessNode',
-      BlockPreprocessEvent::name() => 'preprocessTitleBlock',
       PagePreprocessEvent::name() => 'preprocessPage',
-      BlockPreprocessEvent::name() => 'preprocessHeroBlock',
+      BlockPreprocessEvent::name() => 'preprocessTitleBlock',
     ];
   }
 
-  /**
-   * Preprocess node.
-   *
-   * @param \Drupal\node\NodeEvent $node_event
-   *   The node event.
-   */
-  /**
-   * Preprocess node.
-   *
-   * @param \Drupal\node\NodeEvent $node_event
-   *   The node event.
-   */
   public function preprocessPage(PagePreprocessEvent $event): void {
     $variables = $event->getVariables();
     $defaultBGImageURL = '/sites/default/files/downtown-skyline-.jpg'; // default background image
@@ -411,6 +398,28 @@ final class Node implements EventSubscriberInterface {
         if ($node->getType() == 'digital_archives_photos') {
           $variables->set('department_title', 'Digital Archives');
         }
+      }
+    }
+    if ($variables->get('base_plugin_id') == 'hero_block') {
+      $current_url = Url::fromRoute('<current>');
+      $cid = 'if_components:unique_hero_js_array:' . $current_url->toString();
+
+      // Retrieve the cached data.
+      $cache = \Drupal::cache()->get($cid);
+      if ($cache) {
+        $unique_hero_js_array = $cache->data;
+
+        $content = $variables->get('content');
+        $is_front = $variables->get('is_front') ?? \Drupal::service('path.matcher')->isFrontPage();
+
+        if ($is_front) {
+          $myMarkup = "<script>const arr=" . $unique_hero_js_array . ";const randomIndex=Math.floor(Math.random()*arr.length);const selectedArray=arr[randomIndex];const heroBgImage=document.getElementById('hero-bg-image');heroBgImage.style.backgroundImage=heroBgImage.style.backgroundImage.replace(/url\(.*?\)/i,'url('+selectedArray[0]+')');const bg_credit=document.getElementById('hero-bg-credit');if(bg_credit){bg_credit.textContent=selectedArray[2]+' '+selectedArray[1];};if(bg_credit.textContent.includes('null')){bg_credit.remove();};console.log(arr);console.log(selectedArray);</script>";
+        } else {
+          $myMarkup = "<script>const arr=" . $unique_hero_js_array . ";const randomIndex=Math.floor(Math.random()*arr.length);const selectedArray=arr[randomIndex];const heroBgImage=document.getElementById('hero-bg-image');heroBgImage.style.backgroundImage=heroBgImage.style.backgroundImage.replace(/url\(.*?\)/i,'url('+selectedArray[0]+')');console.log(arr);console.log(selectedArray);</script>";
+        }
+        $content['#markup'] = $myMarkup;
+
+        $variables->set('content', $content);
       }
     }
   }
