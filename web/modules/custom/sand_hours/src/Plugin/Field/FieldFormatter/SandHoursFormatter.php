@@ -16,7 +16,7 @@ use Drupal\office_hours\Plugin\Field\FieldFormatter\OfficeHoursFormatterBase;
  * Plugin implementation of the 'Sand Hours' formatter.
  *
  * @FieldFormatter(
- *   id = "sand_hours_formatter",
+ *   id = "sand_hours",
  *   label = @Translation("Sand Hours"),
  *   field_types = {
  *     "office_hours"
