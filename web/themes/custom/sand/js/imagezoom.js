@@ -16,11 +16,12 @@
   // To understand behaviors, see https://drupal.org/node/756722#behaviors
   Drupal.behaviors.imagezoom = {
     attach: function (context, settings) {
-      $("#main-image").ezPlus({
+      $("#main-image").elevateZoom({
         zoomType: 'lens',
         lensShape: 'round',
-        lensSize: 200,
-        scrollZoom: true
+        lensSize: 250,
+        scrollZoom: true,
+        containLensZoom: true
       });
     }
   };
