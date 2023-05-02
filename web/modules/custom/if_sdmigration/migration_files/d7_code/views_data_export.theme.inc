@@ -178,12 +178,21 @@ function template_preprocess_views_data_export_csv_body(&$vars) {
           $output = str_replace("\n", $vars['options']['newline_replacement'], $output);
         }
       }
-      if ($j == 'field_object_name' || $j == 'field_document_url' || $j == 'title' || $j == 'body' || $j == 'field_additional_content' || $j == 'field_dept_par_featured_content' || $j == 'field_bucket_subtitle' || $j == 'field_featured_card_description' || $j == 'field_department'|| $j == 'field_outreach_body' || $j == 'field_html_block_body' || $j == 'field_business_long_description' || $j == 'field_business_short_description' || $j == 'field_resources_coll_label') {
+//      if (
+//        $j == 'field_object_name' || $j == 'field_document_url' || $j == 'title' || $j == 'body' || $j == 'field_additional_content' ||
+//        $j == 'field_dept_par_featured_content' || $j == 'field_bucket_subtitle' || $j == 'field_featured_card_description' || $j == 'field_department'||
+//        $j == 'field_outreach_body' || $j == 'field_html_block_body' || $j == 'field_business_long_description' || $j == 'field_business_short_description' ||
+//        $j == 'field_resources_coll_label' || $j == 'field_event_activity_desc' || $j == 'field_event_date_2' || $j == 'field_event_location_txt' ||
+//        $j = 'field_file_image_alt_text' || $j == 'created' || $j == 'field_dept_doc_keywords' || $j == 'field_blog_top_content' || $j == 'field_other_description'
+//      ) {
         $output = str_replace(',', '&#44;', $output);
-      }
+        $output = str_replace(array("\r", "\n"), '', $output);
+      //      }
       $output = $str = preg_replace('/[[:^print:]]/', '', $output);
       $vars['themed_rows'][$i][$j] = '`' . $output . '`';
     }
+//    unset($vars['themed_rows'][$i][1]);
+//    die;
   }
 }
 
