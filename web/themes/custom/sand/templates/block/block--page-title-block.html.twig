@@ -5,8 +5,9 @@
     <h1{{ title_attributes.addClass('page-title') }}>{{ title }}</h1>
 {% endif %}
 {{ title_suffix }}
+{{ attach_library('sand_hero/hero_js_async') }}
 
-{% if topmenu is defined %}
+{% if (topmenu is defined) and (department_title != 'Inside San Diego') %}
   <div class="hide-on-mobile top-menu">
     <ul id="department-top-menu" class="department-menu">
       {% for item in topmenu.items %}
@@ -14,8 +15,8 @@
       {% endfor %}
     </ul>
   </div>
-
-  <div class="hide-on-desktop sub-navigation-mobile white-bg l-padding-hd l-padding-ts l-padding-bs">
+  {% if topmenu.items %}
+  <div class="hide-on-desktop sub-navigation-mobile white-bg l-padding-hd l-padding-ts l-padding-bs l-padding-mobile-hm">
 	  <div class="accordions js-toggle-accordion teal-bg">
       <div class="accordion">
         <p class="accordion__heading"><a class="accordion__link" href="#"><i class="icon-menu l-margin-rs"></i> Site Menu  <span class="toggle-icon"> </span></a></p>
@@ -29,8 +30,8 @@
       </div>
     </div>
   </div>
+  {% endif %}
 {% endif %}
-
 
 {% if department_title == 'Inside San Diego' %}
   {{ drupal_menu('inside-san-diego') }}

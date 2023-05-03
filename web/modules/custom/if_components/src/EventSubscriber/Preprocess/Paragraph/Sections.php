@@ -72,8 +72,9 @@ final class Sections implements EventSubscriberInterface {
 
     $vertical_offset = '';
     $variables->set('vertical_offset', $vertical_offset);
-    
-    $min_height  =  '300px';
+
+    $field_minimum_height = $paragraph->field_minimum_height->value;
+    $min_height  = $field_minimum_height ? $field_minimum_height . 'px' : '300px';
     $variables->set('min_height', $min_height);
     
     $adjustment_width  = '';

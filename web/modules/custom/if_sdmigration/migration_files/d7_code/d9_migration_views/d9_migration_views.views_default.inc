@@ -12,6 +12,67 @@ function d9_migration_views_views_default_views() {
   $export = array();
 
   $view = new view();
+  $view->name = 'blocks_migration';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'bean';
+  $view->human_name = 'blocks migration';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Block: Internal, numeric block ID */
+  $handler->display->display_options['fields']['bid']['id'] = 'bid';
+  $handler->display->display_options['fields']['bid']['table'] = 'bean';
+  $handler->display->display_options['fields']['bid']['field'] = 'bid';
+  /* Field: Block: Block Delta */
+  $handler->display->display_options['fields']['delta']['id'] = 'delta';
+  $handler->display->display_options['fields']['delta']['table'] = 'bean';
+  $handler->display->display_options['fields']['delta']['field'] = 'delta';
+  /* Field: Block: Body */
+  $handler->display->display_options['fields']['field_html_block_body']['id'] = 'field_html_block_body';
+  $handler->display->display_options['fields']['field_html_block_body']['table'] = 'field_data_field_html_block_body';
+  $handler->display->display_options['fields']['field_html_block_body']['field'] = 'field_html_block_body';
+  /* Field: Block: Label */
+  $handler->display->display_options['fields']['label']['id'] = 'label';
+  $handler->display->display_options['fields']['label']['table'] = 'bean';
+  $handler->display->display_options['fields']['label']['field'] = 'label';
+  /* Filter criterion: Block: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'bean';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'bean_html_block' => 'bean_html_block',
+  );
+
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '0';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['newline_token'] = '1';
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 1;
+  $handler->display->display_options['path'] = 'migration/beans';
+  $export['blocks_migration'] = $view;
+
+  $view = new view();
   $view->name = 'content_migration';
   $view->description = '';
   $view->tag = 'default';
@@ -243,7 +304,6 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['style_options']['newline_token'] = '1';
   $handler->display->display_options['style_options']['header'] = 1;
   $handler->display->display_options['style_options']['keep_html'] = 1;
-  $handler->display->display_options['style_options']['encoding'] = 'ASCII';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -1769,6 +1829,7 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['fields']['field_replace_body_text_with_att']['id'] = 'field_replace_body_text_with_att';
   $handler->display->display_options['fields']['field_replace_body_text_with_att']['table'] = 'field_data_field_replace_body_text_with_att';
   $handler->display->display_options['fields']['field_replace_body_text_with_att']['field'] = 'field_replace_body_text_with_att';
+  $handler->display->display_options['fields']['field_replace_body_text_with_att']['label'] = 'Replace Body text with Source URL text on Save';
   $handler->display->display_options['fields']['field_replace_body_text_with_att']['type'] = 'list_key';
   /* Field: Content: Source URL */
   $handler->display->display_options['fields']['field_dept_doc_url']['id'] = 'field_dept_doc_url';
@@ -1787,6 +1848,15 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['fields']['path']['table'] = 'node';
   $handler->display->display_options['fields']['path']['field'] = 'path';
   $handler->display->display_options['fields']['path']['label'] = 'Alias';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['alter']['text'] = '[created]';
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'Y-m-d H:i:s';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'rich_snippets_published_date';
+  $handler->display->display_options['fields']['created']['format_date_sql'] = 0;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published status */
@@ -1860,7 +1930,7 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['fields']['field_outreach_sections_coll2']['table'] = 'field_data_field_outreach_sections_coll2';
   $handler->display->display_options['fields']['field_outreach_sections_coll2']['field'] = 'field_outreach_sections_coll2';
   $handler->display->display_options['fields']['field_outreach_sections_coll2']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_outreach_sections_coll2']['alter']['text'] = '[field_outreach_sections_coll2-revision_id]';
+  $handler->display->display_options['fields']['field_outreach_sections_coll2']['alter']['text'] = '[field_outreach_sections_coll2-value]';
   $handler->display->display_options['fields']['field_outreach_sections_coll2']['type'] = 'field_collection_fields';
   $handler->display->display_options['fields']['field_outreach_sections_coll2']['settings'] = array(
     'view_mode' => 'full',
@@ -2195,8 +2265,9 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['style_options']['provide_file'] = 0;
   $handler->display->display_options['style_options']['parent_sort'] = 0;
   $handler->display->display_options['style_options']['quote'] = 1;
-  $handler->display->display_options['style_options']['trim'] = 0;
-  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['trim'] = 1;
+  $handler->display->display_options['style_options']['replace_newlines'] = 1;
+  $handler->display->display_options['style_options']['newline_replacement'] = '';
   $handler->display->display_options['style_options']['newline_token'] = '1';
   $handler->display->display_options['style_options']['header'] = 1;
   $handler->display->display_options['style_options']['keep_html'] = 1;
@@ -2253,6 +2324,7 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['alter']['trim_whitespace'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['nl2br'] = TRUE;
   $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
   /* Field: Content: Edit Notes */
   $handler->display->display_options['fields']['field_edit_notes']['id'] = 'field_edit_notes';
@@ -2269,6 +2341,7 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['fields']['field_other_description']['table'] = 'field_data_field_other_description';
   $handler->display->display_options['fields']['field_other_description']['field'] = 'field_other_description';
   $handler->display->display_options['fields']['field_other_description']['alter']['trim_whitespace'] = TRUE;
+  $handler->display->display_options['fields']['field_other_description']['alter']['nl2br'] = TRUE;
   /* Field: Content: Other Homepage(s) */
   $handler->display->display_options['fields']['field_blog_other_homepages']['id'] = 'field_blog_other_homepages';
   $handler->display->display_options['fields']['field_blog_other_homepages']['table'] = 'field_data_field_blog_other_homepages';
@@ -2300,7 +2373,8 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['fields']['field_blog_top_content']['id'] = 'field_blog_top_content';
   $handler->display->display_options['fields']['field_blog_top_content']['table'] = 'field_data_field_blog_top_content';
   $handler->display->display_options['fields']['field_blog_top_content']['field'] = 'field_blog_top_content';
-  $handler->display->display_options['fields']['field_blog_top_content']['type'] = 'text_plain';
+  $handler->display->display_options['fields']['field_blog_top_content']['alter']['trim_whitespace'] = TRUE;
+  $handler->display->display_options['fields']['field_blog_top_content']['alter']['nl2br'] = TRUE;
   /* Field: Content: Website URL */
   $handler->display->display_options['fields']['field_blog_website_url']['id'] = 'field_blog_website_url';
   $handler->display->display_options['fields']['field_blog_website_url']['table'] = 'field_data_field_blog_website_url';
@@ -4343,12 +4417,11 @@ function d9_migration_views_views_default_views() {
   $handler->display->display_options['relationships']['field_outreach_stellar_image_fid']['table'] = 'field_data_field_outreach_stellar_image';
   $handler->display->display_options['relationships']['field_outreach_stellar_image_fid']['field'] = 'field_outreach_stellar_image_fid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Field collection item: Revision_id */
-  $handler->display->display_options['fields']['revision_id']['id'] = 'revision_id';
-  $handler->display->display_options['fields']['revision_id']['table'] = 'field_collection_item';
-  $handler->display->display_options['fields']['revision_id']['field'] = 'revision_id';
-  $handler->display->display_options['fields']['revision_id']['label'] = 'ID';
-  $handler->display->display_options['fields']['revision_id']['separator'] = '';
+  /* Field: Field collection item: Field collection item ID */
+  $handler->display->display_options['fields']['item_id']['id'] = 'item_id';
+  $handler->display->display_options['fields']['item_id']['table'] = 'field_collection_item';
+  $handler->display->display_options['fields']['item_id']['field'] = 'item_id';
+  $handler->display->display_options['fields']['item_id']['separator'] = '';
   /* Field: Field: Department */
   $handler->display->display_options['fields']['field_department']['id'] = 'field_department';
   $handler->display->display_options['fields']['field_department']['table'] = 'field_data_field_department';

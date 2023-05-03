@@ -3,9 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.department.field_color
     - field.field.taxonomy_term.department.field_field_d7_tid
+    - field.field.taxonomy_term.department.field_meta_tags
     - taxonomy.vocabulary.department
   module:
+    - metatag
+    - options
     - text
 id: taxonomy_term.department.default
 targetEntityType: taxonomy_term
@@ -18,6 +22,20 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_color:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
     region: content
 hidden:
   field_field_d7_tid: true

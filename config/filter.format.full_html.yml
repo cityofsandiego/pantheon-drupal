@@ -5,7 +5,7 @@ dependencies:
   module:
     - customfilter
     - editor
-    - embed_block
+    - if_components
     - insert_block
     - insert_view
     - insert_view_adv
@@ -126,9 +126,15 @@ filters:
     weight: 0
     settings:
       id: retag_pdf
-  embed_block:
-    id: embed_block
-    provider: embed_block
+  filter_insert_reusable_component:
+    id: filter_insert_reusable_component
+    provider: if_components
+    status: true
+    weight: 0
+    settings: {  }
+  filter_insert_webform:
+    id: filter_insert_webform
+    provider: if_components
     status: true
     weight: 0
     settings: {  }

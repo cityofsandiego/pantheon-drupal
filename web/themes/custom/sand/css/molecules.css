@@ -1865,6 +1865,8 @@ textarea {
       flex-wrap: wrap; } }
   .card__container.mobile-flexslider {
     height: 100% !important; }
+  .card__container.flexslider--mobile .slides .card__wrap {
+    margin: 0 !important; }
   .card__container .card__wrap, .card__container .card--wrap {
     height: auto;
     margin: 0 .5em;
@@ -2014,19 +2016,16 @@ textarea {
     display: flex;
     flex-flow: column wrap;
     gap: 1rem;
-    justify-content: space-between;
     flex-flow: row wrap; }
 
 /* Featured Card Item for D9 */
 .featured-card {
   background-color: #e4e9eb;
-  border-radius: 4px; }
-  @media print, screen and (min-width: 30em) {
+  border-radius: 4px;
+  width: calc(50% - .5rem); }
+  @media print, screen and (min-width: 60em) {
     .featured-card {
-      width: calc(50% - 1rem); } }
-  @media print, screen and (min-width: 48em) {
-    .featured-card {
-      width: calc(33.33% - 1rem); } }
+      width: calc(32.1%); } }
   .featured-card a {
     display: block;
     text-decoration: none; }
@@ -2653,6 +2652,8 @@ textarea {
   .stellar-window .no-styling h3,
   .stellar-window .no-styling h4,
   .stellar-window .no-styling p {
+    text-shadow: none; }
+  .stellar-window p.noshadow {
     text-shadow: none; }
 
 /*# sourceMappingURL=molecules.css.map */

@@ -19,9 +19,9 @@
     attach: function (context, settings) {
       $(document).foundation();
 
-      $('.header .header-second .tbm-main .tbm-item--has-dropdown > div > a').once().prepend('<i class="icon-chevron-down hide-on-mobile"></i>');
+      $('.header .header-second .tb-megamenu-main .dropdown > a').once().prepend('<i class="icon-chevron-down hide-on-mobile"></i>');
 
-      $('.header .header-second .tbm-main .tbm-nav.level-0 li:first-child a').once().replaceWith('<a href="/" class="home-link"><i class="icon-home hide-on-mobile"></i></a>');
+      $('.header .header-second .tb-megamenu-main .tb-megamenu-nav.level-0 > li:first-child a').once().replaceWith('<a href="/" class="home-link"><i class="icon-home hide-on-mobile"></i></a>');
     }
   };
 
