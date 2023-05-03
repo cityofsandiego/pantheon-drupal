@@ -35,6 +35,7 @@ class SettingsForm extends ConfigFormBase {
     // Gather the number of names in the form already.
     $num_names = $form_state->get('num_names');
     $source_field = $config->get('source_field');
+    $queue = $config->get('queue');
     $mappings = $config->get('mappings');
 
     // We have to ensure that there is at least one name field. If the config has
@@ -45,6 +46,14 @@ class SettingsForm extends ConfigFormBase {
       $name_field = $form_state->set('num_names', count($mappings));
       $num_names = count($mappings);
     }
+
+    // This is the field that is used to get the source of the data from the entity.
+    $form['queue'] = array(
+      '#type' => 'checkbox',
+      '#title' => $this->t('Turn Off Queuing for PDF Text'),
+      '#default_value' => $queue,
+      '#description' => $this->t('Check this box if you do not want to queue each updated Or inserted item for PDF extraction')
+    );
 
     // This is the field that is used to get the source of the data from the entity.
     $form['source_field'] = array(
@@ -198,7 +207,9 @@ class SettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $mappings = $form_state->getValue(['mappings_fieldset','mappings']);
     $source_field = $form_state->getValue(['source_field']);
+    $queue = $form_state->getValue(['queue']);
     $this->config('sand_remote.settings')
+      ->set('queue', $queue)
       ->set('source_field', $source_field)
       ->set('mappings', $mappings)
       ->save();

@@ -1,5 +1,8 @@
 services:
-  sand_hero_event_dispatcher.preprocess_page:
-    class: Drupal\sand_hero\EventSubscriber\Preprocess\SandHeroPreprocessEventSubscriber
+  sand_hero.preprocess.node:
+    class: Drupal\sand_hero\EventSubscriber\Preprocess\SandHeroSubscriber
+    arguments:
+      - '@current_route_match'
+      - '@entity_type.manager'
     tags:
-    - { name: event_subscriber }
+      - { name: event_subscriber }

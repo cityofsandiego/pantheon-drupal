@@ -1,50 +1,32 @@
 /* Pagination
    ========================================================================== */
-   .pager {
-    padding: 0;
+
+.item-list ul.pager,
+.pager {
+  padding: 0;
+  list-style: none;
+  text-align: center;
+
+  li, 
+  .pager-item {
+    display: inline-block;
+    font-weight: bold;
     list-style: none;
-    text-align: center;
-  
-    li {
-      margin: 0;
-      font-weight: bold;
-      display: inline-block;
-      @include breakpoint(medium) {
-        @include rem('font-size', 13px);
-      }
-    }
-  
-    a {
-      color: $cerulean;
-      text-decoration: none;
-      text-transform: lowercase;
-  
-      &:hover {
-        color: darken($cerulean, 15%);
-      }
-    }
+    margin: 0 0.5em;
 
-    &__items {
-      text-align: center;
-      padding-bottom: 2rem;
-
-      .pager__item {
-        padding: 0;
-
-        &.is-active {
-          background-color: transparent;
-          color: $spruce;
-          border:none;
-        
-          a{
-            color: $spruce;
-          }
-        }
-
-        a {
-          background-color: transparent;
-          border:none;
-        }
-      }
+    @include breakpoint(medium) {
+      @include rem('font-size', 13px);
     }
   }
+
+  a {
+    color: $cerulean;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: lowercase;
+
+    &:hover {
+      color: darken($cerulean, 15%);
+    }
+  }
+}

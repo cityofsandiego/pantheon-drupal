@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\Entity\File;
 use Recurr\Exception;
 use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Service description.
@@ -196,12 +197,11 @@ class ExtractText {
       $cleaned_data = $this->cleanExtractedData($extracted_data);
       // @todo interface with Boone's tesserac server if the cleaned data is empty
       \Drupal::logger('sand_remote')
-        ->error('Got %size text when extracting text on %entity_type ID: %id, on URL: %url, error: %error', [
+        ->error('Got %size text when extracting text on %entity_type ID: %id, on URL: %url', [
           '%size' => strlen($cleaned_data) / 1024 . 'KB',
           '%entity_type' => $this->getEntityType(),
           '%id' => $this->getEntityId(),
           '%url' => $url,
-          '%error' => $e->getMessage(),
         ]);
       return $cleaned_data;
     } catch (\Exception $e) {
@@ -338,7 +338,6 @@ class ExtractText {
     
     // If we changed something, save it.
     if ($changed) {
-      // @todo when saving to NOT update the entity's update time so it can be sorted with other nodes.
       // @todo maybe set a status field and extraction time.
       $entity->save();
     }
@@ -418,6 +417,12 @@ class ExtractText {
   }
 
   function queueEntityForTextExtract($entity_type, $entity): bool {
+    
+    $queue = \Drupal::config('sand_remote.settings')->get('queue');
+    if (!empty($queue)) {
+      return false;
+    }
+    
     $source = $this->getSourceFromEntity($entity);
 
     // If there is nothing in the source field, there is nothing we can do.
@@ -452,5 +457,31 @@ class ExtractText {
     return TRUE;
   }
 
+
+  function queueEntityDelete($entity_type, $entity): bool {
+    $source = $this->getSourceFromEntity($entity);
+
+    // If there is nothing in the source field, there is nothing we can do.
+    if (empty($source)) {
+      return FALSE;
+    }
+
+    $queue = \Drupal::service('queue')->get('sand_remote_queue');
+    $item = new ExtractText();
+    $item->setEntityType($entity_type);
+    $item->setEntityId($entity->id());
+    $item->setSource($source);
+    $item->setUrlField($entity, $source);
+    $item->setTargetField($this->getTargetFromEntity($entity));
+
+    try {
+      $queue->deleteItem($item);
+    } catch (Exception $exception) {
+      watchdog_exception(__CLASS__, $exception);
+    }
+
+    return TRUE;
+  }
+  
 }
 

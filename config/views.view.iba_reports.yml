@@ -466,41 +466,7 @@ display:
             field_identifier: ''
           exposed: false
           granularity: second
-      arguments:
-        field_event_date_value:
-          id: field_event_date_value
-          table: node__field_event_date
-          field: field_event_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: date
-          default_action: empty
-          exception:
-            value: all
-            title_enable: false
-            title: All
-          title_enable: false
-          title: ''
-          default_argument_type: fixed
-          default_argument_options:
-            argument: ''
-          default_argument_skip_url: false
-          summary_options:
-            base_path: ''
-            count: true
-            override: false
-            items_per_page: 25
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: false
-          validate:
-            type: none
-            fail: 'not found'
-          validate_options: {  }
-          format: 'F j, Y'
+      arguments: {  }
       filters:
         status:
           id: status
@@ -622,15 +588,14 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_url'
-  block_1:
-    id: block_1
+  block_category:
+    id: block_category
     display_title: 'by Category'
     display_plugin: block
     position: 1
@@ -687,14 +652,14 @@ display:
             format: default_summary
           specify_validation: true
           validate:
-            type: 'entity:taxonomy_term'
+            type: taxonomy_term_name_into_id
             fail: empty
           validate_options:
             bundles:
               categories: categories
             access: false
             operation: view
-            multiple: 0
+            transform: false
           break_phrase: false
           not: false
       filters:
@@ -848,6 +813,41 @@ display:
     display_plugin: block
     position: 1
     display_options:
+      arguments:
+        created_year:
+          id: created_year
+          table: node_field_data
+          field: created_year
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: date_year
+          default_action: empty
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: fixed
+          default_argument_options:
+            argument: ''
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            override: false
+            items_per_page: 25
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
       filters:
         status:
           id: status
@@ -925,6 +925,7 @@ display:
         groups:
           1: AND
       defaults:
+        arguments: false
         filters: false
         filter_groups: false
       display_description: ''
