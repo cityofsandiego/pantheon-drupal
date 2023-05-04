@@ -8,7 +8,7 @@
  * a function. See The example: /OnBaseAgendaOnline/Meetings/ViewMeeting 
 **/
 
-$redirects = [
+$settings['redirects'] = [
   '/OnBaseAgendaOnline/Meetings/ViewMeeting' => 'function settings_redirect_onbase_view_meeting',
 ];
 
@@ -17,7 +17,7 @@ $redirects = [
  * Redirect Loop code. DO NOT EDIT UNLESS YOU KNOW WHAT YOU ARE DOING!
  */
 // Loop through requests for partial matching
-foreach ($redirects as $source => $target) {
+foreach ($settings['redirects'] as $source => $target) {
   $uri = $_SERVER['REQUEST_URI'];
   if (str_contains($uri, $source)) {
     if (str_starts_with($target, 'function ')) {
