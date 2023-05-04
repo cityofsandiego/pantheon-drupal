@@ -3930,4 +3930,44 @@ class CustomCommands extends DrushCommands {
     }
   }
 
+  /**
+   *
+   * @command import:fix-blog-urls
+   *
+   * @usage import:fix-blog-urls
+   */
+  public function fixBlogUrls() {
+    $query = \Drupal::database()->select('node__field_website', 'f')
+      ->fields('f', ['field_website_uri'])
+      ->condition('field_website_uri', 'http%', 'NOT LIKE')
+      ->condition('field_website_uri', '/%', 'LIKE');
+    $internal_links = $query->execute();
+
+    while ($result = $internal_links->fetchAssoc()) {
+      $internal_uri = 'internal:' . $result['field_website_uri'];
+      \Drupal::database()->update('node__field_website')
+        ->condition('field_website_uri', $result['field_website_uri'])
+        ->fields([
+          'field_website_uri' => $internal_uri,
+        ])
+        ->execute();
+    }
+
+    $query = \Drupal::database()->select('node__field_website', 'f')
+      ->fields('f', ['field_website_uri'])
+      ->condition('field_website_uri', 'http%', 'NOT LIKE')
+      ->condition('field_website_uri', 'internal:%', 'NOT LIKE');
+    $public_links = $query->execute();
+
+    while ($result = $public_links->fetchAssoc()) {
+      $public_uri = 'public:' . $result['field_website_uri'];
+      \Drupal::database()->update('node__field_website')
+        ->condition('field_website_uri', $result['field_website_uri'])
+        ->fields([
+          'field_website_uri' => $public_uri,
+        ])
+        ->execute();
+    }
+  }
+
 }
