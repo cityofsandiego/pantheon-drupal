@@ -47,6 +47,14 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('Check this box if you want to fetch the remote file for PDF extraction before extracting text.')
     );
 
+
+    $form['utf8threechar'] = array(
+      '#type' => 'checkbox',
+      '#title' => $this->t('Save extracted text as 3 character UTF8 instead of normal 4 character UTF8?'),
+      '#default_value' => $config->get('utf8threechar'),
+      '#description' => $this->t('Our previous database only allowed three character UTF-8.')
+    );
+
     // This is the field that is used to get the source of the data from the entity.
     $form['source_field'] = array(
       '#type' => 'textfield',
@@ -211,6 +219,7 @@ class SettingsForm extends ConfigFormBase {
     $this->config('sand_remote.settings')
       ->set('queue', $form_state->getValue(['queue']))
       ->set('fetch', $form_state->getValue(['fetch']))
+      ->set('utf8threechar', $form_state->getValue(['utf8threechar']))
       ->set('source_field', $form_state->getValue(['source_field']))
       ->set('mappings', $form_state->getValue(['mappings_fieldset','mappings']))
       ->save();
