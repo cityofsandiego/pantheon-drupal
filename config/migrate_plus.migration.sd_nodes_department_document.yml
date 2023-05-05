@@ -43,6 +43,13 @@ process:
     plugin: concat
     source:
       - Alias
+  created:
+    plugin: format_date
+    source: 'Post date'
+    from_format: 'Y-m-d H:i:s'
+    to_format: U
+    from_timezone: UTC
+    to_timezone: UTC
 destination:
   plugin: 'entity:node'
   default_bundle: department_document
