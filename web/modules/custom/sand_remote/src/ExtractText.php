@@ -198,8 +198,10 @@ class ExtractText {
       ->createInstance($extractor_plugin_id, $configuration);
 
     try {
-      $extracted_data = $extractor_plugin->extract($this->getFile());
-      $cleaned_data = $this->cleanExtractedData($extracted_data);
+      $cleaned_data = $this->cleanExtractedData($extractor_plugin->extract($this->getFile()));
+      if (\Drupal::config('sand_remote.settings')->get('utf8threechar')) {
+        $cleaned_data = $this->convertToThreeCharUTF8($cleaned_data);
+      }
       // @todo interface with Boone's tesserac server if the cleaned data is empty
       \Drupal::logger('sand_remote')
         ->info('Got %size text extracting from %entity_type ID: %id, on URL: %url, File Size: %filesize', [
@@ -326,7 +328,7 @@ class ExtractText {
    * @return string
    */
   protected function cleanExtractedData(string $string): string {
-    // Convert to valid UTF8.
+    // Strip out ant invalid UTF8.
     try {
       $text = iconv("UTF-8", "UTF-8//IGNORE", $string);
     } catch (Exception $exception) {
@@ -334,17 +336,23 @@ class ExtractText {
         ->error('Error trying to extract text on Sandremote ID: %id, on URL: %url, error: %error', ['%id' => $this->id(), '%url' => $this->field_url->value, '%error' => $exception->getMessage()]);
       $text = $string;
     }
-    //$text = Unicode::convertToUtf8($string);
-    // Convert to 3 character UTF8 @todo we can remove this if our DB supports 4 byte UTF8. 
-    $text = preg_replace('/[\x{10000}-\x{10FFFF}]/u', "\xEF\xBF\xBD", $text);
+
     // Use clean up routine originally found in D7 apachesolr.
     $text = trim($this->apachesolr_clean_text($text));
+    
     // Many of our documents have table of contents with . . . , pull those out.
     $text = preg_replace('/\. \. \./', ' ', $text);
     $text = preg_replace('/\.\.\./', ' ', $text);
+    
     // Cleanup __'s.
     $text = preg_replace('/__/', ' ', $text);
     return $text;
+  }
+
+  protected function convertToThreeCharUTF8(string $string): string {
+    //$text = Unicode::convertToUtf8($string);
+    // Convert to 3 character UTF8 @todo we can remove this if our DB supports 4 byte UTF8. 
+    return preg_replace('/[\x{10000}-\x{10FFFF}]/u', "\xEF\xBF\xBD", $string);
   }
 
   /**
