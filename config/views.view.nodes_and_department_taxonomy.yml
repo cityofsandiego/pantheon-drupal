@@ -1,22 +1,16 @@
-uuid: 9a3240da-8f0a-4f28-97fe-25d13bab2d6d
+uuid: 8e8d4210-dc5a-482e-85af-f0a2c94fa166
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_url
-    - node.type.department_document
+    - node.type.department
     - taxonomy.vocabulary.department
-  content:
-    - 'taxonomy_term:department:ce531ae3-a207-4de5-b6c5-47882ff8eb49'
   module:
-    - file
-    - link
-    - media
     - node
     - taxonomy
     - user
-id: closed_session
-label: 'Closed Session'
+id: nodes_and_department_taxonomy
+label: 'Nodes and Department Taxonomy'
 module: views
 description: ''
 tag: ''
@@ -29,75 +23,8 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Closed Session'
+      title: 'Nodes and Department Taxonomy'
       fields:
-        field_url:
-          id: field_url
-          table: node__field_url
-          field: field_url
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: uri
-          type: link
-          settings:
-            trim_length: 80
-            url_only: false
-            url_plain: false
-            rel: '0'
-            target: '0'
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         title:
           id: title
           table: node_field_data
@@ -105,41 +32,25 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
           plugin_id: field
-          label: ''
-          exclude: true
+          label: Title
+          exclude: false
           alter:
             alter_text: false
-            text: ''
-            make_link: true
-            path: '{{ uri }}'
+            make_link: false
             absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
+            word_boundary: false
+            ellipsis: false
             strip_tags: false
             trim: false
-            preserve_tags: ''
             html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -150,7 +61,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: false
+            link_to_entity: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -161,21 +72,20 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        uri:
-          id: uri
-          table: file_managed
-          field: uri
-          relationship: field_media_document_target_id
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
           group_type: group
           admin_label: ''
-          entity_type: file
-          entity_field: uri
-          plugin_id: field
-          label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: Path
           exclude: false
           alter:
             alter_text: true
-            text: "<span>\r\n<span class=\"file-icon\">\r\n   <img alt=\"PDF icon\" title=\"application/pdf\" src=\"/core/themes/classy/images/icons/application-pdf.png\">\r\n</span> \r\n <a href=\"{{ uri }}\">{{ title }}</a>\r\n</span>"
+            text: '{{ view_node }}'
             make_link: false
             path: ''
             absolute: false
@@ -204,20 +114,138 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
-          empty: '{{ title }}'
+          empty: ''
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: file_uri
+          text: ''
+          output_url_as_text: true
+          absolute: false
+        uid:
+          id: uid
+          table: node_field_data
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: uid
+          plugin_id: field
+          label: 'Author uid'
+          exclude: false
+          alter:
+            alter_text: true
+            text: '{{ uid__target_id }} '
+            make_link: true
+            path: '{{ uid }}'
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
           settings:
-            link_to_file: false
-            file_download_path: false
-          group_column: value
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        uid_1:
+          id: uid_1
+          table: node_field_data
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: uid
+          plugin_id: field
+          label: Name
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -228,17 +256,15 @@ display:
           separator: ', '
           field_api_classes: false
       pager:
-        type: full
+        type: mini
         options:
           offset: 0
-          items_per_page: 50
+          items_per_page: 100
           total_pages: null
           id: 0
           tags:
-            next: 'Next ›'
-            previous: '‹ Previous'
-            first: '« First'
-            last: 'Last »'
+            next: ››
+            previous: ‹‹
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -247,7 +273,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          quantity: 9
       exposed_form:
         type: basic
         options:
@@ -306,21 +331,20 @@ display:
           entity_field: type
           plugin_id: bundle
           value:
-            department_document: department_document
+            department: department
           expose:
             operator_limit_selection: false
             operator_list: {  }
-        tid:
-          id: tid
-          table: taxonomy_index
-          field: tid
+        field_department_target_id:
+          id: field_department_target_id
+          table: node__field_department
+          field: field_department_target_id
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: taxonomy_index_tid
-          operator: or
-          value:
-            - 4612
+          operator: empty
+          value: {  }
           group: 1
           exposed: false
           expose:
@@ -352,16 +376,12 @@ display:
             group_items: {  }
           reduce_duplicates: false
           vid: department
-          type: textfield
+          type: select
           hierarchy: true
           limit: true
           error_message: true
       style:
-        type: default
-        options:
-          grouping: {  }
-          row_class: l-margin-bd
-          default_row_class: true
+        type: table
       row:
         type: fields
       query:
@@ -372,25 +392,7 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships:
-        field_attachment:
-          id: field_attachment
-          table: node__field_attachment
-          field: field_attachment
-          relationship: none
-          group_type: group
-          admin_label: 'field_attachment: Media'
-          plugin_id: standard
-          required: false
-        field_media_document_target_id:
-          id: field_media_document_target_id
-          table: media__field_media_document
-          field: field_media_document_target_id
-          relationship: field_attachment
-          group_type: group
-          admin_label: 'file from field_media_document'
-          plugin_id: standard
-          required: false
+      relationships: {  }
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -403,18 +405,15 @@ display:
         - user
         - 'user.node_grants:view'
         - user.permissions
-      tags:
-        - 'config:field.storage.node.field_url'
-  block:
-    id: block
-    display_title: Block
-    display_plugin: block
+      tags: {  }
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
     position: 1
     display_options:
-      exposed_block: true
       display_extenders: {  }
-      allow:
-        items_per_page: false
+      path: sdadmin/nodes-and-department-taxonomy
     cache_metadata:
       max-age: -1
       contexts:
@@ -424,5 +423,4 @@ display:
         - user
         - 'user.node_grants:view'
         - user.permissions
-      tags:
-        - 'config:field.storage.node.field_url'
+      tags: {  }
