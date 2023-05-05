@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.blog.field_feature_video_img
     - field.field.node.blog.field_keywords
     - field.field.node.blog.field_other_description
+    - field.field.node.blog.field_other_keywords
     - field.field.node.blog.field_promote_to_city_home
     - field.field.node.blog.field_search_keymatch
     - field.field.node.blog.field_subtitle
@@ -89,6 +90,7 @@ third_party_settings:
       children:
         - field_add_updated_tag
         - field_keywords
+        - field_other_keywords
         - field_other_description
         - field_promote_to_city_home
         - field_blog_promote_to_home
@@ -156,7 +158,7 @@ content:
     third_party_settings: {  }
   field_blog_promote_to_home:
     type: boolean_checkbox
-    weight: 20
+    weight: 21
     region: content
     settings:
       display_label: true
@@ -204,15 +206,23 @@ content:
     third_party_settings: {  }
   field_other_description:
     type: text_textarea
-    weight: 18
+    weight: 19
     region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_other_keywords:
+    type: string_textfield
+    weight: 18
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_promote_to_city_home:
     type: boolean_checkbox
-    weight: 19
+    weight: 20
     region: content
     settings:
       display_label: true
