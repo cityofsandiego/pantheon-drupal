@@ -2434,34 +2434,74 @@ figure figcaption {
 /* Pagination
    ========================================================================== */
 .item-list ul.pager,
+nav.pager,
 .pager {
+  border: 0;
+  margin: 5rem 0;
   padding: 0;
   list-style: none;
   text-align: center; }
+  .item-list ul.pager .pager__items,
+  nav.pager .pager__items,
+  .pager .pager__items {
+    text-align: center; }
   .item-list ul.pager li,
-  .item-list ul.pager .pager-item,
+  .item-list ul.pager .pager-item .pager__item,
+  nav.pager li,
+  nav.pager .pager-item .pager__item,
   .pager li,
-  .pager .pager-item {
+  .pager .pager-item .pager__item {
+    background: none;
+    border: 0;
     display: inline-block;
     font-weight: bold;
     list-style: none;
     margin: 0 0.5em; }
     @media print, screen and (min-width: 48em) {
       .item-list ul.pager li,
-      .item-list ul.pager .pager-item,
+      .item-list ul.pager .pager-item .pager__item,
+      nav.pager li,
+      nav.pager .pager-item .pager__item,
       .pager li,
-      .pager .pager-item {
+      .pager .pager-item .pager__item {
         font-size: 13px;
         font-size:  calc($unitless-value / $baseline-px)rem; } }
-  .item-list ul.pager a,
-  .pager a {
-    color: #0098db;
-    font-weight: bold;
-    text-decoration: none;
-    text-transform: lowercase; }
-    .item-list ul.pager a:hover,
-    .pager a:hover {
-      color: #00638f; }
+    .item-list ul.pager li a,
+    .item-list ul.pager .pager-item .pager__item a,
+    nav.pager li a,
+    nav.pager .pager-item .pager__item a,
+    .pager li a,
+    .pager .pager-item .pager__item a {
+      background: none;
+      border: 0;
+      color: #0098db;
+      font-weight: bold;
+      text-decoration: none;
+      text-transform: lowercase; }
+      .item-list ul.pager li a:hover,
+      .item-list ul.pager .pager-item .pager__item a:hover,
+      nav.pager li a:hover,
+      nav.pager .pager-item .pager__item a:hover,
+      .pager li a:hover,
+      .pager .pager-item .pager__item a:hover {
+        color: #00638f; }
+    .item-list ul.pager li.is-active,
+    .item-list ul.pager .pager-item .pager__item.is-active,
+    nav.pager li.is-active,
+    nav.pager .pager-item .pager__item.is-active,
+    .pager li.is-active,
+    .pager .pager-item .pager__item.is-active {
+      background: none;
+      border: 0; }
+      .item-list ul.pager li.is-active a,
+      .item-list ul.pager .pager-item .pager__item.is-active a,
+      nav.pager li.is-active a,
+      nav.pager .pager-item .pager__item.is-active a,
+      .pager li.is-active a,
+      .pager .pager-item .pager__item.is-active a {
+        background: none;
+        border: 0;
+        color: #37424a; }
 
 /* Tables
 ========================================================================== */
@@ -2754,5 +2794,8 @@ a[href^="tel:"] {
 
 .img-circle {
   border-radius: 50%; }
+
+ul.sidebar-menu li {
+  font-size: .8125rem; }
 
 /*# sourceMappingURL=atoms.css.map */
