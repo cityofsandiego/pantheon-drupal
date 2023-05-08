@@ -36,6 +36,7 @@ lando terminus drush mi:import sd_nodes_gallery -- --update --force
 lando terminus drush mi:import sd_nodes_digital_archives_photos -- --update --force
 lando terminus drush mi:import sd_nodes_article -- --update --force
 lando terminus drush mi:import sd_bean -- --update --force
+lando terminus drush mi:import sd_nodes_resource -- --update --force
 
 Menu import:
 lando terminus drush import:menus
@@ -61,6 +62,7 @@ lando terminus drush import:event
 lando terminus drush import:gallery
 lando terminus drush import:digital_archives_photos 
 lando terminus drush import:article
+lando terminus drush import:resource
 
 Fix class names/HTML content cleanup:
 lando terminus drush import:class-fixes
@@ -92,6 +94,7 @@ Outreach2
 Outreach
 Reusable Content (bean custom blocks)
 Department document
+Resource
 
 Field groups:
 field_bucket_events_pi_coll

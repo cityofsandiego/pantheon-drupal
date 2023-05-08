@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.resources.field_category
     - field.field.node.resources.field_company
     - field.field.node.resources.field_contact
+    - field.field.node.resources.field_d7_nid
     - field.field.node.resources.field_department
     - field.field.node.resources.field_edit_notes
     - field.field.node.resources.field_email
@@ -40,14 +41,14 @@ content:
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    weight: -20
+    weight: 0
     region: content
   field_address:
     type: address_default
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 121
+    weight: 20
     region: content
   field_category:
     type: entity_reference_label
@@ -55,7 +56,7 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 119
+    weight: 18
     region: content
   field_company:
     type: string
@@ -63,7 +64,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 110
+    weight: 10
     region: content
   field_contact:
     type: string
@@ -71,7 +72,16 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 113
+    weight: 13
+    region: content
+  field_d7_nid:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 24
     region: content
   field_department:
     type: entity_reference_label
@@ -79,21 +89,21 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 109
+    weight: 9
     region: content
   field_edit_notes:
     type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 123
+    weight: 22
     region: content
   field_email:
     type: basic_string
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 116
+    weight: 15
     region: content
   field_image:
     type: entity_reference_label
@@ -101,7 +111,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 124
+    weight: 23
     region: content
   field_import_id:
     type: number_integer
@@ -110,21 +120,21 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 122
+    weight: 21
     region: content
   field_internet:
     type: list_default
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 103
+    weight: 3
     region: content
   field_laptop:
     type: list_default
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 104
+    weight: 4
     region: content
   field_number_of_computers:
     type: number_integer
@@ -133,7 +143,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 108
+    weight: 8
     region: content
   field_phone:
     type: string
@@ -141,14 +151,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 115
+    weight: 14
     region: content
   field_phone_in_room:
     type: list_default
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 107
+    weight: 7
     region: content
   field_position:
     type: string
@@ -156,21 +166,21 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 117
+    weight: 16
     region: content
   field_projector_big_screen:
     type: list_default
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 105
+    weight: 5
     region: content
   field_resource_description:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 112
+    weight: 12
     region: content
   field_resource_first_name:
     type: string
@@ -178,21 +188,21 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 111
+    weight: 11
     region: content
   field_resource_group:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 118
+    weight: 17
     region: content
   field_resource_type:
     type: list_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 102
+    weight: 2
     region: content
   field_room_capacity:
     type: number_integer
@@ -201,7 +211,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 106
+    weight: 6
     region: content
   field_url:
     type: link
@@ -213,12 +223,12 @@ content:
       rel: '0'
       target: '0'
     third_party_settings: {  }
-    weight: 120
+    weight: 19
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 1
     region: content
 hidden:
   langcode: true
