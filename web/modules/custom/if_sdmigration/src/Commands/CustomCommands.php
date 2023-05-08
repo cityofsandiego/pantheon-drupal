@@ -3971,4 +3971,113 @@ class CustomCommands extends DrushCommands {
     }
   }
 
+  /**
+   *
+   * @command import:resource
+   * @param $after_id (Node ID to resume after).
+   *
+   * @usage import:resource
+   */
+  public function finalizeResource($after_id = 0) {
+    $nodedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/resource.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'department' => explode('|', str_replace('`', '', $data[1])),
+          'address' => str_replace('`', '', $data[23]),
+          'updated' => str_replace('`', '', $data[4]),
+          'image_department' => str_replace('`', '', $data[6]),
+          'image_license' => str_replace('`', '', $data[5]),
+          'image_alt' => str_replace('`', '', $data[7]),
+          'image_d7id' => str_replace('`', '', $data[8]),
+          'image_path' => str_replace('`', '', $data[9]),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) {
+        continue;
+      }
+      echo 'Current memory used: ' . $this->memoryUsage(memory_get_usage(TRUE)) . ' | Current D7 ID: ' . $d7id . PHP_EOL;
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'resources')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+      // Set three taxonomies.
+      $node->field_department->setValue([]);
+      foreach ($data['department'] as $department) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+        $node->field_department->appendItem($term);
+      }
+      if (!empty($data['address'])) {
+        $address = explode('&#44; San Diego&#44; CA ', $data['address']);
+        $street = str_replace('&#44;', ',', $address[0]);
+        $zip_code = trim($address[1]);
+        $node->field_address = [
+          'country_code' => 'US',
+          'address_line1' => $street,
+          'locality' => 'San Diego',
+          'administrative_area' => 'CA',
+          'postal_code' => $zip_code,
+        ];
+      }
+      // Create (if not pre-existing) and set image.
+      if (!empty($data['image_path'])) {
+        $prior_image = $this->checkMediaId($data['image_d7id']);
+        if ($prior_image == NULL) {
+          $remote_file = str_replace('public://', 'https://www.sandiego.gov/sites/default/files/', $data['image_path']);
+          $file_data = file_get_contents($remote_file);
+          // Fixes for irregular paths.
+          $local_destination = str_replace('legacy/police/graphics', '', $data['image_path']);
+          $local_destination = str_replace('default_images', '', $local_destination);
+          $local_destination = str_replace('legacy/park-and-recreation/graphics', '', $local_destination);
+          $local_destination = str_replace('public://', '', $local_destination);
+          $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
+          $image_department = [$this->taxonomyImportTasks->newTid($data['image_department'], 'department')];
+          if (is_object($local_file)) {
+            $image = Media::create([
+              'bundle' => 'image',
+              'uid' => 0,
+              'field_media_image' => [
+                'target_id' => $local_file->id(),
+                'alt' => $data['image_alt']
+              ],
+              'field_d7_mid' => $data['image_d7id'],
+            ]);
+            if (!empty($data['image_license'])) {
+              $image->field_license = $data['image_license'];
+            }
+            foreach ($image_department as $department) {
+              $image->field_department->appendItem([
+                'target_id' => $department,
+              ]);
+            }
+            $image->save();
+            echo 'Image saved.' . PHP_EOL;
+          }
+          else {
+            $image = NULL;
+          }
+        }
+        else {
+          $image = Media::load($prior_image);
+          echo 'Image re-used.' . PHP_EOL;
+        }
+        $node->field_image = $image;
+      }
+
+      $node->save();
+    }
+  }
+
 }
