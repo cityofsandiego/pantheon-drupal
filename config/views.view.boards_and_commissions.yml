@@ -37,6 +37,7 @@ dependencies:
     - telephone
     - text
     - user
+    - views_taxonomy_term_name_depth
 id: boards_and_commissions
 label: 'Boards and Commissions'
 module: views
@@ -1590,15 +1591,15 @@ display:
             field_identifier: ''
           exposed: false
       arguments:
-        term_node_tid_depth:
-          id: term_node_tid_depth
+        term_node_taxonomy_name_depth:
+          id: term_node_taxonomy_name_depth
           table: node_field_data
-          field: term_node_tid_depth
+          field: term_node_taxonomy_name_depth
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
-          plugin_id: taxonomy_index_tid_depth
+          plugin_id: taxonomy_index_name_depth
           default_action: 'not found'
           exception:
             value: all
@@ -1619,19 +1620,16 @@ display:
             sort_order: asc
             number_of_records: 0
             format: default_summary
-          specify_validation: true
+          specify_validation: false
           validate:
-            type: 'entity:taxonomy_term'
+            type: none
             fail: 'not found'
-          validate_options:
-            bundles:
-              location: location
-            access: false
-            operation: view
-            multiple: 0
+          validate_options: {  }
           break_phrase: false
-          depth: 1
+          depth: '1'
           use_taxonomy_term_path: false
+          vocabularies:
+            location: location
       filters:
         status:
           id: status
