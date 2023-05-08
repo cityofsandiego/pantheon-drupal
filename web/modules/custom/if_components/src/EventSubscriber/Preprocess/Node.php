@@ -199,6 +199,11 @@ final class Node implements EventSubscriberInterface {
           array_multisort(array_column($this->dapMenuLinkData, 'weight'), SORT_ASC, $this->dapMenuLinkData);
           $variables->set('topmenu', ['items' => $this->dapMenuLinkData]);
         }
+        if ($node->getType() == 'sand_gallery') {
+          $this->buildMenuLinks('digital_archives_photos');
+          array_multisort(array_column($this->dapMenuLinkData, 'weight'), SORT_ASC, $this->dapMenuLinkData);
+          $variables->set('topmenu', ['items' => $this->dapMenuLinkData]);
+        }
 
         // Department title.
         $department_title = NULL;

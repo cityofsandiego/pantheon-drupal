@@ -71,7 +71,6 @@ Bucket (Note: manually updating these as there are few and content type is compl
 Slide
 Mayoral artifacts
 Hero
-Department document
 External data
 Date (Manually entered nodes as there were few and it was quicker to do so.)
 
@@ -92,6 +91,7 @@ Article
 Outreach2
 Outreach
 Reusable Content (bean custom blocks)
+Department document
 
 Field groups:
 field_bucket_events_pi_coll
