@@ -64,9 +64,6 @@ lando terminus drush import:digital_archives_photos
 lando terminus drush import:article
 lando terminus drush import:resource
 
-Fix class names/HTML content cleanup:
-lando terminus drush import:class-fixes
-
 Node data status:
 **9/26/2022
 Bucket (Note: manually updating these as there are few and content type is complex)
