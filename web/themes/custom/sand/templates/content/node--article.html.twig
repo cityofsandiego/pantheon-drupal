@@ -98,15 +98,17 @@
         </div>
       </div>
       <div class="cell medium-3 sidebar">
-        <div class="l-padding-ad l-padding-mobile-hd l-margin-mobile-as light-gray-bg sidebar-inner">
+        <div class="l-padding-ad l-padding-mobile-hd l-margin-mobile-as light-gray-bg sidebar-inner widget">
           <div class="l-padding-bm">
             {{ content.field_sidebar }}
+
+            {{ drupal_entity('block', 'viewsexposedfilterblock', check_access=false) }}
 
             <div class="accordions js-toggle-accordion">
               <div class="accordion">
                 <p class="accordion__heading h4"><a class="accordion__link" href="#"><strong>Categories</strong><i class="toggle-icon"></i></a></p>
                 <div class="accordion__drawer" style="display: none;">
-                  {{ drupal_view('article_category_list', 'block_1') }}
+                  {{ drupal_view('article_category_list', 'categories') }}
                 </div>
               </div>
             </div>  
@@ -115,7 +117,7 @@
               <div class="accordion">
                 <p class="accordion__heading h4"><a class="accordion__link" href="#"><strong>Archives</strong><i class="toggle-icon"></i></a></p>
                 <div class="accordion__drawer" style="display: none;">
-                  {{ drupal_view('article_archives_list', 'block_1') }}
+                  {{ drupal_view('article_archives_list', 'block') }}
                 </div>
               </div>
             </div>    

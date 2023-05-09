@@ -1,0 +1,29 @@
+uuid: 60b0dce2-d38f-4691-af28-d9560c29a53d
+langcode: en
+status: false
+dependencies:
+  module:
+    - node
+    - views_exposed_filter_blocks
+  theme:
+    - sand
+id: viewsexposedfilterblock
+theme: sand
+region: content
+weight: -6
+provider: null
+plugin: views_exposed_filter_blocks_block
+settings:
+  id: views_exposed_filter_blocks_block
+  label: 'Views exposed filter block'
+  label_display: '0'
+  provider: views_exposed_filter_blocks
+  view_display: 'articles:block_1'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      article: article

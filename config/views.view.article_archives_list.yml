@@ -30,15 +30,15 @@ display:
           field: created
           relationship: none
           group_type: group
-          admin_label: ''
+          admin_label: 'Post date Year'
           entity_type: node
           entity_field: created
           plugin_id: field
           label: ''
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<strong>{{ created_1 }}</strong>'
             make_link: false
             path: ''
             absolute: false
@@ -68,9 +68,9 @@ display:
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
-          element_wrapper_type: div
-          element_wrapper_class: accordion__heading
-          element_default_classes: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -97,11 +97,11 @@ display:
           field: created
           relationship: none
           group_type: group
-          admin_label: ''
+          admin_label: 'Numeric Date'
           entity_type: node
           entity_field: created
           plugin_id: field
-          label: 'Numeric Date'
+          label: ''
           exclude: true
           alter:
             alter_text: false
@@ -199,7 +199,7 @@ display:
             html: false
           element_type: '0'
           element_class: ''
-          element_label_type: '0'
+          element_label_type: ''
           element_label_class: ''
           element_label_colon: false
           element_wrapper_type: ''
@@ -322,46 +322,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        status_1:
-          id: status_1
-          table: node_field_data
-          field: status
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: status
-          plugin_id: boolean
-          operator: '='
-          value: '1'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
         field_article_exclude_value:
           id: field_article_exclude_value
           table: node__field_article_exclude
@@ -409,19 +369,24 @@ display:
           grouping:
             -
               field: created_1
-              rendered: false
+              rendered: true
               rendered_strip: false
             -
               field: created
-              rendered: false
+              rendered: true
               rendered_strip: false
           row_class: ''
-          default_row_class: true
+          default_row_class: false
           type: ul
-          wrapper_class: ''
-          class: ''
+          wrapper_class: item-list
+          class: accordion__drawer
       row:
         type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       query:
         type: views_query
         options:
@@ -431,6 +396,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
+      css_class: 'widget l-padding-hs l-margin-bd'
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -442,8 +408,8 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  block_1:
-    id: block_1
+  block:
+    id: block
     display_title: Block
     display_plugin: block
     position: 1
