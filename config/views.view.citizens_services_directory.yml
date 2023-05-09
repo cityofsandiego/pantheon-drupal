@@ -353,7 +353,7 @@ display:
           field: field_address
           relationship: none
           group_type: group
-          admin_label: ''
+          admin_label: 'Street (mobile)'
           plugin_id: field
           label: 'Street (mobile)'
           exclude: true
@@ -670,8 +670,8 @@ display:
           label: 'Phone (mobile)'
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '{{ field_phone_1__value }}'
             make_link: false
             path: ''
             absolute: false
@@ -868,7 +868,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr>\r\n<div class=\"row\">\r\n  <div class=\"six columns l-margin-desktop-ln\">\r\n    <p class=\"h4 heading--snug\">{{ title }}</p>\r\n    <p class=\"hide-on-mobile\">\r\n      {{ field_contact }}\r\n      {{ field_address }}\r\n      {{ field_address_1 }}\r\n      {{ field_address_2 }}\r\n      {{ field_address_3 }}\r\n      {{ field_phone }}\r\n      {{ field_email }} \r\n      {{ field_url }}</p>\r\n  </div>\r\n  <div class=\"six columns l-margin-desktop-rn\">\r\n    <p>{{ field_resource_description }}</p>\r\n  </div>\r\n</div>\r\n\r\n<!-- Mobile only information -->\r\n<div class=\"row hide-on-desktop text-center l-margin-td\">\r\n\r\n  <div class=\"sm-four columns\">\r\n    <p>\r\n      <span itemprop=\"telephone\">\r\n        <a href=\"tel:{{ field_phone_1 }}\"><i class=\"icon-telephone icon--md icon--circle background--cerulean\"></i><br>Call</a>\r\n      </span>\r\n    </p>\r\n  </div>\r\n\r\n  <div class=\"sm-four columns\">\r\n    {{ field_address_4 }}\r\n  </div>\r\n\r\n  <div class=\"sm-four columns\">\r\n    <p>{{ field_url_1 }}</p>\r\n  </div>\r\n\r\n</div>\r\n"
+            text: "<hr>\r\n<div class=\"row\">\r\n  <div class=\"six columns l-margin-desktop-ln\">\r\n    <p class=\"h4 heading--snug\">{{ title }}</p>\r\n    <p class=\"hide-on-mobile\">\r\n      {{ field_contact }}\r\n      {{ field_address }}\r\n      {{ field_address_1 }}\r\n      {{ field_address_2 }}\r\n      {{ field_address_3 }}\r\n      {{ field_phone }}\r\n      {{ field_email }} \r\n      {{ field_url }}\r\n     </p>\r\n  </div>\r\n  <div class=\"six columns l-margin-desktop-rn\">\r\n    <p>{{ field_resource_description }}</p>\r\n  </div>\r\n</div>\r\n\r\n<!-- Mobile only information -->\r\n<div class=\"row hide-on-desktop text-center l-margin-td\">\r\n\r\n  <div class=\"sm-four columns\">\r\n    <p>\r\n      <span itemprop=\"telephone\">\r\n        <a href=\"tel:{{ field_phone_1 }}\"><i class=\"icon-telephone icon--md icon--circle background--cerulean\"></i><br>Call</a>\r\n      </span>\r\n    </p>\r\n  </div>\r\n\r\n  <div class=\"sm-four columns\">\r\n    [street_1] {{ field_address_4 }}\r\n  </div>\r\n\r\n  <div class=\"sm-four columns\">\r\n    <p>{{ field_url_1 }} </p>\r\n  </div>\r\n\r\n</div>"
             make_link: false
             path: ''
             absolute: false
