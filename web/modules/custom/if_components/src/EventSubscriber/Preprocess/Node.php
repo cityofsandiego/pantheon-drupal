@@ -381,6 +381,11 @@ final class Node implements EventSubscriberInterface {
           array_multisort(array_column($this->dapMenuLinkData, 'weight'), SORT_ASC, $this->dapMenuLinkData);
           $variables->set('topmenu', ['items' => $this->dapMenuLinkData]);
         }
+        if ($node->getType() == 'sand_gallery') {
+          $this->buildMenuLinks('digital_archives_photos');
+          array_multisort(array_column($this->dapMenuLinkData, 'weight'), SORT_ASC, $this->dapMenuLinkData);
+          $variables->set('topmenu', ['items' => $this->dapMenuLinkData]);
+        }
 
         // Department title.
         $department_title = NULL;
@@ -395,7 +400,7 @@ final class Node implements EventSubscriberInterface {
         if ($node->getType() == 'mayoral_artifacts') {
           $variables->set('department_title', 'Office of the City Clerk');
         }
-        if ($node->getType() == 'digital_archives_photos') {
+        if ($node->getType() == 'digital_archives_photos' || $node->getType() == 'sand_gallery') {
           $variables->set('department_title', 'Digital Archives');
         }
       }
