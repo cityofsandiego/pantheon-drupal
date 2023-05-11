@@ -1170,7 +1170,7 @@ class CustomCommands extends DrushCommands {
           'department' => explode('|', str_replace('`', '', $data[18])),
           'secondary_exceptions' => explode('|', str_replace('`', '', $data[20])),
           'hours' => explode(' \ ', str_replace('`', '', $data[23])),
-          'location_type' => str_replace('`', '', $data[25]),
+          'location_type' => explode('|', str_replace('`', '', $data[25])),
           'resources' => explode('|', str_replace('`', '', $data[29])),
           'restrictions' => explode('|', str_replace('`', '', $data[30])),
           'secondary_hours' => explode(' \ ', str_replace('`', '', $data[31])),
@@ -1420,8 +1420,11 @@ class CustomCommands extends DrushCommands {
       $term = Term::load($this->taxonomyImportTasks->newTid($data['bucket'], 'bucket'));
       $node->field_location_bucket = $term;
 
-      $term = Term::load($this->taxonomyImportTasks->newTid($data['location_type'], 'location'));
-      $node->field_location_type = $term;
+      $node->field_location_type->setValue([]);
+      foreach ($data['location_type'] as $location_type) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($location_type, 'location'));
+        $node->field_location_type->appendItem($term);
+      }
 
       $node->field_exceptions = [];
       if (array_key_exists($d7id, $nodedata_exceptions)) {
@@ -4076,6 +4079,39 @@ class CustomCommands extends DrushCommands {
       }
 
       $node->save();
+    }
+  }
+
+  /**
+   *
+   * @command fix-department-document-date
+   * @param $d9id (D9 Node ID to resume after).
+   *
+   * @usage fix-department-document-date
+   */
+  public function fixDeptDocDate($d9id = 0) {
+    // Update each department document.
+    $query = $this->entityTypeManager
+      ->getStorage('node')
+      ->getQuery();
+    $query->condition('type', 'department_document', 'IN');
+    $query->sort('nid', 'ASC');
+    $nids = $query->execute();
+    foreach ($nids as $nid) {
+      if ($nid < $d9id) continue;
+      $node = Node::load($nid);
+      if (!$node->hasField('field_d7_nid') || !array_key_exists(0, $node->get('field_d7_nid')->getValue())) {
+        continue;
+      }
+      $d7id = $node->get('field_d7_nid')->getValue()[0]['value'];
+      $created = $node->get('created')->getValue()[0]['value'];
+      $changed = $node->get('changed')->getValue()[0]['value'];
+      $created = $created + 28800;
+      $node->set('created', $created);
+      $node->set('changed', $changed);
+      $node->save();
+      echo 'Saved: D7: ' . $d7id . ' | D9: ' . $node->id() . ' | Author ID: ' . $author_id . PHP_EOL;
+
     }
   }
 
