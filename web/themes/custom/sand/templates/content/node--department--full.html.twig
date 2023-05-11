@@ -96,8 +96,11 @@
           {{ content.body }}
           {{ content.field_other_description }}
         </div>
-        {{ content.field_resources }}
-      </div>
+
+        {% if content.field_resources[0]['#paragraph'].field_label.value %}
+          {{ content.field_resources }}
+        {% endif %}
+      </div> 
 
       <div class="cell medium-3 large-3">
         <div class="light-gray-bg sidebar">
