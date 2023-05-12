@@ -44,6 +44,48 @@
   }
 }
 
+/* Table from sorted view
+   ========================================================================== */
+
+   .view-grouping .views-table {
+    width: 100%;
+    margin-top: 0;
+  
+    caption {
+      text-align: left;
+      font-weight: 600;
+      padding-left: 1em;
+      padding-bottom: 0.75em;
+      @include rem('font-size', 16px); // 1.25em
+      display: none;
+    }
+
+    tbody {
+      border: none;
+    }
+
+    tr:nth-child(even) {
+      background: $off-white;
+    }
+  
+    tr {
+      td {
+        background-color: #f6f6f6;
+      }
+  
+      td:first-child {
+        width: 20%;
+        visibility: collapse;
+      }
+  
+      &:first-child {
+        td:first-child {
+          visibility: visible;
+        }
+      }
+    }
+  }
+
 //Theme DSD Subdivision Cards view
 .view-dsd-subdivision-cards{
   background: $alto;
@@ -136,5 +178,16 @@
     float: left;
     padding-left: 2.5%;
     padding-right: 2.5%;
+  }
+}
+
+// Committee View
+.view-id-committee {
+  .view-grouping-header {
+    color: $teal;
+    font-size: 1.25rem;
+    font-family: $headline;
+    margin-bottom: 0.5rem;
+    margin-top: 1.25rem;
   }
 }
