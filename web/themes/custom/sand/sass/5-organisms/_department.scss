@@ -54,9 +54,43 @@
             margin-left: 1.1rem;
           }
 
+          &.expanded {
+            list-style-image: url('../images/menu-collapsed.png');
+            list-style-type: circle;
+            margin-left: -2px;
+            padding-left: 2px;
+
+            ul {
+              display: none;
+            }
+          }
+
           &.is_active {
             a {
               color: $black;
+            }
+          }
+
+          &.is_active.expanded {
+            list-style-image: url('../images/menu-expanded.png');
+
+            &::marker {
+              padding-left: 10px;
+            }
+
+            a {
+              color: $black;
+            }
+
+            ul {
+              margin: 0.4rem 0 0.4rem 1.3rem !important;
+              display: block;
+
+              li {
+                a {
+                  color: $cerulean;
+                }
+              }
             }
           }
         }
