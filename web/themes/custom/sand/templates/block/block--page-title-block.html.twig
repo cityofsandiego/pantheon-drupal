@@ -1,6 +1,9 @@
 {{ title_prefix }}
 {% if department_title is defined %}
     <h1{{ title_attributes.addClass('page-title') }}>{{ department_title }}</h1>
+    {% if department_title == 'Inside San Diego' %}
+      <p class="main__tagline">Stories about City Services, Employees, Residents and Communities</p>
+    {% endif %}
 {% elseif title %}
     <h1{{ title_attributes.addClass('page-title') }}>{{ title }}</h1>
 {% endif %}
