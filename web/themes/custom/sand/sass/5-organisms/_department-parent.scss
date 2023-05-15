@@ -20,3 +20,31 @@
     }
   }
 }
+
+.slides {
+  @include breakpoint(mobile) {
+    flex-wrap: wrap;
+    display: flex;
+  }
+
+  .card__wrap {
+    padding: 0.75em 0;
+    width: 100%;
+
+    @include breakpoint(mobile) {
+      width: 47%;
+    }
+
+    @include breakpoint(medium) {
+      width: 33%;
+    }
+
+    .card {
+      margin: 0;
+    }
+
+    .card__headline a {
+      font-size: 1rem;
+    }
+  }
+}
