@@ -54,6 +54,10 @@ $colors: (
       background: rgba($color, 0.2);
     }
   }
+
+  // .background--#{name} {
+  //   background: $color !important;
+  // }
 }
 
 /* Backgrounds
@@ -182,4 +186,20 @@ $colors: (
     background: -ms-linear-gradient(top,  #ffffff 0%,#d4d4d4 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #ffffff 0%,#d4d4d4 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d4d4d4',GradientType=0 ); /* IE6-9 */
+}
+
+/* Think Blue specific colors
+   ========================================================================== */
+
+$color-names: cerulean, robin, sunshade, schoolbus, spruce, westar, teal, tulip, gold, science, endeavour, purple, success, red;
+$color-values: $cerulean, $robin, $sunshade, $schoolbus, $spruce, $westar, $teal, $tulip, $gold, $science, $endeavour, $purple, $success, $error;
+
+@for $c from 1 through 14 {
+
+  $color-name: nth($color-names, $c);
+  $color-value: nth($color-values, $c);
+
+  .background--#{$color-name} {
+    background: $color-value !important;
+  }
 }
