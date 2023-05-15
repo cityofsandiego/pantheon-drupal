@@ -555,6 +555,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
         nothing:
           id: nothing
           table: views
@@ -567,7 +620,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border l-padding-bn\" style=\"position:relative; overflow: hidden\">\r\n\r\n\t\t\t\t<p class=\"text-center text-upper width-100 background--endeavour text-white l-padding-vs l-margin-bn\"><strong>{{ field_event_type }}</strong></p>\r\n\t\t\t\t<p class=\"text-center background-off-white\"><a href=\"{{ field_path }}\">{{ field_image }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-ad\">\r\n\t\t\t\t\t<p class=\"text-accent l-margin-bn\" style=\"line-height:1.3\"><strong><a href=\"{{ field_path }}\">{{ title }}</a></strong></p>\r\n\r\n\t\t\t\t\t<p class=\"l-margin-td\"><strong class=\"text-upper fine-print\">Case Date:</strong><br>\r\n\t\t\t\t\t\t{{ field_event_date }}</p>\r\n{{ field_website }}\r\n\t\t\t\t</div>\r\n\t\t\t</div>"
+            text: "<div class=\"card background--off-white border l-padding-bn\" style=\"position:relative; overflow: hidden\">\r\n\r\n\t\t\t\t<p class=\"text-center text-upper width-100 background--endeavour text-white l-padding-vs l-margin-bn\"><strong>{{ field_event_type }}</strong></p>\r\n\t\t\t\t<p class=\"text-center background-off-white\"><a href=\"{{ view_node }}\">{{ field_image }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-ad\">\r\n\t\t\t\t\t<p class=\"text-accent l-margin-bn\" style=\"line-height:1.3\"><strong><a href=\"{{ view_node }}\">{{ title }}</a></strong></p>\r\n\r\n\t\t\t\t\t<p class=\"l-margin-td\"><strong class=\"text-upper fine-print\">Case Date:</strong><br>\r\n\t\t\t\t\t\t{{ field_event_date }}</p>\r\n{{ field_website }}\r\n\t\t\t\t</div>\r\n\t\t\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -630,7 +683,7 @@ display:
         options:
           submit_button: Apply
           reset_button: false
-          reset_button_label: Reset
+          reset_button_label: 'Show All'
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
           sort_asc_label: Asc
@@ -1121,6 +1174,122 @@ display:
     position: 1
     display_options:
       fields:
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
+        field_event_type:
+          id: field_event_type
+          table: node__field_event_type
+          field: field_event_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         title:
           id: title
           table: node_field_data
@@ -1572,69 +1741,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_event_type:
-          id: field_event_type
-          table: node__field_event_type
-          field: field_event_type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         nothing:
           id: nothing
           table: views
@@ -1647,7 +1753,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border l-padding-bn\" style=\"position:relative; overflow: hidden\">\r\n\r\n\t\t\t\t<p class=\"text-center text-upper width-100 endeavour-bg text-white l-padding-vs l-margin-bn\"><strong>{{ field_event_type }}</strong></p>\r\n\t\t\t\t<p class=\"text-center background-off-white\"><a href=\"{{ field_path }}\">{{ field_image }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-ad\">\r\n\t\t\t\t\t<p class=\"text-accent l-margin-bn\" style=\"line-height:1.3\"><strong><a href=\"{{ field_path }}\">{{ title }}</a></strong></p>\r\n\r\n\t\t\t\t\t<p class=\"l-margin-td\"><strong class=\"text-upper fine-print\">Case Date:</strong><br>\r\n\t\t\t\t\t\t{{ field_event_date }}</p>\r\n{{ field_website }}\r\n\t\t\t\t</div>\r\n\t\t\t</div>"
+            text: "<div class=\"card background--off-white border l-padding-bn\" style=\"position:relative; overflow: hidden\">\r\n\r\n\t\t\t\t<p class=\"text-center text-upper width-100 background--endeavour text-white l-padding-vs l-margin-bn\"><strong>{{ field_event_type }}</strong></p>\r\n\t\t\t\t<p class=\"text-center background-off-white\"><a href=\"{{ view_node }} \">{{ field_image }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-ad\">\r\n\t\t\t\t\t<p class=\"text-accent l-margin-bn\" style=\"line-height:1.3\"><strong><a href=\"{{ view_node }} \">{{ title }}</a></strong></p>\r\n\r\n\t\t\t\t\t<p class=\"l-margin-td\"><strong class=\"text-upper fine-print\">Case Date:</strong><br>\r\n\t\t\t\t\t\t{{ field_event_date }}</p>\r\n{{ field_website }}\r\n\t\t\t\t</div>\r\n\t\t\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -2224,6 +2330,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
         nothing:
           id: nothing
           table: views
@@ -2236,7 +2395,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border l-padding-bn\" style=\"position:relative; overflow: hidden\">\r\n\r\n\t\t\t\t<p class=\"text-center text-upper width-100 background-white l-padding-vs l-margin-bn border border--bottom\"><strong>{{ field_event_type }}</strong></p>\r\n\t\t\t\t<p class=\"text-center background-off-white\"><a href=\"{{ field_path }}\">{{ field_image }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-ad\">\r\n\t\t\t\t\t<p class=\"text-accent l-margin-bn\" style=\"line-height:1.3\"><strong><a href=\"{{ field_path }}\">{{ title }}</a></strong></p>\r\n\r\n\t\t\t\t\t<p class=\"l-margin-td\"><strong class=\"text-upper fine-print\">Case Date:</strong><br>\r\n\t\t\t\t\t\t{{ field_event_date }}</p>\r\n\r\n\t\t\t\t\t<p class=\"l-margin-td\"><strong class=\"text-upper fine-print\">Location:</strong><br>\r\n\t\t\t\t\t\t{{ field_event_location }}</p>\r\n\t\t\t\t</div>\r\n{{ field_website }}\r\n\t\t\t</div>"
+            text: "<div class=\"card background--off-white border l-padding-bn\" style=\"position:relative; overflow: hidden\">\r\n\r\n\t\t\t\t<p class=\"text-center text-upper width-100 background-white l-padding-vs l-margin-bn border border--bottom\"><strong>{{ field_event_type }}</strong></p>\r\n\t\t\t\t<p class=\"text-center background-off-white\"><a href=\"{{ view_node }}\">{{ field_image }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-ad\">\r\n\t\t\t\t\t<p class=\"text-accent l-margin-bn\" style=\"line-height:1.3\"><strong><a href=\"{{ view_node }}\">{{ title }}</a></strong></p>\r\n\r\n\t\t\t\t\t<p class=\"l-margin-td\"><strong class=\"text-upper fine-print\">Case Date:</strong><br>\r\n\t\t\t\t\t\t{{ field_event_date }}</p>\r\n\r\n\t\t\t\t\t<p class=\"l-margin-td\"><strong class=\"text-upper fine-print\">Location:</strong><br>\r\n\t\t\t\t\t\t{{ field_event_location }}</p>\r\n\t\t\t\t</div>\r\n{{ field_website }}\r\n\t\t\t</div>"
             make_link: false
             path: ''
             absolute: false
