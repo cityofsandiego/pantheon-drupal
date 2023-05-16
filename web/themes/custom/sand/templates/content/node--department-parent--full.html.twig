@@ -137,8 +137,7 @@
       <div class="cell small-12 medium-auto">
         <div class="l-padding-am">
           <h2>Features</h2>
-          <p>To be added: departmental news & announcements view here</p>
-          <!-- Insert view-department-news-and-announcements view-id-department_news_and_announcements (D7 View ID) -->
+          {{ drupal_view('department_news_and_announcements', 'block') }}
         </div>
         {% if content.field_featured_content %}
         <div class="l-padding-am background-white">
@@ -148,11 +147,10 @@
       </div>
 
       <div class="cell medium-3">
-        <div class="l-padding-am l-padding-mobile-hd l-margin-mobile-bm sidebar">
+        <div class="l-padding-hd l-padding-mobile-hd l-margin-mobile-bm sidebar">
           {% if 'No' in content.field_hide_news_feed[0] %}
-          <h2>News</h2>
-          <p>To be added: Department notifications view</p>
-          <!-- insert view-department-notifications view-id-department_notifications (D7 view ID) -->
+            <h2>News</h2>
+            {{ drupal_view('department_notifications', 'block') }}
           {% endif %}
 
           {% if content.field_sidebar[0] %}
