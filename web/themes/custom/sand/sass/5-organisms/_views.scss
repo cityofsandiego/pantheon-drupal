@@ -44,6 +44,48 @@
   }
 }
 
+/* Table from sorted view
+   ========================================================================== */
+
+   .view-grouping .views-table {
+    width: 100%;
+    margin-top: 0;
+  
+    caption {
+      text-align: left;
+      font-weight: 600;
+      padding-left: 1em;
+      padding-bottom: 0.75em;
+      @include rem('font-size', 16px); // 1.25em
+      display: none;
+    }
+
+    tbody {
+      border: none;
+    }
+
+    tr:nth-child(even) {
+      background: $off-white;
+    }
+  
+    tr {
+      td {
+        background-color: #f6f6f6;
+      }
+  
+      td:first-child {
+        width: 20%;
+        visibility: collapse;
+      }
+  
+      &:first-child {
+        td:first-child {
+          visibility: visible;
+        }
+      }
+    }
+  }
+
 //Theme DSD Subdivision Cards view
 .view-dsd-subdivision-cards{
   background: $alto;
@@ -136,5 +178,121 @@
     float: left;
     padding-left: 2.5%;
     padding-right: 2.5%;
+  }
+}
+
+// Committee View
+.view-id-committee {
+  .view-grouping-header {
+    color: $teal;
+    font-size: 1.25rem;
+    font-family: $headline;
+    margin-bottom: 0.5rem;
+    margin-top: 1.25rem;
+  }
+}
+
+
+//View Planning-working-initiatives
+.view-id-planning {
+  .card {
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    &.l-padding-bl {
+      padding-bottom: 0;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .field-content {
+    display: flex;
+    height: 100%;
+
+    .card.l-padding-bl {
+      padding-bottom: 0 !important;
+    }
+  }
+
+  .views-field.views-field-nothing {
+    width: 100%;
+  }
+
+  .form--inline {
+    display: flex;
+
+    @include breakpoint(medium) {
+      flex-wrap: nowrap;
+
+      .form-item {
+        width: 25%;
+      }
+  
+      .form-select {
+        width: 100%;
+        min-width: 100%;
+      }
+    }
+  }
+}
+
+// View Cold Cases
+.view-id-cold_cases {
+  .pager {
+    margin: 1rem 0 2rem;
+  }
+}
+
+
+// Article views
+.view-id-articles.view-display-id-block_2,
+.view-id-articles.view-display-id-block_3 {
+  .view-content {
+    width: calc(100% + 32px);
+    display: flex;
+    flex-direction: column;
+    margin-left: -16px;
+
+    .field-content {
+      padding: 0 24px;
+      display: block;
+
+      h3 {
+        a {
+          color: $spruce;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .odd {
+    background-color: $off-white;
+    margin: 1.5rem 0;
+    padding: 1rem 0;
+  }
+
+  .pager {
+    margin: 0;
+  }
+}
+
+// Boards and commision views
+.view-id-boards_and_commissions {
+  .row {
+    @include breakpoint(medium) {
+      display: flex;
+    }
+
+    &.hide-on-desktop {
+      display: flex;
+    }
+  }
+
+  .pager {
+    margin: 1rem 0 0;
   }
 }
