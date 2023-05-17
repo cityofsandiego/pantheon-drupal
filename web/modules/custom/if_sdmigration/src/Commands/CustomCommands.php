@@ -3920,11 +3920,12 @@ class CustomCommands extends DrushCommands {
     $query = \Drupal::database()->select('node__field_url', 'f')
       ->fields('f', ['field_url_uri'])
       ->condition('field_url_uri', 'http%', 'NOT LIKE')
-      ->condition('field_url_uri', 'internal:%', 'NOT LIKE');
+      ->condition('field_url_uri', 'internal:%', 'NOT LIKE')
+      ->condition('field_url_uri', 'public:%', 'NOT LIKE');
     $public_links = $query->execute();
 
     while ($result = $public_links->fetchAssoc()) {
-      $public_uri = 'public:' . $result['field_url_uri'];
+      $public_uri = 'https://www.sandiego.gov/' . $result['field_url_uri'];
       \Drupal::database()->update('node__field_url')
         ->condition('field_url_uri', $result['field_url_uri'])
         ->fields([
@@ -3932,6 +3933,7 @@ class CustomCommands extends DrushCommands {
         ])
         ->execute();
     }
+
   }
 
   /**
