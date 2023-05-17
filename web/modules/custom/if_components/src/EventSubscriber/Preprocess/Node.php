@@ -213,6 +213,20 @@ final class Node implements EventSubscriberInterface {
           if ($parent_id == 0) {
             $department_title = $term->getName();
           }
+          else {
+            $term = Term::load($parent_id);
+            $parent_id = $term->get('parent')->getValue()[0]['target_id'];
+            if ($parent_id == 0) {
+              $department_title = $term->getName();
+            }
+            else {
+              $term = Term::load($parent_id);
+              $parent_id = $term->get('parent')->getValue()[0]['target_id'];
+              if ($parent_id == 0) {
+                $department_title = $term->getName();
+              }
+            }
+          }
         }
         $variables->set('department_title', $department_title);
         if ($node->getType() == 'mayoral_artifacts') {
@@ -386,6 +400,15 @@ final class Node implements EventSubscriberInterface {
       if (is_object($parent)) {
         if (!in_array($parent, $this->departments)) {
           $this->departments[] = $parent->id();
+        }
+        $grandparent = $this->entityTypeManager
+          ->getStorage('taxonomy_term')
+          ->loadParents($parent->id());
+        $grandparent = reset($grandparent);
+        if (is_object($grandparent)) {
+          if (!in_array($grandparent, $this->departments)) {
+            $this->departments[] = $grandparent->id();
+          }
         }
       }
     }
