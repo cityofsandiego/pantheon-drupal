@@ -38,6 +38,7 @@ lando terminus drush mi:import sd_nodes_article -- --update --force
 lando terminus drush mi:import sd_bean -- --update --force
 lando terminus drush mi:import sd_nodes_resource -- --update --force
 lando terminus drush mi:import sd_nodes_application -- --update --force
+lando terminus drush mi:import sd_nodes_webform -- --update --force
 
 Menu import:
 lando terminus drush import:menus
@@ -63,7 +64,8 @@ lando terminus drush import:event
 lando terminus drush import:gallery
 lando terminus drush import:digital_archives_photos 
 lando terminus drush import:article
-lando terminus drush import:resource
+lando terminus drush import:resource 
+lando terminus drush import:webform
 
 Node data status:
 **9/26/2022
@@ -94,6 +96,7 @@ Reusable Content (bean custom blocks)
 Department document
 Resource
 Application
+Webform
 
 Field groups:
 field_bucket_events_pi_coll
