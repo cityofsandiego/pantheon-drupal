@@ -4118,4 +4118,62 @@ class CustomCommands extends DrushCommands {
     }
   }
 
+  /**
+   * Finalize webform node import.
+   *
+   * @command import:webform
+   * @param $after_id (D7 Node ID to resume after).
+   *
+   * @usage import:webform
+   */
+  public function finalizeWebform($after_id = 0) {
+    $nodedata = [];
+
+    // Read extra field data for manual creation/update.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/nodes/webform.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        $nodedata[str_replace('`', '', $data[0])] = [
+          'department' => explode('|', str_replace('`', '', $data[1])),
+          'search_keymatch' => explode('|', str_replace('`', '', $data[2])),
+        ];
+      }
+      fclose($file);
+    }
+
+    // Manually update each node.
+    foreach ($nodedata as $d7id => $data) {
+      if ($d7id < $after_id) continue;
+      // Load node.
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'webform')
+        ->condition('field_d7_nid', $d7id);
+      $nid = reset($query->execute());
+      $node = Node::load($nid);
+
+      $node->field_department->setValue([]);
+      foreach ($data['department'] as $department) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+        $node->field_department->appendItem($term);
+      }
+
+      $node->field_search_keymatch->setValue([]);
+      foreach ($data['search_keymatch'] as $search_keymatch) {
+        $term = Term::load($this->taxonomyImportTasks->newTid($search_keymatch, 'search_keymatch'));
+        $node->field_search_keymatch->appendItem($term);
+      }
+
+      $node->set('webform', [
+        'target_id' => 'webform_' . $d7id,
+        'status' => 'open',
+      ]);
+
+      $node->save();
+
+      echo 'D7 ID | ' . $d7id . PHP_EOL;
+    }
+  }
+
 }
