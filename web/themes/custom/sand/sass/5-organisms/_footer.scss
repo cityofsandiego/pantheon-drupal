@@ -17,8 +17,6 @@
 
     @include breakpoint(medium) {
       font-size: 0.8125rem;
-      padding-right: 0.9375rem;
-      padding-left: 0.9375rem;
     }
 
     @include breakpoint(large) {
@@ -168,29 +166,29 @@
       }
     }
 
-    &__bottom {
-      background: $white;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
+    // &__bottom {
+    //   background: $white;
+    //   display: flex;
+    //   flex-wrap: wrap;
+    //   gap: 1rem;
+    //   justify-content: center;
 
-      @include breakpoint(medium) {
-        justify-content: space-around;
-      }
+    //   @include breakpoint(medium) {
+    //     justify-content: space-around;
+    //   }
 
-      .logo {
-        max-width: 100px;
+    //   .logo {
+    //     max-width: 100px;
 
-        @include breakpoint(medium) {
-          max-width: 33%;
-        }
+    //     @include breakpoint(medium) {
+    //       max-width: 33%;
+    //     }
 
-        img {
-          width: 100%;
-        }
-      }
-    }
+    //     img {
+    //       width: 100%;
+    //     }
+    //   }
+    // }
 
     &__privacy {
       background: $alto;
@@ -224,7 +222,39 @@
     }
 
     &__bottom {
-      padding: 1rem;
+      .block {
+        padding: 1rem;
+        width: 100%;
+        background-color: $white;
+
+        .field--name-body {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1rem;
+          justify-content: center;
+    
+          @include breakpoint(medium) {
+            justify-content: space-around;
+          }
+    
+          .logo {
+            max-width: 100px;
+    
+            @include breakpoint(medium) {
+              max-width: 33%;
+            }
+    
+            img {
+              width: 100%;
+            }
+          }
+        }
+
+        .clearfix::before, .clearfix::after {
+          display: none;
+        }
+
+      }
     }
   }
 }
