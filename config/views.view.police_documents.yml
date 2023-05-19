@@ -18,6 +18,7 @@ dependencies:
     - taxonomy
     - user
     - views_selective_filters
+    - views_taxonomy_term_name_depth
 id: police_documents
 label: 'Police Documents'
 module: views
@@ -768,6 +769,79 @@ display:
             group_items: {  }
       style:
         type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            field_category: field_category
+            title: title
+            field_path: field_path
+            field_url: field_url
+            uri: uri
+            created: created
+            edit_node: edit_node
+            clone_link: clone_link
+          default: '-1'
+          info:
+            field_category:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            title:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_path:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_url:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            uri:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            created:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            edit_node:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: true
+              responsive: ''
+            clone_link:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: true
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
       row:
         type: fields
       query:
@@ -1223,7 +1297,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
+            date_format: standard_date
             custom_date_format: ''
             timezone: ''
           group_column: value
@@ -1246,7 +1320,7 @@ display:
           entity_type: node
           plugin_id: entity_link_edit
           label: 'Link to edit Content'
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -1378,24 +1452,27 @@ display:
             field_identifier: ''
           exposed: false
       arguments:
-        field_category_target_id:
-          id: field_category_target_id
-          table: node__field_category
-          field: field_category_target_id
+        term_node_taxonomy_name_depth:
+          id: term_node_taxonomy_name_depth
+          table: node_field_data
+          field: term_node_taxonomy_name_depth
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: numeric
-          default_action: ignore
+          entity_type: node
+          plugin_id: taxonomy_index_name_depth
+          default_action: default
           exception:
             value: all
             title_enable: false
             title: All
           title_enable: false
           title: ''
-          default_argument_type: fixed
+          default_argument_type: query_parameter
           default_argument_options:
-            argument: ''
+            query_param: category
+            fallback: ''
+            multiple: and
           default_argument_skip_url: false
           summary_options:
             base_path: ''
@@ -1406,18 +1483,17 @@ display:
             sort_order: asc
             number_of_records: 0
             format: default_summary
-          specify_validation: true
+          specify_validation: false
           validate:
-            type: 'entity:taxonomy_term'
+            type: none
             fail: 'not found'
-          validate_options:
-            bundles:
-              categories: categories
-            access: false
-            operation: view
-            multiple: 0
+          validate_options: {  }
           break_phrase: false
-          not: false
+          depth: '0'
+          use_taxonomy_term_path: false
+          vocabularies:
+            categories: categories
+            department: department
       filters:
         status:
           id: status
@@ -1451,11 +1527,31 @@ display:
       defaults:
         title: false
         pager: false
+        relationships: false
         fields: false
         sorts: false
         arguments: false
         filters: false
         filter_groups: false
+      relationships:
+        field_attachment:
+          id: field_attachment
+          table: node__field_attachment
+          field: field_attachment
+          relationship: none
+          group_type: group
+          admin_label: 'field_attachment: Media'
+          plugin_id: standard
+          required: false
+        field_media_document_target_id:
+          id: field_media_document_target_id
+          table: media__field_media_document
+          field: field_media_document_target_id
+          relationship: field_attachment
+          group_type: group
+          admin_label: 'file from field_media_document'
+          plugin_id: standard
+          required: false
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -1878,7 +1974,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
+            date_format: standard_date
             custom_date_format: ''
             timezone: ''
           group_column: value
@@ -1901,7 +1997,7 @@ display:
           entity_type: node
           plugin_id: entity_link_edit
           label: 'Link to edit Content'
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -2033,14 +2129,15 @@ display:
             field_identifier: ''
           exposed: false
       arguments:
-        field_category_target_id:
-          id: field_category_target_id
-          table: node__field_category
-          field: field_category_target_id
+        term_node_taxonomy_name_depth:
+          id: term_node_taxonomy_name_depth
+          table: node_field_data
+          field: term_node_taxonomy_name_depth
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: numeric
+          entity_type: node
+          plugin_id: taxonomy_index_name_depth
           default_action: ignore
           exception:
             value: all
@@ -2061,18 +2158,16 @@ display:
             sort_order: asc
             number_of_records: 0
             format: default_summary
-          specify_validation: true
+          specify_validation: false
           validate:
-            type: 'entity:taxonomy_term'
+            type: none
             fail: 'not found'
-          validate_options:
-            bundles:
-              categories: categories
-            access: false
-            operation: view
-            multiple: 0
+          validate_options: {  }
           break_phrase: false
-          not: false
+          depth: '0'
+          use_taxonomy_term_path: false
+          vocabularies:
+            categories: categories
       filters:
         status:
           id: status
