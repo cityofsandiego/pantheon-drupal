@@ -2002,6 +2002,7 @@ class CustomCommands extends DrushCommands {
         $local_destination = str_replace('legacy/development-services/pdf/industry/forms', '', $local_destination);
         $local_destination = str_replace('legacy/planning/programs/historical/pdf', '', $local_destination);
         $local_destination = str_replace('legacy/development-services/pdf/industry/techbulletin', '', $local_destination);
+        $local_destination = str_replace('legacy/development-services/pdf/industry/meetings', '', $local_destination);
         $local_destination = str_replace('legacy/development-services/pdf/news/meetings/2012', '', $local_destination);
         $local_destination = str_replace('legacy/development-services/pdf/news/meetings/2013', '', $local_destination);
         $local_destination = str_replace('legacy/development-services/pdf/news/meetings/2014', '', $local_destination);
