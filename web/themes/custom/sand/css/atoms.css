@@ -1635,7 +1635,7 @@ textarea {
 /* ============================================================
   Styles for buttons.
   ============================================================ */
-.btn, .button {
+.btn, #edit-reset, .button {
   background-color: #0098db;
   border: none;
   border-radius: 4px;
@@ -1650,12 +1650,12 @@ textarea {
 
 /* Main
  ========================================================================== */
-.btn:hover, .btn:focus {
+.btn:hover, #edit-reset:hover, .btn:focus, #edit-reset:focus {
   background-color: #0fb6ff;
   color: #fff;
   text-decoration: none; }
 
-.btn i {
+.btn i, #edit-reset i {
   background: #fff;
   border-radius: 50%;
   color: #0098db;
@@ -1666,8 +1666,9 @@ textarea {
   text-align: center;
   vertical-align: middle; }
 
-.btn .icon-chevron-right,
-.btn .icon-chevron-left {
+.btn .icon-chevron-right, #edit-reset .icon-chevron-right,
+.btn .icon-chevron-left,
+#edit-reset .icon-chevron-left {
   background: transparent;
   border-radius: 0;
   color: #fff;
@@ -1812,10 +1813,10 @@ textarea {
 
 /* Colors
  ========================================================================== */
-.btn--success {
+.btn--success, #edit-reset {
   background-color: #659f13;
   color: #fff; }
-  .btn--success:hover, .btn--success:focus {
+  .btn--success:hover, #edit-reset:hover, .btn--success:focus, #edit-reset:focus {
     background-color: #48710e;
     color: #fff; }
 
@@ -1835,7 +1836,7 @@ textarea {
 
 /* Disabled
  ========================================================================== */
-.btn[disabled],
+.btn[disabled], #edit-reset[disabled],
 .btn--disabled,
 .btn--disabled:hover,
 .btn--disabled:focus,
@@ -2200,6 +2201,16 @@ legend {
   width: auto;
   z-index: 0;
   background-color: transparent; }
+
+.form-actions {
+  margin-bottom: 1.5em; }
+  .form-actions input {
+    width: auto !important; }
+  .form-actions .form-submit {
+    margin: 0 1em .5em 0; }
+
+#edit-reset {
+  padding: .75em 1em !important; }
 
 /* ============================================================
   Styles for heading typography.
