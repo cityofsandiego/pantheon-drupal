@@ -2000,6 +2000,11 @@ class CustomCommands extends DrushCommands {
         $local_destination = str_replace('legacy/police/pdf/2015', '', $local_destination);
         $local_destination = str_replace('legacy/development-services/pdf/industry/infobulletin', '', $local_destination);
         $local_destination = str_replace('legacy/development-services/pdf/industry/forms', '', $local_destination);
+        $local_destination = str_replace('legacy/planning/programs/historical/pdf', '', $local_destination);
+        $local_destination = str_replace('legacy/development-services/pdf/industry/techbulletin', '', $local_destination);
+        $local_destination = str_replace('legacy/development-services/pdf/news/meetings/2013', '', $local_destination);
+        $local_destination = str_replace('legacy/development-services/pdf/news/meetings/2014', '', $local_destination);
+        $local_destination = str_replace('legacy/development-services/pdf/news/meetings/2015', '', $local_destination);
         $local_destination = str_replace('public://', '', $local_destination);
         $local_destination = str_replace(' ', '%20', $local_destination);
         $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
