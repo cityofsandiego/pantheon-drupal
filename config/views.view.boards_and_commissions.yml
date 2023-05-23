@@ -16,7 +16,6 @@ dependencies:
     - taxonomy.vocabulary.department
     - taxonomy.vocabulary.location
   content:
-    - 'taxonomy_term:department:00e940e7-53c0-4c99-a1c1-6943970c27ca'
     - 'taxonomy_term:location:03049733-356f-4666-8573-03f4e125b9a3'
     - 'taxonomy_term:location:0cc6c1c1-3992-4e91-9bca-c853df77d86c'
     - 'taxonomy_term:location:48bd781b-2e43-4009-8094-b35d0335aa6a'
@@ -734,10 +733,10 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_address_dependent_locality:
-          id: field_address_dependent_locality
+        field_address_locality:
+          id: field_address_locality
           table: node__field_address
-          field: field_address_dependent_locality
+          field: field_address_locality
           relationship: none
           group_type: group
           admin_label: ''
@@ -845,7 +844,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: "<a href=\"https://www.google.com/maps/search/{{ field_address_address_line1 }}+{{ field_address_postal_code }}\">{{ field_address_address_line1 }}</a><br>\r\n{{ field_address_dependent_locality }}, {{ field_address_postal_code }}<br>"
+            text: "<a href=\"https://www.google.com/maps/search/{{ field_address_address_line1 }}+{{ field_address_postal_code }}\">{{ field_address_address_line1 }}</a><br>\r\n{{ field_address_locality }}, {{ field_address_postal_code }}<br>"
             make_link: false
             path: ''
             absolute: false
@@ -4741,10 +4740,10 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_address_dependent_locality:
-          id: field_address_dependent_locality
+        field_address_locality:
+          id: field_address_locality
           table: node__field_address
-          field: field_address_dependent_locality
+          field: field_address_locality
           relationship: none
           group_type: group
           admin_label: ''
@@ -4852,7 +4851,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: "<a href=\"https://www.google.com/maps/search/{{ field_address_address_line1 }}+{{ field_address_postal_code }}\">{{ field_address_address_line1 }}</a><br>\r\n{{ field_address_dependent_locality }}, {{ field_address_postal_code }}<br>"
+            text: "<a href=\"https://www.google.com/maps/search/{{ field_address_address_line1 }}+{{ field_address_postal_code }}\">{{ field_address_address_line1 }}</a><br>\r\n{{ field_address_locality }}, {{ field_address_postal_code }}<br>"
             make_link: false
             path: ''
             absolute: false
@@ -5523,7 +5522,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr class=\"l-margin-bm\">\r\n<div class=\"row\">\r\n<div class=five columns l-margin-desktop-ln\">\r\n<p class=\"h4 heading--trim\">{{ title }}</p>\r\n[field_location_subtitle]\r\n<p class=\"hide-on-mobile\">{{ field_address_address_line1 }}\r\n{{ field_phone }}\r\n{{ field_website }} </p>\r\n</div>\r\n<div class=\"seven columns l-margin-desktop-rn l-padding-mobile-td\">\r\n{{ body }}\r\n</div>\r\n\r\n</div>\r\n<div class=\"row hide-on-desktop text-center l-margin-td\">\r\n<div class=\"sm-four columns\">\r\n<p>{{ field_website_1 }}</p>\r\n</div>\r\n<div class=\"sm-four columns\">\r\n<p>{{ field_phone_1 }}</p>\r\n</div>\r\n<div class=\"sm-four columns\">\r\n<p>{{ field_address_address_line1_1 }}</p>\r\n</div>\r\n</div>"
+            text: "<hr class=\"l-margin-bm\">\r\n<div class=\"row\">\r\n<div class=five columns l-margin-desktop-ln\">\r\n<p class=\"h4 heading--trim\">{{ title }}</p>\r\n{{ field_subtitle }}\r\n<p class=\"hide-on-mobile\">{{ field_address_address_line1 }}\r\n{{ field_phone }}\r\n{{ field_website }} </p>\r\n</div>\r\n<div class=\"seven columns l-margin-desktop-rn l-padding-mobile-td\">\r\n{{ body }}\r\n</div>\r\n\r\n</div>\r\n<div class=\"row hide-on-desktop text-center l-margin-td\">\r\n<div class=\"sm-four columns\">\r\n<p>{{ field_website_1 }}</p>\r\n</div>\r\n<div class=\"sm-four columns\">\r\n<p>{{ field_phone_1 }}</p>\r\n</div>\r\n<div class=\"sm-four columns\">\r\n<p>{{ field_address_address_line1_1 }}</p>\r\n</div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -5598,15 +5597,16 @@ display:
             field_identifier: ''
           exposed: false
       arguments:
-        field_location_type_target_id:
-          id: field_location_type_target_id
-          table: node__field_location_type
-          field: field_location_type_target_id
+        term_node_taxonomy_name_depth:
+          id: term_node_taxonomy_name_depth
+          table: node_field_data
+          field: term_node_taxonomy_name_depth
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: numeric
-          default_action: ignore
+          entity_type: node
+          plugin_id: taxonomy_index_name_depth
+          default_action: 'not found'
           exception:
             value: all
             title_enable: false
@@ -5616,7 +5616,7 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: true
+          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -5626,18 +5626,16 @@ display:
             sort_order: asc
             number_of_records: 0
             format: default_summary
-          specify_validation: true
+          specify_validation: false
           validate:
-            type: taxonomy_term_name
-            fail: empty
-          validate_options:
-            bundles:
-              location: location
-            access: false
-            operation: view
-            transform: false
+            type: none
+            fail: 'not found'
+          validate_options: {  }
           break_phrase: false
-          not: false
+          depth: '0'
+          use_taxonomy_term_path: false
+          vocabularies:
+            location: location
       filters:
         status:
           id: status
@@ -5708,54 +5706,6 @@ display:
           fields:
             title: title
             body: body
-        term_node_tid_depth:
-          id: term_node_tid_depth
-          table: node_field_data
-          field: term_node_tid_depth
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          plugin_id: taxonomy_index_tid_depth
-          operator: or
-          value:
-            3488: 3488
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          vid: department
-          type: select
-          hierarchy: true
-          limit: true
-          error_message: true
-          depth: 0
       filter_groups:
         operator: AND
         groups:
@@ -5787,7 +5737,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:

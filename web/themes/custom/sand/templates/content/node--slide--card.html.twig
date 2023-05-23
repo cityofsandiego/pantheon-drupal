@@ -70,32 +70,7 @@
  *   in different view modes.
  */
 #}
-{# {%
-  set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'l-constrained',
-    'row', 
-    'l-padding-mobile-bm',
-  ]
-%}
-<div{{ attributes.addClass(classes) }}>
 
-  <div class="grid-x">
-    <div class="cell small-12 background-off-white slide-content">
-        <div class="l-padding-ad l-padding-desktop-hx l-margin-vd">
-          
-        </div>
-      </div>
-    </div>
-</div> #}
-
-
-{% if content.field_image[0] %}
   <div class="hero__slides">
     <div class="l-constrained grid-x l-padding-mobile-bm">
       <div class="cell medium-6 small-12 hero__content l-margin-mobile-bd">
