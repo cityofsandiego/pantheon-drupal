@@ -70,32 +70,33 @@
  *   in different view modes.
  */
 #}
-
-  <div class="hero__slides">
-    <div class="l-constrained grid-x l-padding-mobile-bm">
-      <div class="cell medium-6 small-12 hero__content l-margin-mobile-bd">
-        <div id="hero__slides--primary" class="hero__slides--content">
-            {{ content.field_image }}
-            {{ content.field_caption }}
-            <a href="{{ content.field_link[0]['#url'] }}" alt="{{ content.field_link_text.0 }}">{{ content.field_url_text.0 }}</a>
-        </div>
-        <div class="custom-navigation custom-navigation--primary hidden">
-          <a href="#" class="flex-prev"><i class="icon-chevron-left"></i></a>
-          <a href="#" class="flex-next"><i class="icon-chevron-right"></i></a>
-        </div>
-      </div>
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+{# Simple Header #}
+<header role="banner" class="l-padding-vd header--app app_wrap cerulean-bg">
+  <div class="grid-x">
+    <div class="small-12 medium-3 cell l-padding-ts">
+      <a href="{{ path('<front>') }}" rel="home" class="site-logo">
+      <img src="/{{ directory }}/images/logo.png" alt="{{ 'City of San Diego logo'|t }}" class="show-for-medium l-padding-rd" />
+      <img src="/{{ directory }}/images/logo-mark-white.png" alt="{{ 'City of San Diego logo'|t }}" class="hide-for-medium logo-mobile l-margin-bd" width="70" height="57"/>
+    </a>
     </div>
-    <div class="hero__slides--img">
-      <ul class="slides">
-        <li>
-          <div id="hero-bg-image" class="hero__bg" style="background-image:url('/sites/default/files/_sd_rivermouth.jpg');"></div>
-          <div class="hero--credit">
-            <p id="hero-bg-credit">Image by Cindy Devin</p>
-          </div>
-          <script>hero_put_bg_credit();</script>
-        </li>
-      </ul>
+    <div class="small-12 medium-9 cell">
+     <h1 class="text-white heading--trim">{{ label }}</h1> 
     </div>
   </div>
-  {{ drupal_block('hero_block') }}
-{% endif %}
+</header>
+<article {{ attributes.addClass(classes) }}>
+  <div {{ content_attributes.addClass('node__content app_wrap l-padding-td') }}>
+    {{ content }}
+  </div>
+</article>
+

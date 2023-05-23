@@ -346,7 +346,7 @@ final class Node implements EventSubscriberInterface {
 
   public function preprocessTitleBlock(BlockPreprocessEvent $event): void {
     $variables = $event->getVariables();
-    $content_types = ['department', 'location', 'department_document', 'article', 'blog', 'department_parent', 'mayoral_artifacts', 'digital_archives_photos', 'sand_gallery'];
+    $content_types = ['department', 'location', 'department_document', 'article', 'blog', 'department_parent', 'mayoral_artifacts', 'digital_archives_photos', 'sand_gallery', 'webform'];
 
     if ($variables->get('base_plugin_id') == 'page_title_block') {
       $node = \Drupal::routeMatch()->getParameter('node');
@@ -394,6 +394,20 @@ final class Node implements EventSubscriberInterface {
           $parent_id = $term->get('parent')->getValue()[0]['target_id'];
           if ($parent_id == 0) {
             $department_title = $term->getName();
+          }
+          else {
+            $term = Term::load($parent_id);
+            $parent_id = $term->get('parent')->getValue()[0]['target_id'];
+            if ($parent_id == 0) {
+              $department_title = $term->getName();
+            }
+            else {
+              $term = Term::load($parent_id);
+              $parent_id = $term->get('parent')->getValue()[0]['target_id'];
+              if ($parent_id == 0) {
+                $department_title = $term->getName();
+              }
+            }
           }
         }
         $variables->set('department_title', $department_title);
@@ -623,6 +637,15 @@ final class Node implements EventSubscriberInterface {
       if (is_object($parent)) {
         if (!in_array($parent, $this->departments)) {
           $this->departments[] = $parent->id();
+        }
+        $grandparent = $this->entityTypeManager
+          ->getStorage('taxonomy_term')
+          ->loadParents($parent->id());
+        $grandparent = reset($grandparent);
+        if (is_object($grandparent)) {
+          if (!in_array($grandparent, $this->departments)) {
+            $this->departments[] = $grandparent->id();
+          }
         }
       }
     }

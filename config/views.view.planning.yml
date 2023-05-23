@@ -7,6 +7,7 @@ dependencies:
     - field.storage.node.field_attachment
     - field.storage.node.field_category
     - field.storage.node.field_department
+    - field.storage.node.field_feature_video_img
     - field.storage.node.field_image
     - field.storage.node.field_other_description
     - field.storage.node.field_subtitle
@@ -21,6 +22,7 @@ dependencies:
     - 'taxonomy_term:department:e1bf0e03-feab-444d-834c-861f58287c16'
     - 'taxonomy_term:department:ebaf80c1-9d2f-4311-8fa9-240f11c37d6b'
   module:
+    - better_exposed_filters
     - file
     - link
     - media
@@ -412,7 +414,7 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
-          empty: ''
+          empty: '{{ field_attachment }}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -440,15 +442,45 @@ display:
           offset: 0
           items_per_page: 3
       exposed_form:
-        type: basic
+        type: bef
         options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
+          submit_button: Search
+          reset_button: true
+          reset_button_label: 'Clear Search'
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: basic_html
+          bef:
+            general:
+              autosubmit: false
+              autosubmit_exclude_textfield: false
+              autosubmit_textfield_delay: 500
+              autosubmit_hide: false
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Advanced options'
+              secondary_open: false
+              reset_button_always_show: true
+            pager:
+              plugin_id: default
+              advanced:
+                is_secondary: false
+            filter:
+              title:
+                plugin_id: default
+                advanced:
+                  placeholder_text: ''
+                  collapsible: false
+                  is_secondary: false
+              created:
+                plugin_id: default
+                advanced:
+                  placeholder_text: ''
+                  collapsible: false
+                  is_secondary: false
       access:
         type: perm
         options:
@@ -753,7 +785,6 @@ display:
           grouping: {  }
           row_class: ''
           default_row_class: true
-          uses_fields: false
       row:
         type: fields
         options:
@@ -766,7 +797,7 @@ display:
         options:
           query_comment: ''
           disable_sql_rewrite: false
-          distinct: false
+          distinct: true
           replica: false
           query_tags: {  }
       relationships:
@@ -789,6 +820,7 @@ display:
           plugin_id: standard
           required: false
       use_ajax: true
+      group_by: false
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -3422,11 +3454,11 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: timestamp
+          type: timestamp_ago
           settings:
-            date_format: custom
-            custom_date_format: m/d/y
-            timezone: ''
+            future_format: '@interval hence'
+            past_format: 'Posted @interval ago'
+            granularity: 2
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -3513,7 +3545,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: "<div class=\"row\">\r\n<div class=\"two sm-three columns l-padding-desktop-ln\">\r\n<p class=\"text-center\">{{ created }}</p>\r\n</div>\r\n<div class=\"ten sm-nine columns l-padding-desktop-rn\">\r\n<p><a href=\"{{ filename }}\">{{ title }}</a></p>\r\n{{ body }}\r\n</div>\r\n</div>\r\n<hr class=\"hr--dashed l-margin-vd\">"
+            text: "<div class=\"card background--off-white border\">\r\n<div class=\"card__content\">\r\n<p class=\"card__headline\">\r\n<a href=\"{{ filename }}\"><img class=\"file-icon\" alt=\"PDF icon\" title=\"application/pdf\" src=\"/modules/file/icons/application-pdf.png\"></span> {{ title }}</a>\r\n</p>\r\n<p class=\"fine-print\"><em>{{ created }}</em></p>\r\n</div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -3576,7 +3608,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '{{ field_attachment }}'
+            text: "<div class=\"card background--off-white border\">\r\n<div class=\"card__content\">\r\n<p class=\"card__headline\">\r\n<a href=\"{{ field_url }}\">{{ title }}</a>\r\n</p>\r\n<p class=\"fine-print\"><em>{{ created }}</em></p>\r\n</div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -3609,7 +3641,7 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
-          empty: ''
+          empty: '{{ field_attachment }}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -4394,6 +4426,416 @@ display:
     display_plugin: block
     position: 1
     display_options:
+      fields:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: false
+            ellipsis: false
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        body:
+          id: body
+          table: node__body
+          field: body
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Body
+          exclude: true
+          alter:
+            alter_text: true
+            text: '{{ body }}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: field
+          label: 'Post date'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: custom
+            custom_date_format: m/d/y
+            timezone: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        filename:
+          id: filename
+          table: file_managed
+          field: filename
+          relationship: field_media_document_target_id
+          group_type: group
+          admin_label: ''
+          entity_type: file
+          entity_field: filename
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '{{ filename__value }}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_attachment:
+          id: field_attachment
+          table: node__field_attachment
+          field: field_attachment
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Attachment
+          exclude: true
+          alter:
+            alter_text: true
+            text: "<div class=\"row\">\r\n<div class=\"two sm-three columns l-padding-desktop-ln\">\r\n<p class=\"text-center\">{{ created }}</p>\r\n</div>\r\n<div class=\"ten sm-nine columns l-padding-desktop-rn\">\r\n<p><a href=\"{{ filename }}\"><span class=\"pdf-icon\"><img class=\"file-icon\" alt=\"PDF icon\" title=\"application/pdf\" src=\"/modules/file/icons/application-pdf.png\"></span> {{ title }}</a></p>\r\n{{ body }}\r\n</div>\r\n</div>\r\n<hr class=\"hr--dashed l-margin-vd\">"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_url:
+          id: field_url
+          table: node__field_url
+          field: field_url
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"row\">\r\n<div class=\"two sm-three columns l-padding-desktop-ln\">\r\n<p class=\"text-center\">{{ created }}</p>\r\n</div>\r\n<div class=\"ten sm-nine columns l-padding-desktop-rn\">\r\n<p><a href=\"{{ field_url__uri }} \">AAA: {{ title }}</a></p>\r\n{{ body }}\r\n</div>\r\n</div>\r\n<hr class=\"hr--dashed l-margin-vd\">"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: '{{ field_attachment }}'
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: uri
+          type: link
+          settings:
+            trim_length: 80
+            url_only: false
+            url_plain: false
+            rel: '0'
+            target: '0'
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 20
+          total_pages: null
+          id: 0
+          tags:
+            next: 'Next ›'
+            previous: '‹ Previous'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: true
+            items_per_page_label: 'Items per page'
+            items_per_page_options: ' 20, 30, 40, 60'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
       sorts:
         created:
           id: created
@@ -4563,7 +5005,7 @@ display:
           expose:
             operator_id: created_op
             label: 'Filter by Year'
-            description: ''
+            description: 'Format: 2023'
             use_operator: false
             operator: created_op
             operator_limit_selection: false
@@ -4696,6 +5138,8 @@ display:
         groups:
           1: AND
       defaults:
+        pager: false
+        fields: false
         sorts: false
         filters: false
         filter_groups: false
@@ -4707,6 +5151,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - url.query_args
         - user
         - 'user.node_grants:view'
         - user.permissions
@@ -5722,10 +6167,10 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_image:
-          id: field_image
-          table: node__field_image
-          field: field_image
+        field_feature_video_img:
+          id: field_feature_video_img
+          table: node__field_feature_video_img
+          field: field_feature_video_img
           relationship: none
           group_type: group
           admin_label: ''
@@ -5772,9 +6217,9 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: entity_reference_label
+          type: entity_reference_entity_view
           settings:
-            link: true
+            view_mode: default
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -5984,7 +6429,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border l-padding-bl\" style=\"position:relative; overflow: hidden\">\r\n\t\t\t\t<p class=\"text-center background-white\"><a href=\"{{ field_url }}\">{{ field_image }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-vs l-padding-hd text-center\">\r\n\t\t\t\t\t<p class=\"l-margin-bs\"><strong><a href=\"{{ field_url }}\" style=\"text-decoration:none\">{{ title }}</a></strong></p>\r\n\t\t\t\t</div>\r\n<div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn\" style=\"position:absolute;bottom:0\">\r\n<p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n<p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n\t\t\t</div>"
+            text: "<div class=\"card background--off-white border l-padding-bl\" style=\"position:relative; overflow: hidden\">\r\n\t\t\t\t<p class=\"text-center background-white\"><a href=\"{{ field_url }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-vs l-padding-hd text-center\">\r\n\t\t\t\t\t<p class=\"l-margin-bs\"><strong><a href=\"{{ field_url }}\" style=\"text-decoration:none\">{{ title }}</a></strong></p>\r\n\t\t\t\t</div>\r\n<div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn\" style=\"position:absolute;bottom:0\">\r\n<p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n<p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n\t\t\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -6269,7 +6714,7 @@ display:
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_category'
-        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_feature_video_img'
         - 'config:field.storage.node.field_subtitle'
         - 'config:field.storage.node.field_url'
   working_initiatives:
@@ -6470,10 +6915,10 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_image:
-          id: field_image
-          table: node__field_image
-          field: field_image
+        field_feature_video_img:
+          id: field_feature_video_img
+          table: node__field_feature_video_img
+          field: field_feature_video_img
           relationship: none
           group_type: group
           admin_label: ''
@@ -6520,9 +6965,9 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: entity_reference_label
+          type: entity_reference_entity_view
           settings:
-            link: true
+            view_mode: default
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -6732,7 +7177,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border l-padding-bl\" style=\"position:relative; overflow: hidden\">\r\n\t\t\t\t<p class=\"text-center background-white\"><a href=\"{{ field_url }}\">{{ field_image }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-vs l-padding-hd text-center\">\r\n\t\t\t\t\t<p class=\"l-margin-bs\"><strong><a href=\"{{ field_url }}\" style=\"text-decoration:none\">{{ title }}</a></strong></p>\r\n\t\t\t\t</div>\r\n<div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn\" style=\"position:absolute;bottom:0\">\r\n<p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n<p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n\t\t\t</div>"
+            text: "<div class=\"card background--off-white border l-padding-bl\" style=\"position:relative; overflow: hidden\">\r\n\t\t\t\t<p class=\"text-center background-white\"><a href=\"{{ field_url }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-vs l-padding-hd text-center\">\r\n\t\t\t\t\t<p class=\"l-margin-bs\"><strong><a href=\"{{ field_url }}\" style=\"text-decoration:none\">{{ title }}</a></strong></p>\r\n\t\t\t\t</div>\r\n<div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn\" style=\"position:absolute;bottom:0\">\r\n<p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n<p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n\t\t\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -7017,7 +7462,7 @@ display:
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_category'
-        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_feature_video_img'
         - 'config:field.storage.node.field_subtitle'
         - 'config:field.storage.node.field_url'
   working_ongoing:
@@ -7218,10 +7663,10 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_image:
-          id: field_image
-          table: node__field_image
-          field: field_image
+        field_feature_video_img:
+          id: field_feature_video_img
+          table: node__field_feature_video_img
+          field: field_feature_video_img
           relationship: none
           group_type: group
           admin_label: ''
@@ -7480,7 +7925,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border l-padding-bl\" style=\"position:relative; overflow: hidden\">\r\n\t\t\t\t<p class=\"text-center background-white\"><a href=\"{{ field_url }}\">{{ field_image }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-vs l-padding-hd text-center\">\r\n\t\t\t\t\t<p class=\"l-margin-bs\"><strong><a href=\"{{ field_url }}\" style=\"text-decoration:none\">{{ title }}</a></strong></p>\r\n\t\t\t\t</div>\r\n<div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn\" style=\"position:absolute;bottom:0\">\r\n<p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n<p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n\t\t\t</div>"
+            text: "<div class=\"card background--off-white border l-padding-bl\" style=\"position:relative; overflow: hidden\">\r\n\t\t\t\t<p class=\"text-center background-white\"><a href=\"{{ field_url }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-vs l-padding-hd text-center\">\r\n\t\t\t\t\t<p class=\"l-margin-bs\"><strong><a href=\"{{ field_url }}\" style=\"text-decoration:none\">{{ title }}</a></strong></p>\r\n\t\t\t\t</div>\r\n<div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn\" style=\"position:absolute;bottom:0\">\r\n<p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n<p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n\t\t\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -7765,6 +8210,6 @@ display:
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_category'
-        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_feature_video_img'
         - 'config:field.storage.node.field_subtitle'
         - 'config:field.storage.node.field_url'

@@ -44,7 +44,7 @@
  */
 #}
 
-<div class="off-canvas-wrapper alto-bg">
+<div class="off-canvas-wrapper">
   <section class="off-canvas off-canvas-main-menu position-right hide-for-large" id="offCanvas" data-off-canvas>
     {{ drupal_entity('block', 'mainnavigation')}}
   </section>
@@ -56,50 +56,43 @@
 
 
   <section class="off-canvas-content" data-off-canvas-content>
-    <header role="banner" class="header">
-      {{ page.header }}
-    </header>
-    {% if page.hero_image is not empty %}
-      <div id="hero-bg-image" class="hero__bg hero__bg--secondary" style="background-image: url('{{ page.hero_image }}');">
-      </div>
-      {{ drupal_block('hero_block') }}
+    <div class="l-constrained--main l-padding-mobile-hn background-white">
 
-      <div class="grid-container main-grid-container page-with-hero">
-      {% else %}
-      <div class="grid-container main-grid-container">
-    {% endif %}  
+      {{ page.help }}
 
-        {{ page.help }}
+      {{ page.content_top }}
 
-        {{ page.content_top }}
-
-        <main role="main" class="row  white-bg">
+      <main role="main" class="row white-bg">
           <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
-            {% if page.sidebar_first %}
-              <aside class="layout-sidebar-first col percent-25" role="complementary">
-                {{ page.sidebar_first }}
-              </aside>
-            {% endif %}
+          {{ page.content }}
+      
+      </main>
 
-            <div class="layout-content clearfix col">
-              {{ page.content }}
-            </div>{# /.layout-content #}
-
-            {% if page.sidebar_second %}
-              <aside class="layout-sidebar-second col percent-25" role="complementary">
-                {{ page.sidebar_second }}
-              </aside>
-            {% endif %}
-
-        </main>
-
-
-      {% if page.footer %}
-      <footer role="contentinfo" class="footer alto-bg">
-        {{ page.footer }}
-      </footer>
-      {% endif %}
     </div>{# /.grid-container #}
+
+    {% if page.footer %}
+      {% if node.field_outreach_footer_type.value %}
+        {# Simple Footer #}
+        <footer role="contentinfo" class="footer simple-footer">
+          <div class="region--footer">
+            <div class="region--footer__privacy">
+              <ul>
+                <li><a href="/disclaimers">Disclaimers</a></li>
+                <li><a href="/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/accessibility">Accessibility</a></li>
+                <li><a href="/translation">Language Translation</a></li>
+                <li><a href="/contact">Contact the City</a></li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+      {% else %}
+        {# Regular Footer #}
+        <footer role="contentinfo" class="footer">
+          {{ page.footer }}
+        </footer>
+      {% endif %}
+    {% endif %}
   </section>
 </div>
