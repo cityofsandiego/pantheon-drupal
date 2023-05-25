@@ -2002,6 +2002,7 @@ class CustomCommands extends DrushCommands {
         $local_destination = str_replace('legacy/development-services/pdf/industry/forms', '', $local_destination);
         $local_destination = str_replace('legacy/planning/programs/historical/pdf', '', $local_destination);
         $local_destination = str_replace('legacy/development-services/pdf/industry/techbulletin', '', $local_destination);
+        $local_destination = str_replace('legacy/development-services/pdf/industry/meetings', '', $local_destination);
         $local_destination = str_replace('legacy/development-services/pdf/news/meetings/2012', '', $local_destination);
         $local_destination = str_replace('legacy/development-services/pdf/news/meetings/2013', '', $local_destination);
         $local_destination = str_replace('legacy/development-services/pdf/news/meetings/2014', '', $local_destination);
@@ -2009,6 +2010,8 @@ class CustomCommands extends DrushCommands {
         $local_destination = str_replace('legacy/development-services/pdf/news/meetings', '', $local_destination);
         $local_destination = str_replace('public://', '', $local_destination);
         $local_destination = str_replace(' ', '%20', $local_destination);
+        $actual_filename = explode('/', $local_destination);
+        $local_destination = $actual_filename[count($actual_filename) - 1];
         $local_file = file_save_data($file_data, 'public://' . $local_destination, FileSystemInterface::EXISTS_REPLACE);
         if (is_object($local_file)) {
           $document = Media::create([
