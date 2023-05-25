@@ -33,56 +33,38 @@
 {%
   set classes = [
     dom_id ? 'js-view-dom-id-' ~ dom_id,
+    'mayoral-artifacts-gallery'
   ]
 %}
 
-<div class="l-constrained l-constrained--main l-padding-mobile-hd background-white">
-  <div class="row">
-    <div class="grid-x">
-      <div class="cell small-12 medium-auto content">
-        <div class="l-padding-am grid-x grid-margin-x">
+<div{{ attributes.addClass(classes) }}>
 
-          <div{{ attributes.addClass(classes) }}>
+{{ exposed }}
 
-          {{ exposed }}
+  {% if header %}
+    <header>
+      {{ header }}
+    </header>
+  {% endif %}
+  {{ attachment_before }}
 
-          {% if header %}
-            <header>
-              {{ header }}
-            </header>
-          {% endif %}
-          {{ attachment_before }}
-
-          {% if rows -%}
-          <div class="background-white">
-            <div class="entry__content l-padding-bd">
-              <div class="flexslider--mobile view-content card__container l-margin-vd">
-                {{ rows }}
-              </div>
-            </div>
-          </div>
-          {% elseif empty -%}
-            {{ empty }}
-          {% endif %}
-          {{ pager }}
-
-          {{ attachment_after }}
-          {{ more }}
-
-          {% if footer %}
-            <footer>
-              {{ footer }}
-            </footer>
-          {% endif %}
-
-          {{ feed_icons }}
-        </div>
-      </div>
+  {% if rows -%}
+    <div class="flexslider--mobile view-content card__container l-margin-vd">
+      {{ rows }}
     </div>
-    <div class="cell medium-3 large-3 sidebar light-gray-bg">
-      <div class="l-padding-am l-padding-mobile-hd l-margin-mobile-bm">
-        {{ drupal_entity('block_content', '14') }}
-      </div>
-    </div>
-  </div> <!-- row -->
-</div> <!-- l-constrained -->
+  {% elseif empty -%}
+    {{ empty }}
+  {% endif %}
+  {{ pager }}
+
+  {{ attachment_after }}
+  {{ more }}
+
+  {% if footer %}
+    <footer>
+      {{ footer }}
+    </footer>
+  {% endif %}
+
+  {{ feed_icons }}
+</div>
