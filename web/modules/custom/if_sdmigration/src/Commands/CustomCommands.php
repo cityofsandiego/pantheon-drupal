@@ -2303,7 +2303,7 @@ class CustomCommands extends DrushCommands {
       while ($data = fgetcsv($file)) {
         $nodedata[str_replace('`', '', $data[0])] = [
           'department' => explode('|', str_replace('`', '', $data[1])),
-          'category' => explode('|', str_replace('`', '', $data[2])),
+          'category' => str_replace('`', '', $data[2]),
           'search_keymatch' => explode('|', str_replace('`', '', $data[3])),
           'image_department' => str_replace('`', '', $data[16]),
           'image_license' => str_replace('`', '', $data[17]),
@@ -2333,11 +2333,8 @@ class CustomCommands extends DrushCommands {
         $node->field_department->appendItem($term);
       }
 
-      $node->field_category->setValue([]);
-      foreach ($data['category'] as $category) {
-        $term = Term::load($this->taxonomyImportTasks->newTid($category, 'category'));
-        $node->field_category->appendItem($term);
-      }
+      $term = Term::load($this->taxonomyImportTasks->newTid($data['category'], 'categories'));
+      $node->field_category->appendItem($term);
 
       $node->field_search_keymatch->setValue([]);
       foreach ($data['search_keymatch'] as $search_keymatch) {
