@@ -9,7 +9,13 @@
 {% endif %}
 
 {% if (show_slider == 1) %}
-    {{ drupal_view('department_slides', 'block', department_argument) }}
+  <div class="hero__slides hero__slides--secondary">
+    <div class="l-constrained--site row">
+      <div class="twelve columns hero__content">
+        {{ drupal_view('department_slides', 'block', department_argument) }}
+      </div>
+    </div>
+  </div>
 {% endif %}
 
 {{ title_suffix }}
