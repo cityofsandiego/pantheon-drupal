@@ -4183,4 +4183,32 @@ class CustomCommands extends DrushCommands {
     }
   }
 
+  /**
+   * Fix sdgov.lndo.site inline links and &#44; outside of titles.
+   *
+   * @command import:sql-content-fix
+   *
+   * @usage import:sql-content-fix
+   */
+  public function sqlContentFix() {
+    $tables = [
+      'node__body' => 'body_value',
+      'node__field_sidebar' => 'field_sidebar_value',
+      'node__field_subtitle' => 'field_subtitle_value',
+      'node__field_top_content' => 'field_top_content_value',
+    ];
+    foreach ($tables as $table => $field) {
+      $update1 = \Drupal::database()->update($table)
+        ->expression($field, 'replace(' . $field . ', :old, :new)', array(
+          ':old' => '&#44;',
+          ':new' =>  ',',
+        ))->execute();
+      $update2 = \Drupal::database()->update($table)
+        ->expression($field, 'replace(' . $field . ', :old, :new)', array(
+          ':old' => 'sdgov.lndo.site',
+          ':new' =>  'www.sandiego.gov',
+        ))->execute();
+    }
+  }
+
 }
