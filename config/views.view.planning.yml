@@ -12,6 +12,7 @@ dependencies:
     - field.storage.node.field_other_description
     - field.storage.node.field_subtitle
     - field.storage.node.field_url
+    - image.style.50_16x9
     - node.type.department_document
     - taxonomy.vocabulary.categories
     - taxonomy.vocabulary.department
@@ -448,7 +449,7 @@ display:
           reset_button: true
           reset_button_label: 'Clear Search'
           exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
+          expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
           text_input_required: 'Select any filter and click on Apply to see results'
@@ -464,21 +465,23 @@ display:
               secondary_label: 'Advanced options'
               secondary_open: false
               reset_button_always_show: true
-            pager:
+            sort:
               plugin_id: default
               advanced:
+                combine: false
+                combine_rewrite: ''
+                reset: false
+                reset_label: ''
+                collapsible: false
+                collapsible_label: 'Sort options'
                 is_secondary: false
             filter:
-              title:
+              body_value:
                 plugin_id: default
                 advanced:
                   placeholder_text: ''
-                  collapsible: false
-                  is_secondary: false
-              created:
-                plugin_id: default
-                advanced:
-                  placeholder_text: ''
+                  rewrite:
+                    filter_rewrite_values: ''
                   collapsible: false
                   is_secondary: false
       access:
@@ -1636,7 +1639,6 @@ display:
         - 'languages:language_interface'
         - url
         - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -2446,7 +2448,6 @@ display:
         - 'languages:language_interface'
         - url
         - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -3256,7 +3257,6 @@ display:
         - 'languages:language_interface'
         - url
         - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -5958,7 +5958,6 @@ display:
         - 'languages:language_interface'
         - url
         - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -6217,9 +6216,12 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: entity_reference_entity_view
+          type: media_thumbnail
           settings:
-            view_mode: default
+            image_link: ''
+            image_style: 50_16x9
+            image_loading:
+              attribute: lazy
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -6429,7 +6431,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border l-padding-bl\" style=\"position:relative; overflow: hidden\">\r\n\t\t\t\t<p class=\"text-center background-white\"><a href=\"{{ field_url }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-vs l-padding-hd text-center\">\r\n\t\t\t\t\t<p class=\"l-margin-bs\"><strong><a href=\"{{ field_url }}\" style=\"text-decoration:none\">{{ title }}</a></strong></p>\r\n\t\t\t\t</div>\r\n<div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn\" style=\"position:absolute;bottom:0\">\r\n<p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n<p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n\t\t\t</div>"
+            text: "<div class=\"card background--off-white border l-padding-bl\" style=\"position:relative; overflow: hidden\">\r\n\t\t\t\t<p class=\"text-center background-white\"><a href=\"{{ field_url }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-vs l-padding-hd text-center\">\r\n\t\t\t\t\t<p class=\"l-margin-bs\"><strong><a href=\"{{ field_url }}\" style=\"text-decoration:none\">{{ title }}</a></strong></p>\r\n\t\t\t\t</div>\r\n\t\t\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -6497,7 +6499,7 @@ display:
           expose:
             label: Title
             field_identifier: title
-          exposed: true
+          exposed: false
         field_subtitle_value:
           id: field_subtitle_value
           table: node__field_subtitle
@@ -6510,7 +6512,7 @@ display:
           expose:
             label: 'Projected Completion'
             field_identifier: field_subtitle_value
-          exposed: true
+          exposed: false
       filters:
         status:
           id: status
@@ -6706,8 +6708,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - user
         - 'user.node_grants:view'
         - user.permissions
@@ -6965,9 +6965,12 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: entity_reference_entity_view
+          type: media_thumbnail
           settings:
-            view_mode: default
+            image_link: ''
+            image_style: 50_16x9
+            image_loading:
+              attribute: lazy
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -7097,7 +7100,7 @@ display:
           click_sort_column: target_id
           type: entity_reference_label
           settings:
-            link: true
+            link: false
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -7165,6 +7168,63 @@ display:
           or: ''
           or_translate: 1
           strip_tags: 0
+        views_conditional_field_1:
+          id: views_conditional_field_1
+          table: views_conditional
+          field: views_conditional_field
+          relationship: none
+          group_type: group
+          admin_label: 'Views Conditional (Public Engagement)'
+          plugin_id: views_conditional_field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          if: field_category
+          condition: eq
+          equalto: 'Public Engagement'
+          then: texasrose
+          then_translate: 1
+          or: manz
+          or_translate: 1
+          strip_tags: 0
         nothing:
           id: nothing
           table: views
@@ -7177,7 +7237,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border l-padding-bl\" style=\"position:relative; overflow: hidden\">\r\n\t\t\t\t<p class=\"text-center background-white\"><a href=\"{{ field_url }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-vs l-padding-hd text-center\">\r\n\t\t\t\t\t<p class=\"l-margin-bs\"><strong><a href=\"{{ field_url }}\" style=\"text-decoration:none\">{{ title }}</a></strong></p>\r\n\t\t\t\t</div>\r\n<div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn\" style=\"position:absolute;bottom:0\">\r\n<p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n<p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n\t\t\t</div>"
+            text: "<div class=\"card background--off-white border l-padding-bl\" style=\"position:relative; overflow: hidden\">\r\n\t\t\t\t<p class=\"text-center background-white\"><a href=\"{{ field_url }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-vs l-padding-hd text-center\">\r\n\t\t\t\t\t<p class=\"l-margin-bs\"><strong><a href=\"{{ field_url }}\" style=\"text-decoration:none\">{{ title }}</a></strong></p>\r\n\t\t\t\t</div>\r\n<div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn\" style=\"position:absolute;bottom:0\">\r\n<p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field_1 }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n<p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n\t\t\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -7455,7 +7515,6 @@ display:
         - 'languages:language_interface'
         - url
         - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - user
         - 'user.node_grants:view'
         - user.permissions
@@ -7713,9 +7772,12 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: entity_reference_entity_view
+          type: media_thumbnail
           settings:
-            view_mode: default
+            image_link: ''
+            image_style: 50_16x9
+            image_loading:
+              attribute: lazy
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -7925,7 +7987,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border l-padding-bl\" style=\"position:relative; overflow: hidden\">\r\n\t\t\t\t<p class=\"text-center background-white\"><a href=\"{{ field_url }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-vs l-padding-hd text-center\">\r\n\t\t\t\t\t<p class=\"l-margin-bs\"><strong><a href=\"{{ field_url }}\" style=\"text-decoration:none\">{{ title }}</a></strong></p>\r\n\t\t\t\t</div>\r\n<div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn\" style=\"position:absolute;bottom:0\">\r\n<p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n<p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n\t\t\t</div>"
+            text: "<div class=\"card background--off-white border l-padding-bl\" style=\"position:relative; overflow: hidden\">\r\n\t\t\t\t<p class=\"text-center background-white\"><a href=\"{{ field_url }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n\t\t\t\t<div class=\"l-padding-vs l-padding-hd text-center\">\r\n\t\t\t\t\t<p class=\"l-margin-bs\"><strong><a href=\"{{ field_url }}\" style=\"text-decoration:none\">{{ title }}</a></strong></p>\r\n\t\t\t\t</div>\r\n\t\t\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -7993,7 +8055,7 @@ display:
           expose:
             label: Title
             field_identifier: title
-          exposed: true
+          exposed: false
         field_subtitle_value:
           id: field_subtitle_value
           table: node__field_subtitle
@@ -8006,7 +8068,7 @@ display:
           expose:
             label: 'Projected Completion'
             field_identifier: field_subtitle_value
-          exposed: true
+          exposed: false
       filters:
         status:
           id: status
@@ -8202,8 +8264,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - user
         - 'user.node_grants:view'
         - user.permissions
