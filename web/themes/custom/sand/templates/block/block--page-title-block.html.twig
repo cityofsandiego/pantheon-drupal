@@ -7,7 +7,14 @@
 {% elseif title %}
     <h1{{ title_attributes.addClass('page-title') }}>{{ title }}</h1>
 {% endif %}
+
+{% if (show_slider == 1) %}
+    {{ drupal_view('department_slides', 'block', department_argument) }}
+{% endif %}
+
 {{ title_suffix }}
+
+
 
 {% if (topmenu is defined) and (department_title != 'Inside San Diego') %}
   <div class="hide-on-mobile top-menu">
