@@ -407,6 +407,13 @@ final class Node implements EventSubscriberInterface {
               if ($parent_id == 0) {
                 $department_title = $term->getName();
               }
+              else {
+                $term = Term::load($parent_id);
+                $parent_id = $term->get('parent')->getValue()[0]['target_id'];
+                if ($parent_id == 0) {
+                  $department_title = $term->getName();
+                }
+              }
             }
           }
         }
@@ -416,6 +423,16 @@ final class Node implements EventSubscriberInterface {
         }
         if ($node->getType() == 'digital_archives_photos' || $node->getType() == 'sand_gallery') {
           $variables->set('department_title', 'Digital Archives');
+        }
+
+        // Slide logic
+        if ($node->getType() == 'department_parent' && $show_slider = $node->get('field_show_top_slider')->getValue()) {
+          if ($show_slider[0]['value'] == 1) {
+            $department_argument = $node->get('field_department')->getValue()[0]['target_id'];
+            $variables->set('department_argument', $department_argument);
+          }
+          $variables->set('show_slider', $show_slider[0]['value']);
+
         }
       }
     }
@@ -645,6 +662,15 @@ final class Node implements EventSubscriberInterface {
         if (is_object($grandparent)) {
           if (!in_array($grandparent, $this->departments)) {
             $this->departments[] = $grandparent->id();
+          }
+          $greatgrandparent = $this->entityTypeManager
+            ->getStorage('taxonomy_term')
+            ->loadParents($grandparent->id());
+          $greatgrandparent = reset($greatgrandparent);
+          if (is_object($greatgrandparent)) {
+            if (!in_array($greatgrandparent, $this->departments)) {
+              $this->departments[] = $greatgrandparent->id();
+            }
           }
         }
       }
