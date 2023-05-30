@@ -4,12 +4,15 @@ status: true
 dependencies:
   config:
     - field.field.node.reusable_component.body
+    - field.field.node.reusable_component.field_action_url
     - field.field.node.reusable_component.field_block_delta
+    - field.field.node.reusable_component.field_block_type
     - field.field.node.reusable_component.field_d7_nid
+    - field.field.node.reusable_component.field_image
     - node.type.reusable_component
-    - workflows.workflow.editorial
   module:
     - content_moderation
+    - link
     - path
     - scheduler
     - scheduler_content_moderation_integration
@@ -35,6 +38,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_action_url:
+    type: link_default
+    weight: 126
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_block_delta:
     type: string_textfield
     weight: 123
@@ -43,11 +54,27 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_block_type:
+    type: options_select
+    weight: 124
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_d7_nid:
     type: number
     weight: 122
     region: content
     settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_image:
+    type: entity_reference_autocomplete
+    weight: 127
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
       placeholder: ''
     third_party_settings: {  }
   langcode:
