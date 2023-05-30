@@ -14,11 +14,6 @@ namespace Drupal\sand_type\Entity\Bundle;
 
 use Drupal\node\Entity\Node;
 
-use Drupal\sand_type\Entity\Bundle\Interface\DepartmentInterface;
-use Drupal\sand_type\Entity\Bundle\Traits\DepartmentTraits;
-
-class Bucket extends Node implements DepartmentInterface {
-
-  use DepartmentTraits;
+class Bucket extends Node {
 
 }
