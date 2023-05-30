@@ -2302,7 +2302,7 @@ class CustomCommands extends DrushCommands {
       while ($data = fgetcsv($file)) {
         $nodedata[str_replace('`', '', $data[0])] = [
           'department' => explode('|', str_replace('`', '', $data[1])),
-          'category' => explode('|', str_replace('`', '', $data[2])),
+          'category' => str_replace('`', '', $data[2]),
           'search_keymatch' => explode('|', str_replace('`', '', $data[3])),
           'image_department' => str_replace('`', '', $data[16]),
           'image_license' => str_replace('`', '', $data[17]),
@@ -2332,11 +2332,8 @@ class CustomCommands extends DrushCommands {
         $node->field_department->appendItem($term);
       }
 
-      $node->field_category->setValue([]);
-      foreach ($data['category'] as $category) {
-        $term = Term::load($this->taxonomyImportTasks->newTid($category, 'category'));
-        $node->field_category->appendItem($term);
-      }
+      $term = Term::load($this->taxonomyImportTasks->newTid($data['category'], 'categories'));
+      $node->field_category->appendItem($term);
 
       $node->field_search_keymatch->setValue([]);
       foreach ($data['search_keymatch'] as $search_keymatch) {
@@ -3971,7 +3968,8 @@ class CustomCommands extends DrushCommands {
     $query = \Drupal::database()->select('node__field_website', 'f')
       ->fields('f', ['field_website_uri'])
       ->condition('field_website_uri', 'http%', 'NOT LIKE')
-      ->condition('field_website_uri', 'internal:%', 'NOT LIKE');
+      ->condition('field_website_uri', 'internal:%', 'NOT LIKE')
+      ->condition('field_website_uri', 'public:%', 'NOT LIKE');
     $public_links = $query->execute();
 
     while ($result = $public_links->fetchAssoc()) {
@@ -3980,6 +3978,35 @@ class CustomCommands extends DrushCommands {
         ->condition('field_website_uri', $result['field_website_uri'])
         ->fields([
           'field_website_uri' => $public_uri,
+        ])
+        ->execute();
+    }
+
+    // Fix most malformed urls.
+    $query = \Drupal::database()->select('node__field_website', 'f')
+      ->fields('f', ['field_website_uri'])
+      ->condition('field_website_uri', 'public:public:public:public%', 'LIKE');
+    $public_links = $query->execute();
+    while ($result = $public_links->fetchAssoc()) {
+      $public_uri = trim(str_replace('public:public:public:public:', '', $result['field_website_uri']));
+      \Drupal::database()->update('node__field_website')
+        ->condition('field_website_uri', $result['field_website_uri'])
+        ->fields([
+          'field_website_uri' => $public_uri,
+        ])
+        ->execute();
+    }
+
+    // Remove invalid urls.
+    $query = \Drupal::database()->select('node__field_website', 'f')
+      ->fields('f', ['field_website_uri'])
+      ->condition('field_website_uri', 'public:%', 'LIKE');
+    $public_links = $query->execute();
+    while ($result = $public_links->fetchAssoc()) {
+      \Drupal::database()->update('node__field_website')
+        ->condition('field_website_uri', $result['field_website_uri'])
+        ->fields([
+          'field_website_uri' => '',
         ])
         ->execute();
     }
@@ -4182,6 +4209,42 @@ class CustomCommands extends DrushCommands {
       $node->save();
 
       echo 'D7 ID | ' . $d7id . PHP_EOL;
+    }
+  }
+
+  /**
+   * Fix sdgov.lndo.site inline links and &#44; outside of titles.
+   *
+   * @command import:sql-content-fix
+   *
+   * @usage import:sql-content-fix
+   */
+  public function sqlContentFix() {
+    $tables = [
+      'node__body' => 'body_value',
+      'node__field_sidebar' => 'field_sidebar_value',
+      'node__field_subtitle' => 'field_subtitle_value',
+      'node__field_top_content' => 'field_top_content_value',
+    ];
+    foreach ($tables as $table => $field) {
+      // Convert entity back to actual comma.
+      $update1 = \Drupal::database()->update($table)
+        ->expression($field, 'replace(' . $field . ', :old, :new)', array(
+          ':old' => '&#44;',
+          ':new' =>  ',',
+        ))->execute();
+      // Remove lndo domain.
+      $update2 = \Drupal::database()->update($table)
+        ->expression($field, 'replace(' . $field . ', :old, :new)', array(
+          ':old' => 'sdgov.lndo.site',
+          ':new' =>  'www.sandiego.gov',
+        ))->execute();
+      // Switch to relative URL.
+      $update3 = \Drupal::database()->update($table)
+        ->expression($field, 'replace(' . $field . ', :old, :new)', array(
+          ':old' => '="//www.sandiego.gov/',
+          ':new' =>  '="/',
+        ))->execute();
     }
   }
 
