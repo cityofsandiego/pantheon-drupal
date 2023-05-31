@@ -146,7 +146,9 @@ final class Node implements EventSubscriberInterface {
       $nids = $this->if_components_hero_query_hero_home_page();
     } elseif ($node = $variables->getNode()) {
       if ($node instanceof NodeInterface) {
-        $department_terms = $node->get('field_department')->getValue();
+        if ($node->hasField('field_department')) {
+          $department_terms = $node->get('field_department')->getValue();
+        }
         if (!empty($department_terms)) {
           $departments_on_node = array_column($department_terms, "target_id");
           $nids = $this->if_components_hero_query_hero_ids($departments_on_node);
