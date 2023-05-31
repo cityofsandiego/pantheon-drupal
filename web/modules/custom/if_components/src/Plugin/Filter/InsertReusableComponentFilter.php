@@ -77,21 +77,25 @@ class InsertReusableComponentFilter extends FilterBase implements ContainerFacto
         $query->condition('type', 'reusable_component')
           ->condition('field_block_delta', $value);
         $query_result = $query->execute();
-        $nid = reset($query_result);
-        if ($node = $this->entityTypeManager->getStorage('node')->load($nid)) {
-          $component_view = $this->entityTypeManager->getViewBuilder('node')->view($node, 'full');
-        }
-        else {
-          $component_view = NULL;
-        }
+        if (!empty($query_result)) {
+          $nid = reset($query_result);
+          if ($node = $this->entityTypeManager->getStorage('node')->load($nid)) {
+            $component_view = $this->entityTypeManager->getViewBuilder('node')
+              ->view($node, 'full');
+          }
+          else {
+            $component_view = NULL;
+          }
 
-        if (!empty($component_view)) {
-          $repl[] = $this->renderer->render($component_view);
-          $result->addCacheTags($component_view['#cache']['tags'])->addCacheContexts($component_view['#cache']['contexts']);
-        }
+          if (!empty($component_view)) {
+            $repl[] = $this->renderer->render($component_view);
+            $result->addCacheTags($component_view['#cache']['tags'])
+              ->addCacheContexts($component_view['#cache']['contexts']);
+          }
 
-        if (!empty($repl)) {
-          $text = str_replace($raw_tags, $repl, $text);
+          if (!empty($repl)) {
+            $text = str_replace($raw_tags, $repl, $text);
+          }
         }
       }
     }
