@@ -33,5 +33,11 @@ if (file_exists($local_settings)) {
   include $local_settings;
 }
 
+$redirect_file = __DIR__ .  '/settings.redirect.php';
+if(file_exists($redirect_file)) {
+  include $redirect_file;
+}
+
 // Added by City of San Diego
-$settings['config_exclude_modules'] = ['devel'];
+$settings['config_exclude_modules'] = ['devel', 'webprofiler', 'examples', 'config_single_export' ];
+
