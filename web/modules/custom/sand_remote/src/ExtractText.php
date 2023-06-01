@@ -591,4 +591,3 @@ class ExtractText {
     }
 
 }
-
