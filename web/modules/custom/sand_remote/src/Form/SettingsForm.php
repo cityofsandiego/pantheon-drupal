@@ -45,12 +45,12 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('Check this box if you do not want to queue each updated Or inserted item for PDF extraction')
     );
 
-    $form['webdata'] = array(
-      '#type' => 'checkbox',
-      '#title' => $this->t('If no text is extracted try WebData server?'),
-      '#default_value' => $config->get('webdata'),
-      '#description' => $this->t('If the normal method of text extraction via search_api_attachments gets no data then mark the entity for processing by the webdata server that uses tesseract to extract text from PDFs. The webdata server will get data from a view then use REST to update the body field.')
-    );
+//    $form['webdata'] = array(
+//      '#type' => 'checkbox',
+//      '#title' => $this->t('If no text is extracted try WebData server?'),
+//      '#default_value' => $config->get('webdata'),
+//      '#description' => $this->t('If the normal method of text extraction via search_api_attachments gets no data then mark the entity for processing by the webdata server that uses tesseract to extract text from PDFs. The webdata server will get data from a view then use REST to update the body field.')
+//    );
 
     $form['fetch'] = array(
       '#type' => 'checkbox',
