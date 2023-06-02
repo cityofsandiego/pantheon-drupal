@@ -1,0 +1,11 @@
+{% if node.field_block_type.0.value == 'HTML Block' %}
+    {{ content }}
+{% else %}
+    {# This is custom logic for Graphic CTA beans. #}
+    <div class="card card__cta card__cta--graphic entity entity-bean bean-bean-graphic-cta" style="background-image:url({{ file_url(node.field_image.entity.field_media_image.entity.fileuri) }});background-repeat:no-repeat;background-size: cover;">
+        <a href="{{ node.field_action_url.0.uri }}">
+            <p>{{ node.field_graphic_cta_title.0.value }}</p>
+            <span href="" class="btn btn--secondary">{{ node.field_action_url.0.title }}</span>
+        </a>
+    </div>
+{% endif %}

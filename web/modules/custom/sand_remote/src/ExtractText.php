@@ -3,11 +3,15 @@
 namespace Drupal\sand_remote;
 
 use Drupal\Component\Utility\Xss;
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\Entity\File;
 use Recurr\Exception;
 use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\Exception\FileException;
+use Drupal\Core\File\Exception\InvalidStreamWrapperException;
+use GuzzleHttp\Exception\TransferException;
 
 /**
  * Service description.
@@ -16,15 +20,24 @@ class ExtractText {
 
   // This will be 'node' or 'sand_remote'.
   public $entity_type;
+  
   // This will be the entity id.
   public $entity_id;
+  
   // This is the source of the data (i.e. documentum).
+  
   public $source;
   // This is the field that contains the URL to fetch.
+  
   public $url_field;
   // This is the field to set the text to (i.e. field_body). 
+  
   public $target_field;
 
+  private $file;
+  
+  private $file_size;
+  
   /**
    * Getter
    * 
@@ -126,7 +139,7 @@ class ExtractText {
     
     if (empty($url)) {
       \Drupal::logger('sand_remote')
-        ->notice(
+        ->warning(
           'Could not get a source field for entity: %entity id: %id',
           [ '%entity' => $entity->getEntityType(), '%id' => $entity->id()]
         );
@@ -157,7 +170,7 @@ class ExtractText {
     $this->target_field = $target_field;
     return $this;
   }
-
+  
   /**
    * Get text extracted from the PDF of the url field of this class.
    * 
@@ -184,30 +197,25 @@ class ExtractText {
     $extractor_plugin = \Drupal::service('plugin.manager.search_api_attachments.text_extractor')
       ->createInstance($extractor_plugin_id, $configuration);
 
-    // Create a file object since the extractor needs it. It's a temp file.
-    $file = File::create([
-      'filename' => $url,
-      'uri' => $url,
-      'status' => 1,
-      'uid' => 1,
-    ]);
-
     try {
-      $extracted_data = $extractor_plugin->extract($file);
-      $cleaned_data = $this->cleanExtractedData($extracted_data);
+      $cleaned_data = $this->cleanExtractedData($extractor_plugin->extract($this->getFile()));
+      if (\Drupal::config('sand_remote.settings')->get('utf8threechar')) {
+        $cleaned_data = $this->convertToThreeCharUTF8($cleaned_data);
+      }
       // @todo interface with Boone's tesserac server if the cleaned data is empty
       \Drupal::logger('sand_remote')
-        ->error('Got %size text when extracting text on %entity_type ID: %id, on URL: %url', [
-          '%size' => strlen($cleaned_data) / 1024 . 'KB',
+        ->info('Got %size text extracting from %entity_type ID: %id, on URL: %url, File Size: %filesize', [
+          '%size' => round(strlen($cleaned_data) / 1024, 2) . 'KB',
           '%entity_type' => $this->getEntityType(),
           '%id' => $this->getEntityId(),
           '%url' => $url,
+          '%filesize' => $this->getFileSize() ? round($this->getFileSize() / 1024, 2) . 'KB' : 'Unknown',  
         ]);
       return $cleaned_data;
     } catch (\Exception $e) {
       if ($e->getMessage() === 'Tika Extractor is not available.') {
         \Drupal::logger('sand_remote')
-          ->error('Got NO text when trying to extract text on %entity_type ID: %id, on URL: %url, error: %error', [
+          ->error('Tika Extractor is not available or another error such as invalid cert when trying to extract text on %entity_type ID: %id, on URL: %url, error: %error', [
             '%entity_type' => $this->getEntityType(),
             '%id' => $this->getEntityId(),
             '%url' => $url,
@@ -228,6 +236,63 @@ class ExtractText {
 
   }
 
+  /**
+   * Based on system_retrieve_file but with verify arg.
+   * 
+   * @param $destination
+   * @param $managed
+   * @param $replace
+   *
+   * @return \Drupal\file\FileInterface|false|string
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  function getRemoteFile($destination = NULL, $managed = FALSE, $replace = FileSystemInterface::EXISTS_RENAME) {
+    $url = $this->getUrlField();
+    $parsed_url = parse_url($url);
+    /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+    $file_system = \Drupal::service('file_system');
+    if (!isset($destination)) {
+      $path = $file_system->basename($parsed_url['path']);
+      $path = \Drupal::config('system.file')->get('default_scheme') . '://' . $path;
+      $path = \Drupal::service('stream_wrapper_manager')->normalizeUri($path);
+    }
+    else {
+      if (is_dir($file_system->realpath($destination))) {
+        // Prevent URIs with triple slashes when glueing parts together.
+        $path = str_replace('///', '//', "$destination/") . \Drupal::service('file_system')->basename($parsed_url['path']);
+      }
+      else {
+        $path = $destination;
+      }
+    }
+    try {
+      $data = (string) \Drupal::httpClient()
+        ->get($url, [ 'verify' => FALSE, ])
+        ->getBody();
+      if ($managed) {
+        /** @var \Drupal\file\FileRepositoryInterface $file_repository */
+        $file_repository = \Drupal::service('file.repository');
+        $local = $file_repository->writeData($data, $path, $replace);
+      }
+      else {
+        $local = $file_system->saveData($data, $path, $replace);
+      }
+    }
+    catch (TransferException $exception) {
+      \Drupal::messenger()->addError(t('Failed to fetch file due to error "%error"', ['%error' => $exception->getMessage()]));
+      return FALSE;
+    }
+    catch (FileException | InvalidStreamWrapperException $e) {
+      \Drupal::messenger()->addError(t('Failed to save file due to error "%error"', ['%error' => $e->getMessage()]));
+      return FALSE;
+    }
+    if (!$local) {
+      \Drupal::messenger()->addError(t('@remote could not be saved to @path.', ['@remote' => $url, '@path' => $path]));
+    }
+
+    return $local;
+  }
+  
   /**
    * Clean up text, Stolen from D7 apachesolr function.
    * 
@@ -263,7 +328,7 @@ class ExtractText {
    * @return string
    */
   protected function cleanExtractedData(string $string): string {
-    // Convert to valid UTF8.
+    // Strip out ant invalid UTF8.
     try {
       $text = iconv("UTF-8", "UTF-8//IGNORE", $string);
     } catch (Exception $exception) {
@@ -271,17 +336,42 @@ class ExtractText {
         ->error('Error trying to extract text on Sandremote ID: %id, on URL: %url, error: %error', ['%id' => $this->id(), '%url' => $this->field_url->value, '%error' => $exception->getMessage()]);
       $text = $string;
     }
-    //$text = Unicode::convertToUtf8($string);
-    // Convert to 3 character UTF8 @todo we can remove this if our DB supports 4 byte UTF8. 
-    $text = preg_replace('/[\x{10000}-\x{10FFFF}]/u', "\xEF\xBF\xBD", $text);
+
     // Use clean up routine originally found in D7 apachesolr.
     $text = trim($this->apachesolr_clean_text($text));
+    
     // Many of our documents have table of contents with . . . , pull those out.
     $text = preg_replace('/\. \. \./', ' ', $text);
     $text = preg_replace('/\.\.\./', ' ', $text);
+    
+    // Cleanup __'s.
+    $text = preg_replace('/__/', ' ', $text);
     return $text;
   }
 
+  protected function convertToThreeCharUTF8(string $string): string {
+    //$text = Unicode::convertToUtf8($string);
+    // Convert to 3 character UTF8 @todo we can remove this if our DB supports 4 byte UTF8. 
+    return preg_replace('/[\x{10000}-\x{10FFFF}]/u', "\xEF\xBF\xBD", $string);
+  }
+
+  /**
+   * Create file for remote text extract.
+   * 
+   * @param $url
+   *
+   * @return \Drupal\Core\Entity\ContentEntityBase|\Drupal\Core\Entity\EntityBase|\Drupal\Core\Entity\EntityInterface|\Drupal\file\Entity\File|(\Drupal\file\Entity\File&\Drupal\Core\Entity\EntityInterface)
+   */
+  private function createURLFile($url) {
+    $file = File::create([
+      'filename' => $url,
+      'uri' => $url,
+      'status' => 1,
+      'uid' => 1,
+    ]);
+    return $file;
+  }
+  
   /**
    * Set the target field of this class the text extracted from the PDF source.
    * 
@@ -298,6 +388,11 @@ class ExtractText {
     $entity = \Drupal::entityTypeManager()
       ->getStorage($this->getEntityType())
       ->load($this->getEntityId());
+    
+    // Check and make sure entity loaded.
+    if (!$entity instanceof ContentEntityInterface) {
+      return FALSE;
+    }
 
     // Set variable to say we are setting the Text so don't fire our hooks for insert and update.
     /** @var \Drupal\Core\TempStore\PrivateTempStore $tempstore */
@@ -323,8 +418,25 @@ class ExtractText {
       $changed = TRUE;
     }
 
-    // Extract the text from the URL.
-    $extracted_text = $this->extractText();
+      // See if the configuration wants us to bring the file locally first.
+      $fetch = \Drupal::config('sand_remote.settings')->get('fetch');
+      if ($fetch) {
+          $file = $this->getRemoteFile('temporary://', TRUE, FileSystemInterface::EXISTS_RENAME);
+          if ($file instanceof File) {
+              // For some reason it set the file to permanent minute even know the destination is temporary, resetting it here.
+              $file->setTemporary();
+              $file->save();                  
+              $this->setFile($file);
+              $this->setFileSize($file->getSize());
+              $extracted_text = $this->extractText();
+          }
+      } else {
+          // Create a file object since the extractor needs it. It's a temp file.
+          $file = $this->createURLFile($url);
+          $this->setFile($file);
+          $extracted_text = $this->extractText();
+      }
+
     
     // If both are NULL/empty string then nothing to do.
     if (empty($target_value) && empty($extracted_text)) {
@@ -350,6 +462,7 @@ class ExtractText {
     return $changed;
     
   }
+  
   private function getSourceFromEntity(ContentEntityBase $entity): ?string {
     $source_field = \Drupal::config('sand_remote.settings')->get('source_field');
     if ($entity->hasField($source_field)) {
@@ -363,49 +476,19 @@ class ExtractText {
       return NULL;
     }
   }
-  
 
-  private function getSourceUrlField(ContentEntityBase $entity, $field_name = 'field_source_name'): string {
-    $url_field = '';
-    if ($entity->hasField($field_name)) {
-      $source_name = $entity->get($field_name)->value;
-      $url_field = match ($source_name) {
-        'sire', 'onbase' => 'field_a_webc_url',
-        'documentum', 'external' => 'field_document_url',
-        default => '',
-      };
-    }
-    if (empty($url_field)) {
-      \Drupal::logger('sand_remote')
-        ->notice(
-          'Could not get a source field for entity: %entity id: %id',
-          [ '%entity' => $entity->getEntityType(), '%id' => $entity->id()]
-        );
-    }
-    return $url_field;
+  /**
+   * @return mixed
+   */
+  public function getFile() {
+    return $this->file;
   }
-  
-  private function getUrlValue($entity) {
-    // Source field.
-    $source_field = $this->getSourceUrlField($entity);
-    if ($entity->hasField($source_field)) {
-      $source_field_type = $entity->$source_field->getFieldDefinition()->getType();
-      if ($source_field_type === 'link') {
-        $url = $entity->$source_field->uri;
-      } else {
-        $url = $entity->$source_field->value;
-      }
-      $mappings = \Drupal::config('sand_remote.settings')->get('mappings');
-      foreach($mappings as $mapping) {
-        if ($mapping['source_name'] === $this->getSourceUrlField($entity)) {
-          $url = str_replace($mapping['from'], $mapping['to'], $url);
-        }
-      }
-      return $url;
-    }
-    else {
-      return '';
-    }
+
+  /**
+   * @param mixed $file
+   */
+  public function setFile($file): void {
+    $this->file = $file;
   }
 
   private function getTargetFromEntity(EntityInterface $entity): string {
@@ -437,7 +520,15 @@ class ExtractText {
 
     // See if we are in the process of setting a field equal to it's extracted text, then skip the update to avoid a loop.
     if ($is_processing) {
-      return FALSE;
+      // If Inserting.
+      if ($entity->isNew()) {
+        return FALSE;
+      }
+      // If Updating see is it's this entity id.
+      [, $entity_id] = explode(':', $is_processing);
+      if ($entity_id === $entity->id()) {
+        return FALSE;
+      }
     }
 
     $queue = \Drupal::service('queue')->get('sand_remote_queue');
@@ -482,6 +573,21 @@ class ExtractText {
 
     return TRUE;
   }
-  
-}
 
+    /**
+     * @return mixed
+     */
+    public function getFileSize()
+    {
+        return $this->file_size;
+    }
+
+    /**
+     * @param mixed $file_size
+     */
+    public function setFileSize($file_size): void
+    {
+        $this->file_size = $file_size;
+    }
+
+}
