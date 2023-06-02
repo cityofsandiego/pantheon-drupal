@@ -1,5 +1,7 @@
 <?php
 
+// @todo This is NOT done. Just started in case we need to use AWS instead of WebSolr or WebData server (Boone)
+
 namespace Drupal\sand_aws;
 
 use Recurr\Exception;
