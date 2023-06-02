@@ -31,6 +31,11 @@ class SettingsForm extends ConfigFormBase {
 
     $config = $this->config('sand_remote.settings');
     $form['#tree'] = TRUE;
+    
+    $form['info'] = [
+      '#markup' => '<h3>Warning</h3><p>Do not change anything here unless you 100% know what you are doing otherwise it can impact our remote data.</p>', 
+      '#suffix' => '<hr><p>&nbsp;</p>',
+    ];
 
     // This is the field that is used to get the source of the data from the entity.
     $form['queue'] = array(
@@ -40,6 +45,13 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('Check this box if you do not want to queue each updated Or inserted item for PDF extraction')
     );
 
+    $form['webdata'] = array(
+      '#type' => 'checkbox',
+      '#title' => $this->t('If no text is extracted try WebData server?'),
+      '#default_value' => $config->get('webdata'),
+      '#description' => $this->t('If the normal method of text extraction via search_api_attachments gets no data then mark the entity for processing by the webdata server that uses tesseract to extract text from PDFs. The webdata server will get data from a view then use REST to update the body field.')
+    );
+
     $form['fetch'] = array(
       '#type' => 'checkbox',
       '#title' => $this->t('Fetch remote file before extracting text?'),
@@ -47,12 +59,20 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('Check this box if you want to fetch the remote file for PDF extraction before extracting text.')
     );
 
-
     $form['utf8threechar'] = array(
       '#type' => 'checkbox',
       '#title' => $this->t('Save extracted text as 3 character UTF8 instead of normal 4 character UTF8?'),
       '#default_value' => $config->get('utf8threechar'),
       '#description' => $this->t('Our previous database only allowed three character UTF-8.')
+    );
+
+    $form['no_text_body_status'] = array(
+      '#type' => 'textfield',
+      '#size' => 60,
+      '#title' => $this->t('Body Status text if no text'),
+      '#required' => TRUE,
+      '#default_value' => $config->get('no_text_body_status'),
+      '#description' => $this->t('Set the field_body_status to start with this value if there is no text extracted using the inital method (not the WebData server). Usually the initial method will be tika (set in search_api_attachments module). After this text a colon and the date in format "YmdHis" will be appended.')
     );
 
     // This is the field that is used to get the source of the data from the entity.
@@ -67,6 +87,7 @@ class SettingsForm extends ConfigFormBase {
     // Container for the AJAX callback. Everything inside this will be updated.
     $form['mappings_fieldset'] = [
       '#type' => 'fieldset',
+      '#description' => '<p>Each row represents a value in the field: "field_source". If that value in field_source is equal to the first field "Source", then get the URL of the PDF to process from the "URL Field" and replace the text in "From URL" with "To URL (so we can transform the URL)".</p>',
       '#prefix' => '<div id="names-fieldset-wrapper">',
       '#suffix' => '</div>',
     ];
@@ -218,6 +239,8 @@ class SettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->config('sand_remote.settings')
       ->set('queue', $form_state->getValue(['queue']))
+      ->set('webdata', $form_state->getValue(['webdata']))
+      ->set('no_text_body_status', $form_state->getValue(['no_text_body_status']))
       ->set('fetch', $form_state->getValue(['fetch']))
       ->set('utf8threechar', $form_state->getValue(['utf8threechar']))
       ->set('source_field', $form_state->getValue(['source_field']))
