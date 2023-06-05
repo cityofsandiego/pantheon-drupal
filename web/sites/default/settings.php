@@ -39,5 +39,5 @@ if(file_exists($redirect_file)) {
 }
 
 // Added by City of San Diego
-$settings['config_exclude_modules'] = ['devel', 'webprofiler', 'examples', 'config_single_export' ];
+$settings['config_exclude_modules'] = ['devel', 'webprofiler', 'examples', 'config_single_export', 'restui' ];
 
