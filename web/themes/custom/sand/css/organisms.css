@@ -12,6 +12,9 @@
 /* ============================================================
   Vendor-specific styles.
   ============================================================ */
+ul {
+  padding-left: 2rem; }
+
 /**
  * Foundation for Sites
  * Version 6.7.5
@@ -2372,7 +2375,8 @@ textarea {
     color: #e89e3b; }
   .header .header-second .tb-megamenu .nav li.dropdown.active > .dropdown-toggle:hover,
   .header .header-second .tb-megamenu .nav li.dropdown.open > .dropdown-toggle:hover,
-  .header .header-second .tb-megamenu .nav > li.dropdown.open.active > a:hover, .header .header-second .tb-megamenu .nav > li.dropdown.open.active > span.tb-megamenu-no-link:hover,
+  .header .header-second .tb-megamenu .nav > li.dropdown.open.active > a:hover,
+  .header .header-second .tb-megamenu .nav > li.dropdown.open.active > span.tb-megamenu-no-link:hover,
   .header .header-second .tb-megamenu-submenu-toggle:hover,
   .header .header-second .tb-megamenu-submenu-toggle:focus,
   .header .header-second .tb-megamenu .tb-megamenu-item > a:hover,
@@ -2441,8 +2445,8 @@ textarea {
         background: -webkit-linear-gradient(top, #fff 0%, #d4d4d4 100%);
         background: -o-linear-gradient(top, #fff 0%, #d4d4d4 100%);
         background: -ms-linear-gradient(top, #fff 0%, #d4d4d4 100%);
-        background: linear,to bottom,#fff 0%,#d4d4d4 100%;
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d4d4d4',GradientType=0 );
+        background: linear, to bottom, #fff 0%, #d4d4d4 100%;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d4d4d4', GradientType=0);
         z-index: 1; }
       .header .header-second .tb-megamenu-main .tb-megamenu-nav .tb-megamenu-item:first-child:before {
         width: 0; }
@@ -2583,6 +2587,79 @@ textarea {
 
 .accessibility-tools .high-contrast-switch {
   display: inline-block; }
+
+.top-nav-strip {
+  color: white;
+  padding: .5em 1em;
+  background: #005bbb;
+  font-size: .8125rem; }
+  header .top-nav-strip {
+    padding: .5em 1em;
+    background: white;
+    box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 300; }
+    header .top-nav-strip p a {
+      color: #37424a; }
+      header .top-nav-strip p a img {
+        height: 30px;
+        width: auto;
+        max-width: none; }
+  .top-nav-strip p {
+    margin: 0;
+    line-height: 1.9; }
+    .top-nav-strip p a {
+      color: white;
+      text-decoration: none; }
+      .top-nav-strip p a:hover {
+        text-decoration: underline; }
+  .top-nav-strip a {
+    font-family: "Open Sans", sans-serif; }
+
+section.not-found {
+  background: url("../images/skyline-silhouette.jpg") no-repeat center bottom;
+  height: 100%;
+  position: absolute;
+  width: 100%; }
+
+.not-found .simple-header {
+  padding: 0.5em 1em;
+  background: white;
+  box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 300; }
+
+.not-found .form-submit {
+  padding: 0;
+  width: 2rem; }
+
+.not-found .input-group {
+  margin: 0; }
+
+.not-found .input-group-field {
+  border-color: #0098db;
+  border-radius: 4px 0 0 4px; }
+
+.not-found .input-group-submit {
+  display: flex; }
+  .not-found .input-group-submit input {
+    padding: 0 1.75em; }
+
+.not-found input {
+  font-size: 0.86rem; }
+  .not-found input::placeholder {
+    color: #37424a; }
+
+.not-found .form--search input[type="submit"] {
+  color: #0098db;
+  border-radius: 0 4px 4px 0;
+  border: 1px solid #0098db;
+  background-image: url(../images/search-icon.png);
+  background-color: #0098db; }
+
+.not-found .form--search input:focus {
+  border-top-color: #0098db;
+  border-left-color: #0098db; }
 
 .hero__slides {
   z-index: 4;
@@ -3412,5 +3489,32 @@ textarea {
   font-size: 0.8125rem;
   list-style-type: circle !important;
   padding-inline-start: 1rem !important; }
+
+/* ============================================================
+  Styles for cards and featured cards.
+  ============================================================ */
+/* Cards Styles from D7 */
+body.path-search aside.layout-sidebar-second .border.block {
+  margin-bottom: 2em;
+  padding-bottom: 2em; }
+
+@media print, screen and (min-width: 48em) {
+  body.path-search aside.layout-sidebar-second .block {
+    margin-top: 1em;
+    margin-bottom: 1em; } }
+
+body.path-search aside.layout-sidebar-second .block h3 {
+  margin: 0; }
+
+body.path-search aside.layout-sidebar-second .block ul {
+  padding: 0 1em 0 0 !important; }
+
+body.path-search aside.layout-sidebar-second .block li.facet-item {
+  list-style-type: none; }
+  body.path-search aside.layout-sidebar-second .block li.facet-item label {
+    margin-right: 5px; }
+
+body.path-search aside.layout-sidebar-second .block .facets-checkbox {
+  width: 1em; }
 
 /*# sourceMappingURL=organisms.css.map */
