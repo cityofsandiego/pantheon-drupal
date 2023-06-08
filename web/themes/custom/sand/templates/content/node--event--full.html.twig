@@ -80,21 +80,17 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
   ]
 %}
-<article{{ attributes.addClass(classes) }}>
 
+
+{% if node.field_type_of_event.0.value == "normal" %}
+<article{{ attributes.addClass(classes) }}>
   <div {{ content_attributes.addClass('node__content') }}>
     <div class="grid-x l-margin-ts l-margin-bd l-padding-desktop-hm">
       <div class="cell small-12 medium-auto main__message main__message--white l-padding-mobile-hm">
-        
         {% if content.field_image[0] %}
 
           <!-- Image Text if exists will take up 3 columns to the right -->
-          {# {% if content.field_image_text[0] %} #}
             <div class="twelve columns">
-          {# {%} else %} #}
-            {# <div class="nine columns"> #}
-          {# {% endif %} #}
-
               <div class="main__message main__message--white">
 
               {% if label %}
@@ -174,7 +170,7 @@
 
                     <!-- Event URL -->
                     {% if content.field_website[0] %}
-                      <p><strong>Website:</strong> <a href="{{ content.field_website.0.value }}">{{ content['field_event_activity_url'][0] }}</a></p>
+                      <p><strong>Website:</strong>{{ content.field_website }}</p>
                     {% endif %}
                    </div>
 
@@ -207,6 +203,9 @@
                     <!-- // End Address Card -->
                     </div>
                 </div>
+                <div id="maprow" class="row">
+                  {{ content.field_address_pin }}
+                </div>
                 {# <?php if ($special_events): ?> #}
                   <div class="row l-padding-hs l-padding-tm l-padding-bd background-white">
                     <div id="events-btns" class="field-collection-container clearfix">
@@ -232,30 +231,7 @@
 
 </div> <!-- l-constrained -->
 
-
-
-
-<div class="hero__wrap">
-  <div class="hero__bg hero__bg--secondary" style="background-image:url('<?php print base_path() . path_to_theme(); ?>/assets/dist/img/skyline-v2.jpg');"></div>
-  <script>hero_put_bg_credit();</script>
-  <div class="l-constrained">
-    <div class="row">
-      <div class="twelve columns no-gutters">
-        <div class="row">
-          <div class="twelve columns no-gutters">
-            <div class="main__message main__message--transparent l-padding-mobile-hm">
-              <p class="h1 main__heading"><?php print $template_top_department; ?></p>
-            </div>
-
-            <nav class="sub-navigation l-padding-mobile-hd">
-              <?php print render($region['sub-navigation']); ?>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{% else %}
 
 <div class="l-constrained l-constrained--main l-padding-mobile-hm background-white">
 
@@ -267,7 +243,7 @@
             <!-- Title is the name -->
             <h1>Cold Case: <br class="hide-on-desktop"/>{{ label }}</h1>
             {# <?php if (!empty($content["field_event_type"]["#items"][0]["taxonomy_term"]->name)): ?> #}
-              <h3>{{ content.field_type_of_event }}</h3>
+              <h3>{{ content.field_event_type[0] }}</h3>
             {# <?php endif; ?> #}
           </div>
           <?php if (!$solved): ?>
@@ -352,3 +328,5 @@
 
 
 </div> <!-- l-constrained -->
+
+{% endif %}
