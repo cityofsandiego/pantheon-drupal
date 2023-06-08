@@ -48,6 +48,8 @@ dependencies:
   module:
     - address
     - datetime
+    - geocoder_field
+    - geofield_map
     - link
     - options
     - smart_date
@@ -70,6 +72,98 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  field_address_pin:
+    type: geofield_google_map
+    label: hidden
+    settings:
+      map_dimensions:
+        width: 100%
+        height: 300px
+      map_empty:
+        empty_behaviour: '0'
+        empty_message: 'No Geofield Value entered for this field'
+      map_center:
+        lat: !!float 42
+        lon: 12.5
+        center_force: false
+      map_zoom_and_pan:
+        zoom:
+          initial: 16
+          force: false
+          min: 1
+          max: 22
+          finer: 0
+        gestureHandling: auto
+        scrollwheel: false
+        draggable: false
+        map_reset_position: TOP_RIGHT
+        map_reset: false
+      map_controls:
+        zoom_control: true
+        map_type_id: roadmap
+        map_type_control: true
+        map_type_control_options_type_ids:
+          roadmap: roadmap
+          satellite: satellite
+          hybrid: hybrid
+          terrain: terrain
+        scale_control: true
+        street_view_control: true
+        fullscreen_control: true
+        disable_default_ui: false
+      map_marker_and_infowindow:
+        icon_image_mode: icon_file
+        icon_file_wrapper:
+          icon_file:
+            fids: ''
+            upload: ''
+            is_svg: false
+          image_style: geofield_map_default_icon_style
+        icon_image_path: ''
+        infowindow_field: title
+        view_mode: full
+        tooltip_field: title
+        multivalue_split: false
+        force_open: false
+      map_oms:
+        map_oms_control: true
+        map_oms_options: '{"markersWontMove":"true","markersWontHide":"true","basicFormatEvents":"true","nearbyDistance":3}'
+      map_additional_options: ''
+      map_geometries_options: '{"strokeColor":"black","strokeOpacity":"0.8","strokeWeight":2,"fillColor":"blue","fillOpacity":"0.1","clickable":false}'
+      custom_style_map:
+        custom_style_name: ''
+        custom_style_options: ''
+        custom_style_control: false
+        custom_style_default: false
+      map_markercluster:
+        markercluster_additional_options: '{"maxZoom":12,"gridSize":50}'
+        markercluster_control: false
+      map_geocoder:
+        control: 0
+        settings:
+          providers:
+            googlemaps:
+              weight: 0
+              checked: false
+          min_terms: 4
+          delay: 800
+          options: ''
+          zoom: 16
+          infowindow: false
+          position: TOP_LEFT
+          input_size: 25
+      map_additional_libraries:
+        places: false
+        drawing: false
+        geometry: false
+        visualization: false
+      map_lazy_load:
+        lazy_load: false
+      gmap_api_key: ''
+      weight: ''
+    third_party_settings: {  }
+    weight: 26
+    region: content
   field_department:
     type: entity_reference_label
     label: above
@@ -83,7 +177,7 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 28
+    weight: 29
     region: content
   field_event_activity_seq_num:
     type: number_decimal
@@ -117,7 +211,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 27
+    weight: 28
     region: content
   field_event_date:
     type: smartdate_default
@@ -162,7 +256,7 @@ content:
       scale: 2
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 29
+    weight: 30
     region: content
   field_event_expected_participant:
     type: number_decimal
@@ -173,7 +267,7 @@ content:
       scale: 2
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 30
+    weight: 31
     region: content
   field_event_host_nm:
     type: string
@@ -344,24 +438,26 @@ content:
     weight: 37
     region: content
   field_evet_pin_address:
-    type: string
-    label: above
+    type: geocoder_geocode_formatter
+    label: hidden
     settings:
-      link_to_entity: false
+      dumper: wkt
+      providers: {  }
     third_party_settings: {  }
-    weight: 26
+    weight: 27
     region: content
   field_image:
-    type: entity_reference_label
-    label: above
+    type: entity_reference_entity_view
+    label: hidden
     settings:
+      view_mode: default
       link: true
     third_party_settings: {  }
     weight: 14
     region: content
   field_images:
     type: entity_reference_entity_view
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: false
@@ -393,13 +489,13 @@ content:
     region: content
   field_website:
     type: link
-    label: above
+    label: hidden
     settings:
       trim_length: 80
-      url_only: false
+      url_only: true
       url_plain: false
-      rel: ''
-      target: ''
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
     weight: 8
     region: content
@@ -409,7 +505,6 @@ content:
     weight: 1
     region: content
 hidden:
-  field_address_pin: true
   field_d7_nid: true
   field_edit_notes: true
   langcode: true
