@@ -11,9 +11,8 @@ dependencies:
     - sand_remote
     - serialization
     - user
-    - views_data_export
-id: remote_web_data_processing_via_tesseract
-label: 'Remote Web Data Processing via Tesseract'
+id: web_data_process_pdfs_via_tesseract
+label: 'Web Data Process PDFs via Tesseract'
 module: views
 description: 'The web data server looks at the output of this view to see what entities it should try and process'
 tag: ''
@@ -161,7 +160,7 @@ display:
         type: some
         options:
           offset: 0
-          items_per_page: 10
+          items_per_page: 5
       exposed_form:
         type: basic
         options:
@@ -323,20 +322,16 @@ display:
     display_plugin: rest_export
     position: 2
     display_options:
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 5
       style:
-        type: data_export
+        type: serializer
         options:
           formats:
             csv: csv
-          csv_settings:
-            delimiter: ','
-            enclosure: '"'
-            escape_char: \
-            strip_tags: true
-            trim: true
-            encoding: utf8
-            utf8_bom: '0'
-            use_serializer_encode_only: false
       row:
         type: data_field
         options:
