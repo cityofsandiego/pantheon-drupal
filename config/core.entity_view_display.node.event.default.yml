@@ -28,6 +28,7 @@ dependencies:
     - field.field.node.event.field_event_no_show_time
     - field.field.node.event.field_event_non_public_contact
     - field.field.node.event.field_event_organizer_nm
+    - field.field.node.event.field_event_pin_address
     - field.field.node.event.field_event_public_contact_txt
     - field.field.node.event.field_event_public_visibility
     - field.field.node.event.field_event_seq_num
@@ -353,6 +354,15 @@ content:
     third_party_settings: {  }
     weight: 33
     region: content
+  field_event_pin_address:
+    type: geocoder_geocode_formatter
+    label: hidden
+    settings:
+      dumper: wkt
+      providers: {  }
+    third_party_settings: {  }
+    weight: 27
+    region: content
   field_event_public_contact_txt:
     type: string
     label: above
@@ -437,15 +447,6 @@ content:
     third_party_settings: {  }
     weight: 37
     region: content
-  field_evet_pin_address:
-    type: geocoder_geocode_formatter
-    label: hidden
-    settings:
-      dumper: wkt
-      providers: {  }
-    third_party_settings: {  }
-    weight: 27
-    region: content
   field_image:
     type: entity_reference_entity_view
     label: hidden
@@ -507,5 +508,6 @@ content:
 hidden:
   field_d7_nid: true
   field_edit_notes: true
+  field_evet_pin_address: true
   langcode: true
   search_api_excerpt: true
