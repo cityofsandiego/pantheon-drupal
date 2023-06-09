@@ -415,42 +415,54 @@ class ExtractText {
     // If the source url is empty then clear out the target field.
     if (empty($url) && !empty($target_field)) {
       $entity->$target_field->value = '';
+      if ($entity->hasField('field_body_status') && $entity->hasField('field_internal_notes')) {
+        $entity->field_body_status->value = 'cleared:' . date('YmdHis');
+        $entity->field_internal_notes->value = 'The source url was empty and the target field was not.';
+      }
       $changed = TRUE;
     }
 
-      // See if the configuration wants us to bring the file locally first.
-      $fetch = \Drupal::config('sand_remote.settings')->get('fetch');
-      if ($fetch) {
-          $file = $this->getRemoteFile('temporary://', TRUE, FileSystemInterface::EXISTS_RENAME);
-          if ($file instanceof File) {
-              // For some reason it set the file to permanent minute even know the destination is temporary, resetting it here.
-              $file->setTemporary();
-              $file->save();                  
-              $this->setFile($file);
-              $this->setFileSize($file->getSize());
-              $extracted_text = $this->extractText();
-          }
-      } else {
-          // Create a file object since the extractor needs it. It's a temp file.
-          $file = $this->createURLFile($url);
-          $this->setFile($file);
-          $extracted_text = $this->extractText();
+    // See if the configuration wants us to bring the file locally first.
+    if (\Drupal::config('sand_remote.settings')->get('fetch')) {
+      $file = $this->getRemoteFile('temporary://', TRUE, FileSystemInterface::EXISTS_RENAME);
+      if ($file instanceof File) {
+        // For some reason it set the file to permanent minute even know the destination is temporary, resetting it here.
+        $file->setTemporary();
+        $file->save();
+        $this->setFile($file);
+        $this->setFileSize($file->getSize());
+        $extracted_text = $this->extractText();
       }
-
-    
-    // If both are NULL/empty string then nothing to do.
-    if (empty($target_value) && empty($extracted_text)) {
-      $changed = FALSE;
     }
+    else {
+      // Create a file object since the extractor needs it. It's a temp file.
+      $file = $this->createURLFile($url);
+      $this->setFile($file);
+      $extracted_text = $this->extractText();
+    }
+
+    if (empty($extracted_text)) {
+      if ($entity->hasField('field_body_status') && $entity->hasField('field_internal_notes')) {
+        $body_status = \Drupal::config('sand_remote.settings')->get('no_text_body_status');
+        $entity->field_body_status->value = $body_status . ':' . date('YmdHis');
+        $entity->field_internal_notes->value = 'The extracted text was empty, queue it for the webdata server to try by marking it with specific text in the field_body_status (seeing settings for Remote Data).';
+      }
+      $changed = TRUE;
+    }
+    
     // If the extracted text is different from the current value, update it.
     elseif ($target_value !== $extracted_text) {
       $entity->$target_field->value = $extracted_text;
+      if ($entity->hasField('field_body_status') && $entity->hasField('field_internal_notes')) {
+        $entity->field_body_status->value = 'updated:' . date('YmdHis');
+        $entity->field_internal_notes->value = 'The extracted text was different than the current target field';
+      }
       $changed = TRUE;
     }
     
     // If we changed something, save it.
     if ($changed) {
-      // @todo maybe set a status field and extraction time.
+      $entity->set('field_import_date', date('Y-m-d\TH:i:s', time()));
       $entity->save();
     }
     
