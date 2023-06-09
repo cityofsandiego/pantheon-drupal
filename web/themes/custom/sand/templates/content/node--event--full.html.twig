@@ -265,17 +265,17 @@
               {% if content.field_event_date[0] %}
                 <div class="date-wrapper">
                   <p class="l-margin-bn"><strong class="fine-print">CASE DATE: </strong></br>
-                  {# <?php print $date_case_opened; ?> #}
+                      {{ node.field_event_date.0.value|date("F j, Y") }}
                   </p>
                 </div>
               {% endif %}
-              {# <?php if (!empty($date_case_closed) && $solved): ?> #}
+              {% if node.field_event_date.0.end_value %}
                 <div class="date-wrapper">
                   <p class="l-margin-bn l-margin-td"><strong class="fine-print">CASE CLOSED ON: </strong></br>
-                    {# <?php print $date_case_closed; ?> #}
+                      {{ node.field_event_date.0.end_value|date("F j, Y") }}
                   </p>
                 </div>
-              {# <?php endif ?> #}
+              {% endif %}
               <!-- Address -->
               <address>
                 <p class="l-margin-bn l-margin-td">
