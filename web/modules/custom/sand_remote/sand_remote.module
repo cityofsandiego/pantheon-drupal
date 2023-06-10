@@ -134,8 +134,10 @@ function sand_remote_sand_remote_insert(\Drupal\Core\Entity\EntityInterface $ent
  * Implements hook_ENTITY_TYPE_update().
  */
 function sand_remote_sand_remote_update(\Drupal\Core\Entity\EntityInterface $entity): void {
-  if($entity->field_skip_queuing_for_text_extract->value) {
-    $entity->set('field_skip_queuing_for_text_extract', FALSE);
+  // Only queue it for extracting text via tika if it's not already being updated
+  // with tika extracted text or text extracted via webdata server.
+  if ($entity->field_skip_text_extract_queuing->value) {
+    $entity->set('field_skip_text_extract_queuing', FALSE);
   }
   else {
     $added_to_queue = \Drupal::service('sand.extract_text')

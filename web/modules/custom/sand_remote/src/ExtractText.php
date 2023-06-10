@@ -12,6 +12,7 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\File\Exception\FileException;
 use Drupal\Core\File\Exception\InvalidStreamWrapperException;
 use GuzzleHttp\Exception\TransferException;
+use Drupal\Core\Logger\RfcLogLevel;
 
 /**
  * Service description.
@@ -202,9 +203,17 @@ class ExtractText {
       if (\Drupal::config('sand_remote.settings')->get('utf8threechar')) {
         $cleaned_data = $this->convertToThreeCharUTF8($cleaned_data);
       }
+      // Set logging level based on amount of cleaned data returned.
+      if ($cleaned_data === 0) {
+        $level = $severity = RfcLogLevel::WARNING;
+      }
+      else {
+        $level = RfcLogLevel::INFO;
+      }
       // @todo interface with Boone's tesserac server if the cleaned data is empty
       \Drupal::logger('sand_remote')
-        ->info('Got %size text extracting from %entity_type ID: %id, on URL: %url, File Size: %filesize', [
+        ->log($level,
+          'Got %size text extracting from %entity_type ID: %id, on URL: %url, File Size: %filesize', [
           '%size' => round(strlen($cleaned_data) / 1024, 2) . 'KB',
           '%entity_type' => $this->getEntityType(),
           '%id' => $this->getEntityId(),
@@ -463,7 +472,7 @@ class ExtractText {
     // If we changed something, save it.
     if ($changed) {
       $entity->set('field_import_date', date('Y-m-d\TH:i:s', time()));
-      $entity->set('field_skip_queuing_for_text_extract', TRUE);
+      $entity->set('field_skip_text_extract_queuing', TRUE);
       $entity->save();
     }
     
