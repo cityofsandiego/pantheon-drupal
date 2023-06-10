@@ -34,6 +34,7 @@ dependencies:
     - field.field.sand_remote.external.field_r_modify_date
     - field.field.sand_remote.external.field_r_object_id
     - field.field.sand_remote.external.field_search_keymatch
+    - field.field.sand_remote.external.field_skip_text_extract_queuing
     - field.field.sand_remote.external.field_sort1
     - field.field.sand_remote.external.field_source
     - field.field.sand_remote.external.field_source_name
@@ -43,8 +44,92 @@ dependencies:
     - sand_remote.sand_remote_type.external
   module:
     - datetime
-    - media_library
+    - field_group
     - text
+third_party_settings:
+  field_group:
+    group_urls:
+      children:
+        - field_document_url
+        - field_a_webc_url
+      label: URLs
+      region: content
+      parent_name: ''
+      weight: 16
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_source:
+      children:
+        - field_source
+        - field_source_name
+      label: Source
+      region: content
+      parent_name: ''
+      weight: 17
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_text_extract_info:
+      children:
+        - field_body_status
+        - field_internal_notes
+      label: 'Text Extract Info'
+      region: content
+      parent_name: ''
+      weight: 14
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_dates:
+      children:
+        - field_r_modify_date
+        - field_doc_date
+        - field_doc_date_num
+        - field_doc_date_year
+        - field_back_date
+        - created
+      label: Dates
+      region: content
+      parent_name: ''
+      weight: 15
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_pn_fields:
+      children:
+        - field_pn_category
+        - field_pn_comm_plan_group
+        - field_pn_council_district
+        - field_pn_end_date
+        - field_pn_end_date_date
+      label: 'PN Fields'
+      region: content
+      parent_name: ''
+      weight: 18
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
 _core:
   default_config_hash: Q8Vt9QOrZ-O4x8_ex-Hhzsmke0sv_WylxoM-Bi7QT64
 id: sand_remote.external.default
@@ -54,29 +139,13 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 4
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
-  description:
-    type: text_textarea
-    weight: 2
-    region: content
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
   field_a_webc_url:
     type: string_textfield
-    weight: 6
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_action:
-    type: string_textfield
-    weight: 5
+    weight: 26
     region: content
     settings:
       size: 60
@@ -84,13 +153,13 @@ content:
     third_party_settings: {  }
   field_back_date:
     type: datetime_default
-    weight: 7
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
   field_body:
     type: text_textarea_with_summary
-    weight: 9
+    weight: 20
     region: content
     settings:
       rows: 9
@@ -100,7 +169,7 @@ content:
     third_party_settings: {  }
   field_body_status:
     type: string_textfield
-    weight: 10
+    weight: 18
     region: content
     settings:
       size: 60
@@ -112,44 +181,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_d7_nid:
-    type: number
-    weight: 40
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
   field_doc_date:
     type: datetime_default
-    weight: 12
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
   field_doc_date_num:
-    type: string_textfield
-    weight: 13
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_doc_date_year:
-    type: string_textfield
-    weight: 14
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_doc_num:
-    type: string_textfield
-    weight: 15
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_doc_set:
     type: string_textfield
     weight: 16
     region: content
@@ -157,57 +195,37 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_doc_date_year:
+    type: string_textfield
+    weight: 17
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_doc_num:
+    type: string_textfield
+    weight: 9
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_doc_set:
+    type: string_textfield
+    weight: 7
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_doc_type:
     type: options_select
-    weight: 17
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   field_document_url:
-    type: string_textfield
-    weight: 18
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_flag_color:
-    type: string_textfield
-    weight: 19
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_flag_text:
-    type: string_textfield
-    weight: 20
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_import_date:
-    type: datetime_default
-    weight: 21
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_internal_notes:
-    type: string_textfield
-    weight: 22
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_muni_code_chapter:
-    type: options_select
-    weight: 23
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_object_name:
     type: string_textfield
     weight: 24
     region: content
@@ -215,30 +233,37 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_internal_notes:
+    type: string_textfield
+    weight: 20
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_muni_code_chapter:
+    type: options_select
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_object_name:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_path:
     type: string_textfield
-    weight: 25
+    weight: 10
     region: content
     settings:
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_pdf:
-    type: media_library_widget
-    weight: 26
-    region: content
-    settings:
-      media_types: {  }
     third_party_settings: {  }
   field_pn_category:
-    type: string_textfield
-    weight: 27
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_pn_comm_plan_group:
     type: string_textfield
     weight: 28
     region: content
@@ -246,7 +271,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_pn_council_district:
+  field_pn_comm_plan_group:
     type: string_textfield
     weight: 29
     region: content
@@ -254,9 +279,17 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_pn_end_date:
+  field_pn_council_district:
     type: string_textfield
     weight: 30
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pn_end_date:
+    type: string_textfield
+    weight: 31
     region: content
     settings:
       size: 60
@@ -270,13 +303,13 @@ content:
     third_party_settings: {  }
   field_r_modify_date:
     type: datetime_default
-    weight: 33
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
   field_r_object_id:
     type: string_textfield
-    weight: 34
+    weight: 6
     region: content
     settings:
       size: 60
@@ -284,7 +317,7 @@ content:
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete
-    weight: 35
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -292,16 +325,22 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_skip_text_extract_queuing:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_sort1:
     type: number
-    weight: 36
+    weight: 13
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_source:
     type: string_textfield
-    weight: 37
+    weight: 28
     region: content
     settings:
       size: 60
@@ -309,7 +348,7 @@ content:
     third_party_settings: {  }
   field_source_name:
     type: string_textfield
-    weight: 38
+    weight: 29
     region: content
     settings:
       size: 60
@@ -317,25 +356,11 @@ content:
     third_party_settings: {  }
   field_title_long:
     type: string_textarea
-    weight: 31
+    weight: 1
     region: content
     settings:
       rows: 5
       placeholder: ''
-    third_party_settings: {  }
-  field_url:
-    type: string_textfield
-    weight: 8
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_validated:
-    type: options_select
-    weight: 39
-    region: content
-    settings: {  }
     third_party_settings: {  }
   label:
     type: string_textfield
@@ -347,14 +372,14 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 1
+    weight: 2
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 3
+    weight: 19
     region: content
     settings:
       match_operator: CONTAINS
@@ -363,4 +388,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  description: true
   feeds_item: true
+  field_action: true
+  field_d7_nid: true
+  field_flag_color: true
+  field_flag_text: true
+  field_import_date: true
+  field_pdf: true
+  field_url: true
+  field_validated: true

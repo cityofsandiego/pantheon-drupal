@@ -1,0 +1,31 @@
+uuid: 94c8067c-c698-4f96-bef5-3990ed0896d2
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - options
+    - sand_remote
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: sand_remote.field_skip_text_extract_queuing
+field_name: field_skip_text_extract_queuing
+entity_type: sand_remote
+type: list_integer
+settings:
+  allowed_values:
+    -
+      value: 0
+      label: 'Do not Skip'
+    -
+      value: 1
+      label: 'Skip Queuing to Tika for Text Extract'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
