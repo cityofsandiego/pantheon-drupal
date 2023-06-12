@@ -12,6 +12,7 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\File\Exception\FileException;
 use Drupal\Core\File\Exception\InvalidStreamWrapperException;
 use GuzzleHttp\Exception\TransferException;
+use Drupal\Core\Logger\RfcLogLevel;
 
 /**
  * Service description.
@@ -202,9 +203,17 @@ class ExtractText {
       if (\Drupal::config('sand_remote.settings')->get('utf8threechar')) {
         $cleaned_data = $this->convertToThreeCharUTF8($cleaned_data);
       }
+      // Set logging level based on amount of cleaned data returned.
+      if ($cleaned_data === 0) {
+        $level = $severity = RfcLogLevel::WARNING;
+      }
+      else {
+        $level = RfcLogLevel::INFO;
+      }
       // @todo interface with Boone's tesserac server if the cleaned data is empty
       \Drupal::logger('sand_remote')
-        ->info('Got %size text extracting from %entity_type ID: %id, on URL: %url, File Size: %filesize', [
+        ->log($level,
+          'Got %size text extracting from %entity_type ID: %id, on URL: %url, File Size: %filesize', [
           '%size' => round(strlen($cleaned_data) / 1024, 2) . 'KB',
           '%entity_type' => $this->getEntityType(),
           '%id' => $this->getEntityId(),
@@ -394,11 +403,11 @@ class ExtractText {
       return FALSE;
     }
 
-    // Set variable to say we are setting the Text so don't fire our hooks for insert and update.
-    /** @var \Drupal\Core\TempStore\PrivateTempStore $tempstore */
-    $tempstore = \Drupal::service('tempstore.private');
-    $store = $tempstore->get('extracting_text');
-    $store->set('entity_type_id', $this->getEntityType() . ':' . $this->getEntityId());
+//    // Set variable to say we are setting the Text so don't fire our hooks for insert and update.
+//    /** @var \Drupal\Core\TempStore\PrivateTempStore $tempstore */
+//    $tempstore = \Drupal::service('tempstore.private');
+//    $store = $tempstore->get('extracting_text');
+//    $store->set('entity_type_id', $this->getEntityType() . ':' . $this->getEntityId());
 
     $url = $this->getUrlField();
     
@@ -408,7 +417,7 @@ class ExtractText {
 
     // If source and target are empty then just return.
     if (empty($url) && empty($target_value)) {
-      $store->delete('entity_type_id');
+//      $store->delete('entity_type_id');
       return FALSE;
     }
     
@@ -463,12 +472,13 @@ class ExtractText {
     // If we changed something, save it.
     if ($changed) {
       $entity->set('field_import_date', date('Y-m-d\TH:i:s', time()));
+      $entity->set('field_skip_text_extract_queuing', TRUE);
       $entity->save();
     }
     
     // Delete out the variable that says we are processing it. This was set so
     // in the *_update or *_insert hooks don't loop endlessly.
-    $store->delete('entity_type_id');
+//    $store->delete('entity_type_id');
     
     // Return if we $changed to say if we updated the entity or not.
     return $changed;
@@ -524,24 +534,25 @@ class ExtractText {
     if (empty($source)) {
       return FALSE;
     }
+//
+//    /** @var \Drupal\Core\TempStore\PrivateTempStore $tempstore */
+//    $tempstore = \Drupal::service('tempstore.private');
+//    $store = $tempstore->get('extracting_text');
+//    $is_processing = $store->get('entity_type_id');
 
-    /** @var \Drupal\Core\TempStore\PrivateTempStore $tempstore */
-    $tempstore = \Drupal::service('tempstore.private');
-    $store = $tempstore->get('extracting_text');
-    $is_processing = $store->get('entity_type_id');
-
-    // See if we are in the process of setting a field equal to it's extracted text, then skip the update to avoid a loop.
-    if ($is_processing) {
-      // If Inserting.
-      if ($entity->isNew()) {
-        return FALSE;
-      }
-      // If Updating see is it's this entity id.
-      [, $entity_id] = explode(':', $is_processing);
-      if ($entity_id === $entity->id()) {
-        return FALSE;
-      }
-    }
+//    // See if we are in the process of setting a field equal to it's extracted text, then skip the update to avoid a loop.
+//    if ($is_processing) {
+//      // If Inserting.
+//      if ($entity->isNew()) {
+//        return FALSE;
+//      }
+//      
+//      // If Updating see is it's this entity id.
+//      [, $entity_id] = explode(':', $is_processing);
+//      if ($entity_id === $entity->id()) {
+//        return FALSE;
+//      }
+//    }
 
     $queue = \Drupal::service('queue')->get('sand_remote_queue');
     $item = new ExtractText();
