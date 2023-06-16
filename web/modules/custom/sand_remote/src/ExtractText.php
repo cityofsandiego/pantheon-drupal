@@ -336,7 +336,7 @@ class ExtractText {
   public function cleanExtractedData($string): string {
     
     // No work to do.
-    if (is_numeric($string)) {
+    if (is_null($string)) {
       return '';
     }
     
