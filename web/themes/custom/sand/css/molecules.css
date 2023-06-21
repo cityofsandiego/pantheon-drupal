@@ -11,7 +11,7 @@
 /* ============================================================
   Vendor-specific styles.
   ============================================================ */
-ul {
+ul, ol {
   padding-left: 2rem; }
 
 /**
@@ -1798,13 +1798,15 @@ textarea {
       width: 100%; } }
 
 /* Alerts
-   ========================================================================== */
+  ========================================================================== */
 .alert {
-  color: white;
-  background: #005bbb; }
+  padding: 1em;
+  text-align: center;
+  position: relative p; }
   .alert i {
-    font-size: 32px;
-    font-size:  calc($unitless-value / $baseline-px)rem; }
+    font-size: 1.5rem;
+    vertical-align: middle;
+    margin-right: 0.5em; }
   .alert .alert__heading {
     color: white;
     padding: .2em .5em;
@@ -1816,9 +1818,15 @@ textarea {
   .alert .alert__content {
     padding: 0 .75em; }
 
+.sitewide-alert .close {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0.5em;
+  font-size: 2em; }
+
 .amenities-restrictions--title {
-  font-weight: bold;
-  padding-left: 0.5rem; }
+  font-weight: bold; }
 
 /* ============================================================
   Styles for cards and featured cards.
@@ -1833,7 +1841,6 @@ textarea {
     padding-bottom: 0; }
   @media print, screen and (min-width: 48em) {
     .card {
-      margin-top: 1em;
       margin-bottom: 1em; } }
 
 .card > a {
@@ -1843,36 +1850,36 @@ textarea {
   background: #f6f6f6; }
 
 .card__container {
-  position: relative; }
-  @media print, screen and (min-width: 80em) {
-    .card__container {
-      display: block;
-      display: -webkit-flex;
-      /* Safari */
-      display: flex;
-      -webkit-justify-content: flex-start;
-      /* Safari */
-      justify-content: flex-start;
-      -webkit-flex-wrap: wrap;
-      flex-wrap: wrap; } }
-  @media print, screen and (min-width: 80em) {
-    .card__container .slides {
-      display: block;
-      display: -webkit-flex;
-      /* Safari */
-      display: flex;
-      -webkit-justify-content: flex-start;
-      /* Safari */
-      justify-content: flex-start;
-      -webkit-flex-wrap: wrap;
-      flex-wrap: wrap; } }
+  position: relative;
+  /*@include breakpoint(large) {*/
+  display: block;
+  display: -webkit-flex;
+  /* Safari */
+  display: flex;
+  -webkit-justify-content: flex-start;
+  /* Safari */
+  justify-content: flex-start;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  /*}*/
+  /*@include breakpoint(large) {*/
+  /*}*/ }
+  .card__container .slides {
+    display: block;
+    display: -webkit-flex;
+    /* Safari */
+    display: flex;
+    -webkit-justify-content: flex-start;
+    /* Safari */
+    justify-content: flex-start;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap; }
   .card__container.mobile-flexslider {
     height: 100% !important; }
   .card__container.flexslider--mobile .slides .card__wrap {
     margin: 0 !important; }
   .card__container .card__wrap, .card__container .card--wrap {
     height: auto;
-    margin: 0 .5em;
     width: 100%; }
     @media print, screen and (min-width: 48em) {
       .card__container .card__wrap, .card__container .card--wrap {
@@ -1884,7 +1891,9 @@ textarea {
         padding-right: 1.0416588541%;
         width: 33.333333%; }
         .card__container .card__wrap .card, .card__container .card--wrap .card {
-          flex: 0 1 auto; } }
+          flex: 0 1 auto;
+          justify-content: flex-start;
+          overflow: hidden; } }
   .card__container .card__wrap_s, .card__container .card--wrap-s {
     height: auto;
     margin: 0 .5em;
@@ -1945,7 +1954,7 @@ textarea {
 .card__cta--graphic {
   text-align: center; }
   .card__cta--graphic background {
-    position: center center;
+    background-position: center center;
     repeat: no-repeat; }
   .card__cta--graphic > a {
     display: block;
@@ -2009,45 +2018,63 @@ textarea {
   font-family: "Merriweather", serif; }
 
 /* Featured Cards for D9 */
-.featured-card-group {
-  padding: 1rem 0; }
-  .featured-card-group h2 {
-    font-family: "Merriweather", serif;
+/*/.featured-card-group {
+  padding: 1rem 0;
+
+  h2 {
+    font-family: $headline;
     font-size: 1.6875rem;
-    margin: 1em 0 0.8em 0; }
-  .featured-card-group .featured-card-group__wrapper {
+    margin: 1em 0 0.8em 0;
+  }
+
+  .featured-card-group__wrapper {
     display: flex;
     flex-flow: column wrap;
     gap: 1rem;
-    flex-flow: row wrap; }
 
+    @include breakpoint(small) {
+      flex-flow: row wrap;
+    }
+  }
+}*/
 /* Featured Card Item for D9 */
-.featured-card {
-  background-color: #e4e9eb;
+/*.featured-card {
+  background-color: $mercury;
   border-radius: 4px;
-  width: calc(50% - .5rem); }
-  @media print, screen and (min-width: 60em) {
-    .featured-card {
-      width: calc(32.1%); } }
-  .featured-card a {
-    display: block;
-    text-decoration: none; }
-  .featured-card .image {
-    width: 100%;
-    height: auto; }
-  .featured-card img {
-    border-radius: 4px 4px 0 0; }
-  .featured-card .featured-card__content {
-    color: #333332;
-    padding: 1.5em; }
-    @media print, screen and (min-width: 48em) {
-      .featured-card .featured-card__content {
-        font-size: .8125rem; } }
-    .featured-card .featured-card__content .featured-card__heading {
-      font-family: "Merriweather", serif;
-      font-size: 1rem;
-      margin: 0 0 0.75em; }
+  width: calc(50% - .5rem);
 
+  @include breakpoint(site) {
+    width: calc(32.1%)
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+  }
+
+  img {
+    border-radius: 4px 4px 0 0;
+  }
+
+  .featured-card__content {
+    color: $charcoal;
+    @include breakpoint(medium) {
+      font-size: .8125rem;
+    }
+    padding: 1.5em;
+
+    .featured-card__heading {
+      font-family: $headline;
+      font-size: 1rem;
+      margin: 0 0 0.75em;
+    }
+  }
+}*/
 .comments-title {
   color: #37424a;
   font-size: 24px;
@@ -2228,6 +2255,99 @@ textarea {
     clear: both;
     float: right; }
 
+#get_it_done form, .get-it-done form {
+  margin-bottom: 1rem; }
+  @media print, screen and (min-width: 48em) {
+    #get_it_done form, .get-it-done form {
+      display: grid;
+      grid-template-columns: 25% 25% 1fr;
+      gap: 1rem; } }
+  #get_it_done form fieldset:not(fieldgroup), .get-it-done form fieldset:not(fieldgroup) {
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #222;
+    margin-bottom: 2.5em;
+    padding: 1.5em 1em 1em; }
+    @media print, screen and (min-width: 48em) {
+      #get_it_done form fieldset:not(fieldgroup), .get-it-done form fieldset:not(fieldgroup) {
+        width: 100%;
+        margin-bottom: 0; } }
+    #get_it_done form fieldset:not(fieldgroup) .form-item, .get-it-done form fieldset:not(fieldgroup) .form-item {
+      margin-bottom: 0;
+      font-size: 0.8125rem; }
+      #get_it_done form fieldset:not(fieldgroup) .form-item .form-select, .get-it-done form fieldset:not(fieldgroup) .form-item .form-select {
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%; }
+    #get_it_done form fieldset:not(fieldgroup):after, .get-it-done form fieldset:not(fieldgroup):after {
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      border-style: solid;
+      border-width: 10px 16px 0 16px;
+      border-color: #222 transparent transparent transparent;
+      bottom: -10px;
+      left: 50%;
+      -ms-transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%); }
+      @media print, screen and (min-width: 48em) {
+        #get_it_done form fieldset:not(fieldgroup):after, .get-it-done form fieldset:not(fieldgroup):after {
+          border-width: 16px 0 16px 10px;
+          border-color: transparent transparent transparent #222;
+          bottom: auto;
+          left: auto;
+          top: 55%;
+          right: -10px;
+          -ms-transform: translateY(-50%);
+          -webkit-transform: translateY(-50%);
+          transform: translateY(-50%); } }
+    #get_it_done form fieldset:not(fieldgroup) legend, .get-it-done form fieldset:not(fieldgroup) legend {
+      margin-top: -0.4rem;
+      margin-bottom: 0;
+      padding: 0 0.5rem;
+      font-family: Merriweather, 'Open Sans'; }
+      #get_it_done form fieldset:not(fieldgroup) legend .fieldset-legend, .get-it-done form fieldset:not(fieldgroup) legend .fieldset-legend {
+        color: #37424a;
+        text-transform: capitalize;
+        font-size: 1rem; }
+        #get_it_done form fieldset:not(fieldgroup) legend .fieldset-legend:before, .get-it-done form fieldset:not(fieldgroup) legend .fieldset-legend:before {
+          content: "";
+          width: 2em;
+          height: 2em;
+          line-height: 1.75em;
+          text-align: center;
+          background: #00c7b2;
+          color: #fff;
+          font-family: "Merriweather", serif;
+          display: inline-block;
+          border-radius: 50%;
+          margin-right: 0.5rem; }
+  #get_it_done form .step-1 legend .fieldset-legend:before, .get-it-done form .step-1 legend .fieldset-legend:before {
+    content: "1"; }
+  #get_it_done form .step-2 legend .fieldset-legend:before, .get-it-done form .step-2 legend .fieldset-legend:before {
+    content: "2"; }
+  #get_it_done form .step-3 legend .fieldset-legend:before, .get-it-done form .step-3 legend .fieldset-legend:before {
+    content: "3"; }
+  #get_it_done form .step-3 label, .get-it-done form .step-3 label {
+    display: none; }
+  @media print, screen and (min-width: 48em) {
+    #get_it_done form .step-3 .row, .get-it-done form .step-3 .row {
+      display: flex;
+      justify-content: space-between; } }
+  #get_it_done form .step-3:after, .get-it-done form .step-3:after {
+    display: none; }
+  #get_it_done form .form-actions, .get-it-done form .form-actions {
+    display: none;
+    /*@include breakpoint(medium) {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        display: block;
+        grid-column: 1/4;
+        grid-row: 2/3;
+      }*/ }
+
 /* ============================================================
   Styles for the iframe paragraph
   ============================================================ */
@@ -2316,7 +2436,7 @@ textarea {
     font-size: 24px;
     font-size:  calc($unitless-value / $baseline-px)rem; }
   .message.message--success {
-    background-color: #f2fae3; }
+    background-color: #e8f9e6; }
     .message.message--success i {
       color: #659f13; }
   .message.message--warning {
@@ -2342,7 +2462,7 @@ textarea {
 
 /* New set of classes. Requested by Ron */
 .message--success {
-  background-color: #f2fae3; }
+  background-color: #e8f9e6; }
   .message--success i {
     color: #659f13; }
 
@@ -2369,11 +2489,32 @@ textarea {
   .message--emergency i {
     font-size: 2.125rem; }
 
+/* ============================================================
+  Styles for office hours.
+  ============================================================ */
+.office-hours__item {
+  padding-bottom: .5em; }
+
+.office-hours-status--open .message, .office-hours-status--closed .message {
+  padding: 0.5em; }
+
+.office-hours-status--open .message {
+  border: 1px solid #659f13;
+  color: #195A16 !important; }
+
+.office-hours-status--closed .message {
+  border: 1px solid #940500;
+  color: #940500 !important; }
+
+.office-hours__item-comments {
+  padding-left: 0.5em; }
+
 .field--name-field-resources {
   display: flex;
   flex-flow: row wrap;
   justify-content: center; }
   .field--name-field-resources > .field__item {
+    display: flex;
     flex: 0 0 auto;
     width: calc(100% - 1.25rem);
     margin-left: 0.625rem;
@@ -2395,7 +2536,7 @@ textarea {
 
 .resources .paragraph--type--resources {
   display: flex;
-  margin-bottom: 1rem; }
+  width: 100%; }
   .resources .paragraph--type--resources .btn {
     align-items: center;
     display: flex;
@@ -2612,12 +2753,10 @@ textarea {
         margin-left: 0.9375rem;
         margin-right: 0.9375rem; } }
 
-.featured-items h6 {
-  font-size: 1rem; }
-
 .featured-items a,
 .featured-items a:hover {
-  color: #37424a; }
+  color: #37424a;
+  text-decoration: none; }
 
 .featured-items .featured-item-label {
   display: block;
