@@ -200,11 +200,8 @@ class ExtractText {
 
     try {
       $cleaned_data = $this->cleanExtractedData($extractor_plugin->extract($this->getFile()));
-      if (\Drupal::config('sand_remote.settings')->get('utf8threechar')) {
-        $cleaned_data = $this->convertToThreeCharUTF8($cleaned_data);
-      }
       // Set logging level based on amount of cleaned data returned.
-      if ($cleaned_data === 0) {
+      if (strlen($cleaned_data) === 0) {
         $level = $severity = RfcLogLevel::WARNING;
       }
       else {
@@ -336,7 +333,13 @@ class ExtractText {
    *
    * @return string
    */
-  protected function cleanExtractedData(string $string): string {
+  public function cleanExtractedData($string): string {
+    
+    // No work to do.
+    if (is_null($string)) {
+      return '';
+    }
+    
     // Strip out ant invalid UTF8.
     try {
       $text = iconv("UTF-8", "UTF-8//IGNORE", $string);
@@ -355,6 +358,10 @@ class ExtractText {
     
     // Cleanup __'s.
     $text = preg_replace('/__/', ' ', $text);
+    // Should it be 3 or 4 char UTF8?
+    if (\Drupal::config('sand_remote.settings')->get('utf8threechar')) {
+      $text = $this->convertToThreeCharUTF8($text);
+    }
     return $text;
   }
 
@@ -513,7 +520,7 @@ class ExtractText {
     $this->file = $file;
   }
 
-  private function getTargetFromEntity(EntityInterface $entity): string {
+  public function getTargetFromEntity(EntityInterface $entity): string {
     if ($entity->getEntityTypeId() === 'node') {
       return 'body';      
     } else {
@@ -534,25 +541,6 @@ class ExtractText {
     if (empty($source)) {
       return FALSE;
     }
-//
-//    /** @var \Drupal\Core\TempStore\PrivateTempStore $tempstore */
-//    $tempstore = \Drupal::service('tempstore.private');
-//    $store = $tempstore->get('extracting_text');
-//    $is_processing = $store->get('entity_type_id');
-
-//    // See if we are in the process of setting a field equal to it's extracted text, then skip the update to avoid a loop.
-//    if ($is_processing) {
-//      // If Inserting.
-//      if ($entity->isNew()) {
-//        return FALSE;
-//      }
-//      
-//      // If Updating see is it's this entity id.
-//      [, $entity_id] = explode(':', $is_processing);
-//      if ($entity_id === $entity->id()) {
-//        return FALSE;
-//      }
-//    }
 
     $queue = \Drupal::service('queue')->get('sand_remote_queue');
     $item = new ExtractText();
