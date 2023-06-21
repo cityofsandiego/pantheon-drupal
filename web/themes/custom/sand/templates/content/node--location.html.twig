@@ -78,6 +78,7 @@
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'background-white'
   ]
 %}
 <article {{ attributes.addClass(classes) }}>
@@ -94,7 +95,7 @@
 
 
 				<div class="accordions js-toggle-accordion l-margin-bn">
-					<div class="accordion l-margin-bn">
+					<div class="accordion">
 						<p class="h2 heading--trim accordion__heading">
             {% if content.field_alt_amenities_title.0 %}
               <a href="#" class="accordion__link">
@@ -111,10 +112,7 @@
               {{ content.field_amenities }}
 						</div>
 					</div>
-        </div>
-
-				<div class="accordions js-toggle-accordion l-margin-bn">
-					<div class="accordion l-margin-bn">
+					<div class="accordion">
 						<p class="h2 heading--trim accordion__heading">
             {% if content.field_alt_restrictions_title.0 %}
               <a href="#" class="accordion__link">
@@ -135,14 +133,14 @@
 
       </div>
       <div class="cell medium-4 sidebar">
-        <div class="l-padding-mobile-hd l-margin-mobile-bn">
+        <div class="l-margin-mobile-bn">
           <div class="card l-padding-ad text-center--mobile l-margin-mobile-td background-off-white">
             {{ content.field_sidebar }}
             <h2 class="h3 heading--snug">Location</h2>
             {{ content.field_address_pin }}
 
             {% if content.field_address.0 %}
-              <div class="address-text l-padding-td">
+              <div class="address-text l-padding-td text-left">
                 <div>
                   <i class="icon-map-marker icon--sm icon--circle background--cerulean"></i>
                 </div>
@@ -156,15 +154,19 @@
     					<h2 class="h3 heading--snug">
                 {{ content.field_location_hours_title }}
               </h2>
-  					  <div class="">
+              {% if content.field_location_hours_notes.0 %}
+              <div class="office-hours-notes l-padding-bd">
                 {{ content.field_location_hours_notes }}
               </div>
-  					  <div class="l-padding-tm">
+              {% endif %}
+  					  <div class="office-hours">
                 {{ content.field_location_hours }}
               </div>
-  					  <div class="l-padding-tm">
+              {% if logged_in %}
+  					  <div class="office-hours-exceptions">
                 {{ content.field_exceptions }}
               </div>
+              {% endif %}
             </div>
           {% endif %}
 
@@ -173,21 +175,25 @@
     					<h2 class="h3 heading--snug">
                 {{ content.field_location_hours_title_2 }}
               </h2>
-  					  <div class="">
+              {% if content.field_location_hours_notes2.0 %}
+              <div class="office-hours-notes l-padding-bd">
                 {{ content.field_location_hours_notes2 }}
               </div>
-  					  <div class="l-padding-tm">
+              {% endif %}
+              <div class="office-hours">
                 {{ content.field_location_hours2 }}
               </div>
-  					  <div class="l-padding-tm">
+              {% if logged_in %}
+              <div class="office-hours-exceptions">
                 {{ content.field_exceptions_2 }}
               </div>
+              {% endif %}
             </div>
           {% endif %}
 
           {% if content.field_location_contact_name.0 or content.field_location_contact_name.0 or field_location_contact_title.0 or content.field_phone.0 or content.field_email.0 %}
             <div class="card l-padding-ad background-off-white l-margin-td contact-info">
-    					<h2 class="h3 heading--snug">Contact Info</h2>
+    					<h2 class="h3 heading--trim">Contact Info</h2>
               {% if content.field_location_contact_name.0 or content.field_location_contact_title.0 %}
                 <div class="grid-x l-margin-td">
                   <div class="cell small-2">
