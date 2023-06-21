@@ -1,5 +1,6 @@
 .node--type-department,
-.node--type-webform {
+.node--type-webform,
+.node--type-event {
   h1 {
     font-size: 2.25rem;
     margin: 0.5em 0;
@@ -11,19 +12,18 @@
   }
 
   .sidebar {
-    border-left: 1px solid $white;
-    margin: 1rem 2rem 2rem;
-    padding: 2em;
-
-    @include breakpoint(medium) {
-      margin: 0;
-      height: 100%;
-      padding: 1.5em;
+    margin: 0;
+    height: 100%;
+    padding: .5em 2em;
+    
+    @include breakpoint(mobile-landscape) {
+      padding: 1em 1.5em;
+      border-left: 1px solid #dde2e5;
     }
 
-    & > h2 {
+    /*& > h2 {
       margin-top: 0;
-    }
+    }*/
 
     ul {
       padding: 0;

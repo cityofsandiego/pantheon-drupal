@@ -140,7 +140,7 @@
     }
 
     .main-menu {
-      box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
+      //box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
 
       @include breakpoint(medium) {
         background: $white;
@@ -160,7 +160,7 @@
       padding: 1.25rem 1em 1em;
 
       text-decoration: none;
-      width: 56px;
+      //width: 56px;
 
       &:focus,
       &:hover {
@@ -175,7 +175,10 @@
         text-align: center;
       }
     }
-
+    .tb-megamenu img {
+      border-radius: 50%;
+    }
+    
     .tb-megamenu .nav>li>a,
     .tb-megamenu .nav>li>span.tb-megamenu-no-link {
       border: none;
@@ -279,8 +282,14 @@
         flex-direction: row;
         list-style: none;
         margin: 0 !important;
-        padding: 0;
+        padding: 0 1px 0 0;
         justify-content: space-between;
+        background: -moz-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #d4d4d4));
+        background: -webkit-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+        background: -o-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+        background: -ms-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+        background: linear, to bottom, #fff 0%, #d4d4d4 100%;
 
         .tb-megamenu-item {
           border: none;
@@ -302,11 +311,11 @@
             z-index: 1;
           }
 
-          &:first-child {
+          /*&:first-child {
             &:before {
               width: 0;
             }
-          }
+          }*/
         }
       }
     }
@@ -354,6 +363,14 @@
       margin: 0;
     }
 
+    .tb-megamenu-block h2 {
+      margin-top: 0;
+    }
+
+    .mega-dropdown-menu {
+      width: 100% !important;
+    }
+
     .menu-border {
       border-bottom: 1px dashed $alto;
       margin-bottom: 0.5em;
@@ -367,6 +384,9 @@
 
     .nav__event {
       margin: 0 1rem 1rem 0;
+      font-size: .8125em;
+      align-items: center;
+      justify-content: center;
 
       >div {
         padding-left: 1rem;

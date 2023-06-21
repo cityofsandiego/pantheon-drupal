@@ -48,13 +48,13 @@ h1,
 
 .single-line {
   @include breakpoint(medium) {
-    padding-top: 38px;
+    padding-top: 20px;
   }
 }
 
 .multi-line {
   @include breakpoint(medium) {
-    padding-top: 10px;
+    //padding-top: 10px;
   }
 }
 
@@ -70,7 +70,7 @@ h2,
 
 h3,
 .h3 {
-  @include rem("font-size", 24px); // 1.563em
+  @include rem("font-size", 21px); // 1.3125em
   @media print {
     font-size: 1.1em;
     margin: 0;
@@ -112,6 +112,10 @@ h6,
 p {
   line-height: 1.5;
   margin: 0 0 0.75em;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 html,
@@ -165,12 +169,14 @@ ul { // correct admin dropdown issues
   }
 }
 
-ol {
-  margin: 0.75em 0;
+ol, ul {
+  margin: 0 0 0.5em 0;
 }
+
 li {
-  margin: 0.5em 0;
+  margin: 0 0 0.5em 0;
 }
+
 dt {
   margin-bottom: 0.3em;
   font-weight: bold;
@@ -187,23 +193,23 @@ dd {
 }
 
 .heading--center {
-  text-align: center;
+  text-align: center !important;
 }
 
 .heading--right {
-  text-align: right;
+  text-align: right !important;
 }
 
 .heading--trim {
-  margin: 0;
+  margin: 0 !important;
 }
 
 .heading--snug {
-  margin-top: 0;
+  margin-top: 0 !important;
 }
 
 .heading--light {
-  color: white;
+  color: white !important;
 }
 
 .heading--normal {
