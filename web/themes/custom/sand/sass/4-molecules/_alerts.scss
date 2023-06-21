@@ -1,29 +1,42 @@
 /* Alerts
-   ========================================================================== */
-   .alert {
-    color: white;
-    background: $science;
-  
-    p {
-      // @include breakpoint(medium) {
-      //   @include rem('font-size', 13px);
-      // }
-    }
-  
-    i {
-      @include rem('font-size', 32px);
-    }
-  
-    .alert__heading {
-      color: white;
-      padding: .2em .5em;
-      margin-bottom: .5em;
-      @include rem('font-size', 24px);
-      font-family: $font-family-secondary;
-      background: lighten($science, 5%);
-    }
-  
-    .alert__content {
-      padding: 0 .75em;
-    }
+  ========================================================================== */
+.alert {
+  //color: $spruce;
+  padding: 1em;
+  text-align: center;
+  position: relative
+  //background: $science;
+
+  p {
+    // @include breakpoint(medium) {
+    //   @include rem('font-size', 13px);
+    // }
   }
+
+  i {
+    font-size: 1.5rem;
+    vertical-align: middle;
+    margin-right: 0.5em;
+  }
+
+  .alert__heading {
+    color: white;
+    padding: .2em .5em;
+    margin-bottom: .5em;
+    @include rem('font-size', 24px);
+    font-family: $font-family-secondary;
+    background: lighten($science, 5%);
+  }
+
+  .alert__content {
+    padding: 0 .75em;
+  }
+}
+
+.sitewide-alert .close {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0.5em;
+  font-size: 2em;
+}
