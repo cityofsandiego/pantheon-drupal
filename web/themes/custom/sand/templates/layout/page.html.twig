@@ -43,6 +43,7 @@
  * @see html.html.twig
  */
 #}
+{% set  node_type = node.bundle|clean_class %}
 
 <div class="off-canvas-wrapper alto-bg">
   <section class="off-canvas off-canvas-main-menu position-right hide-for-large" id="offCanvas" data-off-canvas>
@@ -59,21 +60,31 @@
     <header role="banner" class="header">
       {{ page.header }}
     </header>
-    {% if page.hero_image is not empty %}
-      <div id="hero-bg-image" class="hero__bg hero__bg--secondary" style="background-image: url('{{ page.hero_image }}');">
-      </div>
-      {{ drupal_block('hero_block') }}
+    {% if node_type == "bucket" %}
+      <div id="hero-bg-image" class="hero__bg hero__bg--secondary"></div>
 
-      <div class="grid-container main-grid-container page-with-hero">
-      {% else %}
       <div class="grid-container main-grid-container">
-    {% endif %}  
+    {% else %}
+
+
+      {% if page.hero_image is not empty %}
+        <div id="hero-bg-image" class="hero__bg hero__bg--secondary" style="background-image: url('{{ page.hero_image }}');">
+        </div>
+        {{ drupal_block('hero_block') }}
+
+        <div class="grid-container main-grid-container page-with-hero">
+      {% else %}
+        <div id="hero-bg-image" class="hero__bg hero__bg--secondary"></div>
+
+        <div class="grid-container main-grid-container">
+      {% endif %}
+    {% endif %}
 
         {{ page.help }}
 
         {{ page.content_top }}
 
-        <main role="main" class="row  white-bg">
+        <main role="main" class="row">
           <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
             {% if page.sidebar_first %}

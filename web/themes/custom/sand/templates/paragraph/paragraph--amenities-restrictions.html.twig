@@ -41,23 +41,24 @@
 {%
   set classes = [
     'paragraph--type--' ~ paragraph.bundle|clean_class,
-    'amenities-restrictions'
+    'amenities-restrictions',
+    'grid-x', 'grid-margin-y'
   ]
 %}
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
-    {% block content %}
-        {% if is_restriction %}
-          <p style="display: flex;align-items: center;">
-            <i class="icon-do-not icon--md">
-              <i class="{{ content.field_icon.0 }}"></i>
-            </i>
-        {% else %}
-          <i class="{{ content.field_icon.0 }} icon--circle icon--sm background--cerulean"></i>
-        {% endif %}
-        <span class="amenities-restrictions--title">{{ content.field_title.0 }}</span>{% if content.field_amend_restrict_description.0 %} - {{ content.field_amend_restrict_description.0 }}{% endif %}
+  {% block content %}
+    <div class="cell small-2 medium-1 text-center">
+      {% if is_restriction %}
+        <p><i class="icon-do-not icon--md"><i class="{{ content.field_icon.0 }}"></i></i></p>
+      {% else %}
+        <p><i class="{{ content.field_icon.0 }} icon--circle icon--sm background--cerulean"></i></p>
+      {% endif %}
+    </div>
+    <div class="cell small-10 medium-11 l-flex-center-v l-padding-ls">
+      <p><span class="amenities-restrictions--title">{{ content.field_title.0 }}</span>{% if content.field_amend_restrict_description.0 %} - {{ content.field_amend_restrict_description.0 }}{% endif %}
       </p>
-    {% endblock %}
-    </a>
+    </div>
+  {% endblock %}
   </div>
 {% endblock paragraph %}
