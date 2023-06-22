@@ -143,37 +143,47 @@
    ========================================================================== */
 
 .border {
-    margin-bottom: 1em;
-    padding-bottom: 1em;
+    //margin-bottom: 1em;
+    //padding-bottom: 1em;
     border: 1px solid $alto;
     &.border--dark {
         border-color: $chateau;
     }
 }
 
+.border--top {
+    border-top: 1px solid $alto;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
 .border--bottom {
     border-top: none;
     border-right: none;
+    border-bottom: 1px solid $alto;
     border-left: none;
 }
 
-.border--top {
-    border-bottom: none;
+.border--left {
+    border-top: none;
     border-right: none;
-    border-left: none;
+    border-bottom: none;
+    border-left: 1px solid $alto;
 }
 
 .border--right {
+    border-top: none;
     border-bottom: none;
     border-left: none;
-    border-top: none;
 }
 
 .border--right--desktop {
     @include breakpoint(medium up) {
+		border-top: none;
+        border-right: 1px solid $alto;
 		border-bottom: none;
 		border-left: none;
-		border-top: none;
     }
 }
 
