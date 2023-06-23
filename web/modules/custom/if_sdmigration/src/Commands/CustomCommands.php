@@ -3158,15 +3158,17 @@ class CustomCommands extends DrushCommands {
         ->condition('field_d7_nid', $d7id);
       $nid = reset($query->execute());
       $node = Node::load($nid);
-      $node->set('field_doc_date', rtrim($date, ' '));
-      if (NULL !== $editdate[$d7id]['created']) {
-        $node->set('created', $editdate[$d7id]['created']);
+      if (!is_null($node)) {
+        $node->set('field_doc_date', rtrim($date, ' '));
+        if (NULL !== $editdate[$d7id]['created']) {
+          $node->set('created', $editdate[$d7id]['created']);
+        }
+        if (NULL !== $editdate[$d7id]['changed']) {
+          $node->set('changed', $editdate[$d7id]['changed']);
+        }
+        $node->save();
+        echo 'Saved D7 id: ' . $d7id . ' D9 id: ' . $node->id() . ' Memory usage: ' . $this->memoryUsage(memory_get_usage(TRUE)) . PHP_EOL;
       }
-      if (NULL !== $editdate[$d7id]['changed']) {
-        $node->set('changed', $editdate[$d7id]['changed']);
-      }
-      $node->save();
-      echo 'Saved D7 id: ' . $d7id . ' D9 id: ' . $node->id() . ' Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
     }
   }
 
