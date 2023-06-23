@@ -74,21 +74,19 @@ Business Resource
 Date
 Mayoral artifacts
 Registration
-Application*
-External data*
+Application**
+Article**
+Digital Archives Photos**
+Department document**
+Department parent**
+External data**
+Reusable Component (bean custom blocks)**
+Sidebar Block Context (contexts)**
 Hero*
 Slide*
-Reusable Content (bean custom blocks)*
-Digital Archives Photos*
 Gallery*
-Webform*
-Department document*
-Department parent*
-Article*
 Location*
-Event*
 Resource*
-Contexts*
 
 **3/2/2023
 Blog
@@ -96,6 +94,8 @@ Department
 Outreach2 Article
 Outreach2
 Outreach
+Event
+Webform (nodes, not webforms themselves)
 
 Field groups:
 field_bucket_events_pi_coll
