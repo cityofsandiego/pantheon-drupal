@@ -2798,4 +2798,140 @@ textarea {
   .stellar-window p.noshadow {
     text-shadow: none; }
 
+/* ============================================================
+Styles for calendars.
+============================================================ */
+table.calendar-view-table {
+  border: 1px solid #37424a; }
+  @media print, screen and (min-width: 30em) {
+    table.calendar-view-table {
+      margin-top: -104px; } }
+  table.calendar-view-table caption {
+    font-family: 'Merriweather';
+    font-size: 2em;
+    font-weight: normal;
+    line-height: 3;
+    width: 100%; }
+    @media print, screen and (max-width: 37.49875em) {
+      table.calendar-view-table caption {
+        float: left; } }
+  table.calendar-view-table thead, table.calendar-view-table tbody, table.calendar-view-table tfoot {
+    border: none; }
+  @media print, screen and (min-width: 30em) {
+    table.calendar-view-table tbody tr:first-child {
+      border-top: none; } }
+  table.calendar-view-table tbody tr:nth-child(even), table.calendar-view-table tbody tr:hover {
+    background-color: white; }
+  table.calendar-view-table tr {
+    border-bottom: 1px solid #dde2e5; }
+    table.calendar-view-table tr:last-child {
+      border-bottom: none; }
+    table.calendar-view-table tr tr:nth-child(even) {
+      background-color: white; }
+    @media print, screen and (max-width: 37.49875em) {
+      table.calendar-view-table tr {
+        border-bottom: 5px solid #dde2e5; } }
+  table.calendar-view-table th {
+    background-color: #ffa02f;
+    padding: 0.5em;
+    font-size: 1em;
+    color: white; }
+  table.calendar-view-table td {
+    padding: 0;
+    border: none;
+    border-right: 1px solid #dde2e5; }
+    table.calendar-view-table td:last-child {
+      border-right: none; }
+    table.calendar-view-table td .calendar-view-day__row {
+      position: relative; }
+      table.calendar-view-table td .calendar-view-day__row > * {
+        margin: 0; }
+      table.calendar-view-table td .calendar-view-day__row a {
+        color: #0098db;
+        font-size: 1rem; }
+        table.calendar-view-table td .calendar-view-day__row a:hover {
+          color: #0fb6ff; }
+        table.calendar-view-table td .calendar-view-day__row a.edit {
+          position: absolute;
+          right: 0.3125rem;
+          bottom: 0.3125rem;
+          font-size: 1em; }
+      table.calendar-view-table td .calendar-view-day__row.is-multi--first, table.calendar-view-table td .calendar-view-day__row.is-multi--middle {
+        margin-right: 0; }
+    @media print, screen and (max-width: 37.49875em) {
+      table.calendar-view-table td {
+        border-bottom: 1px solid #dde2e5; } }
+  table.calendar-view-table .calendar-view-day__number {
+    background-color: white;
+    color: #37424a;
+    font-size: 1em;
+    cursor: auto;
+    width: 100%;
+    text-align: left; }
+    @media print, screen and (min-width: 30em) {
+      table.calendar-view-table .calendar-view-day__number {
+        width: auto; } }
+    table.calendar-view-table .calendar-view-day__number span.dow {
+      float: right; }
+      @media print, screen and (min-width: 30em) {
+        table.calendar-view-table .calendar-view-day__number span.dow {
+          display: none; } }
+  table.calendar-view-table .sunday, table.calendar-view-table .saturday {
+    background-color: #f6f6f6; }
+    table.calendar-view-table .sunday .calendar-view-day__number, table.calendar-view-table .saturday .calendar-view-day__number {
+      background-color: #f6f6f6; }
+  table.calendar-view-table .previous-month, table.calendar-view-table .next-month {
+    background-color: #dde2e5;
+    border-right: 1px solid #d1d4d3; }
+    table.calendar-view-table .previous-month:last-child, table.calendar-view-table .next-month:last-child {
+      border-right: none; }
+    table.calendar-view-table .previous-month .calendar-view-day__number, table.calendar-view-table .next-month .calendar-view-day__number {
+      background-color: #dde2e5; }
+  table.calendar-view-table .calendar-view-table td:hover {
+    background-color: transparent; }
+  table.calendar-view-table .today {
+    background-color: #fffceb; }
+    table.calendar-view-table .today .calendar-view-day__number {
+      background-color: #fffceb; }
+
+.calendar-view-pager {
+  flex-direction: row; }
+  .calendar-view-pager .pager__item.pager__current {
+    display: none; }
+  .calendar-view-pager .pager__item.pager__previous a:before {
+    font-family: 'icomoon';
+    content: '\3c';
+    font-size: 0.8em; }
+  .calendar-view-pager .pager__item.pager__next a:after {
+    font-family: 'icomoon';
+    content: '\3e';
+    font-size: 0.8em; }
+  .calendar-view-pager .pager__item a {
+    background-color: white;
+    border: none; }
+
+.calendar-view-pager__reset {
+  display: none; }
+
+.calendar .views-exposed-form label {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  /*
+    * Extends the .visuallyhidden class to allow the element to be focusable
+    * when navigated to via the keyboard: h5bp.com/p
+    */ }
+  .calendar .views-exposed-form label.focusable:active, .calendar .views-exposed-form label.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto; }
+
 /*# sourceMappingURL=molecules.css.map */
