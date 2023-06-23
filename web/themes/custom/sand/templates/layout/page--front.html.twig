@@ -138,15 +138,19 @@
               </div>
             </div>
 
-            <div class="grid-x grid-padding-x l-padding-hm l-margin-bm">
-              <div class="cell small-12">
-                <h2 class="heading--snug">Calendar</h2>
-              </div>
-              <div class="cell medium-6">
-                {{ drupal_view('events', 'meetings')}}
-              </div>
-              <div class="cell medium-6">
-                {{ drupal_view('events', 'events')}}
+            <div class="l-padding-hm l-margin-bm">
+                <h2 class="heading--trim">Calendar</h2>
+              <div class="grid-x grid-padding-x l-margin-bm">
+                <div class="cell medium-6 l-padding-mobile-hn">
+                  <h3>Meetings</h3>
+                  {{ drupal_view('events', 'meetings')}}
+                  <p><a class="fine-print" href="/city-clerk/officialdocs/meetings-calendar">View All Meetings</a></p>
+                </div>
+                <div class="cell medium-6 l-padding-mobile-hn">
+                  <h3>Events</h3>
+                  {{ drupal_view('events', 'events')}}
+                  <p><a class="fine-print" href="/events">View All Events</a></p>
+                </div>
               </div>
             </div>
           </div>{# /.layout-content #}
