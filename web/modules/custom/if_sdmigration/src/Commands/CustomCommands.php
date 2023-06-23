@@ -2660,7 +2660,7 @@ class CustomCommands extends DrushCommands {
         $departments = NULL;
         $departments_subs = NULL;
         $paths = NULL;
-        if (array_key_exists('node_taxonomy', $conditions)) {
+        if (is_array($conditions) && array_key_exists('node_taxonomy', $conditions)) {
           foreach ($conditions['node_taxonomy']['values'] as $dtid) {
             $d9_tid = $this->taxonomyImportTasks->newTid($dtid, 'department');
             if (!empty($d9_tid)) {
@@ -2668,7 +2668,7 @@ class CustomCommands extends DrushCommands {
             }
           }
         }
-        if (array_key_exists('taxonomy_descendants_condition', $conditions)) {
+        if (is_array($conditions) && array_key_exists('taxonomy_descendants_condition', $conditions)) {
           foreach ($conditions['taxonomy_descendants_condition']['values'] as $dtid) {
             $d9_tid = $this->taxonomyImportTasks->newTid($dtid, 'department');
             if (!empty($d9_tid)) {
@@ -2676,13 +2676,13 @@ class CustomCommands extends DrushCommands {
             }
           }
         }
-        if (array_key_exists('path', $conditions)) {
+        if (is_array($conditions) && array_key_exists('path', $conditions)) {
           foreach ($conditions['path'] as $path) {
             $paths[] = $path;
           }
         }
         $blocks = unserialize($data[4]);
-        if (array_key_exists('block', $blocks) && count($blocks['block']['blocks']) > 0) {
+        if (is_array($blocks) && array_key_exists('block', $blocks) && count($blocks['block']['blocks']) > 0) {
           $node = Node::create([
             'type' => 'sidebar_block_context',
             'title' => $data[0],
