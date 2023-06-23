@@ -68,35 +68,34 @@ lando terminus drush import:resource
 lando terminus drush import:webform
 
 Node data status:
-**9/26/2022
-Bucket (Note: manually updating these as there are few and content type is complex)
-Slide
-Mayoral artifacts
-Hero
-External data
-Date (Manually entered nodes as there were few and it was quicker to do so.)
-
-**2/6/2023
+6/22/2023 (DB backup from 9:30am EDT)
+Bucket
 Business Resource
-Digital Archives Photos
-Gallery
+Date
+Mayoral artifacts
 Registration
+Application*
+External data*
+Hero*
+Slide*
+Reusable Content (bean custom blocks)*
+Digital Archives Photos*
+Gallery*
+Webform*
+Department document*
+Department parent*
+Article*
+Location*
+Event*
+Resource*
+Contexts*
 
 **3/2/2023
 Blog
 Department
-Department parent
-Location
 Outreach2 Article
-Event
-Article
 Outreach2
 Outreach
-Reusable Content (bean custom blocks)
-Department document
-Resource
-Application
-Webform
 
 Field groups:
 field_bucket_events_pi_coll
@@ -122,3 +121,6 @@ Business Resources Target Business
 Business Resources Type of Assistance
 Registration
 Event
+
+D7 DB import command:
+/usr/bin/mysql --max_allowed_packet=1000M --database=pantheon --user=pantheon --password=pantheon --host=127.0.0.1 --port=32976 < /home/andrew/Sites/SAND/sand01/sdgov_live_2023-06-22T13-30-07_UTC_database_split/sdgov_live_2023-06-22T13-30-07_UTC_database_00.sql
