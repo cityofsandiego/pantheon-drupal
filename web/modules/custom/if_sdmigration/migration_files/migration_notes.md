@@ -74,14 +74,14 @@ Business Resource
 Date
 Mayoral artifacts
 Registration
-Application**
-Article**
-Digital Archives Photos**
-Department document**
-Department parent**
-External data**
-Reusable Component (bean custom blocks)**
-Sidebar Block Context (contexts)**
+Application
+Article
+Digital Archives Photos
+Department document
+Department parent
+External data
+Reusable Component (bean custom blocks)
+Sidebar Block Context (contexts)
 Hero*
 Slide*
 Gallery*
