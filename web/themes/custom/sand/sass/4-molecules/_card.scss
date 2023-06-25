@@ -66,6 +66,8 @@
     .slides {
       .card__wrap {
         margin: 0 !important;
+        display: -webkit-flex !important; /* Safari */
+        display: flex !important;
       }
     }
   }
@@ -74,21 +76,19 @@
     height: auto;
     //margin: 0 .5em;
     width: 100%;
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    margin: 0;
+    padding-left: 1.0416588541%;
+    padding-right: 1.0416588541%;
+    width: 33.333333%;
 
-    @include breakpoint(medium) {
-      display: -webkit-flex; /* Safari */
-      display: flex;
-      margin: 0;
-      padding-left: 1.0416588541%;
-      padding-right: 1.0416588541%;
-      width: 33.333333%;
-
-      .card {
-        flex: 0 1 auto;
-        justify-content: flex-start;
-        overflow: hidden;
-      }
+    .card {
+      flex: 0 1 auto;
+      justify-content: flex-start;
+      overflow: hidden;
     }
+
   }
 
   .card__wrap_s, .card--wrap-s {

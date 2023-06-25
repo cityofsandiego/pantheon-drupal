@@ -46,7 +46,13 @@
 {% set  node_type = node.bundle|clean_class %}
 
 <div class="off-canvas-wrapper alto-bg">
-  <section class="off-canvas off-canvas-main-menu position-right hide-for-large" id="offCanvas" data-off-canvas>
+  <section class="off-canvas off-canvas-main-menu position-right hide-for-large" id="offCanvas" data-off-canvas data-content-scroll="false" data-close-on-click="false">
+    <div class="menu-wrapper">
+      <span class="fine-print">Menu</span>
+      <label for="togglenav" class="burger-wrapper">
+        <input type="checkbox" id="togglenav" class="menu-trigger" data-toggle="offCanvas">
+      </label>
+    </div>
     {{ drupal_entity('block', 'mainnavigation')}}
   </section>
   {% if page.preheader %}
@@ -56,7 +62,7 @@
   {% endif %}
 
 
-  <section class="off-canvas-content" data-off-canvas-content>
+  <section class="main-content" data-off-canvas-content>
     <header role="banner" class="header">
       {{ page.header }}
     </header>

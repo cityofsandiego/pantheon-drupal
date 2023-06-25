@@ -10,21 +10,51 @@
   ul,
   ol {
     line-height: 1.5;
-    padding-inline-start: 40px;
+    padding-inline-start: 0;
+
+    &.department-menu {
+      padding-inline-start: 0;
+
+      li {
+        margin: 0.5rem 0;
+
+        @include breakpoint(mobile-landscape down) {
+          margin: 0;
+          padding: 1em 0 1em 0.5rem;
+          border-bottom: 1px solid white;
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
 
     li {
       margin: 0.5rem 0 0.5rem 1rem;
       padding: 0 0 0 0.5rem;
     }
+
+    @include breakpoint(mobile-landscape) {
+      padding-inline-start: 40px;
+    }
   }
 
   ul li {
-    list-style: disc;
+    //list-style: disc;
   }
 
   ol li {
     list-style: decimal;
   }
+
+  @include breakpoint(mobile-landscape) {
+    padding-inline-start: 40px;
+  }
+}
+
+.sub-navigation-mobile .accordion .accordion__drawer {
+  padding: 0;
 }
 
 .text-accent {
