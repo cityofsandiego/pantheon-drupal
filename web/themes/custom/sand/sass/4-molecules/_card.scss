@@ -63,25 +63,28 @@
 
   // this gets used on gallery pages
   &.flexslider--mobile {
-    .slides {
-      .card__wrap {
-        margin: 0 !important;
-        display: -webkit-flex !important; /* Safari */
-        display: flex !important;
+    @include breakpoint(mobile-landscape down) {
+      .slides {
+        .card__wrap {
+          padding: 0;
+          width: 100%;
+        }
       }
     }
   }
 
   .card__wrap, .card--wrap {
     height: auto;
-    //margin: 0 .5em;
-    width: 100%;
     display: -webkit-flex; /* Safari */
-    display: flex;
+    display: flex !important;
     margin: 0;
     padding-left: 1.0416588541%;
     padding-right: 1.0416588541%;
     width: 33.333333%;
+
+    @include breakpoint(mobile-landscape down) {
+      width: 100%;
+    }
 
     .card {
       flex: 0 1 auto;
@@ -168,9 +171,11 @@
 
   &.flexslider--mobile {
     .card__wrap {
-      @include breakpoint(medium) {
-        margin: 0;
-      }
+      margin: 0;
+    }
+
+    .card__content {
+      padding: 1.5em 3.5em;
     }
   }
 }
@@ -180,7 +185,7 @@
 
   background {
     background-position: center center;
-    repeat: no-repeat;
+    background-repeat: no-repeat;
   }
 
   & > a {

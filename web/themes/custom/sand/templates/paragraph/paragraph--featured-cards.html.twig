@@ -40,7 +40,6 @@
 #}
 {%
   set classes = [
-    'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     not paragraph.isPublished() ? 'paragraph--unpublished',
@@ -50,10 +49,13 @@
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <h2 class="l-margin-hs"><a href="{{ content.field_link[0]['#url'] }}">{{ content.field_section_title }}</a></h2>
-
+      {% if content.field_section_title.0 is not empty %}
+      <h2 class="l-margin-desktop-hs"><a href="{{ content.field_link[0]['#url'] }}">{{ content.field_section_title }}</a></h2>
+      {% endif %}
       <div class="featured-card-group__wrapper card__container">
-        {{ content.field_cards }}
+        <ul class="slides">
+          {{ content.field_cards }}
+        </ul>
       </div>
     {% endblock %}
   </div>
