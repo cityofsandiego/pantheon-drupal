@@ -1877,23 +1877,24 @@ textarea {
   .card__container.mobile-flexslider {
     height: 100% !important; }
   .card__container.flexslider--mobile .slides .card__wrap {
-    margin: 0 !important; }
+    margin: 0 !important;
+    display: -webkit-flex !important;
+    /* Safari */
+    display: flex !important; }
   .card__container .card__wrap, .card__container .card--wrap {
     height: auto;
-    width: 100%; }
-    @media print, screen and (min-width: 48em) {
-      .card__container .card__wrap, .card__container .card--wrap {
-        display: -webkit-flex;
-        /* Safari */
-        display: flex;
-        margin: 0;
-        padding-left: 1.0416588541%;
-        padding-right: 1.0416588541%;
-        width: 33.333333%; }
-        .card__container .card__wrap .card, .card__container .card--wrap .card {
-          flex: 0 1 auto;
-          justify-content: flex-start;
-          overflow: hidden; } }
+    width: 100%;
+    display: -webkit-flex;
+    /* Safari */
+    display: flex;
+    margin: 0;
+    padding-left: 1.0416588541%;
+    padding-right: 1.0416588541%;
+    width: 33.333333%; }
+    .card__container .card__wrap .card, .card__container .card--wrap .card {
+      flex: 0 1 auto;
+      justify-content: flex-start;
+      overflow: hidden; }
   .card__container .card__wrap_s, .card__container .card--wrap-s {
     height: auto;
     margin: 0 .5em;
