@@ -40,28 +40,26 @@
 #}
 {%
   set classes = [
-    'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     not paragraph.isPublished() ? 'paragraph--unpublished',
     'featured-card',
+    'card',
     'background-off-white'
   ]
 %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
-    {% block content %}
-      <a href="{{ content.field_link[0]['#url'] }}">
-        {{ content.field_image }}
-        <div class="featured-card__content">
-          <h3 class="featured-card__heading">
-            {{ content.field_label }}
-          </h3>
-          <div class="featured-card__body">
-            {{ content.field_description }}
-          </div>
+  <li class="card__wrap">
+    <div{{ attributes.addClass(classes) }}>
+      {% block content %}
+        <div class="card__image">
+            <a href="{{ content.field_link[0]['#url'] }}">{{ content.field_image }}</a>
         </div>
-      </a>
-    {% endblock %}
-  </div>
+        <div class="card__content">
+            <p class="card__headline"><a href="{{ content.field_link[0]['#url'] }}">{{ content.field_label }}</a></p>
+            {{ content.field_description }}
+        </div>
+      {% endblock %}
+    </div>
+  </li>  
 {% endblock paragraph %}

@@ -3,9 +3,31 @@
     opacity: 0;
   }
 
-  .dept-parent-logo img {
-    border-right: 1px solid $alto;
-    padding: 1rem;
+  h1.dp-title {
+    font-size: 2.25rem;
+    margin-top: 0;
+
+    @include breakpoint (mobile-landscape down) {
+      margin-bottom: 1em;
+    }
+  }
+
+  .top-menu {
+    @include breakpoint (mobile-landscape) {
+      padding-top: 7em;
+    }
+  }
+
+  .dept-parent-logo {
+    width: 100%;
+    text-align: center;
+    
+    img {
+      //border-right: 1px solid $alto;
+      //padding: 1rem;
+      width: auto;
+      height: 70px;
+    }
   }
 
   .sidebar {
@@ -21,18 +43,12 @@
   }
 
   .slides {
-    @include breakpoint(mobile) {
-      flex-wrap: wrap;
-      display: flex;
-    }
+    flex-wrap: wrap;
+    display: flex;
 
     .card__wrap {
-      padding: 0.75em 0.5em;
-      width: 100%;
-
-      @include breakpoint(mobile) {
-        width: 47%;
-      }
+      width: 47%;
+      padding: 0 0.5em 0.75em 0.5em;
 
       @include breakpoint(medium) {
         width: 33%;
@@ -77,5 +93,12 @@
         bottom: 0;
       }
     }
+  }
+
+  .main-section {
+    border-top: 1px solid #d1d8dc;
+  }
+  .sidebar {
+    border-left: 1px solid #d1d8dc;
   }
 }

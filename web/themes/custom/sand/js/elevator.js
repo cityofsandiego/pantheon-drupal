@@ -157,6 +157,12 @@ define(function () {
           controlNav: false,
           customDirectionNav: $(".custom-navigation--primary a")
         });
+        if ($('body').hasClass('front')) {
+          var $slides = $("div#hero__slides--primary .slides li")
+          if ($slides.length > 1) {
+            $("div.custom-navigation").removeClass("hidden").fadeIn("slow");
+          }
+        }
        $('#hero__slides--secondary').flexslider({
           controlNav: false,
           customDirectionNav: $(".custom-navigation--secondary a")

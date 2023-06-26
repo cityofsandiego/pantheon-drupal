@@ -78,24 +78,19 @@
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'background-white'
   ]
 %}
 <article{{ attributes.addClass(classes) }}>
 
   <div {{ content_attributes.addClass('node__content') }}>
-    <div class="grid-x l-margin-ts l-margin-bd l-padding-desktop-hm">
-      <div class="cell small-12 medium-auto main__message main__message--white l-padding-mobile-hm">
-        <h1 class="main__heading l-padding-desktop-hd">{{ label.0 }}</h1>
+    <div class="grid-x">
+      <div class="cell small-12 medium-auto blog-title l-padding-mobile-hm">
+        <h1 class="main__heading">{{ label.0 }}</h1>
 
         {% if content.field_subtitle[0] %}
         <div class="main__content subheading l-padding-desktop-hd">
           {{ content.field_subtitle.0 }}
-        </div>
-        {% endif %}
-
-        {% if content.field_website[0] %}
-        <div class="main__content subheading l-padding-desktop-hd">
-          {{ content.field_website }}
         </div>
         {% endif %}
 
@@ -104,25 +99,19 @@
             {{ content.field_top_content }}
           </div>
         {% endif %}
-
-        <div class="social-share__wrap">
-          <span class='st_sharethis_large' displayText='ShareThis'></span>
-          <span class='st_facebook_large' displayText='Facebook'></span>
-          <span class='st_twitter_large' displayText='Tweet'></span>
-          <span class='st_linkedin_large' displayText='LinkedIn'></span>
-          <span class='st_pinterest_large' displayText='Pinterest'></span>
-          <span class='st_email_large' displayText='Email'></span>
-        </div>
       </div>
 
       {% if content.field_feature_video_img[0] %}
-        <div class="cell small-12 medium-5 main__image l-padding-hd l-padding-desktop-vd l-padding-mobile-bd text-center">
+        <div class="cell small-12 medium-5 main__image l-padding-desktop-rd l-padding-desktop-vd text-center">
           {{ content.field_feature_video_img }}
         </div>
       {% endif %}
     </div>
-    <div class="grid-x l-margin-ts l-margin-bd l-padding-desktop-hm content-body">
-      {{ content.body }}
+    <div class="grid-x l-padding-desktop-hl l-padding-mobile-hm content-body">
+    {{ content.body }}
+    {% if content.field_website.0 %}
+      <p>Website: {{ content.field_website.0 }}</p>
+    {% endif %}
     </div>
   </div>
 

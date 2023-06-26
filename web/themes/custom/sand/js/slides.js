@@ -20,9 +20,9 @@
         controlNav: false,
         customDirectionNav: $(".custom-navigation--primary a")
       });
-     $('#hero__slides--secondary').flexslider({
-        controlNav: false,
-        customDirectionNav: $(".custom-navigation--secondary a")
+      $('#hero__slides--secondary').flexslider({
+          controlNav: false,
+          customDirectionNav: $(".custom-navigation--secondary a")
       });
       $('.flexslider--default').flexslider({
         animation: "slide",
@@ -70,3 +70,16 @@
   // and, in this file's first line of JS, change function (Drupal) to
   // (Drupal, $)
 })(Drupal, jQuery);
+
+jQuery(function () {
+  if (jQuery('body').hasClass('front')) {
+    var $slides = jQuery("div#hero__slides--primary .slides li")
+    console.log($slides);
+    if ($slides.length > 1) {
+      jQuery("div.hero__content").addClass("multi");
+      jQuery("div.custom-navigation").removeClass("hidden").fadeIn("slow");
+    }
+    jQuery("div#hero__slides--primary").removeClass("hidden");
+    jQuery("div#get_it_done").removeClass("hidden");
+  }
+});
