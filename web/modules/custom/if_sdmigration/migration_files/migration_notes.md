@@ -82,11 +82,13 @@ Department parent
 External data
 Reusable Component (bean custom blocks)
 Sidebar Block Context (contexts)
-Hero*
-Slide*
-Gallery*
-Location*
-Resource*
+Hero
+Resource
+Gallery
+Slide
+Location
+Event*
+Webform (nodes, not webforms themselves)*
 
 **3/2/2023
 Blog
@@ -94,8 +96,6 @@ Department
 Outreach2 Article
 Outreach2
 Outreach
-Event
-Webform (nodes, not webforms themselves)
 
 Field groups:
 field_bucket_events_pi_coll

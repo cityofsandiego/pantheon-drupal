@@ -1169,13 +1169,13 @@ class CustomCommands extends DrushCommands {
           'bucket' => str_replace('`', '', $data[15]),
           'department' => explode('|', str_replace('`', '', $data[18])),
           'secondary_exceptions' => explode('|', str_replace('`', '', $data[20])),
-          'hours' => explode(' \ ', str_replace('`', '', $data[23])),
-          'location_type' => explode('|', str_replace('`', '', $data[25])),
-          'resources' => explode('|', str_replace('`', '', $data[29])),
-          'restrictions' => explode('|', str_replace('`', '', $data[30])),
-          'secondary_hours' => explode(' \ ', str_replace('`', '', $data[31])),
-          'search_keymatch' => explode('|', str_replace('`', '', $data[36])),
-          'exceptions' => explode(' |', str_replace('`', '', $data[38])),
+          'hours' => explode(' \ ', str_replace('`', '', $data[41])),
+          'location_type' => explode('|', str_replace('`', '', $data[24])),
+          'resources' => explode('|', str_replace('`', '', $data[28])),
+          'restrictions' => explode('|', str_replace('`', '', $data[29])),
+          'secondary_hours' => explode(' \ ', str_replace('`', '', $data[30])),
+          'search_keymatch' => explode('|', str_replace('`', '', $data[35])),
+          'exceptions' => explode(' |', str_replace('`', '', $data[37])),
         ];
       }
       fclose($file);
@@ -4234,18 +4234,6 @@ class CustomCommands extends DrushCommands {
         ->expression($field, 'replace(' . $field . ', :old, :new)', array(
           ':old' => '&#44;',
           ':new' =>  ',',
-        ))->execute();
-      // Remove lndo domain.
-      $update2 = \Drupal::database()->update($table)
-        ->expression($field, 'replace(' . $field . ', :old, :new)', array(
-          ':old' => 'sdgov.lndo.site',
-          ':new' =>  'www.sandiego.gov',
-        ))->execute();
-      // Switch to relative URL.
-      $update3 = \Drupal::database()->update($table)
-        ->expression($field, 'replace(' . $field . ', :old, :new)', array(
-          ':old' => '="//www.sandiego.gov/',
-          ':new' =>  '="/',
         ))->execute();
     }
   }
