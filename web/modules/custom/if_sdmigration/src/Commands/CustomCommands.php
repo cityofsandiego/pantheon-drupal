@@ -3503,19 +3503,19 @@ class CustomCommands extends DrushCommands {
           $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
         }
       }
-      if (strtotime($data['event_start']) == strtotime($data['event_end'])) {
-        $event_start = explode('T', $data['event_start']);
-        $event_start = strtotime($event_start[0] . 'T00:00:00');
-        $event_end = explode('T', $data['event_end']);
-        $event_end = strtotime($event_end[0] . 'T23:59:00');
-        $duration = 1439;
-        echo 'Set duration of ' . $node->id() . ' to all day.' . PHP_EOL;
-      }
-      else {
+//      if (strtotime($data['event_start']) == strtotime($data['event_end'])) {
+//        $event_start = explode('T', $data['event_start']);
+//        $event_start = strtotime($event_start[0] . 'T00:00:00');
+//        $event_end = explode('T', $data['event_end']);
+//        $event_end = strtotime($event_end[0] . 'T23:59:00');
+//        $duration = 1439;
+//        echo 'Set duration of ' . $node->id() . ' to all day.' . PHP_EOL;
+//      }
+//      else {
         $event_start = strtotime($data['event_start']);
         $event_end = strtotime($data['event_end']);
         $duration = 0;
-      }
+//      }
       $node->field_event_date = [
         'value' => $event_start,
         'end_value' => $event_end,
