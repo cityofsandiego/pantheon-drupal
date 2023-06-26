@@ -78,6 +78,7 @@
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'background-white'
   ]
 %}
 
@@ -102,10 +103,10 @@
         {% endif %}
       </div> 
 
-      <div class="cell medium-3 large-3">
-        <div class="light-gray-bg sidebar">
+      <div class="cell medium-3 large-3 light-gray-bg ">
+        <div class="sidebar l-padding-mobile-hm">
             {% if sidemenu is defined and sidemenu.items %}
-              <h2>{{ sidemenu.title }}</h2>
+              <h2>{{ content.field_department.1['#title'] }}</h2>
               <ul class="sidebar-menu">
                 {% for item in sidemenu.items %}
                   <li{% if item.classes is not empty %} class="{% for class in item.classes %}{{ class }} {% endfor %}"{% endif %}>

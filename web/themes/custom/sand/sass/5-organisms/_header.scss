@@ -1,12 +1,28 @@
 /* ============================================================
   Styles for the header.
   ============================================================ */
+  @mixin transform($transforms) {
+    -webkit-transform: $transforms;
+    -moz-transform: $transforms;
+    -ms-transform: $transforms;
+    transform: $transforms;
+  }
+
+  @mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
+
 
 .off-canvas-wrapper {
 
   .off-canvas-main-menu {
     background: $off-black;
     top: auto;
+    //transition: translate var(--animation-timing);
+    //translate: -100%;
 
     ul {
       margin: 0;
@@ -60,68 +76,6 @@
       }
     }
 
-    .burger-wrapper {
-      $s: 0.2rem;
-
-      cursor: pointer;
-      height: $s * 8;
-      margin: auto;
-      width: $s * 10;
-
-      .hamburger {
-        background: $cerulean;
-        height: $s;
-        position: relative;
-        transition: background 10ms 300ms ease;
-        transform: translateY($s * 4);
-        width: $s * 10;
-
-        &:before,
-        &:after {
-          background: $cerulean;
-          content: '';
-          height: $s;
-          left: 0;
-          position: absolute;
-          transition: top 300ms 350ms ease,
-            transform 300ms 50ms ease;
-          width: $s*10;
-        }
-
-        &:before {
-          top: $s * -3;
-        }
-
-        &:after {
-          top: $s * 3;
-        }
-      }
-    }
-
-    // .menu-trigger:checked {
-    //
-    //   ~ .burger-wrapper {
-    //
-    //     .hamburger {
-    //       background: transparent;
-    //
-    //       &:after, &:before {
-    //         top: 0;
-    //         transition: top 300ms 50ms ease,
-    //         transform 300ms 350ms ease;
-    //       }
-    //
-    //       &:before {
-    //         transform: rotate(45deg);
-    //       }
-    //
-    //       &:after {
-    //         transform: rotate(-45deg);
-    //       }
-    //     }
-    //   }
-    // }
-
     .logo-mobile {
       width: 4.5rem;
     }
@@ -140,7 +94,7 @@
     }
 
     .main-menu {
-      box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
+      //box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
 
       @include breakpoint(medium) {
         background: $white;
@@ -160,7 +114,7 @@
       padding: 1.25rem 1em 1em;
 
       text-decoration: none;
-      width: 56px;
+      //width: 56px;
 
       &:focus,
       &:hover {
@@ -175,7 +129,10 @@
         text-align: center;
       }
     }
-
+    .tb-megamenu img {
+      border-radius: 50%;
+    }
+    
     .tb-megamenu .nav>li>a,
     .tb-megamenu .nav>li>span.tb-megamenu-no-link {
       border: none;
@@ -279,8 +236,14 @@
         flex-direction: row;
         list-style: none;
         margin: 0 !important;
-        padding: 0;
+        padding: 0 1px 0 0;
         justify-content: space-between;
+        background: -moz-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #d4d4d4));
+        background: -webkit-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+        background: -o-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+        background: -ms-linear-gradient(top, #fff 0%, #d4d4d4 100%);
+        background: linear, to bottom, #fff 0%, #d4d4d4 100%;
 
         .tb-megamenu-item {
           border: none;
@@ -302,11 +265,11 @@
             z-index: 1;
           }
 
-          &:first-child {
+          /*&:first-child {
             &:before {
               width: 0;
             }
-          }
+          }*/
         }
       }
     }
@@ -317,6 +280,7 @@
 
       h4 {
         font-size: 1.125rem;
+        font-weight: normal;
 
         a {
           line-height: inherit;
@@ -339,9 +303,25 @@
         margin: 0;
 
         li {
-          font-size: 0.86rem;
           list-style: none;
           text-transform: uppercase;
+          margin-bottom: 0.5em;
+          line-height: 1.2;
+
+          a {
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            color: #5d676f;
+
+            &:hover, &:focus {
+              color: $spruce;
+            }
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
         }
       }
 
@@ -354,10 +334,24 @@
       margin: 0;
     }
 
+    .tb-megamenu-block h2 {
+      margin-top: 0.6em;
+      padding-bottom: 0.4em;
+      border-bottom: 1px solid $alto;
+    }
+
+    .mega-dropdown-menu {
+      width: 100% !important;
+    }
+
     .menu-border {
       border-bottom: 1px dashed $alto;
-      margin-bottom: 0.5em;
-      padding-bottom: 0.5em;
+      padding: 1em 0;
+
+      &:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
+      }
     }
 
     .heading--snug {
@@ -367,6 +361,13 @@
 
     .nav__event {
       margin: 0 1rem 1rem 0;
+      font-size: .8125em;
+      align-items: center;
+      justify-content: center;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
 
       >div {
         padding-left: 1rem;
@@ -478,7 +479,7 @@
     }
 
     input {
-      font-size: 0.86rem;
+      font-size: 1rem;
 
       &::placeholder {
         color: $spruce;
@@ -581,8 +582,6 @@
     }
   }
 
-  .logo {}
-
   a {
     font-family: "Open Sans", sans-serif;
   }
@@ -650,4 +649,156 @@ section.not-found {
     border-top-color: #0098db;
     border-left-color: #0098db;
   }
+}
+
+.menu-toggle {
+  width: 4em;
+  height: 4em;
+  position: relative;
+  z-index: 201; /* 1 */
+  display: none;
+  font-weight: 600;
+  padding-top: .25em;
+  border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover,
+  .js-nav &:hover {
+      color: white;
+      background-color: $cerulean;
+      border-color: $cerulean;
+  }
+  .js-nav & {
+      background-color: transparent;
+  }
+
+  @include breakpoint(mobile-landscape down) {
+      display: block;
+      position: absolute;
+      top: 1em;
+      right: 1em;
+
+  }
+}
+
+/* Mobile Menu Button */
+
+:root {
+  --bar-width: 20px;
+  --bar-height: 2px;
+  --hamburger-gap: 6px;
+  --foreground: white;
+  --background: white;
+  --hamburger-margin: 8px;
+  --animation-timing: 200ms ease-in-out;
+  --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
+}
+
+.menu-wrapper {
+  background-color: $cerulean;
+  border-radius: 4px;
+  padding: .5rem .8rem .8rem;
+  position: absolute;
+  top: 1em;
+  left: -75px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+
+  >span {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    color: white;
+  }
+}
+
+.burger-wrapper {
+  --x-width: calc(var(--hamburger-height) * 1.41421356237);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--hamburger-gap);
+  width: max-content;
+  z-index: 2;
+  cursor: pointer;
+  width: 1.2em;
+  margin: 0 auto;
+
+  input {
+    appearance: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    pointer-events: none;
+    
+    &:checked {
+      opacity: 0;
+      width: 0;
+    }
+
+    &[type=checkbox]:hover {
+      border-color: unset;
+
+    }
+  }
+
+}
+
+.burger-wrapper:has(input:focus-visible)::before,
+.burger-wrapper:has(input:focus-visible)::after,
+.burger-wrapper input:focus-visible {
+  border: 1px solid var(--background);
+  box-shadow: 0 0 0 1px var(--foreground);
+}
+
+.burger-wrapper::before,
+.burger-wrapper::after,
+.burger-wrapper input {
+  top: 0;
+  content: "";
+  width: var(--bar-width);
+  height: var(--bar-height);
+  background-color: var(--foreground);
+  color: var(--foreground);
+  border-color: white;
+  border-radius: 9999px;
+  transform-origin: left center;
+  transition: opacity var(--animation-timing), width var(--animation-timing),
+    rotate var(--animation-timing), translate var(--animation-timing),
+    background-color var(--animation-timing);
+}
+
+
+.burger-wrapper:has(input:checked)::before {
+  rotate: 45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / -2);
+}
+
+.burger-wrapper:has(input:checked)::after {
+  rotate: -45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / 2);
+}
+
+/*.burger-wrapper:has(input:checked) + .menu-wrapper {
+  translate: -250px;
+}*/
+
+.js-off-canvas-overlay {
+  background: rgba(11, 11, 11, 0.8);
+}
+
+.off-canvas {
+  position: absolute;
+
+  &.is-closed {
+    visibility: visible;
+  }
+}
+
+.position-right {
+  overflow-y: unset;
 }
