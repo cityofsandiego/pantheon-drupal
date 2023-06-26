@@ -117,12 +117,6 @@ function sand_remote_user_predelete(UserInterface $account) {
   $storage->delete($sand_remotes);
 }
 
-///**
-// * Implements hook_entity_delete().
-// */
-//function sand_remote_sand_remote_delete(\Drupal\Core\Entity\EntityInterface $entity): void {
-//  $deleted_from_queue = \Drupal::service('sand.extract_text')->queueEntityDelete('sand_remote', $entity);
-//}
 /**
  * Implements hook_entity_insert().
  */
@@ -150,25 +144,6 @@ function sand_remote_sand_remote_update(\Drupal\Core\Entity\EntityInterface $ent
   }
 }
 
-
-/*
- * 1. Feeds inserts new entity = hook_insert = unset no-queue flag
- * 2. User updates entity = hook_update = unset no-queue flag (user can set no-queue flag)
- * 3. Queue updates entity, set no-queue flag = hook_update then unsets no-queue flag
- * 4. Webdata updates entity, set no-queue flag = hook_update then unsets no-queue flag
- * 
- * A. hook_insert always queues
- * B. hook_update queues if flag not set, if flag set then no queue and clear flag
- */
-//
-///**
-// * Implements hook_node_delete().
-// */
-//function sand_remote_node_delete(\Drupal\node\NodeInterface $node): void {
-//  if ($node->getType() == 'external_data') {
-//    $deleted_from_queue = \Drupal::service('sand.extract_text')->queueEntityDelete('node', $node);
-//  }
-//}
 
 /**
  * Implements hook_node_insert().
