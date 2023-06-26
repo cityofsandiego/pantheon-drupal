@@ -1169,13 +1169,13 @@ class CustomCommands extends DrushCommands {
           'bucket' => str_replace('`', '', $data[15]),
           'department' => explode('|', str_replace('`', '', $data[18])),
           'secondary_exceptions' => explode('|', str_replace('`', '', $data[20])),
-          'hours' => explode(' \ ', str_replace('`', '', $data[23])),
-          'location_type' => explode('|', str_replace('`', '', $data[25])),
-          'resources' => explode('|', str_replace('`', '', $data[29])),
-          'restrictions' => explode('|', str_replace('`', '', $data[30])),
-          'secondary_hours' => explode(' \ ', str_replace('`', '', $data[31])),
-          'search_keymatch' => explode('|', str_replace('`', '', $data[36])),
-          'exceptions' => explode(' |', str_replace('`', '', $data[38])),
+          'hours' => explode(' \ ', str_replace('`', '', $data[41])),
+          'location_type' => explode('|', str_replace('`', '', $data[24])),
+          'resources' => explode('|', str_replace('`', '', $data[28])),
+          'restrictions' => explode('|', str_replace('`', '', $data[29])),
+          'secondary_hours' => explode(' \ ', str_replace('`', '', $data[30])),
+          'search_keymatch' => explode('|', str_replace('`', '', $data[35])),
+          'exceptions' => explode(' |', str_replace('`', '', $data[37])),
         ];
       }
       fclose($file);
@@ -2660,7 +2660,7 @@ class CustomCommands extends DrushCommands {
         $departments = NULL;
         $departments_subs = NULL;
         $paths = NULL;
-        if (array_key_exists('node_taxonomy', $conditions)) {
+        if (is_array($conditions) && array_key_exists('node_taxonomy', $conditions)) {
           foreach ($conditions['node_taxonomy']['values'] as $dtid) {
             $d9_tid = $this->taxonomyImportTasks->newTid($dtid, 'department');
             if (!empty($d9_tid)) {
@@ -2668,7 +2668,7 @@ class CustomCommands extends DrushCommands {
             }
           }
         }
-        if (array_key_exists('taxonomy_descendants_condition', $conditions)) {
+        if (is_array($conditions) && array_key_exists('taxonomy_descendants_condition', $conditions)) {
           foreach ($conditions['taxonomy_descendants_condition']['values'] as $dtid) {
             $d9_tid = $this->taxonomyImportTasks->newTid($dtid, 'department');
             if (!empty($d9_tid)) {
@@ -2676,13 +2676,13 @@ class CustomCommands extends DrushCommands {
             }
           }
         }
-        if (array_key_exists('path', $conditions)) {
+        if (is_array($conditions) && array_key_exists('path', $conditions)) {
           foreach ($conditions['path'] as $path) {
             $paths[] = $path;
           }
         }
         $blocks = unserialize($data[4]);
-        if (array_key_exists('block', $blocks) && count($blocks['block']['blocks']) > 0) {
+        if (is_array($blocks) && array_key_exists('block', $blocks) && count($blocks['block']['blocks']) > 0) {
           $node = Node::create([
             'type' => 'sidebar_block_context',
             'title' => $data[0],
@@ -3158,15 +3158,17 @@ class CustomCommands extends DrushCommands {
         ->condition('field_d7_nid', $d7id);
       $nid = reset($query->execute());
       $node = Node::load($nid);
-      $node->set('field_doc_date', rtrim($date, ' '));
-      if (NULL !== $editdate[$d7id]['created']) {
-        $node->set('created', $editdate[$d7id]['created']);
+      if (!is_null($node)) {
+        $node->set('field_doc_date', rtrim($date, ' '));
+        if (NULL !== $editdate[$d7id]['created']) {
+          $node->set('created', $editdate[$d7id]['created']);
+        }
+        if (NULL !== $editdate[$d7id]['changed']) {
+          $node->set('changed', $editdate[$d7id]['changed']);
+        }
+        $node->save();
+        echo 'Saved D7 id: ' . $d7id . ' D9 id: ' . $node->id() . ' Memory usage: ' . $this->memoryUsage(memory_get_usage(TRUE)) . PHP_EOL;
       }
-      if (NULL !== $editdate[$d7id]['changed']) {
-        $node->set('changed', $editdate[$d7id]['changed']);
-      }
-      $node->save();
-      echo 'Saved D7 id: ' . $d7id . ' D9 id: ' . $node->id() . ' Memory usage: ' . $this->memoryUsage(memory_get_usage(true)) . PHP_EOL;
     }
   }
 
@@ -3501,19 +3503,19 @@ class CustomCommands extends DrushCommands {
           $recur_number = str_replace('INTERVAL=', '', $extra_data[1]);
         }
       }
-      if (strtotime($data['event_start']) == strtotime($data['event_end'])) {
-        $event_start = explode('T', $data['event_start']);
-        $event_start = strtotime($event_start[0] . 'T00:00:00');
-        $event_end = explode('T', $data['event_end']);
-        $event_end = strtotime($event_end[0] . 'T23:59:00');
-        $duration = 1439;
-        echo 'Set duration of ' . $node->id() . ' to all day.' . PHP_EOL;
-      }
-      else {
+//      if (strtotime($data['event_start']) == strtotime($data['event_end'])) {
+//        $event_start = explode('T', $data['event_start']);
+//        $event_start = strtotime($event_start[0] . 'T00:00:00');
+//        $event_end = explode('T', $data['event_end']);
+//        $event_end = strtotime($event_end[0] . 'T23:59:00');
+//        $duration = 1439;
+//        echo 'Set duration of ' . $node->id() . ' to all day.' . PHP_EOL;
+//      }
+//      else {
         $event_start = strtotime($data['event_start']);
         $event_end = strtotime($data['event_end']);
         $duration = 0;
-      }
+//      }
       $node->field_event_date = [
         'value' => $event_start,
         'end_value' => $event_end,
@@ -4232,18 +4234,6 @@ class CustomCommands extends DrushCommands {
         ->expression($field, 'replace(' . $field . ', :old, :new)', array(
           ':old' => '&#44;',
           ':new' =>  ',',
-        ))->execute();
-      // Remove lndo domain.
-      $update2 = \Drupal::database()->update($table)
-        ->expression($field, 'replace(' . $field . ', :old, :new)', array(
-          ':old' => 'sdgov.lndo.site',
-          ':new' =>  'www.sandiego.gov',
-        ))->execute();
-      // Switch to relative URL.
-      $update3 = \Drupal::database()->update($table)
-        ->expression($field, 'replace(' . $field . ', :old, :new)', array(
-          ':old' => '="//www.sandiego.gov/',
-          ':new' =>  '="/',
         ))->execute();
     }
   }

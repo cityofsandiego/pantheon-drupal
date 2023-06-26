@@ -66,11 +66,6 @@ elements: |
     '#title': 'Nùmero de Articulo de la Agenda:' 
     '#description': ""
     '#required': true
-    '#states':
-      optional:
-        ':input[name="tipo_de_comentario"]':
-          value: noagenda_key
-          
   meeting_date:
     '#type': date
     '#title': 'Fecha de la Junta:' 
@@ -80,6 +75,23 @@ elements: |
     '#title': 'Comentario:' 
     '#description': ""
     '#required': true
+  declaracion_de_contribucion_de_campana_a_un_regidor_de_mas_de_250_en_el_ultimo_ano_vigente_a_partir_del_1_de_enero_de_2023:
+    '#type': radios
+    '#options':
+      si: 'Si'
+      no: 'No'
+    '#title': 'Declaración de contribución de campaña a un Regidor de más de $250 en el último año (vigente a partir del 1 de Enero de 2023).      ' 
+    '#description': ""
+  nombres_de_regidores:
+    '#type': textarea
+    '#title': 'Nombre(s) de Regidor(es):  ' 
+    '#description': ""
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="declaracion_de_contribucion_de_campana_a_un_regidor_de_mas_de_250_en_el_ultimo_ano_vigente_a_partir_del_1_de_enero_de_2023"]':
+          value: si
+          
 css: ''
 javascript: ''
 settings:
