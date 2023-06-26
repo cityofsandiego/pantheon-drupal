@@ -1,4 +1,4 @@
-uuid: 5e204002-9778-47d4-9366-5d3318ca51aa
+uuid: d7711680-e390-4e1b-95a5-40ea500a54b5
 langcode: en
 status: open
 dependencies: {  }
@@ -8,7 +8,7 @@ close: null
 uid: 53
 template: false
 archive: false
-id: webform_1382137
+id: webform_1457888
 title: 'Request a Proclamation or Certificate of Recognition'
 description: null
 category: null
@@ -45,7 +45,59 @@ elements: |
       '#description': ""
       '#required': true
     state_1:
-      '#type': textfield
+      '#type': select
+      '#options':
+        AL: 'Alabama'
+        AK: 'Alaska'
+        AZ: 'Arizona'
+        AR: 'Arkansas'
+        CA: 'California'
+        CO: 'Colorado'
+        CT: 'Connecticut'
+        DE: 'Delaware'
+        FL: 'Florida'
+        GA: 'Georgia'
+        HI: 'Hawaii'
+        ID: 'Idaho'
+        IL: 'Illinois'
+        IN: 'Indiana'
+        IA: 'Iowa'
+        KS: 'Kansas'
+        KY: 'Kentucky'
+        LA: 'Louisiana'
+        ME: 'Maine'
+        MD: 'Maryland'
+        MA: 'Massachusetts'
+        MI: 'Michigan'
+        MN: 'Minnesota'
+        MS: 'Mississippi'
+        MO: 'Missouri'
+        MT: 'Montana'
+        NE: 'Nebraska'
+        NV: 'Nevada'
+        NH: 'New Hampshire'
+        NJ: 'New Jersey'
+        NM: 'New Mexico'
+        NY: 'New York'
+        NC: 'North Carolina'
+        ND: 'North Dakota'
+        OH: 'Ohio'
+        OK: 'Oklahoma'
+        OR: 'Oregon'
+        PA: 'Pennsylvania'
+        RI: 'Rhode Island'
+        SC: 'South Carolina'
+        SD: 'South Dakota'
+        TN: 'Tennessee'
+        TX: 'Texas'
+        UT: 'Utah'
+        VT: 'Vermont'
+        VA: 'Virginia'
+        WA: 'Washington'
+        WV: 'West Virginia'
+        WI: 'Wisconsin'
+        WY: 'Wyoming'
+      '#default_value': 'CA' 
       '#title': 'State' 
       '#description': ""
       '#required': true
@@ -110,9 +162,9 @@ elements: |
         '#title': 'Certificate of Recognition Date' 
         '#description': ""
         '#required': true
-      please_include_up_to_50_words_of_text_16:
+      recognition_text_16:
         '#title': 'Recognition Text' 
-        '#description': "Please include up to 50 words of text. "
+        '#description': "Please include up to 100 words of text. "
         '#required': true
     fieldset_proclaimed_day_info_10:
       '#type': fieldset
@@ -124,6 +176,12 @@ elements: |
           ':input[name="type_of_request_10"]':
             value: proclamation
             
+      proclamation_text_20:
+        '#type': processed_text
+        '#format': full_html
+        '#text': "<p>If requesting a proclamation, then please provide the exact language that you’d like to be included in the actual document, limited to six Whereas clauses of 1-2 sentences each. Note that the suggested text is subject to modification. [[{'fid':'1921233','view_mode':'default','fields':{'format':'default','alignment':'','media_title[und][0][value]':'','media_description[und][0][value]':'','media_description[und][0][format]':'full_html'},'link_text':'View this sample','type':'media','field_deltas':{'1':{'format':'default','alignment':'','media_title[und][0][value]':'','media_description[und][0][value]':'','media_description[und][0][format]':'full_html'}},'attributes':{'class':'media-element file-default','data-delta':'1'}}]].</p>\n"
+        '#title': 'Proclamation text' 
+        '#description': ""
       name_of_proclaimed_day_20:
         '#type': textfield
         '#title': 'Name of Proclaimed Day' 
@@ -141,9 +199,9 @@ elements: |
     delivery_method_10:
       '#type': radios
       '#options':
-        office: 'Obtain at Mayor’s Office'
-        event: 'Present at an Event/Meeting'
-        mail: 'Mail to address above'
+        obtain: 'Obtain during City Council Meeting'
+        present: 'Present at Event/Meeting'
+        mail: 'Mail to Address Listed Above'
       '#title': 'Delivery Method' 
       '#description': ""
       '#required': true
@@ -158,22 +216,11 @@ elements: |
           ':input[name="delivery_method_10"]':
             value: event
             
-    preferred_date_of_event_10:
+    preferred_date_of_completion_10:
       '#type': date
-      '#title': 'Date of Event' 
+      '#title': 'Preferred Date of Completion' 
       '#description': ""
       '#required': true
-    preferred_date_needed_10:
-      '#type': date
-      '#title': 'Date needed document by' 
-      '#description': ""
-      '#required': true
-  note:
-    '#type': processed_text
-    '#format': full_html
-    '#text': "<p><strong>PLEASE NOTE:</strong>&nbsp;Requests should be submitted&nbsp;a minimum of&nbsp;10 business&nbsp;days&nbsp;in advance of proclaimed date.</p>\n"
-    '#title': 'Note' 
-    '#description': ""
 css: ''
 javascript: ''
 settings:
@@ -183,8 +230,8 @@ settings:
   draft: '0'
   draft_auto_save: false
   confirmation_type: url
-  confirmation_url: /mayor/contact/proclamation-response
-  confirmation_message: "<p>Hi,</p>\r\n\r\n<p>Thank you for your submission request to Mayor Todd Gloria’s Office. This email confirms we’ve received your request and will begin processing it as soon as possible.&nbsp; Please be aware that all requests are subject to the office’s multi-layered approval process. Not all requests are guaranteed to be completed.</p>\r\n\r\n<p>Additionally, office policy requires a minimum of 10 business days’ notice&nbsp;to ensure there is enough time to process and follow up with any questions or issues. Please submit draft language with all requests as this will help us complete the requested documents sooner.</p>\r\n\r\n<p><b>If you have questions or would like to check on the status of your&nbsp;request, please reach out to me directly. I am available via call, text, and email&nbsp;at:</b></p>\r\n\r\n<ul>\r\n\t<li>Cell: 619-753-4586</li>\r\n\t<li>Email:&nbsp;<a href=\"mailto:acsilva@sandiego.gov\">acsilva@sandiego.gov</a></li>\r\n</ul>\r\n\r\n<p>Due to the volume of email our office receives please do not contact other staff regarding the status of your request. I’ll do my best to respond in a timely manner,&nbsp;however,&nbsp;please understand we have a significant number of requests, and I am not always available for immediate response.</p>\r\n\r\n<p>Thank you in advance for your patience, and again thank you for your request. The&nbsp;Mayor&nbsp;loves to support the San Diego community in as many ways as possible!</p>\r\n"
+  confirmation_url: /citycouncil/cd6/request-proclamation-response
+  confirmation_message: ''
   limit_total: null
   limit_user: null
   form_submit_label: ''
@@ -263,24 +310,13 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: default
-      body: |+
-        <p>Hi,</p>
+      body: |
+        <p>Thank you for your submission to Council District 6 Office.</p>
 
-        <p>Thank you for your submission request to Mayor Todd Gloria’s Office. This email confirms we’ve received your request and will begin processing it as soon as possible.&nbsp; Please be aware that all requests are subject to the office’s multi-layered approval process. Not all requests are guaranteed to be completed.</p>
+        <p>You submitted the following information on [webform_submission:date:long]:</p>
 
-        <p>Additionally, office policy requires a minimum of 10 business days’ notice&nbsp;to ensure there is enough time to process and follow up with any questions or issues. Please submit draft language with all requests as this will help us complete the requested documents sooner.</p>
 
-        <p><strong>If you have questions or would like to check on the status of your&nbsp;request, please reach out to me directly. I am available via call, text, and email&nbsp;at:</strong></p>
-
-        <ul>
-        	<li>Cell: 619-753-4586</li>
-        	<li>Email:&nbsp;<a href="mailto:acsilva@sandiego.gov">acsilva@sandiego.gov</a></li>
-        </ul>
-
-        <p>Due to the volume of email our office receives please do not contact other staff regarding the status of your request. I’ll do my best to respond in a timely manner,&nbsp;however,&nbsp;please understand we have a significant number of requests, and I am not always available for immediate response.</p>
-
-        <p>Thank you in advance for your patience, and again thank you for your request. The&nbsp;Mayor&nbsp;loves to support the San Diego community in as many ways as possible!</p>
-
+        [webform_submission:values]
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -322,6 +358,48 @@ handlers:
         Submitted by user: [webform_submission:user]
         Submitted values are:
         [webform_submission:values]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_4:
+    id: email
+    handler_id: email_4
+    label: 'Email 4'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: kentlee@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:completed_date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

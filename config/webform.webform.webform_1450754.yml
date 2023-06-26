@@ -93,9 +93,13 @@ elements: |
     type_of_request_10:
       '#type': radios
       '#options':
+        anniversary: 'Anniversary Letter'
+        birthdayletter: 'Birthday Letter'
+        condolence: 'Condolence Letter'
+        congratulatory: 'Congratulatory Letter'
         greetings: 'Greetings/Welcome Letter'
         support: 'Letter of Support (grant)'
-        anniversary: 'Anniversary Letter'
+        programbook: 'Program Book'
       '#title': 'Type of Request' 
       '#description': ""
       '#required': true
@@ -104,6 +108,11 @@ elements: |
       '#open': true
       '#title': 'Content of Letter' 
       '#description': ""
+      date_letter_should_be_addressed_29:
+        '#type': date
+        '#title': 'Date letter should be addressed' 
+        '#description': ""
+        '#required': true
       name_address_line_29:
         '#type': textfield
         '#title': 'Name of Individual or Organization to list on the address line of the letter' 
@@ -134,6 +143,16 @@ elements: |
       '#title': 'Delivery Method' 
       '#description': ""
       '#required': true
+  date_of_event:
+    '#type': date
+    '#title': 'Date of Event' 
+    '#description': ""
+    '#required': true
+  date_letter_needed_by:
+    '#type': date
+    '#title': 'Date letter needed by' 
+    '#description': ""
+    '#required': true
 css: ''
 javascript: ''
 settings:
@@ -144,7 +163,7 @@ settings:
   draft_auto_save: false
   confirmation_type: url
   confirmation_url: /mayor/request-a-letter-response
-  confirmation_message: ''
+  confirmation_message: "<p>Hi,</p>\r\n\r\n<p>Thank you for your submission request to Mayor Todd Gloria’s Office. This email confirms we’ve received your request and will begin processing it as soon as possible.&nbsp; Please be aware that all requests are subject to the office’s multi-layered approval process. Not all requests are guaranteed to be completed.</p>\r\n\r\n<p>Additionally, office policy requires a minimum of 10 business days’ notice&nbsp;to ensure there is enough time to process and follow up with any questions or issues. Please submit draft language with all requests as this will help us complete the requested documents sooner.</p>\r\n\r\n<p><b>If you have questions or would like to check on the status of your&nbsp;request, please reach out to me directly. I am available via call, text, and email&nbsp;at:</b></p>\r\n\r\n<ul>\r\n\t<li>Cell: 619-753-4586</li>\r\n\t<li>Email:&nbsp;<a href=\"mailto:acsilva@sandiego.gov\">acsilva@sandiego.gov</a></li>\r\n</ul>\r\n\r\n<p>Due to the volume of email our office receives please do not contact other staff regarding the status of your request. I’ll do my best to respond in a timely manner,&nbsp;however,&nbsp;please understand we have a significant number of requests, and I am not always available for immediate response.</p>\r\n\r\n<p>Thank you in advance for your patience, and again thank you for your request. The&nbsp;Mayor&nbsp;loves to support the San Diego community in as many ways as possible!</p>\r\n"
   limit_total: null
   limit_user: null
   form_submit_label: 'Submit Request'
@@ -181,13 +200,24 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: default
-      body: |
-        <p>Thank you for your submission to the Mayor's Office.</p>
+      body: |+
+        <p>Hi,</p>
 
-        <p>You submitted the following information on [webform_submission:date:long]:</p>
+        <p>Thank you for your submission request to Mayor Todd Gloria’s Office. This email confirms we’ve received your request and will begin processing it as soon as possible.&nbsp; Please be aware that all requests are subject to the office’s multi-layered approval process. Not all requests are guaranteed to be completed.</p>
 
+        <p>Additionally, office policy requires a minimum of 10 business days’ notice&nbsp;to ensure there is enough time to process and follow up with any questions or issues. Please submit draft language with all requests as this will help us complete the requested documents sooner.</p>
 
-        [webform_submission:values]
+        <p><strong>If you have questions or would like to check on the status of your&nbsp;request, please reach out to me directly. I am available via call, text, and email&nbsp;at:</strong></p>
+
+        <ul>
+        	<li>Cell: 619-753-4586</li>
+        	<li>Email:&nbsp;<a href="mailto:acsilva@sandiego.gov">acsilva@sandiego.gov</a></li>
+        </ul>
+
+        <p>Due to the volume of email our office receives please do not contact other staff regarding the status of your request. I’ll do my best to respond in a timely manner,&nbsp;however,&nbsp;please understand we have a significant number of requests, and I am not always available for immediate response.</p>
+
+        <p>Thank you in advance for your patience, and again thank you for your request. The&nbsp;Mayor&nbsp;loves to support the San Diego community in as many ways as possible!</p>
+
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -565,6 +595,113 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: default
+      body: |
+        Submitted on [webform_submission:date:long]
+
+        == CONTACT INFO ==
+
+        FIRST NAME: 
+        [webform_submission:values:contact:first_name:nolabel]
+
+        LAST NAME: 
+        [webform_submission:values:contact:last_name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact:email:nolabel]
+
+        MAILING ADDRESS:
+        [webform_submission:values:contact:mailing_address:nolabel]
+
+        CITY: 
+        [webform_submission:values:contact:city:nolabel]
+
+        STATE: 
+        [webform_submission:values:contact:state:nolabel]
+
+        ZIP: 
+        [webform_submission:values:contact:zip:nolabel]
+
+        ORGANIZATION: 
+        [webform_submission:values:contact:organization:nolabel]
+
+        REQUESTOR’S TITLE/ROLE: 
+        [webform_submission:values:contact:requestors_title_role:nolabel]
+
+        == LETTER INFO ==
+
+        PURPOSE OF THE LETTER: 
+        [webform_submission:values:request:letter_purpose:nolabel]
+
+        PUBLISHING ON SOCIAL MEDIA? 
+        [webform_submission:values:request:published_on_social_media:nolabel]
+
+        INCLUDED IN PROGRAM BOOK? 
+        [webform_submission:values:request:program_book:nolabel]
+
+        TYPE OF REQUEST: 
+        [webform_submission:values:request:type_of_request:nolabel]
+
+        == CONTENT OF LETTER ==
+
+        DATE LETTER SHOULD BE ADDRESSED
+        [webform_submission:values:request:content_of_letter:date_letter_should_be_addressed:nolabel]
+
+        NAME OF INDIVIDUAL OR ORGANIZATION IN ADDRESS LINE:
+        [webform_submission:values:request:content_of_letter:name_address_line:nolabel]
+
+        ADDRESS ON LETTER:
+        [webform_submission:values:request:content_of_letter:letter_address:nolabel]
+
+        SAMPLE LANGUAGE:
+        [webform_submission:values:request:content_of_letter:sample_language:nolabel]
+
+        SAMPLE LANGUAGE FILE:
+        [webform_submission:values:request:content_of_letter:sample_language_file:nolabel]
+
+        DELIVERY  METHOD:
+        [webform_submission:values:request:delivery_method:nolabel]
+
+        DATE OF EVENT
+        [webform_submission:values:request: date_of_event:nolabel]
+
+        DATE LETTER NEEDED BY
+        [webform_submission:values:request:date_letter_needed_by:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_8:
+    id: email
+    handler_id: email_8
+    label: 'Email 8'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 8
+    settings:
+      states:
+        - completed
+      to_mail: acsilva@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
       body: |+
         Submitted on [webform_submission:date:long]
 
@@ -613,6 +750,9 @@ handlers:
 
         == CONTENT OF LETTER ==
 
+        DATE LETTER SHOULD BE ADDRESSED
+        [webform_submission:values:request:content_of_letter:date_letter_should_be_addressed:nolabel]
+
         NAME OF INDIVIDUAL OR ORGANIZATION IN ADDRESS LINE:
         [webform_submission:values:request:content_of_letter:name_address_line:nolabel]
 
@@ -628,6 +768,11 @@ handlers:
         DELIVERY  METHOD:
         [webform_submission:values:request:delivery_method:nolabel]
 
+        DATE OF EVENT
+        [webform_submission:values:request: date_of_event:nolabel]
+
+        DATE LETTER NEEDED BY
+        [webform_submission:values:request:date_letter_needed_by:nolabel]
 
       excluded_elements: {  }
       ignore_access: false

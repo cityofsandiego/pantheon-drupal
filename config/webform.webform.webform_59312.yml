@@ -81,21 +81,6 @@ elements: |
       '#title': 'Phone Number' 
       '#description': ""
       '#required': true
-    address_1:
-      '#type': textfield
-      '#title': 'Address' 
-      '#description': ""
-      '#required': true
-    zip_code_1:
-      '#type': textfield
-      '#size': 20
-      '#min': 
-      '#max': 
-      '#step': 
-      '#unique': false
-      '#title': 'Zip Code' 
-      '#description': ""
-      '#required': true
   fieldset_social_media_handle_optional:
     '#type': fieldset
     '#open': true
@@ -138,10 +123,6 @@ elements: |
       '#title': 'Manuscript Word Count' 
       '#description': ""
       '#required': true
-    story_description_8:
-      '#title': 'Story Description' 
-      '#description': ""
-      '#required': true
     upload_manuscript_8:
       '#type': managed_file
       '#max_filesize': '2'
@@ -171,7 +152,7 @@ settings:
   confirmation_type: url
   confirmation_url: /public-library/short-story-contest-registration-response
   confirmation_message: ''
-  limit_total: 80
+  limit_total: 75
   limit_user: null
   form_submit_label: 'Submit Registration'
   wizard_complete: 1
@@ -245,6 +226,50 @@ handlers:
       sender_name: ''
       subject: default
       body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '2023 SDPL Short Story Contest'
+      body: |-
+        Submitted on [webform_submission:completed_date:long]
+
+        The following information has been submitted.  If you have any further questions, please contact us at localauthor@sandiego.gov
+
+        [webform_submission:values]
+
+         
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
