@@ -6,10 +6,9 @@ table:not(.calendar-view-table) {
   margin-bottom: 1em;
   background: white;
   color: $spruce;
-  border-left: 1px solid $spruce;
-  border-bottom: 1px solid $spruce;
+  border: 1px solid $spruce;
   position: relative;
-  border-collapse: separate;
+  border-collapse: collapse;
   border-spacing: 0;
 
   &:last-child {
@@ -238,6 +237,47 @@ table:not(.calendar-view-table) {
       }
     }
 
+  }
+
+  &.t-light-border {
+    border: 1px solid #adafaf;
+  
+    &.t-inside-border {
+  
+      thead th {
+        border-right: 1px solid #adafaf;
+      }
+  
+      thead th, tbody td {
+        &:last-child {
+          border-right: 1px solid #adafaf;
+        }
+      }
+  
+      thead tr:not(:first-child) th {
+        border-top: 1px solid #adafaf;
+      }
+    }
+  
+    thead {
+      th {
+        border-top: 1px solid #adafaf;
+        border-bottom: 3px solid #adafaf;
+        
+        &:last-child {
+          border-right: 1px solid #adafaf;
+        }
+      }
+    }
+    tbody{
+      tr {
+        td {
+          &:last-child {
+            border-right: 1px solid #adafaf;
+          }
+        }
+      }
+    }
   }
 }
 
