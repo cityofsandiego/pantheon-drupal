@@ -50,7 +50,11 @@
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
       {% if content.field_section_title.0 is not empty %}
+      {% if content.field_link.0 is not empty %}
       <h2 class="l-margin-desktop-hs"><a href="{{ content.field_link[0]['#url'] }}">{{ content.field_section_title }}</a></h2>
+      {% else %}
+      <h2 class="l-margin-desktop-hs">{{ content.field_section_title }}</h2>
+      {% endif %}
       {% endif %}
       <div class="featured-card-group__wrapper card__container">
         <ul class="slides">
