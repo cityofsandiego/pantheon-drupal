@@ -93,8 +93,14 @@ class SandRemoteQueue extends QueueWorkerBase implements ContainerFactoryPluginI
    */
   public function processItem($data) {
     // $data is actually an object of ExtractText type.
+
     /** @var ExtractText $data */
-    $was_updated = $data->setText();
+    $entity = $data->getEntity();
+
+    // If the entity still exists, process it.
+    if (!empty($entity)) {
+      $was_updated = $data->setText();
+    }
   }
 
 }

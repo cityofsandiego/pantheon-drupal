@@ -70,6 +70,18 @@ class ExtractText {
   }
 
   /**
+   * Getter
+   *
+   * @return $entity
+   */
+  public function getEntity() {
+    $entity = \Drupal::entityTypeManager()
+      ->getStorage($this->getEntityType())
+      ->load($this->getEntityId());
+    return $entity;
+  }
+
+  /**
    * Setter
    * 
    * @param int $entity_id
@@ -410,12 +422,6 @@ class ExtractText {
       return FALSE;
     }
 
-//    // Set variable to say we are setting the Text so don't fire our hooks for insert and update.
-//    /** @var \Drupal\Core\TempStore\PrivateTempStore $tempstore */
-//    $tempstore = \Drupal::service('tempstore.private');
-//    $store = $tempstore->get('extracting_text');
-//    $store->set('entity_type_id', $this->getEntityType() . ':' . $this->getEntityId());
-
     $url = $this->getUrlField();
     
     // Target field name and value.
@@ -424,7 +430,6 @@ class ExtractText {
 
     // If source and target are empty then just return.
     if (empty($url) && empty($target_value)) {
-//      $store->delete('entity_type_id');
       return FALSE;
     }
     
@@ -482,10 +487,6 @@ class ExtractText {
       $entity->set('field_skip_text_extract_queuing', TRUE);
       $entity->save();
     }
-    
-    // Delete out the variable that says we are processing it. This was set so
-    // in the *_update or *_insert hooks don't loop endlessly.
-//    $store->delete('entity_type_id');
     
     // Return if we $changed to say if we updated the entity or not.
     return $changed;
@@ -559,45 +560,17 @@ class ExtractText {
     return TRUE;
   }
 
-
-  function queueEntityDelete($entity_type, $entity): bool {
-    $source = $this->getSourceFromEntity($entity);
-
-    // If there is nothing in the source field, there is nothing we can do.
-    if (empty($source)) {
-      return FALSE;
-    }
-
-    $queue = \Drupal::service('queue')->get('sand_remote_queue');
-    $item = new ExtractText();
-    $item->setEntityType($entity_type);
-    $item->setEntityId($entity->id());
-    $item->setSource($source);
-    $item->setUrlField($entity, $source);
-    $item->setTargetField($this->getTargetFromEntity($entity));
-
-    try {
-      $queue->deleteItem($item);
-    } catch (Exception $exception) {
-      watchdog_exception(__CLASS__, $exception);
-    }
-
-    return TRUE;
-  }
-
     /**
      * @return mixed
      */
-    public function getFileSize()
-    {
+    public function getFileSize() {
         return $this->file_size;
     }
 
     /**
      * @param mixed $file_size
      */
-    public function setFileSize($file_size): void
-    {
+    public function setFileSize($file_size): void {
         $this->file_size = $file_size;
     }
 
