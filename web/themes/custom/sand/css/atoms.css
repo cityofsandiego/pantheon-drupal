@@ -2626,53 +2626,107 @@ nav.pager,
 table:not(.calendar-view-table) {
   margin-top: 0;
   margin-bottom: 1em;
-  background: #f6f6f6; }
+  background: white;
+  color: #37424a;
+  border-left: 1px solid #37424a;
+  border-bottom: 1px solid #37424a;
+  position: relative;
+  border-collapse: separate;
+  border-spacing: 0; }
   table:not(.calendar-view-table):last-child {
     margin-bottom: 0; }
-  table:not(.calendar-view-table) tbody {
-    background: #f6f6f6; }
-  table:not(.calendar-view-table) thead tr:first-child th {
+  table:not(.calendar-view-table) thead, table:not(.calendar-view-table) tbody, table:not(.calendar-view-table) th, table:not(.calendar-view-table) td {
+    border: none;
     color: #37424a; }
-  table:not(.calendar-view-table) th {
+  table:not(.calendar-view-table).t-no-border {
+    border: none !important; }
+    table:not(.calendar-view-table).t-no-border * {
+      border: none !important; }
+  table:not(.calendar-view-table).t-inside-border thead th {
+    border-right: 1px solid #37424a; }
+  table:not(.calendar-view-table).t-inside-border tbody td {
+    border-right: 1px solid rgba(55, 66, 74, 0.3); }
+  table:not(.calendar-view-table).t-inside-border thead th:last-child, table:not(.calendar-view-table).t-inside-border tbody td:last-child {
+    border-right: 1px solid #37424a; }
+  table:not(.calendar-view-table).t-inside-border thead tr:not(:first-child) th {
+    border-top: 1px solid #37424a; }
+  table:not(.calendar-view-table) thead tr:first-child th {
+    background: rgba(55, 66, 74, 0.2); }
+  table:not(.calendar-view-table) thead tr:not(:first-child) th {
+    border-top: none; }
+    table:not(.calendar-view-table) thead tr:not(:first-child) th:not(:last-child) {
+      border-right: none; }
+  table:not(.calendar-view-table) thead th {
     padding: 0.5em 1em;
     text-align: left;
     word-wrap: break-word;
-    background: #e4e9eb;
-    font-family: "Merriweather", serif; }
-  table:not(.calendar-view-table) tr {
-    line-height: 1.6;
-    border-top: 0;
-    border-bottom: 0; }
-    table:not(.calendar-view-table) tr:first-child {
-      border-top: 0; }
-    table:not(.calendar-view-table) tr:nth-child(even) {
-      background: #e4e9eb; }
-    table:not(.calendar-view-table) tr:nth-child(odd) {
-      background: #f6f6f6; }
-    table:not(.calendar-view-table) tr.subheading, table:not(.calendar-view-table) tr:first-child {
-      background: transparent; }
-    table:not(.calendar-view-table) tr.subheading {
-      color: #37424a;
-      font-family: "Open Sans", sans-serif; }
-      table:not(.calendar-view-table) tr.subheading td {
-        padding-left: 0; }
-    table:not(.calendar-view-table) tr.valign-m td {
-      vertical-align: middle !important; }
-    table:not(.calendar-view-table) tr.valign-b td {
-      vertical-align: bottom !important; }
-  table:not(.calendar-view-table) td {
-    line-height: 1.8;
-    padding: 0.5em 1em;
-    vertical-align: top;
-    font-weight: 400; }
-    table:not(.calendar-view-table) td:first-child {
-      padding-left: 1em; }
-    table:not(.calendar-view-table) td.table--break {
-      padding-left: 0; }
+    font-family: "Merriweather", serif;
+    border-top: 1px solid #37424a;
+    border-bottom: 3px solid #37424a;
+    background: rgba(55, 66, 74, 0.1); }
+    table:not(.calendar-view-table) thead th:last-child {
+      border-right: 1px solid #37424a; }
+    table:not(.calendar-view-table) thead th.th-no-br {
+      border-right: none; }
+    table:not(.calendar-view-table) thead th.th-no-bb {
+      border-bottom: none; }
+  table:not(.calendar-view-table).t-head-fixed thead {
+    position: sticky;
+    top: 0; }
+  table:not(.calendar-view-table) tbody {
+    background: white; }
+    table:not(.calendar-view-table) tbody tr {
+      line-height: 1.6;
+      border-top: 0;
+      border-bottom: 0; }
+      table:not(.calendar-view-table) tbody tr:first-child {
+        border-top: 0; }
+      table:not(.calendar-view-table) tbody tr:nth-child(even) {
+        background: rgba(55, 66, 74, 0.1); }
+      table:not(.calendar-view-table) tbody tr:nth-child(odd) {
+        background: white; }
+      table:not(.calendar-view-table) tbody tr.subheading, table:not(.calendar-view-table) tbody tr:first-child {
+        background: transparent; }
+      table:not(.calendar-view-table) tbody tr.subheading {
+        color: 55, 66, 74;
+        font-family: "Open Sans", sans-serif; }
+        table:not(.calendar-view-table) tbody tr.subheading td {
+          padding-left: 0; }
+      table:not(.calendar-view-table) tbody tr td {
+        line-height: 1.8;
+        padding: 1em;
+        vertical-align: top;
+        font-weight: 400; }
+        table:not(.calendar-view-table) tbody tr td:first-child {
+          padding-left: 1em; }
+        table:not(.calendar-view-table) tbody tr td:last-child {
+          border-right: 1px solid #37424a; }
+        table:not(.calendar-view-table) tbody tr td.table--break {
+          padding-left: 0; }
+      table:not(.calendar-view-table) tbody tr.valign-m td {
+        vertical-align: middle !important; }
+      table:not(.calendar-view-table) tbody tr.valign-b td {
+        vertical-align: bottom !important; }
   table:not(.calendar-view-table).ui-datepicker-calendar tr:nth-child(even) {
     background: #f6f6f6; }
   table:not(.calendar-view-table).ui-datepicker-calendar td:first-child {
     padding-left: 0; }
+  table:not(.calendar-view-table).t-blue thead tr:first-child th {
+    background: rgba(0, 84, 159, 0.2); }
+  table:not(.calendar-view-table).t-blue thead th {
+    background: rgba(0, 84, 159, 0.1); }
+  table:not(.calendar-view-table).t-blue tbody {
+    background: white; }
+    table:not(.calendar-view-table).t-blue tbody tr:nth-child(even) {
+      background: rgba(0, 84, 159, 0.1); }
+  table:not(.calendar-view-table).t-green thead tr:first-child th {
+    background: rgba(0, 123, 105, 0.2); }
+  table:not(.calendar-view-table).t-green thead th {
+    background: rgba(0, 123, 105, 0.1); }
+  table:not(.calendar-view-table).t-green tbody {
+    background: white; }
+    table:not(.calendar-view-table).t-green tbody tr:nth-child(even) {
+      background: rgba(0, 123, 105, 0.1); }
 
 .table--thirds p {
   margin: 0;
