@@ -65,15 +65,27 @@ elements: |
     '#title': 'Agenda Item Number (for Agenda items that are preceded by an S, please drop the S and simply insert the three-digit number in the field below)' 
     '#description': ""
     '#required': true
-    '#states':
-      optional:
-        ':input[name="comment_type"]':
-          value: nonagenda_key
-          
   comment:
     '#title': 'Comments:' 
     '#description': ""
     '#required': true
+  declaration:
+    '#type': radios
+    '#options':
+      yes: 'Yes'
+      no: 'No'
+    '#title': 'Declaration of Campaign Contribution to a Councilmember of more than $250 within the past year (effective Jan 1, 2023)' 
+    '#description': ""
+  names_of_councilmembers:
+    '#type': textarea
+    '#title': 'Name(s) of Councilmember(s):' 
+    '#description': ""
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="declaration"]':
+          value: 'yes'
+          
   attachments_multiple_file:
     '#type': managed_file
     '#max_filesize': '10'
