@@ -1,98 +1,172 @@
 /* Tables
 ========================================================================== */
+
 table:not(.calendar-view-table) {
   margin-top: 0;
   margin-bottom: 1em;
-  background: $off-white;
+  background: white;
+  color: $spruce;
+  border-left: 1px solid $spruce;
+  border-bottom: 1px solid $spruce;
+  position: relative;
+  border-collapse: separate;
+  border-spacing: 0;
 
   &:last-child {
     margin-bottom: 0;
   }
   
-  tbody{
-    background: $off-white ;
+  thead, tbody, th, td {
+    border: none;
+    color: $spruce;
+  }
+
+  &.t-no-border {
+    border: none !important;
+
+    * {
+      border: none !important;
+    }
+  }
+
+  &.t-inside-border {
+
+    thead th {
+      border-right: 1px solid $spruce;
+    }
+
+    tbody td {
+      border-right: 1px solid rgba(55, 66, 74, 0.3);
+    }
+
+    thead th, tbody td {
+      &:last-child {
+        border-right: 1px solid $spruce;
+      }
+    }
+
+    thead tr:not(:first-child) th {
+      border-top: 1px solid $spruce;
+    }
   }
 
   thead {
-    tr:first-child {
-      th {
-        color: $spruce;
+    tr {
+      &:first-child {
+        th {
+          background: rgba(55, 66, 74, 0.2);
+        }
       }
-    }
-  }
 
-  th {
-    padding: 0.5em 1em;
-    text-align: left;
-    word-wrap: break-word;
-    background: $mercury;
-    font-family: $font-family-secondary;
+      &:not(:first-child) {
+        th {
+          border-top: none;
 
-    // @include breakpoint(medium) {
-    //   border-bottom: 1px solid grey;
-    // }
-  }
-
-  tr {
-    line-height: 1.6;
-    border-top: 0;
-    border-bottom: 0;
-
-    &:first-child {
-      border-top: 0;
-    }
-
-    &:nth-child(even) {
-      background: $mercury;
+          &:not(:last-child) {
+            border-right: none;
+          }
+        }
+      }
     }
     
-    &:nth-child(odd) {
-      background: $off-white;
-    }
-
-    &.subheading,
-    &:first-child {
-      background: transparent;
-    }
-
-    &.subheading {
-      color: $spruce;
-      font-family: $font-family;
-
-      td {
-        padding-left: 0;
-        // @include breakpoint(medium) {
-        //   line-height: 2.5;
-        //   @include rem("font-size", 16px);
-        // }
+    th {
+      padding: 0.5em 1em;
+      text-align: left;
+      word-wrap: break-word;
+      font-family: $font-family-secondary;
+      border-top: 1px solid $spruce;
+      border-bottom: 3px solid $spruce;
+      background: rgba(55, 66, 74, 0.1);
+      
+      &:last-child {
+        border-right: 1px solid $spruce;
       }
-    }
 
-    &.valign-m {
-      td {
-        vertical-align: middle !important;
+      &.th-no-br {
+        border-right: none;
       }
-    }
 
-    &.valign-b {
-      td {
-        vertical-align: bottom !important;
+      &.th-no-bb {
+        border-bottom: none;
       }
     }
   }
 
-  td {
-    line-height: 1.8;
-    padding: 0.5em 1em;
-    vertical-align: top;
-    font-weight: 400;
-
-    &:first-child {
-      padding-left: 1em;
+  &.t-head-fixed {
+    thead {
+      position: sticky;
+      top: 0;
     }
+  }
+  
+  tbody{
+    background: white ;
 
-    &.table--break {
-      padding-left: 0;
+    tr {
+      line-height: 1.6;
+      border-top: 0;
+      border-bottom: 0;
+  
+      &:first-child {
+        border-top: 0;
+      }
+  
+      &:nth-child(even) {
+        background: rgba(55, 66, 74, 0.1);
+      }
+      
+      &:nth-child(odd) {
+        background: white;
+      }
+  
+      &.subheading,
+      &:first-child {
+        background: transparent;
+      }
+  
+      &.subheading {
+        color: 55, 66, 74;
+        font-family: $font-family;
+  
+        td {
+          padding-left: 0;
+          // @include breakpoint(medium) {
+          //   line-height: 2.5;
+          //   @include rem("font-size", 16px);
+          // }
+        }
+      }
+
+      td {
+        line-height: 1.8;
+        padding: 1em;
+        vertical-align: top;
+        font-weight: 400;
+    
+        &:first-child {
+          padding-left: 1em;
+        }
+    
+        &:last-child {
+          border-right: 1px solid $spruce;
+        }
+    
+        &.table--break {
+          padding-left: 0;
+        }
+      }
+  
+      &.valign-m {
+        td {
+          vertical-align: middle !important;
+        }
+      }
+  
+      &.valign-b {
+        td {
+          vertical-align: bottom !important;
+        }
+      }
     }
   }
 
@@ -104,6 +178,66 @@ table:not(.calendar-view-table) {
     td:first-child {
       padding-left: 0;
     }
+  }
+
+  // Other colors...
+
+  &.t-blue {
+  
+    thead {
+      tr {
+        &:first-child {
+          th {
+            background: rgba(0, 84, 159, 0.2);
+          }
+        }
+      }
+      
+      th {
+        background: rgba(0, 84, 159, 0.1);
+      }
+    }
+    
+    tbody{
+      background: white ;
+  
+      tr {
+    
+        &:nth-child(even) {
+          background: rgba(0, 84, 159, 0.1);
+        }
+      }
+    }
+
+  }
+
+  &.t-green {
+  
+    thead {
+      tr {
+        &:first-child {
+          th {
+            background: rgba(0, 123, 105, 0.2);
+          }
+        }
+      }
+      
+      th {
+        background: rgba(0, 123, 105, 0.1);
+      }
+    }
+    
+    tbody{
+      background: white ;
+  
+      tr {
+    
+        &:nth-child(even) {
+          background: rgba(0, 123, 105, 0.1);
+        }
+      }
+    }
+
   }
 }
 
