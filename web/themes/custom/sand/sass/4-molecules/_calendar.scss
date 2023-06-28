@@ -76,6 +76,7 @@ table.calendar-view-table {
 
       > * {
         margin: 0;
+        color: black;
       }
 
       a {
@@ -94,8 +95,16 @@ table.calendar-view-table {
         }
       }
 
-      &.is-multi--first, &.is-multi--middle {
+      &.is-multi--first, &.is-multi--middle, &.is-multi--last {
+        margin-left: 0;
         margin-right: 0;
+        padding: 0.5rem;
+        border: 1px solid $chateau;
+        border-radius: 4px;
+      }
+
+      &.is-multi:not(.is-multi--first) > * {
+        opacity: 1;
       }
     }
 
@@ -158,6 +167,14 @@ table.calendar-view-table {
       background-color: $warning-lt;
     }
   }
+
+  .sunday {z-index: 100;}
+  .monday {z-index: 90;}
+  .tuesday {z-index: 80;}
+  .wednesday {z-index: 70;}
+  .thursday {z-index: 60;}
+  .friday {z-index: 50;}
+  .saturday {z-index: 40;}
 }
 
 .calendar-view-pager {

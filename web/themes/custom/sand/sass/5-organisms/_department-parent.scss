@@ -3,6 +3,10 @@
     opacity: 0;
   }
 
+  .main__message {
+    display: none;
+  }
+
   h1.dp-title {
     font-size: 2.25rem;
     margin-top: 0;
@@ -14,7 +18,7 @@
 
   .top-menu {
     @include breakpoint (mobile-landscape) {
-      padding-top: 7em;
+      padding-top: 8em;
     }
   }
 
@@ -71,17 +75,27 @@
   }
 
   .hero__slides--secondary {
-    @include breakpoint(site down) {
-      padding-bottom: 2em;
+    padding: 2em;
+
+    @include breakpoint(mobile-landscape) {
+      padding: 2em 0;
       min-height: 100px;
     }
 
     .hero__content {
       text-align: center;
+      
+      @include breakpoint(mobile-landscape) {
+        margin: 0 auto !important;
+      }
 
       p {
         margin: 0;
         font-size: 1.5rem;
+      }
+
+      .fine-print {
+        font-size: 1rem;
       }
 
     }

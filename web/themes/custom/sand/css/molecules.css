@@ -2595,8 +2595,7 @@ textarea {
     .socials a i {
       height: 1.5em;
       line-height: 1.5em;
-      display: block;
-      vertical-align: middle; }
+      display: block; }
 
 @media print {
   .social-share__wrap {
@@ -2631,19 +2630,47 @@ textarea {
 .social-links__item {
   list-style: none;
   margin: 0 0.25rem;
-  padding: 0; }
+  padding: 0;
+  /* Change to desired color */
+  /* Change to desired color */
+  /* Change to desired color */
+  /* Change to desired color */
+  /* Change to desired color */
+  /* Change to desired color */
+  /* Change to desired color */
+  /* Change to desired color */ }
   .social-links__item:first-child {
     margin: 0; }
   .social-links__item a {
     background: #f6f6f6;
     border-radius: 2px;
     color: #333332;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.2rem;
     height: 2rem;
     text-align: center;
     text-decoration: none;
     width: 2rem; }
+    .social-links__item a:hover {
+      color: white; }
+  .social-links__item a.icon--twitter:hover {
+    background-color: #1DA1F2; }
+  .social-links__item a.icon--facebook:hover {
+    background-color: #4267B2; }
+  .social-links__item a.icon--google:hover {
+    background-color: #C20806; }
+  .social-links__item a.icon--instagram:hover {
+    background-color: #C13584; }
+  .social-links__item a.icon--youtube:hover {
+    background-color: #FF0000; }
+  .social-links__item a.icon--pinterest:hover {
+    background-color: #C91517; }
+  .social-links__item a.icon--nextdoor:hover {
+    background-color: #8ed501; }
+  .social-links__item a.icon--linkedin:hover {
+    background-color: #0077b5; }
 
 /* Steps
    ========================================================================== */
@@ -2847,7 +2874,8 @@ table.calendar-view-table {
     table.calendar-view-table td .calendar-view-day__row {
       position: relative; }
       table.calendar-view-table td .calendar-view-day__row > * {
-        margin: 0; }
+        margin: 0;
+        color: black; }
       table.calendar-view-table td .calendar-view-day__row a {
         color: #0098db;
         font-size: 1rem; }
@@ -2858,8 +2886,14 @@ table.calendar-view-table {
           right: 0.3125rem;
           bottom: 0.3125rem;
           font-size: 1em; }
-      table.calendar-view-table td .calendar-view-day__row.is-multi--first, table.calendar-view-table td .calendar-view-day__row.is-multi--middle {
-        margin-right: 0; }
+      table.calendar-view-table td .calendar-view-day__row.is-multi--first, table.calendar-view-table td .calendar-view-day__row.is-multi--middle, table.calendar-view-table td .calendar-view-day__row.is-multi--last {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0.5rem;
+        border: 1px solid #a7abad;
+        border-radius: 4px; }
+      table.calendar-view-table td .calendar-view-day__row.is-multi:not(.is-multi--first) > * {
+        opacity: 1; }
     @media print, screen and (max-width: 37.49875em) {
       table.calendar-view-table td {
         border-bottom: 1px solid #dde2e5; } }
@@ -2895,6 +2929,20 @@ table.calendar-view-table {
     background-color: #fffceb; }
     table.calendar-view-table .today .calendar-view-day__number {
       background-color: #fffceb; }
+  table.calendar-view-table .sunday {
+    z-index: 100; }
+  table.calendar-view-table .monday {
+    z-index: 90; }
+  table.calendar-view-table .tuesday {
+    z-index: 80; }
+  table.calendar-view-table .wednesday {
+    z-index: 70; }
+  table.calendar-view-table .thursday {
+    z-index: 60; }
+  table.calendar-view-table .friday {
+    z-index: 50; }
+  table.calendar-view-table .saturday {
+    z-index: 40; }
 
 .calendar-view-pager {
   flex-direction: row; }
