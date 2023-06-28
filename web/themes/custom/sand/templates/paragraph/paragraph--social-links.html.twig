@@ -42,6 +42,6 @@
 
 {% block paragraph %}
   {% block content %}
-  <a href="{{ content.field_link[0]['#url'] }}" title="{{ content.field_type|render|trim }}"><i class="icon-{{ icon }}"></i></a>
+  <a class="icon--{{ icon|render|striptags|trim }}" href="{{ content.field_link[0]['#url'] }}" title="{{ content.field_type|render|striptags|trim }}"><i class="icon-{{ icon|render|striptags|trim }}"></i></a>
   {% endblock %}
 {% endblock %}

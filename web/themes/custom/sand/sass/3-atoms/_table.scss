@@ -6,9 +6,10 @@ table:not(.calendar-view-table) {
   margin-bottom: 1em;
   background: white;
   color: $spruce;
-  border: 1px solid $spruce;
+  border-left: 1px solid #adafaf;
+  border-bottom: 1px solid #adafaf;
   position: relative;
-  border-collapse: collapse;
+  border-collapse: separate;
   border-spacing: 0;
 
   &:last-child {
@@ -28,10 +29,24 @@ table:not(.calendar-view-table) {
     }
   }
 
+  &.t-no-outer-border {
+    border: none !important;
+
+    thead th {
+      border-top: none !important;
+    }
+
+    thead th, tbody td {
+      &:last-child {
+        border-right: none !important;
+      }
+    }
+  }
+
   &.t-inside-border {
 
     thead th {
-      border-right: 1px solid $spruce;
+      border-right: 1px solid #adafaf;
     }
 
     tbody td {
@@ -40,12 +55,12 @@ table:not(.calendar-view-table) {
 
     thead th, tbody td {
       &:last-child {
-        border-right: 1px solid $spruce;
+        border-right: 1px solid #adafaf;
       }
     }
 
     thead tr:not(:first-child) th {
-      border-top: 1px solid $spruce;
+      border-top: 1px solid #adafaf;
     }
   }
 
@@ -73,20 +88,20 @@ table:not(.calendar-view-table) {
       text-align: left;
       word-wrap: break-word;
       font-family: $font-family-secondary;
-      border-top: 1px solid $spruce;
-      border-bottom: 3px solid $spruce;
+      border-top: 1px solid #adafaf;
+      border-bottom: 1px solid #adafaf;
       background: rgba(55, 66, 74, 0.1);
       
       &:last-child {
-        border-right: 1px solid $spruce;
+        border-right: 1px solid #adafaf;
       }
 
       &.th-no-br {
-        border-right: none;
+        border-right: none !important;
       }
 
       &.th-no-bb {
-        border-bottom: none;
+        border-bottom: none !important;
       }
     }
   }
@@ -147,7 +162,7 @@ table:not(.calendar-view-table) {
         }
     
         &:last-child {
-          border-right: 1px solid $spruce;
+          border-right: 1px solid #adafaf;
         }
     
         &.table--break {
@@ -239,33 +254,34 @@ table:not(.calendar-view-table) {
 
   }
 
-  &.t-light-border {
-    border: 1px solid #adafaf;
+  &.t-dark-border {
+    border-left: 1px solid $spruce;
+    border-bottom: 1px solid $spruce;
   
     &.t-inside-border {
   
       thead th {
-        border-right: 1px solid #adafaf;
+        border-right: 1px solid $spruce;
       }
   
       thead th, tbody td {
         &:last-child {
-          border-right: 1px solid #adafaf;
+          border-right: 1px solid $spruce;
         }
       }
   
       thead tr:not(:first-child) th {
-        border-top: 1px solid #adafaf;
+        border-top: 1px solid $spruce;
       }
     }
   
     thead {
       th {
-        border-top: 1px solid #adafaf;
-        border-bottom: 3px solid #adafaf;
+        border-top: 1px solid $spruce;
+        border-bottom: 1px solid $spruce;
         
         &:last-child {
-          border-right: 1px solid #adafaf;
+          border-right: 1px solid $spruce;
         }
       }
     }
@@ -273,7 +289,7 @@ table:not(.calendar-view-table) {
       tr {
         td {
           &:last-child {
-            border-right: 1px solid #adafaf;
+            border-right: 1px solid $spruce;
           }
         }
       }

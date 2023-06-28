@@ -1,29 +1,32 @@
 {{ title_prefix }}
 {% if department_title is defined %}
-    <h1{{ title_attributes.addClass('visuallyhidden') }}>{{ department_title }}</h1>
     {% if department_title == 'Inside San Diego' %}
+      <h1>{{ department_title }}</h1>
       <p class="main__tagline">Stories about City Services, Employees, Residents and Communities</p>
+    {% else %}
+      <div class="main__message main__message--transparent">
+        <p class="h1 main__heading">{{ department_title }}</p>
+      </div>
     {% endif %}
 {% elseif title %}
     <h1{{ title_attributes.addClass('page-title') }}>{{ title }}</h1>
 {% endif %}
 
 {% if (show_slider == 1) %}
+  {% set sliderclass = "-with-slider" %}
   <div class="hero__slides hero__slides--secondary">
-    <div class="l-constrained--site row">
-      <div class="twelve columns hero__content">
-        {{ drupal_view('department_slides', 'block', department_argument) }}
-      </div>
+    <div class="l-constrained--site row hero__content">
+      {{ drupal_view('department_slides', 'block', department_argument) }}
     </div>
   </div>
+{% else %}
+  {% set sliderclass = "" %}
 {% endif %}
 
 {{ title_suffix }}
 
-
-
 {% if (topmenu is defined) and (department_title != 'Inside San Diego') %}
-  <div class="hide-on-mobile top-menu">
+  <div class="hide-on-mobile top-menu{{ sliderclass }}">
     <ul id="department-top-menu" class="department-menu">
       {% for item in topmenu.items %}
         <li class={{ item.classes[0]}}><a href="{{ item.url }}">{{ item.title }}</a></li>
