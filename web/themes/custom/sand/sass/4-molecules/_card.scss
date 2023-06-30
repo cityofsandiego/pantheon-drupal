@@ -7,15 +7,13 @@
   background: white;
   border-radius: 4px;
   width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
 
   &.border {
     margin-bottom: 0;
     padding-bottom: 0;
-  }
-
-  @include breakpoint(medium) {
-    //margin-top: 1em;
-    margin-bottom: 1em;
   }
 }
 
@@ -33,16 +31,19 @@
 
 .card__container {
   position: relative;
+  display: block;
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-justify-content: flex-start; /* Safari */
+  justify-content: flex-start;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
 
-  /*@include breakpoint(large) {*/
-    display: block;
-    display: -webkit-flex; /* Safari */
-    display: flex;
-    -webkit-justify-content: flex-start; /* Safari */
-    justify-content: flex-start;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-  /*}*/
+  @include breakpoint(mobile-landscape) {
+    margin-left: -0.5em;
+    margin-right: -0.5em;
+    margin-bottom: -0.5em;
+  }
 
   // If .mobile-flexslider exists, it creates a ul.slides wrapping the .cards
   /*@include breakpoint(large) {*/
@@ -52,8 +53,10 @@
       display: flex;
       -webkit-justify-content: flex-start; /* Safari */
       justify-content: flex-start;
-      -webkit-flex-wrap: wrap;
-      flex-wrap: wrap;
+      margin: 0;
+      -webkit-flex-flow: row wrap;
+      flex-flow: row wrap;
+      padding-left: 0;
     }
   /*}*/
 
@@ -85,6 +88,7 @@
     margin: 0;
     padding-left: 1.0416588541%;
     padding-right: 1.0416588541%;
+    padding-bottom: 1em;
     width: 33.333333%;
 
     @include breakpoint(mobile-landscape down) {
@@ -92,6 +96,7 @@
     }
 
     .card {
+      @extend %card;
       flex: 0 1 auto;
       justify-content: flex-start;
       overflow: hidden;

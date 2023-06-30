@@ -1832,16 +1832,16 @@ textarea {
   Styles for cards and featured cards.
   ============================================================ */
 /* Cards Styles from D7 */
-.card {
+.card, .card__container .card__wrap .card, .card__container .card--wrap .card {
   background: white;
   border-radius: 4px;
-  width: 100%; }
-  .border.card {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0; }
+  .border.card, .card__container .card__wrap .border.card, .card__container .card--wrap .border.card {
     margin-bottom: 0;
     padding-bottom: 0; }
-  @media print, screen and (min-width: 48em) {
-    .card {
-      margin-bottom: 1em; } }
 
 .card > a {
   text-decoration: none; }
@@ -1851,7 +1851,6 @@ textarea {
 
 .card__container {
   position: relative;
-  /*@include breakpoint(large) {*/
   display: block;
   display: -webkit-flex;
   /* Safari */
@@ -1861,9 +1860,13 @@ textarea {
   justify-content: flex-start;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  /*}*/
   /*@include breakpoint(large) {*/
   /*}*/ }
+  @media print, screen and (min-width: 30em) {
+    .card__container {
+      margin-left: -0.5em;
+      margin-right: -0.5em;
+      margin-bottom: -0.5em; } }
   .card__container .slides {
     display: block;
     display: -webkit-flex;
@@ -1872,8 +1875,10 @@ textarea {
     -webkit-justify-content: flex-start;
     /* Safari */
     justify-content: flex-start;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap; }
+    margin: 0;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    padding-left: 0; }
   .card__container.mobile-flexslider {
     height: 100% !important; }
   @media print, screen and (max-width: 37.49875em) {
@@ -1891,6 +1896,7 @@ textarea {
     margin: 0;
     padding-left: 1.0416588541%;
     padding-right: 1.0416588541%;
+    padding-bottom: 1em;
     width: 33.333333%; }
     @media print, screen and (max-width: 37.49875em) {
       .card__container .card__wrap, .card__container .card--wrap {
