@@ -2,21 +2,48 @@
   Styles for general typography and links.
   ============================================================ */
 
-// only style this stuff in the main body
+// Override Foundation's base ul styles
+ul, ol {
+  margin: 0 0 0.75em 0;
+  padding-inline-start: 1em;
+  line-height: 1.5;
 
-.paragraph,
+  li {
+    margin: 0 0 0.5rem 1rem;
+    padding: 0 0 0 0.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  & ul, ol {
+    margin: 0.5em 0;
+  }
+}
+
+ul {
+  list-style-type: disc;
+
+  ul {
+    list-style-type: circle;
+    margin-left: 0;
+  }
+}
+
+ol li {
+  list-style: decimal;
+}
+
 .accordion__drawer {
 
-  ul,
-  ol {
-    line-height: 1.5;
-    padding-inline-start: 0;
+  ul, ol {
 
     &.department-menu {
       padding-inline-start: 0;
 
       li {
-        margin: 0.5rem 0;
+        margin: 0 0 0.5rem 0;
 
         @include breakpoint(mobile-landscape down) {
           margin: 0;
@@ -29,34 +56,13 @@
         }
       }
     }
-
-    li {
-      margin: 0.5rem 0 0.5rem 1rem;
-      padding: 0 0 0 0.5rem;
-    }
-
-    @include breakpoint(mobile-landscape) {
-      padding-inline-start: 40px;
-    }
-  }
-
-  ul li {
-    //list-style: disc;
-  }
-
-  ol li {
-    list-style: decimal;
   }
 
   @include breakpoint(mobile-landscape) {
-    padding-inline-start: 40px;
+    padding-inline-start: 1em;
   }
 }
 
 .sub-navigation-mobile .accordion .accordion__drawer {
   padding: 0;
-}
-
-.text-accent {
-  font-size: 1.375rem;
 }

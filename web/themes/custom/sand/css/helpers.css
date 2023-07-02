@@ -9,9 +9,6 @@
 /* ============================================================
   Vendor-specific styles.
   ============================================================ */
-ul, ol {
-  padding-left: 2rem; }
-
 /**
  * Foundation for Sites
  * Version 6.7.5
@@ -2546,19 +2543,6 @@ blockquote {
     font-size: 12px;
     font-size:  calc($unitless-value / $baseline-px)rem; }
 
-ul {
-  margin: 0.75em 0;
-  list-style-type: disc; }
-  ul ul {
-    list-style-type: circle;
-    margin-left: 0; }
-
-ol, ul {
-  margin: 0 0 0.5em 0; }
-
-li {
-  margin: 0 0 0.5em 0; }
-
 dt {
   margin-bottom: 0.3em;
   font-weight: bold; }
@@ -2589,7 +2573,7 @@ dd {
 .heading--subcolor {
   color: #009581 !important; }
 
-/* Subheadline
+/* Subheading
     ========================================================================== */
 .subheading {
   color: #009581;
@@ -2623,47 +2607,52 @@ span[class^="text-"] {
 /* Text Formatting
    ========================================================================== */
 .fine-print {
-  font-size: .75rem; }
+  font-size: 12px;
+  font-size:  calc($unitless-value / $baseline-px)rem; }
 
 .text-accent {
   font-size: 22px;
   font-size:  calc($unitless-value / $baseline-px)rem; }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .text-accent--desktop {
     font-size: 22px;
     font-size:  calc($unitless-value / $baseline-px)rem; } }
 
-.text-center {
-  text-align: center; }
-
-@media print, screen and (max-width: 63.99875em) {
+@media print, screen and (max-width: 37.49875em) {
   .text-center--mobile {
     text-align: center; } }
 
-@media print, screen and (min-width: 48em) {
+.text-center {
+  text-align: center; }
+
+@media print, screen and (max-width: 37.49875em) {
+  .text-center--mobile {
+    text-align: center; } }
+
+@media print, screen and (min-width: 30em) {
   .text-center--desktop {
     text-align: center; } }
 
 .text-right {
   text-align: right; }
 
-@media print, screen and (max-width: 63.99875em) {
+@media print, screen and (max-width: 37.49875em) {
   .text-right--mobile {
     text-align: right; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .text-right--desktop {
     text-align: right; } }
 
 .text-left {
   text-align: left; }
 
-@media print, screen and (max-width: 63.99875em) {
+@media print, screen and (max-width: 37.49875em) {
   .text-left--mobile {
     text-align: left; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .text-left--desktop {
     text-align: left; } }
 
@@ -2711,6 +2700,30 @@ span[class^="text-"] {
 
 strong a {
   font-weight: bold; }
+
+.no-underline {
+  text-decoration: none; }
+
+p.nav-ex {
+  color: #37424a;
+  font-weight: 200; }
+
+.view-all-link {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-size:  calc($unitless-value / $baseline-px)rem; }
+
+.view-more {
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  font-size:  calc($unitless-value / $baseline-px)rem; }
+  .view-more i {
+    font-weight: 600;
+    font-size: 8px;
+    font-size:  calc($unitless-value / $baseline-px)rem; }
 
 /**
  * l-<type><direction><size>
@@ -4264,115 +4277,6 @@ html[xmlns] .flexslider .slides {
 
 /* Text Formatting
    ========================================================================== */
-.fine-print {
-  font-size: 12px;
-  font-size:  calc($unitless-value / $baseline-px)rem; }
-
-.text-accent {
-  font-size: 22px;
-  font-size:  calc($unitless-value / $baseline-px)rem; }
-
-@media print, screen and (min-width: 48em) {
-  .text-accent--desktop {
-    font-size: 22px;
-    font-size:  calc($unitless-value / $baseline-px)rem; } }
-
-.text-center {
-  text-align: center; }
-
-@media print, screen and (max-width: 63.99875em) {
-  .text-center--mobile {
-    text-align: center; } }
-
-@media print, screen and (min-width: 48em) {
-  .text-center--desktop {
-    text-align: center; } }
-
-.text-right {
-  text-align: right; }
-
-@media print, screen and (max-width: 63.99875em) {
-  .text-right--mobile {
-    text-align: right; } }
-
-@media print, screen and (min-width: 48em) {
-  .text-right--desktop {
-    text-align: right; } }
-
-.text-left {
-  text-align: left; }
-
-@media print, screen and (max-width: 63.99875em) {
-  .text-left--mobile {
-    text-align: left; } }
-
-@media print, screen and (min-width: 48em) {
-  .text-left--desktop {
-    text-align: left; } }
-
-.text-capitalize {
-  text-transform: capitalize; }
-
-.text-upper {
-  text-transform: uppercase; }
-
-@media print, screen and (min-width: 48em) {
-  .text-small {
-    font-size: 13px;
-    font-size:  calc($unitless-value / $baseline-px)rem; } }
-
-.text-white {
-  color: white !important; }
-
-.text-off-white {
-  color: #f6f6f6 !important; }
-
-.text-off-white-like-background {
-  color: #eaeeef !important; }
-
-.text-gray {
-  color: #656667 !important; }
-
-.text-pom {
-  color: #ee3228 !important; }
-
-.text-spruce {
-  color: #37424a !important; }
-
-.inactive-link {
-  pointer-events: none !important;
-  cursor: default !important; }
-
-p.nav-ex {
-  color: #37424a;
-  font-weight: 200; }
-
-.view-all-link {
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-  font-size:  calc($unitless-value / $baseline-px)rem; }
-
-.view-more {
-  text-decoration: none;
-  position: relative;
-  display: inline-block;
-  font-family: "Open Sans", sans-serif;
-  font-size: 13px;
-  font-size:  calc($unitless-value / $baseline-px)rem; }
-  .view-more i {
-    font-weight: 600;
-    font-size: 8px;
-    font-size:  calc($unitless-value / $baseline-px)rem; }
-
-.attention {
-  font-size: 12px;
-  font-size:  calc($unitless-value / $baseline-px)rem;
-  color: #c51313;
-  text-transform: uppercase; }
-
-.no-underline {
-  text-decoration: none; }
-
 /* Indent
    ========================================================================== */
 .indent-s {
