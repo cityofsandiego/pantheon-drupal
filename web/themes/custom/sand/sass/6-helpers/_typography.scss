@@ -157,25 +157,6 @@ blockquote {
   }
 }
 
-ul { // correct admin dropdown issues
-  margin: 0.75em 0;
-  // margin: 0.75em 0 !important;
-  list-style-type: disc;
-  // padding-inline-start: 40px;
-
-  ul {
-    list-style-type: circle;
-    margin-left: 0;
-  }
-}
-
-ol, ul {
-  margin: 0 0 0.5em 0;
-}
-
-li {
-  margin: 0 0 0.5em 0;
-}
 
 dt {
   margin-bottom: 0.3em;
@@ -188,9 +169,6 @@ dd {
 
 /* Heading
     ========================================================================== */
-
-.heading {
-}
 
 .heading--center {
   text-align: center !important;
@@ -220,7 +198,7 @@ dd {
   color: $teal !important;
 }
 
-/* Subheadline
+/* Subheading
     ========================================================================== */
 
 .subheading {
@@ -264,8 +242,7 @@ span[class^="text-"] {
    ========================================================================== */
 
 .fine-print {
-  // @include rem("font-size", 12px);
-  font-size: .75rem;
+  @include rem("font-size", 12px);
 }
 
 .text-accent {
@@ -273,9 +250,14 @@ span[class^="text-"] {
 }
 
 .text-accent--desktop {
-  @include breakpoint(medium) {
+  @include breakpoint(mobile-landscape up) {
     @include rem("font-size", 22px);
   }
+}
+.text-center--mobile {
+    @include breakpoint(mobile-landscape down) {
+        text-align: center;
+    }
 }
 
 .text-center {
@@ -283,13 +265,13 @@ span[class^="text-"] {
 }
 
 .text-center--mobile {
-  @include breakpoint(medium down) {
+  @include breakpoint(mobile-landscape down) {
     text-align: center;
   }
 }
 
 .text-center--desktop {
-  @include breakpoint(medium) {
+  @include breakpoint(mobile-landscape up) {
     text-align: center;
   }
 }
@@ -299,13 +281,13 @@ span[class^="text-"] {
 }
 
 .text-right--mobile {
-  @include breakpoint(medium down) {
+  @include breakpoint(mobile-landscape down) {
     text-align: right;
   }
 }
 
 .text-right--desktop {
-  @include breakpoint(medium) {
+  @include breakpoint(mobile-landscape up) {
     text-align: right;
   }
 }
@@ -315,13 +297,13 @@ span[class^="text-"] {
 }
 
 .text-left--mobile {
-  @include breakpoint(medium down) {
+  @include breakpoint(mobile-landscape down) {
     text-align: left;
   }
 }
 
 .text-left--desktop {
-  @include breakpoint(medium) {
+  @include breakpoint(mobile-landscape up) {
     text-align: left;
   }
 }
@@ -383,4 +365,32 @@ strong {
   a {
     font-weight: bold;
   }
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+// pattern library use only
+p.nav-ex {
+    color: $spruce;
+    font-weight: 200;
+}
+
+.view-all-link {
+    font-family: $font-family;
+    @include rem( 'font-size', 16px );
+}
+
+.view-more {
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    font-family: $font-family;
+    @include rem( 'font-size', 13px );
+
+    i {
+        font-weight: 600;
+        @include rem( 'font-size', 8px );
+    }
 }

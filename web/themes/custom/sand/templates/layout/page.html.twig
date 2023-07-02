@@ -45,6 +45,11 @@
 #}
 {% set  node_type = node.bundle|clean_class %}
 
+  {% if page.preheader %}
+    <div class="preheader">
+      {{ page.preheader }}
+    </div>
+  {% endif %}
 <div class="off-canvas-wrapper alto-bg">
   <section class="off-canvas off-canvas-main-menu position-right hide-for-large" id="offCanvas" data-off-canvas data-content-scroll="false" data-close-on-click="false">
     <div class="menu-wrapper">
@@ -55,11 +60,6 @@
     </div>
     {{ drupal_entity('block', 'mainnavigation')}}
   </section>
-  {% if page.preheader %}
-    <div class="preheader">
-      {{ page.preheader }}
-    </div>
-  {% endif %}
 
 
   <section class="main-content" data-off-canvas-content>
