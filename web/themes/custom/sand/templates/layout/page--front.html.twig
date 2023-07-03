@@ -44,6 +44,11 @@
  */
 #}
 
+{% if page.preheader %}
+  <div class="preheader">
+    {{ page.preheader }}
+  </div>
+{% endif %}
 <div class="off-canvas-wrapper alto-bg">
   <section class="off-canvas off-canvas-main-menu position-right hide-for-large" id="offCanvas" data-off-canvas data-content-scroll="false" data-close-on-click="false">
     <div class="menu-wrapper">
@@ -54,11 +59,6 @@
     </div>
     {{ drupal_entity('block', 'mainnavigation')}}
   </section>
-  {% if page.preheader %}
-    <div class="preheader">
-      {{ page.preheader }}
-    </div>
-  {% endif %}
   <section class="homepage" data-off-canvas-content>
     <header role="banner" class="header">
       {{ page.header }}
@@ -66,10 +66,10 @@
     <div class="hero__slides">
       <div class="grid-container l-padding-desktop-hn">
         <div class="grid-x slide-container">
-          <div class="cell medium-6 small-12 mobile-landscape-12 hero__content">
-            <div id="hero__slides--primary" class="hero__slides--content">
-              {{ drupal_view('department_slides', 'block_1')}}
-            </div>
+          <div class="cell medium-6 small-12 mobile-landscape-12 hero__content" style="display: none">
+            <!--div id="hero__slides--primary" class="hero__slides--content"-->
+              {{ drupal_view('homepage_slide', 'block_1')}}
+            <!--/div-->
             <div class="custom-navigation custom-navigation--primary hidden">
               <a href="#" class="flex-prev">
                 <i class="icon-chevron-left"></i>
