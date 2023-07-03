@@ -3854,7 +3854,19 @@ img.photoRight {
   -moz-border-radius: 4px;
   border-radius: 4px;
   margin-bottom: 2em;
-  padding: 0.5em 0 2em; }
+  padding: 0 0 3em; }
+  .flexslider ul, .flexslider ol {
+    margin: 0;
+    padding: 0; }
+    .flexslider ul li, .flexslider ol li {
+      margin: 0;
+      padding: 0; }
+    .flexslider ul.flex-control-nav li, .flexslider ol.flex-control-nav li {
+      margin: 1em;
+      padding: 0; }
+      @media print, screen and (min-width: 30em) {
+        .flexslider ul.flex-control-nav li, .flexslider ol.flex-control-nav li {
+          margin: 1em 0.5em; } }
   .flexslider .slides {
     zoom: 1; }
     .flexslider .slides img {
@@ -3862,7 +3874,7 @@ img.photoRight {
       height: auto;
       display: block;
       margin: 0 auto;
-      max-height: 587px; }
+      max-height: 600px; }
     .flexslider .slides:after {
       content: "\0020";
       display: block;
@@ -3870,6 +3882,8 @@ img.photoRight {
       visibility: hidden;
       line-height: 0;
       height: 0; }
+  .flexslider .flex-prev, .flexslider .flex-next {
+    display: block !important; }
 
 html[xmlns] .flexslider .slides {
   display: block; }
@@ -3968,10 +3982,11 @@ html[xmlns] .flexslider .slides {
   margin: 0 auto;
   float: left;
   display: flex;
-  justify-content: center; }
-  @media print, screen and (max-width: 37.49875em) {
+  justify-content: center;
+  flex-wrap: wrap; }
+  @media print, screen and (min-width: 30em) {
     .flex-control-nav {
-      flex-wrap: wrap; } }
+      bottom: 0; } }
   .flex-control-nav li {
     margin: 1em;
     display: inline;
@@ -4167,6 +4182,14 @@ html[xmlns] .flexslider .slides {
   bottom: 0;
   position: relative;
   margin-top: 1em; }
+
+/* ====================================================================================================================
+* HOMEPAGE SLIDES
+* ====================================================================================================================*/
+.view-homepage-slide .flexslider {
+  background: transparent;
+  margin: 0;
+  padding: 0; }
 
 .hidden {
   /*

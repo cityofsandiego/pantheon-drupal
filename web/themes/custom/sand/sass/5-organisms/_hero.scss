@@ -4,6 +4,14 @@
   height: 100%;
   position: relative;
 
+  ul, ul li {
+    margin: 0;
+    padding: 0;
+    padding-inline-start: unset;
+
+
+  }
+
   .theme-citynet & {
     height: 198px;
   }
@@ -125,7 +133,7 @@
   margin: 0 0 0 !important;
   padding: 1em;
   position: relative;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.45);
 
   h1 {
     margin: 0;
@@ -141,10 +149,10 @@
 
   .btn {
     font-size: 1rem;
-    display: block;
-    margin-top: 2em;
+    margin-top: 1em;
     font-weight: normal;
     padding: .75em 2em;
+    text-shadow: none;
   }
 
   @include breakpoint(mobile-landscape) {
@@ -160,7 +168,7 @@
     }
 
     .btn {
-      margin-top: 2em;
+      margin-top: 1.5em;
       display: inline-block;
     }
   }
@@ -183,6 +191,63 @@
 
     @include breakpoint(mobile-landscape) {
       padding: 2em 2em 2.6em 2em;
+    }
+  }
+
+  .view-homepage-slide { //Main homepage only
+    padding: 0;
+
+    .flex-control-nav,
+    .flex-direction-nav {
+      display: block;
+    }
+  }
+}
+
+section.homepage {
+  .hero__content {
+    padding: 0;
+
+    .flex-control-nav {
+      position: absolute;
+      bottom: -3rem;
+      display: flex;
+      height: 3em;
+
+      @include breakpoint(mobile-landscape) {
+        display: block;
+        right: 6em;
+        padding-left: 1em;
+      }
+
+      .flex-active {
+        background: white;
+      }
+    }
+
+    .flex-direction-nav {
+      position: absolute;
+      width: 100%;
+      bottom: -1.5rem;
+
+      a {
+        background: transparent;
+        border: none;
+
+        &:hover {
+          color: $cerulean !important;
+        }
+      }
+
+      .flex-nav-prev {
+        position: absolute;
+        left: 0;
+
+        @include breakpoint(mobile-landscape) {
+          left: unset;
+          right: 6em;
+        }
+      }
     }
   }
 }
@@ -308,4 +373,8 @@
     }
   }
 
+}
+
+.l-padding-home-slide {
+  padding: 1.5em;
 }

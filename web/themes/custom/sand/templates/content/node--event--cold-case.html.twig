@@ -139,17 +139,19 @@
               {% endif %}
             </div>
           </div>
-          <div class="l-padding-mobile-tn">
+          <div class="l-padding-mobile-tn l-margin-bm">
             <p class="l-margin-bn"><strong class="fine-print">SYNOPSIS:</strong></p>
             {{ content.body }}
           </div>
-          <div class="l-margin-tm l-padding-desktop-hn">
+          {% if content.field_images.0 is not empty %}
+          <div class="l-margin-bm l-padding-desktop-hn">
             <!-- Slide Show. See if there was slide show html constructed in template.php -->
               <p class="l-margin-bs"><strong class="fine-print">CASE PHOTOS:</strong></p>
-
-              {{ content.field_images }}
+              <div class="masonry-gallery col-4">
+              {{ drupal_view('cold_case_photos', 'block_1', node.ID) }}
+              </div>
           </div>
-
+          {% endif %}
           <div id="block-bean-cold-case-back-button" class="block block-bean">
             <hr class="l-margin-tn">
             <p class="text-center l-margin-vm"><a class="btn btn--outline" href="/police/news-center/cold-cases">Back to Cold Cases</a></p>

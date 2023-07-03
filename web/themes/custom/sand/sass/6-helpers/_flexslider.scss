@@ -37,7 +37,28 @@
   -moz-border-radius: 4px;
   border-radius: 4px;
   margin-bottom: 2em;
-  padding: 0.5em 0 2em;
+  padding: 0 0 3em;
+
+  ul, ol {
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin: 0;
+      padding: 0;
+    }
+
+    &.flex-control-nav {
+      li {
+        margin: 1em;
+        padding: 0;
+
+        @include breakpoint(mobile-landscape) {
+          margin: 1em 0.5em;
+        }
+      }
+    }
+  }
 
   .slides {
     zoom: 1;
@@ -47,7 +68,7 @@
       height: auto;
       display: block;
       margin: 0 auto;
-      max-height: 587px;
+      max-height: 600px;
     }
     &:after {
       content: "\0020";
@@ -57,6 +78,10 @@
       line-height: 0;
       height: 0;
     }
+  }
+
+  .flex-prev, .flex-next {
+    display: block !important;
   }
 }
 
@@ -183,9 +208,10 @@ html[xmlns] .flexslider .slides {
   float: left;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   
-  @include breakpoint(mobile-landscape down) {
-    flex-wrap: wrap;
+  @include breakpoint(mobile-landscape) {
+    bottom: 0;
   }
 
   li {
@@ -456,5 +482,17 @@ padding-bottom:5px;
     bottom: 0;
     position: relative;
     margin-top: 1em;
+  }
+}
+
+/* ====================================================================================================================
+* HOMEPAGE SLIDES
+* ====================================================================================================================*/
+
+.view-homepage-slide {
+  .flexslider {
+    background: transparent;
+    margin: 0;
+    padding: 0;
   }
 }
