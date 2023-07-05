@@ -73,8 +73,7 @@
   #list-container & i {
     font-size: 0.75em;
   }
-  &:hover,
-  &:focus {
+  &:hover {
     text-decoration: none;
     color: lighten( $link-color, 10% );
   }
@@ -95,50 +94,29 @@
 }
 
 .toggle-icon {
-  margin-top: -0.75em;
-  width: 1.5em;
-  height: 1.5em;
-  line-height: 1.5em;
+  margin-top: -12px;
+  width: 32px;
+  height: 24px;
+  line-height: 24px;
   display: inline-block;
   position: absolute;
-  right: 1em;
+  right: 20px;
   top: 50%;
   overflow: hidden;
+  -webkit-transform: rotate(0deg);
   transform: rotate(0deg);
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  -webkit-transition: transform .25s;
   transition: transform .25s;
 
-  &:before,
-  &:after {
-    content: "";
-    position: absolute;
-    display: block;
-    background: $chateau;
-      top: 50%;
-      // left: 50%;
-      transform: translate3d(0, -50%, 0);
-      transition: transform .25s, opacity .25s;
-    }
-
   &:before {
-    margin-top: -1px;
-    width: 100%;
-    height: 2px;
-    top: 50%;
+    font-family: 'icomoon';
+    content: "\7c";
+    font-size: 2rem;
 
     .csstransforms3d & {
       margin-top: auto;
-      // width: 50%;
-    }
-  }
-
-  &:after {
-    margin-left: -1px;
-    height: 100%;
-    width: 2px;
-    left: 50%;
-
-    .csstransforms3d & {
-      margin-left: auto;
     }
   }
 }
@@ -157,15 +135,11 @@
       -webkit-transition: -webkit-transform .25s;
       -moz-transition: -moz-transform .25s;
       transition: transform .25s;
-      -webkit-transform: rotate(45deg);
-      -moz-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      -o-transform: rotate(45deg);
-      transform: rotate(45deg);
-      &::before,
-      &::after {
-        background: $cerulean;
-      }
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+      transform: rotate(180deg);
     }
     .accordion__link {
       font-weight: bold;

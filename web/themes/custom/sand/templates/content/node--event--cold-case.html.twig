@@ -107,18 +107,14 @@
             </div>
             <div class="cell medium-6 text-center--mobile l-padding-desktop-bn l-padding-am">
               {% if content.field_event_date.0 %}
-                <div class="date-wrapper">
                   <p class="l-margin-bn"><strong class="fine-print">CASE DATE: </strong></br>
                       {{ content.field_event_date.0['#value']|date("F j, Y") }}
                   </p>
-                </div>
               {% endif %}
               {% if content.field_event_date.1 and content.field_event_type.0['#plain_text'] == 'Solved' %}
-                <div class="date-wrapper">
                   <p class="l-margin-bn l-margin-td"><strong class="fine-print">CASE CLOSED ON: </strong></br>
                       {{ content.field_event_date.1['#value']|date("F j, Y") }}
                   </p>
-                </div>
               {% endif %}
               <!-- Address -->
               <address>

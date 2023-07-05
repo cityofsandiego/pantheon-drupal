@@ -24,6 +24,19 @@
                     "reference": "master"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+              "name": "woocommerce/flexslider",
+              "version": "2.7.2",
+              "type": "drupal-library",
+              "source": {
+                "url": "https://github.com/woocommerce/FlexSlider.git",
+                "type": "git",
+                "reference": "2.7.2"
+              }
+            }
         }
     ],
     "require": {
@@ -133,7 +146,8 @@
         "drupal/pantheon_advanced_page_cache": "^2.1",
         "drupal/calendar_view": "^2.1",
         "drupal/sitewide_alert": "^2.1",
-        "drupal/flexslider": "^2.0"
+        "drupal/flexslider": "^2.0",
+        "woocommerce/flexslider": "~2.0"
     },
     "require-dev": {
         "drupal/core-dev": "^9.2",
@@ -197,6 +211,9 @@
             ],
             "web/private/scripts/quicksilver/{$name}/": [
                 "type:quicksilver-script"
+            ],
+            "libraries/{$name}": [
+                "type:drupal-library"
             ]
         },
         "composer-exit-on-patch-failure": true,

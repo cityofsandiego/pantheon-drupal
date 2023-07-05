@@ -14,7 +14,7 @@
   // To understand behaviors, see https://drupal.org/node/756722#behaviors
   Drupal.behaviors.slides = {
     attach: function (context, settings) {
-      $('.flexslider').flexslider({
+      $('#flexslider-home').flexslider({
         start: function(slider) {
           var $slides = jQuery("div#flexslider-home .slides li")
           //console.log($slides);
