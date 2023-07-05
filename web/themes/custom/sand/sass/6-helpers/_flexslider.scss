@@ -122,9 +122,10 @@ html[xmlns] .flexslider .slides {
     text-decoration: none;
     display: inline-block;
     position: absolute;
-    top: 45%;
-    left: 0;
+    top: 40%;
+    left: -23px;
     border: 1px solid white;
+    border-radius: 50%;
     -ms-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
@@ -133,9 +134,10 @@ html[xmlns] .flexslider .slides {
     &.flex-next {
 
         left: auto;
-        right: 0;
+        right: -23px;
 
         &:before {
+          font-family: "icomoon";
           content: "\3e";
           padding: 0 .25em;
           @include rem( 'font-size', 30px );
@@ -144,6 +146,7 @@ html[xmlns] .flexslider .slides {
 
     &.flex-prev {
       &:before {
+        font-family: "icomoon";
         content: "\3c";
         padding: 0 .25em;
         @include rem( 'font-size', 30px );
@@ -153,6 +156,11 @@ html[xmlns] .flexslider .slides {
     &:hover {
         cursor: pointer;
         background: darken( $cerulean, 10% );
+    }
+
+    &:before {
+      color: white;
+      text-shadow: none;
     }
   }
 

@@ -2034,7 +2034,8 @@ textarea {
     .department-menu {
       display: flex; } }
   .department-menu li {
-    margin: 0 0.5rem 0 0; }
+    margin: 0 0.5rem 0 0;
+    padding: 0; }
     .department-menu li a {
       background: #009581;
       color: #e4e9eb;
@@ -2317,7 +2318,8 @@ textarea {
               padding-top: 12px;
               gap: 0.5rem; } }
           .footer .region--footer__inner .footer--left .socials li {
-            margin: 0; }
+            margin: 0;
+            padding: 0; }
           .footer .region--footer__inner .footer--left .socials a {
             align-items: center;
             background: RGB(246 246 246/80%);
@@ -2411,22 +2413,23 @@ textarea {
       padding: 1rem;
       text-decoration: none; }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .header {
     display: block;
-    margin-bottom: 0; } }
+    margin-bottom: 0;
+    z-index: 100; } }
 
 .header .header-first,
 .header .header-second {
   background-color: #fff; }
-  @media print, screen and (min-width: 48em) {
+  @media print, screen and (min-width: 30em) {
     .header .header-first,
     .header .header-second {
       background: #0098db; } }
 
 .header .header-first {
   padding: 0.5rem 0 1rem; }
-  @media print, screen and (min-width: 48em) {
+  @media print, screen and (min-width: 30em) {
     .header .header-first {
       padding: 1rem 0; } }
   .header .header-first .grid-x {
@@ -3095,6 +3098,10 @@ section.homepage .hero__content {
       border: none; }
       section.homepage .hero__content .flex-direction-nav a:hover {
         color: #0098db !important; }
+      section.homepage .hero__content .flex-direction-nav a.flex-prev {
+        left: 0; }
+      section.homepage .hero__content .flex-direction-nav a.flex-next {
+        right: 0; }
     section.homepage .hero__content .flex-direction-nav .flex-nav-prev {
       position: absolute;
       left: 0; }
@@ -3388,6 +3395,9 @@ section.homepage .hero__content {
     .node-type-notification .notification-title h1 {
       font-size: 3rem;
       text-align: left; } }
+
+#hr-1 {
+  display: none; }
 
 .node-type-blog h1.main__heading {
   font-size: 2rem;

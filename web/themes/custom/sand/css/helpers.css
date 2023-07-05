@@ -2203,6 +2203,17 @@ textarea {
   .purple-bg.bg-level-4 {
     background: rgba(85, 26, 139, 0.2); }
 
+.warning {
+  color: #fffceb; }
+  .warning-bg {
+    background: #fffceb; }
+  .warning-bg.bg-level-2 {
+    background: rgba(255, 252, 235, 0.9); }
+  .warning-bg.bg-level-3 {
+    background: rgba(255, 252, 235, 0.5); }
+  .warning-bg.bg-level-4 {
+    background: rgba(255, 252, 235, 0.2); }
+
 /* Backgrounds
    ========================================================================== */
 .background--odd {
@@ -3920,9 +3931,10 @@ html[xmlns] .flexslider .slides {
   text-decoration: none;
   display: inline-block;
   position: absolute;
-  top: 45%;
-  left: 0;
+  top: 40%;
+  left: -23px;
   border: 1px solid white;
+  border-radius: 50%;
   -ms-transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -3930,13 +3942,15 @@ html[xmlns] .flexslider .slides {
   font-size:  calc($unitless-value / $baseline-px)rem; }
   .flex-direction-nav a.flex-next {
     left: auto;
-    right: 0; }
+    right: -23px; }
     .flex-direction-nav a.flex-next:before {
+      font-family: "icomoon";
       content: "\3e";
       padding: 0 .25em;
       font-size: 30px;
       font-size:  calc($unitless-value / $baseline-px)rem; }
   .flex-direction-nav a.flex-prev:before {
+    font-family: "icomoon";
     content: "\3c";
     padding: 0 .25em;
     font-size: 30px;
@@ -3944,6 +3958,9 @@ html[xmlns] .flexslider .slides {
   .flex-direction-nav a:hover {
     cursor: pointer;
     background: #0075a8; }
+  .flex-direction-nav a:before {
+    color: white;
+    text-shadow: none; }
 
 .flex-direction-nav .flex-disabled {
   opacity: 0 !important;
