@@ -12,3 +12,18 @@ declare(strict_types=1);
 function sand_admin_help($route_name): ?string {
   return sand_help_show_help(__DIR__, $route_name);
 }
+
+/**
+ * Modify field widgets for which remove button will not be added.
+ * 
+ * These can be added on the route sand_admin.settings.
+ *
+ * @param array $skipWidgets
+ *   A list with field widgets.
+ */
+function sand_admin_multiple_field_remove_button_skip_widgets_alter(array &$skipWidgets): void {
+  $skip_remove_button_widgets_array = explode("\r\n", \Drupal::config('sand_admin.settings')->get('skip_remove_button'));
+  foreach ($skip_remove_button_widgets_array as $widget) {
+    $skipWidgets[] = $widget;
+  }
+}
