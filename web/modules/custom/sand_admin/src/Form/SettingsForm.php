@@ -31,9 +31,9 @@ class SettingsForm extends ConfigFormBase {
     
     $form['skip_remove_button'] = [
       '#type' => 'textarea',
-      '#required' => TRUE,
+      '#required' => FALSE,
       '#title' => $this->t('Skip adding remove button on these widgets'),
-      '#description' => $this->t('We are using the contrib module: multiple_fields_remove_button. In addition to the widgets this skips automatically, add any here that it does not work on like the term fancy tree widget'),
+      '#description' => $this->t('We are using the contrib module: multiple_fields_remove_button. In addition to the widgets this skips automatically, add any here that it does not work on like term_reference_fancytree widget'),
       '#default_value' => $this->config('sand_admin.settings')->get('skip_remove_button'),
     ];
     
