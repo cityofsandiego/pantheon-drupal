@@ -27,11 +27,25 @@
 
 {% if (topmenu is defined) and (department_title != 'Inside San Diego') %}
   <div class="hide-on-mobile top-menu{{ sliderclass }}">
-    <ul id="department-top-menu" class="department-menu">
-      {% for item in topmenu.items %}
-        <li class={{ item.classes[0]}}><a href="{{ item.url }}">{{ item.title }}</a></li>
-      {% endfor %}
-    </ul>
+    <nav>
+      <ul id="department-top-menu" class="department-menu">
+        {% set pageurl = url('<current>') %}
+        {% if item[0] %}
+          {% if (item.url == pageurl|render|render) %}
+          <li class="is_active"><a href="{{ item.url }}">{{ item.title }}</a></li>
+          {% else %}
+          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+         {% endif %}
+        {% endif %}
+        {% for item in topmenu.items[1:] %}
+        {% if (item.url in pageurl|render|render) %}
+          <li class="is_active"><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% else %}
+          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
   </div>
   {% if topmenu.items %}
   <div class="hide-on-desktop sub-navigation-mobile white-bg l-padding-hd l-padding-ts l-padding-bs l-padding-mobile-hm">

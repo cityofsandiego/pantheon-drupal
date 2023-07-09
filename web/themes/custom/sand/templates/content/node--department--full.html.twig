@@ -107,20 +107,22 @@
         <div class="sidebar l-padding-mobile-hm">
             {% if sidemenu is defined and sidemenu.items %}
               <h2>{{ content.field_department.1['#title'] }}</h2>
-              <ul class="sidebar-menu">
-                {% for item in sidemenu.items %}
-                  <li{% if item.classes is not empty %} class="{% for class in item.classes %}{{ class }} {% endfor %}"{% endif %}>
-                    <a href="{{ item.url }}">{{ item.title }}</a>
-                    {% if item.children is not empty %}
-                      <ul>
-                        {% for child in item.children %}
-                          <li><a href="{{ child.url }}">{{ child.title }}</a></li>
-                        {% endfor %}
-                      </ul>
-                    {% endif %}
-                  </li>
-                {% endfor %}
-              </ul>
+              <nav>
+                <ul class="sidebar-menu">
+                  {% for item in sidemenu.items %}
+                    <li{% if item.classes is not empty %} class="{% for class in item.classes %}{{ class }} {% endfor %}"{% endif %}>
+                      <a href="{{ item.url }}">{{ item.title }}</a>
+                      {% if item.children is not empty %}
+                        <ul>
+                          {% for child in item.children %}
+                            <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </nav>
             {% endif %}
             {% for item in sidebar %}
               {{ item.value }}
