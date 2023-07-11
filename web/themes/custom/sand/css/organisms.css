@@ -951,7 +951,7 @@ textarea {
   content: '\e832'; }
 
 .icon-bleachers::before {
-  content: '\e906'; }
+  content: '\e907'; }
 
 .icon-rocket::before {
   content: '\e837'; }
@@ -1415,6 +1415,12 @@ textarea {
 .icon-plus2::before {
   content: '\ea0a'; }
 
+.icon-virus::before {
+  content: '\e90c'; }
+
+.icon-tent::before {
+  content: '\e909'; }
+
 @font-face {
   font-family: 'socials';
   font-style: normal;
@@ -1512,7 +1518,7 @@ textarea {
   font-size: 0.625rem; }
 
 .icon--sm {
-  font-size: 1.125rem; }
+  font-size: 0.75rem; }
 
 .icon--md {
   font-size: 1.5rem; }
@@ -1696,7 +1702,7 @@ textarea {
       align-items: center; } }
 
 .app_wrap {
-  padding: 0 2%; }
+  padding: 1rem 2rem; }
 
 .node-type-application .footer .region--footer__inner {
   display: none; }
@@ -2040,15 +2046,16 @@ textarea {
       background: #009581;
       color: #e4e9eb;
       font-size: 1rem;
-      padding: 0.2em 0.75em;
+      padding: 0.2rem 0.75rem;
       text-decoration: none;
       font-weight: bold;
       display: block;
-      width: 100%; }
+      width: 100%;
+      border-radius: 4px 4px 0 0; }
       @media print, screen and (min-width: 48em) {
         .department-menu li a {
           font-size: 0.8125rem;
-          padding: 0.5em 0.75em;
+          padding: 0.5rem 0.75rem;
           line-height: 1.2;
           height: 100%; } }
       .department-menu li a:hover {
@@ -2056,7 +2063,8 @@ textarea {
       .department-menu li a.is-active {
         color: #0a0a0a; }
     .department-menu li.is_active a {
-      color: #0a0a0a; }
+      color: #0a0a0a;
+      background-color: white; }
 
 .sub-navigation-mobile .accordion__heading {
   color: #fff;
@@ -2292,6 +2300,25 @@ textarea {
           .footer .region--footer__inner .footer--left .top {
             display: grid;
             grid-template-columns: 49px auto; } }
+        .footer .region--footer__inner .footer--left .top ul.social-links {
+          padding: 0;
+          justify-content: center; }
+          @media print, screen and (min-width: 30em) {
+            .footer .region--footer__inner .footer--left .top ul.social-links {
+              padding-top: 12px;
+              gap: 0.5rem;
+              padding-left: 0.5rem;
+              justify-content: left; } }
+          .footer .region--footer__inner .footer--left .top ul.social-links li {
+            margin: 0;
+            padding: 0.5rem; }
+            @media print, screen and (min-width: 30em) {
+              .footer .region--footer__inner .footer--left .top ul.social-links li {
+                padding: 0; } }
+            .footer .region--footer__inner .footer--left .top ul.social-links li a {
+              height: 1.5rem;
+              width: 1.5rem;
+              font-size: 1rem; }
         @media print, screen and (min-width: 48em) {
           .footer .region--footer__inner .footer--left {
             padding: 2rem 1rem;
@@ -2299,55 +2326,6 @@ textarea {
         @media print, screen and (min-width: 80em) {
           .footer .region--footer__inner .footer--left {
             padding: 2rem 1rem 2rem 2rem; } }
-        .footer .region--footer__inner .footer--left .socials {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1rem;
-          justify-content: center;
-          margin-top: 0.5rem;
-          /* Change to desired color */
-          /* Change to desired color */
-          /* Change to desired color */
-          /* Change to desired color */
-          /* Change to desired color */
-          /* Change to desired color */
-          /* Change to desired color */
-          /* Change to desired color */ }
-          @media print, screen and (min-width: 48em) {
-            .footer .region--footer__inner .footer--left .socials {
-              padding-top: 12px;
-              gap: 0.5rem; } }
-          .footer .region--footer__inner .footer--left .socials li {
-            margin: 0;
-            padding: 0; }
-          .footer .region--footer__inner .footer--left .socials a {
-            align-items: center;
-            background: RGB(246 246 246/80%);
-            border-radius: 2px;
-            color: #37424a;
-            display: flex;
-            height: 1.5rem;
-            justify-content: center;
-            width: 1.5rem;
-            font-size: 1rem; }
-            .footer .region--footer__inner .footer--left .socials a:hover {
-              color: white; }
-          .footer .region--footer__inner .footer--left .socials a.icon--twitter:hover {
-            background-color: #1DA1F2; }
-          .footer .region--footer__inner .footer--left .socials a.icon--facebook:hover {
-            background-color: #4267B2; }
-          .footer .region--footer__inner .footer--left .socials a.icon--google:hover {
-            background-color: #C20806; }
-          .footer .region--footer__inner .footer--left .socials a.icon--instagram:hover {
-            background-color: #C13584; }
-          .footer .region--footer__inner .footer--left .socials a.icon--youtube:hover {
-            background-color: #FF0000; }
-          .footer .region--footer__inner .footer--left .socials a.icon--pinterest:hover {
-            background-color: #C91517; }
-          .footer .region--footer__inner .footer--left .socials a.icon--nextdoor:hover {
-            background-color: #8ed501; }
-          .footer .region--footer__inner .footer--left .socials a.icon--linkedin:hover {
-            background-color: #0077b5; }
         .footer .region--footer__inner .footer--left p.copyright {
           color: #6e8393;
           font-size: 1rem;
@@ -2706,7 +2684,10 @@ textarea {
       color: #37424a; }
 
 .header.simple-header {
-  padding: 0.5em 1em 0.6rem; }
+  padding: 0.5rem 1rem 0.6rem;
+  box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
+  z-index: 5;
+  position: relative; }
   .header.simple-header .logo {
     text-decoration: none;
     display: flex;
@@ -3469,8 +3450,7 @@ section.homepage .hero__content {
     background-color: #48710e; }
 
 .view .form-actions {
-  gap: 1rem;
-  margin-top: 0; }
+  gap: 1rem; }
 
 .view .form--inline .form-select {
   max-width: 100%; }

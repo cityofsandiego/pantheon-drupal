@@ -112,6 +112,33 @@
             display: grid;
             grid-template-columns: 49px auto;
           }
+
+          ul.social-links {
+            padding: 0;
+            justify-content: center;
+  
+            @include breakpoint(mobile-landscape) {
+              padding-top: 12px;
+              gap: 0.5rem;
+              padding-left: 0.5rem;
+              justify-content: left;
+            }
+  
+            li {
+              margin: 0;
+              padding: 0.5rem;
+
+              @include breakpoint(mobile-landscape) {
+                padding: 0;
+              }
+  
+              a {
+                height: 1.5rem;
+                width: 1.5rem;
+                font-size: 1rem;
+              }
+            }
+          }
         }
 
         @include breakpoint(medium) {
@@ -121,51 +148,6 @@
 
         @include breakpoint(large) {
           padding: 2rem 1rem 2rem 2rem;
-        }
-
-        .socials {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1rem;
-          justify-content: center;
-          margin-top: 0.5rem;
-
-          @include breakpoint(medium) {
-            //margin: 0.8rem 0 0 0.5rem;
-            padding-top: 12px;
-            gap: 0.5rem;
-            //justify-content: start;
-          }
-
-          li {
-            margin: 0;
-            padding: 0;
-          }
-
-          a {
-            align-items: center;
-            background: RGB(246 246 246 / 80%);
-            border-radius: 2px;
-            color: $spruce;
-            display: flex;
-            height: 1.5rem;
-            justify-content: center;
-            width: 1.5rem;
-            font-size: 1rem;
-
-            &:hover {
-              color: white;
-            }
-          }
-          
-          a.icon--twitter:hover    {background-color: $twitter;}    /* Change to desired color */
-          a.icon--facebook:hover   {background-color: $facebook;}    /* Change to desired color */
-          a.icon--google:hover     {background-color: $googleplus;}    /* Change to desired color */
-          a.icon--instagram:hover  {background-color: $instagram;}    /* Change to desired color */
-          a.icon--youtube:hover    {background-color: $youtube;}    /* Change to desired color */
-          a.icon--pinterest:hover  {background-color: $pinterest;}    /* Change to desired color */
-          a.icon--nextdoor:hover   {background-color: $nextdoor;}    /* Change to desired color */
-          a.icon--linkedin:hover   {background-color: $linkedin;}    /* Change to desired color */
         }
 
         p.copyright {

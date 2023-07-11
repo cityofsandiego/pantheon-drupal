@@ -140,13 +140,26 @@ a {
 }
 
 blockquote {
-  margin: 0;
+  position: relative;
+  margin: 0 2em 1em 2em;
+  padding: 1em 1em 1em 2em;
   color: $spruce;
   // font-style: italic;
   // font-family: $font-family-secondary;
-  @include rem("font-size", 18px);
+  border-left: 4px solid #d1d4d3;
+  background-color: $off-white;
+  border-radius: 0 4px 4px 0;
+
+  p {
+    color: $spruce;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
   .author {
-    margin: 1em 0;
+    margin: 1em 0 0 0;
     color: $spruce;
     display: block;
     font-weight: 600;
@@ -154,6 +167,24 @@ blockquote {
     font-style: normal;
     font-family: $font-family;
     @include rem("font-size", 12px);
+  }
+
+  &::before {
+    font-family: u2000;
+    content: "\201C";
+    font-size: 4rem;
+    line-height: 1;
+    position: absolute;
+    top: 8px;
+    left: -22px;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 2px solid #d1d4d3;
+    color: $spruce;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
   }
 }
 

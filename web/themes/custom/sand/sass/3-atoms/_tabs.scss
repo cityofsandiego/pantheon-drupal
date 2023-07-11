@@ -47,6 +47,7 @@
 .tabs-list__item {
   z-index: 3;
   margin: 0;
+  padding: 0;
   cursor: pointer;
   border-top: none;
   background: white;
@@ -63,16 +64,22 @@
 }
 
 .tabs-list__link {
-  padding: 0.5em;
+  padding: 0.5rem 1rem;
   display: block;
   //color: $chateau;
   text-decoration: none;
   border-top: 3px solid transparent;
 
-  &:hover,
+  &:hover {
+    border-color: $cerulean;
+    color: $link-color;
+    text-decoration: none;
+  }
+  
   .is-active & {
     border-color: $cerulean;
     color: $font-color;
+    text-decoration: none;
   }
 
   &.text-accent--desktop {
@@ -82,7 +89,7 @@
 
 .tabs-container {
   padding: 1em;
-  border: 1px solid $alto;
+  //border: 1px solid $alto;
   border-top: none;
 }
 

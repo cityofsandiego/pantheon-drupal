@@ -948,7 +948,7 @@ textarea {
   content: '\e832'; }
 
 .icon-bleachers::before {
-  content: '\e906'; }
+  content: '\e907'; }
 
 .icon-rocket::before {
   content: '\e837'; }
@@ -1412,6 +1412,12 @@ textarea {
 .icon-plus2::before {
   content: '\ea0a'; }
 
+.icon-virus::before {
+  content: '\e90c'; }
+
+.icon-tent::before {
+  content: '\e909'; }
+
 @font-face {
   font-family: 'socials';
   font-style: normal;
@@ -1509,7 +1515,7 @@ textarea {
   font-size: 0.625rem; }
 
 .icon--sm {
-  font-size: 1.125rem; }
+  font-size: 0.75rem; }
 
 .icon--md {
   font-size: 1.5rem; }
@@ -1763,28 +1769,6 @@ textarea {
 @media print, screen and (min-width: 48em) {
   .hide-on-desktop {
     display: none; } }
-
-/* Vertical centering inside flexbox
-   ========================================================================== */
-.l-flex-center-container {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  padding: 1em !important; }
-  @media print, screen and (min-width: 48em) {
-    .l-flex-center-container--desktop {
-      align-items: center;
-      display: flex;
-      justify-content: center;
-      padding: 1em !important; } }
-
-.l-flex-center {
-  display: flex;
-  align-items: center; }
-  @media print, screen and (min-width: 48em) {
-    .l-flex-center--desktop {
-      display: flex;
-      align-items: center; } }
 
 /* Widths by Percentage
    ========================================================================== */
@@ -2539,12 +2523,19 @@ a {
     text-decoration: underline; }
 
 blockquote {
-  margin: 0;
+  position: relative;
+  margin: 0 2em 1em 2em;
+  padding: 1em 1em 1em 2em;
   color: #37424a;
-  font-size: 18px;
-  font-size:  calc($unitless-value / $baseline-px)rem; }
+  border-left: 4px solid #d1d4d3;
+  background-color: #f6f6f6;
+  border-radius: 0 4px 4px 0; }
+  blockquote p {
+    color: #37424a; }
+    blockquote p:last-child {
+      margin-bottom: 0; }
   blockquote .author {
-    margin: 1em 0;
+    margin: 1em 0 0 0;
     color: #37424a;
     display: block;
     font-weight: 600;
@@ -2553,6 +2544,22 @@ blockquote {
     font-family: "Open Sans", sans-serif;
     font-size: 12px;
     font-size:  calc($unitless-value / $baseline-px)rem; }
+  blockquote::before {
+    font-family: u2000;
+    content: "\201C";
+    font-size: 4rem;
+    line-height: 1;
+    position: absolute;
+    top: 8px;
+    left: -22px;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 2px solid #d1d4d3;
+    color: #37424a;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%; }
 
 dt {
   margin-bottom: 0.3em;
@@ -4602,24 +4609,20 @@ html[xmlns] .flexslider .slides {
 .l-flex-center {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 1em !important; }
+  justify-content: center; }
   @media print, screen and (min-width: 48em) {
     .l-flex-center--desktop {
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 1em !important; } }
+      justify-content: center; } }
 
 .l-flex-center-h {
   display: flex;
-  justify-content: center;
-  padding: 1em !important; }
+  justify-content: center; }
   @media print, screen and (min-width: 48em) {
     .l-flex-center-h--desktop {
       display: flex;
-      justify-content: center;
-      padding: 1em !important; } }
+      justify-content: center; } }
 
 .l-flex-center-v {
   display: flex;
