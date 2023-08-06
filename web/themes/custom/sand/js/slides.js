@@ -34,6 +34,14 @@
           directionNav: true
         });
       }
+      $('.flexslider--default').flexslider({
+        animation: "slide",
+        slideshow: true
+      });
+      $('.flexslider--fade').flexslider({
+        animation: "fade",
+        slideshow: true
+      });
     }
   };
 

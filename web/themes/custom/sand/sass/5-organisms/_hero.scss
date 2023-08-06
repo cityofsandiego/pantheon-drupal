@@ -4,12 +4,15 @@
   height: 100%;
   position: relative;
 
-  ul, ul li {
+  ul,
+  ul li {
     margin: 0;
     padding: 0;
     padding-inline-start: unset;
+  }
 
-
+  ul li {
+    display: block; //needed to remove extra spacing on webkit-based browsers
   }
 
   .theme-citynet & {
@@ -32,7 +35,6 @@
   }
 
   .custom-navigation {
-
     a {
       -ms-transform: none;
       -webkit-transform: none;
@@ -48,12 +50,11 @@
         position: relative;
       }
     }
-
   }
 }
 
 .slide-container {
-    padding: 1em 0 3.5em;
+  padding: 1em 0 3.5em;
 
   @include breakpoint(mobile-landscape) {
     padding: 5em 0 12em;
@@ -69,7 +70,7 @@
 
   li {
     &:after {
-      content: '';
+      content: "";
       z-index: 5;
       display: block;
       position: absolute;
@@ -104,19 +105,19 @@
   p {
     margin: 0;
     color: white;
-    padding: .5em 1em;
+    padding: 0.5em 1em;
     font-style: normal;
     display: inline-block;
     background: rgba(0, 0, 0, 0.45);
-    @include rem('font-size', 11px);
+    @include rem("font-size", 11px);
 
     .hero-image-by-prefix,
     .hero-image-by {
-      @include rem('font-size', 10px);
+      @include rem("font-size", 10px);
     }
 
     @include breakpoint(medium) {
-      padding: .5em 3.5em .5em 1em;
+      padding: 0.5em 3.5em 0.5em 1em;
     }
   }
 
@@ -138,20 +139,20 @@
   h1 {
     margin: 0;
     color: white;
-    @include rem('font-size', 45px);
+    @include rem("font-size", 45px);
   }
 
   p {
     margin: 0;
     text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black;
-    @include rem('font-size', 18px);
+    @include rem("font-size", 18px);
   }
 
   .btn {
     font-size: 1rem;
     margin-top: 1em;
     font-weight: normal;
-    padding: .75em 2em;
+    padding: 0.75em 2em;
     text-shadow: none;
   }
 
@@ -160,11 +161,11 @@
     padding: 2em;
 
     h1 {
-      @include rem('font-size', 60px);
+      @include rem("font-size", 60px);
     }
 
     p {
-      @include rem('font-size', 24px);
+      @include rem("font-size", 24px);
     }
 
     .btn {
@@ -183,7 +184,7 @@
   }
 
   @include breakpoint(site down) {
-     width: auto;
+    width: auto;
   }
 
   &.multi {
@@ -194,7 +195,8 @@
     }
   }
 
-  .view-homepage-slide { //Main homepage only
+  .view-homepage-slide {
+    //Main homepage only
     padding: 0;
 
     .flex-control-nav,
@@ -214,6 +216,10 @@ section.homepage {
       display: flex;
       height: 3em;
 
+      a {
+        background: white;
+      }
+
       @include breakpoint(mobile-landscape) {
         display: block;
         right: 6em;
@@ -221,7 +227,7 @@ section.homepage {
       }
 
       .flex-active {
-        background: white;
+        background: $sunshade;
       }
     }
 
@@ -260,6 +266,69 @@ section.homepage {
   }
 }
 
+.slideshow {
+  padding: 0 0 2rem 0;
+  background: transparent;
+
+  .flexslider {
+    padding-bottom: 0;
+  }
+
+  .flex-control-nav {
+    position: absolute;
+    bottom: -3rem;
+    display: flex;
+    height: 3em;
+
+    @include breakpoint(mobile-landscape) {
+      display: block;
+      right: 6em;
+      padding-left: 1em;
+    }
+
+    .flex-active {
+      background: black;
+    }
+  }
+
+  .flex-direction-nav {
+    position: absolute;
+    width: 100%;
+    bottom: -1.5rem;
+
+    a {
+      background: transparent;
+      border: none;
+
+      &:hover {
+        color: $cerulean !important;
+      }
+
+      &.flex-prev {
+        left: 0;
+      }
+
+      &.flex-next {
+        right: 0;
+      }
+
+      &::before {
+        color: $cerulean;
+      }
+    }
+
+    .flex-nav-prev {
+      position: absolute;
+      left: 0;
+
+      @include breakpoint(mobile-landscape) {
+        left: unset;
+        right: 6em;
+      }
+    }
+  }
+}
+
 .hero__slides--content {
   .slides {
     overflow: hidden;
@@ -277,7 +346,7 @@ section.homepage {
     margin: 1em;
 
     h1 {
-      @include rem('font-size', 48px);
+      @include rem("font-size", 48px);
     }
   }
 
@@ -316,9 +385,21 @@ section.homepage {
     max-height: 20em;
     z-index: 0;
     background: #0098db; /* Old browsers */
-    background: -moz-linear-gradient(left, #0098db 0%, #00c7b2 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #0098db 0%, #00c7b2 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, #0098db 0%, #00c7b2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(
+      left,
+      #0098db 0%,
+      #00c7b2 100%
+    ); /* FF3.6-15 */
+    background: -webkit-linear-gradient(
+      left,
+      #0098db 0%,
+      #00c7b2 100%
+    ); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(
+      to right,
+      #0098db 0%,
+      #00c7b2 100%
+    ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 
     @include breakpoint(medium) {
       height: auto;
@@ -330,9 +411,21 @@ section.homepage {
   &.hero__bg--solid {
     //background: $cerulean;
     background: #0098db; /* Old browsers */
-    background: -moz-linear-gradient(left, #0098db 0%, #00c7b2 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #0098db 0%, #00c7b2 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, #0098db 0%, #00c7b2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(
+      left,
+      #0098db 0%,
+      #00c7b2 100%
+    ); /* FF3.6-15 */
+    background: -webkit-linear-gradient(
+      left,
+      #0098db 0%,
+      #00c7b2 100%
+    ); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(
+      to right,
+      #0098db 0%,
+      #00c7b2 100%
+    ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0098db', endColorstr='#00c7b2', GradientType=1); /* IE6-9 */
     position: absolute;
     width: 100%;
@@ -354,11 +447,10 @@ section.homepage {
 }
 
 .custom-navigation {
-
   a {
     z-index: 10;
     color: white;
-    padding: 0 .25em;
+    padding: 0 0.25em;
     background: $cerulean;
     text-decoration: none;
     display: inline-block;
@@ -368,7 +460,7 @@ section.homepage {
     -ms-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
-    @include rem('font-size', 28px);
+    @include rem("font-size", 28px);
 
     &.flex-next {
       left: auto;
@@ -380,7 +472,6 @@ section.homepage {
       background: darken($cerulean, 10%);
     }
   }
-
 }
 
 .l-padding-home-slide {

@@ -88,7 +88,7 @@
     <h1 class="main__heading">{{ label }}</h1>
   </div>
   {{ title_suffix }}
-  <div {{ content_attributes.addClass('node__content') }}>
+  <div {{ content_attributes.addClass('node__content content-body') }}>
     <div class="grid-x grid-padding-x grid-padding-y">
       <div class="cell small-12 medium-auto content">
         {{ content.body }}
@@ -134,23 +134,25 @@
       </div>
       <div class="cell medium-4 sidebar">
         <div class="l-margin-mobile-bn">
-          <div class="card l-padding-ad text-center--mobile l-margin-mobile-td background-off-white">
+          <div class="card l-padding-ad text-center--mobile">
             {{ content.field_sidebar }}
             <h2 class="h3 heading--snug">Location</h2>
             {{ content.field_address_pin }}
 
             {% if content.field_address.0 %}
-              <div class="address-text l-padding-td text-left">
-                <div>
-                  <i class="icon-map-marker icon--sm icon--circle background--cerulean"></i>
+              <div class="grid-x l-margin-td">
+                <div class="cell small-2">
+                  <i class="icon-map-marker icon--circle background--cerulean"></i>
                 </div>
-                {{ content.field_address }}
+                <div class="cell auto">
+                  {{ content.field_address }}
+                </div>
               </div>
             {% endif %}
           </div>
 
           {% if content.field_location_hours.0 %}
-    				<div class="card l-padding-ad background-off-white l-margin-td">
+    				<div class="card">
     					<h2 class="h3 heading--snug">
                 {{ content.field_location_hours_title }}
               </h2>
@@ -171,7 +173,7 @@
           {% endif %}
 
           {% if content.field_location_hours2.0 %}
-    				<div class="card l-padding-ad background-off-white l-margin-td">
+    				<div class="card">
     					<h2 class="h3 heading--snug">
                 {{ content.field_location_hours_title_2 }}
               </h2>
@@ -192,12 +194,12 @@
           {% endif %}
 
           {% if content.field_location_contact_name.0 or content.field_location_contact_name.0 or field_location_contact_title.0 or content.field_phone.0 or content.field_email.0 %}
-            <div class="card l-padding-ad background-off-white l-margin-td contact-info">
+            <div class="card contact-info">
     					<h2 class="h3 heading--trim">Contact Info</h2>
               {% if content.field_location_contact_name.0 or content.field_location_contact_title.0 %}
                 <div class="grid-x l-margin-td">
                   <div class="cell small-2">
-                    <i class="icon-user icon--sm icon--circle background--cerulean"></i>
+                    <i class="icon-user icon--circle background--cerulean"></i>
                   </div>
                   <div class="cell small-10">
                     <div class="l-margin-an">
@@ -212,7 +214,7 @@
               {% if content.field_phone.0 %}
                 <div class="grid-x l-margin-td">
                   <div class="cell small-2">
-                    <i class="icon-telephone icon--sm icon--circle background--cerulean"></i>
+                    <i class="icon-telephone icon--circle background--cerulean"></i>
                   </div>
                   <div class="cell small-10">
                     <address class="l-margin-an">
@@ -224,7 +226,7 @@
               {% if content.field_email.0 %}
                 <div class="grid-x l-margin-td">
                   <div class="cell small-2">
-                    <i class="icon-at-sign icon--sm icon--circle background--cerulean"></i>
+                    <i class="icon-at-sign icon--circle background--cerulean"></i>
                   </div>
                   <div class="cell small-10">
                     <address class="l-margin-an">
