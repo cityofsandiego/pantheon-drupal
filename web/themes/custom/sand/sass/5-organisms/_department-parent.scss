@@ -12,13 +12,13 @@
     margin-top: 0;
 
     @include breakpoint (mobile-landscape down) {
-      margin-bottom: 1em;
+      margin-bottom: 0.5em;
     }
   }
 
   .top-menu {
     @include breakpoint (mobile-landscape) {
-      padding-top: 8em;
+      margin-top: -5rem;
     }
   }
 
@@ -39,6 +39,27 @@
       list-style-type: none;
       margin: 0;
       padding: 0;
+
+      li {
+        margin: 0 0 0.5rem 0;
+
+        .btn {
+          font-size: 0.9rem !important;
+          padding: 0.75em 1em;
+          width: 100%;
+        }
+      }
+
+      &.list-normal {
+        font-size: 1em;
+        list-style-type: disc;
+        margin: 0 0 1em 0;
+        padding-inline-start: 1em;
+
+        li {
+          margin: 0 0 0.5rem 1rem;
+        }
+      }
     }
 
     .btn {
@@ -68,6 +89,39 @@
     }
   }
 
+  // Background image element height is equal to that of the hero content
+  .hero__bg {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    // Background image element height is not equal to that of the hero content
+    &.hero__bg--secondary {
+      position: relative;
+      width: 100%;
+      height: auto;
+      max-height: none;
+      z-index: 0;
+      background: #0098db; /* Old browsers */
+      background: -moz-linear-gradient(
+        left,
+        #0098db 0%,
+        #00c7b2 100%
+      ); /* FF3.6-15 */
+      background: -webkit-linear-gradient(
+        left,
+        #0098db 0%,
+        #00c7b2 100%
+      ); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(
+        to right,
+        #0098db 0%,
+        #00c7b2 100%
+      ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    }
+  }
+
+
   .hero__slides--content {
     .slides {
       overflow: hidden;
@@ -78,7 +132,7 @@
     padding: 2em;
 
     @include breakpoint(mobile-landscape) {
-      padding: 2em 0;
+      padding: 4em 0 9em;
       min-height: 100px;
     }
 

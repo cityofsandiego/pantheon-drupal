@@ -29,11 +29,16 @@
       list-style-type: none;
       padding: 0;
 
-      a {
+      li {
+        margin: 0;
+        padding: 1rem 1rem 1rem 2rem;
         border-bottom: 1px solid $spruce;
+
+      }
+
+      a {
         color: $white;
         display: block;
-        padding: 1rem;
         text-decoration: none;
       }
     }
@@ -595,7 +600,7 @@ ul.toolbar-menu {
   }
 
   a {
-    font-family: "Open Sans", sans-serif;
+    font-family: $body-copy, sans-serif;
   }
 
 
@@ -652,7 +657,7 @@ section.not-found {
     color: #0098db;
     border-radius: 0 4px 4px 0;
     border: 1px solid #0098db;
-    background-image: url(../images/search-icon.png);
+    background-image: url(/images/blue-search-icon.svg);
     background-color: #0098db;
 
   }
@@ -735,7 +740,7 @@ section.not-found {
   width: max-content;
   z-index: 2;
   cursor: pointer;
-  width: 1.2em;
+  width: 18px;
   margin: 0 auto;
 
   input {
@@ -744,15 +749,17 @@ section.not-found {
     margin: 0;
     outline: none;
     pointer-events: none;
+    opacity: 1;
     
     &:checked {
       opacity: 0;
       width: 0;
     }
 
-    &[type=checkbox]:hover {
+    &[type=checkbox]:focus, &[type=checkbox]:hover {
       border-color: unset;
-
+      outline: none;
+      border: none;
     }
   }
 
@@ -782,6 +789,10 @@ section.not-found {
     background-color var(--animation-timing);
 }
 
+.burger-wrapper:has(input:checked) {
+  --foreground: white;
+  --background: #333;
+}
 
 .burger-wrapper:has(input:checked)::before {
   rotate: 45deg;

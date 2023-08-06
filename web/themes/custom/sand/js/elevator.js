@@ -177,6 +177,16 @@ define(function () {
             $('.current-slide').text(slider.currentSlide+1);
           }
         });
+        $('.flexslider--fade').flexslider({
+          animation: "fade",
+          slideshow: true,
+          start: function(slider) {
+            var count = $('.total-slides').text(slider.count);
+          },
+          after: function(slider) {
+            $('.current-slide').text(slider.currentSlide+1);
+          }
+        });
         var counter = '<li class="flex-counter"><span class="current-slide">1</span> / <span class="total-slides"></span></li>';
         $('.flexslider .flex-control-nav').append( counter );
         var index = $('.flexslider li:has(.flex-active)').index('.flex-control-nav li')+1;

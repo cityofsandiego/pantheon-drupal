@@ -41,7 +41,11 @@
   margin: 0 !important;
   overflow: hidden;
   background: $off-white;
-  display: flex;
+  display: block;
+
+  @include breakpoint(mobile-landscape) {
+    display: flex;
+  }
 }
 
 .tabs-list__item {
@@ -58,8 +62,23 @@
   &:first-child {
     border-left: none;
   }
+  &:last-child {
+    border-right: 1px solid $alto;
+  }
   &.is-active {
     border-bottom: 1px solid white;
+
+    @include breakpoint(mobile-landscape down) {
+      background-color: aliceblue;
+    }
+  }
+
+  @include breakpoint(mobile-landscape down) {
+    width: 100%;
+    float: left;
+    border-bottom: none;
+    border-left: none;
+    border-right: none !important;
   }
 }
 
@@ -83,14 +102,20 @@
   }
 
   &.text-accent--desktop {
-    font-size: 21px;
+    @include breakpoint(mobile-landscape) {
+      font-size: 21px;
+    }
   }
 }
 
 .tabs-container {
   padding: 1em;
-  //border: 1px solid $alto;
-  border-top: none;
+  border-top: 1px solid $alto;
+  margin-top: 0;
+
+  @include breakpoint(mobile-landscape) {
+    margin-top: -1px;
+  }
 }
 
 .tabs__bucket {

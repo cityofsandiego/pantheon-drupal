@@ -98,7 +98,7 @@
 /* Visibility
    ========================================================================== */
 
-.visuallyhidden {
+.visuallyhidden, .visually-hidden {
     @extend %visuallyhidden;
 }
 
@@ -201,9 +201,9 @@
 /* Text Formatting
    ========================================================================== */
 
-
-
-
+.no-wrap {
+    white-space: nowrap;
+}
 
 /* Indent
    ========================================================================== */
@@ -308,6 +308,10 @@
 .no-bullets {
     padding: 0;
     list-style-type: none;
+
+    li {
+        margin-left: 0;
+    }
 }
 .two-columns {
     -webkit-column-count: 2;
@@ -617,10 +621,15 @@
 /* Vertical centering inside flexbox
    ========================================================================== */
 
+.l-flex {
+    display: flex !important;
+}
+
 .l-flex-center {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
 
     &--desktop {
         @include breakpoint(medium up) {
@@ -633,24 +642,26 @@
 
 .l-flex-center-h {
     display: flex;
-    justify-content: center;
+    justify-content: center !important;
+    text-align: center !important;
 
 	&--desktop {
 		@include breakpoint(medium up) {
             display: flex;
-            justify-content: center;
+            justify-content: center !important;
+            text-align: center !important;
 		}
 	}
 }  
 
 .l-flex-center-v {
     display: flex;
-    align-items: center;
+    align-items: center !important;
 
 	&--desktop {
 		@include breakpoint(medium up) {
             display: flex;
-            align-items: center;
+            align-items: center !important;
 		}
 	}
 }

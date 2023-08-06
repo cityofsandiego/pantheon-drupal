@@ -8,6 +8,10 @@ ul, ol {
   padding-inline-start: 1em;
   line-height: 1.5;
 
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   li {
     margin: 0 0 0.5rem 1rem;
     padding: 0;
@@ -65,4 +69,21 @@ ol li {
 
 .sub-navigation-mobile .accordion .accordion__drawer {
   padding: 0;
+}
+
+p.date, .date {
+  font-weight: 600;
+  margin-bottom: 0.75em !important;
+
+  @include breakpoint(mobile-landscape) {
+    margin-bottom: 0;
+  }
+
+  .notification &, .doc-list-compact &, .card--notification & {
+    font-weight: 600;
+    margin-bottom: 0 !important;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    font-family: $font-family;
+  }
 }

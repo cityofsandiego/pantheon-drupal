@@ -58,7 +58,9 @@
   background: $mercury;
   position: relative;
   border: 1px solid white;
-  // @include transition(all .5s);
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
 
   #list-container & {
     padding: 0.2em 1em;
@@ -69,6 +71,7 @@
   display: block;
   color: $spruce;
   text-decoration: none;
+  font-weight: unset;
 
   #list-container & i {
     font-size: 0.75em;
@@ -125,7 +128,7 @@
   }
 }
 
-.is-open {
+.current.is-open {
   &.accordion {
 
     > .accordion__heading {
@@ -144,9 +147,6 @@
       -ms-transform: rotate(180deg);
       -o-transform: rotate(180deg);
       transform: rotate(180deg);
-    }
-    .accordion__link {
-      font-weight: bold;
     }
   }
 }

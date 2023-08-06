@@ -11,7 +11,7 @@ table.calendar-view-table {
   }
 
   caption {
-    font-family: 'Merriweather';
+    font-family: $font-family-secondary;
     font-size: 2em;
     font-weight: normal;
     line-height: 3;
@@ -65,7 +65,10 @@ table.calendar-view-table {
   td {
     padding: 0;
     border: none;
-    border-right: 1px solid $alto;
+
+    @include breakpoint(mobile-landscape) {
+      border-right: 1px solid $alto;
+    }
 
     &:last-child {
       border-right: none;
@@ -80,8 +83,13 @@ table.calendar-view-table {
       }
 
       a {
-        color: $link-color;
+        color: $science;
         font-size: 1rem;
+        line-height: 1.3;
+
+        @include breakpoint(mobile-landscape) {
+          font-size: 1em;
+        }
 
         &:hover {
           color: lighten($link-color, 10%);
@@ -181,6 +189,11 @@ table.calendar-view-table {
   flex-direction: row;
 
   .pager__item {
+    margin: 0 !important;
+
+    @include breakpoint(mobile-landscape) {
+      margin: 0 0 10px 0 !important;
+    }
 
     &.pager__current {
       display: none;
