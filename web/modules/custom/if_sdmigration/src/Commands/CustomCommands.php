@@ -4327,4 +4327,150 @@ class CustomCommands extends DrushCommands {
     }
   }
 
+  /**
+   * Add media entities back from copied D7 files.
+   *
+   * @command associate:files
+   * @param $after_id (File ID to resume after).
+   *
+   * @usage associate:files
+   */
+  public function associateFiles($after_id = 0) {
+    // Process D7 files and turn into D9 entities.
+    if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/file-entity-export.csv', 'r')) {
+      fgets($file);
+      while ($data = fgetcsv($file)) {
+        // Skip due to command line argument.
+        if ($data[0] < $after_id) continue;
+
+        $media_id = $data[0];
+        $filename = str_replace('`', '', $data[1]);
+        $departments = explode('|', str_replace('`', '', $data[2]));
+        $license = str_replace('`', '', $data[3]);
+        $alt_text = str_replace('`', '' , $data[4]);
+        $extension = strtolower(str_replace('`', '' , $data[5]));
+        $path = str_replace('`', '', $data[6]);
+        $title = str_replace('`', '' , $data[7]);
+        $changed = str_replace('`', '', $data[8]);
+        $created = str_replace('`', '', $data[9]);
+
+        // 1. Check extension and determine media type.  Skip media item if invalid.
+        if (str_starts_with($path, 'youtube://')) {
+          $media_type = 'remote_video';
+        }
+        elseif (in_array($extension, ['mp3', 'wav', 'aac', 'm4a'])) {
+          $media_type = 'audio';
+        }
+        elseif (in_array($extension, ['txt', 'rtf', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'pdf', 'odf', 'odg', 'odp', 'ods', 'odt', 'fodt', 'fods', 'fodp', 'fodg', 'key', 'numbers', 'pages'])) {
+          $media_type = 'document';
+        }
+        elseif (in_array($extension, ['png', 'gif', 'jpg', 'jpeg'])) {
+          $media_type = 'image';
+        }
+        elseif (in_array($extension, ['mp4', 'mov'])) {
+          $media_type = 'video';
+        }
+        else {
+          echo 'ID: ' . $media_id . ' - Invalid extension (' . $extension . '). Skipping.' . PHP_EOL;
+          continue;
+        }
+
+        // 2. Check if media already exists, create if it doesn't.
+        if ($media_type == 'remote_video') {
+          $video_url = str_replace('youtube://v/', 'https://www.youtube.com/watch?v=', $path);
+          $existing_media = $this->entityTypeManager->getStorage('media')
+            ->loadByProperties(['field_media_oembed_video' => $video_url]);
+          if (!empty($existing_media)) {
+            echo 'ID: ' . $media_id . ' - Already imported. Skipping.' . PHP_EOL;
+          }
+          else {
+            // Create remote video.
+            $remote_video = $this->entityTypeManager->getStorage('media')->create([
+              'bundle' => 'remote_video',
+              'uid' => 1,
+              'field_media_oembed_video' => $video_url,
+            ]);
+            $remote_video->setPublished(TRUE)->save();
+            foreach ($departments as $department) {
+              $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+              $remote_video->field_department->appendItem($term);
+            }
+            $remote_video->created = strtotime($created);
+            $remote_video->changed = strtotime($changed);
+            $remote_video->save();
+             echo 'ID: ' . $media_id . ' - Imported.' . PHP_EOL;
+          }
+        }
+        else {
+          $existing_file = $this->entityTypeManager->getStorage('file')
+            ->loadByProperties(['uri' => $path]);
+          if (count($existing_file) > 0) {
+            echo 'ID: ' . $media_id . ' - Already imported. Skipping.' . PHP_EOL;
+          }
+          else {
+            // Create file association.
+            $newfile = $this->entityTypeManager->getStorage('file')->create([
+              'filename' => $filename,
+              'uri' => $path,
+              'status' => 1,
+              'uid' => 1,
+            ]);
+            $newfile->save();
+            // Create media item.
+            switch ($media_type) {
+              case 'audio':
+                $media_details = [
+                  'bundle' => $media_type,
+                  'uid' => 1,
+                  'status' => 1,
+                  'field_media_audio_file' => $newfile->id(),
+                ];
+                break;
+              case 'document':
+                $media_details = [
+                  'bundle' => $media_type,
+                  'uid' => 1,
+                  'status' => 1,
+                  'field_media_document' => $newfile->id(),
+                ];
+                break;
+              case 'image':
+                $media_details = [
+                  'bundle' => $media_type,
+                  'uid' => 1,
+                  'status' => 1,
+                  'field_media_image' => [
+                    'target_id' => $newfile->id(),
+                    'alt' => $alt_text,
+                    'title' => $title,
+                  ],
+                  'field_license' => $license,
+                ];
+                break;
+              case 'video':
+                $media_details = [
+                  'bundle' => $media_type,
+                  'uid' => 1,
+                  'status' => 1,
+                  'field_media_video_file' => $newfile->id(),
+                ];
+                break;
+            }
+            $media = $this->entityTypeManager->getStorage('media')->create($media_details);
+            $media->setPublished(TRUE)->save();
+            foreach ($departments as $department) {
+              $term = Term::load($this->taxonomyImportTasks->newTid($department, 'department'));
+              $media->field_department->appendItem($term);
+            }
+            $media->created = strtotime($created);
+            $media->changed = strtotime($changed);
+            $media->save();
+            echo 'ID: ' . $media_id . ' - Imported.' . PHP_EOL;
+          }
+        }
+      }
+      fclose($file);
+    }
+  }
+
 }

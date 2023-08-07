@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.audio.field_department
     - field.field.media.audio.field_media_audio_file
     - media.type.audio
   module:
@@ -14,6 +15,14 @@ targetEntityType: media
 bundle: audio
 mode: default
 content:
+  field_department:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
   field_media_audio_file:
     type: file_audio
     label: visually_hidden
