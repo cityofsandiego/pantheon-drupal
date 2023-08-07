@@ -1,0 +1,29 @@
+uuid: 00dd769a-4263-4f1d-900d-a8b0f6c65c3c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_department
+    - media.type.video
+    - taxonomy.vocabulary.department
+id: media.video.field_department
+field_name: field_department
+entity_type: media
+bundle: video
+label: Department
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      department: department
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
