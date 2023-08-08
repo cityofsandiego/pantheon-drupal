@@ -4340,10 +4340,11 @@ class CustomCommands extends DrushCommands {
     if ($file = fopen($this->extensionList->getPath('if_sdmigration') . '/migration_files/file-entity-export.csv', 'r')) {
       fgets($file);
       while ($data = fgetcsv($file)) {
-        // Skip due to command line argument.
-        if ($data[0] < $after_id) continue;
-
         $media_id = str_replace('`', '', $data[0]);
+
+        // Skip due to command line argument.
+        if ($media_id < $after_id) continue;
+
         $filename = str_replace('`', '', $data[1]);
         $departments = explode('|', str_replace('`', '', $data[2]));
         $license = str_replace('`', '', $data[3]);
