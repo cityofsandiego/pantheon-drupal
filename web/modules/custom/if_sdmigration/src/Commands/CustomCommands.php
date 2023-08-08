@@ -4411,7 +4411,7 @@ class CustomCommands extends DrushCommands {
           else {
             // Create file association.
             $newfile = $this->entityTypeManager->getStorage('file')->create([
-              'filename' => $filename,
+              'filename' => mb_strimwidth($filename, 0, 32, ''),
               'uri' => $path,
               'status' => 1,
               'uid' => 1,
