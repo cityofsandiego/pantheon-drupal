@@ -4343,7 +4343,7 @@ class CustomCommands extends DrushCommands {
         // Skip due to command line argument.
         if ($data[0] < $after_id) continue;
 
-        $media_id = $data[0];
+        $media_id = str_replace('`', '', $data[0]);
         $filename = str_replace('`', '', $data[1]);
         $departments = explode('|', str_replace('`', '', $data[2]));
         $license = str_replace('`', '', $data[3]);
