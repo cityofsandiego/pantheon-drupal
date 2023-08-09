@@ -1,38 +1,42 @@
 {{ title_prefix }}
 {% if department_title is defined %}
-    <h1{{ title_attributes.addClass('page-title') }}>{{ department_title }}</h1>
     {% if department_title == 'Inside San Diego' %}
+      <h1>{{ department_title }}</h1>
       <p class="main__tagline">Stories about City Services, Employees, Residents and Communities</p>
+    {% else %}
+      <div class="main__message main__message--transparent">
+        <p class="h1 main__heading">{{ department_title }}</p>
+      </div>
     {% endif %}
 {% elseif title %}
     <h1{{ title_attributes.addClass('page-title') }}>{{ title }}</h1>
 {% endif %}
 
-{% if (show_slider == 1) %}
-  <div class="hero__slides hero__slides--secondary">
-    <div class="l-constrained--site row">
-      <div class="twelve columns hero__content">
-        {{ drupal_view('department_slides', 'block', department_argument) }}
-      </div>
-    </div>
-  </div>
-{% endif %}
-
 {{ title_suffix }}
 
-
-
 {% if (topmenu is defined) and (department_title != 'Inside San Diego') %}
-  <div class="hide-on-mobile top-menu">
-    <ul id="department-top-menu" class="department-menu">
-      {% for item in topmenu.items %}
-        <li class={{ item.classes[0]}}><a href="{{ item.url }}">{{ item.title }}</a></li>
-      {% endfor %}
-    </ul>
-  </div>
   {% if topmenu.items %}
-  <div class="hide-on-desktop sub-navigation-mobile white-bg l-padding-hd l-padding-ts l-padding-bs l-padding-mobile-hm">
-	  <div class="accordions js-toggle-accordion teal-bg">
+  <div class="hide-on-mobile top-menu{{ sliderclass }}">
+    <nav>
+      <ul id="department-top-menu" class="department-menu">
+        {% set pageurl = path('<current>') %}
+        {% if (topmenu.items.0.url == pageurl|render|render) %}
+          <li class="is_active"><a href="{{ topmenu.items.0.url }}">{{ topmenu.items.0.title }}</a></li>
+        {% else %}
+          <li><a href="{{ topmenu.items.0.url }}">{{ topmenu.items.0.title }}</a></li>
+        {% endif %}
+        {% for item in topmenu.items[1:] %}
+        {% if (item.url in pageurl|render|render) %}
+          <li class="is_active"><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% else %}
+          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+  <div class="hide-on-desktop sub-navigation-mobile">
+	  <div class="accordions js-toggle-accordion">
       <div class="accordion">
         <p class="accordion__heading"><a class="accordion__link" href="#"><i class="icon-menu l-margin-rs"></i> Site Menu  <span class="toggle-icon"> </span></a></p>
         <div class="accordion__drawer" style="display: none;">

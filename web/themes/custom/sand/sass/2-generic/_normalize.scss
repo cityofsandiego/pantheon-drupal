@@ -7,7 +7,7 @@
  */
 
 html {
-  font-family: $body-copy; /* 1 */
+  font-family: $font-family; /* 1 */
   -ms-text-size-adjust: 100%; /* 2 */
   -webkit-text-size-adjust: 100%; /* 2 */
 }
@@ -45,6 +45,7 @@ nav,
 section,
 summary {
   display: block;
+  position: relative;
 }
 
 article,
@@ -64,6 +65,9 @@ summary {
 	}
 }
 
+article {
+  z-index: 1;
+}
 /**
  * 1. Correct `inline-block` display not defined in IE 8/9.
  * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
@@ -315,6 +319,7 @@ html input[type="button"], /* 1 */
 input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button; /* 2 */
+  appearance: button;
   cursor: pointer; /* 3 */
 }
 
@@ -379,6 +384,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="search"] {
   -webkit-appearance: none; /* 1 */
+  appearance: none;
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box; /* 2 */
   box-sizing: content-box;
@@ -445,9 +451,4 @@ optgroup {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-}
-
-td,
-th {
-  // padding: 0;
 }

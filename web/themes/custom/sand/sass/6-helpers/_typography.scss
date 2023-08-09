@@ -20,7 +20,7 @@ h6,
 .h6 {
   margin: 1em 0 0.5em 0;
   color: $spruce;
-  font-weight: normal;
+  font-weight: unset;
   font-family: $font-family-secondary;
 }
 
@@ -48,13 +48,13 @@ h1,
 
 .single-line {
   @include breakpoint(medium) {
-    padding-top: 38px;
+    padding-top: 20px;
   }
 }
 
 .multi-line {
   @include breakpoint(medium) {
-    padding-top: 10px;
+    //padding-top: 10px;
   }
 }
 
@@ -70,7 +70,7 @@ h2,
 
 h3,
 .h3 {
-  @include rem("font-size", 24px); // 1.563em
+  @include rem("font-size", 21px); // 1.3125em
   @media print {
     font-size: 1.1em;
     margin: 0;
@@ -112,6 +112,10 @@ h6,
 p {
   line-height: 1.5;
   margin: 0 0 0.75em;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 html,
@@ -136,13 +140,26 @@ a {
 }
 
 blockquote {
-  margin: 0;
+  position: relative;
+  margin: 0 2em 1em 2em;
+  padding: 1em 1em 1em 2em;
   color: $spruce;
   // font-style: italic;
   // font-family: $font-family-secondary;
-  @include rem("font-size", 18px);
+  border-left: 4px solid #d1d4d3;
+  background-color: $off-white;
+  border-radius: 0 4px 4px 0;
+
+  p {
+    color: $spruce;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
   .author {
-    margin: 1em 0;
+    margin: 1em 0 0 0;
     color: $spruce;
     display: block;
     font-weight: 600;
@@ -151,26 +168,27 @@ blockquote {
     font-family: $font-family;
     @include rem("font-size", 12px);
   }
-}
 
-ul { // correct admin dropdown issues
-  margin: 0.75em 0;
-  // margin: 0.75em 0 !important;
-  list-style-type: disc;
-  // padding-inline-start: 40px;
-
-  ul {
-    list-style-type: circle;
-    margin-left: 0;
+  &::before {
+    font-family: u2000;
+    content: "\201C";
+    font-size: 4rem;
+    line-height: 1;
+    position: absolute;
+    top: 8px;
+    left: -22px;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 2px solid #d1d4d3;
+    color: $spruce;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
   }
 }
 
-ol {
-  margin: 0.75em 0;
-}
-li {
-  margin: 0.5em 0;
-}
+
 dt {
   margin-bottom: 0.3em;
   font-weight: bold;
@@ -183,27 +201,24 @@ dd {
 /* Heading
     ========================================================================== */
 
-.heading {
-}
-
 .heading--center {
-  text-align: center;
+  text-align: center !important;
 }
 
 .heading--right {
-  text-align: right;
+  text-align: right !important;
 }
 
 .heading--trim {
-  margin: 0;
+  margin: 0 !important;
 }
 
 .heading--snug {
-  margin-top: 0;
+  margin-top: 0 !important;
 }
 
 .heading--light {
-  color: white;
+  color: white !important;
 }
 
 .heading--normal {
@@ -214,7 +229,7 @@ dd {
   color: $teal !important;
 }
 
-/* Subheadline
+/* Subheading
     ========================================================================== */
 
 .subheading {
@@ -258,18 +273,22 @@ span[class^="text-"] {
    ========================================================================== */
 
 .fine-print {
-  // @include rem("font-size", 12px);
-  font-size: .75rem;
+  font-size: 0.8em;
 }
 
 .text-accent {
-  @include rem("font-size", 22px);
+  font-size: 1.2em;
 }
 
 .text-accent--desktop {
-  @include breakpoint(medium) {
-    @include rem("font-size", 22px);
+  @include breakpoint(mobile-landscape up) {
+    font-size: 1.2em;
   }
+}
+.text-center--mobile {
+    @include breakpoint(mobile-landscape down) {
+        text-align: center;
+    }
 }
 
 .text-center {
@@ -277,13 +296,13 @@ span[class^="text-"] {
 }
 
 .text-center--mobile {
-  @include breakpoint(medium down) {
+  @include breakpoint(mobile-landscape down) {
     text-align: center;
   }
 }
 
 .text-center--desktop {
-  @include breakpoint(medium) {
+  @include breakpoint(mobile-landscape up) {
     text-align: center;
   }
 }
@@ -293,13 +312,13 @@ span[class^="text-"] {
 }
 
 .text-right--mobile {
-  @include breakpoint(medium down) {
+  @include breakpoint(mobile-landscape down) {
     text-align: right;
   }
 }
 
 .text-right--desktop {
-  @include breakpoint(medium) {
+  @include breakpoint(mobile-landscape up) {
     text-align: right;
   }
 }
@@ -309,13 +328,13 @@ span[class^="text-"] {
 }
 
 .text-left--mobile {
-  @include breakpoint(medium down) {
+  @include breakpoint(mobile-landscape down) {
     text-align: left;
   }
 }
 
 .text-left--desktop {
-  @include breakpoint(medium) {
+  @include breakpoint(mobile-landscape up) {
     text-align: left;
   }
 }
@@ -377,4 +396,32 @@ strong {
   a {
     font-weight: bold;
   }
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+// pattern library use only
+p.nav-ex {
+    color: $spruce;
+    font-weight: 200;
+}
+
+.view-all-link {
+    font-family: $font-family;
+    @include rem( 'font-size', 16px );
+}
+
+.view-more {
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    font-family: $font-family;
+    @include rem( 'font-size', 13px );
+
+    i {
+        font-weight: 600;
+        @include rem( 'font-size', 8px );
+    }
 }

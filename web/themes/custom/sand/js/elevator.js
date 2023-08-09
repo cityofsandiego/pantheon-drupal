@@ -157,6 +157,12 @@ define(function () {
           controlNav: false,
           customDirectionNav: $(".custom-navigation--primary a")
         });
+        if ($('body').hasClass('front')) {
+          var $slides = $("div#hero__slides--primary .slides li")
+          if ($slides.length > 1) {
+            $("div.custom-navigation").removeClass("hidden").fadeIn("slow");
+          }
+        }
        $('#hero__slides--secondary').flexslider({
           controlNav: false,
           customDirectionNav: $(".custom-navigation--secondary a")
@@ -164,6 +170,16 @@ define(function () {
         $('.flexslider--default').flexslider({
           animation: "slide",
           slideshow: false,
+          start: function(slider) {
+            var count = $('.total-slides').text(slider.count);
+          },
+          after: function(slider) {
+            $('.current-slide').text(slider.currentSlide+1);
+          }
+        });
+        $('.flexslider--fade').flexslider({
+          animation: "fade",
+          slideshow: true,
           start: function(slider) {
             var count = $('.total-slides').text(slider.count);
           },

@@ -1,0 +1,71 @@
+uuid: 298f38dc-365b-44d5-8cf6-e157183d28d7
+langcode: en
+status: true
+dependencies: {  }
+id: accordion
+name: Accordion
+cache: false
+description: 'This inserts an accordion'
+shorttip: "<p>To insert an accordion with any number of drawers</p>\r\n<p>[accordion-start]</p>\r\n<p>[accordion-drawer-start:Title1 of drawer1]</p>\r\n<p>This is the text in drawer number 1</p>\r\n<p>[accordion-drawer-end]</p>\r\n<p>[accordion-drawer-start:Title2 of drawer2]</p>\r\n<p>This is the text in drawer number 2</p>\r\n<p>[accordion-drawer-end]</p>\r\n<p>[accordion-end]</p>"
+longtip: "<p>To insert an accordion with any number of drawers</p>\r\n<p>[accordion-start]</p>\r\n<p>[accordion-drawer-start:Title1 of drawer1]</p>\r\n<p>This is the text in drawer number 1</p>\r\n<p>[accordion-drawer-end]</p>\r\n<p>[accordion-drawer-start:Title2 of drawer2]</p>\r\n<p>This is the text in drawer number 2</p>\r\n<p>[accordion-drawer-end]</p>\r\n<p>[accordion-end]</p>"
+rules:
+  accordion_start:
+    rid: accordion_start
+    prid: ''
+    fid: accordion
+    name: Accordion-Start
+    description: "#<p>\\[accordion-start:(.*?)\\]</p>#i\r\n"
+    enabled: true
+    matches: null
+    pattern: '#<p>\[accordion-start\]</p>#i'
+    replacement: '<div class="accordions js-toggle-accordion">'
+    code: false
+    weight: 0
+  accordion_drawer:
+    rid: accordion_drawer
+    prid: ''
+    fid: accordion
+    name: 'Accordion Drawer'
+    description: '#<p>\[accordion-end\]</p>#i'
+    enabled: false
+    matches: null
+    pattern: '#<p>\[accordion-drawer-start\]</p>(.*?)<p>/\[accordion-drawer-end\]</p>#m'
+    replacement: "<div class=\"accordion__drawer\">\r\n${1}\r\n</div>"
+    code: false
+    weight: 0
+  accordion_end:
+    rid: accordion_end
+    prid: ''
+    fid: accordion
+    name: 'Accordion End'
+    description: '#<p>\[accordion-end\]</p>#i'
+    enabled: true
+    matches: null
+    pattern: '#<p>\[accordion-end\]</p>#i'
+    replacement: '</div>'
+    code: false
+    weight: 0
+  accordion_drawer_start:
+    rid: accordion_drawer_start
+    prid: ''
+    fid: accordion
+    name: 'Accordion Drawer Start'
+    description: ''
+    enabled: true
+    matches: null
+    pattern: '#<p>\[accordion-drawer-start:(.*?)\]</p>#i'
+    replacement: "<div class=\"accordion\">\r\n<p class=\"accordion__heading\"><a class=\"accordion__link\" href=\"#\">${1} <i class=\"toggle-icon\"></i></a></p>\r\n<div class=\"accordion__drawer\">"
+    code: false
+    weight: 0
+  accordion_drawer_end:
+    rid: accordion_drawer_end
+    prid: ''
+    fid: accordion
+    name: 'Accordion Drawer End'
+    description: ''
+    enabled: true
+    matches: null
+    pattern: '#<p>\[accordion-drawer-end\]</p>#i'
+    replacement: "  </div>\r\n</div>"
+    code: false
+    weight: 0

@@ -3,9 +3,35 @@
     opacity: 0;
   }
 
-  .dept-parent-logo img {
-    border-right: 1px solid $alto;
-    padding: 1rem;
+  .main__message {
+    display: none;
+  }
+
+  h1.dp-title {
+    font-size: 2.25rem;
+    margin-top: 0;
+
+    @include breakpoint (mobile-landscape down) {
+      margin-bottom: 0.5em;
+    }
+  }
+
+  .top-menu {
+    @include breakpoint (mobile-landscape) {
+      margin-top: -5rem;
+    }
+  }
+
+  .dept-parent-logo {
+    width: 100%;
+    text-align: center;
+    
+    img {
+      //border-right: 1px solid $alto;
+      //padding: 1rem;
+      width: auto;
+      height: 70px;
+    }
   }
 
   .sidebar {
@@ -13,6 +39,27 @@
       list-style-type: none;
       margin: 0;
       padding: 0;
+
+      li {
+        margin: 0 0 0.5rem 0;
+
+        .btn {
+          font-size: 0.9rem !important;
+          padding: 0.75em 1em;
+          width: 100%;
+        }
+      }
+
+      &.list-normal {
+        font-size: 1em;
+        list-style-type: disc;
+        margin: 0 0 1em 0;
+        padding-inline-start: 1em;
+
+        li {
+          margin: 0 0 0.5rem 1rem;
+        }
+      }
     }
 
     .btn {
@@ -21,18 +68,12 @@
   }
 
   .slides {
-    @include breakpoint(mobile) {
-      flex-wrap: wrap;
-      display: flex;
-    }
+    flex-wrap: wrap;
+    display: flex;
 
     .card__wrap {
-      padding: 0.75em 0.5em;
-      width: 100%;
-
-      @include breakpoint(mobile) {
-        width: 47%;
-      }
+      width: 47%;
+      padding: 0 0.5em 0.75em 0.5em;
 
       @include breakpoint(medium) {
         width: 33%;
@@ -48,6 +89,24 @@
     }
   }
 
+  // Background image element height is equal to that of the hero content
+  .hero__bg {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    // Background image element height is not equal to that of the hero content
+    &.hero__bg--secondary {
+      position: relative;
+      width: 100%;
+      height: auto;
+      min-height: 16rem;
+      max-height: none;
+      z-index: 0;
+    }
+  }
+
+
   .hero__slides--content {
     .slides {
       overflow: hidden;
@@ -55,17 +114,27 @@
   }
 
   .hero__slides--secondary {
-    @include breakpoint(site down) {
-      padding-bottom: 2em;
+    padding: 2em;
+
+    @include breakpoint(mobile-landscape) {
+      padding: 4em 0 9em;
       min-height: 100px;
     }
 
     .hero__content {
       text-align: center;
+      
+      @include breakpoint(mobile-landscape) {
+        margin: 0 auto !important;
+      }
 
       p {
         margin: 0;
         font-size: 1.5rem;
+      }
+
+      .fine-print {
+        font-size: 1rem;
       }
 
     }
@@ -77,5 +146,12 @@
         bottom: 0;
       }
     }
+  }
+
+  .main-section {
+    border-top: 1px solid #d1d8dc;
+  }
+  .sidebar {
+    border-left: 1px solid #d1d8dc;
   }
 }

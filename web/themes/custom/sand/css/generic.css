@@ -9,9 +9,6 @@
 /* ============================================================
   Vendor-specific styles.
   ============================================================ */
-ul {
-  padding-left: 2rem; }
-
 /**
  * Foundation for Sites
  * Version 6.7.5
@@ -175,7 +172,7 @@ template {
   -webkit-user-select: none; }
 
 .foundation-mq {
-  font-family: "small=0em&mobile=20em&mobile-landscape=30em&mobile-wide=37.5em&medium=48em&medium-large=64em&site=60em&site-constraint=75em&large=80em&xlarge=93.75em&infinite=624.9375em"; }
+  font-family: "small=0em&mobile=20em&mobile-landscape=30em&mobile-wide=37.5em&medium=30em&medium-large=64em&site=60em&site-constraint=75em&large=80em&xlarge=93.75em&infinite=624.9375em"; }
 
 html {
   box-sizing: border-box;
@@ -981,7 +978,7 @@ textarea {
   content: '\e832'; }
 
 .icon-bleachers::before {
-  content: '\e906'; }
+  content: '\e907'; }
 
 .icon-rocket::before {
   content: '\e837'; }
@@ -1445,6 +1442,12 @@ textarea {
 .icon-plus2::before {
   content: '\ea0a'; }
 
+.icon-virus::before {
+  content: '\e90c'; }
+
+.icon-tent::before {
+  content: '\e909'; }
+
 @font-face {
   font-family: 'socials';
   font-style: normal;
@@ -1470,7 +1473,8 @@ textarea {
 .icon-linkedin::before,
 .icon-pinterest::before,
 .icon-reddit::before,
-.icon-tiktok::before {
+.icon-tiktok::before,
+.icon-threads::before {
   font-family: 'socials';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1485,7 +1489,7 @@ textarea {
   content: '\e60c'; }
 
 .icon-nextdoor::before {
-  content: '\e900'; }
+  content: '\e901'; }
 
 .icon-share::before {
   content: '\ea82'; }
@@ -1538,11 +1542,17 @@ textarea {
 .icon-tiktok::before {
   content: '\e902'; }
 
+.icon-threads::before {
+  content: '\e900'; }
+
 .icon--xs {
   font-size: 0.625rem; }
 
 .icon--sm {
-  font-size: 1.125rem; }
+  font-size: 0.75rem; }
+
+.icon--ms {
+  font-size: 1.2em; }
 
 .icon--md {
   font-size: 1.5rem; }
@@ -1553,9 +1563,15 @@ textarea {
 .icon--xl {
   font-size: 2.75rem; }
 
+.icon--hg {
+  font-size: 5rem; }
+
+.icon--gi {
+  font-size: 8.75rem; }
+
 .icon--circle {
   border-radius: 50%;
-  color: #fff;
+  color: white;
   display: inline-block;
   padding: 0.5em; }
 
@@ -1611,6 +1627,9 @@ textarea {
 /* ============================================================
   Placeholders for repeat styles.
   ============================================================ */
+html {
+  scroll-behavior: smooth; }
+
 html,
 body {
   background: white;
@@ -1649,6 +1668,9 @@ img {
 
 .node__content .flex-container {
   display: block; }
+
+i {
+  font-style: normal; }
 
 /*
  * HTML5 Boilerplate
@@ -1854,7 +1876,8 @@ menu,
 nav,
 section,
 summary {
-  display: block; }
+  display: block;
+  position: relative; }
 
 @media print {
   article,
@@ -1870,6 +1893,9 @@ summary {
   section,
   summary {
     page-break-before: always; } }
+
+article {
+  z-index: 1; }
 
 /**
  * 1. Correct `inline-block` display not defined in IE 8/9.
@@ -2077,6 +2103,7 @@ input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
   /* 2 */
+  appearance: button;
   cursor: pointer;
   /* 3 */ }
 
@@ -2133,6 +2160,7 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="search"] {
   -webkit-appearance: none;
   /* 1 */
+  appearance: none;
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   /* 2 */
@@ -2199,6 +2227,11 @@ body {
   font-size: 1rem; }
   body .main {
     background-color: #fff; }
+  body .off-canvas-wrapper {
+    overflow: hidden; }
+    @media print, screen and (min-width: 30em) {
+      body .off-canvas-wrapper {
+        overflow: unset; } }
 
 button {
   font-family: "Merriweather", serif;
@@ -2213,7 +2246,7 @@ button {
 .columns {
   word-wrap: break-word;
   min-height: 1px; }
-  @media print, screen and (min-width: 48em) {
+  @media print, screen and (min-width: 30em) {
     .columns {
       position: relative;
       float: left; } }
@@ -2312,7 +2345,7 @@ button {
       padding-left: 0;
       padding-right: 0; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .one {
     width: 6.77966%;
     padding-left: 1.0416588541%;
@@ -2321,7 +2354,7 @@ button {
       padding-left: 0;
       padding-right: 0; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .two {
     width: 15.25424%;
     padding-left: 1.0416588541%;
@@ -2330,7 +2363,7 @@ button {
       padding-left: 0;
       padding-right: 0; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .three {
     width: 23.72881%;
     padding-left: 1.0416588541%;
@@ -2339,7 +2372,7 @@ button {
       padding-left: 0;
       padding-right: 0; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .four {
     width: 32.20339%;
     padding-left: 1.0416588541%;
@@ -2348,7 +2381,7 @@ button {
       padding-left: 0;
       padding-right: 0; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .five {
     width: 40.67797%;
     padding-left: 1.0416588541%;
@@ -2357,7 +2390,7 @@ button {
       padding-left: 0;
       padding-right: 0; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .six {
     width: 49.15254%;
     padding-left: 1.0416588541%;
@@ -2366,7 +2399,7 @@ button {
       padding-left: 0;
       padding-right: 0; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .seven {
     width: 57.62712%;
     padding-left: 1.0416588541%;
@@ -2375,7 +2408,7 @@ button {
       padding-left: 0;
       padding-right: 0; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .eight {
     width: 66.10169%;
     padding-left: 1.0416588541%;
@@ -2384,7 +2417,7 @@ button {
       padding-left: 0;
       padding-right: 0; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .nine {
     width: 74.57627%;
     padding-left: 1.0416588541%;
@@ -2393,7 +2426,7 @@ button {
       padding-left: 0;
       padding-right: 0; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .ten {
     width: 83.05085%;
     padding-left: 1.0416588541%;
@@ -2402,7 +2435,7 @@ button {
       padding-left: 0;
       padding-right: 0; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .eleven {
     width: 91.52542%;
     padding-left: 1.0416588541%;
@@ -2411,7 +2444,7 @@ button {
       padding-left: 0;
       padding-right: 0; } }
 
-@media print, screen and (min-width: 48em) {
+@media print, screen and (min-width: 30em) {
   .twelve {
     width: 100%;
     padding-left: 1.0416588541%;

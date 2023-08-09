@@ -1,8 +1,10 @@
 .block-local-tasks-block {
+  position: relative;
   margin-bottom: 0;
   background-color: rgba($alto, 0.75);
   border-bottom: solid 2px $white;
-
+  z-index: 1;
+  
   .local-tasks {
     display: flex;
 
@@ -26,6 +28,8 @@
   .tabs {
     background-color: transparent;
     border: none;
+    width: $global-width;
+    margin: 0 auto;
   }
 }
 
@@ -37,12 +41,17 @@
   margin: 0 !important;
   overflow: hidden;
   background: $off-white;
-  display: flex;
+  display: block;
+
+  @include breakpoint(mobile-landscape) {
+    display: flex;
+  }
 }
 
 .tabs-list__item {
   z-index: 3;
   margin: 0;
+  padding: 0;
   cursor: pointer;
   border-top: none;
   background: white;
@@ -53,33 +62,60 @@
   &:first-child {
     border-left: none;
   }
+  &:last-child {
+    border-right: 1px solid $alto;
+  }
   &.is-active {
     border-bottom: 1px solid white;
+
+    @include breakpoint(mobile-landscape down) {
+      background-color: aliceblue;
+    }
+  }
+
+  @include breakpoint(mobile-landscape down) {
+    width: 100%;
+    float: left;
+    border-bottom: none;
+    border-left: none;
+    border-right: none !important;
   }
 }
 
 .tabs-list__link {
-  padding: 0.5em;
+  padding: 0.5rem 1rem;
   display: block;
   //color: $chateau;
   text-decoration: none;
   border-top: 3px solid transparent;
 
-  &:hover,
+  &:hover {
+    border-color: $cerulean;
+    color: $link-color;
+    text-decoration: none;
+  }
+  
   .is-active & {
     border-color: $cerulean;
     color: $font-color;
+    text-decoration: none;
   }
 
   &.text-accent--desktop {
-    font-size: 21px;
+    @include breakpoint(mobile-landscape) {
+      font-size: 21px;
+    }
   }
 }
 
 .tabs-container {
   padding: 1em;
-  border: 1px solid $alto;
-  border-top: none;
+  border-top: 1px solid $alto;
+  margin-top: 0;
+
+  @include breakpoint(mobile-landscape) {
+    margin-top: -1px;
+  }
 }
 
 .tabs__bucket {

@@ -70,6 +70,11 @@
     i {
       background-color: $cerulean;
       color: $white;
+
+      &.icon--heavy {
+        background-color: $white;
+        color: $cerulean;
+      }
     }
   }
 
@@ -90,7 +95,6 @@
 
   &:hover,
   &:focus {
-
     i.icon-chevron-left,
     i.icon-chevron-right {
       color: $white;
@@ -130,7 +134,7 @@
   }
 
   i {
-    color: $white;
+    color: $spruce;
   }
 }
 
@@ -147,7 +151,7 @@
 
 .btn--icon {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   padding: 1em;
   text-align: left;
 
@@ -171,11 +175,12 @@
 .btn--icon-left,
 .btn--icon-right {
   position: relative;
+  display: flex;
+  align-items: center;
 
   .icon-chevron-left,
   .icon-chevron-right {
     position: absolute;
-    top: 50%;
   }
 }
 
@@ -231,7 +236,8 @@
   border-radius: 3px;
 }
 
-.btn--oval {
+.btn--oval,
+.btn--pill {
   border-radius: 500px;
 }
 
@@ -315,4 +321,15 @@
   @extend %btn;
   text-transform: capitalize;
   padding: 0.75em 1em;
+  -webkit-transition-property: none;
+  -moz-transition-property: none;
+  -o-transition-property: none;
+  transition-property: none;
+
+  &:hover,
+  &:focus {
+    background-color: lighten($cerulean, 10%);
+    color: $white;
+    text-decoration: none;
+  }
 }

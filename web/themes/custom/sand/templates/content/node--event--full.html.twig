@@ -78,16 +78,12 @@
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'background-white'
   ]
 %}
 
-
-{% if node.field_type_of_event.0.value == "normal" %}
-
-  {% include "node--event-default.html.twig" %}
-
+{% if node.field_type_of_event.0.value == "coldcase" %}
+  {% include "@sand/templates/content/node--event--cold-case.html.twig" %}
 {% else %}
-
-  {% include "node--event-coldcase.html.twig" %}
-
+  {% include "@sand/templates/content/node--event--default.html.twig" %}
 {% endif %}

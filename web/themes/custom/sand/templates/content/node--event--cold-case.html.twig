@@ -1,4 +1,3 @@
-
 {#
 /**
  * @file
@@ -79,50 +78,43 @@
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'background-white'
   ]
 %}
 
+<article{{ attributes.addClass(classes) }}>
 
-<div class="l-constrained l-constrained--main l-padding-mobile-hm background-white">
+  <div{{ content_attributes.addClass('node__content') }}>
+    <div class="grid-x">
+      <div class="cell medium-auto content">
+        <div class="l-padding-desktop-am l-padding-mobile-bd l-padding-mobile-hm">
+          <h1>Cold Case: {{ label }}</h1>
 
-  <div class="row">
-    <main>
-      <div class="nine columns no-gutters">
-        <div class="entry__content l-padding-desktop-am l-padding-mobile-bd">
-          <div class="row">
-            <!-- Title is the name -->
-            <h1>Cold Case: <br class="hide-on-desktop"/>{{ label }}</h1>
-            {% if content.field_event_type[0] %}
-              <h3>{{ content.field_event_type[0] }}</h3>
-            {% endif %}
-          </div>
-          {% if node.field_event_type.0.target_id != '5004' %}
-            <!-- if a context put something in the block1 region then print it -->
-              <div class="l-margin-tm">
-                {{ drupal_entity('block_content', 32) }}
-              </div>
+          {% if content.field_event_type[0] %}
+          <p class="h3">{{ content.field_event_type[0] }}</p>
           {% endif %}
-          <div class="l-section row background--off-white l-margin-bm l-padding-vn l-padding-mobile-hn">
-            <div class="six columns text-center l-padding-desktop-ln">
+
+          <div class="l-section message--warning l-padding-am l-margin-tm">
+            {{ drupal_entity('block_content', 32) }}
+          </div>
+          
+          <div class="l-section grid-x background--off-white l-margin-bm l-padding-vn l-padding-mobile-hn">
+            <div class="cell medium-6 text-center l-padding-desktop-ln">
               <!-- Image -->
               <div class="text-center">
                 {{ content.field_image }}
               </div>
             </div>
-            <div class="six columns text-center--mobile l-padding-desktop-bn l-padding-am">
-              {% if content.field_event_date[0] %}
-                <div class="date-wrapper">
+            <div class="cell medium-6 text-center--mobile l-padding-desktop-bn l-padding-am">
+              {% if content.field_event_date.0 %}
                   <p class="l-margin-bn"><strong class="fine-print">CASE DATE: </strong></br>
-                      {{ node.field_event_date.0.value|date("F j, Y") }}
+                      {{ content.field_event_date.0['#value']|date("F j, Y") }}
                   </p>
-                </div>
               {% endif %}
-              {% if node.field_event_date.0.end_value %}
-                <div class="date-wrapper">
+              {% if content.field_event_date.1 and content.field_event_type.0['#plain_text'] == 'Solved' %}
                   <p class="l-margin-bn l-margin-td"><strong class="fine-print">CASE CLOSED ON: </strong></br>
-                      {{ node.field_event_date.0.end_value|date("F j, Y") }}
+                      {{ content.field_event_date.1['#value']|date("F j, Y") }}
                   </p>
-                </div>
               {% endif %}
               <!-- Address -->
               <address>
@@ -132,9 +124,9 @@
                 </p>
               </address>
               <!-- Video -->
-              {% if content.field_website[0] %}
+              {% if content.video[0] %}
                 <div class="l-margin-tm">
-                  <a style="margin-top: 4px;" href="{{ node.field_website.0.url }}" class="btn btn--outline"><i class="icon-play"></i> Watch Video</a>
+                  <a style="margin-top: 4px;" href="{{ content.video }}" class="btn btn--outline"><i class="icon-play"></i> Watch Video</a>
                 </div>
               {% endif %}
               <!-- Subtitle -->
@@ -143,52 +135,56 @@
               {% endif %}
             </div>
           </div>
-          <div class="l-padding-mobile-tn">
-          <div class="l-padding-desktop-hn">
+          <div class="l-padding-mobile-tn l-margin-bm">
             <p class="l-margin-bn"><strong class="fine-print">SYNOPSIS:</strong></p>
-          {{ body }}
+            {{ content.body }}
           </div>
-          <div class="l-margin-tm l-padding-desktop-hn">
-              <!-- Slide Show. See if there was slide show html constructed in template.php -->
-              {% if content.slide_show %}
-                <p class="l-margin-bs"><strong class="fine-print">CASE PHOTOS:</strong></p>
-                  {{ content.slide_show }}
-              {% endif %}
-            </div>
-          </div>
-
-          <div id="block-bean-cold-case-back-button" class="block block-bean">
-            <div class="content">
-              <div class="entity entity-bean bean-bean-html-block clearfix" about="/block/cold-case-back-button">
-                <div class="content">
-                  <div class="field field-name-field-html-block-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even"><div class="l-padding-hm">
-                  <hr class="l-margin-tn">
-                  <p class="text-center l-margin-vm"><a class="btn btn--outline" href="/staging/police-new/news-center/cold-cases">Back to Cold Cases</a></p>
-                </div>
+          {% if content.field_images.0 is not empty %}
+          <div class="l-margin-bm l-padding-desktop-hn">
+            <!-- Slide Show. See if there was slide show html constructed in template.php -->
+              <p class="l-margin-bs"><strong class="fine-print">CASE PHOTOS:</strong></p>
+              <div class="masonry-gallery col-4">
+              {{ drupal_view('cold_case_photos', 'block_1', node.ID) }}
               </div>
-            </div>
           </div>
+          {% endif %}
+          <div id="block-bean-cold-case-back-button" class="block block-bean">
+            <hr class="l-margin-tn">
+            <p class="text-center l-margin-vm"><a class="btn btn--outline" href="/police/news-center/cold-cases">Back to Cold Cases</a></p>
+          </div>
+        </div>
+      </div> 
+
+      <div class="cell medium-3 light-gray-bg">
+        <div class="sidebar l-padding-mobile-hm">
+            {% if sidemenu is defined and sidemenu.items %}
+              <h2>{{ content.field_department.1['#title'] }}</h2>
+              <ul class="sidebar-menu">
+                {% for item in sidemenu.items %}
+                  <li{% if item.classes is not empty %} class="{% for class in item.classes %}{{ class }} {% endfor %}"{% endif %}>
+                    <a href="{{ item.url }}">{{ item.title }}</a>
+                    {% if item.children is not empty %}
+                      <ul>
+                        {% for child in item.children %}
+                          <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% for item in sidebar %}
+              {{ item.value }}
+            {% endfor %}
+            {% if content.field_sidebar[0] %}
+              {{ content.field_sidebar }}
+            {% endif %}
+            {% for item in sidebar_bottom %}
+              {{ item.value }}
+            {% endfor %}
         </div>
       </div>
     </div>
   </div>
-        </div>
-      </div>
-    </main>
-
-    <aside class="l-margin-mobile-vd l-margin-bm">
-      <div class="three columns background-off-white l-padding-vd l-padding-mobile-hd l-margin-mobile-bm">
-        <div class="widget l-padding-hs l-margin-bd">
-          <h2 id="block-menu-menu-police-news-center" class="block block-menu" "=""> News Center</h2>
-          <ul>
-            <li class="first leaf"><a href="/police/news-center" title="">News Center Home</a></li>
-            <li class="leaf"><a href="/police/news-center/news-releases" title="">News Releases</a></li>
-            <li class="last leaf"><a href="/police/news-center/cold-cases" title="">Cold Cases</a></li>
-          </ul>
-        </div>
-      </div>
-    </aside>
-  </div> <!-- row -->
-
-
-</div> <!-- l-constrained -->
+</article>
