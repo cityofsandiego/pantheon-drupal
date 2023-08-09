@@ -1838,18 +1838,22 @@ textarea {
   Styles for cards and featured cards.
   ============================================================ */
 /* Cards Styles from D7 */
-.card, .card__container .card__wrap .card, .card__container .card--wrap .card {
+.card, .card__container .card__wrap .card,
+.card__container .card--wrap .card {
   background: white;
   border-radius: 4px;
   width: 100%;
   position: relative;
   overflow: hidden;
   margin-bottom: 0; }
-  .border.card, .card__container .card__wrap .border.card, .card__container .card--wrap .border.card {
+  .border.card, .card__container .card__wrap .border.card,
+  .card__container .card--wrap .border.card {
     margin-bottom: 0;
     padding-bottom: 0; }
 
-.card > a, .card > p > a, .card > p > strong > a {
+.card > a,
+.card > p > a,
+.card > p > strong > a {
   text-decoration: none; }
 
 .card.background-off-white {
@@ -1895,7 +1899,8 @@ textarea {
       margin: 0; }
     .card__container.flexslider--mobile .slides .card__content {
       padding: 1.5em 2.2em; } }
-  .card__container .card__wrap, .card__container .card--wrap {
+  .card__container .card__wrap,
+  .card__container .card--wrap {
     height: auto;
     display: -webkit-flex;
     /* Safari */
@@ -1906,37 +1911,45 @@ textarea {
     padding-bottom: 1em;
     width: 33.333333%; }
     @media print, screen and (max-width: 37.49875em) {
-      .card__container .card__wrap, .card__container .card--wrap {
+      .card__container .card__wrap,
+      .card__container .card--wrap {
         width: 100%; } }
-    .card__container .card__wrap .card, .card__container .card--wrap .card {
+    .card__container .card__wrap .card,
+    .card__container .card--wrap .card {
       flex: 0 1 auto;
       justify-content: flex-start;
       overflow: hidden; }
-  .card__container .card__wrap_s, .card__container .card--wrap-s {
+  .card__container .card__wrap_s,
+  .card__container .card--wrap-s {
     height: auto;
-    margin: 0 .5em;
+    margin: 0 0.5em;
     width: 100%; }
     @media print, screen and (min-width: 80em) {
-      .card__container .card__wrap_s, .card__container .card--wrap-s {
+      .card__container .card__wrap_s,
+      .card__container .card--wrap-s {
         margin: 0;
-        padding: .75em;
+        padding: 0.75em;
         display: -webkit-flex;
         /* Safari */
         display: flex; }
-        .card__container .card__wrap_s .card, .card__container .card--wrap-s .card {
+        .card__container .card__wrap_s .card,
+        .card__container .card--wrap-s .card {
           flex: 0 1 auto; } }
-  .card__container .card__wrap_m, .card__container .card--wrap-m {
+  .card__container .card__wrap_m,
+  .card__container .card--wrap-m {
     height: auto;
-    margin: 0 .5em;
+    margin: 0 0.5em;
     width: 100%; }
     @media print, screen and (min-width: 80em) {
-      .card__container .card__wrap_m, .card__container .card--wrap-m {
+      .card__container .card__wrap_m,
+      .card__container .card--wrap-m {
         margin: 0;
-        padding: .75em;
+        padding: 0.75em;
         display: -webkit-flex;
         /* Safari */
         display: flex; }
-        .card__container .card__wrap_m .card, .card__container .card--wrap-m .card {
+        .card__container .card__wrap_m .card,
+        .card__container .card--wrap-m .card {
           flex: 0 1 auto; } }
   .card__container .card__content {
     padding: 1.5em; }
@@ -1967,16 +1980,16 @@ textarea {
     font-weight: 600; }
 
 .card__cta--graphic {
-  text-align: center; }
-  .card__cta--graphic background {
-    background-position: center center;
-    background-repeat: no-repeat; }
+  text-align: center;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat; }
   .card__cta--graphic > a {
     display: block;
     padding: 1.5em;
     position: relative; }
     .card__cta--graphic > a:before {
-      content: '';
+      content: "";
       display: block;
       background: black;
       width: 100%;
@@ -1985,9 +1998,11 @@ textarea {
       top: 0;
       left: 0;
       opacity: 0;
-      transition: opacity .25s ease; }
-    .card__cta--graphic > a:hover:before {
-      opacity: .1; }
+      transition: opacity 0.25s ease; }
+    .card__cta--graphic > a:hover {
+      text-decoration: none; }
+      .card__cta--graphic > a:hover:before {
+        opacity: 0.1; }
   .card__cta--graphic a {
     font-size: 16px;
     font-size:  calc($unitless-value / $baseline-px)rem; }
@@ -2015,7 +2030,7 @@ textarea {
 
 .card--notification i {
   color: white;
-  padding: .3em;
+  padding: 0.3em;
   border-radius: 50%;
   display: inline-block;
   vertical-align: middle;
@@ -2025,7 +2040,7 @@ textarea {
 .card--notification .date {
   margin: 0;
   font-weight: 600;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   font-size: 12px;
   font-size:  calc($unitless-value / $baseline-px)rem;
@@ -2881,6 +2896,7 @@ a {
 .step-tiles {
   display: flex;
   flex-flow: row wrap;
+  margin-top: 2em;
   margin-left: -1em;
   margin-right: -1em;
   justify-content: center; }
@@ -2923,6 +2939,9 @@ a {
         width: calc(67% - 2em); }
       .step-tiles .step.medium-9 {
         width: calc(75% - 2em); } }
+    @media print, screen and (max-width: 37.49875em) {
+      .step-tiles .step:last-child {
+        margin-bottom: 0; } }
 
 /* Weather
    ========================================================================== */
