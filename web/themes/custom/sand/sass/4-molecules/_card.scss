@@ -20,7 +20,9 @@
 .card {
   @extend %card;
 
-  > a, > p > a, > p > strong > a {
+  > a,
+  > p > a,
+  > p > strong > a {
     text-decoration: none;
   }
 
@@ -47,18 +49,18 @@
 
   // If .mobile-flexslider exists, it creates a ul.slides wrapping the .cards
   /*@include breakpoint(large) {*/
-    .slides {
-      display: block;
-      display: -webkit-flex; /* Safari */
-      display: flex;
-      -webkit-justify-content: flex-start; /* Safari */
-      justify-content: flex-start;
-      margin: 0;
-      -webkit-flex-flow: row wrap;
-      flex-flow: row wrap;
-      padding-left: 0;
-      width: 100%;
-    }
+  .slides {
+    display: block;
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    -webkit-justify-content: flex-start; /* Safari */
+    justify-content: flex-start;
+    margin: 0;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    padding-left: 0;
+    width: 100%;
+  }
   /*}*/
 
   &.mobile-flexslider {
@@ -74,7 +76,7 @@
           width: 100%;
           margin: 0;
         }
-  
+
         .card__content {
           padding: 1.5em 2.2em;
         }
@@ -82,7 +84,8 @@
     }
   }
 
-  .card__wrap, .card--wrap {
+  .card__wrap,
+  .card--wrap {
     height: auto;
     display: -webkit-flex; /* Safari */
     display: flex !important;
@@ -102,17 +105,17 @@
       justify-content: flex-start;
       overflow: hidden;
     }
-
   }
 
-  .card__wrap_s, .card--wrap-s {
+  .card__wrap_s,
+  .card--wrap-s {
     height: auto;
-    margin: 0 .5em;
+    margin: 0 0.5em;
     width: 100%;
 
     @include breakpoint(large) {
       margin: 0;
-      padding: .75em;
+      padding: 0.75em;
       display: -webkit-flex; /* Safari */
       display: flex;
 
@@ -122,14 +125,15 @@
     }
   }
 
-  .card__wrap_m, .card--wrap-m {
+  .card__wrap_m,
+  .card--wrap-m {
     height: auto;
-    margin: 0 .5em;
+    margin: 0 0.5em;
     width: 100%;
 
     @include breakpoint(large) {
       margin: 0;
-      padding: .75em;
+      padding: 0.75em;
       display: -webkit-flex; /* Safari */
       display: flex;
 
@@ -143,11 +147,11 @@
     padding: 1.5em;
 
     @include breakpoint(medium) {
-      @include rem('font-size', 13px);
+      @include rem("font-size", 13px);
     }
 
     > a {
-      @include rem('font-size', 16px);
+      @include rem("font-size", 16px);
     }
   }
 
@@ -156,7 +160,7 @@
     color: $spruce;
     text-decoration: none;
     font-family: $font-family-secondary;
-    @include rem('font-size', 16px);
+    @include rem("font-size", 16px);
   }
 
   .card__meta {
@@ -179,16 +183,13 @@
     display: block;
     font-weight: 600;
   }
-
 }
 
 .card__cta--graphic {
   text-align: center;
-
-  background {
-    background-position: center center;
-    background-repeat: no-repeat;
-  }
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
 
   & > a {
     display: block;
@@ -196,7 +197,7 @@
     position: relative;
 
     &:before {
-      content: '';
+      content: "";
       display: block;
       background: black;
       width: 100%;
@@ -205,23 +206,25 @@
       top: 0;
       left: 0;
       opacity: 0;
-      transition: opacity .25s ease;
+      transition: opacity 0.25s ease;
     }
 
     &:hover {
+      text-decoration: none;
+
       &:before {
-        opacity: .1;
+        opacity: 0.1;
       }
     }
   }
 
   a {
-    @include rem('font-size', 16px);
+    @include rem("font-size", 16px);
   }
 
   p {
     color: white;
-    @include rem('font-size', 18px);
+    @include rem("font-size", 18px);
     font-family: $font-family-secondary;
   }
 }
@@ -251,7 +254,7 @@
 
   i {
     color: white;
-    padding: .3em;
+    padding: 0.3em;
     border-radius: 50%;
     display: inline-block;
     vertical-align: middle;
@@ -262,9 +265,9 @@
   .date {
     margin: 0;
     font-weight: 600;
-    letter-spacing: .1em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    @include rem('font-size', 12px);
+    @include rem("font-size", 12px);
     font-family: $font-family-secondary;
   }
 }
