@@ -78,6 +78,7 @@
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'background-white', 'l-margin-tl'
   ]
 %}
 <article{{ attributes.addClass(classes) }}>
@@ -91,37 +92,38 @@
   {{ title_suffix }}
 
   <div{{ content_attributes.addClass('node__content') }}>
-    <div class="grid-container">
-      <div class="grid-x grid-margin-x grid-padding-y subtitle-media">
-        <div class="cell medium-6">
-          <h1>{{ content.field_bucket.0 }}</h1>
-          <p class="subtitle">{{ content.field_subtitle.0 }}</p>
-          {{ content.body }}
-        </div>
-        <div class="cell medium-6">
-          {{ content.field_feature_video_img }}
-        </div>
+    <div class="grid-x subtitle-media">
+      <div class="cell medium-6 l-padding-am l-padding-desktop-rn">
+        <h1>{{ content.field_bucket.0 }}</h1>
+        <p class="subheading l-margin-bd">{{ content.field_subtitle.0 }}</p>
+        {{ content.body }}
       </div>
-      <div class="grid-x">
-        <div class="cell small-12">
-          {{ content.field_featured_card }}
-        </div>
+      <div class="cell medium-6 l-padding-desktop-am">
+        {{ content.field_feature_video_img }}
       </div>
     </div>
-    <div class="grid-container full">
-      <div class="grid-x">
-        <div class="cell small-12 featured-items background-off-white">
-          <h2 class="section-title">{{ content.field_section_title }}</h2>
-          {{ content.field_featured_items }}
-        </div>
-      </div>
-      <div class="grid-x">
-        <div class="cell small-12 resources background-off-white">
-          <h2 class="resources-title">Resources</h2>
-          {{ content.field_resources }}
-        </div>
-      </div>
+    <div class="l-padding-desktop-hd l-padding-desktop-bd l-padding-mobile-am">
+        {{ content.field_featured_card }}
     </div>
   </div>
+
+  {% if (content.field_featured_items.0 is not empty) or (content.field_resources.0 is not empty) %}
+  <div class="grid-container full background-off-white l-padding-tm l-padding-hm">
+    {% if content.field_featured_items.0 is not empty %}
+    <div class="l-padding-bm">
+      {% if content.field_section_title.0 is not empty %}
+      <h2 class="section-title heading--snug">{{ content.field_section_title }}</h2>
+      {% endif %}
+      {{ content.field_featured_items }}
+    </div>
+    {% endif %}
+    {% if content.field_resources.0 is not empty %}
+    <div class="resources l-padding-bm">
+      <h2 class="resources-title heading--snug">Resources</h2>
+      {{ content.field_resources }}
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
 
 </article>

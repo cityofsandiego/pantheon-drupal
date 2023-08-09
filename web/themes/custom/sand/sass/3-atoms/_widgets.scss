@@ -171,3 +171,69 @@ a[href^="tel:"] {
 ul.sidebar-menu li {
 	font-size: .8125rem;
 }
+
+.tag-list {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+
+	li, .tag-list__item {
+    margin: 0.25em 0;
+    padding: 0 1em 0.5em 0;
+    display: inline-block;
+
+		a, span, .tag-list__link {
+			color: $spruce;
+			line-height: 1;
+			display: block;
+			font-weight: 700;
+			position: relative;
+			padding: 0.5em;
+			text-decoration: none;
+			background-color: #f6f6f6;
+			font-size: 13px;
+			font-size: .8125rem;
+
+			&:before {
+				width: 3px;
+				height: 3px;
+				top: 50%;
+				left: 100%;
+				z-index: 2;
+				background-color: white;
+				border-radius: 500px;
+				-webkit-transform: translateY(-50%);
+				-moz-transform: translateY(-50%);
+				-ms-transform: translateY(-50%);
+				-o-transform: translateY(-50%);
+				transform: translateY(-50%);
+			}
+
+			&:after {
+				top: 0;
+				left: 100%;
+				border-style: solid;
+				border-color: transparent;
+				border-left-color: #f6f6f6;
+				border-width: 13px;
+				-webkit-transition: border .15s;
+				-moz-transition: border .15s;
+				transition: border .15s;
+			}
+		}
+		
+		a {
+			color: $science;
+			border-bottom: 1px solid $science;
+		}
+
+		a:hover {
+			color: $link-color;
+			border-bottom: 1px solid $cerulean;
+		}
+
+		span, .tag-list__link {
+			border-bottom: 1px solid #adafaf;
+		}
+	}
+}

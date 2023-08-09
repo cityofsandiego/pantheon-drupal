@@ -36,7 +36,6 @@
       height: 1.5em;
       line-height: 1.5em;
       display: block;
-      vertical-align: middle;
     }
   }
 }
@@ -83,26 +82,48 @@
   list-style: none;
   margin: 0;
   padding: 0.5rem 0;
+
+  li {
+    list-style: none;
+    margin: 0 0.25rem;
+    padding: 0;
+  
+    &:first-child {
+      margin-left: 0;
+    }
+  
+    a {
+      background: $off-white;
+      border-radius: 2px;
+      color: $charcoal;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      height: 2rem;
+      text-align: center;
+      text-decoration: none;
+      width: 2rem;
+  
+      &:hover {
+        color: $link-color;
+      }
+    }
+  }
 }
 
-.social-links__item {
-  list-style: none;
-  margin: 0 0.25rem;
-  padding: 0;
-
-  &:first-child {
-    margin: 0;
-  }
-
-  a {
-    background: $off-white;
-    border-radius: 2px;
-    color: $charcoal;
-    display: block;
-    font-size: 1.2rem;
-    height: 2rem;
-    text-align: center;
-    text-decoration: none;
-    width: 2rem;
-  }
+a {
+  /* Change background-color to matching social media platform color */
+  &.icon--twitter:hover    {color: white !important; background-color: $twitter;}    
+  &.icon--facebook:hover   {color: white !important; background-color: $facebook;}
+  &.icon--google:hover     {color: white !important; background-color: $googleplus;}
+  &.icon--instagram:hover  {color: white !important;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);}
+  &.icon--youtube:hover    {color: white !important; background-color: $youtube;}
+  &.icon--pinterest:hover  {color: white !important; background-color: $pinterest;}
+  &.icon--nextdoor:hover   {color: white !important; background-color: $nextdoor;}
+  &.icon--linkedin:hover   {color: white !important; background-color: $linkedin;}
+  &.icon--reddit:hover   {color: white !important; background-color: $reddit;}
+  &.icon--tiktok:hover   {color: white !important; background-color: $tiktok;}
+  &.icon--threads:hover   {color: white !important; background-color: $threads;}
 }

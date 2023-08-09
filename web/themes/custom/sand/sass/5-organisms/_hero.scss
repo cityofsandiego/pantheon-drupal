@@ -4,6 +4,17 @@
   height: 100%;
   position: relative;
 
+  ul,
+  ul li {
+    margin: 0;
+    padding: 0;
+    padding-inline-start: unset;
+  }
+
+  ul li {
+    display: block; //needed to remove extra spacing on webkit-based browsers
+  }
+
   .theme-citynet & {
     height: 198px;
   }
@@ -24,14 +35,13 @@
   }
 
   .custom-navigation {
-
     a {
       -ms-transform: none;
       -webkit-transform: none;
       transform: none;
     }
 
-    @include breakpoint(large) {
+    @include breakpoint(mobile-landscape) {
       position: absolute;
       right: 0;
       bottom: 0;
@@ -40,7 +50,14 @@
         position: relative;
       }
     }
+  }
+}
 
+.slide-container {
+  padding: 1em 0 3.5em;
+
+  @include breakpoint(mobile-landscape) {
+    padding: 5em 0 12em;
   }
 }
 
@@ -53,7 +70,7 @@
 
   li {
     &:after {
-      content: '';
+      content: "";
       z-index: 5;
       display: block;
       position: absolute;
@@ -88,19 +105,19 @@
   p {
     margin: 0;
     color: white;
-    padding: .5em 1em;
+    padding: 0.5em 1em;
     font-style: normal;
     display: inline-block;
     background: rgba(0, 0, 0, 0.45);
-    @include rem('font-size', 11px);
+    @include rem("font-size", 11px);
 
     .hero-image-by-prefix,
     .hero-image-by {
-      @include rem('font-size', 10px);
+      @include rem("font-size", 10px);
     }
 
     @include breakpoint(medium) {
-      padding: .5em 3.5em .5em 1em;
+      padding: 0.5em 3.5em 0.5em 1em;
     }
   }
 
@@ -114,49 +131,52 @@
 .hero__content {
   z-index: 4;
   color: white;
-  margin: 0 0 0;
-  padding: 1.5em;
+  margin: 0 0 0 !important;
+  padding: 1em;
   position: relative;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.45);
 
   h1 {
     margin: 0;
     color: white;
-    @include rem('font-size', 45px);
+    @include rem("font-size", 45px);
   }
 
   p {
     margin: 0;
-    @include rem('font-size', 18px);
+    text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black;
+    @include rem("font-size", 18px);
   }
 
   .btn {
-    display: block;
-    margin-top: 2em;
-    font-weight: 600;
-    padding: 1.25em 2.5em;
+    font-size: 1rem;
+    margin-top: 1em;
+    font-weight: normal;
+    padding: 0.75em 2em;
+    text-shadow: none;
   }
 
   @include breakpoint(mobile-landscape) {
-    padding: 1.75em 2.5em;
+    //padding: 1.75em 2.5em;
+    padding: 2em;
 
     h1 {
-      @include rem('font-size', 60px);
+      @include rem("font-size", 60px);
     }
 
     p {
-      @include rem('font-size', 24px);
+      @include rem("font-size", 24px);
     }
 
     .btn {
-      margin-top: 2em;
+      margin-top: 1.5em;
       display: inline-block;
     }
   }
 
   @include breakpoint(site) {
-    margin: 0 0 2em;
-    padding: 2.75em 3.5em;
+    //margin: 0 0 2em;
+    //padding: 2.75em 3.5em;
 
     &.no-sides {
       background: transparent;
@@ -164,7 +184,148 @@
   }
 
   @include breakpoint(site down) {
-     width: auto;
+    width: auto;
+  }
+
+  &.multi {
+    padding: 1em 2.8em;
+
+    @include breakpoint(mobile-landscape) {
+      padding: 2em 2em 2.6em 2em;
+    }
+  }
+
+  .view-homepage-slide {
+    //Main homepage only
+    padding: 0;
+
+    .flex-control-nav,
+    .flex-direction-nav {
+      display: block;
+    }
+  }
+}
+
+section.homepage {
+  .hero__content {
+    padding: 0;
+
+    .flex-control-nav {
+      position: absolute;
+      bottom: -3rem;
+      display: flex;
+      height: 3em;
+
+      a {
+        background: white;
+      }
+
+      @include breakpoint(mobile-landscape) {
+        display: block;
+        right: 6em;
+        padding-left: 1em;
+      }
+
+      .flex-active {
+        background: $sunshade;
+      }
+    }
+
+    .flex-direction-nav {
+      position: absolute;
+      width: 100%;
+      bottom: -1.5rem;
+
+      a {
+        background: transparent;
+        border: none;
+
+        &:hover {
+          color: $cerulean !important;
+        }
+
+        &.flex-prev {
+          left: 0;
+        }
+
+        &.flex-next {
+          right: 0;
+        }
+      }
+
+      .flex-nav-prev {
+        position: absolute;
+        left: 0;
+
+        @include breakpoint(mobile-landscape) {
+          left: unset;
+          right: 6em;
+        }
+      }
+    }
+  }
+}
+
+.slideshow {
+  padding: 0 0 2rem 0;
+  background: transparent;
+
+  .flexslider {
+    padding-bottom: 0;
+  }
+
+  .flex-control-nav {
+    position: absolute;
+    bottom: -3rem;
+    display: flex;
+    height: 3em;
+
+    @include breakpoint(mobile-landscape) {
+      display: block;
+      right: 6em;
+      padding-left: 1em;
+    }
+
+    .flex-active {
+      background: black;
+    }
+  }
+
+  .flex-direction-nav {
+    position: absolute;
+    width: 100%;
+    bottom: -1.5rem;
+
+    a {
+      background: transparent;
+      border: none;
+
+      &:hover {
+        color: $cerulean !important;
+      }
+
+      &.flex-prev {
+        left: 0;
+      }
+
+      &.flex-next {
+        right: 0;
+      }
+
+      &::before {
+        color: $cerulean;
+      }
+    }
+
+    .flex-nav-prev {
+      position: absolute;
+      left: 0;
+
+      @include breakpoint(mobile-landscape) {
+        left: unset;
+        right: 6em;
+      }
+    }
   }
 }
 
@@ -176,16 +337,16 @@
 
 .hero__slides--secondary {
   @include breakpoint(medium) {
-    padding-bottom: 2em;
+    padding: 2em 0;
     min-height: 100px;
   }
 
   .hero__content {
     text-align: center;
-    padding: 3.5em 1em;
+    margin: 1em;
 
     h1 {
-      @include rem('font-size', 48px);
+      @include rem("font-size", 48px);
     }
   }
 
@@ -212,13 +373,14 @@
 
 // Background image element height is equal to that of the hero content
 .hero__bg {
+  background-image: url('/images/home-hero-1.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 
   // Background image element height is not equal to that of the hero content
   &.hero__bg--secondary {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 8rem;
     max-height: 20em;
@@ -234,9 +396,21 @@
   &.hero__bg--solid {
     //background: $cerulean;
     background: #0098db; /* Old browsers */
-    background: -moz-linear-gradient(left, #0098db 0%, #00c7b2 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #0098db 0%, #00c7b2 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, #0098db 0%, #00c7b2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(
+      left,
+      #0098db 0%,
+      #00c7b2 100%
+    ); /* FF3.6-15 */
+    background: -webkit-linear-gradient(
+      left,
+      #0098db 0%,
+      #00c7b2 100%
+    ); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(
+      to right,
+      #0098db 0%,
+      #00c7b2 100%
+    ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0098db', endColorstr='#00c7b2', GradientType=1); /* IE6-9 */
     position: absolute;
     width: 100%;
@@ -250,19 +424,18 @@
 .page-with-hero {
   z-index: 5;
   position: relative;
-  margin-top: -8rem;
+  //margin-top: -8rem;
 
   @include breakpoint(medium) {
-    margin-top: -16rem;
+    //margin-top: -16rem;
   }
 }
 
 .custom-navigation {
-
   a {
     z-index: 10;
     color: white;
-    padding: 0 .25em;
+    padding: 0 0.25em;
     background: $cerulean;
     text-decoration: none;
     display: inline-block;
@@ -272,7 +445,7 @@
     -ms-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
-    @include rem('font-size', 28px);
+    @include rem("font-size", 28px);
 
     &.flex-next {
       left: auto;
@@ -284,5 +457,8 @@
       background: darken($cerulean, 10%);
     }
   }
+}
 
+.l-padding-home-slide {
+  padding: 1.5em;
 }

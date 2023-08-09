@@ -1,450 +1,615 @@
-
-
 // ==========================================================================
 // Forms
 // ==========================================================================
-
 
 /* Webforms
    ========================================================================== */
 
 // Hide the file Upload button on all webforms.
 .webform-component-file .form-managed-file input[value="Upload"] {
-    display: none;
+  display: none;
 }
-
 
 /* General
    ========================================================================== */
 ::-webkit-input-placeholder {
-    color: $shuttle;
+  color: $shuttle;
 }
 
-:-moz-placeholder { /* Firefox 18- */
-    color: $shuttle;
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: $shuttle;
 }
 
-::-moz-placeholder { /* Firefox 19+ */
-    color: $shuttle;
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: $shuttle;
 }
 
 :-ms-input-placeholder {
-    color: $shuttle;
+  color: $shuttle;
+}
+
+.form-item {
+  margin-bottom: 1.2em;
 }
 
 %select {
-    display: block;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0;
-    border: none;
-    background: $mercury;
-    /*outline: none;*/
-    padding: .5em;
-    width: 100%;
-    height: 40px;
-    @include rem( 'font-size', 14px );
-    /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
-    @media screen and (-webkit-min-device-pixel-ratio:0) {
-        select {padding-right:18px}
+  display: block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  border: none;
+  background: $mercury;
+  /*outline: none;*/
+  padding: 0.5em;
+  width: 100%;
+  height: 40px;
+  @include rem("font-size", 14px);
+  /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    select {
+      padding-right: 18px;
     }
+  }
 }
 input,
 textarea {
-    /*color: $shuttle;*/
-    color: #37424a;
-    margin: 0 0 1em 0;
-    padding: .75em;
-    width: 100%;
-    font-weight: 600;
-    border-radius: 4px;
-    display: inline-block;
-    border: 1px solid $chateau;
-    @include rem( 'font-size', 13px );
-    box-shadow: none !important;
-    // @include transition( border .15s, box-shadow .15s, background .15s );
+  /*color: $shuttle;*/
+  color: #37424a;
+  margin: 0 0 1em 0;
+  padding: 0.75em;
+  width: 100%;
+  font-weight: 400;
+  border-radius: 4px;
+  display: inline-block;
+  border: 1px solid $chateau;
+  @include rem("font-size", 13px);
+  box-shadow: none !important;
+  // @include transition( border .15s, box-shadow .15s, background .15s );
 }
 
 input[type="text"],
 input[type="email"],
 textarea {
-    background-color: white;
-    border-width: inherit;
-    border: 1px solid #a7abad;
-    border-radius: 4px;
+  background-color: white;
+  border-width: inherit;
+  border: 1px solid #a7abad;
+  //border-radius: 4px;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-    border-color: $cerulean;
-    /*outline: none;*/
+  border-color: $cerulean !important;
+  /*outline: none;*/
 }
 
 input[type="checkbox"],
 input[type="radio"] {
-    width: auto;
+  width: auto;
 }
 
 input[type="submit"],
 button[type="submit"] {
-    margin: 0;
-    height: auto;
-    width: auto;
-    border: none;
-    /*outline: none;*/
-    -webkit-appearance: none;
-    &[value="None"] {
-        display: none;
-    }
+  margin: 0;
+  height: auto;
+  width: auto;
+  border: none;
+  /*outline: none;*/
+  -webkit-appearance: none;
+  appearance: none;
+  &[value="None"] {
+    display: none;
+  }
 }
 
-select {
-    width: 100%;
+select,
+select.form-select {
+  //width: 100%;
+  display: block;
+  background-color: white;
+  padding: 0 2em 0 0.5em;
+  //border-radius: 2px;
+  /*color: rgba(0,0,0,.87);*/
+  color: $spruce;
+  border: 1px solid $chateau;
+  box-shadow: 0 0 0 0 transparent inset;
+  -webkit-transition: color 0.1s ease, border-color 0.1s ease;
+  transition: color 0.1s ease, border-color 0.1s ease;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+fieldset {
+  &:not(.radios--wrapper),
+  &:not(.fieldgroup) {
     display: block;
-    background: white;
-    padding: .67em 1em;
-    border-radius: 2px;
-    /*color: rgba(0,0,0,.87);*/
-    color: #37424a;
+    background-color: white;
     border: 1px solid $chateau;
-    box-shadow: 0 0 0 0 transparent inset;
-    -webkit-transition: color .1s ease,border-color .1s ease;
-    transition: color .1s ease,border-color .1s ease;
-    font-size: .8125rem;
+    margin: 2em 0 1.5em 0;
+    padding: 1.5em 1.3em 1.3em 1.3em;
+    position: relative;
+
+    > legend {
+      font-family: $font-family;
+      color: $spruce;
+      position: absolute;
+      top: -12px;
+      left: 8px;
+      padding: 0 0.8em;
+      font-size: 1em;
+      text-transform: uppercase;
+    }
+  }
+
+  .webform-composite-hidden-title {
+    margin: 0;
+  }
+}
+
+fieldset.radios--wrapper {
+  padding: 0;
+  border: none;
+  margin-bottom: 1.2em;
+
+  > legend {
+    font-family: $font-family;
     font-weight: 600;
-}
+    text-transform: uppercase;
+    font-size: 0.8em;
+  }
 
-button {
-    // @include transition( all .15s );
-}
+  .form-item {
+    margin: 0 0 0.2em 0;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
 
+    input {
+      width: 14px;
+      height: 14px;
+      margin: 0;
+      top: 1px;
+    }
+
+    label {
+      display: table-cell;
+      font-size: 1em;
+      text-transform: none;
+      font-weight: normal;
+      display: inline-block;
+      margin: 0 0.8em;
+      color: $spruce;
+    }
+  }
+}
 
 /**
  * Normalize sets as 'content-box'
  */
- input.search-type,
- input[type="search"] {
-     margin: 0;
-     @include box-sizing( border-box ); /* 1 */
- }
- 
- input[type="radio"] {
-     width: auto;
-     margin-right: .5em;
- }
- 
- .form-type-radio, .form-type-checkbox {
-     display: table-row;
- 
-     input.form-radio{
-         display: inline-block;
-         width: 13px;
-         height: 13px;
-         margin-left: 0;
-     }
+input.search-type,
+input[type="search"] {
+  margin: 0;
+  @include box-sizing(border-box); /* 1 */
+}
 
-    input.form-checkbox {
-        display: inline-block;
-        border-radius: 4px;
-        width: 13px;
-        height: 13px;
-        margin-left: 0;
-        margin-right: 0.5rem;
-    }
- 
-     label.option {
-         display: table-cell;
-         padding-bottom: .5em;
-     }
- }
- 
- .form-radios, .form-checkboxes {
+input[type="radio"] {
+  width: auto;
+  margin-right: 0.5em;
+}
+
+.form-type-radio,
+.form-type-checkbox {
+  display: flex;
+  padding-left: 0.5em;
+
+  input.form-radio {
+    width: 13px;
+    height: 13px;
+    margin-left: 0;
+    top: 8px;
+  }
+
+  input.form-checkbox {
+    display: inline-block;
+    border-radius: 4px;
+    width: 13px;
+    height: 13px;
+    margin-left: 0;
+    margin-right: 0.5rem;
+  }
+
+  label.option {
+    display: table-cell;
+    font-size: 1em;
+  }
+}
+
+.form-radios > .form-item {
+  margin: 0 0 0.2em;
+}
+
+/*.form-radios, .form-checkboxes {
      margin-top: .5em;
- }
- 
- label.element-invisible + div.form-radios, label.element-invisible + div.form-checkboxes {
-     margin-top: 0;
- }
- 
- textarea {
- }
- 
- legend {
-     font-weight: 600;
-     padding: 0 .5em;
-     @include rem( 'font-size', 13px );
-     font-family: $font-family-secondary;
- 
-     @include breakpoint(medium) {
-         @include rem( 'font-size', 14px );
-     }
- 
-     @include breakpoint(large) {
-         @include rem( 'font-size', 16px );
-     }
- }
- 
- .form-error {
-     color: $error;
-     @include rem( 'font-size', 11px );
- }
- 
- .form--general {
- 
-     .form-actions {
- 
-         .form-submit {
-             @include breakpoint(medium down) {
-                 width: 100%;
-                 padding: 1.25em 0;
-             }
-         }
-     }
- }
- 
- .form {
-     overflow: hidden;
-     input[type="email"],
-     input.search-type,
-     input[type="search"] {
-         width: auto;
-         color: $gray;
-         border: none;
-         margin-bottom: 0;
-         padding: .25em .5em;
-         background: $off-white;
-         @include rem( 'font-size', 16px );
-         @include breakpoint(medium) {
-             float: left;
-             width: 80%;
-             min-height: 40px;
-             margin-right: .5em;
-         }
-     }
-     button[type="submit"] {
-         color: white;
-         background-color: $sunshade;
-         i {
-             @include rem( 'font-size', 24px );
-         }
-         @include breakpoint(medium)  {
-             min-height: 40px;
-             padding: .25em .5em;
-         }
-         &:hover {
-             background: lighten( $sunshade, 10% );
-         }
-     }
-     label {
-         font-weight: 600;
-         text-transform: uppercase;
-         @include rem( 'font-size', 12px );
-     }
-     select {
-         @extend %select;
-     }
-     .select-wrap {
-         position: relative;
-     }
-     .select-wrap:after {
-         content:'';
-         color: $sunshade;
-         background: url(../img/select-arrow.png) no-repeat;
-         display: block;
-         width: 8px;
-         height: 18px;
-         // -webkit-transform:rotate(90deg) translateX(-50%);
-         // -moz-transform:rotate(90deg) translateX(-50%);
-         // -ms-transform:rotate(90deg) translateX(-50%);
-         // transform:rotate(90deg) translateX(-50%);
-         right:10%; top:30%;
-         line-height: .6;
-         padding:0 0 2px;
-         position:absolute;
-         pointer-events:none;
-     }
-     .select-wrap:before {
-         content:'';
-         right:6px; top:0px;
-         width:20px; height:20px;
-         position:absolute;
-         pointer-events:none;
-         display:block;
-     }
- }
- 
- .form--homesearch {
-     button[type="submit"] {
-         width: 100%;
-         margin-top: 1.25em;
-     }
- }
- 
- .form--signup {
-     input[type="email"] {
-         margin: 0;
-         width: auto;
-         color: white;
-         background: darken( $sunshade, 10% );
-         @include breakpoint(medium)  {
-             min-height: 48px;
-         }
-     }
-     button[type="submit"] {
-         color: $sunshade;
-         @include breakpoint(medium) {
-             min-height: 48px;
-             padding: .25em 1.5em;
-         }
-         &:hover {
-             background: white;
-         }
-     }
- }
- 
- .form--comments {
-     .form-actions {
-         @include breakpoint(medium) {
-             text-align: right;
-         }
- 
-         input[type="submit"] {
-             @include rem( 'font-size', 13px );
-         }
-     }
- }
- 
- .form--newsletter {
-     @extend %clearfix;
- 
-     .form-item,
-     .form-actions {
-         padding-left: .5em;
-         padding-right: .5em;
-     }
- 
-     input {
-         margin: 0;
-     }
- 
-     input[type="submit"] {
-         width: 100%;
-         @include rem( 'font-size', 13px );
-     }
- 
- }
- 
- .views-submit-button {
-     input[type="submit"] {
-         background-color:$cerulean;
-         color: white;
-     }
-     @include breakpoint(medium down) {
-         clear: left;
-     }
- }
- 
-    .form--search {
- 
-         // So drop shadow aligns for views-exposed search filter
-         .views-exposed-widgets {
-             margin-bottom: 0px;
-         }
- 
-         input.search-type,
-         input[type="text"] {
-             border-right: none;
-             border-radius: 4px 0 0 4px;
-             margin-bottom: 0;
-         }
- 
-         input[type="submit"] {
-             width: 100%;
-             color: $cerulean;
-             display: block;
-             padding: .75em;
-             text-indent: -9999px;
-             border-radius: 0 4px 4px 0;
-             border: 1px solid $mercury;
-             background-image: url(../images/search-icon.png);
-             background-repeat: no-repeat;
-             background-position: center center;
-             background-color: $mercury;
-             @include rem( 'font-size', 13px );
-             &:hover {
-                 background-color: lighten( $cerulean, 10% );
-                 border-color: lighten( $cerulean, 10% );
-             }
-         }
- 
-         .form-item {
-             width: 85%;
-         }
-         .views-submit-button,
-         .form-actions {
-             width: 15%;
-         }
-         .views-submit-button,
-         .form-item,
-         .form-actions {
-             float: left;
-         }
- 
-         &.form--directory {
-             margin-bottom: 1em;
-         }
- 
-         input {
-             border-color: white;
-             &:focus {
-                 border-top-color: white;
-                 border-left-color: white;
-             }
-             &.apachesolr-autocomplete {
-                 border-top-right-radius: 0;
-                 border-bottom-right-radius: 0;
-             }
-         }
-         input[type="submit"] {
-             border-left: none;
-             border-color: $mercury;
-             background-color: $mercury;
-             background-image: url(../images/search-icon-blue.png);
-             &:hover {
-                 border-color: darken( $mercury, 5% );
-                 border-bottom-color: $chateau;
-                 background-color: darken( $mercury, 5% );
-             }
-         }
+ }*/
+label {
+  color: $spruce;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  .form-type-processed-text & {
+    display: none;
+  }
+}
+
+label.element-invisible + div.form-radios,
+label.element-invisible + div.form-checkboxes {
+  margin-top: 0;
+}
+
+.form-textarea {
+  background-color: white;
+  border: 1px solid #a7abad;
+  //border-radius: 4px;
+  font-size: 1em;
+  line-height: 1.5;
+  color: $spruce;
+}
+legend {
+  font-weight: 600;
+  padding: 0 0.5em;
+  @include rem("font-size", 13px);
+  font-family: $font-family-secondary;
+
+  @include breakpoint(medium) {
+    @include rem("font-size", 14px);
+  }
+
+  @include breakpoint(large) {
+    @include rem("font-size", 16px);
+  }
+}
+.form-file {
+  background-color: $off-white;
+  border: 1px solid #a7abad;
+  //border-radius: 4px;
+}
+
+.form-error {
+  color: $error;
+  @include rem("font-size", 11px);
+}
+
+.form--general {
+  .form-actions {
+    .form-submit {
+      @include breakpoint(medium down) {
+        width: 100%;
+        padding: 1.25em 0;
+      }
     }
+  }
+}
+
+.form {
+  overflow: hidden;
+  input[type="email"],
+  input.search-type,
+  input[type="search"] {
+    width: auto;
+    color: $gray;
+    border: none;
+    margin-bottom: 0;
+    padding: 0.25em 0.5em;
+    background: $off-white;
+    @include rem("font-size", 16px);
+    @include breakpoint(medium) {
+      float: left;
+      width: 80%;
+      min-height: 40px;
+      margin-right: 0.5em;
+    }
+  }
+  button[type="submit"] {
+    color: white;
+    background-color: $sunshade;
+    i {
+      @include rem("font-size", 24px);
+    }
+    @include breakpoint(medium) {
+      min-height: 40px;
+      padding: 0.25em 0.5em;
+    }
+    &:hover {
+      background: lighten($sunshade, 10%);
+    }
+  }
+  label {
+    font-weight: 600;
+    text-transform: uppercase;
+    @include rem("font-size", 12px);
+  }
+  select {
+    @extend %select;
+  }
+  .select-wrap {
+    position: relative;
+  }
+  .select-wrap:after {
+    content: "";
+    color: $sunshade;
+    background: url(../img/select-arrow.png) no-repeat;
+    display: block;
+    width: 8px;
+    height: 18px;
+    // -webkit-transform:rotate(90deg) translateX(-50%);
+    // -moz-transform:rotate(90deg) translateX(-50%);
+    // -ms-transform:rotate(90deg) translateX(-50%);
+    // transform:rotate(90deg) translateX(-50%);
+    right: 10%;
+    top: 30%;
+    line-height: 0.6;
+    padding: 0 0 2px;
+    position: absolute;
+    pointer-events: none;
+  }
+  .select-wrap:before {
+    content: "";
+    right: 6px;
+    top: 0px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    pointer-events: none;
+    display: block;
+  }
+}
+
+.form--homesearch {
+  button[type="submit"] {
+    width: 100%;
+    margin-top: 1.25em;
+  }
+}
+
+.form--signup {
+  input[type="email"] {
+    margin: 0;
+    width: auto;
+    color: white;
+    background: darken($sunshade, 10%);
+    @include breakpoint(medium) {
+      min-height: 48px;
+    }
+  }
+  button[type="submit"] {
+    color: $sunshade;
+    @include breakpoint(medium) {
+      min-height: 48px;
+      padding: 0.25em 1.5em;
+    }
+    &:hover {
+      background: white;
+    }
+  }
+}
+
+fieldset.form-wrapper fieldset.radios--wrapper:last-child {
+  margin-bottom: 0;
+}
+
+.form-wrapper .description,
+.form-item .description {
+  margin-bottom: 0.5em;
+  color: $spruce;
+  padding: 0;
+  line-height: 1.3;
+}
+
+.form--comments {
+  .form-actions {
+    @include breakpoint(medium) {
+      text-align: right;
+    }
+
+    input[type="submit"] {
+      @include rem("font-size", 13px);
+    }
+  }
+}
+
+.form--newsletter {
+  @extend %clearfix;
+
+  .form-item,
+  .form-actions {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  input {
+    margin: 0;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    @include rem("font-size", 13px);
+  }
+}
+
+.views-submit-button {
+  input[type="submit"] {
+    background-color: $cerulean;
+    color: white;
+  }
+  @include breakpoint(medium down) {
+    clear: left;
+  }
+}
+
+.form--search,
+.form-coll-search {
+  // So drop shadow aligns for views-exposed search filter
+  .views-exposed-widgets {
+    margin-bottom: 0px;
+  }
+
+  input.search-type,
+  input[type="text"] {
+    //border-right: none;
+    border-radius: 4px 0 0 4px;
+    margin-bottom: 0;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    color: $cerulean;
+    display: block;
+    padding: 0.75em;
+    text-indent: -9999px;
+    border-radius: 0 4px 4px 0;
+    //border: 1px solid $mercury;
+    background-image: url(/images/blue-search-icon.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: $mercury;
+    @include rem("font-size", 13px);
+    &:hover {
+      background-color: lighten($cerulean, 10%);
+      //border-color: lighten( $cerulean, 10% );
+    }
+  }
+
+  .form-item {
+    width: 85%;
+  }
+  .views-submit-button,
+  .form-actions {
+    width: 15%;
+  }
+  .views-submit-button,
+  .form-item,
+  .form-actions {
+    float: left;
+  }
+
+  &.form--directory {
+    margin-bottom: 1em;
+  }
+
+  input {
+    //border-color: white;
+    border: none;
+    &:focus {
+      border: none !important;
+    }
+    &.apachesolr-autocomplete {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+  input[type="submit"] {
+    border-left: none;
+    //border-color: $mercury;
+    background-color: $mercury;
+    background-image: url(../images/blue-search-icon.svg);
+    background-size: 1rem;
+    background-position: center;
+
+    &:hover {
+      //border-color: darken( $mercury, 5% );
+      border-bottom-color: $chateau;
+      background-color: darken($mercury, 5%);
+    }
+  }
+}
+
+.form-coll-search {
+  .form-item {
+    margin-bottom: 0.5em;
+  }
+  .input-group {
+    border: 1px solid $shuttle;
+    border-radius: 4px;
+    overflow: hidden;
+
+    input.form-submit {
+      width: 12%;
+    }
+  }
+}
 
 .form-actions {
-    padding: 0px;
-    position: relative;
-    left: 0;
-    bottom: 0;
-    border-top: 0;
-    width: auto;
-    z-index: 0; 
-    background-color: transparent; 
+  padding: 0px;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  border-top: 0;
+  width: auto;
+  z-index: 0;
+  background-color: transparent;
 }
 
 .form-actions {
   margin-bottom: 1.5em;
 
+  @include breakpoint(mobile-landscape down) {
+    text-align: center;
+  }
+
   input {
     width: auto !important;
   }
 
-  .form-submit {
-    margin: 0 1em .5em 0;
+  .button--primary {
+    font-weight: normal;
+
+    @include breakpoint(mobile-landscape down) {
+      font-size: 1.2em;
+    }
   }
 }
 
 #edit-reset {
   @extend .btn;
   @extend .btn--success;
-  padding: .75em 1em !important;
+  padding: 0.75em 1em !important;
+}
+[type="text"]:last-child,
+.form-item:last-child {
+  margin-bottom: 0.5em;
+}
+
+[type="file"],
+.form-file:last-child {
+  margin-bottom: 0;
+}
+
+.form-required::after {
+  content: "*";
+  color: #e32700;
+  margin-left: 4px;
+}
+
+.views-exposed-form {
+  .form-actions {
+    margin-top: 23px;
+
+    @include breakpoint(mobile-landscape down) {
+      margin-top: 0;
+    }
+
+    .button {
+      max-height: 44px;
+      font-weight: normal;
+      font-size: 1em;
+    }
+  }
+}
+
+.form--inline .form-actions .button {
+  margin-top: 0;
 }

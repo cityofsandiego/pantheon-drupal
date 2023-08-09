@@ -1,32 +1,30 @@
 .theme-citynet {
-
   main[role="main"],
   .role-main {
-      z-index: 5;
-      position: relative;
-      margin-top: -50px;
+    z-index: 5;
+    position: relative;
+    margin-top: -50px;
 
-      @include breakpoint(site) {
-	  .sub-navigation {
-	      margin-top: 0;
-	  }
+    @include breakpoint(site) {
+      .sub-navigation {
+        margin-top: 0;
       }
+    }
 
-      .breadcrumbs {
-  	+ .l-container {
-	      background: white;
-	  }
+    .breadcrumbs {
+      + .l-container {
+        background: white;
       }
+    }
   }
 
   // Front page.
   &.front {
-
     // Announcement title for first block.
     .view-id-announcements.view-display-id-block {
       .card__headline.heading--snug a {
         font-size: 1.3em;
-        font-family: "Merriweather",serif;
+        font-family: $headline, serif;
       }
       // Titles for block attached to announcements block.
       .view-display-id-attachment_1 {
@@ -36,7 +34,7 @@
       }
     }
 
-      // View title link changes.
+    // View title link changes.
     .view .card__headline.heading--snug a {
       color: inherit;
       text-decoration: none;
@@ -88,7 +86,8 @@
       bottom: 4em;
     }
     // Dept Name top and bottom padding
-    #citynet-title a, #citynet-title {
+    #citynet-title a,
+    #citynet-title {
       color: white;
     }
     .card--container .card--wrap,
@@ -121,7 +120,7 @@
       margin-top: 0;
     }
     .menu-toggle {
-      top: .5em;
+      top: 0.5em;
     }
     .hero__slides--secondary {
       padding-bottom: 1.5em;
@@ -134,7 +133,7 @@
     }
     .main__message .main__heading {
       font-size: 1.5rem;
-	  margin-top: 40px;
+      margin-top: 40px;
     }
     header .form--search {
       top: 80px;
@@ -146,12 +145,12 @@
 
   .event__date {
     font-size: 1.5em;
-    padding: .5em;
+    padding: 0.5em;
     line-height: 1.2em;
   }
 
   .view-events .event__date {
-    font-size: .81em;
+    font-size: 0.81em;
     line-height: 1;
   }
 
@@ -161,7 +160,8 @@
     line-height: inherit;
   }
 
-  header, .main__navigation {
+  header,
+  .main__navigation {
     box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
   }
 
@@ -186,19 +186,20 @@
   }
 
   .tb-megamenu {
-	background-color: white;
+    background-color: white;
     ul.nav {
-      > li, > li.active {
+      > li,
+      > li.active {
         > a.dropdown-toggle {
           display: block;
-		  background-color: white;
+          background-color: white;
           line-height: 1.6;
           position: relative;
           text-decoration: none;
           color: #37424a;
           padding: 1em 1.1em;
           text-transform: uppercase;
-          transition: color .15s ease;
+          transition: color 0.15s ease;
           font-size: 13px;
           font-size: 0.8125rem;
           font-weight: 600;
@@ -219,77 +220,76 @@
           }
         }
       }
-	  > li.dropdown.active > .dropdown-toggle {
-		  background-color: white;
-		  border-color: #ccc;
-		  color: #37242a;
-		  .caret {
-			border-top-color: #666;
-			border-bottom-color: #666;
-		  }
-          &:focus {
-            background: $tulip;
-            color: white;
-          }
-          &:hover {
-            background: $tulip;
-            color: white;
-          }
-	  }
+      > li.dropdown.active > .dropdown-toggle {
+        background-color: white;
+        border-color: #ccc;
+        color: #37242a;
+        .caret {
+          border-top-color: #666;
+          border-bottom-color: #666;
+        }
+        &:focus {
+          background: $tulip;
+          color: white;
+        }
+        &:hover {
+          background: $tulip;
+          color: white;
+        }
+      }
     }
     .dropdown-menu {
       margin: 0;
       padding: 0;
       z-index: 10;
       @extend %white-gradient;
-	  border: none;
+      border: none;
     }
     .mega-align-justify > .dropdown-menu {
-
       top: 102%;
     }
-	.field-item {
-	  a:hover {
-		color: $cerulean !important;
-	  }
-	  > ul {
-		width: 100%;
-	    display: block;
-	    margin-bottom: 1em;
-	    > li {
-		  float: left;
-		  margin-right: 5em;
-		  margin-bottom: 1em;
-	    }
-	  }
-	}
-	.tb-block {
-		margin-bottom: 0;
-	}
-	@media screen and (max-width: 979px) {
-	  .nav-collapse {
-		background-color: white;
+    .field-item {
+      a:hover {
+        color: $cerulean !important;
+      }
+      > ul {
+        width: 100%;
+        display: block;
+        margin-bottom: 1em;
+        > li {
+          float: left;
+          margin-right: 5em;
+          margin-bottom: 1em;
+        }
+      }
+    }
+    .tb-block {
+      margin-bottom: 0;
+    }
+    @media screen and (max-width: 979px) {
+      .nav-collapse {
+        background-color: white;
         box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.5);
-		.nav > li > a {
-			border: none;
-		}
-		&.collapse {
-			margin-top: 20px;
-		}
-	  }
-	  .always-show .mega > .mega-dropdown-menu, .always-show .dropdown-menu {
-		display: none !important;
-	  }
-
-	}
+        .nav > li > a {
+          border: none;
+        }
+        &.collapse {
+          margin-top: 20px;
+        }
+      }
+      .always-show .mega > .mega-dropdown-menu,
+      .always-show .dropdown-menu {
+        display: none !important;
+      }
+    }
   }
 
   nav.sub-navigation {
     background-color: white;
-	a {
-		font-size: 1rem;
-		color: #37424a;
-	}
+    a {
+      font-size: 1rem;
+      color: #37424a;
+    }
     ul.contextual-links li {
       background-color: white;
       position: relative;
@@ -298,7 +298,7 @@
 
       a {
         background-color: white;
-		font-size: 1rem;
+        font-size: 1rem;
         &:hover {
           background-color: grey;
         }
@@ -308,15 +308,16 @@
       border-bottom: 1px solid #37424a;
       border-bottom: none;
       box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.5);
-      li.leaf, li.tb-megamenu-item {
+      li.leaf,
+      li.tb-megamenu-item {
         background-color: white;
         margin: 0;
-		float: left;
-		position: static;
-		border-bottom: none;
-		opacity: 1;
+        float: left;
+        position: static;
+        border-bottom: none;
+        opacity: 1;
 
-        &>a {
+        & > a {
           display: block;
           line-height: 1.6;
           position: relative;
@@ -324,45 +325,44 @@
           color: #37424a;
           padding: 1em 1.1em;
           text-transform: uppercase;
-          transition: color .15s ease;
+          transition: color 0.15s ease;
           font-size: 13px;
           font-size: 0.8125rem;
           font-weight: 600;
           border-right: 1px solid #ccc;
-		  @media screen and (max-width: 979px) {
-			border-right: none;
-		  }
-          &:focus, &:hover, &.active {
+          @media screen and (max-width: 979px) {
+            border-right: none;
+          }
+          &:focus,
+          &:hover,
+          &.active {
             background: $tulip;
             color: white;
           }
         }
 
-		.tb-megamenu-submenu {
-			width: 100%;
+        .tb-megamenu-submenu {
+          width: 100%;
 
-			.tb-megamenu-column-inner {
-				padding: 2em 2em 0 2em;
-			}
-		}
+          .tb-megamenu-column-inner {
+            padding: 2em 2em 0 2em;
+          }
+        }
       }
-	  li.tb-megamenu-item.active {
-	    > a, > a.dropdown-toggle {
-			background: $tulip;
-			color: white;
-			.caret {
-			  border-top-color: white;
-			  border-bottom-color: white;
-			}
-		}
-	  }
-	  .mega-dropdown-inner .content {
-	    box-shadow: none;
-
-		li {
-
-		}
-	  }
+      li.tb-megamenu-item.active {
+        > a,
+        > a.dropdown-toggle {
+          background: $tulip;
+          color: white;
+          .caret {
+            border-top-color: white;
+            border-bottom-color: white;
+          }
+        }
+      }
+      .mega-dropdown-inner .content {
+        box-shadow: none;
+      }
     }
   }
 
@@ -372,16 +372,16 @@
 
   // On the menu blocks in the sidebar have a shorter bottom margin.
   // aside three.column .widget>ul.menu {
-  aside div.widget>ul.menu {
+  aside div.widget > ul.menu {
     margin-bottom: 1em;
   }
 
   // Style search page.
   &.page-search {
     @include breakpoint(medium-large up) {
-      header.header--fixed+div.container {
-        position:relative;
-        margin-top:0;
+      header.header--fixed + div.container {
+        position: relative;
+        margin-top: 0;
       }
     }
     .facets {
@@ -403,7 +403,6 @@
   div.search-result-wrapper h3.title a:visited {
     color: $link-color-visited;
   }
-
 
   // Adjustments after changing sandiego.gov to shorter header.
   @include breakpoint(site) {
@@ -437,11 +436,10 @@
 
 // End theme citynet
 
-
 /* Admin page settings specific to citynet */
 
 /* backup and migrate */
 #edit-filters-sources-db-exclude-tables,
 #edit-filters-sources-db-nodata-tables {
-  height:400px;
+  height: 400px;
 }

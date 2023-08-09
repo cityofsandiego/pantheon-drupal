@@ -55,12 +55,28 @@
   {% endif %}
 
 
-  <section class="off-canvas-content" data-off-canvas-content>
-    <div class="l-constrained--main l-padding-mobile-hn background-white">
+  <section class="off-canvas-content alto-bg" data-off-canvas-content>
 
+<header role="banner" class="header--app app_wrap">
+  <div class="grid-x l-padding-desktop-vs">
+    <div class="cell small-12 medium-3 xlarge-2">
+      <a href="{{ path('<front>') }}" rel="home" class="site-logo">
+      <img src="/{{ directory }}/images/cosd-logo/cosd-logo-primary-white-color-sails.svg" alt="{{ 'City of San Diego logo'|t }}" class="hide-on-mobile l-padding-rd" width="205" height="auto" />
+      <img src="/{{ directory }}/images/cosd-logo/cosd-logo-initials-white-color-sails.svg" alt="{{ 'City of San Diego logo'|t }}" class="hide-on-desktop logo-mobile l-margin-bs" width="70" height="57"/>
+    </a>
+    </div>
+    <div class="cell small-12 medium-auto xlarge-auto">
+      <h1 class="text-white heading--trim">{{ node.title.value }}</h1>
+      {% if node.field_subtitle.value %}
+      <p class="text-white l-margin-bn">{{ node.field_subtitle.value }}</p>
+      {% endif %}
+    </div>
+  </div>
+</header>
       {{ page.help }}
 
       {{ page.content_top }}
+    <div class="l-constrained--main l-padding-mobile-hn background-white">
 
       <main role="main" class="row white-bg">
           <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}

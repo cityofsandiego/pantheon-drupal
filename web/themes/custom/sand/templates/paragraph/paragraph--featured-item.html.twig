@@ -40,7 +40,6 @@
 #}
 {%
   set classes = [
-    'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     not paragraph.isPublished() ? 'paragraph--unpublished',
@@ -50,12 +49,12 @@
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <h6 class="featured-item__wrapper">
+      <p class="featured-item__wrapper">
         <a href="{{ content.field_link[0]['#url'] }}">
           <span>{{ content.field_image.0 }}</span>
-          <span class="featured-item-label">{{ content.field_label.0 }}</span>
+          <span class="h5 featured-item-label">{{ content.field_label.0 }}</span>
         </a>
-      </h6>
+      </p>
     {% endblock %}
   </div>
 {% endblock paragraph %}

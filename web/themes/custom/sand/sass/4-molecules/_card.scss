@@ -7,22 +7,22 @@
   background: white;
   border-radius: 4px;
   width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
 
   &.border {
     margin-bottom: 0;
     padding-bottom: 0;
-  }
-
-  @include breakpoint(medium) {
-    margin-top: 1em;
-    margin-bottom: 1em;
   }
 }
 
 .card {
   @extend %card;
 
-  > a {
+  > a,
+  > p > a,
+  > p > strong > a {
     text-decoration: none;
   }
 
@@ -33,29 +33,35 @@
 
 .card__container {
   position: relative;
+  display: block;
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-justify-content: flex-start; /* Safari */
+  justify-content: flex-start;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
 
-  @include breakpoint(large) {
+  @include breakpoint(mobile-landscape) {
+    margin-left: -0.5em;
+    margin-right: -0.5em;
+    margin-bottom: -0.5em;
+  }
+
+  // If .mobile-flexslider exists, it creates a ul.slides wrapping the .cards
+  /*@include breakpoint(large) {*/
+  .slides {
     display: block;
     display: -webkit-flex; /* Safari */
     display: flex;
     -webkit-justify-content: flex-start; /* Safari */
     justify-content: flex-start;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
+    margin: 0;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    padding-left: 0;
+    width: 100%;
   }
-
-  // If .mobile-flexslider exists, it creates a ul.slides wrapping the .cards
-  @include breakpoint(large) {
-    .slides {
-      display: block;
-      display: -webkit-flex; /* Safari */
-      display: flex;
-      -webkit-justify-content: flex-start; /* Safari */
-      justify-content: flex-start;
-      -webkit-flex-wrap: wrap;
-      flex-wrap: wrap;
-    }
-  }
+  /*}*/
 
   &.mobile-flexslider {
     height: 100% !important;
@@ -63,25 +69,55 @@
 
   // this gets used on gallery pages
   &.flexslider--mobile {
-    .slides {
-      .card__wrap {
-        margin: 0 !important;
+    @include breakpoint(mobile-landscape down) {
+      .slides {
+        .card__wrap {
+          padding: 0;
+          width: 100%;
+          margin: 0;
+        }
+
+        .card__content {
+          padding: 1.5em 2.2em;
+        }
       }
     }
   }
 
-  .card__wrap, .card--wrap {
+  .card__wrap,
+  .card--wrap {
     height: auto;
-    margin: 0 .5em;
+    display: -webkit-flex; /* Safari */
+    display: flex !important;
+    margin: 0;
+    padding-left: 1.0416588541%;
+    padding-right: 1.0416588541%;
+    padding-bottom: 1em;
+    width: 33.333333%;
+
+    @include breakpoint(mobile-landscape down) {
+      width: 100%;
+    }
+
+    .card {
+      @extend %card;
+      flex: 0 1 auto;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+  }
+
+  .card__wrap_s,
+  .card--wrap-s {
+    height: auto;
+    margin: 0 0.5em;
     width: 100%;
 
-    @include breakpoint(medium) {
+    @include breakpoint(large) {
+      margin: 0;
+      padding: 0.75em;
       display: -webkit-flex; /* Safari */
       display: flex;
-      margin: 0;
-      padding-left: 1.0416588541%;
-      padding-right: 1.0416588541%;
-      width: 33.333333%;
 
       .card {
         flex: 0 1 auto;
@@ -89,31 +125,15 @@
     }
   }
 
-  .card__wrap_s, .card--wrap-s {
+  .card__wrap_m,
+  .card--wrap-m {
     height: auto;
-    margin: 0 .5em;
+    margin: 0 0.5em;
     width: 100%;
 
     @include breakpoint(large) {
       margin: 0;
-      padding: .75em;
-      display: -webkit-flex; /* Safari */
-      display: flex;
-
-      .card {
-        flex: 0 1 auto;
-      }
-    }
-  }
-
-  .card__wrap_m, .card--wrap-m {
-    height: auto;
-    margin: 0 .5em;
-    width: 100%;
-
-    @include breakpoint(large) {
-      margin: 0;
-      padding: .75em;
+      padding: 0.75em;
       display: -webkit-flex; /* Safari */
       display: flex;
 
@@ -127,11 +147,11 @@
     padding: 1.5em;
 
     @include breakpoint(medium) {
-      @include rem('font-size', 13px);
+      @include rem("font-size", 13px);
     }
 
     > a {
-      @include rem('font-size', 16px);
+      @include rem("font-size", 16px);
     }
   }
 
@@ -139,8 +159,8 @@
   .card__headline a {
     color: $spruce;
     text-decoration: none;
-    font-family: $headline;
-    @include rem('font-size', 16px);
+    font-family: $font-family-secondary;
+    @include rem("font-size", 16px);
   }
 
   .card__meta {
@@ -163,23 +183,13 @@
     display: block;
     font-weight: 600;
   }
-
-  &.flexslider--mobile {
-    .card__wrap {
-      @include breakpoint(medium) {
-        margin: 0;
-      }
-    }
-  }
 }
 
 .card__cta--graphic {
   text-align: center;
-
-  background {
-    position: center center;
-    repeat: no-repeat;
-  }
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
 
   & > a {
     display: block;
@@ -187,7 +197,7 @@
     position: relative;
 
     &:before {
-      content: '';
+      content: "";
       display: block;
       background: black;
       width: 100%;
@@ -196,24 +206,26 @@
       top: 0;
       left: 0;
       opacity: 0;
-      transition: opacity .25s ease;
+      transition: opacity 0.25s ease;
     }
 
     &:hover {
+      text-decoration: none;
+
       &:before {
-        opacity: .1;
+        opacity: 0.1;
       }
     }
   }
 
   a {
-    @include rem('font-size', 16px);
+    @include rem("font-size", 16px);
   }
 
   p {
     color: white;
-    @include rem('font-size', 18px);
-    font-family: $headline;
+    @include rem("font-size", 18px);
+    font-family: $font-family-secondary;
   }
 }
 
@@ -221,7 +233,7 @@
   color: white;
   padding: 0.75em;
   border-radius: 0;
-  text-align: right;
+  text-align: center;
   background-color: $cerulean;
 
   p {
@@ -231,7 +243,7 @@
   .card__headline {
     line-height: 1;
     font-weight: 700;
-    @include rem('font-size', 50px);
+    font-size: 2.5em;
   }
 }
 
@@ -242,7 +254,7 @@
 
   i {
     color: white;
-    padding: .3em;
+    padding: 0.3em;
     border-radius: 50%;
     display: inline-block;
     vertical-align: middle;
@@ -253,19 +265,19 @@
   .date {
     margin: 0;
     font-weight: 600;
-    letter-spacing: .1em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    @include rem('font-size', 12px);
-    font-family: $headline;
+    @include rem("font-size", 12px);
+    font-family: $font-family-secondary;
   }
 }
 
 /* Featured Cards for D9 */
-.featured-card-group {
+/*/.featured-card-group {
   padding: 1rem 0;
 
   h2 {
-    font-family: $headline;
+    font-family: $font-family-secondary;
     font-size: 1.6875rem;
     margin: 1em 0 0.8em 0;
   }
@@ -279,10 +291,10 @@
       flex-flow: row wrap;
     }
   }
-}
+}*/
 
 /* Featured Card Item for D9 */
-.featured-card {
+/*.featured-card {
   background-color: $mercury;
   border-radius: 4px;
   width: calc(50% - .5rem);
@@ -313,9 +325,9 @@
     padding: 1.5em;
 
     .featured-card__heading {
-      font-family: $headline;
+      font-family: $font-family-secondary;
       font-size: 1rem;
       margin: 0 0 0.75em;
     }
   }
-}
+}*/

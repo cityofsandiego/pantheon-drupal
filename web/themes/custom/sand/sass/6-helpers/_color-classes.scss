@@ -5,6 +5,7 @@ $colors: (
   'cerulean': $cerulean,
   'robin': $robin,
   'teal': $teal,
+  'pine': $pine,
   'sunshade': $sunshade,
   'schoolbus': $schoolbus,
   'spruce': $spruce,
@@ -29,6 +30,7 @@ $colors: (
   'charcoal': $charcoal,
   'pomegranate': $pomegranate, // red
   'purple': $purple,
+  'warning': $warning-lt
 );
 
 // Global
@@ -36,10 +38,10 @@ $colors: (
 
 @each $name, $color in $colors {
   .#{$name} {
-    color: $color;
+    color: $color !important;
 
     &-bg {
-      background: $color;
+      background: $color !important;
     }
 
     &-bg.bg-level-2 {
