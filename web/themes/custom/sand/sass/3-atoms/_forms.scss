@@ -42,7 +42,7 @@
   border-radius: 0;
   border: none;
   background: $mercury;
-  /*outline: none;*/
+  outline: none;
   padding: 0.5em;
   width: 100%;
   height: 40px;
@@ -79,11 +79,11 @@ textarea {
   //border-radius: 4px;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: $cerulean !important;
-  /*outline: none;*/
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: solid;
+  outline-color: $science;
 }
 
 input[type="checkbox"],
@@ -97,7 +97,7 @@ button[type="submit"] {
   height: auto;
   width: auto;
   border: none;
-  /*outline: none;*/
+  outline: solid;
   -webkit-appearance: none;
   appearance: none;
   &[value="None"] {
@@ -457,11 +457,17 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
     margin-bottom: 0px;
   }
 
+  .input-group {
+    background-color: white;
+    border-radius: 4px;
+  }
+
   input.search-type,
   input[type="text"] {
     //border-right: none;
     border-radius: 4px 0 0 4px;
     margin-bottom: 0;
+    margin-right: 3px;
   }
 
   input[type="submit"] {
@@ -503,9 +509,14 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
   input {
     //border-color: white;
     border: none;
-    &:focus {
+    outline: none;
+
+    &:focus, &:active {
       border: none !important;
+      outline: solid;
+      outline-color: $science;
     }
+
     &.apachesolr-autocomplete {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
@@ -612,4 +623,13 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
 
 .form--inline .form-actions .button {
   margin-top: 0;
+}
+
+.form-text:focus, .form-tel:focus, .form-email:focus, .form-url:focus, .form-number:focus, .form-color:focus, .form-file:focus, .form-textarea:focus, .form-date:focus, .form-time:focus, .form-select:focus {
+  border: 1px solid #a7abad;
+}
+
+.form-text:focus-visible, .form-tel:focus-visible, .form-email:focus-visible, .form-url:focus-visible, .form-number:focus-visible, .form-color:focus-visible, .form-file:focus-visible, .form-textarea:focus-visible, .form-date:focus-visible, .form-time:focus-visible, .form-select:focus-visible {
+  outline: solid;
+  outline-color: $science;
 }
