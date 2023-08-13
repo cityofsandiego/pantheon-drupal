@@ -117,9 +117,15 @@ a {
  * Improve readability when focused and also mouse hovered in all browsers.
  */
 
+a:focus-visible {
+  outline: solid;
+  outline-color: $science;
+}
+
+a:hover,
 a:active,
-a:hover {
-  outline: 0;
+a:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* Text-level semantics
