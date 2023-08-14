@@ -38,6 +38,27 @@
  * @ingroup themeable
  */
 #}
+
+{% if background_size is not empty %}
+  {% set bg_size = 'background-size: ' ~ background_size ~ ';' %}
+{% else %}
+  {% set bg_size = '' %}
+{% endif %}
+
+{% if min_height is not empty %}
+  {% set min_hgt = 'min-height: ' ~ min_height ~ ';' %}
+{% else %}
+  {% set min_hgt = 'min-height: 300px;' %}
+{% endif %}
+
+{% if hide_on_desktop == "1" %}
+  {% set show = 'hide-on-desktop' %}
+{% elseif hide_on_mobile == "1" %}
+  {% set show = 'hide-on-mobile' %}
+{% else %}
+  {% set show = '' %}
+{% endif %}
+
 {% set body_attributes = create_attribute() %}
 {% set no_img_attributes = create_attribute() %}
 {% set img_attributes = create_attribute() %}
@@ -45,22 +66,20 @@
 {%
   set classes = [
     'section-outreach2',
-    hide_on_desktop,
-    hide_on_mobile,
-    border_bottom,
+    show
   ]
 %}
 
 {%
   set img_classes = [
     'stellar-window',
-    repeat
+    'repeat'
   ]
 %}
 {%
   set body_classes = [
-    text_center,
-    no_shadow,
+    'text_center',
+    'no_shadow',
     'l-padding-vd'
   ]
 %}
@@ -70,16 +89,18 @@
     'l-padding-desktop-hx',
     'l-padding-mobile-hm',
     'l-padding-vd',
-    text_center
+    'text_center'
   ]
 %}
-
 
 {% block paragraph %}
   {% block content %}
     <div {{ attributes.addClass(classes)}}>
     <!-- This section HAS an image -->
     {% if content.field_image.0 %}
+      {% if scroll_ratio == "1.0" %}
+        <div class="bg-cover" style="background-image: url('{{image_url}}');{{bg_size}}{{min_hgt}}background-position-x:{{percent_horizontal}}%;background-position-y:{{percent_vertical}}%;"></div>
+      {% else %}
       <div {{ img_attributes.addClass(img_classes)
         .setAttribute('id', 'img-' ~ paragraph.id())
         .setAttribute('style', 
@@ -107,6 +128,7 @@
             {{ content.field_body }}   
         </div>
       </div>
+      {% endif %}
     {% else %}
     <!-- This section does NOT have an image -->
       <div {{ img_attributes.addClass('no-image').setAttribute('style', 'background-color:' ~ bg_color ~ ';') }}>

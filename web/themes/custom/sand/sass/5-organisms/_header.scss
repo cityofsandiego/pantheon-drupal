@@ -864,6 +864,7 @@ section.not-found {
     div {
       flex: 1;
     }
+
     h4 {
       text-transform: none !important;
     }
@@ -871,16 +872,17 @@ section.not-found {
     a {
       font-size: .9em !important;
       border-top: none !important;
+      color: $link-color !important;
 
       &:hover {
         text-decoration: underline !important;
         background-color: transparent !important;
-        color: $spruce !important;
+        color: lighten($link-color, 10%) !important;
       }
 
       &:focus-visible {
         background-color: transparent !important;
-        color: $spruce !important;
+        //color: $spruce !important;
       }
     }
 
@@ -891,9 +893,11 @@ section.not-found {
     li.level-4 {
       padding: 0;
       margin-bottom: 5px !important;
+      line-height: 1.3em !important;
 
       a {
-        padding: 0;
+        padding: 0 !important;
+        line-height: inherit !important;
       }
     }
 
@@ -919,11 +923,12 @@ section.not-found {
     text-transform: none !important;
     font-size: 0.8125rem !important;
     font-weight: normal !important;
-    color: $spruce !important;
+    color: $link-color !important;
     border: none !important;
 
     &:hover {
       text-decoration: underline !important;
+      color: lighten($link-color, 10%) !important;
     }
 
     &:focus-visible {
