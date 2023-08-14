@@ -113,15 +113,16 @@ final class SectionsOutreach2 implements EventSubscriberInterface {
       $variables->set('repeat', 'repeat-x');
     } 
 
-
     // Hide on desktop or mobile
     if ($paragraph->field_hide_on_desktop->value) {
       $variables->set('hide_on_desktop', 'hide-on-desktop');
-    } 
-
+    }
+    $variables->set('hide_on_desktop', $paragraph->field_hide_on_desktop->value);
+    
     if ($paragraph->field_hide_on_mobile->value) {
       $variables->set('hide_on_mobile', 'hide-on-mobile');
-    } 
+    }
+    $variables->set('hide_on_mobile', $paragraph->field_hide_on_mobile->value);
 
     //Set text styles
     if ($paragraph->field_centered->value) {
