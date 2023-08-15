@@ -28,14 +28,14 @@
         {
             "type": "package",
             "package": {
-              "name": "woocommerce/flexslider",
-              "version": "2.7.2",
-              "type": "drupal-library",
-              "source": {
-                "url": "https://github.com/woocommerce/FlexSlider.git",
-                "type": "git",
-                "reference": "2.7.2"
-              }
+                "name": "woocommerce/flexslider",
+                "version": "2.7.2",
+                "type": "drupal-library",
+                "source": {
+                    "url": "https://github.com/woocommerce/FlexSlider.git",
+                    "type": "git",
+                    "reference": "2.7.2"
+                }
             }
         }
     ],
@@ -148,7 +148,8 @@
         "drupal/sitewide_alert": "^2.1",
         "drupal/flexslider": "^2.0",
         "woocommerce/flexslider": "~2.0",
-        "drupal/multiple_fields_remove_button": "^2.2"
+        "drupal/multiple_fields_remove_button": "^2.2",
+        "drupal/site_alert": "^1.3"
     },
     "require-dev": {
         "drupal/core-dev": "^9.2",
@@ -165,7 +166,7 @@
         "drupal/entity_count": "^1.2"
     },
     "conflict": {
-            "drupal/drupal": "*"
+        "drupal/drupal": "*"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -174,9 +175,7 @@
             "locations": {
                 "web-root": "./web"
             },
-            "allowed-packages": [
-                "pantheon-systems/drupal-integrations"
-            ],
+            "allowed-packages": ["pantheon-systems/drupal-integrations"],
             "file-mapping": {
                 "[project-root]/.editorconfig": false,
                 "[project-root]/pantheon.upstream.yml": false,
@@ -184,39 +183,17 @@
             }
         },
         "installer-paths": {
-            "web/core": [
-                "type:drupal-core"
-            ],
-            "web/libraries/{$name}": [
-                "type:drupal-library"
-            ],
-            "web/modules/contrib/{$name}": [
-                "type:drupal-module"
-            ],
-            "web/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "web/themes/contrib/{$name}": [
-                "type:drupal-theme"
-            ],
-            "drush/Commands/contrib/{$name}": [
-                "type:drupal-drush"
-            ],
-            "web/modules/custom/{$name}": [
-                "type:drupal-custom-module"
-            ],
-            "web/profiles/custom/{$name}": [
-                "type:drupal-custom-profile"
-            ],
-            "web/themes/custom/{$name}": [
-                "type:drupal-custom-theme"
-            ],
-            "web/private/scripts/quicksilver/{$name}/": [
-                "type:quicksilver-script"
-            ],
-            "libraries/{$name}": [
-                "type:drupal-library"
-            ]
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+            "web/profiles/custom/{$name}": ["type:drupal-custom-profile"],
+            "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
+            "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"],
+            "libraries/{$name}": ["type:drupal-library"]
         },
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
@@ -238,23 +215,15 @@
             "drupal/views_selective_filters": {
                 "Pending bugfix for issue #2804485.": "https://www.drupal.org/files/issues/2020-07-13/views_selective_filters-sql_error-2804485-9-8.patch"
             }
-        }
+        },
+        "enable-patching": true
     },
     "autoload": {
-        "classmap": [
-            "upstream-configuration/scripts/ComposerScripts.php"
-        ]
+        "classmap": ["upstream-configuration/scripts/ComposerScripts.php"]
     },
     "scripts": {
-        "pre-update-cmd": [
-            "DrupalComposerManaged\\ComposerScripts::preUpdate"
-        ],
-        "upstream-require": [
-            "DrupalComposerManaged\\ComposerScripts::upstreamRequire"
-        ]
-    },
-    "scripts-descriptions": {
-        "upstream-require": "Add a dependency to an upstream. See https://pantheon.io/docs/create-custom-upstream for information on creating custom upstreams."
+        "pre-update-cmd": ["DrupalComposerManaged\\ComposerScripts::preUpdate"],
+        "post-update-cmd": ["DrupalComposerManaged\\ComposerScripts::postUpdate"]
     },
     "config": {
         "preferred-install": "dist",
@@ -268,7 +237,8 @@
             "drupal/core-composer-scaffold": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "php-http/discovery": true,
-            "simplesamlphp/composer-module-installer": true
+            "simplesamlphp/composer-module-installer": true,
+            "phpstan/extension-installer": true
         }
     }
 }
