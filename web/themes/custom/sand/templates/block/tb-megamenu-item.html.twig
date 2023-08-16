@@ -32,9 +32,9 @@
         <div class="cell auto">{{ link.title_translate }}</div>
         </div></a>
     </li>
-  {% elseif colTitle starts with "More" %}
+  {% elseif colTitle starts with "(More)" %}
     <li {{ attributes }}>
-      <a href="{{ link['url'] }}" style="margin-left: 51%">{{ link.title_translate }}</a>
+      <a href="{{ link['url'] }}" style="margin-left: 51%">{{ link.title_translate|replace({'(More)':''}) }}</a>
     </li>
   {% else %}
     <li {{ attributes }} >
