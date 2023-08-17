@@ -10,9 +10,9 @@
     {% set linkAttributes = linkAttributes.addClass('tb-megamenu-no-submenu') %}
   {% endif %}
 {% endif %}
-{% if colTitle starts with "Title" %}
+{% if colTitle starts with "[Title]" %}
   <li class="cell medium-4 tb-megamenu-block">
-    <h2>{{ link.title_translate|replace({'Title - ':''}) }}</h2>
+    <h2>{{ link.title_translate|replace({'[Title]':''}) }}</h2>
     <p>{{link['attributes'].title}}</p>
   </li>
 {% elseif colTitle == "2nd Column" %}
@@ -24,17 +24,17 @@
       {{ submenu }}
     </li>
 {% else %}
-  {% if itemDesc starts with 'Image' %}
+  {% if itemDesc starts with '[Image]' %}
     <li {{ attributes }} >
         <a href="{{ link['url'] }}">
         <div class="grid-x nav__event">
-        <div class="cell small-3"><img alt="" height="74" src="{{ itemDesc|replace({'Image-':''}) }}" width="74"></div>
+        <div class="cell small-3"><img alt="" height="74" src="{{ itemDesc|replace({'[Image]':''}) }}" width="74"></div>
         <div class="cell auto">{{ link.title_translate }}</div>
         </div></a>
     </li>
-  {% elseif colTitle starts with "(More)" %}
+  {% elseif colTitle starts with "[More]" %}
     <li {{ attributes }}>
-      <a href="{{ link['url'] }}" style="margin-left: 51%">{{ link.title_translate|replace({'(More)':''}) }}</a>
+      <a href="{{ link['url'] }}" style="margin-left: 51%">{{ link.title_translate|replace({'[More]':''}) }}</a>
     </li>
   {% else %}
     <li {{ attributes }} >
