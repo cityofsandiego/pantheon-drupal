@@ -191,7 +191,7 @@ class SandInfoController extends ControllerBase
                 'field_intro',
                 'field_search_keymatch',
             ];
-        $type['events'] =
+        $type['event'] =
             [
                 'body',
                 'field_department',
