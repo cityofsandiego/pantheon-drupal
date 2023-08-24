@@ -119,9 +119,17 @@
       </div>
       {% if content.field_feature_video_img[0] %}
       <div class="cell medium-6">
+      {%if node.field_feature_video_img.entity.field_media_oembed_video.value is not empty %}
+        <div class="l-padding-desktop-am l-padding-mobile-an">
+          <div class="video-wrapper">
+            <iframe width="560" height="315" src="{{ node.field_feature_video_img.entity.field_media_oembed_video.value|replace({"/watch?v=":"/embed/"}) }}?rel=0&wmode=transparent" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      {% else %}
         <div class="l-padding-desktop-am l-padding-mobile-an">
           {{ content.field_feature_video_img }}
         </div>
+      {% endif %}
       </div>
       {% endif %}
     </div>
