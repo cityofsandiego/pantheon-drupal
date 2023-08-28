@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.department.field_dept_card_order
     - field.field.node.department.field_edit_notes
     - field.field.node.department.field_image
+    - field.field.node.department.field_meta_tags
     - field.field.node.department.field_other_description
     - field.field.node.department.field_other_keywords
     - field.field.node.department.field_promote_to_city_home
@@ -22,6 +23,7 @@ dependencies:
     - node.type.department
   module:
     - entity_reference_revisions
+    - metatag
     - text
     - user
 id: node.department.default
@@ -57,6 +59,13 @@ content:
       link: false
     third_party_settings: {  }
     weight: 3
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
     region: content
   field_other_description:
     type: text_default

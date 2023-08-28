@@ -6,15 +6,18 @@ dependencies:
     - field.field.node.outreach2.field_d7_nid
     - field.field.node.outreach2.field_department
     - field.field.node.outreach2.field_edit_notes
+    - field.field.node.outreach2.field_meta_tags
     - field.field.node.outreach2.field_outreach_footer_type
     - field.field.node.outreach2.field_outreach_header_type
     - field.field.node.outreach2.field_outreach_version
     - field.field.node.outreach2.field_search_keymatch
     - field.field.node.outreach2.field_sections_outreach2
     - node.type.outreach2
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - field_group
+    - metatag
     - paragraphs
     - path
     - scheduler
@@ -40,7 +43,7 @@ third_party_settings:
     group_content:
       children:
         - field_sections_outreach2
-      label: Content
+      label: 'Main Content'
       region: content
       parent_name: group_main_tabs
       weight: 20
@@ -56,7 +59,7 @@ third_party_settings:
       children:
         - field_department
         - field_search_keymatch
-      label: Vocabularies
+      label: 'Taxonomy Terms'
       region: content
       parent_name: group_main_tabs
       weight: 21
@@ -83,7 +86,23 @@ third_party_settings:
         open: false
         description: ''
         required_fields: true
-        weight: 0
+        weight: 100
+    group_moderation_state:
+      children:
+        - moderation_state
+      label: 'Moderation State'
+      region: content
+      parent_name: ''
+      weight: 20
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+        weight: -100
 id: node.outreach2.default
 targetEntityType: node
 bundle: outreach2
@@ -110,6 +129,14 @@ content:
     settings:
       rows: 10
       placeholder: ''
+    third_party_settings: {  }
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 101
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
     third_party_settings: {  }
   field_outreach_footer_type:
     type: options_select
