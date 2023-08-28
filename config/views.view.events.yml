@@ -8,7 +8,6 @@ dependencies:
     - field.storage.node.field_event_date
     - field.storage.node.field_subtitle
     - field.storage.node.field_website
-    - node.type.department
     - node.type.event
     - taxonomy.vocabulary.department
     - taxonomy.vocabulary.event
@@ -22,6 +21,7 @@ dependencies:
     - taxonomy
     - text
     - user
+    - views_conditional
 id: events
 label: Events
 module: views
@@ -306,7 +306,7 @@ display:
         type: some
         options:
           offset: 0
-          items_per_page: 100
+          items_per_page: 5
       exposed_form:
         type: basic
         options:
@@ -550,20 +550,7 @@ display:
           table: node__field_department
           field: field_department
           plugin_id: standard
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: false
-          content:
-            value: "<div class=\"view-header\">\r\n      <h3 class=\"l-margin-tn l-margin-bs\">Events</h3>\r\n    </div>"
-            format: basic_html
-          tokenize: false
+      header: {  }
       footer:
         area:
           id: area
@@ -3113,7 +3100,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: ''
+          label: Date
           exclude: true
           alter:
             alter_text: false
@@ -3164,7 +3151,7 @@ display:
             join: ''
             time_format: ''
             time_hour_format: ''
-            allday_label: ''
+            allday_label: 'All Day'
             date_first: '1'
             ampm_reduce: 0
             site_time_toggle: 0
@@ -3186,7 +3173,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: date
-          label: ''
+          label: Time
           exclude: true
           alter:
             alter_text: false
@@ -3230,6 +3217,120 @@ display:
           date_format: custom
           custom_date_format: 'g:i a'
           timezone: ''
+        field_event_date_duration:
+          id: field_event_date_duration
+          table: node__field_event_date
+          field: field_event_date_duration
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: numeric
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          set_precision: false
+          precision: 0
+          decimal: .
+          separator: ''
+          format_plural: false
+          format_plural_string: !!binary MQNAY291bnQ=
+          prefix: ''
+          suffix: ''
+        views_conditional_field:
+          id: views_conditional_field
+          table: views_conditional
+          field: views_conditional_field
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: views_conditional_field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          if: field_event_date_duration
+          condition: eq
+          equalto: '1439'
+          then: 'All Day'
+          then_translate: 0
+          or: '{{ field_event_date_value }}'
+          or_translate: 0
+          strip_tags: 0
         view_node:
           id: view_node
           table: node
@@ -3297,7 +3398,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"event__date\">\r\n  <span class=\"event--month\">{{ field_event_date }} </span>\r\n  <span class=\"event--day\">{{ field_event_date_value }} </span>\r\n\r\n</div>\r\n<div class=\"event__info\">\r\n  <p class=\"l-padding-ls l-margin-bn\"><a href=\"{{ view_node }}\">{{ title }}</a></p>\r\n</div>"
+            text: "<div class=\"event__date\">\r\n  <span class=\"event--month\">{{ field_event_date }} </span>\r\n  <span class=\"event--day\">{{ views_conditional_field }}</span>\r\n\r\n</div>\r\n<div class=\"event__info l-padding-vs\">\r\n  <p class=\"l-padding-ls l-margin-bn\"><a href=\"{{ view_node }}\">{{ title }}</a></p>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -3518,20 +3619,7 @@ display:
         filter_groups: false
         footer: false
       display_description: ''
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: false
-          content:
-            value: '<a class="fine-print" href="/events">View All Events</a>'
-            format: basic_html
-          tokenize: false
+      footer: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -3551,15 +3639,15 @@ display:
     display_options:
       title: 'Legislative Calendar'
       fields:
-        field_event_date:
-          id: field_event_date
+        field_event_date_value_1:
+          id: field_event_date_value_1
           table: node__field_event_date
-          field: field_event_date
+          field: field_event_date_value
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
-          label: ''
+          plugin_id: date
+          label: Date
           exclude: true
           alter:
             alter_text: false
@@ -3595,35 +3683,14 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: smartdate_custom
-          settings:
-            separator: ''
-            date_format: 'M j'
-            custom_date_format: ''
-            timezone: ''
-            join: ''
-            time_format: ''
-            time_hour_format: ''
-            allday_label: ''
-            date_first: '1'
-            ampm_reduce: 0
-            site_time_toggle: 0
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
+          date_format: custom
+          custom_date_format: 'M j'
+          timezone: ''
         field_event_date_value:
           id: field_event_date_value
           table: node__field_event_date
@@ -3632,7 +3699,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: date
-          label: ''
+          label: Time
           exclude: true
           alter:
             alter_text: false
@@ -3676,6 +3743,120 @@ display:
           date_format: custom
           custom_date_format: 'g:i a'
           timezone: ''
+        field_event_date_duration:
+          id: field_event_date_duration
+          table: node__field_event_date
+          field: field_event_date_duration
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: numeric
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          set_precision: false
+          precision: 0
+          decimal: .
+          separator: ''
+          format_plural: false
+          format_plural_string: !!binary MQNAY291bnQ=
+          prefix: ''
+          suffix: ''
+        views_conditional_field:
+          id: views_conditional_field
+          table: views_conditional
+          field: views_conditional_field
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: views_conditional_field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          if: field_event_date_duration
+          condition: eq
+          equalto: '1439'
+          then: 'All Day'
+          then_translate: 0
+          or: '{{ field_event_date_value }}'
+          or_translate: 0
+          strip_tags: 0
         view_node:
           id: view_node
           table: node
@@ -3721,7 +3902,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -3741,7 +3922,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{{ field_website__uri }}'
+            text: '{{ field_website }}'
             make_link: false
             path: ''
             absolute: false
@@ -3773,17 +3954,17 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
+          element_default_classes: false
+          empty: '{{ view_node }}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: uri
-          type: link_separate
+          type: link
           settings:
             trim_length: 80
             url_only: true
-            url_plain: false
+            url_plain: true
             rel: '0'
             target: '0'
           group_column: ''
@@ -3810,7 +3991,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"event__date\" style=\"border-top-color:#0098db\">\r\n  <span class=\"event--month\">{{ field_event_date }} </span>\r\n  <span class=\"event--day\">{{ field_event_date_value }} </span>\r\n</div>\r\n<div class=\"event__info\">\r\n  <p class=\"l-padding-ls l-margin-bn\"><a href=\"{{ field_website }}\">{{ title }}</a></p>\r\n</div>"
+            text: "<div class=\"event__date\" style=\"border-top-color:#0098db\">\r\n  <span class=\"event--month\">{{ field_event_date_value_1 }}</span>\r\n  <span class=\"event--day\">{{ views_conditional_field }}</span>\r\n</div>\r\n<div class=\"event__info l-padding-vs\">\r\n  <p class=\"l-padding-ls l-margin-bn\"><a href=\"{{ field_website }}\">{{ title }}</a></p>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -3887,7 +4068,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            department: department
+            event: event
           group: 1
           exposed: false
           expose:
@@ -4021,34 +4202,8 @@ display:
         header: false
         footer: false
       display_description: ''
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: false
-          content:
-            value: "<div class=\"view-header\">\r\n      <h3 class=\"l-margin-tn l-margin-bs\">Meetings</h3>\r\n    </div>"
-            format: basic_html
-          tokenize: false
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: false
-          content:
-            value: '<a class="fine-print" href="/city-clerk/officialdocs/meetings-calendar">View All Meetings</a>'
-            format: basic_html
-          tokenize: false
+      header: {  }
+      footer: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -4060,7 +4215,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_event_date'
         - 'config:field.storage.node.field_website'
   page_1:
     id: page_1

@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.department.field_dept_card_order
     - field.field.node.department.field_edit_notes
     - field.field.node.department.field_image
+    - field.field.node.department.field_meta_tags
     - field.field.node.department.field_other_description
     - field.field.node.department.field_other_keywords
     - field.field.node.department.field_promote_to_city_home
@@ -20,10 +21,12 @@ dependencies:
     - field.field.node.department.field_sidebar
     - field.field.node.department.field_subtitle
     - node.type.department
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - field_group
     - media_library
+    - metatag
     - paragraphs
     - path
     - scheduler
@@ -37,10 +40,11 @@ third_party_settings:
         - group_content
         - group_vocabularies
         - group_other_fields
+        - group_sidebar
       label: 'Main Tabs'
       region: content
       parent_name: ''
-      weight: 5
+      weight: 6
       format_type: tabs
       format_settings:
         classes: ''
@@ -51,9 +55,8 @@ third_party_settings:
     group_content:
       children:
         - body
-        - field_sidebar
-        - field_resources
-      label: Content
+        - group_resources
+      label: 'Main Content'
       region: content
       parent_name: group_main_tabs
       weight: 27
@@ -70,10 +73,10 @@ third_party_settings:
         - field_department
         - field_category
         - field_search_keymatch
-      label: Vocabularies
+      label: 'Taxonomy Terms'
       region: content
       parent_name: group_main_tabs
-      weight: 28
+      weight: 29
       format_type: tab
       format_settings:
         classes: ''
@@ -84,14 +87,15 @@ third_party_settings:
         required_fields: true
     group_other_fields:
       children:
+        - field_promote_to_city_home
         - field_add_updated_tag
         - field_other_keywords
         - field_other_description
         - field_dept_card_order
-      label: 'Other Fields'
+      label: 'Additional Fields'
       region: content
       parent_name: group_main_tabs
-      weight: 29
+      weight: 30
       format_type: tab
       format_settings:
         classes: ''
@@ -115,7 +119,53 @@ third_party_settings:
         open: false
         description: ''
         required_fields: false
-        weight: 0
+        weight: 100
+    group_moderation_state:
+      children:
+        - moderation_state
+      label: 'Moderation State'
+      region: content
+      parent_name: ''
+      weight: 22
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+        weight: -100
+    group_resources:
+      children:
+        - field_resources
+      label: Resources
+      region: hidden
+      parent_name: group_content
+      weight: 29
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+    group_sidebar:
+      children:
+        - field_sidebar
+      label: Sidebar
+      region: hidden
+      parent_name: group_main_tabs
+      weight: 28
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
 id: node.department.default
 targetEntityType: node
 bundle: department
@@ -123,7 +173,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 31
+    weight: 28
     region: content
     settings:
       rows: 9
@@ -133,13 +183,13 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   field_add_updated_tag:
     type: boolean_checkbox
-    weight: 21
+    weight: 23
     region: content
     settings:
       display_label: true
@@ -164,21 +214,21 @@ content:
     third_party_settings: {  }
   field_dept_card_only:
     type: boolean_checkbox
-    weight: 4
+    weight: 5
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_dept_card_order:
     type: number
-    weight: 24
+    weight: 26
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_edit_notes:
     type: string_textarea
-    weight: 21
+    weight: 22
     region: content
     settings:
       rows: 10
@@ -186,14 +236,22 @@ content:
     third_party_settings: {  }
   field_image:
     type: media_library_widget
-    weight: 2
+    weight: 3
     region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 21
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
   field_other_description:
     type: text_textarea
-    weight: 23
+    weight: 25
     region: content
     settings:
       rows: 5
@@ -201,7 +259,7 @@ content:
     third_party_settings: {  }
   field_other_keywords:
     type: string_textfield
-    weight: 22
+    weight: 24
     region: content
     settings:
       size: 60
@@ -209,14 +267,14 @@ content:
     third_party_settings: {  }
   field_promote_to_city_home:
     type: boolean_checkbox
-    weight: 17
+    weight: 22
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_resources:
     type: paragraphs
-    weight: 33
+    weight: 29
     region: content
     settings:
       title: Paragraph
@@ -234,7 +292,7 @@ content:
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete
-    weight: 14
+    weight: 15
     region: content
     settings:
       match_operator: CONTAINS
@@ -244,7 +302,7 @@ content:
     third_party_settings: {  }
   field_sidebar:
     type: text_textarea
-    weight: 32
+    weight: 31
     region: content
     settings:
       rows: 5
@@ -267,50 +325,55 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 21
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 3
+    weight: 4
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 11
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 13
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
   simple_sitemap:
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 16
+    weight: 18
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 9
+    weight: 10
     region: content
     settings:
       display_label: true
@@ -325,7 +388,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 6
+    weight: 7
     region: content
     settings:
       match_operator: CONTAINS
@@ -335,18 +398,18 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 12
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 14
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 15
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }

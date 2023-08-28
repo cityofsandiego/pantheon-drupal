@@ -7,7 +7,6 @@ dependencies:
   module:
     - entity_reference_revisions
     - taxonomy
-    - user
 id: department_names
 label: 'Department Names'
 module: views
@@ -118,9 +117,8 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: perm
-        options:
-          perm: 'access content'
+        type: none
+        options: {  }
       cache:
         type: time
         options:
@@ -267,7 +265,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.permissions
       tags: {  }
   entityreference_1:
     id: entityreference_1
@@ -298,5 +295,4 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - user.permissions
       tags: {  }

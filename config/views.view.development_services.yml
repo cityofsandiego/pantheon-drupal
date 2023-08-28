@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.media.field_media_document
     - field.storage.node.body
     - field.storage.node.field_attachment
     - field.storage.node.field_category
@@ -15,6 +16,7 @@ dependencies:
     - field.storage.node.field_phone
     - field.storage.node.field_resource_description
     - field.storage.node.field_url
+    - node.type.blog
     - node.type.department_document
     - node.type.event
     - node.type.resources
@@ -34,7 +36,9 @@ dependencies:
     - 'taxonomy_term:department:6ae950c3-aa44-4a3d-8a1c-156c2921c4c3'
     - 'taxonomy_term:department:87d2f0eb-263f-41ab-9d01-5b1b5ff44150'
   module:
+    - file
     - link
+    - media
     - node
     - semanticviews
     - smart_date
@@ -202,7 +206,7 @@ display:
       row:
         type: fields
         options:
-          default_field_elements: true
+          default_field_elements: false
           inline: {  }
           separator: ''
           hide_empty: false
@@ -856,7 +860,7 @@ display:
           element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -864,7 +868,7 @@ display:
           click_sort_column: target_id
           type: entity_reference_label
           settings:
-            link: true
+            link: false
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -884,7 +888,7 @@ display:
           admin_label: ''
           plugin_id: field
           label: 'Form Number'
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -919,7 +923,7 @@ display:
           element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -1109,7 +1113,7 @@ display:
           element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -1310,6 +1314,59 @@ display:
           text: Edit
           output_url_as_text: false
           absolute: true
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: Path
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
         field_attachment:
           id: field_attachment
           table: node__field_attachment
@@ -1354,7 +1411,7 @@ display:
           element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -1362,8 +1419,70 @@ display:
           click_sort_column: target_id
           type: entity_reference_label
           settings:
-            link: true
+            link: false
           group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_media_document:
+          id: field_media_document
+          table: media__field_media_document
+          field: field_media_document
+          relationship: field_attachment
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: '{{ view_node }}'
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: file_url_plain
+          settings: {  }
+          group_column: ''
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -1436,59 +1555,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        view_node:
-          id: view_node
-          table: node
-          field: view_node
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          plugin_id: entity_link
-          label: Path
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: view
-          output_url_as_text: false
-          absolute: false
         field_url:
           id: field_url
           table: node__field_url
@@ -1608,7 +1674,7 @@ display:
           if: field_category
           condition: eq
           equalto: 'Information Bulletin'
-          then: "<p class=\"text-accent--desktop l-margin-ts\"><a href=\"{{ field_attachment }}\">[title]</a></p>\r\n<p><strong class=\"text-upper\">{{ field_category }}{{ field_other_keywords }}</strong></p>\r\n{{ field_other_description }}\r\n<p class=\"fine-print\"><em>Revised {{ created }}</em></p>\r\n<hr class=\"l-margin-vm\">"
+          then: "<hr class=\"l-margin-vm\">\r\n<p class=\"text-accent--desktop l-margin-ts\"><a href=\"{{ field_media_document }}\">{{ title }}</a></p>\r\n<p><strong class=\"text-upper\">{{ field_category }}{{ field_other_keywords }}</strong></p>\r\n{{ field_other_description }}\r\n<p class=\"fine-print\"><em>Revised {{ created }}</em></p>"
           then_translate: 1
           or: '{{ field_dept_doc_id }}'
           or_translate: 1
@@ -1684,6 +1750,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
+            blog: blog
             department_document: department_document
           group: 1
           exposed: false
@@ -1889,10 +1956,21 @@ display:
         use_ajax: false
         style: false
         row: false
+        relationships: false
         fields: false
         sorts: false
         filters: false
         filter_groups: false
+      relationships:
+        field_attachment:
+          id: field_attachment
+          table: node__field_attachment
+          field: field_attachment
+          relationship: none
+          group_type: group
+          admin_label: 'field_attachment: Media'
+          plugin_id: standard
+          required: false
       use_ajax: true
       display_description: ''
       display_extenders: {  }
@@ -1907,6 +1985,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_media_document'
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_attachment'
         - 'config:field.storage.node.field_category'
@@ -7668,11 +7747,11 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: timestamp
+          type: timestamp_ago
           settings:
-            date_format: custom
-            custom_date_format: m/d/y
-            timezone: ''
+            future_format: '@interval hence'
+            past_format: '@interval ago'
+            granularity: 4
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -7762,7 +7841,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border\">\r\n<div class=\"card__content\">\r\n<p class=\"card__headline\">\r\n<a href=\"{{ field_url }}\">{{ title }}</a>\r\n</p>\r\n<p class=\"fine-print\"><em>{{ created }}</em></p>\r\n</div>\r\n</div> "
+            text: "<div class=\"card off-white-bg border l-padding-ad\">\r\n<p class=\"card__headline l-margin-bs\">\r\n<a href=\"{{ field_url }}\">{{ title }}</a>\r\n</p>\r\n<p class=\"fine-print\"><em>{{ created }}</em></p>\r\n</div> "
             make_link: false
             path: ''
             absolute: false
@@ -7794,7 +7873,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -8024,12 +8103,12 @@ display:
           row_class: card__wrap
           default_row_class: false
           type: ul
-          wrapper_class: item-list
+          wrapper_class: card__container
           class: slides
       row:
         type: fields
         options:
-          default_field_elements: true
+          default_field_elements: false
           inline: {  }
           separator: ''
           hide_empty: false
@@ -9448,19 +9527,19 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        nothing:
-          id: nothing
+        counter:
+          id: counter
           table: views
-          field: nothing
+          field: counter
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: custom
+          plugin_id: counter
           label: ''
-          exclude: false
+          exclude: true
           alter:
-            alter_text: true
-            text: "<div class=\"row\">\r\n<div class=\"two sm-three columns l-padding-desktop-ln\">\r\n<p class=\"h5 heading--trim text-center\">{{ created }}</p>\r\n</div>\r\n<div class=\"ten sm-nine columns l-padding-desktop-rn\">\r\n<p><a href=\"{{ field_url }}\">{{ title }}</a></p>\r\n{{ body }}\r\n</div>\r\n</div>"
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -9492,7 +9571,57 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          counter_start: 1
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<hr id=\"hr-{{ counter }}\" class=\"hr--dashed\">\r\n\r\n<div class=\"grid-x grid-margin-x\">\r\n\t<div class=\"cell medium-2\">\r\n\t\t<p class=\"date\">{{ created }}</p>\r\n\t</div>\r\n\t<div class=\"cell medium-auto\">\r\n\t\t<p><a href=\"{{ field_url }}\">{{ title }}</a></p>\r\n\t</div>\r\n</div>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -11113,19 +11242,19 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        nothing:
-          id: nothing
+        counter:
+          id: counter
           table: views
-          field: nothing
+          field: counter
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: custom
+          plugin_id: counter
           label: ''
-          exclude: false
+          exclude: true
           alter:
-            alter_text: true
-            text: "<hr class=\"l-margin-vm\" />\r\n<div class=\"hero__wrap\">\r\n<p class=\"text-accent\">{{ title }}</p>\r\n<p>{{ body_1 }}</p>\r\n</div>"
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -11157,7 +11286,57 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          counter_start: 1
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<hr id=\"hr-{{ counter }}\" class=\"l-margin-vm\">\r\n<p class=\"text-accent\">{{ title }}</p>\r\n<p>{{ body }}</p>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false

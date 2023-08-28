@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.blog.field_edit_notes
     - field.field.node.blog.field_feature_video_img
     - field.field.node.blog.field_keywords
+    - field.field.node.blog.field_meta_tags
     - field.field.node.blog.field_other_description
     - field.field.node.blog.field_other_keywords
     - field.field.node.blog.field_promote_to_city_home
@@ -23,6 +24,7 @@ dependencies:
     - node.type.blog
   module:
     - link
+    - metatag
     - text
     - user
 id: node.blog.default
@@ -50,6 +52,13 @@ content:
       link: false
     third_party_settings: {  }
     weight: 4
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
     region: content
   field_other_description:
     type: text_default

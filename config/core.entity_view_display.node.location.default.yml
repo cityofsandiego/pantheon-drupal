@@ -27,6 +27,7 @@ dependencies:
     - field.field.node.location.field_location_hours_title
     - field.field.node.location.field_location_hours_title_2
     - field.field.node.location.field_location_type
+    - field.field.node.location.field_meta_tags
     - field.field.node.location.field_partial_re_open_citywide
     - field.field.node.location.field_phone
     - field.field.node.location.field_resources
@@ -42,6 +43,7 @@ dependencies:
     - entity_reference_revisions
     - geofield_map
     - link
+    - metatag
     - office_hours
     - smart_date
     - text
@@ -291,9 +293,9 @@ content:
         open_text: 'Currently open!'
         closed_text: 'Currently closed'
       exceptions:
+        title: 'Exception hours'
         restrict_exceptions_to_num_days: 7
         date_format: long
-        title: 'Exception hours'
       timezone_field: ''
       office_hours_first_day: '0'
       schema:
@@ -322,9 +324,9 @@ content:
         open_text: 'Currently open!'
         closed_text: 'Currently closed'
       exceptions:
+        title: 'Exception hours'
         restrict_exceptions_to_num_days: 7
         date_format: long
-        title: 'Exception hours'
       timezone_field: ''
       office_hours_first_day: ''
       schema:
@@ -369,6 +371,13 @@ content:
       link: true
     third_party_settings: {  }
     weight: 31
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 32
     region: content
   field_partial_re_open_citywide:
     type: boolean

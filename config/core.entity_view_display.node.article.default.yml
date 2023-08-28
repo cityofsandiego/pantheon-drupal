@@ -11,11 +11,13 @@ dependencies:
     - field.field.node.article.field_d7_nid
     - field.field.node.article.field_department
     - field.field.node.article.field_image
+    - field.field.node.article.field_meta_tags
     - field.field.node.article.field_search_keymatch
     - field.field.node.article.field_sidebar
     - field.field.node.article.field_subtitle
     - node.type.article
   module:
+    - metatag
     - text
     - user
 id: node.article.default
@@ -50,6 +52,13 @@ content:
       link: false
     third_party_settings: {  }
     weight: 3
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
     region: content
   field_sidebar:
     type: text_default
