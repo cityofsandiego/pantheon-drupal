@@ -1,8 +1,18 @@
 {{ title_prefix }}
 {% if department_title is defined %}
     {% if department_title == 'Inside San Diego' %}
-      <h1>{{ department_title }}</h1>
-      <p class="main__tagline">Stories about City Services, Employees, Residents and Communities</p>
+      <div class="grid-container l-padding-hn">
+        <div class="grid-x l-margin-tm l-flex-center-v">
+          <div class="cell medium-4 text-center--mobile">
+            <h1 class="visuallyhidden">{{ department_title }}</h1>
+            <p><img src="/themes/custom/sand/images/inside-sd-logo.svg" alt="Inside San Diego logo" width="200" height="auto"></p>
+          </div>
+          <div class="cell medium-auto">
+            <p class="main__tagline">News &amp; information from the City&nbsp;of&nbsp;San&nbsp;Diego</p>
+          </div>
+        </div>
+        {{ drupal_menu('inside-san-diego') }}
+      </div>
     {% else %}
       <div class="main__message main__message--transparent">
         <p class="h1 main__heading">{{ department_title }}</p>
@@ -50,8 +60,4 @@
     </div>
   </div>
   {% endif %}
-{% endif %}
-
-{% if department_title == 'Inside San Diego' %}
-  {{ drupal_menu('inside-san-diego') }}
 {% endif %}
