@@ -16,15 +16,27 @@
     }
   }
 
+  .hero__bg.hero__bg--secondary {
+    height: 16rem;
+
+    @include breakpoint(mobile-landscape) {
+      height: 8rem;
+    }
+  }
+
   .article-menu{
     @include breakpoint(medium) {
       justify-content: end;
-      padding-top: 1.5rem;
+      //padding-top: 1.5rem;
     }
 
     li {
       a {
         background-color: $endeavour;
+        
+        @include breakpoint(mobile-landscape down) {
+          background-color: $teal;
+        }
       }
 
       &:last-child {
@@ -47,16 +59,22 @@
   }
 
   .main__tagline {
-    margin: 10px 0 0 0;
+    margin: 0 0 1em 0;
     color: white;
     font-size: 16px;
-    font-size: 1rem;
-    text-align: left;
-    font-weight: bold;
-    line-height: 1rem;
+    font-size: 1.5em;
+    font-family: $headline;
+    text-align: right;
+    font-style: italic;
+    line-height: 1.8rem;
     background-color: transparent;
-    text-shadow: 0 0 #555, 0 2px 0.5em black, 2px 0 0.5em black, 0 0 black;
-    padding:0 2rem 1rem 0;
+    //text-shadow: 0 0 #555, 0 2px 0.5em black, 2px 0 0.5em black, 0 0 black;
+    padding: 0;
+
+    @include breakpoint(mobile-landscape down) {
+      margin: 1em 0;
+      text-align: center;
+    }
   }
 
   .sub-navigation-mobile .accordion__heading,
