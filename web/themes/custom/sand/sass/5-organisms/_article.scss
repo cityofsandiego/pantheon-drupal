@@ -1,7 +1,7 @@
 .node-type-article {
   .simple-header {
     background: $white;
-    box-shadow: 0 4px 3px -3px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
     z-index: 1;
     position: relative;
   }
@@ -16,6 +16,14 @@
     }
   }
 
+  .image-style-article-100 {
+    margin-bottom: 2em;
+  }
+
+  .view-content .image-style-article-100 {
+    margin-bottom: 0 !important;
+  }
+
   .hero__bg.hero__bg--secondary {
     height: 16rem;
 
@@ -24,7 +32,7 @@
     }
   }
 
-  .article-menu{
+  .article-menu {
     @include breakpoint(medium) {
       justify-content: end;
       //padding-top: 1.5rem;
@@ -33,10 +41,6 @@
     li {
       a {
         background-color: $endeavour;
-        
-        @include breakpoint(mobile-landscape down) {
-          background-color: $teal;
-        }
       }
 
       &:last-child {
@@ -45,10 +49,17 @@
     }
   }
 
+  h2,
+  .h5 {
+    a {
+      color: $spruce;
+      text-decoration: none;
+    }
+  }
   .page-title {
     text-align: left;
-    padding:1.5rem 2rem 0;
-    
+    padding: 1.5rem 2rem 0;
+
     @include breakpoint(medium) {
       padding-left: 0;
     }
@@ -59,7 +70,7 @@
   }
 
   .main__tagline {
-    margin: 0 0 1em 0;
+    margin: 0 0 0.7em 0;
     color: white;
     font-size: 16px;
     font-size: 1.5em;
@@ -77,8 +88,8 @@
     }
   }
 
-  .sub-navigation-mobile .accordion__heading,
-  .sub-navigation-mobile .accordion__drawer {
+  .sub-navigation-mobile .accordions .accordion__heading,
+  .sub-navigation-mobile .accordions .accordion__drawer {
     color: #fff;
     background: $endeavour;
     // border: none;
@@ -89,9 +100,21 @@
       height: 100%;
     }
   }
+
+  input[type="submit"] {
+    outline: none;
+    font-size: 0.8em !important;
+  }
+
+  input[data-drupal-selector="edit-reset"] {
+    color: $spruce;
+    background-color: $sunshade;
+
+    &:hover {
+      background-color: lighten($sunshade,10%);
+    }
+  }
 }
-
-
 
 /* Entry
    ========================================================================== */
@@ -103,7 +126,7 @@
   }
 
   @include breakpoint(medium) {
-    @include rem('font-size', 13px);
+    @include rem("font-size", 13px);
 
     .social-share__wrap {
       margin: 1em 0;
