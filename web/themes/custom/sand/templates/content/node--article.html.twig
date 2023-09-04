@@ -81,12 +81,11 @@
   ]
 %}
 <article {{ attributes.addClass(classes) }}>
-
   {% if node.title.value == "Inside San Diego Home" %}
   <div class="white-bg">
-    <div {{ content_attributes.addClass('node__content grid-container') }}>
+    <div {{ content_attributes.addClass('node__content grid-container main-grid-container') }}>
   {% else %}
-  <div class="grid-container white-bg l-padding-hn">
+  <div class="grid-container main-grid-container white-bg l-padding-hn">
     <div {{ content_attributes.addClass('node__content') }}>
   {% endif %}
       <div class="grid-x">
@@ -97,7 +96,7 @@
           {% if content.field_subtitle.0 %}
             <h3 class="l-padding-desktop-hs">{{ content.field_subtitle }}</h3>
           {% endif %}
-          <div class="l-margin-desktop-tm">
+          <div>
             {{ content.field_image }}
             {{ content.field_body_no_margin }}
             {{ content.body }}

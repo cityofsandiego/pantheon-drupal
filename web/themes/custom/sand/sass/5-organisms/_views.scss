@@ -1,5 +1,5 @@
 //General style for views
-.view {
+.view, views-exposed-form {
   label {
     font-weight: bold;
     color: $spruce;
@@ -24,11 +24,12 @@
   }
 
   input[data-drupal-selector="edit-reset"] {
-    background-color: $success;
-    color: $white;
+    background-color: $sunshade;
+    color: $spruce;
+    outline: none;
 
     &:hover {
-      background-color: #48710e;
+      background-color: lighten($sunshade, 10%);
     }
   }
 
@@ -312,13 +313,15 @@
 
 
 // Article views
+.view-id-articles.view-display-id-block_1,
 .view-id-articles.view-display-id-block_2,
 .view-id-articles.view-display-id-block_3 {
   .view-content {
-    width: calc(100% + 32px);
+    //width: calc(100% + 32px);
     display: flex;
     flex-direction: column;
-    margin-left: -16px;
+    margin-left: -2rem;
+    margin-right: -2rem;
 
     .field-content {
       padding: 0 24px;
@@ -335,8 +338,13 @@
 
   .odd {
     background-color: $off-white;
-    margin: 1.5rem 0;
-    padding: 1rem 0;
+  }
+
+  h3 {
+    a {
+      color: $spruce;
+      text-decoration: none;
+    }
   }
 
   .pager {

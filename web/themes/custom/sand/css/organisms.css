@@ -1655,6 +1655,12 @@ textarea {
     height: 400px;
     padding: 0; }
 
+.node-type-article .image-style-article-100 {
+  margin-bottom: 2em; }
+
+.node-type-article .view-content .image-style-article-100 {
+  margin-bottom: 0 !important; }
+
 .node-type-article .hero__bg.hero__bg--secondary {
   height: 16rem; }
   @media print, screen and (min-width: 30em) {
@@ -1667,12 +1673,14 @@ textarea {
 
 .node-type-article .article-menu li a {
   background-color: #00549f; }
-  @media print, screen and (max-width: 37.49875em) {
-    .node-type-article .article-menu li a {
-      background-color: #009581; } }
 
 .node-type-article .article-menu li:last-child {
   margin-right: 0; }
+
+.node-type-article h2 a,
+.node-type-article .h5 a {
+  color: #37424a;
+  text-decoration: none; }
 
 .node-type-article .page-title {
   text-align: left;
@@ -1685,7 +1693,7 @@ textarea {
   margin: 0 -1em 0; }
 
 .node-type-article .main__tagline {
-  margin: 0 0 1em 0;
+  margin: 0 0 0.7em 0;
   color: white;
   font-size: 16px;
   font-size: 1.5em;
@@ -1700,14 +1708,24 @@ textarea {
       margin: 1em 0;
       text-align: center; } }
 
-.node-type-article .sub-navigation-mobile .accordion__heading,
-.node-type-article .sub-navigation-mobile .accordion__drawer {
+.node-type-article .sub-navigation-mobile .accordions .accordion__heading,
+.node-type-article .sub-navigation-mobile .accordions .accordion__drawer {
   color: #fff;
   background: #00549f; }
 
 @media print, screen and (min-width: 30em) {
   .node-type-article .sidebar-inner {
     height: 100%; } }
+
+.node-type-article input[type="submit"] {
+  outline: none;
+  font-size: 0.8em !important; }
+
+.node-type-article input[data-drupal-selector="edit-reset"] {
+  color: #37424a;
+  background-color: #ffa02f; }
+  .node-type-article input[data-drupal-selector="edit-reset"]:hover {
+    background-color: #ffb762; }
 
 /* Entry
    ========================================================================== */
@@ -1951,7 +1969,7 @@ textarea {
   padding: 0; }
   .node-type-department-parent .sidebar ul li {
     margin: 0 0 0.5rem 0; }
-    .node-type-department-parent .sidebar ul li .btn, .node-type-department-parent .sidebar ul li .view input[type="submit"], .view .node-type-department-parent .sidebar ul li input[type="submit"] {
+    .node-type-department-parent .sidebar ul li .btn, .node-type-department-parent .sidebar ul li .view input[type="submit"], .view .node-type-department-parent .sidebar ul li input[type="submit"], .node-type-department-parent .sidebar ul li views-exposed-form input[type="submit"], views-exposed-form .node-type-department-parent .sidebar ul li input[type="submit"] {
       font-size: 0.9rem !important;
       padding: 0.75em 1em;
       width: 100%; }
@@ -1963,7 +1981,7 @@ textarea {
     .node-type-department-parent .sidebar ul.list-normal li {
       margin: 0 0 0.5rem 1rem; }
 
-.node-type-department-parent .sidebar .btn, .node-type-department-parent .sidebar .view input[type="submit"], .view .node-type-department-parent .sidebar input[type="submit"] {
+.node-type-department-parent .sidebar .btn, .node-type-department-parent .sidebar .view input[type="submit"], .view .node-type-department-parent .sidebar input[type="submit"], .node-type-department-parent .sidebar views-exposed-form input[type="submit"], views-exposed-form .node-type-department-parent .sidebar input[type="submit"] {
   font-size: 1rem !important; }
 
 .node-type-department-parent .slides {
@@ -2060,13 +2078,17 @@ textarea {
     .node--type-webform .sidebar ul li,
     .node--type-event .sidebar ul li {
       margin: 0 0 0.5rem 0; }
-      .node--type-department .sidebar ul li .btn, .node--type-department .sidebar ul li .view input[type="submit"], .view .node--type-department .sidebar ul li input[type="submit"],
+      .node--type-department .sidebar ul li .btn, .node--type-department .sidebar ul li .view input[type="submit"], .view .node--type-department .sidebar ul li input[type="submit"], .node--type-department .sidebar ul li views-exposed-form input[type="submit"], views-exposed-form .node--type-department .sidebar ul li input[type="submit"],
       .node--type-webform .sidebar ul li .btn,
       .node--type-webform .sidebar ul li .view input[type="submit"],
       .view .node--type-webform .sidebar ul li input[type="submit"],
+      .node--type-webform .sidebar ul li views-exposed-form input[type="submit"],
+      views-exposed-form .node--type-webform .sidebar ul li input[type="submit"],
       .node--type-event .sidebar ul li .btn,
       .node--type-event .sidebar ul li .view input[type="submit"],
-      .view .node--type-event .sidebar ul li input[type="submit"] {
+      .view .node--type-event .sidebar ul li input[type="submit"],
+      .node--type-event .sidebar ul li views-exposed-form input[type="submit"],
+      views-exposed-form .node--type-event .sidebar ul li input[type="submit"] {
         font-size: 0.9rem !important;
         padding: 0.75em 1em;
         width: 100%; }
@@ -2890,11 +2912,14 @@ textarea {
       color: #37424a; }
 
 .header.simple-header {
-  padding: 0.5rem 1rem 0.6rem;
+  padding: 0.5rem 1em 0.6rem;
   box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
   z-index: 5;
   position: relative;
   background-color: white; }
+  @media print, screen and (min-width: 30em) {
+    .header.simple-header {
+      padding: 0.5rem 0 0.6rem; } }
   .header.simple-header .logo {
     text-decoration: none;
     display: flex;
@@ -3308,7 +3333,7 @@ section.not-found {
     text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black;
     font-size: 18px;
     font-size:  1.125rem; }
-  .hero__content .btn, .hero__content .view input[type="submit"], .view .hero__content input[type="submit"] {
+  .hero__content .btn, .hero__content .view input[type="submit"], .view .hero__content input[type="submit"], .hero__content views-exposed-form input[type="submit"], views-exposed-form .hero__content input[type="submit"] {
     font-size: 1rem;
     margin-top: 1em;
     font-weight: normal;
@@ -3323,7 +3348,7 @@ section.not-found {
       .hero__content p {
         font-size: 24px;
         font-size:  1.5rem; }
-      .hero__content .btn, .hero__content .view input[type="submit"], .view .hero__content input[type="submit"] {
+      .hero__content .btn, .hero__content .view input[type="submit"], .view .hero__content input[type="submit"], .hero__content views-exposed-form input[type="submit"], views-exposed-form .hero__content input[type="submit"] {
         margin-top: 1.5em;
         display: inline-block; } }
   @media print, screen and (min-width: 60em) {
@@ -3797,30 +3822,31 @@ section.homepage .hero__content {
       margin-right: -4em !important;
       padding: 2em 4em; } }
 
-.view label {
+.view label, views-exposed-form label {
   font-weight: bold;
   color: #37424a; }
 
-.view .form-item {
+.view .form-item, views-exposed-form .form-item {
   margin-bottom: 0; }
   @media print, screen and (min-width: 30em) {
-    .view .form-item {
+    .view .form-item, views-exposed-form .form-item {
       margin-bottom: 1.5rem; } }
-  .view .form-item input {
+  .view .form-item input, views-exposed-form .form-item input {
     border-radius: 4px;
     border: 1px solid #a7abad;
     font-size: .8125rem; }
 
-.view input[data-drupal-selector="edit-reset"] {
-  background-color: #659f13;
-  color: #fff; }
-  .view input[data-drupal-selector="edit-reset"]:hover {
-    background-color: #48710e; }
+.view input[data-drupal-selector="edit-reset"], views-exposed-form input[data-drupal-selector="edit-reset"] {
+  background-color: #ffa02f;
+  color: #37424a;
+  outline: none; }
+  .view input[data-drupal-selector="edit-reset"]:hover, views-exposed-form input[data-drupal-selector="edit-reset"]:hover {
+    background-color: #ffb762; }
 
-.view .form-actions {
+.view .form-actions, views-exposed-form .form-actions {
   gap: 1rem; }
 
-.view .form--inline .form-select {
+.view .form--inline .form-select, views-exposed-form .form--inline .form-select {
   max-width: 100%; }
 
 /* Table from sorted view
@@ -3990,27 +4016,36 @@ section.homepage .hero__content {
 .view-id-cold_cases .pager {
   margin: 1rem 0 2rem; }
 
+.view-id-articles.view-display-id-block_1 .view-content,
 .view-id-articles.view-display-id-block_2 .view-content,
 .view-id-articles.view-display-id-block_3 .view-content {
-  width: calc(100% + 32px);
   display: flex;
   flex-direction: column;
-  margin-left: -16px; }
+  margin-left: -2rem;
+  margin-right: -2rem; }
+  .view-id-articles.view-display-id-block_1 .view-content .field-content,
   .view-id-articles.view-display-id-block_2 .view-content .field-content,
   .view-id-articles.view-display-id-block_3 .view-content .field-content {
     padding: 0 24px;
     display: block; }
+    .view-id-articles.view-display-id-block_1 .view-content .field-content h3 a,
     .view-id-articles.view-display-id-block_2 .view-content .field-content h3 a,
     .view-id-articles.view-display-id-block_3 .view-content .field-content h3 a {
       color: #37424a;
       text-decoration: none; }
 
+.view-id-articles.view-display-id-block_1 .odd,
 .view-id-articles.view-display-id-block_2 .odd,
 .view-id-articles.view-display-id-block_3 .odd {
-  background-color: #f6f6f6;
-  margin: 1.5rem 0;
-  padding: 1rem 0; }
+  background-color: #f6f6f6; }
 
+.view-id-articles.view-display-id-block_1 h3 a,
+.view-id-articles.view-display-id-block_2 h3 a,
+.view-id-articles.view-display-id-block_3 h3 a {
+  color: #37424a;
+  text-decoration: none; }
+
+.view-id-articles.view-display-id-block_1 .pager,
 .view-id-articles.view-display-id-block_2 .pager,
 .view-id-articles.view-display-id-block_3 .pager {
   margin: 0; }
