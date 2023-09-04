@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.resources.field_import_id
     - field.field.node.resources.field_internet
     - field.field.node.resources.field_laptop
+    - field.field.node.resources.field_meta_tags
     - field.field.node.resources.field_number_of_computers
     - field.field.node.resources.field_phone
     - field.field.node.resources.field_phone_in_room
@@ -34,6 +35,7 @@ dependencies:
     - content_moderation
     - field_group
     - link
+    - metatag
     - path
     - scheduler
     - scheduler_content_moderation_integration
@@ -47,11 +49,11 @@ third_party_settings:
         - group_content
         - group_type
         - group_vocabularies
-        - group_update_notes
+        - group_additional_fields
       label: 'Main Tabs'
       region: content
       parent_name: ''
-      weight: 15
+      weight: 16
       format_type: tabs
       format_settings:
         classes: ''
@@ -61,12 +63,18 @@ third_party_settings:
         width_breakpoint: 640
     group_content:
       children:
+        - field_resource_first_name
         - field_resource_description
         - field_phone
         - field_email
         - field_url
         - field_address
-      label: Content
+        - field_image
+        - field_position
+        - field_contact
+        - field_company
+        - field_resource_group
+      label: 'Main Content'
       region: content
       parent_name: group_main_tabs
       weight: 15
@@ -80,20 +88,13 @@ third_party_settings:
         required_fields: true
     group_type:
       children:
-        - field_resource_type
         - field_internet
         - field_laptop
         - field_projector_big_screen
         - field_room_capacity
         - field_phone_in_room
         - field_number_of_computers
-        - field_company
-        - field_resource_first_name
-        - field_image
-        - field_contact
-        - field_position
-        - field_resource_group
-      label: Type
+      label: 'Room Info'
       region: content
       parent_name: group_main_tabs
       weight: 16
@@ -109,7 +110,7 @@ third_party_settings:
       children:
         - field_department
         - field_category
-      label: Vocabularies
+      label: 'Taxonomy Terms'
       region: content
       parent_name: group_main_tabs
       weight: 17
@@ -126,6 +127,38 @@ third_party_settings:
         - field_edit_notes
       label: 'Update Notes'
       region: content
+      parent_name: ''
+      weight: 17
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+        weight: 100
+    group_moderation_state:
+      children:
+        - moderation_state
+      label: 'Moderation State'
+      region: content
+      parent_name: ''
+      weight: 20
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+        weight: -100
+    group_additional_fields:
+      children:
+        - field_import_id
+      label: 'Additional Fields'
+      region: hidden
       parent_name: group_main_tabs
       weight: 18
       format_type: tab
@@ -149,7 +182,7 @@ content:
     third_party_settings: {  }
   field_address:
     type: address_default
-    weight: 19
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -165,7 +198,7 @@ content:
     third_party_settings: {  }
   field_company:
     type: string_textfield
-    weight: 23
+    weight: 26
     region: content
     settings:
       size: 60
@@ -191,7 +224,7 @@ content:
             selector: ''
   field_contact:
     type: string_textfield
-    weight: 26
+    weight: 25
     region: content
     settings:
       size: 60
@@ -225,7 +258,7 @@ content:
     third_party_settings: {  }
   field_edit_notes:
     type: string_textarea
-    weight: 22
+    weight: 21
     region: content
     settings:
       rows: 10
@@ -233,7 +266,7 @@ content:
     third_party_settings: {  }
   field_email:
     type: email_default
-    weight: 17
+    weight: 20
     region: content
     settings:
       placeholder: ''
@@ -241,7 +274,7 @@ content:
     third_party_settings: {  }
   field_image:
     type: entity_reference_autocomplete
-    weight: 25
+    weight: 23
     region: content
     settings:
       match_operator: CONTAINS
@@ -269,14 +302,14 @@ content:
             selector: ''
   field_import_id:
     type: number
-    weight: 14
+    weight: 25
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_internet:
     type: options_buttons
-    weight: 17
+    weight: 32
     region: content
     settings: {  }
     third_party_settings:
@@ -300,7 +333,7 @@ content:
             selector: ''
   field_laptop:
     type: options_buttons
-    weight: 18
+    weight: 33
     region: content
     settings: {  }
     third_party_settings:
@@ -322,9 +355,17 @@ content:
             effect: show
             effect_options: {  }
             selector: ''
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 38
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
   field_number_of_computers:
     type: number
-    weight: 22
+    weight: 37
     region: content
     settings:
       placeholder: ''
@@ -349,14 +390,14 @@ content:
             selector: ''
   field_phone:
     type: telephone_default
-    weight: 16
+    weight: 19
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_phone_in_room:
     type: options_buttons
-    weight: 21
+    weight: 36
     region: content
     settings: {  }
     third_party_settings:
@@ -380,7 +421,7 @@ content:
             selector: ''
   field_position:
     type: string_textfield
-    weight: 27
+    weight: 24
     region: content
     settings:
       size: 60
@@ -406,7 +447,7 @@ content:
             selector: ''
   field_projector_big_screen:
     type: options_buttons
-    weight: 19
+    weight: 34
     region: content
     settings: {  }
     third_party_settings:
@@ -430,7 +471,7 @@ content:
             selector: ''
   field_resource_description:
     type: text_textarea_with_summary
-    weight: 15
+    weight: 18
     region: content
     settings:
       rows: 9
@@ -440,7 +481,7 @@ content:
     third_party_settings: {  }
   field_resource_first_name:
     type: string_textfield
-    weight: 24
+    weight: 17
     region: content
     settings:
       size: 60
@@ -466,7 +507,7 @@ content:
             selector: ''
   field_resource_group:
     type: options_select
-    weight: 28
+    weight: 27
     region: content
     settings: {  }
     third_party_settings:
@@ -490,13 +531,13 @@ content:
             selector: ''
   field_resource_type:
     type: options_select
-    weight: 16
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
   field_room_capacity:
     type: number
-    weight: 20
+    weight: 35
     region: content
     settings:
       placeholder: ''
@@ -521,7 +562,7 @@ content:
             selector: ''
   field_url:
     type: link_default
-    weight: 18
+    weight: 21
     region: content
     settings:
       placeholder_url: ''
@@ -554,7 +595,7 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 16
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
