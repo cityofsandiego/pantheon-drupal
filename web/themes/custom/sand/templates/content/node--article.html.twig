@@ -96,6 +96,13 @@
           {% if content.field_subtitle.0 %}
             <h3 class="l-padding-desktop-hs">{{ content.field_subtitle }}</h3>
           {% endif %}
+          <div class="byline l-margin-bd">
+          {% if (content.field_byline.0) and (node.title.value != "Inside San Diego Home") %}
+          <p>{{ date.value|date("F j, Y") }} | {{ content.field_byline.0 }}</p>
+          {% else %}
+          <p>{{ date.value|date("F j, Y") }}</p>
+          {% endif %}
+          </div>
           <div>
             {{ content.field_image }}
             {{ content.field_body_no_margin }}
