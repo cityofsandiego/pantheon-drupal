@@ -49,7 +49,17 @@ class SandMigrationsCommands extends DrushCommands {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function sandMigrationsPrep() {
-
+    $modules = [
+      'migrate_upgrade',
+      'media_migration',
+      'bean_migrate',
+      'migrate_sandbox',
+      'yaml_editor',
+    ];
+      foreach($modules as $module) {
+        $this->output()->writeln('Enabling Module: ' . $module);
+        \Drupal::service('module_installer')->install([$module]);
+      }
     $this->logger()->success(dt('The D9 site has been prepped for migrations of citynet.'));
   }
 
@@ -61,11 +71,11 @@ class SandMigrationsCommands extends DrushCommands {
    * @usage sand_migrations-commandName foo
    *   Usage description
    *
-   * @command sand_migrations:delete_roles
+   * @command sand_migrations:roles-delete
    * @aliases smdr
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function sandMigrationsDeleteRoles() {
+  public function sandMigrationsRolesDelete() {
 
     $roles = \Drupal\user\Entity\Role::loadMultiple();
     foreach ($roles as $role) {
@@ -91,10 +101,10 @@ class SandMigrationsCommands extends DrushCommands {
    * @usage sand_migrations-commandName foo
    *   Usage description
    *
-   * @command sand_migrations:test
+   * @command sand_migrations:users-update
    * @aliases smt
    */
-  public function sandMigrationsTest($arg1 = 'No Arguments passed in.', $options = ['option-name' => 'default']) {
+  public function sandMigrationsUsersUpdate($arg1 = 'No Arguments passed in.', $options = ['option-name' => 'default']) {
     
     $userStorage = \Drupal::entityTypeManager()->getStorage('user');
     $query = $userStorage->getQuery();
