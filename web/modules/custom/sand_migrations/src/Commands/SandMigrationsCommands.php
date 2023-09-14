@@ -3,7 +3,9 @@
 namespace Drupal\sand_migrations\Commands;
 
 use Consolidation\OutputFormatters\StructuredData\RowsOfFields;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drush\Commands\DrushCommands;
+use Http\Client\Exception;
 
 /**
  * A Drush commandfile.
@@ -17,7 +19,7 @@ use Drush\Commands\DrushCommands;
  *   - http://cgit.drupalcode.org/devel/tree/drush.services.yml
  */
 class SandMigrationsCommands extends DrushCommands {
-  
+
   private $ignore_role = [
     'administrator',
     'if_administrator',
@@ -35,11 +37,10 @@ class SandMigrationsCommands extends DrushCommands {
     'webform_results',
     'webform_results_photos_only',
   ];
-  
+
   private $label_map = [
     'Library' => 'Public Library',
   ];
-
 
   /**
    * Command description here.
@@ -54,7 +55,7 @@ class SandMigrationsCommands extends DrushCommands {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function sandMigrationsPrep() {
-    $modules = [
+    $modules_install = [
       'migrate_upgrade',
       'media_migration',
       'bean_migrate',
@@ -62,12 +63,48 @@ class SandMigrationsCommands extends DrushCommands {
       'migrate_sandbox',
       'yaml_editor',
     ];
-      foreach($modules as $module) {
-        $this->output()->writeln('Enabling Module: ' . $module);
-        \Drupal::service('module_installer')->install([$module]);
+
+    $modules_uninstall = [
+      'sand_datalayer',
+      'if_sdmigration',
+      'if_sand_customphp',
+    ];
+
+    foreach ($modules_install as $module_install) {
+      $this->output()->writeln('Enabling Module: ' . $module_install);
+      \Drupal::service('module_installer')->install([$module_install]);
+    }
+
+    //now disable some sandiego.gov modules
+    foreach ($modules_uninstall as $module_uninstall) {
+      $this->output()->writeln('Enabling Module: ' . $module_uninstall);
+      \Drupal::service('module_installer')->uninstall([$module_uninstall]);
+    }
+
+      $entity_types = [
+        'node',
+        'paragraph',
+        'feeds_feed',
+        'feeds_type',
+        'webform',
+        'taxonomy_term',
+        'redirect',
+        'search_api_task',
+        'user',
+        'role',
+      ];
+      foreach ($entity_types as $entity_type) {
+        $this->output()->writeln('Deleting Enties of type: ' . $entity_type);
+        $command = \Drupal::service('entity.commands');
+        try {
+          $command->delete($entity_type);
+        }
+        catch (\Exception $exception) {
+          $this->output()->writeln($exception->getMessage());
+        }
       }
-    $this->logger()->success(dt('The D9 site has been prepped for migrations of citynet.'));
-  }
+      $this->logger()->success(dt('The D9 site has been prepped for migrations of citynet.'));
+}
 
   /**
    * Command description here.
