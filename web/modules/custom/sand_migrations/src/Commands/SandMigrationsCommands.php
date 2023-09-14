@@ -4,6 +4,7 @@ namespace Drupal\sand_migrations\Commands;
 
 use Consolidation\OutputFormatters\StructuredData\RowsOfFields;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
+use Drupal\user\RoleInterface;
 use Drush\Commands\DrushCommands;
 use Http\Client\Exception;
 
@@ -20,6 +21,47 @@ use Http\Client\Exception;
  */
 class SandMigrationsCommands extends DrushCommands {
 
+  // Modules to install
+  private $modules_install = [
+    'entity_count',
+    'registration',
+    'migrate_upgrade',
+    'media_migration',
+    'bean_migrate',
+    'webform_migrate',
+    'migrate_sandbox',
+    'yaml_editor',
+  ];
+
+  // Modules to UNinstall
+  private $modules_uninstall = [
+    'if_sand_customphp',
+    'if_sdmigration',
+    'registration',
+    'sand_datalayer',
+    'site_alert',
+  ];
+  
+  // Themes to uninstall
+  private $themes_uninstall = [
+    'bartik',
+    'claro',
+  ];
+  
+  // Entity types to delete
+  private $entity_types = [
+    'node',
+    'paragraph',
+    'feeds_feed',
+    'feeds_type',
+    'webform',
+    'taxonomy_term',
+    'registration',
+    'redirect',
+    'sand_remote',
+    'search_api_task',
+  ];
+  
   private $ignore_role = [
     'administrator',
     'if_administrator',
@@ -42,7 +84,85 @@ class SandMigrationsCommands extends DrushCommands {
     'Library' => 'Public Library',
   ];
 
-  /**
+  private function sandModuleInstall() {
+    $installed_modules = array_keys(\Drupal::service('extension.list.module')->getAllInstalledInfo());
+    foreach ($this->modules_install as $module_install) {
+      if (!in_array($module_install, $installed_modules)) {
+        $this->output()->writeln('Enabling Module: ' . $module_install);
+        \Drupal::service('module_installer')->install([$module_install]);
+      }
+    }
+  }
+
+  private function sandModuleUnInstall() {
+    $installed_modules = array_keys(\Drupal::service('extension.list.module')->getAllInstalledInfo());
+    foreach ($this->modules_uninstall as $module_uninstall) {
+      if (in_array($module_uninstall, $installed_modules)) {
+        $this->output()->writeln('Disabling Module: ' . $module_uninstall);
+        \Drupal::service('module_installer')->uninstall([$module_uninstall]);
+      }
+    }
+  }
+
+  private function sandModuleUnInstallViaDatabase() {
+    // Uninstall site_alert via db in case there is still an issue with it
+    $module_data = \Drupal::config("core.extension")->get("module");
+    unset($module_data["site_alert"]);
+    \Drupal::configFactory()
+      ->getEditable("core.extension")
+      ->set("module", $module_data)
+      ->save();    
+  }
+
+  private function sandThemeUnInstall() {
+    $installed_themes = array_keys(\Drupal::service('extension.list.theme')->getAllInstalledInfo());
+    foreach ($this->themes_uninstall as $theme_uninstall) {
+      if (in_array($theme_uninstall, $installed_themes)) {
+        $this->output()->writeln('Enabling Module: ' . $theme_uninstall);
+        \Drupal::service('theme_installer')->uninstall([$theme_uninstall]);
+      }
+    } 
+  }
+  
+  private function sandDeleteEntities() {
+    
+    foreach ($this->entity_types as $entity_type) {
+      // Create query object.
+      try {
+        $query = \Drupal::entityQuery($entity_type);
+      }
+      catch (\Exception $exception) {
+        $this->output()->writeln('Entity type does not exist: ' . $entity_type);
+        continue;
+      }
+
+      // Count number of entities.
+      $count = $query->count()->execute();
+      if ($count === 0) {
+        $this->output()->writeln('No Enties of type: ' . $entity_type);
+        continue;
+      }
+      else {
+        $this->output()
+          ->writeln('Number of Enties of type: ' . $entity_type . ' is: ' . $count);
+      }
+
+      // Try and delete them.
+      $this->output()->writeln('Deleting Enties of type: ' . $entity_type);
+      /** @var \Drush\Drupal\Commands\core\EntityCommands $command */
+      $command = \Drupal::service('entity.commands');
+      try {
+        // Must supply bundle = null for taxonomy_term
+        $options = ['bundle' => NULL, 'exclude' => NULL, 'chunks' => 50];
+        $command->delete($entity_type, NULL, $options);
+      }
+      catch (\Exception $exception) {
+        $this->output()->writeln($exception->getMessage());
+      }
+    }    
+  }
+
+    /**
    * Command description here.
    *
    * @option option-name
@@ -55,99 +175,70 @@ class SandMigrationsCommands extends DrushCommands {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function sandMigrationsPrep() {
-    $modules_install = [
-      'migrate_upgrade',
-      'media_migration',
-      'bean_migrate',
-      'webform_migrate',
-      'migrate_sandbox',
-      'yaml_editor',
-    ];
 
-    $modules_uninstall = [
-      'sand_datalayer',
-      'if_sdmigration',
-      'if_sand_customphp',
-    ];
-
-    foreach ($modules_install as $module_install) {
-      $this->output()->writeln('Enabling Module: ' . $module_install);
-      \Drupal::service('module_installer')->install([$module_install]);
-    }
-
-    //now disable some sandiego.gov modules
-    foreach ($modules_uninstall as $module_uninstall) {
-      $this->output()->writeln('Enabling Module: ' . $module_uninstall);
-      \Drupal::service('module_installer')->uninstall([$module_uninstall]);
-    }
-
-      $entity_types = [
-        'node',
-        'paragraph',
-        'feeds_feed',
-        'feeds_type',
-        'webform',
-        'taxonomy_term',
-        'redirect',
-        'search_api_task',
-        'user',
-        'role',
-      ];
-      foreach ($entity_types as $entity_type) {
-        $this->output()->writeln('Deleting Enties of type: ' . $entity_type);
-        $command = \Drupal::service('entity.commands');
-        try {
-          $command->delete($entity_type);
-        }
-        catch (\Exception $exception) {
-          $this->output()->writeln($exception->getMessage());
-        }
-      }
-      $this->logger()->success(dt('The D9 site has been prepped for migrations of citynet.'));
-}
+    $this->sandDeleteEntities();
+    $this->sandModuleInstall();
+    $this->sandModuleUnInstall();
+    $this->sandModuleUnInstallViaDatabase();
+    $this->sandThemeUnInstall();
+//    $this->sandMigrationsRolesDelete();
+    $this->logger()
+      ->success(dt('The D9 site has been prepped for migrations of citynet.'));
+  }
 
   /**
-   * Command description here.
+   * Delete all roles except those in the ignore list.
    *
-   * @option option-name
-   *   Description
-   * @usage sand_migrations-commandName foo
-   *   Usage description
+   * @usage sand_migrations:roles-delete
+   *   Usage No arguments
    *
    * @command sand_migrations:roles-delete
    * @aliases smdr
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function sandMigrationsRolesDelete() {
-
+    // Get all roles.
     $roles = \Drupal\user\Entity\Role::loadMultiple();
     foreach ($roles as $role) {
+      // If not in ignore list, delete the role.
       if (!in_array($role->id(), $this->ignore_role)) {
         $role->delete();
         $this->output()->writeln('Deleted role: ' . $role->id());
       }
     }
-
     $this->logger()->success(dt('Deleted Roles.')); 
   }
 
-
-    /**
-   * Command description here.
+  /**
+   * List out any roles that do not have permissions.
    *
-   * @param $arg1
-   *   Argument description.
-   * @param array $options
-   *   An associative array of options whose values come from cli, aliases, config, etc.
-   * @option option-name
-   *   Description
-   * @usage sand_migrations-commandName foo
-   *   Usage description
+   * @usage sand_migrations:roles-permissions
+   *   Usage No arguments
+   *
+   * @command sand_migrations:roles-permissions
+   * @aliases smrp
+   */
+  public function sandMigrationsPermissionsForRole() {
+    $roles = \Drupal\user\Entity\Role::loadMultiple();
+    foreach ($roles as $role) {
+      $permissions = $role->getPermissions();
+      if (count($permissions) === 0) {
+        $this->output()->writeln($role->id() . ' Has NO permissions');
+      }
+    }
+  }
+
+
+  /**
+   * Update users and set a department taxonomy term on them equivalent to a role then remove that role from the user.
+   *
+   * @usage sand_migrations:users-update
+   *   Usage No arguments
    *
    * @command sand_migrations:users-update
    * @aliases smt
    */
-  public function sandMigrationsUsersUpdate($arg1 = 'No Arguments passed in.', $options = ['option-name' => 'default']) {
+  public function sandMigrationsUsersUpdate() {
     
     $userStorage = \Drupal::entityTypeManager()->getStorage('user');
     $query = $userStorage->getQuery();
@@ -207,12 +298,12 @@ class SandMigrationsCommands extends DrushCommands {
           $this->output()->writeln('Did not find: ' . $label_search); 
         }
       }
-      $rows[] = [
-        'ID' => $user->id(),
-        'Name' => $user->getAccountName(),
-        'Roles' => implode(",", $roles),
-        'Labels' => implode(",", $labels),
-      ];
+//      $rows[] = [
+//        'ID' => $user->id(),
+//        'Name' => $user->getAccountName(),
+//        'Roles' => implode(",", $roles),
+//        'Labels' => implode(",", $labels),
+//      ];
     }
 //    return new RowsOfFields($rows);
   }
