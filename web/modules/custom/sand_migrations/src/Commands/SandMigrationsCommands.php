@@ -115,7 +115,8 @@ class SandMigrationsCommands extends DrushCommands {
     $userStorage = \Drupal::entityTypeManager()->getStorage('user');
     $query = $userStorage->getQuery();
     $uids = $query
-      ->condition('status', '1')
+//      ->condition('status', '1')
+//      ->condition('uid', 195093)
 //      ->range(0,10)
       ->execute();
 
@@ -128,8 +129,10 @@ class SandMigrationsCommands extends DrushCommands {
       $roles = [];
       $labels = [];
       
+      $current_roles = $user->getRoles();
+      
       // Get all roles for the user
-      foreach ($user->getRoles() as $role_id) {
+      foreach ($user->getRoles() as $key => $role_id) {
         if (in_array($role_id, $this->ignore_role)) {
           continue;
         }
@@ -154,10 +157,12 @@ class SandMigrationsCommands extends DrushCommands {
           $term = reset($term);
 //          $parent = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadParents($term->id());
           // If the term is not on the user, add it.
+          $tid = $term->id();
           $current_terms = $user->get('field_department')->getValue();
-          if (!in_array($term->id(), $current_terms)) {
-            $new_terms = [$term->id()] + $current_terms;
+          if (!in_array($tid, $current_terms)) {
+            $new_terms = [$tid] + $current_terms;
             $user->set('field_department', $new_terms);
+            $user->removeRole($role_id);
             $user->save();
           }
         } else {
