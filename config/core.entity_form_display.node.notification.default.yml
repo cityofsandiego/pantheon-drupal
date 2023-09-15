@@ -8,13 +8,33 @@ dependencies:
     - field.field.node.notification.field_notif_icon_color
     - field.field.node.notification.field_url
     - node.type.notification
+    - workflows.workflow.editorial
   module:
     - content_moderation
+    - field_group
     - link
     - path
     - scheduler
     - scheduler_content_moderation_integration
     - text
+third_party_settings:
+  field_group:
+    group_moderation_state:
+      children:
+        - moderation_state
+      label: 'Moderation State'
+      region: content
+      parent_name: ''
+      weight: 20
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+        weight: -100
 id: node.notification.default
 targetEntityType: node
 bundle: notification

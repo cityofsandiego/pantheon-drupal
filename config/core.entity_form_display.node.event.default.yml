@@ -65,6 +65,7 @@ dependencies:
     - smart_date
     - smart_date_recur
     - term_reference_fancytree
+    - term_reference_tree
     - text
 third_party_settings:
   field_group:
@@ -198,7 +199,7 @@ third_party_settings:
       children:
         - moderation_state
       label: 'Moderation State'
-      region: hidden
+      region: content
       parent_name: ''
       weight: 21
       format_type: details_sidebar
@@ -239,12 +240,15 @@ content:
       html5_geolocation: false
     third_party_settings: {  }
   field_department:
-    type: term_reference_fancytree
+    type: term_reference_tree
     weight: 25
     region: content
     settings:
-      select_all: false
-      select_children: false
+      start_minimized: true
+      leaves_only: false
+      select_parents: true
+      cascading_selection: 0
+      max_depth: 0
     third_party_settings: {  }
   field_edit_notes:
     type: string_textarea

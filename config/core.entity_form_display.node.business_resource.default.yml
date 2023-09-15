@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.business_resource.field_d7_nid
     - field.field.node.business_resource.field_search_keymatch
     - node.type.business_resource
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - field_group
@@ -46,7 +47,7 @@ third_party_settings:
         - body
         - field_business_primarily_money
         - field_business_primarily_info
-      label: Content
+      label: 'Main Content'
       region: content
       parent_name: group_main_tabs
       weight: 24
@@ -63,7 +64,7 @@ third_party_settings:
         - field_business_typeof_assistance
         - field_business_target_business
         - field_search_keymatch
-      label: Vocabularies
+      label: 'Taxonomy Terms'
       region: content
       parent_name: group_main_tabs
       weight: 25
@@ -75,6 +76,22 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_moderation_state:
+      children:
+        - moderation_state
+      label: 'Moderation State'
+      region: content
+      parent_name: ''
+      weight: 20
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+        weight: -100
 id: node.business_resource.default
 targetEntityType: node
 bundle: business_resource
