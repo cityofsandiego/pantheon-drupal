@@ -41,7 +41,12 @@ $light-gray: #eaeeef;
 .button {
   border-radius: 4px;
 }
-#edit-submit-content {
+
+#edit-header {
+  width: 100%;
+}
+
+#edit-submit-content, #edit-submit-media, #edit-submit-media-library {
   background-color: $cerulean;
   color: white;
   border: none;
@@ -56,7 +61,31 @@ $light-gray: #eaeeef;
   background-color: $off-white;
 }
 
-#edit-node-bulk-form--2 {
+.layout-node-form {
+  #edit-actions {
+    display: block;
+    width: 100%;
+    background-color: $off-white;
+    border-top: 1px solid #d1d4d3;
+
+    #edit-delete {
+      background-color: #c51313;
+      border-color: #c51313;
+      color: white;
+      float: right;
+
+      &:hover {
+        background-color: lighten(#c51313, 10%);
+        border-color: lighten(#c51313, 10%);
+      }
+    }
+
+    #edit-cancel {
+      background-color: white;
+    }
+  }
+}
+#edit-node-bulk-form--2, #edit-media-bulk-form--2 {
   display: flex;
 
   @include breakpoint(mobile-landscape down) {
@@ -75,6 +104,9 @@ $light-gray: #eaeeef;
   }
 }
 
+#edit-field-media-document-0-remove-button {
+  margin-left: 1em;
+}
 .form-text, .form-select {
   background-color: white;
 }
@@ -106,3 +138,21 @@ $light-gray: #eaeeef;
   background-color: #7cbc48;
 }
 
+#admin-toolbar-search-tab .form-type-search {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  margin-top: 0 !important;
+}
+
+#admin-toolbar-search-input {
+  height: 30px;
+}
+
+.term-reference-tree-button, .no-term-reference-tree-button {
+  margin-right: 30px !important;
+}
+
+.no-term-reference-tree-button {
+  background-color: white !important;
+}

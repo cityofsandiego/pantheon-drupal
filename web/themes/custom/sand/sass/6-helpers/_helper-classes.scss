@@ -610,3 +610,19 @@ a[href$=".pdf"]:after {
 a[href$=".pdf"].no-pdf-icon:after {
     content: none;
 }
+
+.overflow-h {
+    overflow: hidden;
+
+    &-d {
+        @include breakpoint(mobile-landscape up) {
+            overflow: hidden;
+        }
+    }
+
+    &-m {
+        @include breakpoint(mobile-landscape down) {
+            overflow: hidden;
+        }
+    }
+}

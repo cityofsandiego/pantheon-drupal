@@ -24,7 +24,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
-    - term_reference_fancytree
+    - term_reference_tree
     - text
 third_party_settings:
   field_group:
@@ -35,7 +35,7 @@ third_party_settings:
       label: 'Main tabs'
       region: content
       parent_name: ''
-      weight: 15
+      weight: 16
       format_type: tabs
       format_settings:
         classes: ''
@@ -51,7 +51,7 @@ third_party_settings:
         - field_da_photographer
         - field_da_location
         - field_da_featured
-      label: Content
+      label: 'Main Content'
       region: content
       parent_name: group_main_tabs
       weight: 20
@@ -68,7 +68,7 @@ third_party_settings:
         - field_department
         - field_search_keymatch
         - field_category
-      label: Vocabularies
+      label: 'Taxonomy Terms'
       region: content
       parent_name: group_main_tabs
       weight: 21
@@ -80,6 +80,22 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_moderation_state:
+      children:
+        - moderation_state
+      label: 'Moderation State'
+      region: content
+      parent_name: ''
+      weight: 17
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+        weight: -100
 id: node.digital_archives_photos.default
 targetEntityType: node
 bundle: digital_archives_photos
@@ -97,7 +113,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 3
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -120,7 +136,7 @@ content:
     third_party_settings: {  }
   field_da_high_quality_url:
     type: string_textfield
-    weight: 14
+    weight: 15
     region: content
     settings:
       size: 60
@@ -151,12 +167,15 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_department:
-    type: term_reference_fancytree
+    type: term_reference_tree
     weight: 26
     region: content
     settings:
-      select_all: false
-      select_children: false
+      start_minimized: true
+      leaves_only: false
+      select_parents: true
+      cascading_selection: 0
+      max_depth: 0
     third_party_settings: {  }
   field_image:
     type: media_library_widget
@@ -167,7 +186,7 @@ content:
     third_party_settings: {  }
   field_record_id:
     type: string_textfield
-    weight: 13
+    weight: 14
     region: content
     settings:
       size: 60
@@ -192,50 +211,50 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 16
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 4
+    weight: 5
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   simple_sitemap:
-    weight: 2
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 12
+    weight: 13
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 5
+    weight: 6
     region: content
     settings:
       display_label: true
@@ -260,18 +279,18 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 11
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }

@@ -213,3 +213,11 @@ function sand_theme_suggestions_paragraph_alter(array &$suggestions, array $vari
     return $suggestions;
   }
 }
+
+/**
+ * Implements hook_preprocess_HOOK() for node templates.
+ */
+function sand_preprocess_node(&$variables) {
+  // put query parameters in url_params variable
+  $variables['url_params'] = \Drupal::request()->query->all();
+}

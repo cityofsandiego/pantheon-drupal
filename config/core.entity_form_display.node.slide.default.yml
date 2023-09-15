@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.slide.field_link_text
     - field.field.node.slide.field_url
     - node.type.slide
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - field_group
@@ -18,7 +19,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
-    - term_reference_fancytree
+    - term_reference_tree
     - text
 third_party_settings:
   field_group:
@@ -43,7 +44,7 @@ third_party_settings:
         - field_caption
         - field_url
         - field_link_text
-      label: Content
+      label: 'Main Content'
       region: content
       parent_name: group_main_tabs
       weight: 19
@@ -58,7 +59,7 @@ third_party_settings:
     group_vocabularies:
       children:
         - field_department
-      label: Vocabularies
+      label: 'Taxonomy Terms'
       region: content
       parent_name: group_main_tabs
       weight: 20
@@ -70,6 +71,22 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_moderation_state:
+      children:
+        - moderation_state
+      label: 'Moderation State'
+      region: content
+      parent_name: ''
+      weight: 20
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+        weight: -100
 id: node.slide.default
 targetEntityType: node
 bundle: slide
@@ -90,12 +107,15 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_department:
-    type: term_reference_fancytree
+    type: term_reference_tree
     weight: 18
     region: content
     settings:
-      select_all: false
-      select_children: false
+      start_minimized: true
+      leaves_only: false
+      select_parents: true
+      cascading_selection: 0
+      max_depth: 0
     third_party_settings: {  }
   field_image:
     type: media_library_widget

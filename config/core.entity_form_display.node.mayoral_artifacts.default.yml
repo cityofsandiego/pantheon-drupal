@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.mayoral_artifacts.field_record_id
     - field.field.node.mayoral_artifacts.field_search_keymatch
     - node.type.mayoral_artifacts
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - field_group
@@ -22,7 +23,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
-    - term_reference_fancytree
+    - term_reference_tree
     - text
 third_party_settings:
   field_group:
@@ -49,7 +50,7 @@ third_party_settings:
         - field_location
         - field_mayor
         - field_keywords
-      label: Content
+      label: 'Main Content'
       region: content
       parent_name: group_main_tabs
       weight: 20
@@ -66,7 +67,7 @@ third_party_settings:
         - field_department
         - field_category
         - field_search_keymatch
-      label: Vocabularies
+      label: 'Taxonomy Terms'
       region: content
       parent_name: group_main_tabs
       weight: 22
@@ -78,6 +79,22 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_moderation_state:
+      children:
+        - moderation_state
+      label: 'Moderation State'
+      region: content
+      parent_name: ''
+      weight: 20
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+        weight: -100
 id: node.mayoral_artifacts.default
 targetEntityType: node
 bundle: mayoral_artifacts
@@ -110,12 +127,15 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_department:
-    type: term_reference_fancytree
+    type: term_reference_tree
     weight: 26
     region: content
     settings:
-      select_all: false
-      select_children: false
+      start_minimized: true
+      leaves_only: false
+      select_parents: true
+      cascading_selection: 0
+      max_depth: 0
     third_party_settings: {  }
   field_image:
     type: media_library_widget
