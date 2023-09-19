@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.outreach.field_search_keymatch
     - field.field.node.outreach.field_sections
     - node.type.outreach
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - field_group
@@ -16,7 +17,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
-    - term_reference_fancytree
+    - term_reference_tree
 third_party_settings:
   field_group:
     group_main_tabs:
@@ -37,7 +38,7 @@ third_party_settings:
     group_content:
       children:
         - field_sections
-      label: Content
+      label: 'Main Content'
       region: content
       parent_name: group_main_tabs
       weight: 18
@@ -53,7 +54,7 @@ third_party_settings:
       children:
         - field_department
         - field_search_keymatch
-      label: Vocabularies
+      label: 'Taxonomy Terms'
       region: content
       parent_name: group_main_tabs
       weight: 19
@@ -80,7 +81,23 @@ third_party_settings:
         open: false
         description: ''
         required_fields: true
-        weight: 10
+        weight: 100
+    group_moderation_state:
+      children:
+        - moderation_state
+      label: 'Moderation State'
+      region: content
+      parent_name: ''
+      weight: 20
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+        weight: -100
 id: node.outreach.default
 targetEntityType: node
 bundle: outreach
@@ -93,12 +110,15 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_department:
-    type: term_reference_fancytree
+    type: term_reference_tree
     weight: 16
     region: content
     settings:
-      select_all: false
-      select_children: false
+      start_minimized: true
+      leaves_only: false
+      select_parents: true
+      cascading_selection: 0
+      max_depth: 0
     third_party_settings: {  }
   field_edit_notes:
     type: string_textarea

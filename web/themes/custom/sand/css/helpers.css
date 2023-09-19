@@ -1667,8 +1667,17 @@ textarea {
   #edit-submit-content:hover, #edit-submit-content:focus {
     background-color: #0fb6ff; }
 
+#toolbar-administration * {
+  -webkit-font-smoothing: auto; }
+
+#admin-toolbar-search-tab .form-type-search {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  margin-top: 0 !important; }
+
 #admin-toolbar-search-input {
-  margin-top: 10px; }
+  height: 30px; }
 
 /* ============================================================
   Alignment and display helpers.
@@ -2577,7 +2586,7 @@ h6,
 
 p {
   line-height: 1.5;
-  margin: 0 0 0.75em; }
+  margin: 0 0 0.75rem; }
   p:last-child {
     margin-bottom: 0; }
 
@@ -2668,7 +2677,7 @@ dd {
 /* Subheading
     ========================================================================== */
 .subheading {
-  color: #009581;
+  color: #009581 !important;
   font-size: 20px;
   font-size:  1.25rem;
   font-family: "Merriweather", serif; }
@@ -2702,7 +2711,9 @@ span[class^="text-"] {
   font-size: 0.8em; }
 
 .text-accent {
-  font-size: 1.2em; }
+  font-size: 1.2em;
+  margin-bottom: 0.75rem;
+  line-height: 1.3; }
 
 @media print, screen and (min-width: 30em) {
   .text-accent--desktop {
@@ -2813,6 +2824,9 @@ p.nav-ex {
     font-weight: 600;
     font-size: 8px;
     font-size:  0.5rem; }
+
+.text-mayor {
+  color: #551a8b !important; }
 
 /**
  * l-<type><direction><size>
@@ -4303,7 +4317,8 @@ html[xmlns] .flexslider .slides {
   display: none !important;
   visibility: hidden; }
 
-.visuallyhidden, .visually-hidden {
+.visuallyhidden,
+.visually-hidden {
   /*
      * Hide only visually, but have it available for screen readers:
      * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
@@ -4320,7 +4335,9 @@ html[xmlns] .flexslider .slides {
      * Extends the .visuallyhidden class to allow the element to be focusable
      * when navigated to via the keyboard: h5bp.com/p
      */ }
-  .focusable.visuallyhidden:active, .focusable.visually-hidden:active, .focusable.visuallyhidden:focus, .focusable.visually-hidden:focus {
+  .focusable.visuallyhidden:active,
+  .focusable.visually-hidden:active, .focusable.visuallyhidden:focus,
+  .focusable.visually-hidden:focus {
     clip: auto;
     height: auto;
     margin: 0;
@@ -4352,7 +4369,8 @@ html[xmlns] .flexslider .slides {
 
 /* Corners
    ========================================================================== */
-.rounded-corner, .rounded-corners {
+.rounded-corner,
+.rounded-corners {
   border-radius: 4px; }
 
 .rounded-corners-large {
@@ -4609,8 +4627,8 @@ html[xmlns] .flexslider .slides {
 .photo-credit {
   text-align: right;
   line-height: 1.5;
-  font-size: .6rem;
-  padding: .5em;
+  font-size: 0.6rem;
+  padding: 0.5em;
   margin: 0; }
 
 /* Vertical centering inside flexbox
@@ -4676,5 +4694,24 @@ html[xmlns] .flexslider .slides {
 .bg-cover {
   background-size: cover;
   background-position: center center; }
+
+a[href$=".pdf"]:after {
+  content: url("/themes/custom/sand/images/pdf-icon.svg")/"PDF icon";
+  -webkit-alt: "PDF icon";
+  padding-left: 5px;
+  display: inline-block;
+  width: 1.5rem; }
+
+a[href$=".pdf"].no-pdf-icon:after {
+  content: none; }
+
+.overflow-h {
+  overflow: hidden; }
+  @media print, screen and (min-width: 30em) {
+    .overflow-h-d {
+      overflow: hidden; } }
+  @media print, screen and (max-width: 37.49875em) {
+    .overflow-h-m {
+      overflow: hidden; } }
 
 /*# sourceMappingURL=helpers.css.map */

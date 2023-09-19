@@ -10,6 +10,7 @@ dependencies:
     - node.type.blog
     - node.type.department
     - taxonomy.vocabulary.department
+    - user.role.authenticated
   module:
     - draggableviews
     - link
@@ -322,9 +323,9 @@ display:
           plugin_id: draggable_views_sort_default
           order: ASC
           expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
+            label: 'DraggableViews Weight'
+            field_identifier: weight
+          exposed: true
           draggable_views_reference: this
           draggable_views_null_order: after
           draggable_views_pass_arguments: false
@@ -529,6 +530,8 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - 'url.query_args:sort_by'
+        - 'url.query_args:sort_order'
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -863,7 +866,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card\">\r\n    <div class=\"card__image\">\r\n        <a href=\"{{ field_website }}\">{{ field_image }}{{ field_feature_video_img }}</a>\r\n    </div>\r\n    <div class=\"card__content\">\r\n        <p class=\"card__headline\"><a href=\"{{ field_website }}\">{{ title }}</a></p>\r\n    </div>\r\n</div>"
+            text: "<div class=\"card\">\r\n    <div class=\"card__image\">\r\n        <a class=\"no-pdf-icon\" href=\"{{ field_website }}\">{{ field_image }}{{ field_feature_video_img }}</a>\r\n    </div>\r\n    <div class=\"card__content\">\r\n        <p class=\"card__headline\"><a href=\"{{ field_website }}\">{{ title }}</a></p>\r\n    </div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -900,6 +903,23 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: false
+      sorts:
+        weight:
+          id: weight
+          table: draggableviews_structure
+          field: weight
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: draggable_views_sort_default
+          order: ASC
+          expose:
+            label: 'DraggableViews Weight'
+            field_identifier: weight
+          exposed: false
+          draggable_views_reference: this
+          draggable_views_null_order: after
+          draggable_views_pass_arguments: false
       style:
         type: html_list
         options:
@@ -920,6 +940,7 @@ display:
         style: false
         row: false
         fields: false
+        sorts: false
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -940,60 +961,6 @@ display:
     position: 2
     display_options:
       fields:
-        draggableviews:
-          id: draggableviews
-          table: node_field_data
-          field: draggableviews
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: nid
-          plugin_id: draggable_views_field
-          label: Content
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          action_title: Action
-          include_exclude: exclude
-          selected_actions: {  }
         field_image:
           id: field_image
           table: node__field_image
@@ -1120,17 +1087,18 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        view_node:
-          id: view_node
-          table: node
-          field: view_node
+        draggableviews:
+          id: draggableviews
+          table: node_field_data
+          field: draggableviews
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
-          plugin_id: entity_link
-          label: 'Link to Content'
-          exclude: true
+          entity_field: nid
+          plugin_id: draggable_views_field
+          label: Content
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -1170,9 +1138,14 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          text: view
-          output_url_as_text: false
-          absolute: false
+          action_title: Action
+          include_exclude: exclude
+          selected_actions: {  }
+      access:
+        type: role
+        options:
+          role:
+            authenticated: authenticated
       sorts:
         weight:
           id: weight
@@ -1255,6 +1228,7 @@ display:
         type: fields
         options: {  }
       defaults:
+        access: false
         style: false
         row: false
         fields: false
@@ -1262,6 +1236,15 @@ display:
       display_description: ''
       display_extenders: {  }
       path: sdadmin/sort/departmentparentfeatures
+      menu:
+        type: none
+        title: 'Sort Cards'
+        description: ''
+        weight: 0
+        expanded: false
+        menu_name: main
+        parent: ''
+        context: '0'
     cache_metadata:
       max-age: 0
       contexts:
@@ -1269,6 +1252,6 @@ display:
         - 'languages:language_interface'
         - url
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_image'

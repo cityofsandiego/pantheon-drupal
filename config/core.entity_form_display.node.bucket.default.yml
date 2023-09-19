@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.bucket.field_section_title
     - field.field.node.bucket.field_subtitle
     - node.type.bucket
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - field_group
@@ -65,7 +66,7 @@ third_party_settings:
         - field_featured_items
         - field_events_programs_initiative
         - field_resources
-      label: Content
+      label: 'Main Content'
       region: content
       parent_name: group_main_tabs
       weight: 21
@@ -80,7 +81,7 @@ third_party_settings:
     group_vocabularies:
       children:
         - field_search_keymatch
-      label: Vocabularies
+      label: 'Taxonomy Terms'
       region: content
       parent_name: group_main_tabs
       weight: 22
@@ -92,6 +93,22 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_moderation_state:
+      children:
+        - moderation_state
+      label: 'Moderation State'
+      region: content
+      parent_name: ''
+      weight: 20
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+        weight: -100
 id: node.bucket.default
 targetEntityType: node
 bundle: bucket

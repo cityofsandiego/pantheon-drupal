@@ -3,11 +3,14 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.full_html
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
     - node.type.article
     - node.type.blog
     - node.type.department
     - node.type.department_document
-    - node.type.department_parent
     - node.type.event
     - node.type.location
     - node.type.registration
@@ -16,25 +19,29 @@ dependencies:
   module:
     - content_moderation
     - draggableviews
+    - field_permissions
+    - filter
+    - media
     - node
-    - system
-    - toolbar
 id: content_owner
 label: 'Content Owner'
-weight: -7
+weight: -6
 is_admin: null
 permissions:
-  - 'access administration pages'
-  - 'access content overview'
   - 'access draggableviews'
-  - 'access toolbar'
   - 'create article content'
   - 'create blog content'
   - 'create department content'
   - 'create department_document content'
+  - 'create document media'
   - 'create event content'
+  - 'create field_department'
+  - 'create field_general_contact_info'
+  - 'create field_image'
+  - 'create image media'
   - 'create location content'
   - 'create registration content'
+  - 'create remote_video media'
   - 'create resources content'
   - 'delete own event content'
   - 'delete own registration content'
@@ -42,27 +49,21 @@ permissions:
   - 'edit any location content'
   - 'edit any registration content'
   - 'edit any resources content'
+  - 'edit field_department'
+  - 'edit field_general_contact_info'
+  - 'edit field_image'
   - 'edit own article content'
   - 'edit own blog content'
   - 'edit own department content'
   - 'edit own department_document content'
   - 'edit own event content'
+  - 'edit own field_department'
+  - 'edit own field_general_contact_info'
+  - 'edit own field_image'
   - 'edit own location content'
-  - 'edit own registration content'
-  - 'edit own resources content'
-  - 'revert registration revisions'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition needs_review'
   - 'use editorial transition publish'
+  - 'use text format full_html'
   - 'view any unpublished content'
-  - 'view article revisions'
-  - 'view blog revisions'
-  - 'view department revisions'
-  - 'view department_document revisions'
-  - 'view department_parent revisions'
-  - 'view event revisions'
   - 'view latest version'
-  - 'view location revisions'
-  - 'view registration revisions'
-  - 'view resources revisions'
-  - 'view the administration theme'

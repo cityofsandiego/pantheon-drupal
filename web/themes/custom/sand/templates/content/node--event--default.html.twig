@@ -93,11 +93,27 @@
             {{ content.field_subtitle.0 }}
           </div>-->
         {% endif %}
-
         {% if content.field_event_date[0] %}
+          {% if (url_params["event-date"]) is not empty %}
           <div class="date-wrapper subheading l-padding-ts">
-            {{ content.field_event_date }}
+            {{ (url_params["event-date"]) }}
           </div>
+          {% else %}
+            {% if content.field_event_date.1["#value"] is empty %}
+            <div class="date-wrapper subheading l-padding-ts">
+            {{ content.field_event_date }}
+            </div>
+            {% else %}
+            <div class="accordions js-toggle-accordion l-margin-desktop-hx">
+              <div class="accordion l-padding-desktop-hx">
+                <p class="accordion__heading"><a class="accordion__link" href="#">View Event Dates <i class="toggle-icon"></i></a></p>
+                <div class="accordion__drawer subheading">
+                  {{ content.field_event_date }}
+                </div>
+              </div>
+            </div>
+            {% endif %}      
+          {% endif %}
         {% endif %}
 
       </div>
@@ -135,8 +151,8 @@
       {% if content.field_event_location[0] %}
         <div class="l-padding-ad text-center--mobile l-margin-mobile-td background-off-white rounded-corners">
           <div class="grid-x">
-            <div class="cell medium-2">
-              <p><i class="icon-map-marker icon--sm icon--circle background--cerulean"></i></p>
+            <div class="cell medium-3 text-center">
+              <p><i class="icon-map-marker icon--circle icon--ms cerulean-bg"></i></p>
               <!--<img src="{{ url('<front>') }}themes/custom/sand/images/gmap-markers/marker.png" alt="" width="83" height="83">-->
             </div>
             <div class="cell medium-auto">

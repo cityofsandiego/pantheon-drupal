@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.article.field_article_exclude
     - field.field.node.article.field_article_type
     - field.field.node.article.field_body_no_margin
+    - field.field.node.article.field_byline
     - field.field.node.article.field_category
     - field.field.node.article.field_d7_nid
     - field.field.node.article.field_department
@@ -25,7 +26,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
-    - term_reference_fancytree
+    - term_reference_tree
     - text
 third_party_settings:
   field_group:
@@ -38,7 +39,7 @@ third_party_settings:
       label: 'Main Tabs'
       region: content
       parent_name: ''
-      weight: 15
+      weight: 16
       format_type: tabs
       format_settings:
         classes: ''
@@ -101,7 +102,7 @@ third_party_settings:
         - field_article_type
         - field_article_exclude
       label: 'Additional Fields'
-      region: hidden
+      region: content
       parent_name: group_main_tabs
       weight: 19
       format_type: tab
@@ -116,7 +117,7 @@ third_party_settings:
       children:
         - field_sidebar
       label: Sidebar
-      region: hidden
+      region: content
       parent_name: group_main_tabs
       weight: 18
       format_type: tab
@@ -134,7 +135,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 17
+    weight: 18
     region: content
     settings:
       rows: 9
@@ -168,6 +169,14 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_byline:
+    type: string_textfield
+    weight: 15
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_category:
     type: entity_reference_autocomplete
     weight: 17
@@ -179,12 +188,15 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_department:
-    type: term_reference_fancytree
+    type: term_reference_tree
     weight: 16
     region: content
     settings:
-      select_all: false
-      select_children: false
+      start_minimized: true
+      leaves_only: false
+      select_parents: true
+      cascading_selection: 0
+      max_depth: 0
     third_party_settings: {  }
   field_image:
     type: media_library_widget
@@ -195,7 +207,7 @@ content:
     third_party_settings: {  }
   field_meta_tags:
     type: metatag_firehose
-    weight: 16
+    weight: 17
     region: content
     settings:
       sidebar: true

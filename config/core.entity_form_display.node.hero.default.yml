@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.hero.field_image
     - field.field.node.hero.field_vimeo_url
     - node.type.hero
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - field_group
@@ -21,7 +22,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
-    - term_reference_fancytree
+    - term_reference_tree
 third_party_settings:
   field_group:
     group_main_tabs:
@@ -49,7 +50,7 @@ third_party_settings:
         - field_hero_time_of_day
         - field_hero_frontpage
         - field_hero_sitewide
-      label: Content
+      label: 'Main Content'
       region: content
       parent_name: group_main_tabs
       weight: 15
@@ -64,7 +65,7 @@ third_party_settings:
     group_vocabularies:
       children:
         - field_department
-      label: Vocabularies
+      label: 'Taxonomy Terms'
       region: content
       parent_name: group_main_tabs
       weight: 16
@@ -76,6 +77,22 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_moderation_state:
+      children:
+        - moderation_state
+      label: 'Moderation State'
+      region: content
+      parent_name: ''
+      weight: 20
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+        weight: -100
 id: node.hero.default
 targetEntityType: node
 bundle: hero
@@ -88,12 +105,15 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_department:
-    type: term_reference_fancytree
+    type: term_reference_tree
     weight: 23
     region: content
     settings:
-      select_all: false
-      select_children: false
+      start_minimized: true
+      leaves_only: false
+      select_parents: true
+      cascading_selection: 0
+      max_depth: 0
     third_party_settings: {  }
   field_hero_caption:
     type: string_textfield
