@@ -384,7 +384,7 @@ final class Node implements EventSubscriberInterface {
 
   public function preprocessTitleBlock(BlockPreprocessEvent $event): void {
     $variables = $event->getVariables();
-    $content_types = ['department', 'location', 'department_document', 'article', 'blog', 'department_parent', 'mayoral_artifacts', 'digital_archives_photos', 'sand_gallery'];
+    $content_types = ['department', 'location', 'department_document', 'article', 'blog', 'department_parent', 'event', 'mayoral_artifacts', 'digital_archives_photos', 'sand_gallery', 'webform'];
 
     if ($variables->get('base_plugin_id') == 'page_title_block') {
       $node = \Drupal::routeMatch()->getParameter('node');

@@ -23,6 +23,7 @@ class SandInfoController extends ControllerBase
             'department',
             'department_document',
             'department_parent',
+            'event',
             'events',
             'hero',
             'page',
@@ -50,6 +51,7 @@ class SandInfoController extends ControllerBase
         foreach ($types as $type) {
             $bundles[] = $type->id();
         }
+        asort($bundles);
 
         foreach ($bundles as $bundle) {
             
@@ -190,7 +192,7 @@ class SandInfoController extends ControllerBase
                 'field_intro',
                 'field_search_keymatch',
             ];
-        $type['events'] =
+        $type['event'] =
             [
                 'body',
                 'field_department',
