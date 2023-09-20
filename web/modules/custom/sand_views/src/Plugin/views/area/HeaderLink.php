@@ -68,7 +68,6 @@ class HeaderLink extends AreaPluginBase
             '#type' => 'textfield',
             '#title' => $this->t('Link Taxonomy Field'),
             '#description' => $this->t('This is the field name of the taxonomy term that the view uses.'),
-            '#required' => TRUE,
             '#default_value' => $this->options['link_taxonomy_field'],
             '#size' => 60,
             '#maxlength' => 128,
