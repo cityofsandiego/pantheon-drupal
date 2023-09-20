@@ -48,14 +48,15 @@
     <div{{ attributes.addClass(classes) }}>
       <a href="{{ content.field_link[0]['#url'] }}" title="{{ content.field_link[0]['#title'] }}" class="btn btn--wide btn--secondary btn--icon">
       {% block content %}
-        <span class="content">
+      {% if content.field_icon.0 is null %}
+        <span class="no-icon">
+      {% else %}
+        <span class="with-icon">
           {{ content.field_icon }}
+      {% endif %}
           {{ content.field_label.0 }}
         </span>
       {% endblock %}
-        <span class="icon">
-          <i class="icon-chevron-right"></i>
-        </span>
       </a>
     </div>
   {% endif %}
