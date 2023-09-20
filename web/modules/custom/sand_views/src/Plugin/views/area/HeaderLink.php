@@ -4,6 +4,7 @@ namespace Drupal\sand_views\Plugin\views\area;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
 use Drupal\views\Plugin\views\area\AreaPluginBase;
 use Drupal\views\Annotation\ViewsArea;
 
@@ -90,14 +91,23 @@ class HeaderLink extends AreaPluginBase
 //        if ($empty($_SERVER["REQUEST_URI"])) {
 //            return;
 //        }
+        $options = ['query' => ['destination' => $_SERVER["REQUEST_URI"]]];
+        
+        $node = \Drupal::routeMatch()->getParameter('node');
+        if (!$node instanceof NodeInterface) {
+            return '';
+        }
+        $tid = $node->field_department->target_id;
+        if (!empty($tid)) {
+            $options['query']['terms'] = $tid;
+        }
         
         if (!empty($this->options['link_classes'])) {
-            $options = [
-                'attributes' => ['class' => $this->options['link_classes']],
-            ];
-        } else {
-            $options = [];
+            $options['attributes'] = ['class' => $this->options['link_classes']];
         }
+
+        //$parents = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadAllParents($tid);
+        //$tids =  $parents ? array_key_last($parents) : $tid;
         
         
         if (!$empty && \Drupal::currentUser()->isAuthenticated()) {
