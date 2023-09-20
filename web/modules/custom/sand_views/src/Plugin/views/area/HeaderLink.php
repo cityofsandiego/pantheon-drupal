@@ -30,6 +30,7 @@ class HeaderLink extends AreaPluginBase
         $options['link_text']['default'] = 'Click here to order the items below';
         $options['link_url']['default'] = '';
         $options['link_classes']['default'] = '';
+        $options['link_taxonomy_field']['default'] = 'field_department';
         return $options;
     }
 
@@ -57,9 +58,18 @@ class HeaderLink extends AreaPluginBase
         $form['link_url'] = [
             '#type' => 'textfield',
             '#title' => $this->t('Link URL'),
-            '#description' => $this->t('Start the URL with a slash, this should be the url to the sort page in the view'),
+            '#description' => $this->t('Start the URL with a slash. If you are using this for draggable views and sorting the current items by drag and drop on another page, this should be the url to that page (you have to look in the view)'),
             '#required' => TRUE,
             '#default_value' => $this->options['link_url'],
+            '#size' => 60,
+            '#maxlength' => 128,
+        ];
+        $form['link_taxonomy_field'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('Link Taxonomy Field'),
+            '#description' => $this->t('This is the field name of the taxonomy term that the view uses.'),
+            '#required' => TRUE,
+            '#default_value' => $this->options['link_taxonomy_field'],
             '#size' => 60,
             '#maxlength' => 128,
         ];
@@ -86,37 +96,48 @@ class HeaderLink extends AreaPluginBase
      * {@inheritdoc}
      */
     public function render($empty = FALSE) {
-        
-        // Make sure we have the current URI, otherwise this won't work.
-//        if ($empty($_SERVER["REQUEST_URI"])) {
-//            return;
-//        }
-        $options = ['query' => ['destination' => $_SERVER["REQUEST_URI"]]];
-        
+
+        // Make sure we are on a page with a node.
         $node = \Drupal::routeMatch()->getParameter('node');
         if (!$node instanceof NodeInterface) {
             return '';
         }
-        $tid = $node->field_department->target_id;
-        if (!empty($tid)) {
-            $options['query']['terms'] = $tid;
+
+        // Make sure we have the current URI, otherwise this won't work. Hopefully, should not hit this.
+        if (empty($_SERVER["REQUEST_URI"])) {
+            return '';
+        } else {
+            // Set the query destination to this page so that after you click save on the sort it returns.
+            $options = ['query' => ['destination' => $_SERVER["REQUEST_URI"]]];
         }
         
+        // Make sure the field exists on the node.
+        if (!$node->hasField($this->options['link_taxonomy_field'])) {
+            return '';
+        } else {
+            $field_name = $this->options['link_taxonomy_field'];
+        }
+        
+        // Get all the taxonomy terms in $field_name.
+        $tids = $node->{$field_name}->getValue();
+        if (!empty($tids)) {
+            foreach ($tids as $key => $tid) {
+                $options['query']["term[$key]"] = $tid['target_id'];
+            }
+        }
+        
+        // Add classes.
         if (!empty($this->options['link_classes'])) {
             $options['attributes'] = ['class' => $this->options['link_classes']];
         }
 
-        //$parents = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadAllParents($tid);
-        //$tids =  $parents ? array_key_last($parents) : $tid;
         
-        
+        // Only render the link if the user is logged in.
         if (!$empty && \Drupal::currentUser()->isAuthenticated()) {
-            $text = $this->t($this->options['link_text']);
-            $url = Url::fromUserInput($this->options['link_url'] . '?destination=' . $_SERVER["REQUEST_URI"], $options);
             $item = [
                 '#type' => 'link',
-                '#title' => $text,
-                '#url' => $url,
+                '#title' =>  $this->t($this->options['link_text']),
+                '#url' => Url::fromUserInput($this->options['link_url'] . '?destination=' . $_SERVER["REQUEST_URI"], $options),
             ];
             return $item;
         }
