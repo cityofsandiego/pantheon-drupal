@@ -105,25 +105,27 @@
     </div>
     <div class="l-padding-desktop-hd l-padding-desktop-bd l-padding-mobile-am">
 
-  <div id="get_it_done" class="l-container l-padding-hd">
-    <h2 class="heading--snug">Get It Done</h2>
-    {% if node.label == "Leisure" %}
-      {{ drupal_entity('webform', 'webform_13162') }}
-    {% elseif node.label == "Resident Resources" %}
-      {{ drupal_entity('webform', 'webform_13163') }}
-    {% elseif node.label == "Doing Business" %}
-      {{ drupal_entity('webform', 'webform_13165') }}
-    {% elseif node.label == "Public Safety" %}
-      {{ drupal_entity('webform', 'webform_13166') }}
-    {% elseif node.label == "City Hall" %}
-      {{ drupal_entity('webform', 'webform_13164') }}
-    {% endif %}
-    <div class="get-it-done-app l-margin-mobile-bd text-center--mobile">
-      {# Get it Done app block #}
-      {{ drupal_block('block_content:7500dd99-1c24-428f-97a2-2581f90d4d96') }}
-    </div>
-  </div>
-        {{ content.field_featured_card }}
+      {# Get it Done form #}
+      <div id="get_it_done" class="l-container l-padding-hd">
+        <h2 class="heading--snug">Get It Done</h2>
+        {% if node.label == "Leisure" %}
+          {{ drupal_entity('webform', 'webform_13162') }}
+        {% elseif node.label == "Resident Resources" %}
+          {{ drupal_entity('webform', 'webform_13163') }}
+        {% elseif node.label == "Doing Business" %}
+          {{ drupal_entity('webform', 'webform_13165') }}
+        {% elseif node.label == "Public Safety" %}
+          {{ drupal_entity('webform', 'webform_13166') }}
+        {% elseif node.label == "City Hall" %}
+          {{ drupal_entity('webform', 'webform_13164') }}
+        {% endif %}
+        <div class="get-it-done-app l-margin-mobile-bd text-center--mobile">
+          {# Get it Done app block #}
+          {{ drupal_block('block_content:7500dd99-1c24-428f-97a2-2581f90d4d96') }}
+        </div>
+      </div>
+
+      {{ content.field_featured_card }}
     </div>
   </div>
 
