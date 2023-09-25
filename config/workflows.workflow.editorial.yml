@@ -62,43 +62,62 @@ type_settings:
       from:
         - published
       to: archived
-      weight: 0
+      weight: 1
     archived_draft:
       label: 'Restore to Draft'
       from:
         - archived
       to: draft
-      weight: 1
+      weight: 2
     archived_published:
       label: Restore
       from:
         - archived
       to: published
-      weight: 2
+      weight: 3
+    bypass_review:
+      label: 'Publish without Review'
+      from:
+        - draft
+      to: published
+      weight: -3
     create_new_draft:
       label: 'Create New Draft'
       from:
-        - draft
-        - needs_review
         - published
       to: draft
-      weight: -3
+      weight: -5
     needs_review:
       label: 'Needs Review'
       from:
         - draft
-        - needs_review
         - published
       to: needs_review
-      weight: -2
+      weight: -4
     publish:
       label: Publish
       from:
-        - draft
         - needs_review
+      to: published
+      weight: 0
+    quick_publish:
+      label: 'Quick Publish'
+      from:
         - published
       to: published
+      weight: 4
+    reject_draft:
+      label: 'Reject Draft'
+      from:
+        - needs_review
+      to: draft
       weight: -1
+    save_draft:
+      label: 'Save Draft'
+      from:
+        - draft
+      to: draft
+      weight: -2
   entity_types:
     node:
       - article

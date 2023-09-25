@@ -10,9 +10,108 @@ dependencies:
     - field.field.node.sidebar_block_context.field_sidebar_menu_id
     - field.field.node.sidebar_block_context.field_top_menu_id
     - node.type.sidebar_block_context
+    - workflows.workflow.editorial
   module:
     - content_moderation
+    - field_group
     - paragraphs
+    - term_reference_tree
+third_party_settings:
+  field_group:
+    group_main_tabs:
+      children:
+        - group_department
+        - group_department_subterms
+        - group_menus
+        - group_blocks
+      label: 'Main Tabs'
+      region: content
+      parent_name: ''
+      weight: 3
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: horizontal
+        width_breakpoint: 640
+    group_department:
+      children:
+        - field_department
+      label: Department
+      region: content
+      parent_name: group_main_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_department_subterms:
+      children:
+        - field_department_subs
+      label: 'Department Subterms'
+      region: content
+      parent_name: group_main_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_menus:
+      children:
+        - field_top_menu_id
+        - field_sidebar_menu_id
+      label: Menus
+      region: content
+      parent_name: group_main_tabs
+      weight: 23
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_blocks:
+      children:
+        - field_block
+      label: Blocks
+      region: content
+      parent_name: group_main_tabs
+      weight: 24
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_moderation_state:
+      children:
+        - moderation_state
+      label: 'Moderation State'
+      region: content
+      parent_name: ''
+      weight: 20
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+        weight: -100
 id: node.sidebar_block_context.default
 targetEntityType: node
 bundle: sidebar_block_context
@@ -20,7 +119,7 @@ mode: default
 content:
   field_block:
     type: paragraphs
-    weight: 4
+    weight: 6
     region: content
     settings:
       title: Paragraph
@@ -37,28 +136,30 @@ content:
         duplicate: duplicate
     third_party_settings: {  }
   field_department:
-    type: entity_reference_autocomplete
-    weight: 1
+    type: term_reference_tree
+    weight: 23
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      start_minimized: true
+      leaves_only: false
+      select_parents: false
+      cascading_selection: 0
+      max_depth: 0
     third_party_settings: {  }
   field_department_subs:
-    type: entity_reference_autocomplete
-    weight: 2
+    type: term_reference_tree
+    weight: 3
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      start_minimized: true
+      leaves_only: false
+      select_parents: false
+      cascading_selection: 0
+      max_depth: 0
     third_party_settings: {  }
   field_path:
     type: string_textfield
-    weight: 3
+    weight: 2
     region: content
     settings:
       size: 60
@@ -66,7 +167,7 @@ content:
     third_party_settings: {  }
   field_sidebar_menu_id:
     type: string_textfield
-    weight: 26
+    weight: 28
     region: content
     settings:
       size: 60
@@ -82,14 +183,14 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 2
+    weight: 1
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }

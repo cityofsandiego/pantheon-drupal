@@ -88,31 +88,33 @@
 
 <article{{ attributes.addClass(classes) }}>
   <div{{ content_attributes.addClass('node__content') }}>
-  <div class="grid-x">
-    <div class="cell small-12 medium-auto content">
-      <div class="l-padding-am grid-x grid-margin-x">
-        <div class="cell small-12">
-          <h1>{{ label }}</h1>
-        </div>
-        <div class="cell medium-6" id="main_image">
-          <p><img id="main-image" src="{{ image }}" data-zoom-image="{{ imagezoom }}"/></p>
-          <p class="fine-print text-center"><em>Magnify by hovering your mouse over the image. Zoom in/out with the mousewheel.</em></p>
-        </div>
-        <div class="cell auto">
-          {{ content.body }}
-          {{ content.field_mayor }}
-          {{ content.field_photo_date }}
+    <div class="grid-x">
+      <div class="cell small-12 medium-auto content">
+        <div class="l-padding-desktop-am l-padding-mobile-bd l-padding-mobile-hm">
+          <h1>{{ label.0 }}</h1>
+          <div class="grid-x grid-padding-x">
+            <div class="cell medium-6" id="main_image">
+              <p><img id="main-image" src="{{ image }}" data-zoom-image="{{ imagezoom }}"/></p>
+              <p class="fine-print text-center"><em>Magnify by hovering your mouse over the image. Zoom in/out with the mousewheel.</em></p>
+            </div>
+            <div class="cell auto">
+              <div class="l-margin-bd">
+              {{ content.body }}
+              </div>
+              {{ content.field_mayor }}
+              {{ content.field_photo_date }}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="cell medium-3 large-3 sidebar light-gray-bg">
-      <div class="l-padding-am l-padding-mobile-hd l-margin-mobile-bm">
-        {{ drupal_entity('block_content', '14') }}
+      <div class="cell medium-3 large-3 sidebar light-gray-bg">
+        <div class="l-padding-am l-padding-mobile-hd l-margin-mobile-bm">
+          {{ drupal_entity('block_content', '14') }}
 
-        <a href="/city-clerk/inforecords/mayoral-artifacts/gallery" class="btn btn--outline btn--wide">Mayoral Artifacts Gallery</a>
+          <a href="/city-clerk/inforecords/mayoral-artifacts/gallery" class="btn btn--outline btn--wide">Mayoral Artifacts Gallery</a>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
 </article>

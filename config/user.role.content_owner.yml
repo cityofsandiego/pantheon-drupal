@@ -7,14 +7,22 @@ dependencies:
     - media.type.document
     - media.type.image
     - media.type.remote_video
+    - node.type.application
     - node.type.article
     - node.type.blog
+    - node.type.business_resource
     - node.type.department
     - node.type.department_document
+    - node.type.department_parent
     - node.type.event
     - node.type.location
+    - node.type.outreach
+    - node.type.outreach2
+    - node.type.outreach_article2
     - node.type.registration
     - node.type.resources
+    - taxonomy.vocabulary.categories
+    - taxonomy.vocabulary.search_keymatch
     - workflows.workflow.editorial
   module:
     - content_moderation
@@ -23,13 +31,19 @@ dependencies:
     - filter
     - media
     - node
+    - scheduler
+    - taxonomy
+    - toolbar
 id: content_owner
 label: 'Content Owner'
 weight: -6
 is_admin: null
 permissions:
+  - 'access content overview'
   - 'access draggableviews'
-  - 'create article content'
+  - 'access media overview'
+  - 'access toolbar'
+  - 'administer nodes'
   - 'create blog content'
   - 'create department content'
   - 'create department_document content'
@@ -40,14 +54,26 @@ permissions:
   - 'create field_image'
   - 'create image media'
   - 'create location content'
-  - 'create registration content'
+  - 'create media'
   - 'create remote_video media'
   - 'create resources content'
-  - 'delete own event content'
+  - 'create terms in categories'
+  - 'create terms in search_keymatch'
   - 'delete own registration content'
+  - 'edit any application content'
+  - 'edit any blog content'
+  - 'edit any business_resource content'
+  - 'edit any department content'
   - 'edit any department_document content'
+  - 'edit any department_parent content'
+  - 'edit any document media'
+  - 'edit any event content'
+  - 'edit any image media'
   - 'edit any location content'
-  - 'edit any registration content'
+  - 'edit any outreach content'
+  - 'edit any outreach2 content'
+  - 'edit any outreach_article2 content'
+  - 'edit any remote_video media'
   - 'edit any resources content'
   - 'edit field_department'
   - 'edit field_general_contact_info'
@@ -61,9 +87,29 @@ permissions:
   - 'edit own field_general_contact_info'
   - 'edit own field_image'
   - 'edit own location content'
+  - 'edit terms in categories'
+  - 'edit terms in search_keymatch'
+  - 'schedule publishing of nodes'
+  - 'update any media'
+  - 'use editorial transition archived_draft'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition needs_review'
   - 'use editorial transition publish'
+  - 'use editorial transition reject_draft'
+  - 'use editorial transition save_draft'
   - 'use text format full_html'
   - 'view any unpublished content'
+  - 'view application revisions'
+  - 'view article revisions'
+  - 'view blog revisions'
+  - 'view department revisions'
+  - 'view department_document revisions'
+  - 'view department_parent revisions'
+  - 'view event revisions'
   - 'view latest version'
+  - 'view location revisions'
+  - 'view media'
+  - 'view outreach revisions'
+  - 'view outreach2 revisions'
+  - 'view outreach_article2 revisions'
+  - 'view resources revisions'
