@@ -97,7 +97,7 @@ button[type="submit"] {
   height: auto;
   width: auto;
   border: none;
-  outline: solid;
+  //outline: solid;
   -webkit-appearance: none;
   appearance: none;
   &[value="None"] {
@@ -107,12 +107,10 @@ button[type="submit"] {
 
 select,
 select.form-select {
-  //width: 100%;
+  min-width: auto;
   display: block;
   background-color: white;
   padding: 0 2em 0 0.5em;
-  //border-radius: 2px;
-  /*color: rgba(0,0,0,.87);*/
   color: $spruce;
   border: 1px solid $chateau;
   box-shadow: 0 0 0 0 transparent inset;
@@ -621,6 +619,11 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
       max-height: 44px;
       font-weight: normal;
       font-size: 1em;
+      margin-right: 1em;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 }
@@ -636,4 +639,38 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
 .form-text:focus-visible, .form-tel:focus-visible, .form-email:focus-visible, .form-url:focus-visible, .form-number:focus-visible, .form-color:focus-visible, .form-file:focus-visible, .form-textarea:focus-visible, .form-date:focus-visible, .form-time:focus-visible, .form-select:focus-visible {
   outline: solid;
   outline-color: $science;
+  outline-width: thin;
+}
+
+.node-type-webform {
+  #edit-actions {
+    width: 100%;
+    display: block;
+
+    input#edit-submit {
+      float: right;
+
+      @include breakpoint(mobile-landscape down) {
+        width: 100% !important;
+        margin-bottom: 1em;
+      }
+    }
+
+    a.button.cancel {
+      margin: 0;
+      margin-bottom: 0;
+      background-color: $white;
+      border: 1px solid $deepcerulean;
+      color: $deepcerulean;
+      font-weight: normal;
+      float: left;
+    
+      &:hover,
+      &:focus {
+        background-color: lighten($deepcerulean, 10%);
+        color: $white;
+        border: 1px solid lighten($deepcerulean, 10%);
+      }
+    }
+  }
 }
