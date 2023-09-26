@@ -42,16 +42,6 @@ if(file_exists($redirect_file)) {
 $settings['config_exclude_modules'] = [
   'devel',
   'examples',
-  'if_sdmigration',
-  'bean_migrate',
-  'migrate',
-  'migrate_drupal',
-  'migrate_drupal_ui',
-  'migrate_plus',
-  'migrate_source_csv',
-  'media_migration',
-  'migrate_sandbox',
-  'webform_migrate',
   'yaml_editor',
   'webprofiler',
 ];
