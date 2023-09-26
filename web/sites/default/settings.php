@@ -40,25 +40,19 @@ if(file_exists($redirect_file)) {
 
 // Added by City of San Diego, the settings from these modules will not be exported in config
 $settings['config_exclude_modules'] = [
-  'bean_migrate',
-  'config_single_export',
   'devel',
-  'entity_count',
   'examples',
-  'filter_perms',
   'if_sdmigration',
+  'bean_migrate',
   'migrate',
   'migrate_drupal',
   'migrate_drupal_ui',
   'migrate_plus',
   'migrate_source_csv',
-  'migrate_tools',
   'media_migration',
   'migrate_sandbox',
   'webform_migrate',
-  'restui',
-  'views_bulk_edit',
-  'webprofiler',
   'yaml_editor',
+  'webprofiler',
 ];
 
