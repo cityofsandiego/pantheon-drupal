@@ -10,6 +10,7 @@ dependencies:
     - node.type.notification
     - workflows.workflow.editorial
   module:
+    - allowed_formats
     - content_moderation
     - field_group
     - link
@@ -49,7 +50,10 @@ content:
       summary_rows: 3
       placeholder: ''
       show_summary: false
-    third_party_settings: {  }
+    third_party_settings:
+      allowed_formats:
+        hide_help: '1'
+        hide_guidelines: '0'
   created:
     type: datetime_timestamp
     weight: 3
@@ -113,6 +117,11 @@ content:
   publish_state:
     type: scheduler_moderation
     weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }

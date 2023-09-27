@@ -20,6 +20,7 @@ dependencies:
     - node.type.department_document
     - workflows.workflow.editorial
   module:
+    - allowed_formats
     - content_moderation
     - field_group
     - link
@@ -53,7 +54,7 @@ third_party_settings:
         - field_url
         - field_replace_body_text_with_att
         - body
-      label: Content
+      label: 'Main Content'
       region: content
       parent_name: group_main_tabs
       weight: 20
@@ -122,7 +123,7 @@ third_party_settings:
         - field_icon
         - field_promote_to_city_home
       label: 'Additional Fields'
-      region: hidden
+      region: content
       parent_name: group_main_tabs
       weight: 22
       format_type: tab
@@ -147,7 +148,10 @@ content:
       summary_rows: 3
       placeholder: ''
       show_summary: false
-    third_party_settings: {  }
+    third_party_settings:
+      allowed_formats:
+        hide_help: '1'
+        hide_guidelines: '0'
   created:
     type: datetime_timestamp
     weight: 4
