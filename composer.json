@@ -152,7 +152,8 @@
         "drupal/term_reference_tree": "^2.0",
         "drupal/views_alias_filter": "^1.0",
         "drupal/workbench": "^1.4",
-        "drupal/override_node_options": "^2.7"
+        "drupal/override_node_options": "^2.7",
+        "wikimedia/composer-merge-plugin": "^2.1"
     },
     "require-dev": {
         "drupal/core-dev": "^9.2",
@@ -208,6 +209,11 @@
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"],
             "libraries/{$name}": ["type:drupal-library"]
         },
+        "merge-plugin": {
+            "include": [
+                "web/modules/contrib/webform/composer.libraries.json"
+            ]
+        },
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
             "drupal/core": "-p2"
@@ -252,7 +258,8 @@
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "php-http/discovery": true,
             "simplesamlphp/composer-module-installer": true,
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "wikimedia/composer-merge-plugin": true
         }
     }
 }
