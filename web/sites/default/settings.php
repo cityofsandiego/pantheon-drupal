@@ -38,6 +38,14 @@ if(file_exists($redirect_file)) {
   include $redirect_file;
 }
 
+// Place for settings for the live environment
+if (defined('PANTHEON_ENVIRONMENT')) {
+  if (PANTHEON_ENVIRONMENT == 'live') {
+    // Do not reroute email on Live
+    $conf['reroute_email_enable'] = 0;
+  }
+}
+
 // Added by City of San Diego, the settings from these modules will not be exported in config
 $settings['config_exclude_modules'] = [
   'devel',
