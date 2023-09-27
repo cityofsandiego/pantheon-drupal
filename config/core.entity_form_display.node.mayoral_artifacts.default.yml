@@ -17,6 +17,7 @@ dependencies:
     - node.type.mayoral_artifacts
     - workflows.workflow.editorial
   module:
+    - allowed_formats
     - content_moderation
     - field_group
     - media_library
@@ -109,7 +110,10 @@ content:
       summary_rows: 3
       placeholder: ''
       show_summary: false
-    third_party_settings: {  }
+    third_party_settings:
+      allowed_formats:
+        hide_help: '1'
+        hide_guidelines: '0'
   created:
     type: datetime_timestamp
     weight: 3

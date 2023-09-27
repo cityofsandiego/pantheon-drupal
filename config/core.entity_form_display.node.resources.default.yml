@@ -31,6 +31,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - address
+    - allowed_formats
     - conditional_fields
     - content_moderation
     - field_group
@@ -481,7 +482,10 @@ content:
       summary_rows: 3
       placeholder: ''
       show_summary: false
-    third_party_settings: {  }
+    third_party_settings:
+      allowed_formats:
+        hide_help: '1'
+        hide_guidelines: '0'
   field_resource_first_name:
     type: string_textfield
     weight: 17
