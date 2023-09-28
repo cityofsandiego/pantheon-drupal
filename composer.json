@@ -170,7 +170,8 @@
         "drupal/reroute_email": "^2.2",
         "drupal/seckit": "^2.0",
         "drupal/permissionspolicy": "^1.1",
-        "simplesamlphp/simplesamlphp": "^1.19"
+        "simplesamlphp/simplesamlphp": "^1.19",
+        "drupal/redis": "^1.7"
     },
     "require-dev": {
         "drupal/core-dev": "^9.2",
@@ -260,8 +261,7 @@
     },
     "scripts": {
         "pre-update-cmd": ["DrupalComposerManaged\\ComposerScripts::preUpdate"],
-        "post-update-cmd": ["DrupalComposerManaged\\ComposerScripts::postUpdate", "rm -rf vendor/simplesamlphp/simplesamlphp/config && ln -sf ../../../private/simplesamlphp/config vendor/simplesamlphp/simplesamlphp/config",         "rm -rf vendor/simplesamlphp/simplesamlphp/metadata && ln -sf ../../../private/simplesamlphp/metadata vendor/simplesamlphp/simplesamlphp/metadata"],
-        "post-install-cmd": ["rm -rf vendor/simplesamlphp/simplesamlphp/config && ln -sf ../../../private/simplesamlphp/config vendor/simplesamlphp/simplesamlphp/config", "rm -rf vendor/simplesamlphp/simplesamlphp/metadata && ln -sf ../../../private/simplesamlphp/metadata vendor/simplesamlphp/simplesamlphp/metadata"]
+        "post-update-cmd": ["DrupalComposerManaged\\ComposerScripts::postUpdate"]
     },
     "config": {
         "preferred-install": "dist",
