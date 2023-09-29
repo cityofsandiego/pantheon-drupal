@@ -399,9 +399,31 @@
     }
   }
 
+  .header-tools {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+  }
+
+  .sand-weather a {
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    justify-content: left;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+    i {
+      font-size: 1.5em;
+      margin-right: 5px;
+    }
+  }
+
   .accessibility-toggle {
-    display: inline-block;
-    margin: 0 1rem 0.5rem 0;
+    display: flex;
+    justify-content: right;
 
     a {
       color: $white;
@@ -416,17 +438,16 @@
   }
 
   .languages {
+    display: flex;
+    justify-content: right;
+    color: $cerulean;
+    font-size: 0.75rem;
+    font-weight: bold;
+    position: relative;
 
     @include breakpoint(medium) {
       color: $white;
     }
-
-    color: $cerulean;
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: bold;
-    margin: 0 0 0.5rem;
-    position: relative;
 
     #google_translate_element {
       display: flex;
