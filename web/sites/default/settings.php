@@ -54,3 +54,4 @@ $settings['config_exclude_modules'] = [
   'webprofiler',
 ];
 
+$conf['simplesamlphp_auth_installdir'] = $_ENV['HOME'] .'/code/private/simplesamlphp';
