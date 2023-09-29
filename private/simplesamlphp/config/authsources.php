@@ -26,8 +26,8 @@ $config = [
 
         'NameIDPolicy' => NULL,
 
-       'privatekey' => 'private/simplesamlphp/cert/saml.pem',
-       'certificate' => 'private/simplesamlphp/cert/saml.crt',
+       'privatekey' => 'saml.pem',
+       'certificate' => 'saml.crt',
 
         // Enforce signing of redirections, using our certificate.
         'sign.logout' => TRUE,
