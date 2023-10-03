@@ -201,6 +201,56 @@ display:
     display_options:
       title: Notifications(display-title)
       fields:
+        counter:
+          id: counter
+          table: views
+          field: counter
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: counter
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          counter_start: 1
         field_url:
           id: field_url
           table: node__field_url
@@ -245,7 +295,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -254,8 +304,8 @@ display:
           type: link
           settings:
             trim_length: 80
-            url_only: false
-            url_plain: false
+            url_only: true
+            url_plain: true
             rel: '0'
             target: '0'
           group_column: ''
@@ -339,10 +389,10 @@ display:
           admin_label: ''
           plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
-            alter_text: true
-            text: "<div class=\"card--notification grid-x\">\r\n<div class=\"icon cell small-2 text-center l-margin-mobile-bd\">\r\n <i class=\"{{ field_icon }} background--{{ field_notif_icon_color }} \"></i>\r\n </div>\r\n<div class=\"cell small-10 l-padding-ls\">"
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -375,7 +425,7 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: false
-          empty: "<div class=\"card--notification row\">\r\n<div class=\"twelve columns\">"
+          empty: ''
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -480,8 +530,8 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{{ title_1 }}\r\n</div>\r\n</div>\r\n<hr class=\"hr--dashed\">"
-            make_link: true
+            text: "<hr id=\"hr-{{ counter }}\" class=\"hr--dashed\">\r\n<div class=\"grid-x\">\r\n<div class=\"icon cell small-2 text-center l-margin-mobile-bd\">\r\n<p><i class=\"{{ field_icon }} icon--ms icon--circle background--{{ field_notif_icon_color }}\"></i></p>\r\n</div>\r\n<div class=\"cell small-10 l-padding-ls\">\r\n<p><a href=\"{{ field_url }}\">{{ title_1 }}</a></p>\r\n</div>\r\n</div>"
+            make_link: false
             path: '{{ field_url }}'
             absolute: false
             external: false
@@ -505,14 +555,14 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: p
+          element_type: ''
           element_class: ''
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
