@@ -53,5 +53,3 @@ $settings['config_exclude_modules'] = [
   'yaml_editor',
   'webprofiler',
 ];
-
-$conf['simplesamlphp_auth_installdir'] = $_ENV['HOME'] .'/code/private/simplesamlphp';
