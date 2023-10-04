@@ -38,6 +38,11 @@ if(file_exists($redirect_file)) {
   include $redirect_file;
 }
 
+$redis_file = __DIR__ .  '/settings.redis.php';
+if(file_exists($redis_file)) {
+    include $redis_file;
+}
+
 // Place for settings for the live environment
 if (defined('PANTHEON_ENVIRONMENT')) {
   if (PANTHEON_ENVIRONMENT == 'live') {
