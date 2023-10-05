@@ -14,11 +14,11 @@ if (!ini_get('session.save_handler')) {
 
 $host = $_SERVER['HTTP_HOST'];
 $db = array(
-  'host'      => $_ENV['DB_HOST'] ?? 'localhost',
-  'database'  => $_ENV['DB_NAME'] ?? 'sandgov',
-  'username'  => $_ENV['DB_USER'] ?? 'root',
-  'password'  => $_ENV['DB_PASSWORD'] ?? 'wtuser1904',
-  'port'      => $_ENV['DB_PORT'] ?? '3306',
+  'host'      => $_ENV['DB_HOST'],
+  'database'  => $_ENV['DB_NAME'],
+  'username'  => $_ENV['DB_USER'],
+  'password'  => $_ENV['DB_PASSWORD'],
+  'port'      => $_ENV['DB_PORT'],
 );
 
 $config = [
@@ -1061,7 +1061,7 @@ $config = [
   'certdir' => 'cert/',
   'logging.handler' => 'errorlog',
   'datadir' => 'data/',
-  'tempdir' => $_ENV['HOME'] . '/tmp/simplesaml' ?? '/Volumes/db/Sites/sandgov/web/sites/default/files/tmp/simplesaml',
+  'tempdir' => $_ENV['HOME'] . '/tmp/simplesaml',
 
   // Your $config array continues for a while...
   // until we get to the "store.type" value, where we put in DB config...
