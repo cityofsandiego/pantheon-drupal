@@ -84,24 +84,18 @@
 <article{{ attributes.addClass(classes) }}>
   <h2 class="main__heading">{{ label }}</h2>
 
-  <div{{ content_attributes.addClass('node__content l-padding-ad l-padding-desktop-hx') }}>
+  <div{{ content_attributes.addClass('node__content l-padding-am') }}>
 
     {{ content.body }}
 
     {% if content.field_attachment[0] %}
-      <a href={{ attachment_url }} target="_blank" class="file attachment">
-        <span class="file-icon">
-          <img alt="PDF icon" title="application/pdf" src="/core/themes/classy/images/icons/application-pdf.png" />
-        </span>
+      <a href={{ attachment_url }} target="_blank">
         {{ label }}
       </a>
     {% endif %}
 
     {% if content.field_url[0] %}
-      <div class="file field_source"> 
-        <span class="file-icon">
-          <img alt="PDF icon" title="application/pdf" src="/core/themes/classy/images/icons/application-pdf.png" />
-        </span>
+      <div class="file field_source">
         {{ content.field_url }}
       </div> 
     {% endif %}

@@ -1928,14 +1928,14 @@ textarea {
   padding: 0 1rem 2rem;
   border-bottom: solid 8px #dde2e5;
   text-align: center;
-  margin-top: 1rem; }
+  margin: 0; }
   @media print, screen and (min-width: 30em) {
     .node--type-department-document .main__heading {
       font-size: 3rem;
-      padding: 2rem 2rem 3rem; } }
+      padding: 2rem; } }
 
 .node--type-department-document .node__content {
-  margin-bottom: 1rem; }
+  margin-bottom: 0; }
   .node--type-department-document .node__content .file {
     display: grid;
     grid-template-columns: 23px 1fr;
@@ -3878,42 +3878,41 @@ section.homepage .hero__content {
       margin-right: -4em !important;
       padding: 2em 4em; } }
 
-.view label, views-exposed-form label {
-  font-weight: bold;
-  color: #37424a; }
-
-.view .form-item, views-exposed-form .form-item {
-  margin-bottom: 0; }
-  @media print, screen and (min-width: 30em) {
-    .view .form-item, views-exposed-form .form-item {
-      margin-bottom: 1.5rem; } }
-  .view .form-item input, views-exposed-form .form-item input {
-    border-radius: 4px;
-    border: 1px solid #a7abad;
-    font-size: .8125rem; }
-
-.view input[name="year"], views-exposed-form input[name="year"] {
-  min-width: 4em;
-  width: 4em; }
-
-.view input[data-drupal-selector="edit-reset"], views-exposed-form input[data-drupal-selector="edit-reset"] {
-  background-color: #ffa02f;
-  color: #37424a;
-  outline: none; }
-  .view input[data-drupal-selector="edit-reset"]:hover, views-exposed-form input[data-drupal-selector="edit-reset"]:hover {
-    background-color: #ffb762; }
-
-.view .form-actions, views-exposed-form .form-actions {
-  gap: 1rem; }
-
-.view .form--inline .form-select, views-exposed-form .form--inline .form-select {
-  max-width: 100%; }
-
-.view .view-filters .form--inline .form-item, views-exposed-form .view-filters .form--inline .form-item {
-  width: auto; }
-  @media print, screen and (max-width: 37.49875em) {
-    .view .view-filters .form--inline .form-item, views-exposed-form .view-filters .form--inline .form-item {
-      width: 100%; } }
+.view, views-exposed-form {
+  /*.form-actions{
+    gap: 1rem;
+  }*/ }
+  .view label, views-exposed-form label {
+    font-weight: bold;
+    color: #37424a; }
+  .view .form-item, views-exposed-form .form-item {
+    margin-bottom: 0; }
+    @media print, screen and (min-width: 30em) {
+      .view .form-item, views-exposed-form .form-item {
+        margin-bottom: 1.5rem; } }
+    .view .form-item input, views-exposed-form .form-item input {
+      border-radius: 4px;
+      border: 1px solid #a7abad;
+      font-size: .8125rem; }
+  .view input[name="year"], views-exposed-form input[name="year"] {
+    min-width: 4em;
+    width: 4em; }
+  .view input[name="year-filter"], views-exposed-form input[name="year-filter"] {
+    min-width: 4em;
+    width: 8em; }
+  .view input[data-drupal-selector="edit-reset"], views-exposed-form input[data-drupal-selector="edit-reset"] {
+    background-color: #ffa02f;
+    color: #37424a;
+    outline: none; }
+    .view input[data-drupal-selector="edit-reset"]:hover, views-exposed-form input[data-drupal-selector="edit-reset"]:hover {
+      background-color: #ffb762; }
+  .view .form--inline .form-select, views-exposed-form .form--inline .form-select {
+    max-width: 100%; }
+  .view .view-filters .form--inline .form-item, views-exposed-form .view-filters .form--inline .form-item {
+    width: auto; }
+    @media print, screen and (max-width: 37.49875em) {
+      .view .view-filters .form--inline .form-item, views-exposed-form .view-filters .form--inline .form-item {
+        width: 100%; } }
 
 /* Table from sorted view
    ========================================================================== */
@@ -3953,20 +3952,29 @@ section.homepage .hero__content {
       .view-dsd-subdivision-cards .form-actions {
         margin-top: 26px; } }
 
-.view-id-article_category_list ul {
-  padding: 0;
-  list-style-type: none; }
-  .view-id-article_category_list ul .row-class {
-    display: flex;
-    justify-content: space-between;
-    margin: 0.5em 0;
-    padding: 0; }
+.view-id-article_category_list {
+  padding-top: 1rem; }
+  .view-id-article_category_list ul {
+    padding: 0;
+    list-style-type: none; }
+    .view-id-article_category_list ul .row-class {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 0 0.5em 0;
+      padding: 0; }
 
-.view-article-archives-list .accordion__drawer ul {
-  padding-left: 0;
-  padding-inline-start: 0; }
-  .view-article-archives-list .accordion__drawer ul .item-list h3 {
-    font-size: 0.8125rem; }
+.view-article-archives-list {
+  padding-top: 1rem; }
+  .view-article-archives-list h3 {
+    font-family: 'Open Sans' !important;
+    margin-top: 0; }
+  .view-article-archives-list .accordion__drawer {
+    padding-top: 1rem; }
+    .view-article-archives-list .accordion__drawer ul {
+      padding-left: 0;
+      padding-inline-start: 0; }
+      .view-article-archives-list .accordion__drawer ul .item-list h3 {
+        font-size: 0.8125rem; }
 
 .block-views-exposed-filter-blocks .form-item {
   margin-bottom: 0;
