@@ -3147,7 +3147,7 @@ display:
         - 'config:field.storage.node.field_department'
   page_2:
     id: page_2
-    display_title: 'Bulk Actions'
+    display_title: OCD
     display_plugin: page
     position: 2
     display_options:
@@ -3203,7 +3203,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           batch: true
-          batch_size: 10
+          batch_size: 20
           form_step: true
           ajax_loader: false
           buttons: false
@@ -3211,11 +3211,11 @@ display:
           clear_on_exposed: true
           force_selection_info: false
           selected_actions:
-            1:
+            0:
               action_id: node_unpublish_by_keyword_action
               preconfiguration:
                 add_confirmation: false
-            2:
+            5:
               action_id: node_assign_owner_action
               preconfiguration:
                 add_confirmation: true
@@ -3226,11 +3226,11 @@ display:
                 get_bundles_from_results: true
             8:
               action_id: views_bulk_operations_delete_entity
-            10:
+            9:
               action_id: 'entity:unpublish_action:node'
               preconfiguration:
                 add_confirmation: true
-            11:
+            10:
               action_id: 'entity:publish_action:node'
               preconfiguration:
                 add_confirmation: false
@@ -3777,6 +3777,27 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 40
+          total_pages: null
+          id: 0
+          tags:
+            next: 'Next ›'
+            previous: '‹ Previous'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
       access:
         type: role
         options:
@@ -4184,6 +4205,7 @@ display:
       defaults:
         access: false
         title: false
+        pager: false
         relationships: false
         fields: false
         filters: false
