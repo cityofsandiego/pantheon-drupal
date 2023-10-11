@@ -21,12 +21,20 @@
 
   input[name="year"] {
     min-width: 4em;
-    width: 4em;
+    width: 4em !important;
+
+    @include breakpoint(mobile-landscape down) {
+      width: 100% !important;
+    }
   }
 
   input[name="year-filter"] {
     min-width: 4em;
-    width: 8em;
+    width: 8em !important;
+
+    @include breakpoint(mobile-landscape down) {
+      width: 100% !important;
+    }
   }
 
   input[type="submit"] {
@@ -277,6 +285,10 @@
       min-width: auto;
       width: 100%;
       margin-bottom: 0;
+
+      @include breakpoint(mobile-landscape down) {
+        margin-bottom: 1rem;
+      }
     }
 
     .row {
