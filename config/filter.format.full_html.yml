@@ -5,11 +5,14 @@ dependencies:
   module:
     - customfilter
     - editor
+    - entity_embed
     - if_components
     - insert_block
     - insert_view
     - insert_view_adv
+    - linkit
     - media
+    - views_entity_embed
 _core:
   default_config_hash: WNeK5FbcY8pXgEpbD_KgRzlF1-5PL3BJXwqaBctPTqw
 name: 'Full HTML'
@@ -44,7 +47,7 @@ filters:
     id: filter_html
     provider: filter
     status: false
-    weight: -45
+    weight: -34
     settings:
       allowed_html: '<em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <s> <sup> <sub> <img src alt data-entity-type data-entity-uuid data-align data-caption> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr> <p> <h1> <pre> <drupal-media data-entity-type data-entity-uuid data-view-mode data-align data-caption alt title> <a href hreflang !href name data-entity-substitution data-entity-type data-entity-uuid title>'
       filter_html_help: true
@@ -59,48 +62,49 @@ filters:
     id: filter_html_escape
     provider: filter
     status: false
-    weight: -44
+    weight: -33
     settings: {  }
   filter_html_image_secure:
     id: filter_html_image_secure
     provider: filter
     status: false
-    weight: -41
+    weight: -31
     settings: {  }
   filter_url:
     id: filter_url
     provider: filter
     status: false
-    weight: -42
+    weight: -32
     settings:
       filter_url_length: 72
   filter_autop:
     id: filter_autop
     provider: filter
     status: true
-    weight: -43
+    weight: -45
     settings: {  }
   media_embed:
     id: media_embed
     provider: media
     status: true
-    weight: -40
+    weight: -44
     settings:
       default_view_mode: default
       allowed_view_modes: {  }
-      allowed_media_types: {  }
+      allowed_media_types:
+        image: image
   filter_insert_block:
     id: filter_insert_block
     provider: insert_block
     status: true
-    weight: 0
+    weight: -37
     settings:
       check_roles: '1'
   insert_view_adv:
     id: insert_view_adv
     provider: insert_view_adv
     status: true
-    weight: 0
+    weight: -36
     settings:
       allowed_views: {  }
       render_as_empty: 0
@@ -109,39 +113,65 @@ filters:
     id: customfilter_insert_search_solr_field
     provider: customfilter
     status: true
-    weight: 0
+    weight: -41
     settings:
       id: insert_search_solr_field
   customfilter_library_xml_feed:
     id: customfilter_library_xml_feed
     provider: customfilter
     status: true
-    weight: 0
+    weight: -40
     settings:
       id: library_xml_feed
   filter_insert_reusable_component:
     id: filter_insert_reusable_component
     provider: if_components
     status: true
-    weight: 0
+    weight: -39
     settings: {  }
   filter_insert_webform:
     id: filter_insert_webform
     provider: if_components
     status: true
-    weight: 0
+    weight: -38
     settings: {  }
   customfilter_accordion:
     id: customfilter_accordion
     provider: customfilter
     status: true
-    weight: 0
+    weight: -43
     settings:
       id: accordion
   customfilter_insert_icon:
     id: customfilter_insert_icon
     provider: customfilter
     status: true
-    weight: 0
+    weight: -42
     settings:
       id: insert_icon
+  linkit:
+    id: linkit
+    provider: linkit
+    status: true
+    weight: -35
+    settings:
+      title: true
+  entity_embed:
+    id: entity_embed
+    provider: entity_embed
+    status: false
+    weight: -28
+    settings: {  }
+  views_embed:
+    id: views_embed
+    provider: views_entity_embed
+    status: false
+    weight: -29
+    settings: {  }
+  customfilter_retag_pdf:
+    id: customfilter_retag_pdf
+    provider: customfilter
+    status: false
+    weight: -30
+    settings:
+      id: retag_pdf
