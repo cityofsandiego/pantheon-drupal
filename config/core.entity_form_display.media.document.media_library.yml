@@ -9,6 +9,7 @@ dependencies:
     - media.type.document
   module:
     - file
+    - term_reference_tree
 _core:
   default_config_hash: dcpfpqyLXOSGpulacMAJW3H-G34_LeNsjdfxd1_oCfY
 id: media.document.media_library
@@ -18,19 +19,20 @@ mode: media_library
 content:
   created:
     type: datetime_timestamp
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   field_department:
-    type: entity_reference_autocomplete
-    weight: 2
+    type: term_reference_tree
+    weight: 3
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      start_minimized: true
+      leaves_only: false
+      select_parents: false
+      cascading_selection: 0
+      max_depth: 1
     third_party_settings: {  }
   field_media_document:
     type: file_generic
@@ -41,7 +43,7 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 3
+    weight: 4
     region: content
     settings:
       include_locked: true
@@ -54,16 +56,21 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  replace_file:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 6
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
