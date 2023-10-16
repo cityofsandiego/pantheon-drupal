@@ -52,9 +52,18 @@ class AdminContentView implements EventSubscriberInterface {
    */
   public function alterAdminContentView(ViewsQueryAlterEvent $event) {
     $view = $event->getView();
-    if ($view->id() == 'content' && in_array('content_owner', $this->userInformation->userRoles())) {
+    $viewDisplay = $view->getDisplay();
+    $displayName = $view->current_display;
+    if ($view->id() ==  'content' && in_array('content_owner', $this->userInformation->userRoles())) {
       $event->getQuery()->where[1]['conditions'][] = [
         'field' => 'node__field_department.field_department_target_id',
+        'value' => $this->userInformation->userDepartments(),
+        'operator' => 'in',
+      ];
+    }
+    if ($view->id() ==  'files' && in_array('content_owner', $this->userInformation->userRoles())) {
+      $event->getQuery()->where[1]['conditions'][] = [
+        'field' => 'field_media_' . $displayName . '_file_managed__media__field_department.field_department_target_id',
         'value' => $this->userInformation->userDepartments(),
         'operator' => 'in',
       ];

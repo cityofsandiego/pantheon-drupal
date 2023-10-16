@@ -7,6 +7,7 @@ dependencies:
     - image.style.media_library
     - system.menu.admin
     - taxonomy.vocabulary.department
+    - user.role.administrator
   module:
     - better_exposed_filters
     - file
@@ -770,402 +771,8 @@ display:
         - url.query_args
         - user.permissions
       tags: {  }
-  page_1:
-    id: page_1
-    display_title: 'Files overview'
-    display_plugin: page
-    position: 1
-    display_options:
-      defaults:
-        pager: true
-        relationships: false
-      relationships:
-        fid:
-          id: fid
-          table: file_managed
-          field: fid
-          relationship: none
-          group_type: group
-          admin_label: 'File usage'
-          required: false
-      display_description: ''
-      display_extenders: {  }
-      path: admin/content/files
-      menu:
-        type: tab
-        title: Files
-        description: ''
-        weight: 0
-        menu_name: admin
-        context: ''
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user.permissions
-      tags: {  }
-  page_2:
-    id: page_2
-    display_title: 'File usage'
-    display_plugin: page
-    position: 2
-    display_options:
-      title: 'File usage'
-      fields:
-        entity_label:
-          id: entity_label
-          table: file_usage
-          field: entity_label
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: entity_label
-          label: Entity
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          link_to_entity: true
-        type:
-          id: type
-          table: file_usage
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: standard
-          label: 'Entity type'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-        module:
-          id: module
-          table: file_usage
-          field: module
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: standard
-          label: 'Registering module'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-        count:
-          id: count
-          table: file_usage
-          field: count
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: numeric
-          label: 'Use count'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          set_precision: false
-          precision: 0
-          decimal: .
-          separator: ','
-          format_plural: false
-          format_plural_string: !!binary MQNAY291bnQ=
-          prefix: ''
-          suffix: ''
-      pager:
-        type: mini
-        options:
-          offset: 0
-          items_per_page: 10
-          total_pages: 0
-          id: 0
-          tags:
-            next: 'Next ›'
-            previous: '‹ Previous'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-      empty: {  }
-      arguments:
-        fid:
-          id: fid
-          table: file_managed
-          field: fid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: file
-          entity_field: fid
-          plugin_id: file_fid
-          default_action: 'not found'
-          exception:
-            value: all
-            title_enable: false
-            title: All
-          title_enable: true
-          title: 'File usage information for {{ arguments.fid }}'
-          default_argument_type: fixed
-          default_argument_options:
-            argument: ''
-          default_argument_skip_url: false
-          summary_options:
-            base_path: ''
-            count: true
-            override: false
-            items_per_page: 25
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: false
-          validate:
-            type: none
-            fail: 'not found'
-          validate_options: {  }
-          break_phrase: false
-          not: false
-      filters: {  }
-      filter_groups:
-        operator: AND
-        groups: {  }
-      style:
-        type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          columns:
-            entity_label: entity_label
-            type: type
-            module: module
-            count: count
-          default: entity_label
-          info:
-            entity_label:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            type:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-medium
-            module:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-low
-            count:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          override: true
-          sticky: false
-          summary: ''
-          empty_table: true
-          caption: ''
-          description: ''
-      row:
-        type: fields
-        options: {  }
-      defaults:
-        empty: false
-        title: false
-        pager: false
-        group_by: false
-        style: false
-        row: false
-        relationships: false
-        fields: false
-        arguments: false
-        filters: false
-        filter_groups: false
-      relationships:
-        fid:
-          id: fid
-          table: file_managed
-          field: fid
-          relationship: none
-          group_type: group
-          admin_label: 'File usage'
-          required: true
-      group_by: false
-      display_description: ''
-      display_extenders: {  }
-      path: admin/content/files/usage/%
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user.permissions
-      tags: {  }
-  page_3:
-    id: page_3
+  document:
+    id: document
     display_title: 'Documents overview'
     display_plugin: page
     position: 1
@@ -1834,7 +1441,7 @@ display:
         type: full
         options:
           offset: 0
-          items_per_page: 30
+          items_per_page: 10
           total_pages: 0
           id: 0
           tags:
@@ -2178,10 +1785,10 @@ display:
         type: normal
         title: Documents
         description: ''
-        weight: 0
+        weight: 2
         expanded: false
         menu_name: admin
-        parent: 'admin_toolbar_tools.extra_links:view.files'
+        parent: system.admin_content
         context: '0'
     cache_metadata:
       max-age: -1
@@ -2194,8 +1801,8 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.media.field_department'
-  page_4:
-    id: page_4
+  image:
+    id: image
     display_title: 'Images overview'
     display_plugin: page
     position: 1
@@ -2932,7 +2539,7 @@ display:
         type: full
         options:
           offset: 0
-          items_per_page: 30
+          items_per_page: 10
           total_pages: 0
           id: 0
           tags:
@@ -3288,10 +2895,10 @@ display:
         type: normal
         title: Images
         description: ''
-        weight: 1
+        weight: 3
         expanded: false
         menu_name: admin
-        parent: 'admin_toolbar_tools.extra_links:view.files'
+        parent: system.admin_content
         context: '0'
     cache_metadata:
       max-age: -1
@@ -3304,3 +2911,403 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.media.field_department'
+  page_1:
+    id: page_1
+    display_title: 'Files overview'
+    display_plugin: page
+    position: 1
+    display_options:
+      access:
+        type: role
+        options:
+          role:
+            administrator: administrator
+      defaults:
+        access: false
+        pager: true
+        relationships: false
+      relationships:
+        fid:
+          id: fid
+          table: file_managed
+          field: fid
+          relationship: none
+          group_type: group
+          admin_label: 'File usage'
+          required: false
+      display_description: ''
+      display_extenders: {  }
+      path: admin/content/files
+      menu:
+        type: tab
+        title: Files
+        description: ''
+        weight: 0
+        menu_name: admin
+        context: ''
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.roles
+      tags: {  }
+  page_2:
+    id: page_2
+    display_title: 'File usage'
+    display_plugin: page
+    position: 2
+    display_options:
+      title: 'File usage'
+      fields:
+        entity_label:
+          id: entity_label
+          table: file_usage
+          field: entity_label
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: entity_label
+          label: Entity
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          link_to_entity: true
+        type:
+          id: type
+          table: file_usage
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          label: 'Entity type'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+        module:
+          id: module
+          table: file_usage
+          field: module
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          label: 'Registering module'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+        count:
+          id: count
+          table: file_usage
+          field: count
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: numeric
+          label: 'Use count'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          set_precision: false
+          precision: 0
+          decimal: .
+          separator: ','
+          format_plural: false
+          format_plural_string: !!binary MQNAY291bnQ=
+          prefix: ''
+          suffix: ''
+      pager:
+        type: mini
+        options:
+          offset: 0
+          items_per_page: 10
+          total_pages: 0
+          id: 0
+          tags:
+            next: 'Next ›'
+            previous: '‹ Previous'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+      empty: {  }
+      arguments:
+        fid:
+          id: fid
+          table: file_managed
+          field: fid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: file
+          entity_field: fid
+          plugin_id: file_fid
+          default_action: 'not found'
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: true
+          title: 'File usage information for {{ arguments.fid }}'
+          default_argument_type: fixed
+          default_argument_options:
+            argument: ''
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            override: false
+            items_per_page: 25
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+      filters: {  }
+      filter_groups:
+        operator: AND
+        groups: {  }
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            entity_label: entity_label
+            type: type
+            module: module
+            count: count
+          default: entity_label
+          info:
+            entity_label:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            type:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: priority-medium
+            module:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: priority-low
+            count:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: true
+          caption: ''
+          description: ''
+      row:
+        type: fields
+        options: {  }
+      defaults:
+        empty: false
+        title: false
+        pager: false
+        group_by: false
+        style: false
+        row: false
+        relationships: false
+        fields: false
+        arguments: false
+        filters: false
+        filter_groups: false
+      relationships:
+        fid:
+          id: fid
+          table: file_managed
+          field: fid
+          relationship: none
+          group_type: group
+          admin_label: 'File usage'
+          required: true
+      group_by: false
+      display_description: ''
+      display_extenders: {  }
+      path: admin/content/files/usage/%
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.permissions
+      tags: {  }

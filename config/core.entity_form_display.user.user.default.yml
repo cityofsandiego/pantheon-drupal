@@ -14,6 +14,7 @@ dependencies:
     - datetime
     - image
     - path
+    - term_reference_tree
     - user
 _core:
   default_config_hash: FaQ9Ptcpxpg30AtiqRDtl_8zbJArHP1LPfug_s59TOA
@@ -25,9 +26,13 @@ content:
   account:
     weight: -10
     region: content
+    settings: {  }
+    third_party_settings: {  }
   contact:
     weight: 5
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_d7_uid:
     type: number
     weight: 31
@@ -36,14 +41,15 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_department:
-    type: entity_reference_autocomplete
+    type: term_reference_tree
     weight: 32
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      start_minimized: true
+      leaves_only: false
+      select_parents: false
+      cascading_selection: 1
+      max_depth: 0
     third_party_settings: {  }
   field_last_password_reset:
     type: datetime_default
@@ -61,15 +67,24 @@ content:
   language:
     weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
   path:
     type: path
     weight: 30
     region: content
     settings: {  }
     third_party_settings: {  }
+  simplesamlphp_auth_user_enable:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   timezone:
     weight: 6
     region: content
+    settings: {  }
+    third_party_settings: {  }
   user_picture:
     type: image_image
     weight: -1

@@ -8,7 +8,7 @@ dependencies:
     - media.type.remote_video
   module:
     - media
-    - term_reference_fancytree
+    - term_reference_tree
 _core:
   default_config_hash: pM8mGlwfpvfG_y5tZn0lGAXFLXz2_yKkL7MvWZsRqdA
 id: media.remote_video.default
@@ -23,12 +23,15 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_department:
-    type: term_reference_fancytree
+    type: term_reference_tree
     weight: 2
     region: content
     settings:
-      select_all: false
-      select_children: false
+      start_minimized: true
+      leaves_only: false
+      select_parents: true
+      cascading_selection: 0
+      max_depth: 0
     third_party_settings: {  }
   field_media_oembed_video:
     type: oembed_textfield
