@@ -471,7 +471,23 @@ display:
           plugin_id: text_custom
           empty: true
           content: 'No content available.'
-      sorts: {  }
+      sorts:
+        changed:
+          id: changed
+          table: node_field_data
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: changed
+          plugin_id: date
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
       arguments: {  }
       filters:
         title:
@@ -915,7 +931,7 @@ display:
             field_department: field_department
             uid: uid
             revision_uid: uid
-          default: title
+          default: changed
           info:
             delta:
               sortable: false
