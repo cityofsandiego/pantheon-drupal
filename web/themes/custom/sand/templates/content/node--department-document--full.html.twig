@@ -81,6 +81,7 @@
     'background-white'
   ]
 %}
+
 <article{{ attributes.addClass(classes) }}>
   <h2 class="main__heading">{{ label }}</h2>
 
@@ -89,9 +90,7 @@
     {{ content.body }}
 
     {% if content.field_attachment[0] %}
-      <a href={{ attachment_url }} target="_blank">
-        {{ label }}
-      </a>
+      <a href={{ attachment_url }} target="_blank">{{ content.field_attachment.0["#media"].name.value }}</a>
     {% endif %}
 
     {% if content.field_url[0] %}
