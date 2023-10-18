@@ -1,6 +1,6 @@
 uuid: 77fbe736-8814-4a27-a46b-0f40c28ec6f8
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - field.storage.sand_remote.field_a_webc_url
@@ -31,6 +31,7 @@ dependencies:
     - field.storage.sand_remote.field_source
     - field.storage.sand_remote.field_source_name
     - field.storage.sand_remote.field_title_long
+    - search_api.server.test
   module:
     - search_api_solr
     - sand_remote
@@ -376,7 +377,7 @@ tracker_settings:
   default:
     indexing_order: fifo
 options:
-  cron_limit: 50
+  cron_limit: 100
   index_directly: true
   track_changes_in_references: true
-server: null
+server: test
