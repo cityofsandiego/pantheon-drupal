@@ -12,7 +12,7 @@
  * @see template_preprocess_region()
  */
 #}
-{{ dump() }}
+
 {% if content %}
   <section class="header-first">
     <div class="grid-container l-padding-mobile-hd">
@@ -25,9 +25,10 @@
         </div>
         <div class="search-bar cell medium-3">
         <div class="header-tools hide-on-mobile">
-          <div class="sand-weather">
+          {{ elements.sandiegoweather["#markup"] }}
+          <!--div class="sand-weather">
             <a href="https://w1.weather.gov/xml/current_obs/KSAN.xml"><i class="{{ elements.sandiegoweather.content["#icon"]|render }}"></i> {{ elements.sandiegoweather.content["#temp"]|render }}&deg;</a>
-          </div>
+          </div-->
           <div class="accessibility-toggle">
             <a href="#" data-open="accessibility-modal">Accessibility Tools</a>
           </div>
