@@ -86,10 +86,6 @@ field_settings:
     dependencies:
       module:
         - node
-  entity_type:
-    label: 'Entity type'
-    property_path: search_api_entity_type
-    type: string
   name:
     label: 'Department » Taxonomy term » Name'
     datasource_id: 'entity:node'
@@ -124,14 +120,6 @@ field_settings:
     dependencies:
       module:
         - node
-  type:
-    label: 'Content type'
-    datasource_id: 'entity:node'
-    property_path: type
-    type: string
-    dependencies:
-      module:
-        - node
 datasource_settings:
   'entity:node':
     bundles:
@@ -139,7 +127,6 @@ datasource_settings:
       selected:
         - application
         - article
-        - blog
         - bucket
         - business_resource
         - department_parent
@@ -166,7 +153,7 @@ tracker_settings:
   default:
     indexing_order: fifo
 options:
-  cron_limit: 150
+  cron_limit: 100
   index_directly: true
   track_changes_in_references: true
 server: test
