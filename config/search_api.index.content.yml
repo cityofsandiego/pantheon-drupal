@@ -3,13 +3,17 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.media.field_department
+    - field.storage.media.field_media_document
     - field.storage.node.body
     - field.storage.node.field_department
     - search_api.server.test
   module:
     - search_api_solr
-    - node
+    - media
     - taxonomy
+    - file
+    - node
     - search_api
 third_party_settings:
   search_api_solr:
@@ -70,6 +74,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.body
+  bundle:
+    label: 'Media type'
+    datasource_id: 'entity:media'
+    property_path: bundle
+    type: string
+    dependencies:
+      module:
+        - media
   changed:
     label: Changed
     datasource_id: 'entity:node'
@@ -78,6 +90,14 @@ field_settings:
     dependencies:
       module:
         - node
+  changed_1:
+    label: Changed
+    datasource_id: 'entity:media'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - media
   created:
     label: 'Authored on'
     datasource_id: 'entity:node'
@@ -86,6 +106,34 @@ field_settings:
     dependencies:
       module:
         - node
+  description:
+    label: 'Document » Description'
+    datasource_id: 'entity:media'
+    property_path: 'field_media_document:description'
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_media_document
+  filename:
+    label: 'Document » File » Filename'
+    datasource_id: 'entity:media'
+    property_path: 'field_media_document:entity:filename'
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_media_document
+      module:
+        - file
+  filesize:
+    label: 'Document » File » File size'
+    datasource_id: 'entity:media'
+    property_path: 'field_media_document:entity:filesize'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.media.field_media_document
+      module:
+        - file
   name:
     label: 'Department » Taxonomy term » Name'
     datasource_id: 'entity:node'
@@ -94,6 +142,24 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_department
+      module:
+        - taxonomy
+  name_1:
+    label: Name
+    datasource_id: 'entity:media'
+    property_path: name
+    type: text
+    dependencies:
+      module:
+        - media
+  name_2:
+    label: 'Department » Taxonomy term » Name'
+    datasource_id: 'entity:media'
+    property_path: 'field_department:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_department
       module:
         - taxonomy
   revision_timestamp:
@@ -121,6 +187,14 @@ field_settings:
       module:
         - node
 datasource_settings:
+  'entity:media':
+    bundles:
+      default: false
+      selected:
+        - document
+    languages:
+      default: true
+      selected: {  }
   'entity:node':
     bundles:
       default: false
@@ -132,6 +206,7 @@ datasource_settings:
         - department_parent
         - digital_archives_photos
         - event
+        - location
         - mayoral_artifacts
         - outreach
         - outreach2
