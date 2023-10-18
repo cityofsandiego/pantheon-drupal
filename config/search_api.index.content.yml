@@ -1,0 +1,159 @@
+uuid: 85a48602-b9e7-4917-98ca-74b4a5bcb622
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - field.storage.node.field_department
+    - search_api.server.test
+  module:
+    - search_api_solr
+    - node
+    - taxonomy
+    - search_api
+third_party_settings:
+  search_api_solr:
+    finalize: false
+    commit_before_finalize: false
+    commit_after_finalize: false
+    debug_finalize: false
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    mlt:
+      mintf: 1
+      mindf: 1
+      maxdf: 0
+      maxdfpct: 0
+      minwl: 0
+      maxwl: 0
+      maxqt: 100
+      maxntp: 2000
+      boost: false
+      interestingTerms: none
+    term_modifiers:
+      slop: 3
+      fuzzy: 1
+    advanced:
+      index_prefix: ''
+      collection: ''
+      timezone: ''
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
+      use_language_undefined_as_fallback_language: false
+      specific_languages:
+        en: '0'
+      use_universal_collation: false
+id: content
+name: Content
+description: ''
+read_only: false
+field_settings:
+  body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  changed:
+    label: Changed
+    datasource_id: 'entity:node'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - node
+  created:
+    label: 'Authored on'
+    datasource_id: 'entity:node'
+    property_path: created
+    type: date
+    dependencies:
+      module:
+        - node
+  name:
+    label: 'Department » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_department:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_department
+      module:
+        - taxonomy
+  revision_timestamp:
+    label: 'Revision create time'
+    datasource_id: 'entity:node'
+    property_path: revision_timestamp
+    type: date
+    dependencies:
+      module:
+        - node
+  revision_timestamp_1:
+    label: 'Revision create time'
+    datasource_id: 'entity:node'
+    property_path: revision_timestamp
+    type: date
+    dependencies:
+      module:
+        - node
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - application
+        - article
+        - bucket
+        - business_resource
+        - department_parent
+        - digital_archives_photos
+        - event
+        - mayoral_artifacts
+        - outreach
+        - outreach2
+        - outreach_article2
+        - resources
+        - sand_gallery
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  auto_aggregated_fulltext_field: {  }
+  entity_type: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+  solr_date_range: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 100
+  index_directly: true
+  track_changes_in_references: true
+server: test
