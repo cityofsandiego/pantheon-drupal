@@ -85,7 +85,7 @@
 {% set image = node.field_image | file_uri | image_style('large') %}
 
 {% set imagezoom = node.field_image | file_url %}
-
+{{ content.content_moderation_control }}
 <article{{ attributes.addClass(classes) }}>
   <div{{ content_attributes.addClass('node__content') }}>
     <div class="grid-x">
