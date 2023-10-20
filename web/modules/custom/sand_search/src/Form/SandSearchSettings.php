@@ -22,20 +22,13 @@ class SandSearchSettings extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['message'] = [
-      '#type' => 'textarea',
-      '#title' => $this->t('Message'),
-      '#required' => TRUE,
+    $form['info'] = [
+      '#markup' => '<h2>List of search indices</h2>',
     ];
-
-    $form['actions'] = [
-      '#type' => 'actions',
-    ];
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Send'),
-    ];
-
+    
+    $form['link_content'] = [ '#markup' => '<a href="/admin/config/search/search-api/searchindex/content">Content</a>', ];
+    $form['link_remote'] = [ '#markup' => '<a href="/admin/config/search/search-api/searchindex/remote">Remote</a>', ];
+    
     return $form;
   }
 
