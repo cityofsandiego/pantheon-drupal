@@ -4,14 +4,20 @@ status: true
 dependencies:
   config:
     - field.storage.node.body
+    - field.storage.node.field_body_bottom
     - field.storage.node.field_department
+    - field.storage.node.field_keywords
+    - field.storage.node.field_mayor
+    - field.storage.node.field_search_keymatch
+    - field.storage.node.field_sidebar
+    - field.storage.node.field_top_content
     - search_api.server.test
   module:
     - search_api_solr
-    - node
     - media
-    - taxonomy
     - user
+    - node
+    - taxonomy
     - search_api
     - search_api_attachments
 third_party_settings:
@@ -61,7 +67,7 @@ third_party_settings:
         en: '0'
       use_universal_collation: false
 id: content
-name: 'Content and Media'
+name: 'Content and Media Files'
 description: ''
 read_only: false
 field_settings:
@@ -109,6 +115,54 @@ field_settings:
     label: 'Entity type'
     property_path: search_api_entity_type
     type: string
+  field_body_bottom:
+    label: 'Body Bottom'
+    datasource_id: 'entity:node'
+    property_path: field_body_bottom
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_body_bottom
+  field_keywords:
+    label: Keywords
+    datasource_id: 'entity:node'
+    property_path: field_keywords
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_keywords
+  field_mayor:
+    label: Mayor
+    datasource_id: 'entity:node'
+    property_path: field_mayor
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_mayor
+  field_sidebar:
+    label: 'Sidebar Content'
+    datasource_id: 'entity:node'
+    property_path: field_sidebar
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_sidebar
+  field_top_content:
+    label: 'Top Content'
+    datasource_id: 'entity:node'
+    property_path: field_top_content
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_top_content
+  mid:
+    label: ID
+    datasource_id: 'entity:media'
+    property_path: mid
+    type: integer
+    dependencies:
+      module:
+        - media
   name:
     label: 'Department » Taxonomy term » Name'
     datasource_id: 'entity:node'
@@ -129,6 +183,16 @@ field_settings:
         - media
         - user
   name_2:
+    label: 'Search KeyMatch » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_search_keymatch:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_search_keymatch
+      module:
+        - taxonomy
+  name_media:
     label: Name
     datasource_id: 'entity:media'
     property_path: name
@@ -136,6 +200,14 @@ field_settings:
     dependencies:
       module:
         - media
+  nid:
+    label: ID
+    datasource_id: 'entity:node'
+    property_path: nid
+    type: integer
+    dependencies:
+      module:
+        - node
   revision_timestamp:
     label: 'Revision create time'
     datasource_id: 'entity:node'
@@ -164,6 +236,14 @@ field_settings:
     dependencies:
       module:
         - node
+  type:
+    label: 'Content type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+    dependencies:
+      module:
+        - node
 datasource_settings:
   'entity:media':
     bundles:
@@ -181,7 +261,6 @@ datasource_settings:
         - article
         - bucket
         - business_resource
-        - department_document
         - department_parent
         - digital_archives_photos
         - event
@@ -200,6 +279,7 @@ processor_settings:
   aggregated_field: {  }
   auto_aggregated_fulltext_field: {  }
   custom_value: {  }
+  entity_status: {  }
   entity_type: {  }
   file_attachments:
     excluded_extensions: 'aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv'
@@ -208,8 +288,49 @@ processor_settings:
     max_filesize: '0'
     excluded_private: 1
     excluded_mimes: 'audio/x-aiff image/x-jg video/x-msvideo image/x-ms-bmp image/gif image/vnd.microsoft.icon video/quicktime audio/ogg video/ogg image/png image/x-photoshop audio/x-realaudio audio/x-pn-realaudio image/x-rgb video/x-flv'
+  highlight:
+    weights:
+      postprocess_query: 0
+    prefix: '<strong>'
+    suffix: '</strong>'
+    excerpt: true
+    excerpt_always: false
+    excerpt_length: 256
+    exclude_fields: {  }
+    highlight: always
+    highlight_partial: false
+  html_filter:
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+    all_fields: true
+    fields:
+      - body
+      - entity_type
+      - field_body_bottom
+      - field_keywords
+      - field_mayor
+      - field_sidebar
+      - field_top_content
+      - name
+      - name_1
+      - name_2
+      - name_media
+      - saa_field_media_document
+      - title
+      - type
+    title: true
+    alt: true
+    tags:
+      h1: 5
+      h2: 3
+      h3: 2
   language_with_fallback: {  }
   rendered_item: {  }
+  solr_boost_more_recent:
+    weights:
+      preprocess_query: 0
+    boosts: {  }
   solr_date_range:
     weights:
       preprocess_index: 0
