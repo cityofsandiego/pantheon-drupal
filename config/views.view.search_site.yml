@@ -106,7 +106,7 @@ display:
           admin_label: ''
           plugin_id: search_api_field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -130,9 +130,9 @@ display:
             more_link: false
             more_link_text: ''
             more_link_path: ''
-            strip_tags: true
+            strip_tags: false
             trim: false
-            preserve_tags: '<strong><p><br>'
+            preserve_tags: '<em>'
             html: false
           element_type: ''
           element_class: ''
@@ -177,7 +177,7 @@ display:
           entity_field: null
           plugin_id: search_api_field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -203,7 +203,7 @@ display:
             more_link_path: ''
             strip_tags: false
             trim: false
-            preserve_tags: ''
+            preserve_tags: '<em>'
             html: false
           element_type: div
           element_class: 'l-margin-bl l-margin-ld'
@@ -246,7 +246,7 @@ display:
           admin_label: ''
           plugin_id: search_api_field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -272,7 +272,7 @@ display:
             more_link_path: ''
             strip_tags: false
             trim: false
-            preserve_tags: ''
+            preserve_tags: '<em>'
             html: false
           element_type: ''
           element_class: ''
@@ -315,7 +315,7 @@ display:
           admin_label: ''
           plugin_id: search_api_field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -341,7 +341,7 @@ display:
             more_link_path: ''
             strip_tags: false
             trim: false
-            preserve_tags: ''
+            preserve_tags: '<em>'
             html: false
           element_type: ''
           element_class: ''
@@ -375,6 +375,55 @@ display:
             use_highlighting: true
             multi_type: separator
             multi_separator: ', '
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "{{ field_top_content }} \r\n{{ body }} \r\n{{ field_sidebar }} \r\n{{ field_body_bottom }} "
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 300
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: true
+            preserve_tags: '<bold><strong>'
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
       pager:
         type: mini
         options:
@@ -394,15 +443,17 @@ display:
             offset: false
             offset_label: Offset
       exposed_form:
-        type: basic
+        type: input_required
         options:
           submit_button: Search
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
+          expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: basic_html
       access:
         type: none
         options: {  }
