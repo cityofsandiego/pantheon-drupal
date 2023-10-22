@@ -48,12 +48,22 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   if (PANTHEON_ENVIRONMENT == 'live') {
     // Do not reroute email on Live
     $conf['reroute_email_enable'] = 0;
+    # enable search_api server: productioo
+    $config['search_api.server.production']['status'] = true;
+    # disable search_api server: test
+    $config['search_api.server.test']['status'] = false;
+  } else {
+    # disable search_api server: production
+    #$config['search_api.server.production']['status'] = false;
+    # enable search_api server: test
+    #$config['search_api.server.test']['status'] = true;
   }
 }
 
 // Added by City of San Diego, the settings from these modules will not be exported in config
 $settings['config_exclude_modules'] = [
   'devel',
+  'search_api_solr_devel',
   'examples',
   'yaml_editor',
   'webprofiler',
