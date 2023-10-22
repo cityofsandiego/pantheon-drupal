@@ -1,0 +1,28 @@
+<?php
+
+function sand_search_search_api_index_items_alter(\Drupal\search_api\IndexInterface $index, array &$items) {
+  //  foreach ($items as $item_id => $item) { list(, $raw_id) = \Drupal\search_api\Utility\Utility::splitCombinedId($item->getId());  }
+  if (! \Drupal::config('sand_search.settings')->get('sand_search_log')) {
+    return; 
+  }
+  $arguments = [
+    '%index' => $index->label(),
+    '@ids' => implode(', ', array_keys($items)),
+  ];
+  $message = t('Start Indexing items on index %index with the following IDs: @ids', $arguments);
+  \Drupal::logger('sand_search')->info($message);
+}
+
+
+function sand_search_search_api_items_indexed(\Drupal\search_api\IndexInterface $index, array $item_ids) {
+  if (! \Drupal::config('sand_search.settings')->get('sand_search_log')) {
+    return;
+  }
+  $arguments = [
+    '%index' => $index->label(),
+    '@ids' => implode(', ', $item_ids),
+  ];
+  $message = t('Indexed items on index %index with the following IDs: @ids', $arguments);
+  \Drupal::logger('sand_search')->info($message);
+  
+}
