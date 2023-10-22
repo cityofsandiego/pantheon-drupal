@@ -2977,10 +2977,10 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
-        field_department_target_id:
-          id: field_department_target_id
-          table: node__field_department
-          field: field_department_target_id
+        tid:
+          id: tid
+          table: taxonomy_index
+          field: tid
           relationship: none
           group_type: group
           admin_label: ''
@@ -2990,20 +2990,21 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: field_department_target_id_op
-            label: Department
+            operator_id: tid_op
+            label: 'Department or Sub-term'
             description: ''
             use_operator: false
-            operator: field_department_target_id_op
+            operator: tid_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_department_target_id
+            identifier: tid
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              administrator: '0'
               content_editor: '0'
               content_owner: '0'
               sand_admin_email: '0'
@@ -3014,8 +3015,6 @@ display:
               webform_results_photos_only: '0'
               outreach2_article: '0'
               sand_admin: '0'
-              if_administrator: '0'
-              administrator: '0'
               locations: '0'
             reduce: false
           is_grouped: false
