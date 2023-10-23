@@ -44,6 +44,7 @@ if(file_exists($redis_file)) {
 }
 
 // Place for settings for the live environment
+// Note: if NOT pantheon ENV then make changes to your settings.local.php
 if (defined('PANTHEON_ENVIRONMENT')) {
   if (PANTHEON_ENVIRONMENT == 'live') {
     // Do not reroute email on Live
@@ -54,9 +55,9 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     $config['search_api.server.test']['status'] = false;
   } else {
     # disable search_api server: production
-    #$config['search_api.server.production']['status'] = false;
+    $config['search_api.server.production']['status'] = false;
     # enable search_api server: test
-    #$config['search_api.server.test']['status'] = true;
+    $config['search_api.server.test']['status'] = true;
   }
 }
 
