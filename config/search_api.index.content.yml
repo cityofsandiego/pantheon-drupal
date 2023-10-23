@@ -8,16 +8,16 @@ dependencies:
     - field.storage.node.field_department
     - field.storage.node.field_keywords
     - field.storage.node.field_mayor
-    - field.storage.node.field_search_keymatch
     - field.storage.node.field_sidebar
     - field.storage.node.field_top_content
+    - field.storage.node.field_search_keymatch
     - search_api.server.test
   module:
     - search_api_solr
-    - media
-    - user
     - node
+    - media
     - taxonomy
+    - user
     - search_api
     - search_api_attachments
 third_party_settings:
@@ -298,8 +298,8 @@ processor_settings:
   highlight:
     weights:
       postprocess_query: 0
-    prefix: '<strong>'
-    suffix: '</strong>'
+    prefix: '<mark>'
+    suffix: '</mark>'
     excerpt: true
     excerpt_always: false
     excerpt_length: 256
