@@ -1,6 +1,6 @@
 uuid: 7bdeb82d-8f0d-4e36-b5bc-370736ade89e
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - field.storage.node.body
@@ -11,7 +11,7 @@ dependencies:
     - field.storage.node.field_sidebar
     - field.storage.node.field_top_content
     - field.storage.node.field_search_keymatch
-    - search_api.server.production
+    - search_api.server.test
   module:
     - search_api_solr
     - node
@@ -298,8 +298,8 @@ processor_settings:
   highlight:
     weights:
       postprocess_query: 0
-    prefix: '<strong>'
-    suffix: '</strong>'
+    prefix: '<mark>'
+    suffix: '</mark>'
     excerpt: true
     excerpt_always: false
     excerpt_length: 256

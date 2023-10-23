@@ -416,7 +416,7 @@ display:
             more_link_path: ''
             strip_tags: true
             trim: true
-            preserve_tags: '<bold><strong>'
+            preserve_tags: '<mark>'
             html: false
           element_type: ''
           element_class: ''
@@ -557,33 +557,8 @@ display:
         - 'config:field.storage.node.field_top_content'
         - 'config:search_api.index.content'
         - 'search_api_list:content'
-  page_1:
-    id: page_1
-    display_title: 'Page Site'
-    display_plugin: page
-    position: 1
-    display_options:
-      display_description: ''
-      exposed_block: true
-      display_extenders: {  }
-      path: search/site
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - 'user.node_grants:view'
-      tags:
-        - 'config:field.storage.node.body'
-        - 'config:field.storage.node.field_body_bottom'
-        - 'config:field.storage.node.field_sidebar'
-        - 'config:field.storage.node.field_top_content'
-        - 'config:search_api.index.content'
-        - 'search_api_list:content'
-  page_2:
-    id: page_2
+  did:
+    id: did
     display_title: 'Page DSD'
     display_plugin: page
     position: 1
@@ -721,8 +696,172 @@ display:
         - 'config:field.storage.node.field_top_content'
         - 'config:search_api.index.content'
         - 'search_api_list:content'
-  page_3:
-    id: page_3
+  page_1:
+    id: page_1
+    display_title: 'Page Site'
+    display_plugin: page
+    position: 1
+    display_options:
+      display_description: ''
+      exposed_block: true
+      display_extenders: {  }
+      path: search/site
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+      tags:
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_body_bottom'
+        - 'config:field.storage.node.field_sidebar'
+        - 'config:field.storage.node.field_top_content'
+        - 'config:search_api.index.content'
+        - 'search_api_list:content'
+  planning:
+    id: planning
+    display_title: 'Page Planning'
+    display_plugin: page
+    position: 1
+    display_options:
+      title: 'Search DSD'
+      filters:
+        search_api_fulltext:
+          id: search_api_fulltext
+          table: search_api_index_content
+          field: search_api_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_fulltext
+          operator: or
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: search_api_fulltext_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: search_api_fulltext_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: search_api_fulltext
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              sand_admin: '0'
+              locations: '0'
+            expose_fields: false
+            placeholder: ''
+            searched_fields_id: search_api_fulltext_searched_fields
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          parse_mode: terms
+          min_length: null
+          fields: {  }
+        field_department:
+          id: field_department
+          table: search_api_index_content
+          field: field_department
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_term
+          operator: or
+          value:
+            - 3334
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: department
+          type: textfield
+          hierarchy: false
+          limit: true
+          error_message: true
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      exposed_block: true
+      display_extenders: {  }
+      path: search/collection/dsd/council
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+      tags:
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_body_bottom'
+        - 'config:field.storage.node.field_sidebar'
+        - 'config:field.storage.node.field_top_content'
+        - 'config:search_api.index.content'
+        - 'search_api_list:content'
+  police:
+    id: police
     display_title: 'Page Police'
     display_plugin: page
     position: 1
@@ -858,8 +997,8 @@ display:
         - 'config:field.storage.node.field_top_content'
         - 'config:search_api.index.content'
         - 'search_api_list:content'
-  page_4:
-    id: page_4
+  police_procedure:
+    id: police_procedure
     display_title: 'Page Police Procedures'
     display_plugin: page
     position: 1
@@ -1023,145 +1162,6 @@ display:
       exposed_block: true
       display_extenders: {  }
       path: search/collection/police
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user
-        - 'user.node_grants:view'
-      tags:
-        - 'config:field.storage.node.body'
-        - 'config:field.storage.node.field_body_bottom'
-        - 'config:field.storage.node.field_sidebar'
-        - 'config:field.storage.node.field_top_content'
-        - 'config:search_api.index.content'
-        - 'search_api_list:content'
-  page_5:
-    id: page_5
-    display_title: 'Page Planning'
-    display_plugin: page
-    position: 1
-    display_options:
-      title: 'Search DSD'
-      filters:
-        search_api_fulltext:
-          id: search_api_fulltext
-          table: search_api_index_content
-          field: search_api_fulltext
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_fulltext
-          operator: or
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: search_api_fulltext_op
-            label: ''
-            description: ''
-            use_operator: false
-            operator: search_api_fulltext_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: search_api_fulltext
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              content_editor: '0'
-              content_owner: '0'
-              sand_admin_email: '0'
-              sand_admin_email_solr: '0'
-              event: '0'
-              digital_archives_photos: '0'
-              webform_results: '0'
-              webform_results_photos_only: '0'
-              outreach2_article: '0'
-              sand_admin: '0'
-              locations: '0'
-            expose_fields: false
-            placeholder: ''
-            searched_fields_id: search_api_fulltext_searched_fields
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          parse_mode: terms
-          min_length: null
-          fields: {  }
-        field_department:
-          id: field_department
-          table: search_api_index_content
-          field: field_department
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_term
-          operator: or
-          value:
-            - 3334
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          vid: department
-          type: textfield
-          hierarchy: false
-          limit: true
-          error_message: true
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      defaults:
-        title: false
-        filters: false
-        filter_groups: false
-      display_description: ''
-      exposed_block: true
-      display_extenders: {  }
-      path: search/collection/dsd/council
     cache_metadata:
       max-age: -1
       contexts:
