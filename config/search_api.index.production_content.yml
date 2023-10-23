@@ -341,6 +341,14 @@ processor_settings:
   solr_date_range:
     weights:
       preprocess_index: 0
+  type_boost:
+    weights:
+      preprocess_index: 0
+    boosts:
+      'entity:media':
+        datasource_boost: !!float 1
+      'entity:node':
+        datasource_boost: !!float 1
 tracker_settings:
   default:
     indexing_order: lifo
