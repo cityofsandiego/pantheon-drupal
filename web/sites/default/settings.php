@@ -50,14 +50,14 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     // Do not reroute email on Live
     $conf['reroute_email_enable'] = 0;
     # enable search_api server: productioo
-    $config['search_api.server.production']['status'] = true;
+##########    $config['search_api.server.production']['status'] = true;
     # disable search_api server: test
-    $config['search_api.server.test']['status'] = false;
+##########    $config['search_api.server.test']['status'] = false;
   } else {
     # disable search_api server: production
-    $config['search_api.server.production']['status'] = false;
+##########    $config['search_api.server.production']['status'] = false;
     # enable search_api server: test
-    $config['search_api.server.test']['status'] = true;
+##########    $config['search_api.server.test']['status'] = true;
   }
 }
 
