@@ -49,23 +49,13 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   if (PANTHEON_ENVIRONMENT == 'live') {
     // Do not reroute email on Live
     $conf['reroute_email_enable'] = 0;
-    # enable search_api server: productioo
+    // enable search_api server: production and indexes
     $config['search_api.server.production']['status'] = true;
-    $config['search_api.index.production_content']['status'] = true;
-    $config['search_api.index.production_remote']['status'] = true;
-    # disable search_api server: test
-    $config['search_api.server.test']['status'] = false;
-    $config['search_api.index.content']['status'] = false;
-    $config['search_api.index.remote']['status'] = false;
-//  } else {
-//    # disable search_api server: production
-//    $config['search_api.server.production']['status'] = false;
-//    $config['search_api.index.production_content']['status'] = false;
-//    $config['search_api.index.production_remote']['status'] = false;
-//    # enable search_api server: test
-//    $config['search_api.server.test']['status'] = true;
-//    $config['search_api.index.content']['status'] = true;
-//    $config['search_api.index.remote']['status'] = true;
+    $config['search_api.index.content']['status'] = true;
+    $config['search_api.index.remote']['status'] = true;
+  } else {
+    // disable search_api server: production
+    $config['search_api.server.production']['status'] = false;
   }
 }
 
@@ -74,6 +64,7 @@ $settings['config_exclude_modules'] = [
   'devel',
   'config_single_export',
   'examples',
+  'sand_search',
   'search_api_solr_devel',
   'webprofiler',
   'yaml_editor',
