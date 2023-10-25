@@ -57,15 +57,15 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     $config['search_api.server.test']['status'] = false;
     $config['search_api.index.content']['status'] = false;
     $config['search_api.index.remote']['status'] = false;
-  } else {
-    # disable search_api server: production
-    $config['search_api.server.production']['status'] = false;
-    $config['search_api.index.production_content']['status'] = false;
-    $config['search_api.index.production_remote']['status'] = false;
-    # enable search_api server: test
-    $config['search_api.server.test']['status'] = true;
-    $config['search_api.index.content']['status'] = true;
-    $config['search_api.index.remote']['status'] = true;
+//  } else {
+//    # disable search_api server: production
+//    $config['search_api.server.production']['status'] = false;
+//    $config['search_api.index.production_content']['status'] = false;
+//    $config['search_api.index.production_remote']['status'] = false;
+//    # enable search_api server: test
+//    $config['search_api.server.test']['status'] = true;
+//    $config['search_api.index.content']['status'] = true;
+//    $config['search_api.index.remote']['status'] = true;
   }
 }
 
