@@ -50,22 +50,31 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     // Do not reroute email on Live
     $conf['reroute_email_enable'] = 0;
     # enable search_api server: productioo
-##########    $config['search_api.server.production']['status'] = true;
+    $config['search_api.server.production']['status'] = true;
+    $config['search_api.index.production_content']['status'] = true;
+    $config['search_api.index.production_remote']['status'] = true;
     # disable search_api server: test
-##########    $config['search_api.server.test']['status'] = false;
+    $config['search_api.server.test']['status'] = false;
+    $config['search_api.index.content']['status'] = false;
+    $config['search_api.index.remote']['status'] = false;
   } else {
     # disable search_api server: production
-##########    $config['search_api.server.production']['status'] = false;
+    $config['search_api.server.production']['status'] = false;
+    $config['search_api.index.production_content']['status'] = false;
+    $config['search_api.index.production_remote']['status'] = false;
     # enable search_api server: test
-##########    $config['search_api.server.test']['status'] = true;
+    $config['search_api.server.test']['status'] = true;
+    $config['search_api.index.content']['status'] = true;
+    $config['search_api.index.remote']['status'] = true;
   }
 }
 
 // Added by City of San Diego, the settings from these modules will not be exported in config
 $settings['config_exclude_modules'] = [
   'devel',
-  'search_api_solr_devel',
+  'config_single_export',
   'examples',
-  'yaml_editor',
+  'search_api_solr_devel',
   'webprofiler',
+  'yaml_editor',
 ];
