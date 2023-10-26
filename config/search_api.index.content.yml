@@ -8,14 +8,18 @@ dependencies:
     - field.storage.node.field_department
     - field.storage.node.field_keywords
     - field.storage.node.field_mayor
-    - field.storage.node.field_search_keymatch
     - field.storage.node.field_sidebar
     - field.storage.node.field_top_content
+    - field.storage.node.field_search_keymatch
+    - field.storage.node.field_sections_outreach2
+    - field.storage.paragraph.field_body
+    - field.storage.node.field_sections
     - search_api.server.production
   module:
     - search_api_solr
     - node
     - taxonomy
+    - paragraphs
     - search_api
     - search_api_attachments
 third_party_settings:
@@ -118,6 +122,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: field_keywords
     type: text
+    boost: 1.4
     dependencies:
       config:
         - field.storage.node.field_keywords
@@ -150,6 +155,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: 'field_department:entity:name'
     type: text
+    boost: !!float 2
     dependencies:
       config:
         - field.storage.node.field_department
@@ -160,6 +166,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: 'field_search_keymatch:entity:name'
     type: text
+    boost: !!float 2
     dependencies:
       config:
         - field.storage.node.field_search_keymatch
@@ -173,6 +180,30 @@ field_settings:
     dependencies:
       module:
         - node
+  processed:
+    label: 'Sections » Paragraph » Body » Processed text'
+    datasource_id: 'entity:node'
+    property_path: 'field_sections_outreach2:entity:field_body:processed'
+    type: text
+    boost: 1.2
+    dependencies:
+      config:
+        - field.storage.node.field_sections_outreach2
+        - field.storage.paragraph.field_body
+      module:
+        - paragraphs
+  processed_1:
+    label: 'Sections » Paragraph » Body » Processed text'
+    datasource_id: 'entity:node'
+    property_path: 'field_sections:entity:field_body:processed'
+    type: text
+    boost: 1.1
+    dependencies:
+      config:
+        - field.storage.node.field_sections
+        - field.storage.paragraph.field_body
+      module:
+        - paragraphs
   revision_timestamp:
     label: 'Revision create time'
     datasource_id: 'entity:node'
@@ -194,6 +225,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: title
     type: text
+    boost: !!float 8
     dependencies:
       module:
         - node
@@ -212,8 +244,10 @@ datasource_settings:
       selected:
         - application
         - article
+        - blog
         - bucket
         - business_resource
+        - department
         - department_parent
         - digital_archives_photos
         - event
@@ -267,6 +301,8 @@ processor_settings:
       - field_top_content
       - name
       - name_2
+      - processed
+      - processed_1
       - title
       - type
     title: true
@@ -280,7 +316,19 @@ processor_settings:
   solr_boost_more_recent:
     weights:
       preprocess_query: 0
-    boosts: {  }
+    boosts:
+      changed:
+        boost: !!float 13
+        resolution: NOW
+        m: '3.16e-11'
+        a: 0.1
+        b: 0.05
+      created:
+        boost: !!float 8
+        resolution: NOW
+        m: '3.16e-11'
+        a: 0.1
+        b: 0.05
   solr_date_range:
     weights:
       preprocess_index: 0
@@ -290,6 +338,11 @@ processor_settings:
     boosts:
       'entity:node':
         datasource_boost: !!float 1
+        bundle_boosts:
+          department: !!float 2
+          department_parent: !!float 21
+          mayoral_artifacts: 1.1
+          outreach: !!float 13
 tracker_settings:
   default:
     indexing_order: lifo
