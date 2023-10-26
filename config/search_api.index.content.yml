@@ -1,6 +1,6 @@
 uuid: 85a48602-b9e7-4917-98ca-74b4a5bcb622
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - field.storage.node.body
@@ -8,12 +8,12 @@ dependencies:
     - field.storage.node.field_department
     - field.storage.node.field_keywords
     - field.storage.node.field_mayor
+    - field.storage.node.field_sidebar
+    - field.storage.node.field_top_content
     - field.storage.node.field_search_keymatch
     - field.storage.node.field_sections_outreach2
     - field.storage.paragraph.field_body
     - field.storage.node.field_sections
-    - field.storage.node.field_sidebar
-    - field.storage.node.field_top_content
     - search_api.server.production
   module:
     - search_api_solr
@@ -318,13 +318,13 @@ processor_settings:
       preprocess_query: 0
     boosts:
       changed:
-        boost: !!float 5
+        boost: !!float 13
         resolution: NOW
         m: '3.16e-11'
         a: 0.1
         b: 0.05
       created:
-        boost: 1.5
+        boost: !!float 8
         resolution: NOW
         m: '3.16e-11'
         a: 0.1
