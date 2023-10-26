@@ -8,16 +8,14 @@ dependencies:
     - field.storage.node.field_department
     - field.storage.node.field_keywords
     - field.storage.node.field_mayor
+    - field.storage.node.field_search_keymatch
     - field.storage.node.field_sidebar
     - field.storage.node.field_top_content
-    - field.storage.node.field_search_keymatch
     - search_api.server.production
   module:
     - search_api_solr
     - node
-    - media
     - taxonomy
-    - user
     - search_api
     - search_api_attachments
 third_party_settings:
@@ -87,14 +85,6 @@ field_settings:
     dependencies:
       module:
         - node
-  changed_1:
-    label: Changed
-    datasource_id: 'entity:media'
-    property_path: changed
-    type: date
-    dependencies:
-      module:
-        - media
   created:
     label: 'Authored on'
     datasource_id: 'entity:node'
@@ -103,14 +93,6 @@ field_settings:
     dependencies:
       module:
         - node
-  created_1:
-    label: 'Authored on'
-    datasource_id: 'entity:media'
-    property_path: created
-    type: date
-    dependencies:
-      module:
-        - media
   entity_type:
     label: 'Entity type'
     property_path: search_api_entity_type
@@ -135,7 +117,7 @@ field_settings:
     label: Keywords
     datasource_id: 'entity:node'
     property_path: field_keywords
-    type: string
+    type: text
     dependencies:
       config:
         - field.storage.node.field_keywords
@@ -163,51 +145,26 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_top_content
-  mid:
-    label: ID
-    datasource_id: 'entity:media'
-    property_path: mid
-    type: integer
-    dependencies:
-      module:
-        - media
   name:
     label: 'Department » Taxonomy term » Name'
     datasource_id: 'entity:node'
     property_path: 'field_department:entity:name'
-    type: string
+    type: text
     dependencies:
       config:
         - field.storage.node.field_department
       module:
         - taxonomy
-  name_1:
-    label: 'Authored by » User » Name'
-    datasource_id: 'entity:media'
-    property_path: 'uid:entity:name'
-    type: string
-    dependencies:
-      module:
-        - media
-        - user
   name_2:
     label: 'Search KeyMatch » Taxonomy term » Name'
     datasource_id: 'entity:node'
     property_path: 'field_search_keymatch:entity:name'
-    type: string
+    type: text
     dependencies:
       config:
         - field.storage.node.field_search_keymatch
       module:
         - taxonomy
-  name_media:
-    label: Name
-    datasource_id: 'entity:media'
-    property_path: name
-    type: string
-    dependencies:
-      module:
-        - media
   nid:
     label: ID
     datasource_id: 'entity:node'
@@ -232,10 +189,6 @@ field_settings:
     dependencies:
       module:
         - node
-  saa_field_media_document:
-    label: 'Search api attachments: Document'
-    property_path: saa_field_media_document
-    type: text
   title:
     label: Title
     datasource_id: 'entity:node'
@@ -253,14 +206,6 @@ field_settings:
       module:
         - node
 datasource_settings:
-  'entity:media':
-    bundles:
-      default: false
-      selected:
-        - document
-    languages:
-      default: true
-      selected: {  }
   'entity:node':
     bundles:
       default: false
@@ -321,10 +266,7 @@ processor_settings:
       - field_sidebar
       - field_top_content
       - name
-      - name_1
       - name_2
-      - name_media
-      - saa_field_media_document
       - title
       - type
     title: true
@@ -346,8 +288,6 @@ processor_settings:
     weights:
       preprocess_index: 0
     boosts:
-      'entity:media':
-        datasource_boost: !!float 1
       'entity:node':
         datasource_boost: !!float 1
 tracker_settings:
