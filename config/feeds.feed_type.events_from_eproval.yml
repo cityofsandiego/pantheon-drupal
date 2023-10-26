@@ -67,6 +67,14 @@ third_party_settings:
         source: state
         weight: 0
         label: 'Set value or default value'
+      811ce8aa-f094-48df-861b-ce72379665a1:
+        default_value: published
+        only_if_empty: false
+        uuid: 811ce8aa-f094-48df-861b-ce72379665a1
+        plugin: default_value
+        source: moderation
+        weight: 0
+        label: 'Set value or default value'
 label: 'Events from eProval'
 id: events_from_eproval
 description: ''
@@ -191,6 +199,16 @@ custom_sources:
     label: 'Special Event Calendar Listing'
     machine_name: special_event_calendar_listing_text
     type: csv
+  hash:
+    value: Hash
+    label: Hash
+    machine_name: hash
+    type: csv
+  moderation:
+    value: MODERATION
+    label: MODERATION
+    machine_name: moderation
+    type: blank
 mappings:
   -
     target: field_department
@@ -306,10 +324,20 @@ mappings:
       value: special_event_calendar_listing_text
       summary: ''
     settings:
-      language: null
-      format: plain_text
+      language: ''
+      format: full_html
   -
     target: feeds_item
     map:
       url: ''
-      guid: ''
+      guid: hash
+    settings: {  }
+    unique:
+      guid: 1
+  -
+    target: moderation_state
+    map:
+      value: moderation
+    settings:
+      language: null
+    unique: {  }
