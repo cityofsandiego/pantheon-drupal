@@ -18,38 +18,34 @@
     <div class="grid-container l-padding-mobile-hd">
       <div class="grid-x grid-margin-y">
         <div class="site-branding cell small-4 medium-9">
-          {{ drupal_entity('block', 'sitebranding')}}
+          {{ drupal_entity('block', 'sitebranding') }}
         </div>
         <div class="cell small-4 text-center l-padding-td hide-on-desktop">
-          <p><a href="#" class="no-underline"><i class="icon-translate icon--lg"></i></a></p>
+          <a href="#" class="no-underline"><i class="icon-translate icon--lg"></i></a>
         </div>
-        <div class="search-bar cell medium-3">
-        <div class="header-tools hide-on-mobile">
-          {{ elements.sandiegoweather["#markup"] }}
-          <!--div class="sand-weather">
-            <a href="https://w1.weather.gov/xml/current_obs/KSAN.xml"><i class="{{ elements.sandiegoweather.content["#icon"]|render }}"></i> {{ elements.sandiegoweather.content["#temp"]|render }}&deg;</a>
-          </div-->
-          <div class="accessibility-toggle">
-            <a href="#" data-open="accessibility-modal">Accessibility Tools</a>
+        <div class="search-bar cell medium-3 grid-container">
+          <div class="header-tools hide-on-mobile grid-x">
+            <div class="sd-weather cell medium-1 show-for-large-only">
+              {{ elements.sandiegoweather["#markup"] }}
+            </div>
+            <div class="accessibility-toggle cell medium-6">
+              <a href="#" data-open="accessibility-modal">Accessibility Tools</a>
+            </div>
+            <div id="google_translate_element" class="cell medium-5"></div>
           </div>
-
-          <div class="languages">
-            <div id="google_translate_element">
-              <span>Translate </span><i class="icon-translate"></i>
+          <div class="form--search grid-x">
+            <div class="cell medium-auto">
+             {{ drupal_entity('block', 'exposedformsearch_sitepage_1') }}
             </div>
           </div>
-        </div>
-            <div class="form--search">
-                {{ drupal_entity('block', 'exposedformsearch_siteall')}}
-            </div>
-{#          <form action="/search/site" method="get" class="form--search">#}
-{#            <div class="input-group">#}
-{#              <input id="search_api_fulltext" class="input-group-field" type="text" placeholder="Search sandiego.gov">#}
-{#              <div class="input-group-submit">#}
-{#                <input type="submit" class="btn form-submit" value="">#}
-{#              </div>#}
-{#            </div>#}
-{#          </form>#}
+          {#          <form action="/search/site" method="get" class="form--search"> #}
+          {#            <div class="input-group"> #}
+          {#              <input id="search_api_fulltext" class="input-group-field" type="text" placeholder="Search sandiego.gov"> #}
+          {#              <div class="input-group-submit"> #}
+          {#                <input type="submit" class="btn form-submit" value=""> #}
+          {#              </div> #}
+          {#            </div> #}
+          {#          </form> #}
         </div>
       </div>
     </div>
@@ -60,7 +56,7 @@
       <div class="grid-x">
         <div class="main-menu cell medium-12">
           <div class="grid-x">
-            <div class="cell medium-auto">
+            <div class="cell medium-12">
               {{ drupal_entity('block', 'mainnavigation_mega_menu')}}
             </div>
           </div>
