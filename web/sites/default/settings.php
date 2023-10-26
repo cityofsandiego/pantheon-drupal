@@ -62,7 +62,6 @@ if (defined('PANTHEON_ENVIRONMENT')) {
 // Added by City of San Diego, the settings from these modules will not be exported in config
 $settings['config_exclude_modules'] = [
   'devel',
-  'config_single_export',
   'examples',
   'sand_search',
   'search_api_solr_devel',
