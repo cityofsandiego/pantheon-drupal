@@ -123,6 +123,13 @@ filters:
     weight: -40
     settings:
       id: library_xml_feed
+  customfilter_retag_pdf:
+    id: customfilter_retag_pdf
+    provider: customfilter
+    status: false
+    weight: -30
+    settings:
+      id: retag_pdf
   filter_insert_reusable_component:
     id: filter_insert_reusable_component
     provider: if_components
@@ -134,6 +141,25 @@ filters:
     provider: if_components
     status: true
     weight: -38
+    settings: {  }
+  entity_embed:
+    id: entity_embed
+    provider: entity_embed
+    status: false
+    weight: -28
+    settings: {  }
+  linkit:
+    id: linkit
+    provider: linkit
+    status: true
+    weight: -35
+    settings:
+      title: true
+  views_embed:
+    id: views_embed
+    provider: views_entity_embed
+    status: false
+    weight: -29
     settings: {  }
   customfilter_accordion:
     id: customfilter_accordion
@@ -149,29 +175,3 @@ filters:
     weight: -42
     settings:
       id: insert_icon
-  linkit:
-    id: linkit
-    provider: linkit
-    status: true
-    weight: -35
-    settings:
-      title: true
-  entity_embed:
-    id: entity_embed
-    provider: entity_embed
-    status: false
-    weight: -28
-    settings: {  }
-  views_embed:
-    id: views_embed
-    provider: views_entity_embed
-    status: false
-    weight: -29
-    settings: {  }
-  customfilter_retag_pdf:
-    id: customfilter_retag_pdf
-    provider: customfilter
-    status: false
-    weight: -30
-    settings:
-      id: retag_pdf
