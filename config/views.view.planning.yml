@@ -5934,7 +5934,7 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: false
-          empty: ''
+          empty: '{{ view_node }}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -5956,14 +5956,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_media_image:
-          id: field_media_image
-          table: media__field_media_image
-          field: field_media_image
-          relationship: field_attachment
+        edit_node:
+          id: edit_node
+          table: node_field_revision
+          field: edit_node
+          relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
+          entity_type: node
+          plugin_id: entity_link_edit
           label: ''
           exclude: true
           alter:
@@ -6005,20 +6006,9 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: image_url
-          settings:
-            image_style: ''
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
+          text: Edit
+          output_url_as_text: false
+          absolute: false
         nothing:
           id: nothing
           table: views
@@ -6031,7 +6021,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>\r\n  </div>\r\n</div>"
+            text: "<div class=\"card background--off-white border pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>{{ edit_node }}\r\n  </div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -6301,16 +6291,7 @@ display:
         sorts: false
         filters: false
         filter_groups: false
-      relationships:
-        field_attachment:
-          id: field_attachment
-          table: node__field_attachment
-          field: field_attachment
-          relationship: none
-          group_type: group
-          admin_label: 'field_attachment: Media'
-          plugin_id: standard
-          required: false
+      relationships: {  }
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -6323,7 +6304,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.media.field_media_image'
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_feature_video_img'
         - 'config:field.storage.node.field_website'
@@ -6591,19 +6571,20 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_url:
-          id: field_url
-          table: node__field_url
-          field: field_url
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
+          entity_type: node
+          plugin_id: entity_link
           label: ''
           exclude: true
           alter:
-            alter_text: true
-            text: '{{ field_url__uri }}'
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -6635,8 +6616,60 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
+        field_website:
+          id: field_website
+          table: node__field_website
+          field: field_website
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: '{{ view_node }}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -6644,8 +6677,8 @@ display:
           type: link
           settings:
             trim_length: 80
-            url_only: false
-            url_plain: false
+            url_only: true
+            url_plain: true
             rel: '0'
             target: '0'
           group_column: ''
@@ -6835,6 +6868,59 @@ display:
           or: manz
           or_translate: 1
           strip_tags: 0
+        edit_node:
+          id: edit_node
+          table: node_field_revision
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
         nothing:
           id: nothing
           table: views
@@ -6847,7 +6933,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border l-padding-bl pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_url }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_url }}\">{{ title }}</a></strong></p>\r\n  </div>\r\n  <div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn pin-bottom\">\r\n  <p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field_1 }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n  <p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n</div>"
+            text: "<div class=\"card background--off-white border l-padding-bl pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>{{ edit_node }}\r\n  </div>\r\n  <div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn pin-bottom\">\r\n  <p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field_1 }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n  <p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -7112,10 +7198,12 @@ display:
         pager: false
         style: false
         row: false
+        relationships: false
         fields: false
         sorts: false
         filters: false
         filter_groups: false
+      relationships: {  }
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -7133,7 +7221,7 @@ display:
         - 'config:field.storage.node.field_category'
         - 'config:field.storage.node.field_feature_video_img'
         - 'config:field.storage.node.field_subtitle'
-        - 'config:field.storage.node.field_url'
+        - 'config:field.storage.node.field_website'
   working_ongoing:
     id: working_ongoing
     display_title: 'Working On (Ongoing)'
@@ -7399,8 +7487,8 @@ display:
           label: ''
           exclude: true
           alter:
-            alter_text: true
-            text: '{{ field_website }}'
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -7455,14 +7543,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_media_image:
-          id: field_media_image
-          table: media__field_media_image
-          field: field_media_image
-          relationship: field_attachment
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: field
+          entity_type: node
+          plugin_id: entity_link_edit
           label: ''
           exclude: true
           alter:
@@ -7504,20 +7593,9 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: image_url
-          settings:
-            image_style: ''
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
+          text: Edit
+          output_url_as_text: false
+          absolute: false
         nothing:
           id: nothing
           table: views
@@ -7530,7 +7608,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>\r\n  </div>\r\n</div>"
+            text: "<div class=\"card background--off-white border pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>{{ edit_node }}\r\n  </div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -7800,16 +7878,7 @@ display:
         sorts: false
         filters: false
         filter_groups: false
-      relationships:
-        field_attachment:
-          id: field_attachment
-          table: node__field_attachment
-          field: field_attachment
-          relationship: none
-          group_type: group
-          admin_label: 'field_attachment: Media'
-          plugin_id: standard
-          required: false
+      relationships: {  }
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -7822,7 +7891,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.media.field_media_image'
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_feature_video_img'
         - 'config:field.storage.node.field_website'

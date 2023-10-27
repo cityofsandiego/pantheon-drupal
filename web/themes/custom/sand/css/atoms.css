@@ -2383,7 +2383,12 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
     min-width: unset;
     display: block;
     width: 100% !important;
-    margin-left: 2px; }
+    margin-left: 0;
+    height: 100%; }
+    @media print, screen and (min-width: 30em) {
+      .form--search #edit-submit-search-site,
+      .form-coll-search #edit-submit-search-site {
+        margin-left: 2px; } }
 
 .form-coll-search .form-item {
   margin-bottom: 0.5em; }
@@ -2436,25 +2441,6 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
   content: "*";
   color: #e32700;
   margin-left: 4px; }
-
-.views-exposed-form .form-actions {
-  margin-top: 23px; }
-  @media print, screen and (max-width: 37.49875em) {
-    .views-exposed-form .form-actions {
-      margin-top: 1.5rem; } }
-  .views-exposed-form .form-actions .button {
-    max-height: 44px;
-    font-weight: normal;
-    font-size: 1em;
-    margin-right: 1em; }
-    @media print, screen and (max-width: 37.49875em) {
-      .views-exposed-form .form-actions .button {
-        margin-right: 0; } }
-    .views-exposed-form .form-actions .button:last-child {
-      margin-right: 0; }
-
-.form--inline .form-actions .button {
-  margin-top: 0; }
 
 .form-text:focus, .form-tel:focus, .form-email:focus, .form-url:focus, .form-number:focus, .form-color:focus, .form-file:focus, .form-textarea:focus, .form-date:focus, .form-time:focus, .form-select:focus {
   border: 1px solid #a7abad; }
