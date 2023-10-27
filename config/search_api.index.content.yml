@@ -3,22 +3,26 @@ langcode: en
 status: false
 dependencies:
   config:
+    - field.storage.media.field_department
+    - field.storage.media.field_media_document
     - field.storage.node.body
     - field.storage.node.field_body_bottom
     - field.storage.node.field_department
     - field.storage.node.field_keywords
     - field.storage.node.field_mayor
-    - field.storage.node.field_sidebar
-    - field.storage.node.field_top_content
     - field.storage.node.field_search_keymatch
     - field.storage.node.field_sections_outreach2
     - field.storage.paragraph.field_body
     - field.storage.node.field_sections
+    - field.storage.node.field_sidebar
+    - field.storage.node.field_top_content
     - search_api.server.production
   module:
     - search_api_solr
-    - node
+    - media
     - taxonomy
+    - file
+    - node
     - paragraphs
     - search_api
     - search_api_attachments
@@ -90,6 +94,14 @@ field_settings:
     dependencies:
       module:
         - node
+  changed_1:
+    label: Changed
+    datasource_id: 'entity:media'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - media
   created:
     label: 'Authored on'
     datasource_id: 'entity:node'
@@ -98,6 +110,22 @@ field_settings:
     dependencies:
       module:
         - node
+  created_1:
+    label: 'Authored on'
+    datasource_id: 'entity:media'
+    property_path: created
+    type: date
+    dependencies:
+      module:
+        - media
+  description:
+    label: 'Document » Description'
+    datasource_id: 'entity:media'
+    property_path: 'field_media_document:description'
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_media_document
   entity_type:
     label: 'Entity type'
     property_path: search_api_entity_type
@@ -151,6 +179,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_top_content
+  mid:
+    label: ID
+    datasource_id: 'entity:media'
+    property_path: mid
+    type: integer
+    dependencies:
+      module:
+        - media
   name:
     label: 'Department » Taxonomy term » Name'
     datasource_id: 'entity:node'
@@ -160,6 +196,16 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_department
+      module:
+        - taxonomy
+  name_1:
+    label: 'Department » Taxonomy term » Name'
+    datasource_id: 'entity:media'
+    property_path: 'field_department:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_department
       module:
         - taxonomy
   name_2:
@@ -173,6 +219,14 @@ field_settings:
         - field.storage.node.field_search_keymatch
       module:
         - taxonomy
+  name_3:
+    label: Name
+    datasource_id: 'entity:media'
+    property_path: name
+    type: text
+    dependencies:
+      module:
+        - media
   nid:
     label: ID
     datasource_id: 'entity:node'
@@ -221,6 +275,16 @@ field_settings:
     dependencies:
       module:
         - node
+  tid:
+    label: 'Department » Taxonomy term » Term ID'
+    datasource_id: 'entity:media'
+    property_path: 'field_department:entity:tid'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.media.field_department
+      module:
+        - taxonomy
   title:
     label: Title
     datasource_id: 'entity:node'
@@ -238,7 +302,35 @@ field_settings:
     dependencies:
       module:
         - node
+  uri:
+    label: 'Document » File » URI'
+    datasource_id: 'entity:media'
+    property_path: 'field_media_document:entity:uri'
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_media_document
+      module:
+        - file
+  url:
+    label: 'Document » File » URI » Root-relative file URL'
+    datasource_id: 'entity:media'
+    property_path: 'field_media_document:entity:uri:url'
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_media_document
+      module:
+        - file
 datasource_settings:
+  'entity:media':
+    bundles:
+      default: false
+      selected:
+        - document
+    languages:
+      default: true
+      selected: {  }
   'entity:node':
     bundles:
       default: false
@@ -294,6 +386,7 @@ processor_settings:
     all_fields: true
     fields:
       - body
+      - description
       - entity_type
       - field_body_bottom
       - field_keywords
@@ -301,11 +394,15 @@ processor_settings:
       - field_sidebar
       - field_top_content
       - name
+      - name_1
       - name_2
+      - name_3
       - processed
       - processed_1
       - title
       - type
+      - uri
+      - url
     title: true
     alt: true
     tags:
@@ -352,7 +449,7 @@ tracker_settings:
   default:
     indexing_order: lifo
 options:
-  cron_limit: 50
+  cron_limit: 20
   index_directly: true
   track_changes_in_references: true
 server: production
