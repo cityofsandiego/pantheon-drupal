@@ -138,7 +138,7 @@ final class Node implements EventSubscriberInterface {
 
   public function preprocessPage(PagePreprocessEvent $event): void {
     $variables = $event->getVariables();
-    $defaultBGImageURL = '/sites/default/files/downtown-skyline-.jpg'; // default background image
+    $defaultBGImageURL = '/themes/custom/sand/images/home-hero-1.jpg'; // default background image
     $is_front = $variables->get('is_front') ?? \Drupal::service('path.matcher')->isFrontPage();
     $nids = [];
 
