@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.sand_gallery.field_sand_gallery_items
     - field.field.node.sand_gallery.field_sand_gallery_no_events
     - field.field.node.sand_gallery.field_sand_gallery_sidebar_title
+    - field.field.node.sand_gallery.field_search_exclude_entity
     - field.field.node.sand_gallery.field_search_keymatch
     - field.field.node.sand_gallery.field_sidebar
     - node.type.sand_gallery
@@ -25,6 +26,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - search_api_exclude_entity
     - term_reference_fancytree
     - text
 third_party_settings:
@@ -205,6 +207,13 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_search_exclude_entity:
+    type: search_api_exclude_entity_widget
+    weight: 26
+    region: content
+    settings:
+      field_label: 'Yes, exclude this entity from the search indexes.'
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete

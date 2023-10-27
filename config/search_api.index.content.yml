@@ -22,6 +22,7 @@ dependencies:
     - paragraphs
     - search_api
     - search_api_attachments
+    - search_api_exclude_entity
 third_party_settings:
   search_api_solr:
     finalize: false
@@ -313,6 +314,10 @@ processor_settings:
       h3: 2
   language_with_fallback: {  }
   rendered_item: {  }
+  search_api_exclude_entity_processor:
+    fields:
+      node:
+        - field_search_exclude_entity
   solr_boost_more_recent:
     weights:
       preprocess_query: 0

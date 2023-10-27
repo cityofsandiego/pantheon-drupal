@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.department.field_other_keywords
     - field.field.node.department.field_promote_to_city_home
     - field.field.node.department.field_resources
+    - field.field.node.department.field_search_exclude_entity
     - field.field.node.department.field_search_keymatch
     - field.field.node.department.field_sidebar
     - field.field.node.department.field_subtitle
@@ -36,12 +37,12 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    weight: -20
+    weight: 0
     region: content
   field_department:
     type: entity_reference_label
@@ -58,7 +59,7 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   field_meta_tags:
     type: metatag_empty_formatter
@@ -74,14 +75,14 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
   field_sidebar:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   field_subtitle:
     type: string
@@ -89,12 +90,12 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   field_add_updated_tag: true
@@ -106,6 +107,7 @@ hidden:
   field_other_description: true
   field_other_keywords: true
   field_promote_to_city_home: true
+  field_search_exclude_entity: true
   field_search_keymatch: true
   langcode: true
   search_api_excerpt: true

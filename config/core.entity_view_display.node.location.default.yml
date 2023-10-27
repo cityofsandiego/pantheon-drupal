@@ -32,6 +32,7 @@ dependencies:
     - field.field.node.location.field_phone
     - field.field.node.location.field_resources
     - field.field.node.location.field_restrictions
+    - field.field.node.location.field_search_exclude_entity
     - field.field.node.location.field_search_keymatch
     - field.field.node.location.field_sidebar
     - field.field.node.location.field_subtitle
@@ -58,19 +59,19 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    weight: -20
+    weight: 0
     region: content
   field_address:
     type: address_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   field_address_pin:
     type: geofield_google_map
@@ -162,7 +163,7 @@ content:
       gmap_api_key: ''
       weight: ''
     third_party_settings: {  }
-    weight: 6
+    weight: 7
     region: content
   field_alt_amenities_title:
     type: string
@@ -170,7 +171,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 8
+    weight: 9
     region: content
   field_alt_restrictions_title:
     type: string
@@ -178,7 +179,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 10
+    weight: 11
     region: content
   field_amenities:
     type: entity_reference_revisions_entity_view
@@ -187,7 +188,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 9
+    weight: 10
     region: content
   field_department:
     type: entity_reference_label
@@ -195,14 +196,14 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 26
+    weight: 27
     region: content
   field_email:
     type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 22
+    weight: 23
     region: content
   field_exceptions:
     type: smartdate_default
@@ -216,7 +217,7 @@ content:
       time_wrapper: true
       localize: false
     third_party_settings: {  }
-    weight: 14
+    weight: 15
     region: content
   field_exceptions_2:
     type: smartdate_default
@@ -230,7 +231,7 @@ content:
       time_wrapper: true
       localize: false
     third_party_settings: {  }
-    weight: 18
+    weight: 19
     region: content
   field_location_bucket:
     type: entity_reference_label
@@ -238,7 +239,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 7
+    weight: 8
     region: content
   field_location_contact_name:
     type: string
@@ -246,7 +247,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 19
+    weight: 20
     region: content
   field_location_contact_title:
     type: string
@@ -254,7 +255,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 20
+    weight: 21
     region: content
   field_location_external_id:
     type: string
@@ -262,7 +263,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 28
+    weight: 29
     region: content
   field_location_external_place_id:
     type: string
@@ -270,7 +271,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 29
+    weight: 30
     region: content
   field_location_hours:
     type: office_hours
@@ -282,6 +283,7 @@ content:
       grouped: false
       show_closed: all
       closed_format: Closed
+      all_day_format: 'All day open'
       separator:
         days: '<br />'
         grouped_days: ' - '
@@ -301,7 +303,7 @@ content:
       schema:
         enabled: false
     third_party_settings: {  }
-    weight: 13
+    weight: 14
     region: content
   field_location_hours2:
     type: office_hours
@@ -313,6 +315,7 @@ content:
       grouped: false
       show_closed: all
       closed_format: Closed
+      all_day_format: 'All day open'
       separator:
         days: '<br />'
         grouped_days: ' - '
@@ -332,21 +335,21 @@ content:
       schema:
         enabled: false
     third_party_settings: {  }
-    weight: 17
+    weight: 18
     region: content
   field_location_hours_notes:
     type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 30
+    weight: 31
     region: content
   field_location_hours_notes2:
     type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 16
+    weight: 17
     region: content
   field_location_hours_title:
     type: string
@@ -354,7 +357,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 12
+    weight: 13
     region: content
   field_location_hours_title_2:
     type: string
@@ -362,7 +365,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 15
+    weight: 16
     region: content
   field_location_type:
     type: entity_reference_label
@@ -370,14 +373,14 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 31
+    weight: 32
     region: content
   field_meta_tags:
     type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 32
+    weight: 33
     region: content
   field_partial_re_open_citywide:
     type: boolean
@@ -387,7 +390,7 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 24
+    weight: 25
     region: content
   field_phone:
     type: string
@@ -395,7 +398,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 21
+    weight: 22
     region: content
   field_resources:
     type: entity_reference_revisions_entity_view
@@ -404,7 +407,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 23
+    weight: 24
     region: content
   field_restrictions:
     type: entity_reference_revisions_entity_view
@@ -413,7 +416,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 11
+    weight: 12
     region: content
   field_search_keymatch:
     type: entity_reference_label
@@ -421,14 +424,14 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 27
+    weight: 28
     region: content
   field_sidebar:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 25
+    weight: 26
     region: content
   field_subtitle:
     type: string
@@ -436,7 +439,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_title_sort:
     type: string
@@ -444,7 +447,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   field_website:
     type: link
@@ -456,15 +459,16 @@ content:
       rel: '0'
       target: '0'
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   field_d7_nid: true
   field_edit_notes: true
+  field_search_exclude_entity: true
   langcode: true
   search_api_excerpt: true
