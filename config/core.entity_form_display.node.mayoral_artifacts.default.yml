@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.mayoral_artifacts.field_mayor
     - field.field.node.mayoral_artifacts.field_photo_date
     - field.field.node.mayoral_artifacts.field_record_id
+    - field.field.node.mayoral_artifacts.field_search_exclude_entity
     - field.field.node.mayoral_artifacts.field_search_keymatch
     - node.type.mayoral_artifacts
     - workflows.workflow.editorial
@@ -24,6 +25,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - search_api_exclude_entity
     - term_reference_tree
     - text
 third_party_settings:
@@ -185,6 +187,13 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_search_exclude_entity:
+    type: search_api_exclude_entity_widget
+    weight: 101
+    region: content
+    settings:
+      field_label: 'Yes, exclude this entity from the search indexes.'
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete

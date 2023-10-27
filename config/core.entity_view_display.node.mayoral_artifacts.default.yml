@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.mayoral_artifacts.field_mayor
     - field.field.node.mayoral_artifacts.field_photo_date
     - field.field.node.mayoral_artifacts.field_record_id
+    - field.field.node.mayoral_artifacts.field_search_exclude_entity
     - field.field.node.mayoral_artifacts.field_search_keymatch
     - image.style.large
     - node.type.mayoral_artifacts
@@ -31,12 +32,12 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    weight: -20
+    weight: 0
     region: content
   field_department:
     type: entity_reference_label
@@ -44,7 +45,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 6
+    weight: 7
     region: content
   field_image:
     type: media_thumbnail
@@ -55,7 +56,7 @@ content:
       image_loading:
         attribute: lazy
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_location:
     type: string
@@ -63,14 +64,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   field_mayor:
     type: list_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
   field_photo_date:
     type: string
@@ -78,18 +79,19 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   field_category: true
   field_d7_nid: true
   field_keywords: true
   field_record_id: true
+  field_search_exclude_entity: true
   field_search_keymatch: true
   langcode: true
   search_api_excerpt: true

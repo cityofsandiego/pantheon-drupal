@@ -6,14 +6,17 @@ dependencies:
     - field.field.node.application.body
     - field.field.node.application.field_d7_nid
     - field.field.node.application.field_edit_notes
+    - field.field.node.application.field_search_exclude_entity
     - field.field.node.application.field_search_keymatch
     - node.type.application
+    - workflows.workflow.editorial
   module:
     - allowed_formats
     - content_moderation
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - search_api_exclude_entity
     - text
 id: node.application.default
 targetEntityType: node
@@ -46,6 +49,13 @@ content:
     settings:
       rows: 5
       placeholder: ''
+    third_party_settings: {  }
+  field_search_exclude_entity:
+    type: search_api_exclude_entity_widget
+    weight: 26
+    region: content
+    settings:
+      field_label: 'Yes, exclude this entity from the search indexes.'
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete

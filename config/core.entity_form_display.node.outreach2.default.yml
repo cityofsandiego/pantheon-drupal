@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.outreach2.field_outreach_footer_type
     - field.field.node.outreach2.field_outreach_header_type
     - field.field.node.outreach2.field_outreach_version
+    - field.field.node.outreach2.field_search_exclude_entity
     - field.field.node.outreach2.field_search_keymatch
     - field.field.node.outreach2.field_sections_outreach2
     - node.type.outreach2
@@ -22,6 +23,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - search_api_exclude_entity
     - term_reference_tree
 third_party_settings:
   field_group:
@@ -158,6 +160,13 @@ content:
     weight: 15
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_search_exclude_entity:
+    type: search_api_exclude_entity_widget
+    weight: 102
+    region: content
+    settings:
+      field_label: 'Yes, exclude this entity from the search indexes.'
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete

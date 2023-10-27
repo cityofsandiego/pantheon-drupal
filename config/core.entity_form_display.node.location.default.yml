@@ -32,6 +32,7 @@ dependencies:
     - field.field.node.location.field_phone
     - field.field.node.location.field_resources
     - field.field.node.location.field_restrictions
+    - field.field.node.location.field_search_exclude_entity
     - field.field.node.location.field_search_keymatch
     - field.field.node.location.field_sidebar
     - field.field.node.location.field_subtitle
@@ -52,6 +53,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - search_api_exclude_entity
     - smart_date
     - telephone
     - term_reference_fancytree
@@ -569,6 +571,13 @@ content:
         add_above: '0'
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
+    third_party_settings: {  }
+  field_search_exclude_entity:
+    type: search_api_exclude_entity_widget
+    weight: 28
+    region: content
+    settings:
+      field_label: 'Yes, exclude this entity from the search indexes.'
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete

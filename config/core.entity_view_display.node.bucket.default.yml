@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.bucket.field_featured_card
     - field.field.node.bucket.field_featured_items
     - field.field.node.bucket.field_resources
+    - field.field.node.bucket.field_search_exclude_entity
     - field.field.node.bucket.field_search_keymatch
     - field.field.node.bucket.field_section_title
     - field.field.node.bucket.field_subtitle
@@ -29,12 +30,12 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    weight: -20
+    weight: 0
     region: content
   field_bucket:
     type: entity_reference_label
@@ -116,9 +117,10 @@ content:
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   field_d7_nid: true
+  field_search_exclude_entity: true
   langcode: true
   search_api_excerpt: true

@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.article.field_department
     - field.field.node.article.field_image
     - field.field.node.article.field_meta_tags
+    - field.field.node.article.field_search_exclude_entity
     - field.field.node.article.field_search_keymatch
     - field.field.node.article.field_sidebar
     - field.field.node.article.field_subtitle
@@ -27,6 +28,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - search_api_exclude_entity
     - term_reference_tree
     - text
 third_party_settings:
@@ -219,6 +221,13 @@ content:
     settings:
       sidebar: true
       use_details: true
+    third_party_settings: {  }
+  field_search_exclude_entity:
+    type: search_api_exclude_entity_widget
+    weight: 26
+    region: content
+    settings:
+      field_label: 'Yes, exclude this entity from the search indexes.'
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete

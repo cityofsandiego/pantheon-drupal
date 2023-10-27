@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.business_resource.field_business_target_business
     - field.field.node.business_resource.field_business_typeof_assistance
     - field.field.node.business_resource.field_d7_nid
+    - field.field.node.business_resource.field_search_exclude_entity
     - field.field.node.business_resource.field_search_keymatch
     - node.type.business_resource
     - workflows.workflow.editorial
@@ -22,6 +23,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - search_api_exclude_entity
     - text
 third_party_settings:
   field_group:
@@ -172,6 +174,13 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_search_exclude_entity:
+    type: search_api_exclude_entity_widget
+    weight: 26
+    region: content
+    settings:
+      field_label: 'Yes, exclude this entity from the search indexes.'
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete
