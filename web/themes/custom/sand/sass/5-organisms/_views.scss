@@ -1,5 +1,18 @@
 //General style for views
-.view, views-exposed-form {
+.views-exposed-form {
+  margin: 2em 0;
+
+  .views-exposed-widgets {
+    display: flex;
+
+    .views-exposed-widget {
+      margin-right: 1rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
   label {
     font-weight: bold;
     color: $font-color;
@@ -9,13 +22,14 @@
     margin-bottom: 0;
 
     @include breakpoint(medium) {
-      margin-bottom: 1.5rem;
+      margin-bottom: 0;
     }
 
     input {
       border-radius: 4px;
       border: 1px solid #a7abad;
       font-size: .8125rem;
+      margin-bottom: 0;
     }
   }
 
@@ -51,13 +65,50 @@
     }
   }
 
-  /*.form-actions{
-    gap: 1rem;
-  }*/
+  .form-actions {
+    margin-top: 23px;
+
+    @include breakpoint(mobile-landscape down) {
+      margin-top: 1.5rem;
+    }
+
+    .button {
+      max-height: 44px;
+      font-weight: normal;
+      font-size: 1em;
+      margin-right: 1em;
+
+      @include breakpoint(mobile-landscape down) {
+        margin-right: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
 
   .form--inline {
+    @include breakpoint(mobile-landscape down) {
+      border: 1px solid $spruce;
+      border-radius: 4px;
+    }
+
+    .form-item {
+      margin-right: 1em;
+    }
+
     .form-select {
       max-width: 100%;
+    }
+
+    .form-actions {
+      margin-bottom: 0;
+      align-self: inherit;
+    }
+
+    .button {
+      margin-top: 0;
     }
   }
 
@@ -269,7 +320,7 @@
       flex-wrap: nowrap;
 
       .form-item {
-        width: 25%;
+        width: auto;
       }
   
       .form-select {

@@ -543,7 +543,12 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
     min-width: unset;
     display: block;
     width: 100% !important;
-    margin-left: 2px;
+    margin-left: 0;
+    height: 100%;
+
+    @include breakpoint(mobile-landscape) {
+      margin-left: 2px;
+    }
   }
 }
 
@@ -616,35 +621,6 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
   content: "*";
   color: #e32700;
   margin-left: 4px;
-}
-
-.views-exposed-form {
-  .form-actions {
-    margin-top: 23px;
-
-    @include breakpoint(mobile-landscape down) {
-      margin-top: 1.5rem;
-    }
-
-    .button {
-      max-height: 44px;
-      font-weight: normal;
-      font-size: 1em;
-      margin-right: 1em;
-
-      @include breakpoint(mobile-landscape down) {
-        margin-right: 0;
-      }
-
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  }
-}
-
-.form--inline .form-actions .button {
-  margin-top: 0;
 }
 
 .form-text:focus, .form-tel:focus, .form-email:focus, .form-url:focus, .form-number:focus, .form-color:focus, .form-file:focus, .form-textarea:focus, .form-date:focus, .form-time:focus, .form-select:focus {

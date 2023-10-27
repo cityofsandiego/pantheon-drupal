@@ -1973,7 +1973,7 @@ textarea {
   padding: 0; }
   .node-type-department-parent .sidebar ul li {
     margin: 0 0 0.5rem 0; }
-    .node-type-department-parent .sidebar ul li .btn, .node-type-department-parent .sidebar ul li .view input[type="submit"], .view .node-type-department-parent .sidebar ul li input[type="submit"], .node-type-department-parent .sidebar ul li views-exposed-form input[type="submit"], views-exposed-form .node-type-department-parent .sidebar ul li input[type="submit"] {
+    .node-type-department-parent .sidebar ul li .btn, .node-type-department-parent .sidebar ul li .views-exposed-form input[type="submit"], .views-exposed-form .node-type-department-parent .sidebar ul li input[type="submit"] {
       font-size: 0.9rem !important;
       padding: 0.75em 1em;
       width: 100%; }
@@ -1985,7 +1985,7 @@ textarea {
     .node-type-department-parent .sidebar ul.list-normal li {
       margin: 0 0 0.5rem 1rem; }
 
-.node-type-department-parent .sidebar .btn, .node-type-department-parent .sidebar .view input[type="submit"], .view .node-type-department-parent .sidebar input[type="submit"], .node-type-department-parent .sidebar views-exposed-form input[type="submit"], views-exposed-form .node-type-department-parent .sidebar input[type="submit"] {
+.node-type-department-parent .sidebar .btn, .node-type-department-parent .sidebar .views-exposed-form input[type="submit"], .views-exposed-form .node-type-department-parent .sidebar input[type="submit"] {
   font-size: 1rem !important; }
 
 .node-type-department-parent .slides {
@@ -2078,17 +2078,13 @@ textarea {
     .node--type-webform .sidebar ul li,
     .node--type-event .sidebar ul li {
       margin: 0 0 0.5rem 0; }
-      .node--type-department .sidebar ul li .btn, .node--type-department .sidebar ul li .view input[type="submit"], .view .node--type-department .sidebar ul li input[type="submit"], .node--type-department .sidebar ul li views-exposed-form input[type="submit"], views-exposed-form .node--type-department .sidebar ul li input[type="submit"],
+      .node--type-department .sidebar ul li .btn, .node--type-department .sidebar ul li .views-exposed-form input[type="submit"], .views-exposed-form .node--type-department .sidebar ul li input[type="submit"],
       .node--type-webform .sidebar ul li .btn,
-      .node--type-webform .sidebar ul li .view input[type="submit"],
-      .view .node--type-webform .sidebar ul li input[type="submit"],
-      .node--type-webform .sidebar ul li views-exposed-form input[type="submit"],
-      views-exposed-form .node--type-webform .sidebar ul li input[type="submit"],
+      .node--type-webform .sidebar ul li .views-exposed-form input[type="submit"],
+      .views-exposed-form .node--type-webform .sidebar ul li input[type="submit"],
       .node--type-event .sidebar ul li .btn,
-      .node--type-event .sidebar ul li .view input[type="submit"],
-      .view .node--type-event .sidebar ul li input[type="submit"],
-      .node--type-event .sidebar ul li views-exposed-form input[type="submit"],
-      views-exposed-form .node--type-event .sidebar ul li input[type="submit"] {
+      .node--type-event .sidebar ul li .views-exposed-form input[type="submit"],
+      .views-exposed-form .node--type-event .sidebar ul li input[type="submit"] {
         font-size: 0.9rem !important;
         padding: 0.75em 1em;
         width: 100%; }
@@ -2945,6 +2941,11 @@ textarea {
 
 .header .search-bar {
   text-align: right; }
+  .header .search-bar .views-exposed-form {
+    margin: 0; }
+    .header .search-bar .views-exposed-form .form-item input {
+      border: none;
+      border-radius: 4px 0 0 4px; }
   .header .search-bar #views-exposed-form-search-site-all .form-item {
     margin: 0; }
   .header .search-bar #views-exposed-form-search-site-all #edit-actions, .header .search-bar #views-exposed-form-search-site-all #edit-actions--2 {
@@ -3393,7 +3394,7 @@ section.not-found {
     text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black;
     font-size: 18px;
     font-size:  1.125rem; }
-  .hero__content .btn, .hero__content .view input[type="submit"], .view .hero__content input[type="submit"], .hero__content views-exposed-form input[type="submit"], views-exposed-form .hero__content input[type="submit"] {
+  .hero__content .btn, .hero__content .views-exposed-form input[type="submit"], .views-exposed-form .hero__content input[type="submit"] {
     font-size: 1rem;
     margin-top: 1em;
     font-weight: normal;
@@ -3408,7 +3409,7 @@ section.not-found {
       .hero__content p {
         font-size: 24px;
         font-size:  1.5rem; }
-      .hero__content .btn, .hero__content .view input[type="submit"], .view .hero__content input[type="submit"], .hero__content views-exposed-form input[type="submit"], views-exposed-form .hero__content input[type="submit"] {
+      .hero__content .btn, .hero__content .views-exposed-form input[type="submit"], .views-exposed-form .hero__content input[type="submit"] {
         margin-top: 1.5em;
         display: inline-block; } }
   @media print, screen and (min-width: 60em) {
@@ -3882,46 +3883,77 @@ section.homepage .hero__content {
       margin-right: -4em !important;
       padding: 2em 4em; } }
 
-.view, views-exposed-form {
-  /*.form-actions{
-    gap: 1rem;
-  }*/ }
-  .view label, views-exposed-form label {
+.views-exposed-form {
+  margin: 2em 0; }
+  .views-exposed-form .views-exposed-widgets {
+    display: flex; }
+    .views-exposed-form .views-exposed-widgets .views-exposed-widget {
+      margin-right: 1rem; }
+      .views-exposed-form .views-exposed-widgets .views-exposed-widget:last-child {
+        margin-right: 0; }
+  .views-exposed-form label {
     font-weight: bold;
     color: #37424a; }
-  .view .form-item, views-exposed-form .form-item {
+  .views-exposed-form .form-item {
     margin-bottom: 0; }
     @media print, screen and (min-width: 30em) {
-      .view .form-item, views-exposed-form .form-item {
-        margin-bottom: 1.5rem; } }
-    .view .form-item input, views-exposed-form .form-item input {
+      .views-exposed-form .form-item {
+        margin-bottom: 0; } }
+    .views-exposed-form .form-item input {
       border-radius: 4px;
       border: 1px solid #a7abad;
-      font-size: .8125rem; }
-  .view input[name="year"], views-exposed-form input[name="year"] {
+      font-size: .8125rem;
+      margin-bottom: 0; }
+  .views-exposed-form input[name="year"] {
     min-width: 4em;
     width: 4em !important; }
     @media print, screen and (max-width: 37.49875em) {
-      .view input[name="year"], views-exposed-form input[name="year"] {
+      .views-exposed-form input[name="year"] {
         width: 100% !important; } }
-  .view input[name="year-filter"], views-exposed-form input[name="year-filter"] {
+  .views-exposed-form input[name="year-filter"] {
     min-width: 4em;
     width: 8em !important; }
     @media print, screen and (max-width: 37.49875em) {
-      .view input[name="year-filter"], views-exposed-form input[name="year-filter"] {
+      .views-exposed-form input[name="year-filter"] {
         width: 100% !important; } }
-  .view input[data-drupal-selector="edit-reset"], views-exposed-form input[data-drupal-selector="edit-reset"] {
+  .views-exposed-form input[data-drupal-selector="edit-reset"] {
     background-color: #ffa02f;
     color: #37424a;
     outline: none; }
-    .view input[data-drupal-selector="edit-reset"]:hover, views-exposed-form input[data-drupal-selector="edit-reset"]:hover {
+    .views-exposed-form input[data-drupal-selector="edit-reset"]:hover {
       background-color: #ffb762; }
-  .view .form--inline .form-select, views-exposed-form .form--inline .form-select {
+  .views-exposed-form .form-actions {
+    margin-top: 23px; }
+    @media print, screen and (max-width: 37.49875em) {
+      .views-exposed-form .form-actions {
+        margin-top: 1.5rem; } }
+    .views-exposed-form .form-actions .button {
+      max-height: 44px;
+      font-weight: normal;
+      font-size: 1em;
+      margin-right: 1em; }
+      @media print, screen and (max-width: 37.49875em) {
+        .views-exposed-form .form-actions .button {
+          margin-right: 0; } }
+      .views-exposed-form .form-actions .button:last-child {
+        margin-right: 0; }
+  @media print, screen and (max-width: 37.49875em) {
+    .views-exposed-form .form--inline {
+      border: 1px solid #37424a;
+      border-radius: 4px; } }
+  .views-exposed-form .form--inline .form-item {
+    margin-right: 1em; }
+  .views-exposed-form .form--inline .form-select {
     max-width: 100%; }
-  .view .view-filters .form--inline .form-item, views-exposed-form .view-filters .form--inline .form-item {
+  .views-exposed-form .form--inline .form-actions {
+    margin-bottom: 0;
+    align-self: inherit; }
+  .views-exposed-form .form--inline .button {
+    margin-top: 0; }
+  .views-exposed-form .view-filters .form--inline .form-item {
     width: auto; }
     @media print, screen and (max-width: 37.49875em) {
-      .view .view-filters .form--inline .form-item, views-exposed-form .view-filters .form--inline .form-item {
+      .views-exposed-form .view-filters .form--inline .form-item {
         width: 100%; } }
 
 /* Table from sorted view
@@ -4051,7 +4083,7 @@ section.homepage .hero__content {
     .view-id-planning .form--inline {
       flex-wrap: nowrap; }
       .view-id-planning .form--inline .form-item {
-        width: 25%; }
+        width: auto; }
       .view-id-planning .form--inline .form-select {
         width: 100%;
         min-width: 100%; } }
