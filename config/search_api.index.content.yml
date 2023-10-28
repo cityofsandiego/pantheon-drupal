@@ -3,27 +3,26 @@ langcode: en
 status: false
 dependencies:
   config:
-    - field.storage.media.field_department
-    - field.storage.media.field_media_document
     - field.storage.node.body
+    - field.storage.media.field_media_document
     - field.storage.node.field_body_bottom
     - field.storage.node.field_department
     - field.storage.node.field_keywords
     - field.storage.node.field_mayor
+    - field.storage.node.field_sidebar
+    - field.storage.node.field_top_content
+    - field.storage.media.field_department
     - field.storage.node.field_search_keymatch
     - field.storage.node.field_sections_outreach2
     - field.storage.paragraph.field_body
-    - field.storage.node.field_sections
-    - field.storage.node.field_sidebar
-    - field.storage.node.field_top_content
     - search_api.server.production
   module:
     - search_api_solr
+    - node
     - media
     - taxonomy
-    - file
-    - node
     - paragraphs
+    - file
     - search_api
     - search_api_attachments
     - search_api_exclude_entity
@@ -247,18 +246,6 @@ field_settings:
         - field.storage.paragraph.field_body
       module:
         - paragraphs
-  processed_1:
-    label: 'Sections » Paragraph » Body » Processed text'
-    datasource_id: 'entity:node'
-    property_path: 'field_sections:entity:field_body:processed'
-    type: text
-    boost: 1.1
-    dependencies:
-      config:
-        - field.storage.node.field_sections
-        - field.storage.paragraph.field_body
-      module:
-        - paragraphs
   revision_timestamp:
     label: 'Revision create time'
     datasource_id: 'entity:node'
@@ -346,7 +333,6 @@ datasource_settings:
         - event
         - location
         - mayoral_artifacts
-        - outreach
         - outreach2
         - outreach_article2
         - resources
@@ -398,7 +384,6 @@ processor_settings:
       - name_2
       - name_3
       - processed
-      - processed_1
       - title
       - type
       - uri
