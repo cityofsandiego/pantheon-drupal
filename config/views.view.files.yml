@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.media.field_department
+    - field.storage.media.field_media_image
     - image.style.media_library
     - system.menu.admin
     - taxonomy.vocabulary.department
@@ -641,6 +642,7 @@ display:
             fid: fid
             name: name
             thumbnail__target_id: name
+            field_media_image: name
             filename: filename
             filesize: filesize
             created: created
@@ -663,10 +665,17 @@ display:
               sortable: false
               default_sort_order: asc
               align: ''
-              separator: ''
+              separator: '<br>'
               empty_column: false
               responsive: ''
             thumbnail__target_id:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_media_image:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -691,7 +700,7 @@ display:
               sortable: true
               default_sort_order: desc
               align: ''
-              separator: ''
+              separator: '<br>'
               empty_column: false
               responsive: ''
             uid:
@@ -705,7 +714,7 @@ display:
               sortable: true
               default_sort_order: desc
               align: ''
-              separator: ''
+              separator: '<br>'
               empty_column: false
               responsive: ''
             uid_1:
@@ -1047,8 +1056,8 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
-            custom_date_format: ''
+            date_format: custom
+            custom_date_format: 'D, m/d/y - g:i A'
             timezone: ''
           group_column: value
           group_columns: {  }
@@ -1179,8 +1188,8 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
-            custom_date_format: ''
+            date_format: custom
+            custom_date_format: 'D, m/d/y - g:i A'
             timezone: ''
           group_column: value
           group_columns: {  }
@@ -1975,6 +1984,72 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_media_image:
+          id: field_media_image
+          table: media__field_media_image
+          field: field_media_image
+          relationship: reverse_field_media_image_media
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: 'Alt Text: {{ field_media_image__alt }}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: image
+          settings:
+            image_link: ''
+            image_style: ''
+            image_loading:
+              attribute: lazy
+          group_column: entity_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         filename:
           id: filename
           table: file_managed
@@ -2145,8 +2220,8 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
-            custom_date_format: ''
+            date_format: custom
+            custom_date_format: 'D, m/d/y - g:i A'
             timezone: ''
           group_column: value
           group_columns: {  }
@@ -2277,8 +2352,8 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
-            custom_date_format: ''
+            date_format: custom
+            custom_date_format: 'D, m/d/y - g:i A'
             timezone: ''
           group_column: value
           group_columns: {  }
@@ -2617,12 +2692,12 @@ display:
           entity_type: file
           entity_field: changed
           plugin_id: date
-          order: ASC
+          order: DESC
           expose:
             label: ''
             field_identifier: ''
           exposed: false
-          granularity: second
+          granularity: minute
         filename:
           id: filename
           table: file_managed
@@ -2639,29 +2714,86 @@ display:
             field_identifier: ''
           exposed: false
       filters:
-        filename:
-          id: filename
-          table: file_managed
-          field: filename
-          relationship: none
+        name:
+          id: name
+          table: media_field_data
+          field: name
+          relationship: reverse_field_media_image_media
           group_type: group
           admin_label: ''
-          entity_type: file
-          entity_field: filename
+          entity_type: media
+          entity_field: name
           plugin_id: string
-          operator: word
+          operator: allwords
           value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: filemime_op
-            label: Filename
+            operator_id: name_op
+            label: Name
             description: ''
             use_operator: false
-            operator: filename_op
+            operator: name_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: filename
+            identifier: name
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              sand_admin: '0'
+              locations: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        uid:
+          id: uid
+          table: media_field_data
+          field: uid
+          relationship: reverse_field_media_image_media
+          group_type: group
+          admin_label: ''
+          entity_type: media
+          entity_field: uid
+          plugin_id: numeric
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: uid_op
+            label: 'Created by'
+            description: ''
+            use_operator: false
+            operator: uid_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: author
             required: false
             remember: false
             multiple: false
@@ -2680,6 +2812,8 @@ display:
               outreach2_article: '0'
               sand_admin: '0'
               locations: '0'
+            min_placeholder: ''
+            max_placeholder: ''
             placeholder: ''
           is_grouped: false
           group_info:
@@ -2805,65 +2939,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        uid:
-          id: uid
-          table: media_field_data
-          field: uid
-          relationship: reverse_field_media_image_media
-          group_type: group
-          admin_label: ''
-          entity_type: media
-          entity_field: uid
-          plugin_id: numeric
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: uid_op
-            label: 'Created by'
-            description: ''
-            use_operator: false
-            operator: uid_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: author
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              content_editor: '0'
-              content_owner: '0'
-              sand_admin_email: '0'
-              sand_admin_email_solr: '0'
-              event: '0'
-              digital_archives_photos: '0'
-              webform_results: '0'
-              webform_results_photos_only: '0'
-              outreach2_article: '0'
-              sand_admin: '0'
-              locations: '0'
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -2911,6 +2986,7 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.media.field_department'
+        - 'config:field.storage.media.field_media_image'
   page_1:
     id: page_1
     display_title: 'Files overview'
