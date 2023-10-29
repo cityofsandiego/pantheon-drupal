@@ -68,11 +68,14 @@
     <div class="hero__slides">
       <div class="grid-container l-padding-desktop-hn">
         <div class="grid-x slide-container">
-          <div class="cell medium-6 small-12 mobile-landscape-12 hero__content" style="display: none">
+          <div class="cell medium-6 small-12 mobile-landscape-12 hero__content">
             <!--div id="hero__slides--primary" class="hero__slides--content"-->
-              {{ drupal_view('homepage_slide', 'block_1')}}
+            {% set view = drupal_view_result('homepage_slide', 'block_1')|length %}
+            {% if view > 0 %}
+              {{ drupal_view('homepage_slide', 'block_1') }}
+            {% endif %}
             <!--/div-->
-            <div class="custom-navigation custom-navigation--primary hidden">
+            <div class="custom-navigation custom-navigation--primary l-padding-home-slide hidden">
               <a href="#" class="flex-prev">
                 <i class="icon-chevron-left"></i>
               </a>

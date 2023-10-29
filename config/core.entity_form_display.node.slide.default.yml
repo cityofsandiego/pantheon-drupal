@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.slide.field_image
     - field.field.node.slide.field_link_text
     - field.field.node.slide.field_url
+    - field.field.node.slide.field_wrapper_padding
     - node.type.slide
     - workflows.workflow.editorial
   module:
@@ -44,6 +45,7 @@ third_party_settings:
         - field_caption
         - field_url
         - field_link_text
+        - field_wrapper_padding
       label: 'Main Content'
       region: content
       parent_name: group_main_tabs
@@ -139,6 +141,13 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
+    third_party_settings: {  }
+  field_wrapper_padding:
+    type: boolean_checkbox
+    weight: 18
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   langcode:
     type: language_select
