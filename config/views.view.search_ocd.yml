@@ -4,8 +4,10 @@ status: true
 dependencies:
   config:
     - field.storage.sand_remote.field_body
+    - field.storage.sand_remote.field_doc_date
     - search_api.index.remote
   module:
+    - datetime
     - search_api
     - text
 id: search_ocd
@@ -24,6 +26,77 @@ display:
     display_options:
       title: 'Search OCD'
       fields:
+        field_doc_date:
+          id: field_doc_date
+          table: search_api_index_remote
+          field: field_doc_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_custom
+          settings:
+            timezone_override: ''
+            date_format: 'l, F j, Y - '
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
         label:
           id: label
           table: search_api_index_remote
@@ -35,9 +108,9 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: false
-            text: ''
-            make_link: false
+            alter_text: true
+            text: '{{ field_doc_date }} {{ label }} '
+            make_link: true
             path: ''
             absolute: false
             external: false
@@ -307,6 +380,7 @@ display:
         - url.query_args
       tags:
         - 'config:field.storage.sand_remote.field_body'
+        - 'config:field.storage.sand_remote.field_doc_date'
         - 'config:search_api.index.remote'
         - 'search_api_list:remote'
   all:
@@ -326,5 +400,6 @@ display:
         - url.query_args
       tags:
         - 'config:field.storage.sand_remote.field_body'
+        - 'config:field.storage.sand_remote.field_doc_date'
         - 'config:search_api.index.remote'
         - 'search_api_list:remote'
