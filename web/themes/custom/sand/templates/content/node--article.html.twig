@@ -80,6 +80,7 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class
   ]
 %}
+
 <div class="grid-container">
 {{ content.content_moderation_control }}
 </div>
@@ -93,7 +94,7 @@
   {% endif %}
       <div class="grid-x">
         <div class="cell small-12 medium-auto content l-padding-am l-padding-mobile-tn">
-          {% if node.title.value != "Inside San Diego Home" %}
+          {% if node.title.value != "Inside San Diego Home"%}
             {% if content.field_category.0 %}
               {{ content.field_category }}
             {% endif %}
@@ -101,13 +102,15 @@
             {% if content.field_subtitle.0 %}
             <h3 class="l-padding-desktop-hs">{{ content.field_subtitle }}</h3>
             {% endif %}
-            <div class="byline l-margin-bd">
-            {% if (content.field_byline.0) and (node.title.value != "Inside San Diego Home") %}
-            <p>{{ node.created.value|date("F j, Y") }} | {{ content.field_byline.0 }}</p>
-            {% else %}
-            <p>{{ node.created.value|date("F j, Y") }}</p>
+            {% if content.field_article_exclude.0['#markup'] != "All Views" %}
+              <div class="byline l-margin-bd">
+              {% if (content.field_byline.0) and (node.title.value != "Inside San Diego Home") %}
+              <p>{{ node.created.value|date("F j, Y") }} | {{ content.field_byline.0 }}</p>
+              {% else %}
+              <p>{{ node.created.value|date("F j, Y") }}</p>
+              {% endif %}
+              </div>
             {% endif %}
-            </div>
           {% endif %}
           <div>
             {{ content.field_image }}
@@ -116,22 +119,23 @@
           </div>
         </div>
         {% if node.title.value != "Inside San Diego Home" %}
-        <div class="cell medium-3 sidebar light-gray-bg l-padding-vm l-padding-desktop-hd l-padding-mobile-hm">
+        <div class="cell medium-3 sidebar light-gray-bg l-padding-vm l-padding-desktop-hm l-padding-mobile-hm">
             <div class="l-padding-bm">
               {{ content.field_sidebar }}
 
               {{ drupal_entity('block', 'viewsexposedfilterblock', check_access=false) }}
 
-              <div class="accordions js-toggle-accordion">
+              <h5>Filter by Category</h5>
+              <div>
+                    {{ drupal_view('article_category_list', 'categories') }}
+              </div>
+              <div class="accordions js-toggle-accordion hidden">
                 <div class="accordion">
                   <p class="accordion__heading h4"><a class="accordion__link" href="#"><strong>Categories</strong><i class="toggle-icon"></i></a></p>
                   <div class="accordion__drawer" style="display: none;">
                     {{ drupal_view('article_category_list', 'categories') }}
                   </div>
                 </div>
-              </div>  
-
-              <div class="accordions js-toggle-accordion">
                 <div class="accordion">
                   <p class="accordion__heading h4"><a class="accordion__link" href="#"><strong>Archives</strong><i class="toggle-icon"></i></a></p>
                   <div class="accordion__drawer" style="display: none;">
