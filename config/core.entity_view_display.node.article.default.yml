@@ -20,6 +20,7 @@ dependencies:
     - node.type.article
   module:
     - metatag
+    - options
     - text
     - user
 id: node.article.default
@@ -38,6 +39,20 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 2
+    region: content
+  field_article_exclude:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_article_type:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
     region: content
   field_body_no_margin:
     type: text_default
@@ -107,8 +122,6 @@ content:
     weight: 3
     region: content
 hidden:
-  field_article_exclude: true
-  field_article_type: true
   field_d7_nid: true
   field_search_exclude_entity: true
   field_search_keymatch: true
