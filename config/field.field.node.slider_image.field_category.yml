@@ -1,0 +1,29 @@
+uuid: 1932bc39-efa4-4b14-8a7f-bd0a77fd6985
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category
+    - node.type.slider_image
+    - taxonomy.vocabulary.categories
+id: node.slider_image.field_category
+field_name: field_category
+entity_type: node
+bundle: slider_image
+label: Category
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      categories: categories
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
