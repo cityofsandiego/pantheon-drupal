@@ -90,9 +90,18 @@
   .flex-prev,
   .flex-next {
     display: block !important;
+    transition: none !important;
+    opacity: 1!important;
   }
 }
-
+.flexslider:hover .flex-direction-nav .flex-prev {
+  opacity: 1;
+  left: 0;
+}
+.flexslider:hover .flex-direction-nav .flex-next {
+  opacity: 1;
+  right: 0;
+}
 html[xmlns] .flexslider .slides {
   display: block;
 }
@@ -134,14 +143,16 @@ html[xmlns] .flexslider .slides {
     left: 0;
     border: 1px solid white;
     border-radius: 50%;
-    -ms-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+    //-ms-transform: translateY(-50%);
+    //-webkit-transform: translateY(-50%);
+    //transform: translateY(-50%);
     @include rem("font-size", 0px);
 
     &.flex-next {
       left: auto;
       right: -0;
+      transition: none !important;
+      opacity: 1!important;
 
       &:before {
         font-family: "icomoon";
@@ -152,6 +163,9 @@ html[xmlns] .flexslider .slides {
     }
 
     &.flex-prev {
+      transition: none !important;
+      opacity: 1!important;
+
       &:before {
         font-family: "icomoon";
         content: "\3c";
@@ -185,7 +199,7 @@ html[xmlns] .flexslider .slides {
     height: 40px;
     padding-left: 1px;
     position: absolute;
-    bottom: 5px;
+    bottom: -39px;
     left: 10px;
     opacity: 0.8;
     z-index: 10;
@@ -211,6 +225,10 @@ html[xmlns] .flexslider .slides {
     &.flex-pause:before {
       content: "\e96b";
     }
+  }
+
+  @include breakpoint(mobile-landscape down) {
+    display: none;
   }
 }
 .flex-control-nav {
@@ -270,6 +288,10 @@ html[xmlns] .flexslider .slides {
     bottom: 0;
     margin: 1em 0;
   }
+}
+
+.flex-control-paging li a {
+  background: $cerulean;
 }
 
 .flex-control-thumbs {
@@ -342,10 +364,12 @@ html[xmlns] .flexslider .slides {
 
 @media screen and (max-width: 860px) {
   .flex-direction-nav .flex-prev {
-    opacity: 1;
+    transition: none !important;
+    opacity: 1!important;
   }
   .flex-direction-nav .flex-next {
-    opacity: 1;
+    transition: none !important;
+    opacity: 1!important;
   }
 }
 
@@ -431,9 +455,13 @@ html[xmlns] .flexslider .slides {
     }
     a.flex-prev {
       left: 0;
+      transition: none !important;
+      opacity: 1!important;
     }
     a.flex-next {
       right: 0;
+      transition: none !important;
+      opacity: 1!important;
     }
   }
 }
