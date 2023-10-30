@@ -39,8 +39,28 @@ body.path-search {
   }
 }
 
+// This will change all <mark> from looking like a highlighter to just a bold.
 .view-content mark {
   background-color: transparent;
   font-weight: bold;
   color: black;
+}
+
+
+// Make search box bigger on desktop.
+form[action="/search/site"] .form-type-textfield,
+.search.view .views-exposed-form .form-type-textfield {
+  @include breakpoint(medium) {
+    width: 75%;
+  }
+}
+
+// Don't display the label for the search in the header.
+header form[action="/search/site"] .form-type-textfield label {
+  display: none;
+}
+
+// Put some spacing on the top of the facets block.
+div.block.block-facets {
+  margin-top: 1em;
 }
