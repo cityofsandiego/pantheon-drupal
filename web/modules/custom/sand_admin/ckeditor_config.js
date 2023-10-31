@@ -8,3 +8,5 @@ CKEDITOR.on('instanceReady', function(ev) {
               breakAfterClose: true
           });
 });
+// allow i tags to be empty
+CKEDITOR.dtd.$removeEmpty['i'] = false;
