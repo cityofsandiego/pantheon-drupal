@@ -93,8 +93,9 @@
     <div {{ content_attributes.addClass('node__content') }}>
   {% endif %}
       <div class="grid-x">
-        <div class="cell small-12 medium-auto content l-padding-am l-padding-mobile-tn">
+        <div class="cell small-12 medium-auto content l-padding-mobile-tn">
           {% if node.title.value != "Inside San Diego Home"%}
+          <div class="l-padding-hm l-padding-vd">
             {% if content.field_category.0 %}
               {{ content.field_category }}
             {% endif %}
@@ -111,12 +112,19 @@
               {% endif %}
               </div>
             {% endif %}
+          </div>
           {% endif %}
-          <div>
-            {{ content.field_image }}
+          {% if content.field_body_no_margin.0 %}
+          <div class="l-padding-vm">
             {{ content.field_body_no_margin }}
+          </div>
+          {% endif %}
+          {% if content.body.0 %}
+          <div class="l-padding-hm l-padding-bm">
+            {{ content.field_image }}
             {{ content.body }}
           </div>
+          {% endif %}
         </div>
         {% if node.title.value != "Inside San Diego Home" %}
         <div class="cell medium-3 sidebar light-gray-bg l-padding-vm l-padding-desktop-hm l-padding-mobile-hm">
