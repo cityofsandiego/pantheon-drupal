@@ -595,19 +595,68 @@ display:
           use_highlighting: false
           multi_type: separator
           multi_separator: ', '
-        search_api_rendered_item:
-          id: search_api_rendered_item
-          table: search_api_index_content
-          field: search_api_rendered_item
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: search_api_rendered_item
+          plugin_id: custom
           label: ''
           exclude: false
           alter:
             alter_text: true
-            text: "<a href=\"{{ url }}\">{{ search_api_rendered_item }}</a>\r\n<p>{{ url_1 }}</p>"
+            text: "{{ field_top_content }} \r\n{{ body }}\r\n{{ processed }} \r\n{{ processed_1 }} \r\n{{ field_sidebar }} \r\n{{ field_body_bottom }} "
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 300
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: true
+            preserve_tags: '<mark>'
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: l-margin-ld
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+        search_api_rendered_item_1:
+          id: search_api_rendered_item_1
+          table: search_api_index_content
+          field: search_api_rendered_item
+          relationship: none
+          group_type: group
+          admin_label: 'Document Icon'
+          plugin_id: search_api_rendered_item
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '<img class="file-icon" alt="PDF icon" title="application/pdf" src="/modules/file/icons/application-pdf.png">'
             make_link: false
             path: ''
             absolute: false
@@ -654,7 +703,76 @@ display:
               bucket: ''
               business_resource: ''
               department: ''
-              department_document: default
+              department_document: ''
+              department_parent: ''
+              digital_archives_photos: ''
+              event: ''
+              location: ''
+              mayoral_artifacts: ''
+              outreach2: ''
+              outreach_article2: ''
+              resources: ''
+              sand_gallery: ''
+        search_api_rendered_item:
+          id: search_api_rendered_item
+          table: search_api_index_content
+          field: search_api_rendered_item
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_rendered_item
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<a href=\"{{ url }}\">{{ search_api_rendered_item }}</a>  {{ search_api_rendered_item_1 }}\r\n<p>{{ url_1 }}</p>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          view_modes:
+            'entity:media':
+              document: default
+            'entity:node':
+              application: ''
+              article: ''
+              blog: ''
+              bucket: ''
+              business_resource: ''
+              department: ''
+              department_document: ''
               department_parent: ''
               digital_archives_photos: ''
               event: ''
@@ -721,7 +839,7 @@ display:
             max_filesize: '0'
             excluded_private: 0
             relationship: none
-            field_rendering: 1
+            field_rendering: 0
             fieldsets:
               - more
               - admin_label
@@ -757,8 +875,8 @@ display:
               prefix: ''
               suffix: ''
               target: ''
-              trim: 0
-              max_length: '0'
+              trim: 1
+              max_length: '256'
               word_boundary: 1
               ellipsis: 1
               more_link: 0
@@ -793,57 +911,8 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-        nothing:
-          id: nothing
-          table: views
-          field: nothing
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: custom
-          label: ''
-          exclude: false
-          alter:
-            alter_text: true
-            text: "{{ field_top_content }} \r\n{{ body }}\r\n{{ processed }} \r\n{{ processed_1 }} \r\n{{ field_sidebar }} \r\n{{ field_body_bottom }} "
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 300
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: true
-            trim: true
-            preserve_tags: '<mark>'
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: l-margin-ld
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: false
       pager:
-        type: mini
+        type: full
         options:
           offset: 0
           items_per_page: 10
@@ -852,6 +921,8 @@ display:
           tags:
             next: ››
             previous: ‹‹
+            first: '« First'
+            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -860,6 +931,7 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
+          quantity: 5
       exposed_form:
         type: input_required
         options:
@@ -901,7 +973,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: search_api_fulltext
-          operator: or
+          operator: and
           value: ''
           group: 1
           exposed: true
@@ -1015,6 +1087,47 @@ display:
                   min: ''
                   max: ''
                   value: ''
+        type:
+          id: type
+          table: search_api_index_content
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: not
+          value:
+            department_document: department_document
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
       style:
         type: default
         options:
