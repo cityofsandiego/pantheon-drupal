@@ -3,26 +3,27 @@ langcode: en
 status: false
 dependencies:
   config:
-    - field.storage.node.body
+    - field.storage.media.field_department
     - field.storage.media.field_media_document
+    - field.storage.node.field_attachment
+    - field.storage.node.body
     - field.storage.node.field_body_bottom
     - field.storage.node.field_department
     - field.storage.node.field_keywords
     - field.storage.node.field_mayor
-    - field.storage.node.field_sidebar
-    - field.storage.node.field_top_content
-    - field.storage.media.field_department
     - field.storage.node.field_search_keymatch
     - field.storage.node.field_sections_outreach2
     - field.storage.paragraph.field_body
+    - field.storage.node.field_sidebar
+    - field.storage.node.field_top_content
     - search_api.server.production
   module:
     - search_api_solr
-    - node
     - media
     - taxonomy
-    - paragraphs
     - file
+    - node
+    - paragraphs
     - search_api
     - search_api_attachments
     - search_api_exclude_entity
@@ -129,6 +130,14 @@ field_settings:
     label: 'Entity type'
     property_path: search_api_entity_type
     type: string
+  field_attachment:
+    label: Attachment
+    datasource_id: 'entity:node'
+    property_path: field_attachment
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_attachment
   field_body_bottom:
     label: 'Body Bottom'
     datasource_id: 'entity:node'
@@ -162,6 +171,17 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_mayor
+  field_media_document:
+    label: 'Attachment » Media » Document'
+    datasource_id: 'entity:node'
+    property_path: 'field_attachment:entity:field_media_document'
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_media_document
+        - field.storage.node.field_attachment
+      module:
+        - media
   field_sidebar:
     label: 'Sidebar Content'
     datasource_id: 'entity:node'
@@ -262,6 +282,10 @@ field_settings:
     dependencies:
       module:
         - node
+  saa_field_media_document:
+    label: 'Search api attachments: Document'
+    property_path: saa_field_media_document
+    type: text
   tid:
     label: 'Department » Taxonomy term » Term ID'
     datasource_id: 'entity:media'
@@ -375,9 +399,11 @@ processor_settings:
       - body
       - description
       - entity_type
+      - field_attachment
       - field_body_bottom
       - field_keywords
       - field_mayor
+      - field_media_document
       - field_sidebar
       - field_top_content
       - name
@@ -385,6 +411,7 @@ processor_settings:
       - name_2
       - name_3
       - processed
+      - saa_field_media_document
       - title
       - type
       - uri
