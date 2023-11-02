@@ -55,9 +55,12 @@ main .search.view .views-exposed-form .form-type-textfield {
   }
 }
 
-// Don't display the label for the search in the header.
-header form[action="/search/site"] .form-type-textfield label {
-  display: none;
+// Don't display the label for the search in the header or any select field.
+header form[action="/search/site"] {
+  .form-type-select,
+  .form-type-textfield label {
+    display: none;
+  }
 }
 
 // Put some spacing on the top of the facets block.
