@@ -93,7 +93,9 @@
           {% if content.field_subtitle[0] %}
             <p class="h2 heading--snug">{{ content.field_subtitle.0 }}</p>
           {% endif %}
-
+          {% if (content.field_image.0) and (content.field_dept_card_only.0["#markup"] == "No") %}
+          <figure class="l-margin-bm"><img src="{{ file_url(node.field_image.entity.field_media_image.entity.uri.value) }}" alt="" width="100%" height="auto"></figure>
+          {% endif %}
           {{ content.body }}
           {{ content.field_other_description }}
         </div>

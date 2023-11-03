@@ -2059,6 +2059,8 @@ fieldset:not(.radios--wrapper), fieldset:not(.fieldgroup) {
     padding: 0 0.8em;
     font-size: 1em;
     text-transform: uppercase; }
+  fieldset:not(.radios--wrapper) fieldset:not(.fieldgroup), fieldset:not(.fieldgroup) fieldset:not(.fieldgroup) {
+    padding: 1.5em 1.3em 1.3em 1.3em; }
 
 fieldset .webform-composite-hidden-title {
   margin: 0; }
@@ -2958,6 +2960,7 @@ table:not(.calendar-view-table) {
   table:not(.calendar-view-table).t-inside-border thead th[colspan]:not([colspan="1"]) {
     border-bottom: none !important; }
   table:not(.calendar-view-table).t-inside-border tbody td {
+    border-top: 1px solid #d1d4d3;
     border-right: 1px solid #d1d4d3; }
   table:not(.calendar-view-table).t-inside-border thead th:last-child,
   table:not(.calendar-view-table).t-inside-border tbody td:last-child {
@@ -2965,6 +2968,8 @@ table:not(.calendar-view-table) {
   table:not(.calendar-view-table).t-inside-border thead tr:not(:first-child) th {
     border-top: 1px solid #d1d4d3;
     border-right: 1px solid #d1d4d3 !important; }
+  table:not(.calendar-view-table).t-inside-border tbody tr:first-child td {
+    border-top: none; }
   table:not(.calendar-view-table).ui-datepicker-calendar tr:nth-child(even) {
     background: #f6f6f6; }
   table:not(.calendar-view-table).ui-datepicker-calendar td:first-child {
@@ -2990,6 +2995,7 @@ table:not(.calendar-view-table) {
   table:not(.calendar-view-table).t-white.t-inside-border thead th {
     border-right: 1px solid #d1d4d3; }
   table:not(.calendar-view-table).t-white.t-inside-border tbody td {
+    border-top: none;
     border-right: 1px solid #d1d4d3;
     border-bottom: 1px solid #d1d4d3; }
   table:not(.calendar-view-table).t-white.t-inside-border tbody tr:last-child td {
@@ -3018,6 +3024,7 @@ table:not(.calendar-view-table) {
     table:not(.calendar-view-table).t-blue.t-inside-border thead th, table:not(.calendar-view-table).t-green.t-inside-border thead th {
       border-right: 1px solid #adafaf; }
     table:not(.calendar-view-table).t-blue.t-inside-border tbody td, table:not(.calendar-view-table).t-green.t-inside-border tbody td {
+      border-top: 1px solid #adafaf;
       border-right: 1px solid #adafaf; }
     table:not(.calendar-view-table).t-blue.t-inside-border thead th:last-child,
     table:not(.calendar-view-table).t-blue.t-inside-border tbody td:last-child, table:not(.calendar-view-table).t-green.t-inside-border thead th:last-child,
@@ -3026,6 +3033,8 @@ table:not(.calendar-view-table) {
     table:not(.calendar-view-table).t-blue.t-inside-border thead tr:not(:first-child) th, table:not(.calendar-view-table).t-green.t-inside-border thead tr:not(:first-child) th {
       border-top: 1px solid #adafaf;
       border-right: 1px solid #adafaf !important; }
+    table:not(.calendar-view-table).t-blue.t-inside-border tbody tr:first-child td, table:not(.calendar-view-table).t-green.t-inside-border tbody tr:first-child td {
+      border-top: none; }
   table:not(.calendar-view-table).t-dark-border {
     border-left: 1px solid #37424a;
     border-bottom: 1px solid #37424a; }
@@ -3238,9 +3247,6 @@ ul {
   ul ul {
     list-style-type: circle;
     margin-left: 0; }
-
-ol li {
-  list-style: decimal; }
 
 .accordion__drawer ul.department-menu, .accordion__drawer ol.department-menu {
   padding-inline-start: 0; }
