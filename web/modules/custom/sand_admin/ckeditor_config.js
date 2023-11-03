@@ -10,3 +10,15 @@ CKEDITOR.on('instanceReady', function(ev) {
 });
 // allow i tags to be empty
 CKEDITOR.dtd.$removeEmpty['i'] = false;
+CKEDITOR.editorConfig = function( config ) {
+  config.allowedContent = {
+      script: true,
+      $1: {
+          // This will set the default set of elements
+          elements: CKEDITOR.dtd,
+          attributes: true,
+          styles: true,
+          classes: true
+      }
+  };
+};
