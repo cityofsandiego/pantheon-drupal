@@ -12,55 +12,79 @@ id: webform_1209138
 title: 'Sign up for email updates - CD3'
 description: null
 category: null
-elements: |
+elements: |-
   outer_fieldset:
     '#type': fieldset
     '#open': true
-    '#title': 'Receive Email Updates' 
-    '#description': ""
+    '#title': 'Receive Email Updates'
+    '#description': ''
     required_first_8:
       '#type': textfield
+      '#title': 'First Name'
       '#title_display': invisible
-      '#title': 'First Name' 
-      '#description': ""
+      '#placeholder': 'First Name'
       '#required': true
+      '#wrapper_attributes':
+        class:
+          - three
+          - columns
+          - l-padding-ln
     required_last_8:
       '#type': textfield
+      '#title': 'Last Name'
       '#title_display': invisible
-      '#title': 'Last Name' 
-      '#description': ""
+      '#placeholder': 'Last Name'
       '#required': true
+      '#wrapper_attributes':
+        class:
+          - three
+          - columns
     required_valid_email_8:
       '#type': email
-      '#size': 20
+      '#title': 'Email Address'
       '#title_display': invisible
-      '#title': 'Email Address' 
-      '#description': ""
+      '#size': 20
+      '#placeholder': 'Email Address'
       '#required': true
+      '#wrapper_attributes':
+        class:
+          - three
+          - columns
     submit_button_8:
       '#type': processed_text
+      '#title': 'Submit Button'
+      '#description': ''
+      '#wrapper_attributes':
+        class:
+          - three
+          - columns
+      '#text': |
+        <p><input class="btn form-submit width-100" name="op" type="submit" value="Subscribe" /></p>
       '#format': full_html
-      '#text': "<div class='three column'><input class='btn form-submit width-100' name='op' type='submit' value='Subscribe'></div>\n"
-      '#title': 'Submit Button' 
-      '#description': ""
   opt:
     '#type': radios
+    '#title': Subscription
     '#options':
-      EMAIL.OPTIN: 'Subscribe'
-      EMAIL.OPTOUT: 'Unsubscribe'
-    '#default_value': 'EMAIL.OPTIN' 
-    '#title': 'Subscription' 
-    '#description': ""
+      EMAIL.OPTIN: Subscribe
+      EMAIL.OPTOUT: Unsubscribe
+    '#default_value': EMAIL.OPTIN
+    '#wrapper_attributes':
+      class:
+        - hidden
   opt_first:
     '#type': textfield
-    '#default_value': 'EMAIL.OPTIN' 
-    '#title': 'OPT_FIRST' 
-    '#description': ""
+    '#title': OPT_FIRST
+    '#default_value': EMAIL.OPTIN
+    '#wrapper_attributes':
+      class:
+        - hidden
   opt_second:
     '#type': textfield
-    '#default_value': 'EMAIL.OPTOUT' 
-    '#title': 'OPT_SECOND' 
-    '#description': ""
+    '#title': OPT_SECOND
+    '#default_value': EMAIL.OPTOUT
+    '#wrapper_attributes':
+      class:
+        - hidden
 css: ''
 javascript: ''
 settings:
