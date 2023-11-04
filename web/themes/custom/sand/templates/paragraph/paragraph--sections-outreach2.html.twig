@@ -99,7 +99,7 @@
     <!-- This section HAS an image -->
     {% if content.field_image.0 %}
       {% if scroll_ratio == "1.0" %}
-        <div class="bg-cover" style="background-image: url('{{image_url}}');{{bg_size}}{{min_hgt}}background-position-x:{{percent_horizontal}}%;background-position-y:{{percent_vertical}}%;"></div>
+      <div class="bg-cover" style="background-image: url('{{image_url}}');{{bg_size}}{{min_hgt}}background-position-x:{{percent_horizontal}}%;background-position-y:{{percent_vertical}}%;">
       {% else %}
       <div {{ img_attributes.addClass(img_classes)
         .setAttribute('id', 'img-' ~ paragraph.id())
@@ -118,17 +118,17 @@
         .setAttribute('data-sand-adjustment-height', adjustment_height)
         .setAttribute('data-sand-background-size', background_size)
         .setAttribute('data-sand-full-width-on-mobile', full_width_mobile)
-        }}  
+        }}
       >
+      {% endif %}
         {% if no_styling %}
-          <div>
+        <div>
         {% else %}
-          <div {{ body_attributes.addClass(body_classes)}}>
+        <div {{ body_attributes.addClass(body_classes)}}>
         {% endif %}
-            {{ content.field_body }}   
+          {{ content.field_body }}   
         </div>
       </div>
-      {% endif %}
     {% else %}
     <!-- This section does NOT have an image -->
       <div {{ img_attributes.addClass('no-image').setAttribute('style', 'background-color:' ~ bg_color ~ ';') }}>
