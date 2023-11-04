@@ -59,6 +59,12 @@
   {% set show = '' %}
 {% endif %}
 
+{% if content.field_centered.0["#markup"] == "On" %}
+  {% set centered = 'text-center' %}
+{% else %}
+  {% set centered = '' %}
+{% endif %}
+
 {% set body_attributes = create_attribute() %}
 {% set no_img_attributes = create_attribute() %}
 {% set img_attributes = create_attribute() %}
@@ -73,12 +79,13 @@
 {%
   set img_classes = [
     'stellar-window',
-    'repeat'
+    'repeat',
+    centered
   ]
 %}
 {%
   set body_classes = [
-    'text_center',
+    centered,
     'no_shadow',
     'l-padding-vd'
   ]
@@ -89,7 +96,7 @@
     'l-padding-desktop-hx',
     'l-padding-mobile-hm',
     'l-padding-vd',
-    'text_center'
+    centered
   ]
 %}
 
