@@ -405,6 +405,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
         nothing:
           id: nothing
           table: views
@@ -417,7 +470,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr id=\"hr-{{ counter }}\" class=\"l-margin-vm\">\r\n\r\n<p><em>Published on {{ created }}</em></p>\r\n<h3>{{ title }}</h3>\r\n<figure class=\"img-right width-33 width-100--mobile text-center\">{{ field_feature_video_img }}<br><a class=\"fine-print\" href=\"{{ field_media_image }}\" download>Download Image</a></figure>\r\n{{ body }}\r\n"
+            text: "<hr id=\"hr-{{ counter }}\" class=\"l-margin-vm\">\r\n\r\n<p><em>Published on {{ created }}</em> <span class=\"l-margin-lm\">{{ edit_node }}</span></p>\r\n<h3>{{ title }}</h3>\r\n<figure class=\"img-right width-33 width-100--mobile text-center\">{{ field_feature_video_img }}<br><a class=\"fine-print\" href=\"{{ field_media_image }}\" download>Download Image</a></figure>\r\n{{ body }}\r\n"
             make_link: false
             path: ''
             absolute: false
