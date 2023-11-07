@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.media.field_media_document
     - field.storage.node.body
     - field.storage.node.field_department
     - field.storage.node.field_image
@@ -23,7 +24,9 @@ dependencies:
     - 'taxonomy_term:department:fc95d50f-a9d4-4ede-9785-dcfaa6b89d66'
     - 'taxonomy_term:department:fec5fbd5-d594-47cf-8d87-1e53f8a56d4a'
   module:
+    - file
     - link
+    - media
     - node
     - taxonomy
     - text
@@ -1670,7 +1673,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -1678,7 +1681,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
+            date_format: standard_date
             custom_date_format: ''
             timezone: ''
           group_column: value
@@ -1817,6 +1820,121 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
+        field_media_document:
+          id: field_media_document
+          table: media__field_media_document
+          field: field_media_document
+          relationship: field_attachment
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: file_url_plain
+          settings: {  }
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         nothing:
           id: nothing
           table: views
@@ -1829,7 +1947,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ field_path }}\" class=\"no-pdf-icon\"><img src=\"/sites/default/files/city-seal-gold.png\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ field_path }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }}</p>\r\n\t\t</div>\r\n\t</div>"
+            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ field_media_document }}\" class=\"no-pdf-icon\"><img src=\"/sites/default/files/city-seal-gold.png\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ field_media_document }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }} <span class=\"l-margin-lm\">{{ edit_node }}</span></p>\r\n\t\t</div>\r\n\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -1973,9 +2091,20 @@ display:
         groups:
           1: AND
       defaults:
+        relationships: false
         fields: false
         filters: false
         filter_groups: false
+      relationships:
+        field_attachment:
+          id: field_attachment
+          table: node__field_attachment
+          field: field_attachment
+          relationship: none
+          group_type: group
+          admin_label: 'field_attachment: Media'
+          plugin_id: standard
+          required: false
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -1988,6 +2117,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_media_document'
         - 'config:field.storage.node.field_image'
         - 'config:field.storage.node.field_path'
   newsletters:
@@ -2190,69 +2320,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_path:
-          id: field_path
-          table: node__field_path
-          field: field_path
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         field_department:
           id: field_department
           table: node__field_department
@@ -2316,6 +2383,126 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
+        field_url:
+          id: field_url
+          table: node__field_url
+          field: field_url
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: uri
+          type: link
+          settings:
+            trim_length: 80
+            url_only: true
+            url_plain: true
+            rel: '0'
+            target: '0'
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         nothing:
           id: nothing
           table: views
@@ -2328,7 +2515,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ field_path }}\"><img src=\"/themes/custom/sand/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ field_path }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }} - <em>{{ field_department }}</em></p>\r\n\t\t</div>\r\n\t</div>"
+            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ field_url }}\"><img src=\"/themes/custom/sand/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ field_url }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }} - <em>{{ field_department }}</em> <span class=\"l-margin-lm\">{{ edit_node }}</span></p>\r\n\t\t</div>\r\n\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -2490,7 +2677,7 @@ display:
       tags:
         - 'config:field.storage.node.field_department'
         - 'config:field.storage.node.field_image'
-        - 'config:field.storage.node.field_path'
+        - 'config:field.storage.node.field_url'
   oped:
     id: oped
     display_title: Op-ed
@@ -2754,6 +2941,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
         nothing:
           id: nothing
           table: views
@@ -2766,7 +3006,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ field_path }}\"><img src=\"/themes/custom/sand/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ field_path }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }}</p>\r\n\t\t</div>\r\n\t</div>"
+            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ field_path }}\"><img src=\"/themes/custom/sand/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ field_path }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }} <span class=\"l-margin-lm\">{{ edit_node }}</span></p>\r\n\t\t</div>\r\n\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -3160,6 +3400,112 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
         nothing:
           id: nothing
           table: views
@@ -3172,7 +3518,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ field_path }}\"><img src=\"/themes/custom/sand/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ field_path }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }}</p>\r\n\t\t</div>\r\n\t</div>"
+            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ view_node }}\"><img src=\"/themes/custom/sand/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ view_node }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }} <span class=\"l-margin-lm\">{{ edit_node }}</span></p>\r\n\t\t</div>\r\n\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -3341,7 +3687,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -3488,6 +3834,121 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
+        field_media_document:
+          id: field_media_document
+          table: media__field_media_document
+          field: field_media_document
+          relationship: field_attachment
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: file_url_plain
+          settings: {  }
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         nothing:
           id: nothing
           table: views
@@ -3500,7 +3961,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ field_path }}\" class=\"no-pdf-icon\"><img src=\"/sites/default/files/city-seal-gold.png\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ field_path }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }}</p>\r\n\t\t</div>\r\n\t</div>"
+            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ field_media_document }}\" class=\"no-pdf-icon\"><img src=\"/sites/default/files/city-seal-gold.png\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ field_media_document }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }} <span class=\"l-margin-lm\">{{ edit_node }}</span></p>\r\n\t\t</div>\r\n\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -3650,9 +4111,20 @@ display:
           1: AND
       defaults:
         pager: false
+        relationships: false
         fields: false
         filters: false
         filter_groups: false
+      relationships:
+        field_attachment:
+          id: field_attachment
+          table: node__field_attachment
+          field: field_attachment
+          relationship: none
+          group_type: group
+          admin_label: 'field_attachment: Media'
+          plugin_id: standard
+          required: false
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -3664,6 +4136,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_media_document'
         - 'config:field.storage.node.field_image'
         - 'config:field.storage.node.field_path'
   recent_newsletters:
@@ -3790,7 +4263,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: standard_date
+            date_format: medium
             custom_date_format: ''
             timezone: ''
           group_column: value
@@ -3866,69 +4339,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_path:
-          id: field_path
-          table: node__field_path
-          field: field_path
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         field_department:
           id: field_department
           table: node__field_department
@@ -3992,19 +4402,20 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        nothing:
-          id: nothing
-          table: views
-          field: nothing
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: custom
+          entity_type: node
+          plugin_id: entity_link_edit
           label: ''
-          exclude: false
+          exclude: true
           alter:
-            alter_text: true
-            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ field_path }}\"><img src=\"/themes/custom/sand/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ field_path }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }} - <em>{{ field_department }}</em></p>\r\n\t\t</div>\r\n\t</div>"
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -4036,7 +4447,126 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
+        field_url:
+          id: field_url
+          table: node__field_url
+          field: field_url
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: uri
+          type: link
+          settings:
+            trim_length: 80
+            url_only: true
+            url_plain: true
+            rel: '0'
+            target: '0'
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ field_url }}\"><img src=\"/themes/custom/sand/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ field_url }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }} - <em>{{ field_department }}</em> <span class=\"l-margin-lm\">{{ edit_node }}</span></p>\r\n\t\t</div>\r\n\t</div>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -4145,8 +4675,8 @@ display:
             group_items: {  }
           reduce_duplicates: false
           vid: department
-          type: textfield
-          hierarchy: false
+          type: select
+          hierarchy: true
           limit: true
           error_message: true
       filter_groups:
@@ -4171,7 +4701,7 @@ display:
       tags:
         - 'config:field.storage.node.field_department'
         - 'config:field.storage.node.field_image'
-        - 'config:field.storage.node.field_path'
+        - 'config:field.storage.node.field_url'
   recent_oped:
     id: recent_oped
     display_title: 'Recent Op-ed'
@@ -4435,6 +4965,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
         nothing:
           id: nothing
           table: views
@@ -4447,7 +5030,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ field_path }}\"><img src=\"/themes/custom/sand/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ field_path }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }}</p>\r\n\t\t</div>\r\n\t</div>"
+            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ view_node }}\"><img src=\"/themes/custom/sand/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ view_node }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }}</p>\r\n\t\t</div>\r\n\t</div>"
             make_link: false
             path: ''
             absolute: false
@@ -4846,6 +5429,112 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
         nothing:
           id: nothing
           table: views
@@ -4858,7 +5547,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ field_path }}\"><img src=\"/themes/custom/sand/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ field_path }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }}</p>\r\n\t\t</div>\r\n\t</div>"
+            text: "\t<div class=\"row l-margin-bm\">\r\n\t\t<div class=\"two sm-two columns\">\r\n\t\t\t<p><a href=\"{{ view_node }}\"><img src=\"/themes/custom/sand/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg\" alt=\"City of San Diego logo\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"ten sm-ten columns l-margin-bn l-padding-desktop-ll l-padding-mobile-lm\">\r\n\t\t\t<p class=\"h3 heading--snug\"><a href=\"{{ view_node }}\">{{ title }}</a></p>\r\n\r\n\t\t\t<p>{{ created }} <span class=\"l-margin-lm\">{{ edit_node }}</span></p>\r\n\t\t</div>\r\n\t</div>"
             make_link: false
             path: ''
             absolute: false

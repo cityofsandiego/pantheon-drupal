@@ -1430,6 +1430,20 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: 'No draft documents were found.'
+            format: full_html
+          tokenize: false
       filters:
         status:
           id: status
@@ -1595,6 +1609,7 @@ display:
         groups:
           1: AND
       defaults:
+        empty: false
         fields: false
         filters: false
         filter_groups: false
