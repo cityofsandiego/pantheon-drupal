@@ -12,86 +12,92 @@ id: webform_986920
 title: 'Formulario para Comentario Pùblico Para Elementos de la Agenda'
 description: null
 category: null
-elements: |
+elements: |-
   your_name:
     '#type': textfield
-    '#title': 'Nombre:' 
-    '#description': ""
+    '#title': 'Nombre:'
+    '#description': ''
     '#required': true
   e_mail_address:
     '#type': textfield
-    '#title': 'Correo Electrònico:' 
-    '#description': ""
+    '#title': 'Correo Electrònico:'
+    '#description': ''
   street_address:
     '#type': textfield
-    '#title': 'Domicilio:' 
-    '#description': ""
+    '#title': 'Domicilio:'
+    '#description': ''
   city:
     '#type': textfield
-    '#title': 'Ciudad:' 
-    '#description': ""
+    '#title': 'Ciudad:'
+    '#description': ''
     '#required': true
   state:
     '#type': textfield
-    '#title': 'Estado:' 
-    '#description': ""
+    '#title': 'Estado:'
+    '#description': ''
     '#required': true
   zip_code:
     '#type': textfield
-    '#title': 'Còdigo Postal:' 
-    '#description': ""
+    '#title': 'Còdigo Postal:'
+    '#description': ''
     '#required': true
   area_code___telephone_number:
     '#type': textfield
-    '#title': 'Nùmero de Telefono:' 
-    '#description': ""
+    '#title': 'Nùmero de Telefono:'
+    '#description': ''
   tipo_de_comentario:
     '#type': radios
     '#options':
       agenda_key: 'Comentario Sobre Agendados'
       closed_key: 'Sesión Cerrada'
-      pffa_key: 'PFFA'
+      pffa_key: PFFA
       housing_key: 'Autoridad de Viviendas'
       noagenda_key: 'Comentarios Sobre Asuntos No Agendados'
-    '#title': 'Tipo de Comentario' 
-    '#description': ""
+    '#title': 'Tipo de Comentario'
+    '#description': ''
     '#required': true
   numero_de_articulo_de_la_agenda:
     '#type': textfield
     '#size': 20
-    '#min': 
-    '#max': 
-    '#step': 
+    '#min': null
+    '#max': null
+    '#step': null
     '#unique': false
-    '#title': 'Nùmero de Articulo de la Agenda:' 
-    '#description': ""
+    '#title': 'Nùmero de Articulo de la Agenda:'
+    '#description': ''
     '#required': true
   meeting_date:
     '#type': date
-    '#title': 'Fecha de la Junta:' 
-    '#description': ""
+    '#title': 'Fecha de la Junta:'
+    '#description': ''
     '#required': true
   comments:
-    '#title': 'Comentario:' 
-    '#description': ""
+    '#title': 'Comentario:'
+    '#description': ''
     '#required': true
+  comentario_:
+    '#type': textarea
+    '#title': 'Comentario:'
+    '#autocomplete': 'off'
+    '#required': true
+    '#counter_type': word
+    '#counter_maximum': 500
   declaracion_de_contribucion_de_campana_a_un_regidor_de_mas_de_250_en_el_ultimo_ano_vigente_a_partir_del_1_de_enero_de_2023:
     '#type': radios
     '#options':
-      si: 'Si'
-      no: 'No'
-    '#title': 'Declaración de contribución de campaña a un Regidor de más de $250 en el último año (vigente a partir del 1 de Enero de 2023).      ' 
-    '#description': ""
+      si: Si
+      'no': 'No'
+    '#title': 'Declaración de contribución de campaña a un Regidor de más de $250 en el último año (vigente a partir del 1 de Enero de 2023).      '
+    '#description': ''
   nombres_de_regidores:
     '#type': textarea
-    '#title': 'Nombre(s) de Regidor(es):  ' 
-    '#description': ""
+    '#title': 'Nombre(s) de Regidor(es):  '
+    '#description': ''
     '#required': true
     '#states':
       visible:
         ':input[name="declaracion_de_contribucion_de_campana_a_un_regidor_de_mas_de_250_en_el_ultimo_ano_vigente_a_partir_del_1_de_enero_de_2023"]':
           value: si
-          
 css: ''
 javascript: ''
 settings:
