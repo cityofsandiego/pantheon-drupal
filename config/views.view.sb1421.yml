@@ -426,10 +426,10 @@ display:
         type: basic
         options:
           submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
+          reset_button: true
+          reset_button_label: 'Show All'
           exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
+          expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
@@ -664,7 +664,7 @@ display:
             -
               field: field_icon
               rendered: true
-              rendered_strip: true
+              rendered_strip: false
           group:
             element_type: h3
             attributes: ''
@@ -1951,18 +1951,38 @@ display:
               administrator: '0'
               locations: '0'
             placeholder: ''
-          is_grouped: false
+          is_grouped: true
           group_info:
-            label: ''
+            label: Category
             description: ''
-            identifier: ''
+            identifier: category
             optional: true
             widget: select
             multiple: false
             remember: false
             default_group: All
             default_group_multiple: {  }
-            group_items: {  }
+            group_items:
+              1:
+                title: 'AB 748'
+                operator: '='
+                value: 'AB 748'
+              2:
+                title: 'In Custody Deaths'
+                operator: '='
+                value: 'In Custody Deaths'
+              3:
+                title: 'Officer Involved Shootings'
+                operator: '='
+                value: 'Officer Involved Shootings'
+              4:
+                title: 'Sustained Findings'
+                operator: '='
+                value: 'Sustained Findings'
+              5:
+                title: 'Use of Force'
+                operator: '='
+                value: 'Use of Force'
         field_keywords_value_1:
           id: field_keywords_value_1
           table: node__field_keywords
@@ -2047,7 +2067,7 @@ display:
         - 'config:field.storage.node.field_keywords'
   case_files_cpp:
     id: case_files_cpp
-    display_title: 'Case Files (CPP Only)'
+    display_title: 'CPP Case Files'
     display_plugin: block
     position: 1
     display_options:
@@ -2148,7 +2168,7 @@ display:
             more_link: false
             more_link_text: ''
             more_link_path: ''
-            strip_tags: false
+            strip_tags: true
             trim: false
             preserve_tags: ''
             html: false
@@ -2159,7 +2179,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -2252,7 +2272,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr class=\"hr--dashed\">\r\n<div class=\"row\">\r\n<div class=\"six columns\">\r\n<p><a href=\"/police/data-transparency/mandated-disclosures/case?id={{ body }}&cat={{ field_keywords }}\">{{ body }}</a></p>\r\n</div>\r\n<div class=\"six columns\">\r\n<p>{{ field_keywords }}</p>\r\n</div>\r\n</div>"
+            text: "<hr class=\"hr--dashed\">\r\n\r\n<p class=\"l-margin-vd\"><a href=\"/police/data-transparency/mandated-disclosures/case?id={{ body }}&cat={{ field_keywords }}\">{{ body }}</a></p>\r\n"
             make_link: false
             path: ''
             absolute: false
