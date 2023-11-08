@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.slider_image.field_caption
     - field.field.node.slider_image.field_category
+    - field.field.node.slider_image.field_department
     - field.field.node.slider_image.field_image
     - field.field.node.slider_image.field_url
     - node.type.slider_image
@@ -17,6 +18,7 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - term_reference_tree
     - text
 third_party_settings:
   field_group:
@@ -57,7 +59,7 @@ third_party_settings:
         - field_url
         - field_caption
       label: Image
-      region: hidden
+      region: content
       parent_name: group_main_tabs
       weight: 20
       format_type: tab
@@ -70,9 +72,10 @@ third_party_settings:
         required_fields: true
     group_categories:
       children:
+        - field_department
         - field_category
       label: Categories
-      region: hidden
+      region: content
       parent_name: group_main_tabs
       weight: 21
       format_type: tab
@@ -107,13 +110,24 @@ content:
         hide_guidelines: '1'
   field_category:
     type: entity_reference_autocomplete
-    weight: 18
+    weight: 26
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_department:
+    type: term_reference_tree
+    weight: 25
+    region: content
+    settings:
+      start_minimized: false
+      leaves_only: false
+      select_parents: false
+      cascading_selection: 0
+      max_depth: 1
     third_party_settings: {  }
   field_image:
     type: media_library_widget
