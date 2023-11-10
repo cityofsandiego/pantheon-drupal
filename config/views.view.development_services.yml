@@ -1380,7 +1380,7 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
-          empty: ''
+          empty: '{{ field_dept_doc_id }}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -1770,8 +1770,8 @@ display:
           label: 'Source URL'
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: "<p class=\"text-accent--desktop l-margin-ts\"><a href=\"{{ field_url }}\" target=\"_blank\">{{ title }}</a></p>\r\n<p><strong>FORM {{ field_dept_doc_id }}</strong></p>\r\n{{ body }}\r\n<p class=\"fine-print\"><em>Revised {{ created }}</em></p>\r\n\r\n<hr class=\"l-margin-vm\">"
             make_link: false
             path: ''
             absolute: false
@@ -1878,11 +1878,23 @@ display:
           if: field_category
           condition: eq
           equalto: 'Information Bulletin'
-          then: "<hr class=\"l-margin-vm\">\r\n<p class=\"text-accent--desktop l-margin-ts\"><a href=\"{{ field_media_document }}\">{{ title }}</a></p>\r\n<p><strong class=\"text-upper\">{{ field_category }}{{ field_other_keywords }}</strong></p>\r\n{{ field_other_description }}\r\n<p class=\"fine-print\"><em>Revised {{ created }}</em></p>"
+          then: "<hr class=\"l-margin-vm\">\r\n<p class=\"text-accent--desktop l-margin-ts\"><a href=\"{{ field_media_document }}\">{{ title }}</a></p>\r\n<p><strong class=\"text-upper\">{{ field_category }} {{ field_other_keywords }}</strong></p>\r\n{{ field_other_description }}\r\n<p class=\"fine-print\"><em>Revised {{ created }}</em></p>"
           then_translate: 1
-          or: '{{ field_dept_doc_id }}'
+          or: '{{ field_url }}'
           or_translate: 1
           strip_tags: 0
+      exposed_form:
+        type: input_required
+        options:
+          submit_button: Search
+          reset_button: false
+          reset_button_label: 'Clear Search'
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: ''
+          text_input_required_format: basic_html
       empty:
         area:
           id: area
@@ -2158,6 +2170,7 @@ display:
         empty: false
         title: false
         use_ajax: false
+        exposed_form: false
         style: false
         row: false
         relationships: false
@@ -5949,6 +5962,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node_1:
+          id: edit_node_1
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
         nothing:
           id: nothing
           table: views
@@ -5961,7 +6027,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr id=\"hr-{{ counter }}\" class=\"l-margin-vm\">\r\n\r\n<p class=\"text-accent--desktop l-margin-desktop-ts\"><a href=\"{{ field_url }}\" target=\"_blank\">{{ title }}</a></p>\r\n<p><strong>FORM {{ field_dept_doc_id }}</strong></p>\r\n{{ body }} \r\n<p class=\"fine-print\"><em>Revised {{ created }}</em></p>"
+            text: "<hr id=\"hr-{{ counter }}\" class=\"l-margin-vm\">\r\n\r\n<p class=\"l-margin-desktop-ts\"><a class=\"text-accent--desktop\" href=\"{{ field_url }}\" target=\"_blank\">{{ title }}</a> <span class=\"pull-right\">{{ edit_node }}</p>\r\n<p><strong>FORM {{ field_dept_doc_id }}</strong></p>\r\n{{ body }} \r\n<p class=\"fine-print\"><em>Revised {{ created }}</em></p>"
             make_link: false
             path: ''
             absolute: false
@@ -12828,6 +12894,73 @@ display:
           empty_zero: false
           hide_alter_empty: true
           counter_start: 1
+        field_url:
+          id: field_url
+          table: node__field_url
+          field: field_url
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: uri
+          type: link
+          settings:
+            trim_length: 255
+            url_only: true
+            url_plain: true
+            rel: '0'
+            target: '0'
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         field_media_document:
           id: field_media_document
           table: media__field_media_document
@@ -12873,7 +13006,7 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: false
-          empty: ''
+          empty: '{{ field_url }}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -13293,3 +13426,4 @@ display:
         - 'config:field.storage.node.field_attachment'
         - 'config:field.storage.node.field_dept_doc_id'
         - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_url'
