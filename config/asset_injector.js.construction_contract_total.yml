@@ -1,0 +1,34 @@
+uuid: ca4d637c-dc96-4100-8eb3-55563bc59923
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: construction_contract_total
+label: 'Construction Contract Total'
+code: |-
+  (function ($) {
+  var awardtotal=0;
+  var awardcount=0;
+
+  $(".AwardAmount").each(function(){
+  var number = Number($(this).text().replace(/[^0-9\.]+/g,""));
+  awardtotal += number*100;
+  awardcount += 1;
+  });
+  var totalcurrencyformat = "$" + (awardtotal/100).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,")
+  $(".AwardCount").html(awardcount);
+  $(".AwardAmountTotal").html(totalcurrencyformat);
+  })(jQuery);
+noscript: ''
+noscriptRegion: {  }
+jquery: false
+header: false
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/cip/reports/*'
+contexts: {  }
+conditions_require_all: true

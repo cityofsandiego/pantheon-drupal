@@ -13,6 +13,8 @@ dependencies:
     - field.field.sand_remote.external.field_document_url
     - field.field.sand_remote.external.field_object_name
     - field.field.sand_remote.external.field_path
+    - field.field.sand_remote.external.field_pn_end_date
+    - field.field.sand_remote.external.field_pn_end_date_date
     - field.field.sand_remote.external.field_r_modify_date
     - field.field.sand_remote.external.field_r_object_id
     - field.field.sand_remote.external.field_sort1
@@ -154,6 +156,36 @@ custom_sources:
     label: SAND_TAMPER_SET_SOURCE_NAME
     machine_name: sand_tamper_set_source_name
     type: blank
+  pn_end_date_date:
+    value: PN_END_DATE_DATE
+    label: PN_END_DATE_DATE
+    machine_name: pn_end_date_date
+    type: csv
+  pn_end_date:
+    value: PN_END_DATE
+    label: PN_END_DATE
+    machine_name: pn_end_date
+    type: csv
+  pn_end_date_date2:
+    value: PN_END_DATE_DATE
+    label: PN_END_DATE_DATE
+    machine_name: pn_end_date_date2
+    type: csv
+  pn_end_date2:
+    value: PN_END_DATE
+    label: PN_END_DATE
+    machine_name: pn_end_date2
+    type: csv
+  pn_end_date_date_unique:
+    value: PN_END_DATE_DATE
+    label: PN_END_DATE_DATE
+    machine_name: pn_end_date_date_unique
+    type: csv
+  pn_end_date_unique:
+    value: PN_END_DATE
+    label: PN_END_DATE
+    machine_name: pn_end_date_unique
+    type: csv
 mappings:
   -
     target: label
@@ -216,7 +248,7 @@ mappings:
     settings:
       language: null
     unique:
-      value: '1'
+      value: 1
   -
     target: field_doc_num
     map:
@@ -270,6 +302,20 @@ mappings:
     target: field_source_name
     map:
       value: sand_tamper_set_source_name
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_pn_end_date_date
+    map:
+      value: pn_end_date_date_unique
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_pn_end_date
+    map:
+      value: pn_end_date_unique
     settings:
       language: null
     unique: {  }
