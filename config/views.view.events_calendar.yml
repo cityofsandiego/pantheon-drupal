@@ -16,7 +16,7 @@ dependencies:
     - node.type.event
     - taxonomy.vocabulary.department
   content:
-    - 'taxonomy_term:department:e5cf1d90-a48d-46ab-98ae-be2a5951caef'
+    - 'taxonomy_term:department:74a5ee82-3ed1-4673-8f52-4615fc0065e4'
   module:
     - address
     - calendar
@@ -396,10 +396,10 @@ display:
         type: basic
         options:
           submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
+          reset_button: true
+          reset_button_label: 'Show All'
           exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
+          expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
@@ -2711,21 +2711,39 @@ display:
           entity_field: title
           plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
+            text: ''
             make_link: false
+            path: ''
             absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
             word_boundary: false
             ellipsis: false
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
             strip_tags: false
             trim: false
+            preserve_tags: ''
             html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -2915,6 +2933,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
         field_event_date:
           id: field_event_date
           table: node__field_event_date
@@ -2927,7 +2998,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"l-padding-hs\">\r\n<a href=\"{{ view_node }}?field_event_date={{ field_event_date_value }}\">[title]</a>\r\n<div class=\"fine-print\">{{ field_event_date }}<div>\r\n</div>"
+            text: "<p>{{ title }}<br>{{ field_event_date }} {{ edit_node }}<p>\r\n"
             make_link: false
             path: ''
             absolute: false
@@ -2965,21 +3036,17 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: smartdate_duration
+          type: smartdate_default
           settings:
             timezone_override: ''
-            format: default
+            format: time_only
             force_chronological: false
             add_classes: false
             time_wrapper: true
             localize: false
-            duration_separator: ' - '
-            unit: ''
-            decimals: 2
-            suffix: h
           group_column: value
           group_columns: {  }
-          group_rows: true
+          group_rows: false
           delta_limit: 1
           delta_offset: 0
           delta_reversed: false
@@ -3120,54 +3187,7 @@ display:
           display_reset: 0
           use_previous_next: 0
           label_format: F
-      arguments:
-        term_node_tid_depth:
-          id: term_node_tid_depth
-          table: node_field_data
-          field: term_node_tid_depth
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          plugin_id: taxonomy_index_tid_depth
-          default_action: default
-          exception:
-            value: all
-            title_enable: false
-            title: All
-          title_enable: false
-          title: ''
-          default_argument_type: taxonomy_tid
-          default_argument_options:
-            term_page: '0'
-            node: true
-            limit: true
-            vids:
-              department: department
-            anyall: +
-          default_argument_skip_url: false
-          summary_options:
-            base_path: ''
-            count: true
-            override: false
-            items_per_page: 25
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: true
-          validate:
-            type: 'entity:taxonomy_term'
-            fail: ignore
-          validate_options:
-            bundles:
-              department: department
-            access: false
-            operation: view
-            multiple: 1
-          break_phrase: true
-          depth: 0
-          use_taxonomy_term_path: false
+      arguments: {  }
       filters:
         status:
           id: status
@@ -3210,7 +3230,7 @@ display:
           exposed: true
           expose:
             operator_id: title_op
-            label: ''
+            label: 'Search for an event:'
             description: ''
             use_operator: false
             operator: title_op
@@ -3223,6 +3243,7 @@ display:
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              administrator: '0'
               content_editor: '0'
               content_owner: '0'
               sand_admin_email: '0'
@@ -3233,8 +3254,6 @@ display:
               webform_results_photos_only: '0'
               outreach2_article: '0'
               sand_admin: '0'
-              if_administrator: '0'
-              administrator: '0'
               locations: '0'
             placeholder: ''
           is_grouped: false
@@ -3257,9 +3276,9 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: taxonomy_index_tid
-          operator: not
+          operator: or
           value:
-            4628: 4628
+            3335: 3335
           group: 1
           exposed: false
           expose:

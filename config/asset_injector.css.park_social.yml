@@ -7,20 +7,39 @@ dependencies:
 id: park_social
 label: 'Park Social'
 code: |
-  .ps-previous {
-  	position:absolute;
-  	top:0;
-  	left: -15%;
-  	transform: translate(0, 50%);
-  	color: #262526;
+  @media print, screen and (max-width: 30em) {
+  	.ps-previous {
+  		position:absolute;
+  		top:0;
+  		left: 1rem;
+  		transform: translate(0, 50%);
+  		color: #262526;
+  	}
+  	.ps-next {
+  		position:absolute;
+  		top:0;
+  		right: 1rem;
+  		transform: translate(0, 50%);
+  		color: #262526;
+  	}
   }
-  .ps-next {
-  	position:absolute;
-  	top:0;
-  	right: -15%;
-  	transform: translate(0, 50%);
-  	color: #262526;
+  @media print, screen and (min-width: 30em) {
+  	.ps-previous {
+  		position:absolute;
+  		top:0;
+  		left: 6rem;
+  		transform: translate(0, 50%);
+  		color: #262526;
+  	}
+  	.ps-next {
+  		position:absolute;
+  		top:0;
+  		right: 6rem;
+  		transform: translate(0, 50%);
+  		color: #262526;
+  	}
   }
+
   .ps-title-desktop {
   	font-size: 3em;
   	color:#262526 !important;
