@@ -111,6 +111,9 @@
       <div class="grid-x">
         <div class="cell small-12 medium-auto l-padding-am l-padding-desktop-hl">
           {{ content.body }}
+      {% if content.field_website[0] %}
+          <p><strong>Website:</strong> <a href="{{ content.field_website.0["#url"].uri }}" target="_blank">{{ content.field_website.0["#url"].uri }}</a></p>
+      {% endif %}
         </div>
       </div>
     </div>
