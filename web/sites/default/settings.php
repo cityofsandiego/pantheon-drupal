@@ -46,8 +46,9 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     $config['search_api.index.content']['status'] = true;
     $config['search_api.index.remote']['status'] = true;
   } else {
-    // disable search_api server: production
-    $config['search_api.server.production']['status'] = false;
+    // read-only
+    $config['search_api.index.content']['read_only'] = true;
+    $config['search_api.index.remote']['read_only'] = true;
   }
 }
 
