@@ -62,6 +62,7 @@
     text_center,
     no_shadow,
     'l-padding-vd',
+    'text-white'
   ]
 %}
 
@@ -75,12 +76,20 @@
   ]
 %}
 
-
 {% block paragraph %}
   {% block content %}
     <div {{ attributes.addClass(classes)}}>
     <!-- This section HAS an image -->
     {% if content.field_image.0 %}
+      {% if scroll_ratio == "1.0" %}
+      <div style="background-image: url('{{ image_url }}'); background-size: cover; background-position: center center; min-height: {{ min_height }};">
+        <div class="grid-container">
+          <div {{ body_attributes.addClass(body_classes)}}>
+            {{ content.field_body }}   
+          </div>
+        </div>
+      </div>
+      {% else %}
       <div {{ img_attributes.addClass(img_classes)
         .setAttribute('id', 'img-' ~ paragraph.id())
         .setAttribute('style', 
@@ -106,6 +115,7 @@
           </div>
         </div>
       </div>
+      {% endif %}
     {% else %}
     <!-- This section does NOT have an image -->
       <div {{ img_attributes.addClass('no-image').setAttribute('style', 'background-color:' ~ bg_color ~ ';') }}>
