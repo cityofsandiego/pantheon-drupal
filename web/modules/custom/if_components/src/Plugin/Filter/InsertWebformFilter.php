@@ -72,7 +72,14 @@ class InsertWebformFilter extends FilterBase implements ContainerFactoryPluginIn
       foreach ($match[1] as $key => $value) {
         $raw_tags[] = $match[0][$key];
 
+        // This prepending webform_ to the webform-id is a left over from the conversion. The second try should
+        // hanle new forms.
         $webform = $this->entityTypeManager->getStorage('webform')->load('webform_' . $value);
+        if (is_null($webform)) {
+            // Try just the webform-id.
+            $webform = $this->entityTypeManager->getStorage('webform')->load($value);
+        }
+        // If we got a webform, process it.
         if (NULL !== $webform) {
           $webform = $this->entityTypeManager->getViewBuilder('webform')->view($webform);
           $repl[] = $this->renderer->render($webform);

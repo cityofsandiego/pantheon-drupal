@@ -25,14 +25,6 @@ include __DIR__ . "/settings.pantheon.php";
  */
 // $settings['skip_permissions_hardening'] = TRUE;
 
-/**
- * If there is a local settings file, then include it
- */
-$local_settings = __DIR__ . "/settings.local.php";
-if (file_exists($local_settings)) {
-  include $local_settings;
-}
-
 $redirect_file = __DIR__ .  '/settings.redirect.php';
 if(file_exists($redirect_file)) {
   include $redirect_file;
@@ -68,3 +60,12 @@ $settings['config_exclude_modules'] = [
   'webprofiler',
   'yaml_editor',
 ];
+
+/**
+ * If there is a local settings file, then include it
+ */
+$local_settings = __DIR__ . "/settings.local.php";
+if (file_exists($local_settings)) {
+  include $local_settings;
+}
+
