@@ -1288,12 +1288,15 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'user.node_grants:view'
       tags:
         - 'config:field.storage.media.field_media_document'
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_body_bottom'
         - 'config:field.storage.node.field_sidebar'
         - 'config:field.storage.node.field_top_content'
+        - 'config:search_api.index.content'
+        - 'search_api_list:content'
   all:
     id: all
     display_title: 'Page Site'
@@ -1311,12 +1314,15 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'user.node_grants:view'
       tags:
         - 'config:field.storage.media.field_media_document'
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_body_bottom'
         - 'config:field.storage.node.field_sidebar'
         - 'config:field.storage.node.field_top_content'
+        - 'config:search_api.index.content'
+        - 'search_api_list:content'
   dsd:
     id: dsd
     display_title: 'Block DSD'
@@ -1905,7 +1911,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: search_api_fulltext
-          operator: or
+          operator: and
           value: ''
           group: 1
           exposed: true
@@ -2044,6 +2050,67 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        type:
+          id: type
+          table: search_api_index_content
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: not
+          value:
+            application: application
+            article: article
+            bucket: bucket
+            business_resource: business_resource
+            date: date
+            department_document: department_document
+            digital_archives_photos: digital_archives_photos
+            external_data: external_data
+            hero: hero
+            mayoral_artifacts: mayoral_artifacts
+            notification: notification
+            outreach: outreach
+            outreach2: outreach2
+            outreach_article2: outreach_article2
+            registration: registration
+            resources: resources
+            reusable_component: reusable_component
+            sand_gallery: sand_gallery
+            sidebar_block_context: sidebar_block_context
+            slide: slide
+            slider_image: slider_image
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
       filter_groups:
         operator: AND
         groups:
@@ -2068,11 +2135,14 @@ display:
         - url
         - url.query_args
         - user
+        - 'user.node_grants:view'
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_body_bottom'
         - 'config:field.storage.node.field_sidebar'
         - 'config:field.storage.node.field_top_content'
+        - 'config:search_api.index.content'
+        - 'search_api_list:content'
   planning:
     id: planning
     display_title: 'Block Planning'
@@ -2780,11 +2850,14 @@ display:
         - url
         - url.query_args
         - user
+        - 'user.node_grants:view'
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_body_bottom'
         - 'config:field.storage.node.field_sidebar'
         - 'config:field.storage.node.field_top_content'
+        - 'config:search_api.index.content'
+        - 'search_api_list:content'
   police:
     id: police
     display_title: 'Block Police'
@@ -3492,11 +3565,14 @@ display:
         - url
         - url.query_args
         - user
+        - 'user.node_grants:view'
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_body_bottom'
         - 'config:field.storage.node.field_sidebar'
         - 'config:field.storage.node.field_top_content'
+        - 'config:search_api.index.content'
+        - 'search_api_list:content'
   police_procedures:
     id: police_procedures
     display_title: 'Block Police Procedures'
@@ -4248,11 +4324,14 @@ display:
         - url
         - url.query_args
         - user
+        - 'user.node_grants:view'
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_body_bottom'
         - 'config:field.storage.node.field_sidebar'
         - 'config:field.storage.node.field_top_content'
+        - 'config:search_api.index.content'
+        - 'search_api_list:content'
   ppolice_procedure:
     id: ppolice_procedure
     display_title: 'Page Police Procedures'
@@ -4426,9 +4505,12 @@ display:
         - url
         - url.query_args
         - user
+        - 'user.node_grants:view'
       tags:
         - 'config:field.storage.media.field_media_document'
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_body_bottom'
         - 'config:field.storage.node.field_sidebar'
         - 'config:field.storage.node.field_top_content'
+        - 'config:search_api.index.content'
+        - 'search_api_list:content'
