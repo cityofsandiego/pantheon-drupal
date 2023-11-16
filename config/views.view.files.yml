@@ -9,8 +9,6 @@ dependencies:
     - system.menu.admin
     - taxonomy.vocabulary.department
     - user.role.administrator
-  content:
-    - 'taxonomy_term:department:1938e7bc-82ac-491f-83e2-8da5558e35d7'
   module:
     - better_exposed_filters
     - file
@@ -1778,6 +1776,7 @@ display:
         sorts: false
         filters: false
         filter_groups: false
+        header: false
       relationships:
         reverse_field_media_document_media:
           id: reverse_field_media_document_media
@@ -1790,6 +1789,20 @@ display:
           plugin_id: entity_reverse
           required: true
       display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: '<p><a href="/media/add/document?destination=/admin/content/documents" class="button button-action button--primary button--small">Add Document</a></p>'
+            format: full_html
+          tokenize: false
       display_extenders: {  }
       path: admin/content/documents
       menu:
@@ -2954,6 +2967,7 @@ display:
         sorts: false
         filters: false
         filter_groups: false
+        header: false
       relationships:
         reverse_field_media_image_media:
           id: reverse_field_media_image_media
@@ -2966,6 +2980,20 @@ display:
           plugin_id: entity_reverse
           required: true
       display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: '<p><a href="/media/add/image?destination=/admin/content/images" class="button button-action button--primary button--small">Add Image</a></p>'
+            format: full_html
+          tokenize: false
       display_extenders: {  }
       path: admin/content/images
       menu:
