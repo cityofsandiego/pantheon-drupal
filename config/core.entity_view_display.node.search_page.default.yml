@@ -1,0 +1,52 @@
+uuid: 74f8713c-8cf8-4fe3-88d4-e3643ba43286
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.search_page.body
+    - field.field.node.search_page.field_department
+    - field.field.node.search_page.field_sidebar
+    - node.type.search_page
+  module:
+    - text
+    - user
+id: node.search_page.default
+targetEntityType: node
+bundle: search_page
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_department:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_sidebar:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true
