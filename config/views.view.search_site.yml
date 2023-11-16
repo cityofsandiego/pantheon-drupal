@@ -1225,7 +1225,15 @@ display:
           plugin_id: search_api_options
           operator: not
           value:
+            date: date
             department_document: department_document
+            event: event
+            hero: hero
+            registration: registration
+            reusable_component: reusable_component
+            sidebar_block_context: sidebar_block_context
+            slide: slide
+            slider_image: slider_image
           group: 1
           exposed: false
           expose:
@@ -1960,6 +1968,71 @@ display:
           parse_mode: terms
           min_length: null
           fields: {  }
+        entity_type:
+          id: entity_type
+          table: search_api_index_content
+          field: entity_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_string
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: entity_type_op
+            label: 'Entity type'
+            description: null
+            use_operator: false
+            operator: entity_type_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: entity_type
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: null
+            max_placeholder: null
+            placeholder: null
+          is_grouped: true
+          group_info:
+            label: Type
+            description: ''
+            identifier: entity_type
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: 'Web Pages'
+                operator: '='
+                value:
+                  min: ''
+                  max: ''
+                  value: node
+              2:
+                title: Documents
+                operator: '='
+                value:
+                  min: ''
+                  max: ''
+                  value: media
+              3:
+                title: ''
+                operator: '='
+                value:
+                  min: ''
+                  max: ''
+                  value: ''
         field_department:
           id: field_department
           table: search_api_index_content
@@ -2006,50 +2079,6 @@ display:
           hierarchy: false
           limit: true
           error_message: true
-        nid:
-          id: nid
-          table: search_api_index_content
-          field: nid
-          relationship: none
-          group_type: group
-          admin_label: 'Exclude DSD Home Page'
-          plugin_id: search_api_numeric
-          operator: '!='
-          value:
-            min: ''
-            max: ''
-            value: '224183'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
         type:
           id: type
           table: search_api_index_content
@@ -2149,7 +2178,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      title: 'Search DSD'
+      title: 'Search Planning'
       fields:
         title:
           id: title
@@ -2840,7 +2869,7 @@ display:
       display_description: ''
       exposed_block: false
       display_extenders: {  }
-      block_description: 'Search DSD'
+      block_description: 'Search Planning'
       block_category: Search
     cache_metadata:
       max-age: -1
