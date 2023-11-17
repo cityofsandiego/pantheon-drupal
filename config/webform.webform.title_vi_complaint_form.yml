@@ -1,98 +1,62 @@
-uuid: c4dc4773-76c1-4c33-96eb-0f4f981cf3d0
+uuid: 66b2ee3d-e9a9-48b0-8894-7650f1e0a0c1
 langcode: en
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 58
+uid: 355
 template: false
 archive: false
-id: webform_300
-title: 'Noise Complaint Form'
-description: null
-category: null
+id: title_vi_complaint_form
+title: 'Title VI Complaint Form'
+description: ''
+category: ''
 elements: |-
-  fieldset_reported_by:
+  fieldset_contact_information___please_provide_at_least_one_way_to_contact_you:
     '#type': fieldset
+    '#title': 'Contact Information'
     '#open': true
-    '#title': 'Reported by'
-    '#description': ''
-    name_2:
+    name_4:
       '#type': textfield
-      '#title': Name
-      '#description': ''
-    address_2:
-      '#type': textfield
-      '#title': Address
+      '#title': 'Name:'
       '#description': ''
       '#required': true
-    city_2:
+    address_:
       '#type': textfield
-      '#title': City
-      '#description': ''
+      '#title': 'Address:'
       '#required': true
-    zip_code_2:
+    phone_home999_999_9999_4:
       '#type': textfield
-      '#title': 'Zip code'
-      '#description': ''
-      '#required': true
-    phone_2:
-      '#type': textfield
-      '#title': Phone
-      '#description': ''
-    email_2:
-      '#type': textfield
-      '#title': Email
-      '#description': ''
-  fieldset_description_of_event:
+      '#title': 'Phone: (999-999-9999)'
+    email:
+      '#type': email
+      '#title': 'Email: (you@yourdomain.com)'
+  fieldset_disability_related_complaint_or_request:
     '#type': fieldset
+    '#title': 'Complaint Details'
     '#open': true
-    '#title': 'Description of Event'
-    '#description': ''
-    date_of_event_9:
-      '#type': textfield
-      '#title': 'Date of event'
-      '#description': ''
+    complaint_or_requestlimited_to_2000_characters_2:
+      '#type': textarea
+      '#title': 'Complaint or Request:(Limited to 2000 characters)<br>Please state the nature of your complaint. Be specific. This information is necessary in order to fully investigate your complaint.'
       '#required': true
-    time_of_event_9:
-      '#type': textfield
-      '#title': 'Time of event'
-      '#description': ''
+    remedy_requested_limited_to_2000_characters_:
+      '#type': textarea
+      '#title': 'Remedy Requested: (Limited to 2000 characters)'
       '#required': true
-    type_of_aircraft_9:
-      '#type': radios
-      '#options':
-        1: Single-Prop
-        2: Multi-Prop
-        3: Helicopter
-        4: Jet
-        5: Unknown
-      '#title': 'Type of Aircraft'
-      '#description': ''
-    type_of_operation_9:
-      '#type': radios
-      '#options':
-        1: Departure
-        2: Arrival
-      '#title': 'Type of Operation'
-      '#description': ''
-  fieldset_contact:
+  previous_filings_with_other_agencies:
     '#type': fieldset
-    '#open': true
-    '#title': Contact
-    '#description': ''
-    would_you_like_someone_to_contact_you_17:
-      '#type': radios
-      '#title': 'Would you like someone to contact you?'
-      '#title_display': before
-      '#options':
-        'yes': 'Yes'
-        'no': 'No'
-  comments:
-    '#type': textarea
-    '#title': Comments
-    '#description': ''
+    '#title': 'Previous Filings with Other Agencies'
+    name_of_agency_:
+      '#type': textfield
+      '#title': 'Name of Agency:'
+    date_mm_dd_yyyy_:
+      '#type': date
+      '#title': 'Date: (mm/dd/yyyy)'
+      '#date_date_format': ''
+    status_of_previous_complaint_limited_to_2000_characters_:
+      '#type': textarea
+      '#title': 'STATUS OF PREVIOUS COMPLAINT: (LIMITED TO 2000 CHARACTERS)'
 css: ''
 javascript: ''
 settings:
@@ -197,8 +161,8 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: inline
-  confirmation_url: ''
+  confirmation_type: url
+  confirmation_url: /adacompliance/complaint/thankyou
   confirmation_title: ''
   confirmation_message: ''
   confirmation_attributes: {  }
@@ -229,7 +193,7 @@ settings:
   token_update: false
   token_delete: false
   serial_disabled: false
-  form_submit_label: ''
+  form_submit_label: 'Submit Complaint'
   wizard_complete: 1
 access:
   create:
@@ -238,32 +202,32 @@ access:
       - authenticated
     users: {  }
 handlers:
-  email_2:
+  email_3:
     id: email
-    handler_id: email_2
-    label: 'Email 2'
+    handler_id: email_3
+    label: 'Email 3'
     notes: ''
     status: true
     conditions: {  }
-    weight: 2
+    weight: 3
     settings:
       states:
         - completed
-      to_mail: 'airports@sandiego.gov, lkosta@sandiego.gov'
+      to_mail: titlevi@sandiego.gov
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: _default
+      from_mail: '[webform_submission:values:email2:raw]'
       from_options: {  }
-      from_name: _default
+      from_name: '[webform_submission:values:name:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: _default
-      body: "Submitted on [webform_submission:created]\r\n\r\nNAME:\r\n[webform_submission:values:name_2]\r\n\r\nADDRESS:\r\n[webform_submission:values:address_2]\r\n\r\nCITY, ZIP:\r\n[webform_submission:values:city_2], [webform_submission:values:zip_code_2]\r\n\r\nPHONE:\r\n[webform_submission:values:phone_2]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_2]\r\n\r\nDATE OF EVENT, TIME OF EVENT:\r\n[webform_submission:values:date_of_event_9], [webform_submission:values:time_of_event_9]\r\n\r\nTYPE OF AIRCRAFT:\r\n[webform_submission:values:type_of_aircraft_9]\r\n\r\nTYPE OF OPERATION:\r\n[webform_submission:values:type_of_operation_9]\r\n\r\nWOULD YOU LIKE SOMEONE TO CONTACT YOU?\r\n[webform_submission:values:would_you_like_someone_to_contact_you_17]\r\n\r\nCOMMENTS:\r\n[webform_submission:values:comments]\r\n"
+      subject: default
+      body: default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
