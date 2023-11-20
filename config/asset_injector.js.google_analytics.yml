@@ -1,0 +1,823 @@
+uuid: c7418daf-a100-4f5c-a02e-8435773dfd61
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - user
+id: google_analytics
+label: 'Google Analytics'
+code: |
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41750560-1', 'auto');
+  ga('require', 'linkid', 'linkid.js');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.googletagmanager.com/gtag/js?id=G-LV7FC3GM85','ga4');
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){window.dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LV7FC3GM85');
+
+  try {
+    var pathname = window.location.pathname;
+    var hostname = window.location.hostname;
+
+    if (hostname.substring(0, 17) == "google.sannet.gov") {
+      ga('create', 'UA-41750560-6', 'auto', {'name': 'googlesannetgov'});
+      ga('googlesannetgov.require', 'linkid', 'linkid.js');
+      ga('googlesannetgov.require', 'displayfeatures');
+      ga('googlesannetgov.send', 'pageview');
+
+      if (document.URL.match('proxystylesheet=sandiego_gov')) {
+        ga('create', 'UA-41750560-8', 'auto', {'name': 'googlesearch'});
+        ga('googlesearch.require', 'linkid', 'linkid.js');
+        ga('googlesearch.require', 'displayfeatures');
+        ga('googlesearch.send', 'pageview');
+      }
+      if (document.URL.match('proxystylesheet=sirefrontend')) {
+        ga('create', 'UA-41750560-10', 'auto', {'name': 'googlesire'});
+        ga('googlesire.require', 'linkid', 'linkid.js');
+        ga('googlesire.require', 'displayfeatures');
+        ga('googlesire.send', 'pageview');
+      }
+      if (document.URL.match('proxystylesheet=scs_ocd')) {
+        ga('create', 'UA-41750560-9', 'auto', {'name': 'googleocd'});
+        ga('googleocd.require', 'linkid', 'linkid.js');
+        ga('googleocd.require', 'displayfeatures');
+        ga('googleocd.send', 'pageview');
+      }
+    }
+
+    if (pathname.substring(0, 12) == "/citycouncil") {
+      ga('create', 'UA-48906855-1', 'auto', {'name': 'citycounciloffices'});
+      ga('citycounciloffices.require', 'linkid', 'linkid.js');
+      ga('citycounciloffices.require', 'displayfeatures');
+      ga('citycounciloffices.send', 'pageview');
+      gtag('config', 'G-7V7NJQF9M4');
+      if (pathname.substring(0, 16) == "/citycouncil/cd1") {
+        ga('create', 'UA-48906855-2', 'auto', {'name': 'councildistrict1'});
+        ga('councildistrict1.require', 'linkid', 'linkid.js');
+        ga('councildistrict1.require', 'displayfeatures');
+        ga('councildistrict1.send', 'pageview');
+        gtag('config', 'G-WF1BNGZM4G');
+      }
+      if (pathname.substring(0, 16) == "/citycouncil/cd2") {
+        ga('create', 'UA-48906855-3', 'auto', {'name': 'councildistrict2'});
+        ga('councildistrict2.require', 'linkid', 'linkid.js');
+        ga('councildistrict2.require', 'displayfeatures');
+        ga('councildistrict2.send', 'pageview');
+        gtag('config', 'G-NTGLHR2BVW');
+      }
+      if (pathname.substring(0, 16) == "/citycouncil/cd3") {
+        ga('create', 'UA-48906855-4', 'auto', {'name': 'councildistrict3'});
+        ga('councildistrict3.require', 'linkid', 'linkid.js');
+        ga('councildistrict3.require', 'displayfeatures');
+        ga('councildistrict3.send', 'pageview');
+        gtag('config', 'G-9E1ENWFE73');
+      }
+      if (pathname.substring(0, 16) == "/citycouncil/cd4") {
+        ga('create', 'UA-48906855-5', 'auto', {'name': 'councildistrict4'});
+        ga('councildistrict4.require', 'linkid', 'linkid.js');
+        ga('councildistrict4.require', 'displayfeatures');
+        ga('councildistrict4.send', 'pageview');
+        gtag('config', 'G-771M1S28V2');
+      }
+      if (pathname.substring(0, 16) == "/citycouncil/cd5") {
+        ga('create', 'UA-48906855-6', 'auto', {'name': 'councildistrict5'});
+        ga('councildistrict5.require', 'linkid', 'linkid.js');
+        ga('councildistrict5.require', 'displayfeatures');
+        ga('councildistrict5.send', 'pageview');
+        gtag('config', 'G-82Q1PQVFXC');
+      }
+      if (pathname.substring(0, 16) == "/citycouncil/cd6") {
+        ga('create', 'UA-48906855-7', 'auto', {'name': 'councildistrict6'});
+        ga('councildistrict6.require', 'linkid', 'linkid.js');
+        ga('councildistrict6.require', 'displayfeatures');
+        ga('councildistrict6.send', 'pageview');
+        gtag('config', 'G-GJYHW2R30V');
+      }
+      if (pathname.substring(0, 16) == "/citycouncil/cd7") {
+        ga('create', 'UA-48906855-8', 'auto', {'name': 'councildistrict7'});
+        ga('councildistrict7.require', 'linkid', 'linkid.js');
+        ga('councildistrict7.require', 'displayfeatures');
+        ga('councildistrict7.send', 'pageview');
+        gtag('config', 'G-CB5JKERWCX');
+      }
+      if (pathname.substring(0, 16) == "/citycouncil/cd8") {
+        ga('create', 'UA-48906855-9', 'auto', {'name': 'councildistrict8'});
+        ga('councildistrict7.require', 'linkid', 'linkid.js');
+        ga('councildistrict7.require', 'displayfeatures');
+        ga('councildistrict7.send', 'pageview');
+        gtag('config', 'G-KR39EH38QJ');
+      }
+      if (pathname.substring(0, 16) == "/citycouncil/cd9") {
+        ga('create', 'UA-48906855-10', 'auto', {'name': 'councildistrict9'});
+        ga('councildistrict9.require', 'linkid', 'linkid.js');
+        ga('councildistrict9.require', 'displayfeatures');
+        ga('councildistrict9.send', 'pageview');
+        gtag('config', 'G-P6TYEC8S32');
+      }
+    }
+
+    if (pathname.substring(0, 13) == "/arts-culture") {
+      ga('create', 'UA-48909038-2', 'auto', {'name': 'artsculture'});
+      ga('artsculture.require', 'linkid', 'linkid.js');
+      ga('artsculture.require', 'displayfeatures');
+      ga('artsculture.send', 'pageview');
+      gtag('config', 'G-PK8WNBWLP0');
+    }
+    if (pathname.substring(0, 15) == "/gangcommission") {
+      ga('create', 'UA-48909038-3', 'auto', {'name': 'gangcommission'});
+      ga('gangcommission.require', 'linkid', 'linkid.js');
+      ga('gangcommission.require', 'displayfeatures');
+      ga('gangcommission.send', 'pageview');
+      gtag('config', 'G-EE1MCPJY83');
+    }
+    if (pathname.substring(0, 21) == "/development-services") {
+      ga('create', 'UA-48909038-4', 'auto', {'name': 'developmentservices'});
+      ga('developmentservices.require', 'linkid', 'linkid.js');
+      ga('developmentservices.require', 'displayfeatures');
+      ga('developmentservices.send', 'pageview');
+      gtag('config', 'G-XKE6XR334H');
+    }
+    if (pathname.substring(0, 15) == "/public-library") {
+      ga('create', 'UA-48909038-5', 'auto', {'name': 'publiclibrary'});
+      ga('publiclibrary.require', 'linkid', 'linkid.js');
+      ga('publiclibrary.require', 'displayfeatures');
+      ga('publiclibrary.send', 'pageview');
+      gtag('config', 'G-X2YR7QFTMF');
+    }
+    if (pathname.substring(0, 20) == "/park-and-recreation") {
+      ga('create', 'UA-48909038-6', 'auto', {'name': 'parkandrecreation'});
+      ga('parkandrecreation.require', 'linkid', 'linkid.js');
+      ga('parkandrecreation.require', 'displayfeatures');
+      ga('parkandrecreation.send', 'pageview');
+      gtag('config', 'G-VRFME2GYPK');
+      if (pathname.substring(0, 37) == "/park-and-recreation/golf/torreypines") {
+        ga('create', 'UA-48909038-18', 'auto', {'name': 'torreypinesgolfcourse'});
+        ga('torreypinesgolfcourse.require', 'linkid', 'linkid.js');
+        ga('torreypinesgolfcourse.require', 'displayfeatures');
+        ga('torreypinesgolfcourse.send', 'pageview');
+        gtag('config', 'G-E46KP6EQXS');
+      }
+    }
+    if (pathname.substring(0, 21) == "/parks-and-recreation") {
+      ga('create', 'UA-48909038-6', 'auto', {'name': 'parksandrecreation'});
+      ga('parkandrecreation.require', 'linkid', 'linkid.js');
+      ga('parkandrecreation.require', 'displayfeatures');
+      ga('parkandrecreation.send', 'pageview');
+      gtag('config', 'G-VRFME2GYPK');
+    }
+      if (pathname.substring(0, 13) == "/torrey-pines") {
+        ga('create', 'UA-48909038-18', 'auto', {'name': 'torreypinesgolfcourse'});
+        ga('torreypinesgolfcourse.require', 'linkid', 'linkid.js');
+        ga('torreypinesgolfcourse.require', 'displayfeatures');
+        ga('torreypinesgolfcourse.send', 'pageview');
+        gtag('config', 'G-E46KP6EQXS');
+      }
+    if (pathname.substring(0, 5) == "/pned") {
+      ga('create', 'UA-48909038-7', 'auto', {'name': 'pned'});
+      ga('pned.require', 'linkid', 'linkid.js');
+      ga('pned.require', 'displayfeatures');
+      ga('pned.send', 'pageview');
+    }
+    if (pathname.substring(0, 7) == "/police" || pathname.substring(0, 33) == "/join-san-diego-police-department") {
+      ga('create', 'UA-48908544-1', 'auto', {'name': 'police'});
+      ga('police.require', 'linkid', 'linkid.js');
+      ga('police.require', 'displayfeatures');
+      ga('police.send', 'pageview');
+      gtag('config', 'G-DG9BGFRQE7');
+    }
+    if (pathname.substring(0, 14) == "/adacompliance") {
+      ga('create', 'UA-48913020-2', 'auto', {'name': 'adacompliance'});
+      ga('adacompliance.require', 'linkid', 'linkid.js');
+      ga('adacompliance.require', 'displayfeatures');
+      ga('adacompliance.send', 'pageview');
+      gtag('config', 'G-M3LZ85N0D5');
+    }
+    if (pathname.substring(0, 9) == "/airports") {
+      ga('create', 'UA-48903271-2', 'auto', {'name': 'airports'});
+      ga('airports.require', 'linkid', 'linkid.js');
+      ga('airports.require', 'displayfeatures');
+      ga('airports.send', 'pageview');
+      gtag('config', 'G-LCK6MGBBGY');
+    }
+    if (pathname.substring(0, 8) == "/auditor") {
+      ga('create', 'UA-48906554-3', 'auto', {'name': 'auditor'});
+      ga('auditor.require', 'linkid', 'linkid.js');
+      ga('auditor.require', 'displayfeatures');
+      ga('auditor.send', 'pageview');
+      gtag('config', 'G-E224K4W693');
+    }
+    if (pathname.substring(0, 5) == "/cdbg") {
+      ga('create', 'UA-48909038-10', 'auto', {'name': 'cdbg'});
+      ga('cdbg.require', 'linkid', 'linkid.js');
+      ga('cdbg.require', 'displayfeatures');
+      ga('cdbg.send', 'pageview');
+      gtag('config', 'G-K6BC4S6YB9');
+    }
+    if (pathname.substring(0, 4) == "/cil") {
+      ga('create', 'UA-48911430-5', 'auto', {'name': 'cil'});
+      ga('cil.require', 'linkid', 'linkid.js');
+      ga('cil.require', 'displayfeatures');
+      ga('cil.send', 'pageview');
+    }
+    if (pathname.substring(0, 4) == "/cip") {
+      ga('create', 'UA-48913020-3', 'auto', {'name': 'cip'});
+      ga('cip.require', 'linkid', 'linkid.js');
+      ga('cip.require', 'displayfeatures');
+      ga('cip.send', 'pageview');
+      gtag('config', 'G-9WSJYV1X7M');
+    }
+    if (pathname.substring(0, 20) == "/citizensreviewboard") {
+      ga('create', 'UA-48909038-8', 'auto', {'name': 'citizensreviewboard'});
+      ga('citizensreviewboard.require', 'linkid', 'linkid.js');
+      ga('citizensreviewboard.require', 'displayfeatures');
+      ga('citizensreviewboard.send', 'pageview');
+    }
+    if (pathname.substring(0, 13) == "/cityattorney") {
+      ga('create', 'UA-48906554-2', 'auto', {'name': 'cityattorney'});
+      ga('cityattorney.require', 'linkid', 'linkid.js');
+      ga('cityattorney.require', 'displayfeatures');
+      ga('cityattorney.send', 'pageview');
+      gtag('config', 'G-NNEPNSYEVS');
+    }
+    if (pathname.substring(0, 11) == "/city-clerk") {
+      ga('create', 'UA-48906554-4', 'auto', {'name': 'cityclerk'});
+      ga('cityclerk.require', 'linkid', 'linkid.js');
+      ga('cityclerk.require', 'displayfeatures');
+      ga('cityclerk.send', 'pageview');
+      gtag('config', 'G-2S5KEM1W1C');
+    }
+    if (pathname.substring(0, 16) == "/digitalarchives") {
+      ga('create', 'UA-48906554-8', 'auto', {'name': 'digitalarchives'});
+      ga('digitalarchives.require', 'linkid', 'linkid.js');
+      ga('digitalarchives.require', 'displayfeatures');
+      ga('digitalarchives.send', 'pageview');
+      gtag('config', 'G-ZSBRZ23R71');
+    }
+    if (pathname.substring(0, 30) == "/city-clerk/boards-commissions") {
+      ga('create', 'UA-48908137-6', 'auto', {'name': 'cityclerkboardscommissions'});
+      ga('cityclerkboardscommissions.require', 'linkid', 'linkid.js');
+      ga('cityclerkboardscommissions.require', 'displayfeatures');
+      ga('cityclerkboardscommissions.send', 'pageview');
+      gtag('config', 'G-VQEX22S08H');
+    }
+    if (pathname.substring(0, 44) == "/city-clerk/boards-commissions/smallbusiness") {
+      ga('create', 'UA-48908137-25', 'auto', {'name': 'cityclerkboardscommissionssmallbusiness'});
+      ga('cityclerkboardscommissionssmallbusiness.require', 'linkid', 'linkid.js');
+      ga('cityclerkboardscommissionssmallbusiness.require', 'displayfeatures');
+      ga('cityclerkboardscommissionssmallbusiness.send', 'pageview');
+    }
+    if (pathname.substring(0, 36) == "/city-clerk/boards-commissions/youth") {
+      ga('create', 'UA-48908137-26', 'auto', {'name': 'cityclerkboardscommissionsyouth'});
+      ga('cityclerkboardscommissionsyouth.require', 'linkid', 'linkid.js');
+      ga('cityclerkboardscommissionsyouth.require', 'displayfeatures');
+      ga('cityclerkboardscommissionsyouth.send', 'pageview');
+    }
+    if (pathname.substring(0, 21) == "/city-clerk/elections") {
+      ga('create', 'UA-48906554-5', 'auto', {'name': 'cityclerkelections'});
+      ga('cityclerkelections.require', 'linkid', 'linkid.js');
+      ga('cityclerkelections.require', 'displayfeatures');
+      ga('cityclerkelections.send', 'pageview');
+      gtag('config', 'G-DS5HCR3KNK');
+    }
+    if (pathname.substring(0, 7) == "/citytv") {
+      ga('create', 'UA-48911430-3', 'auto', {'name': 'citytv'});
+      ga('citytv.require', 'linkid', 'linkid.js');
+      ga('citytv.require', 'displayfeatures');
+      ga('citytv.send', 'pageview');
+    }
+    if (pathname.substring(0, 18) == "/communityservices") {
+      ga('create', 'UA-48909038-11', 'auto', {'name': 'communityservices'});
+      ga('communityservices.require', 'linkid', 'linkid.js');
+      ga('communityservices.require', 'displayfeatures');
+      ga('communityservices.send', 'pageview');
+      gtag('config', 'G-6KGL98ZGS8');
+    }
+    if (pathname.substring(0, 12) == "/comptroller") {
+      ga('create', 'UA-48918517-5', 'auto', {'name': 'comptroller'});
+      ga('comptroller.require', 'linkid', 'linkid.js');
+      ga('comptroller.require', 'displayfeatures');
+      ga('comptroller.send', 'pageview');
+    }
+    if (pathname.substring(0, 21) == "/corporatepartnership") {
+      ga('create', 'UA-48911430-6', 'auto', {'name': 'corporatepartnership'});
+      ga('corporatepartnership.require', 'linkid', 'linkid.js');
+      ga('corporatepartnership.require', 'displayfeatures');
+      ga('corporatepartnership.send', 'pageview');
+      gtag('config', 'G-K6VJ0Z785G');
+    }
+    if (pathname.substring(0, 15) == "/debtmanagement") {
+      ga('create', 'UA-48918517-3', 'auto', {'name': 'debtmanagement'});
+      ga('debtmanagement.require', 'linkid', 'linkid.js');
+      ga('debtmanagement.require', 'displayfeatures');
+      ga('debtmanagement.send', 'pageview');
+      gtag('config', 'G-MSV93H9KEP');
+    }
+    if (pathname.substring(0, 21) == "/economic-development") {
+      ga('create', 'UA-48909038-12', 'auto', {'name': 'economicdevelopment'});
+      ga('economicdevelopment.require', 'linkid', 'linkid.js');
+      ga('economicdevelopment.require', 'displayfeatures');
+      ga('economicdevelopment.send', 'pageview');
+      gtag('config', 'G-D6Y8DKE3XN');
+    }
+    if (pathname.substring(0, 7) == "/empopp") {
+      ga('create', 'UA-48906554-7', 'auto', {'name': 'empopp'});
+      ga('empopp.require', 'linkid', 'linkid.js');
+      ga('empopp.require', 'displayfeatures');
+      ga('empopp.send', 'pageview');
+      gtag('config', 'G-765H9SR903');
+    }
+    if (pathname.substring(0, 22) == "/empopp/about/civilser") {
+      ga('create', 'UA-48908137-7', 'auto', {'name': 'empoppaboutcivilser'});
+      ga('empoppaboutcivilser.require', 'linkid', 'linkid.js');
+      ga('empoppaboutcivilser.require', 'displayfeatures');
+      ga('empoppaboutcivilser.send', 'pageview');
+      gtag('config', 'G-B5VDC1ME67');
+    }
+    if (pathname.substring(0, 23) == "/environmental-services") {
+      ga('create', 'UA-48913020-4', 'auto', {'name': 'environmentalservices'});
+      ga('environmentalservices.require', 'linkid', 'linkid.js');
+      ga('environmentalservices.require', 'displayfeatures');
+      ga('environmentalservices.send', 'pageview');
+      gtag('config', 'G-D1L48D920W');
+    }
+    if (pathname.substring(0, 4) == "/eoc") {
+      ga('create', 'UA-48903271-3', 'auto', {'name': 'eoc'});
+      ga('eoc.require', 'linkid', 'linkid.js');
+      ga('eoc.require', 'displayfeatures');
+      ga('eoc.send', 'pageview');
+      gtag('config', 'G-4TJWNSC41G');
+    }
+    if (pathname.substring(0, 21) == "/eoc/about/commission") {
+      ga('create', 'UA-48908137-5', 'auto', {'name': 'eocaboutcommission'});
+      ga('eocaboutcommission.require', 'linkid', 'linkid.js');
+      ga('eocaboutcommission.require', 'displayfeatures');
+      ga('eocaboutcommission.send', 'pageview');
+      gtag('config', 'G-54TZMDKZHC');
+    }
+    if (pathname.substring(0, 7) == "/ethics") {
+      ga('create', 'UA-48908137-10', 'auto', {'name': 'ethics'});
+      ga('ethics.require', 'linkid', 'linkid.js');
+      ga('ethics.require', 'displayfeatures');
+      ga('ethics.send', 'pageview');
+      gtag('config', 'G-KKCHB4MHPD');
+    }
+    if (pathname.substring(0, 5) == "/fire") {
+      ga('create', 'UA-48911828-2', 'auto', {'name': 'fire'});
+      ga('fire.require', 'linkid', 'linkid.js');
+      ga('fire.require', 'displayfeatures');
+      ga('fire.send', 'pageview');
+      gtag('config', 'G-LDMKWB7RV3');
+    }
+    if (pathname.substring(0, 8) == "/finance") {
+      ga('create', 'UA-48918517-4', 'auto', {'name': 'finance'});
+      ga('finance.require', 'linkid', 'linkid.js');
+      ga('finance.require', 'displayfeatures');
+      ga('finance.send', 'pageview');
+      gtag('config', 'G-37CBS40GVF');
+    }
+      if (pathname.substring(0, 12) == "/get-it-done") {
+        gtag('config', 'G-M2TK4QG652');
+      }
+    if (pathname.substring(0, 38) == "/homelessness-strategies-and-solutions") {
+      ga('create', 'UA-48909038-14', 'auto', {'name': 'homelessservices'});
+      ga('homelessservices.require', 'linkid', 'linkid.js');
+      ga('homelessservices.require', 'displayfeatures');
+      ga('homelessservices.send', 'pageview');
+      gtag('config', 'G-T3L3J53L62');
+    }
+    if (pathname.substring(0, 16) == "/human-relations") {
+      ga('create', 'UA-48909038-15', 'auto', {'name': 'humanrelations'});
+      ga('humanrelations.require', 'linkid', 'linkid.js');
+      ga('humanrelations.require', 'displayfeatures');
+      ga('humanrelations.send', 'pageview');
+      gtag('config', 'G-4ZX0R41QLS');
+    }
+    if (pathname.substring(0, 15) == "/humanresources") {
+      ga('create', 'UA-48903271-4', 'auto', {'name': 'humanresources'});
+      ga('humanresources.require', 'linkid', 'linkid.js');
+      ga('humanresources.require', 'displayfeatures');
+      ga('humanresources.send', 'pageview');
+      gtag('config', 'G-20KP0089FY');
+    }
+    if (pathname.substring(0, 4) == "/iab") {
+      ga('create', 'UA-48908137-13', 'auto', {'name': 'iab'});
+      ga('iab.require', 'linkid', 'linkid.js');
+      ga('iab.require', 'displayfeatures');
+      ga('iab.send', 'pageview');
+      gtag('config', 'G-GVQGY567R3');
+    }
+    if (pathname.substring(0, 4) == "/iba") {
+      ga('create', 'UA-48906554-6', 'auto', {'name': 'iba'});
+      ga('iba.require', 'linkid', 'linkid.js');
+      ga('iba.require', 'displayfeatures');
+      ga('iba.send', 'pageview');
+      gtag('config', 'G-239XQPZ3VL');
+    }
+    if (pathname.substring(0, 3) == "/it") {
+      ga('create', 'UA-48903271-5', 'auto', {'name': 'it'});
+      ga('it.require', 'linkid', 'linkid.js');
+      ga('it.require', 'displayfeatures');
+      ga('it.send', 'pageview');
+      gtag('config', 'G-03LJ0RGH54');
+    }
+    if (pathname.substring(0, 11) == "/lifeguards") {
+      ga('create', 'UA-48911828-3', 'auto', {'name': 'lifeguards'});
+      ga('lifeguards.require', 'linkid', 'linkid.js');
+      ga('lifeguards.require', 'displayfeatures');
+      ga('lifeguards.send', 'pageview');
+      gtag('config', 'G-18YB819BKM');
+    }
+    if (pathname.substring(0, 6) == "/mayor") {
+      ga('create', 'UA-48911430-1', 'auto', {'name': 'mayor'});
+      ga('mayor.require', 'linkid', 'linkid.js');
+      ga('mayor.require', 'displayfeatures');
+      ga('mayor.send', 'pageview');
+      gtag('config', 'G-HHZ1PZPSX7');
+    }
+    if (pathname.substring(0, 5) == "/mwwd") {
+      ga('create', 'UA-48913020-13', 'auto', {'name': 'mwwd'});
+      ga('mwwd.require', 'linkid', 'linkid.js');
+      ga('mwwd.require', 'displayfeatures');
+      ga('mwwd.send', 'pageview');
+    }
+    if (pathname.substring(0, 4) == "/oes") {
+      gtag('config', 'G-7NXL5NJK3E');
+    }
+    if (pathname.substring(0, 4) == "/ohs") {
+      ga('create', 'UA-48911828-4', 'auto', {'name': 'ohs'});
+      ga('ohs.require', 'linkid', 'linkid.js');
+      ga('ohs.require', 'displayfeatures');
+      ga('ohs.send', 'pageview');
+      gtag('config', 'G-LG698T9YSN');
+    }
+    if (pathname.substring(0, 16) == "/parkandrecboard") {
+      ga('create', 'UA-48908137-17', 'auto', {'name': 'parkandrecboard'});
+      ga('parkandrecboard.require', 'linkid', 'linkid.js');
+      ga('parkandrecboard.require', 'displayfeatures');
+      ga('parkandrecboard.send', 'pageview');
+      gtag('config', 'G-YK5J1GRF3N');
+    }
+    if (pathname.substring(0, 33) == "/park-and-recreation/general-info") {
+      ga('create', 'UA-48908137-23', 'auto', {'name': 'parkandrecreationgeneralinfo'});
+      ga('parkandrecreationgeneralinfo.require', 'linkid', 'linkid.js');
+      ga('parkandrecreationgeneralinfo.require', 'displayfeatures');
+      ga('parkandrecreationgeneralinfo.send', 'pageview');
+    }
+    if (pathname.substring(0, 44) == "/park-and-recreation/general-info/boards/bpc") {
+      ga('create', 'UA-48908137-3', 'auto', {'name': 'parkandrecreationgeneralinfoboardsbpc'});
+      ga('parkandrecreationgeneralinfoboardsbpc.require', 'linkid', 'linkid.js');
+      ga('parkandrecreationgeneralinfoboardsbpc.require', 'displayfeatures');
+      ga('parkandrecreationgeneralinfoboardsbpc.send', 'pageview');
+      gtag('config', 'G-5K1ND1YEXZ');
+    }
+    if (pathname.substring(0, 45) == "/park-and-recreation/general-info/boards/mbpc") {
+      ga('create', 'UA-48908137-16', 'auto', {'name': 'parkandrecreationgeneralinfoboardsmbpc'});
+      ga('parkandrecreationgeneralinfoboardsmbpc.require', 'linkid', 'linkid.js');
+      ga('parkandrecreationgeneralinfoboardsmbpc.require', 'displayfeatures');
+      ga('parkandrecreationgeneralinfoboardsmbpc.send', 'pageview');
+      gtag('config', 'G-GQNEHEQHW2');
+    }
+    if (pathname.substring(0, 8) == "/parking") {
+      ga('create', 'UA-48909038-16', 'auto', {'name': 'parking'});
+      ga('parking.require', 'linkid', 'linkid.js');
+      ga('parking.require', 'displayfeatures');
+      ga('parking.send', 'pageview');
+      gtag('config', 'G-YNFRK0WM61');
+    }
+    if (pathname.substring(0, 19) == "/philanthropycenter") {
+      ga('create', 'UA-48911430-7', 'auto', {'name': 'philanthropycenter'});
+      ga('philanthropycenter.require', 'linkid', 'linkid.js');
+      ga('philanthropycenter.require', 'displayfeatures');
+      ga('philanthropycenter.send', 'pageview');
+    }
+    if (pathname.substring(0, 9) == "/planning") {
+      ga('create', 'UA-48909038-17', 'auto', {'name': 'planning'});
+      ga('planning.require', 'linkid', 'linkid.js');
+      ga('planning.require', 'displayfeatures');
+      ga('planning.send', 'pageview');
+      gtag('config', 'G-KREYYWBH0B');
+    }
+    if (pathname.substring(0, 23) == "/planning/community/cpc") {
+      ga('create', 'UA-48908137-9', 'auto', {'name': 'planningcommunitycpc'});
+      ga('planningcommunitycpc.require', 'linkid', 'linkid.js');
+      ga('planningcommunitycpc.require', 'displayfeatures');
+      ga('planningcommunitycpc.send', 'pageview');
+    }
+    if (pathname.substring(0, 20) == "/planning-commission") {
+      ga('create', 'UA-48908137-19', 'auto', {'name': 'planningcommission'});
+      ga('planningcommission.require', 'linkid', 'linkid.js');
+      ga('planningcommission.require', 'displayfeatures');
+      ga('planningcommission.send', 'pageview');
+      gtag('config', 'G-VSMQ44HZYR');
+    }
+    if (pathname.substring(0, 47) == "/public-library/about-the-library/commissioners") {
+      ga('create', 'UA-48908137-14', 'auto', {'name': 'publiclibraryaboutthelibrarycommissioners'});
+      ga('publiclibraryaboutthelibrarycommissioners.require', 'linkid', 'linkid.js');
+      ga('publiclibraryaboutthelibrarycommissioners.require', 'displayfeatures');
+      ga('publiclibraryaboutthelibrarycommissioners.send', 'pageview');
+      gtag('config', 'G-KSRWZMEE3S');
+    }
+    if (pathname.substring(0, 17) == "/public-utilities") {
+      ga('create', 'UA-48913020-7', 'auto', {'name': 'publicutilities'});
+      ga('publicutilities.require', 'linkid', 'linkid.js');
+      ga('publicutilities.require', 'displayfeatures');
+      ga('publicutilities.send', 'pageview');
+      gtag('config', 'G-Y9R8PRMBGL');
+    }
+      if (pathname.substring(0, 46) == "/public-utilities/sustainability/pure-water-sd") {
+          gtag('config', 'G-KFJGCHX7NJ');
+      }
+    if (pathname.substring(0, 12) == "/publicworks") {
+      ga('create', 'UA-48913020-8', 'auto', {'name': 'publicworks'});
+      ga('publicworks.require', 'linkid', 'linkid.js');
+      ga('publicworks.require', 'displayfeatures');
+      ga('publicworks.send', 'pageview');
+      gtag('config', 'G-YDR3KZRNPR');
+    }
+    if (pathname.substring(0, 4) == "/ecp") {
+      ga('create', 'UA-48913020-8', 'auto', {'name': 'ecp'});
+      ga('publicworks.require', 'linkid', 'linkid.js');
+      ga('publicworks.require', 'displayfeatures');
+      ga('publicworks.send', 'pageview');
+      gtag('config', 'G-YDR3KZRNPR');
+    }
+    if (pathname.substring(0, 26) == "/publicworks/about/gensvcs") {
+      ga('create', 'UA-48913020-6', 'auto', {'name': 'publicworksaboutgensvcs'});
+      ga('publicworksaboutgensvcs.require', 'linkid', 'linkid.js');
+      ga('publicworksaboutgensvcs.require', 'displayfeatures');
+      ga('publicworksaboutgensvcs.send', 'pageview');
+    }
+    if (pathname.substring(0, 37) == "/publicworks/about/gensvcs/facilities") {
+      ga('create', 'UA-48913020-5', 'auto', {'name': 'publicworksaboutgensvcsfacilities'});
+      ga('publicworksaboutgensvcsfacilities.require', 'linkid', 'linkid.js');
+      ga('publicworksaboutgensvcsfacilities.require', 'displayfeatures');
+      ga('publicworksaboutgensvcsfacilities.send', 'pageview');
+    }
+    if (pathname.substring(0, 11) == "/purchasing") {
+      ga('create', 'UA-48903271-6', 'auto', {'name': 'purchasing'});
+      ga('purchasing.require', 'linkid', 'linkid.js');
+      ga('purchasing.require', 'displayfeatures');
+      ga('purchasing.send', 'pageview');
+      gtag('config', 'G-SYX047B8D9');
+    }
+    if (pathname.substring(0, 20) == "/qualcomm/about/qsab") {
+      ga('create', 'UA-48908137-20', 'auto', {'name': 'qualcommaboutqsab'});
+      ga('qualcommaboutqsab.require', 'linkid', 'linkid.js');
+      ga('qualcommaboutqsab.require', 'displayfeatures');
+      ga('qualcommaboutqsab.send', 'pageview');
+    }
+    if (pathname.substring(0, 35) === "/real-estate-and-airport-management") {
+      ga('create', 'UA-48903271-8', 'auto', {'name': 'realestateassets'});
+      ga('realestateassets.require', 'linkid', 'linkid.js');
+      ga('realestateassets.require', 'displayfeatures');
+      ga('realestateassets.send', 'pageview');
+      gtag('config', 'G-R2K47XS4X4');
+    }
+    if (pathname.substring(0, 21) == "/redevelopment-agency") {
+      ga('create', 'UA-48908137-21', 'auto', {'name': 'redevelopmentagency'});
+      ga('redevelopmentagency.require', 'linkid', 'linkid.js');
+      ga('redevelopmentagency.require', 'displayfeatures');
+      ga('redevelopmentagency.send', 'pageview');
+    }
+    if (pathname.substring(0, 14) == "/redistricting") {
+      ga('create', 'UA-48908137-22', 'auto', {'name': 'redistricting'});
+      ga('redistricting.require', 'linkid', 'linkid.js');
+      ga('redistricting.require', 'displayfeatures');
+      ga('redistricting.send', 'pageview');
+    }
+    if (pathname.substring(0, 15) == "/riskmanagement") {
+      ga('create', 'UA-48918517-6', 'auto', {'name': 'riskmanagement'});
+      ga('riskmanagement.require', 'linkid', 'linkid.js');
+      ga('riskmanagement.require', 'displayfeatures');
+      ga('riskmanagement.send', 'pageview');
+      gtag('config', 'G-028TTCHRBE');
+    }
+    if (pathname.substring(0, 5) == "/saab") {
+      ga('create', 'UA-48908137-24', 'auto', {'name': 'saab'});
+      ga('saab.require', 'linkid', 'linkid.js');
+      ga('saab.require', 'displayfeatures');
+      ga('saab.send', 'pageview');
+    }
+    if (pathname.substring(0, 28) == "/sandiegofamilyjusticecenter") {
+      ga('create', 'UA-48908544-2', 'auto', {'name': 'sandiegofamilyjusticecenter'});
+      ga('sandiegofamilyjusticecenter.require', 'linkid', 'linkid.js');
+      ga('sandiegofamilyjusticecenter.require', 'displayfeatures');
+      ga('sandiegofamilyjusticecenter.send', 'pageview');
+      gtag('config', 'G-7QSBBVB48N');
+    }
+    if (pathname.substring(0, 7) == "/events") {
+      ga('create', 'UA-48911430-8', 'auto', {'name': 'specialevents'});
+      ga('specialevents.require', 'linkid', 'linkid.js');
+      ga('specialevents.require', 'displayfeatures');
+      ga('specialevents.send', 'pageview');
+    }
+    if (pathname.substring(0, 14) == "/specialevents") {
+      ga('create', 'UA-48911430-8', 'auto', {'name': 'specialevents'});
+      ga('specialevents.require', 'linkid', 'linkid.js');
+      ga('specialevents.require', 'displayfeatures');
+      ga('specialevents.send', 'pageview');
+    }
+    if (pathname.substring(0, 11) == "/stormwater") {
+      ga('create', 'UA-48913020-9', 'auto', {'name': 'stormwater'});
+      ga('stormwater.require', 'linkid', 'linkid.js');
+      ga('stormwater.require', 'displayfeatures');
+      ga('stormwater.send', 'pageview');
+      gtag('config', 'G-BEQ0VQH6CP');
+    }
+    if (pathname.substring(0, 11) == "/street-div") {
+      ga('create', 'UA-48913020-10', 'auto', {'name': 'streetdiv'});
+      ga('streetdiv.require', 'linkid', 'linkid.js');
+      ga('streetdiv.require', 'displayfeatures');
+      ga('streetdiv.send', 'pageview');
+      gtag('config', 'G-9E4HR3BEKJ');
+    }
+    if (pathname.substring(0, 10) == "/treasurer") {
+      ga('create', 'UA-48918517-2', 'auto', {'name': 'treasurer'});
+      ga('treasurer.require', 'linkid', 'linkid.js');
+      ga('treasurer.require', 'displayfeatures');
+      ga('treasurer.send', 'pageview');
+      gtag('config', 'G-W3RZKL04WX');
+    }
+    if (pathname.substring(0, 4) == "/tsw") {
+      ga('create', 'UA-48913020-11', 'auto', {'name': 'tsw'});
+      ga('tsw.require', 'linkid', 'linkid.js');
+      ga('tsw.require', 'displayfeatures');
+      ga('tsw.send', 'pageview');
+      gtag('config', 'G-CV63GYQTL4');
+    }
+    if (pathname.substring(0, 15) == "/undergrounding") {
+      ga('create', 'UA-48913020-12', 'auto', {'name': 'undergrounding'});
+      ga('undergrounding.require', 'linkid', 'linkid.js');
+      ga('undergrounding.require', 'displayfeatures');
+      ga('undergrounding.send', 'pageview');
+      gtag('config', 'G-0EWHVS7X2W');
+    }
+    if (pathname.substring(0, 18) == "/volunteer-program") {
+      ga('create', 'UA-48911430-9', 'auto', {'name': 'volunteerprogram'});
+      ga('volunteerprogram.require', 'linkid', 'linkid.js');
+      ga('volunteerprogram.require', 'displayfeatures');
+      ga('volunteerprogram.send', 'pageview');
+    }
+    if (pathname.substring(0, 6) == "/water") {
+      ga('create', 'UA-48913020-14', 'auto', {'name': 'water'});
+      ga('water.require', 'linkid', 'linkid.js');
+      ga('water.require', 'displayfeatures');
+      ga('water.send', 'pageview');
+      gtag('config', 'G-7ZFQVBF6Z8');
+    }
+    if (pathname.substring(0, 8) == "/opengov") {
+      ga('create', 'UA-48911430-10', 'auto', {'name': 'opengov'});
+      ga('opengov.require', 'linkid', 'linkid.js');
+      ga('opengov.require', 'displayfeatures');
+      ga('opengov.send', 'pageview');
+      gtag('config', 'G-YC1LQ24SPE');
+    }
+    if (pathname.substring(0, 4) == "/pad") {
+      ga('create', 'UA-48911430-11', 'auto', {'name': 'pad'});
+      ga('pad.require', 'linkid', 'linkid.js');
+      ga('pad.require', 'displayfeatures');
+      ga('pad.send', 'pageview');
+      gtag('config', 'G-29KJPZQDSM');
+    }
+    if (pathname.substring(0, 19) == "/investorinformation") {
+      ga('create', 'UA-48918517-7', 'auto', {'name': 'investorinformation'});
+      ga('investorinformation.require', 'linkid', 'linkid.js');
+      ga('investorinformation.require', 'displayfeatures');
+      ga('investorinformation.send', 'pageview');
+    }
+    if (pathname.substring(0, 15) == "/communications") {
+      ga('create', 'UA-48903271-9', 'auto', {'name': 'communications'});
+      ga('communications.require', 'linkid', 'linkid.js');
+      ga('communications.require', 'displayfeatures');
+      ga('communications.send', 'pageview');
+      gtag('config', 'G-F6N0TCCCW6');
+    }
+    if (pathname.substring(0, 15) == "/sustainability") {
+      ga('create', 'UA-48909038-19', 'auto', {'name': 'sustainability'});
+      ga('sustainability.require', 'linkid', 'linkid.js');
+      ga('sustainability.require', 'displayfeatures');
+      ga('sustainability.send', 'pageview');
+      gtag('config', 'G-8V5CPM322Y');
+    }
+
+  } catch (ex) {}
+
+  try {
+    ga('create', 'UA-41750560-17', 'auto', {'name': 'sandiegogovredesign'});
+    ga('sandiegogovredesign.require', 'linkid', 'linkid.js');
+    ga('sandiegogovredesign.require', 'displayfeatures');
+    ga('sandiegogovredesign.send', 'pageview');
+
+  } catch (ex) {}
+
+  try {
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TGPZ43');
+  } catch (ex) {}
+
+  function GAFileExtEmail(myName,myID){
+
+    myRequire = myName+".require";
+    mySend = myName+".send";
+
+    ga('create', myID, 'auto', {'name': myName});
+    ga(myRequire, 'linkid', 'linkid.js');
+    ga(myRequire, 'displayfeatures');
+    //ga(mySend, 'pageview');
+
+    if (typeof jQuery != 'undefined') {
+      jQuery(document).ready(function($) {
+        var filetypes = /\.(zip|exe|pdf|doc*|xls*|ppt*|mp3)$/i;
+        var baseHref = '';
+        if (jQuery('base').attr('href') != undefined)
+          baseHref = jQuery('base').attr('href');
+        jQuery('a').each(function() {
+          var href = jQuery(this).attr('href');
+          if (href && (href.match(/^https?\:/i)) && (!href.match(document.domain))) {
+            jQuery(this).click(function() {
+              var extLink = href.replace(/^https?\:\/\//i, '');
+              //_gaq.push(['_trackEvent', 'External', 'Click', extLink]);
+              ga(mySend, 'event', {
+                eventCategory: 'External',
+                eventAction: 'Click',
+                eventLabel: extLink,
+                transport: 'beacon'
+              });
+
+              if (jQuery(this).attr('target') != undefined && jQuery(this).attr('target').toLowerCase() != '_blank') {
+                setTimeout(function() { location.href = href; }, 200);
+                return false;
+              }
+            });
+          }
+          else if (href && href.match(/^mailto\:/i)) {
+            jQuery(this).click(function() {
+              var mailLink = href.replace(/^mailto\:/i, '');
+              //_gaq.push(['_trackEvent', 'Email', 'Click', mailLink]);
+              ga(mySend, 'event', {
+                eventCategory: 'Email',
+                eventAction: 'Click',
+                eventLabel: mailLink
+              });
+
+            });
+          }
+          else if (href && href.match(filetypes)) {
+            jQuery(this).click(function() {
+              var extension = (/[.]/.exec(href)) ? /[^.]+$/.exec(href) : undefined;
+              var filePath = href;
+              //_gaq.push(['_trackEvent', 'Download', 'Click-' + extension, filePath]);
+              ga(mySend, 'event', {
+                eventCategory: 'Download',
+                eventAction: 'Click-'+extension,
+                eventLabel: filePath
+              });
+
+              if (jQuery(this).attr('target') != undefined && jQuery(this).attr('target').toLowerCase() != '_blank') {
+                setTimeout(function() { location.href = baseHref + href; }, 200);
+                return false;
+              }
+            });
+          }
+        });
+      });
+    }
+  }
+
+  GAFileExtEmail('sandiegofileextemail','UA-41750560-17');
+noscript: ''
+noscriptRegion: {  }
+jquery: true
+header: false
+preprocess: true
+conditions:
+  current_theme:
+    id: current_theme
+    negate: false
+    theme: sand
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      anonymous: anonymous
+contexts: {  }
+conditions_require_all: true
