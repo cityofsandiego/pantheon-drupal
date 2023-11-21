@@ -32,7 +32,7 @@
           var selector = "#" + $(this).attr("id");
 
           // The default size for larger screens and no overrides.
-          var background_size = "100% auto";
+          var background_size = "cover";
           var min_height = "300px";
 
           // See if there are any overrides on this image for min-height.
