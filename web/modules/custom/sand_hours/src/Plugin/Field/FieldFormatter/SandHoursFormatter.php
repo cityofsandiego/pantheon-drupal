@@ -12,6 +12,8 @@ use Drupal\office_hours\OfficeHoursDateHelper;
 use Drupal\office_hours\Plugin\Field\FieldFormatter\OfficeHoursFormatterBase;
 
 
+
+
 /**
  * Plugin implementation of the 'Sand Hours' formatter.
  *
@@ -34,6 +36,23 @@ class SandHoursFormatter extends OfficeHoursFormatterBase {
       return $summary;
   }
 
+    public function prepareView(array $entities_items) {
+        // Collect entity IDs to load. For performance, we want to use a single
+        // "multiple entity load" to load all the entities for the multiple
+        // "entity reference item lists" being displayed. We thus cannot use
+        // \Drupal\Core\Field\EntityReferenceFieldItemList::referencedEntities().
+//        $ids = [];
+//        foreach ($entities_items as $items) {
+//            foreach ($items as $item) {
+//                $x = 1;
+//            }
+//        }
+//        if ($ids) {
+//            $target_type = $this->getFieldSetting('target_type');
+//            $target_entities = \Drupal::entityTypeManager()->getStorage($target_type)->loadMultiple($ids);
+//        }
+    }
+    
   /**
    * {@inheritdoc}
    */
@@ -130,9 +149,11 @@ class SandHoursFormatter extends OfficeHoursFormatterBase {
       $elements = $this->addSchemaFormatter($items, $langcode, $elements);
       $elements = $this->addStatusFormatter($items, $langcode, $elements);
 
+      // Enable dynamic field update in office_hours_status_update.js.
+      // Since Field cache does not work properly for Anonymous users.
+      $elements = $this->attachStatusUpdateJS($items, $langcode, $elements);
       // Add a ['#cache']['max-age'] attribute to $elements.
       // Note: This invalidates a previous Cache in Status Formatter.
-      //$this->addCacheMaxAge($items, $elements);
       $elements = $this->addCacheData($items, $elements);
 
 
