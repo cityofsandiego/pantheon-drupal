@@ -517,9 +517,9 @@ display:
               allow_secondary: false
               secondary_label: 'Advanced options'
               secondary_open: false
-              reset_button_always_show: true
+              reset_button_always_show: false
             filter:
-              field_muni_code_chapter_value:
+              field_doc_date_year_value_selective:
                 plugin_id: default
                 advanced:
                   sort_options: false
@@ -1481,15 +1481,79 @@ display:
     display_options:
       title: 'Council Meetings'
       fields:
-        field_doc_date_1:
-          id: field_doc_date_1
+        field_doc_date:
+          id: field_doc_date
           table: node__field_doc_date
           field: field_doc_date
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: Date
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_custom
+          settings:
+            timezone_override: ''
+            date_format: 'M Y'
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_doc_date_1:
+          id: field_doc_date_1
+          table: node__field_doc_date
+          field: field_doc_date
+          relationship: none
+          group_type: group
+          admin_label: 'Doc Date'
+          plugin_id: field
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -1674,7 +1738,7 @@ display:
           admin_label: ''
           plugin_id: field
           label: Number
-          exclude: false
+          exclude: true
           alter:
             alter_text: true
             text: ''
@@ -1738,7 +1802,7 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-          label: Title
+          label: ''
           exclude: false
           alter:
             alter_text: true
@@ -1774,7 +1838,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -1884,46 +1948,7 @@ display:
             label: ''
             field_identifier: ''
           exposed: false
-      arguments:
-        field_path_value:
-          id: field_path_value
-          table: node__field_path
-          field: field_path_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: string
-          default_action: default
-          exception:
-            value: all
-            title_enable: false
-            title: All
-          title_enable: false
-          title: ''
-          default_argument_type: fixed
-          default_argument_options:
-            argument: ''
-          default_argument_skip_url: false
-          summary_options:
-            base_path: ''
-            count: true
-            override: false
-            items_per_page: 25
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: true
-          validate:
-            type: none
-            fail: 'not found'
-          validate_options: {  }
-          glossary: false
-          limit: 0
-          case: none
-          path_case: none
-          transform_dash: false
-          break_phrase: false
+      arguments: {  }
       filters:
         status:
           id: status
@@ -1964,7 +1989,7 @@ display:
             min: ''
             max: ''
             value: '2009'
-            type: date
+            type: date_year
           group: 1
           exposed: false
           expose:
@@ -1996,6 +2021,7 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+          granularity: 0
         field_doc_type_value:
           id: field_doc_type_value
           table: node__field_doc_type
@@ -2142,19 +2168,32 @@ display:
         options:
           grouping:
             -
+              field: field_doc_date
+              rendered: true
+              rendered_strip: true
+            -
               field: field_doc_date_1
               rendered: true
-              rendered_strip: false
-          row_class: ''
-          default_row_class: true
+              rendered_strip: true
+          row_class: ocd_group
+          default_row_class: false
           columns:
+            field_doc_date: field_doc_date
             field_doc_date_1: field_doc_date_1
             field_document_url: field_document_url
             edit_node: edit_node
             field_doc_num: field_doc_num
             title: title
+            field_doc_date_year: field_doc_date_year
           default: '-1'
           info:
+            field_doc_date:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             field_doc_date_1:
               sortable: false
               default_sort_order: asc
@@ -2188,7 +2227,14 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-          override: true
+            field_doc_date_year:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: false
           sticky: false
           summary: ''
           empty_table: false
@@ -2203,6 +2249,7 @@ display:
           hide_empty: false
       defaults:
         title: false
+        use_ajax: false
         style: false
         row: false
         fields: false
@@ -2210,6 +2257,7 @@ display:
         arguments: false
         filters: false
         filter_groups: false
+      use_ajax: false
       display_description: 'Council Meetings'
       display_extenders: {  }
       block_description: councilmeetings
