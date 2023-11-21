@@ -95,7 +95,7 @@ class SandHoursFormatter extends OfficeHoursFormatterBase {
                  continue;
              }
              if ($office_hour['date'] == $field_date_date_value) {
-                $office_hours[$key]['formatted_slots'] = $office_hour['closed'];
+                $office_hours[$key]['formatted_slots'] = t('Closed');
                 $node = Node::load($row->entity_id);
                 if (!empty($node->get('field_date_type')->value)) {
                     $comment = $node->get('field_date_type')->view(['label' => 'hidden'])[0]['#markup']; 
@@ -132,7 +132,9 @@ class SandHoursFormatter extends OfficeHoursFormatterBase {
 
       // Add a ['#cache']['max-age'] attribute to $elements.
       // Note: This invalidates a previous Cache in Status Formatter.
-      $this->addCacheMaxAge($items, $elements);
+      //$this->addCacheMaxAge($items, $elements);
+      $elements = $this->addCacheData($items, $elements);
+
 
       return $elements;
 
