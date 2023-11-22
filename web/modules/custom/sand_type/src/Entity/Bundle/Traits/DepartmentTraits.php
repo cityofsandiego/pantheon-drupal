@@ -19,5 +19,22 @@ trait DepartmentTraits {
       return NULL;
     }
   }
+
+    public function getDepartmentsTID($include_parents = FALSE): ?array {
+        if ($this->hasField('field_department')) {
+            $departments_tids = [];
+            $departments = $this->get('field_department')->getValue();
+            foreach ($departments as $key => $department) {
+                $departments_tids[] = $department['target_id'];
+                if ($include_parents) {
+                    $ancestors = \Drupal::service('entity_type.manager')->getStorage("taxonomy_term")->loadAllParents($department['target_id']);
+                    $departments_tids += array_keys($ancestors);
+                }
+            }
+            return array_unique($departments_tids);
+        } else {
+            return [];
+        }
+    }
   
 }
