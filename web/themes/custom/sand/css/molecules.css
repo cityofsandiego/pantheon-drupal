@@ -2466,16 +2466,21 @@ textarea {
 .office-hours__item {
   padding-bottom: .5em; }
 
-.office-hours-status--open .message, .office-hours-status--closed .message {
-  padding: 0.5em; }
+.office-hours-notes {
+  margin-top: 0.5rem; }
 
-.office-hours-status--open .message {
-  border: 1px solid #659f13;
-  color: #195A16 !important; }
-
-.office-hours-status--closed .message {
-  border: 1px solid #940500;
-  color: #940500 !important; }
+.office-hours-status {
+  margin: 1.4rem 0 1.5rem 0; }
+  .office-hours-status.office-hours-status--open, .office-hours-status.office-hours-status--closed {
+    font-style: normal; }
+    .office-hours-status.office-hours-status--open .message, .office-hours-status.office-hours-status--closed .message {
+      padding: 0.5em; }
+  .office-hours-status.office-hours-status--open .message {
+    border: 1px solid #659f13;
+    color: #195A16 !important; }
+  .office-hours-status.office-hours-status--closed .message {
+    border: 1px solid #940500;
+    color: #940500 !important; }
 
 .office-hours__item-comments {
   padding-left: 0.5em; }
@@ -2605,7 +2610,9 @@ textarea {
     width: calc(100% - 1.25rem);
     margin-left: 0.625rem;
     margin-right: 0.625rem;
-    margin: 0 0 1.125rem; }
+    margin: 0 0 1.125rem;
+    justify-content: center;
+    flex-direction: column; }
     @media print, screen and (min-width: 30em) {
       .field--name-field-resources > .field__item {
         flex: 0 0 auto;
