@@ -45,7 +45,7 @@ dependencies:
     - geofield_map
     - link
     - metatag
-    - office_hours
+    - sand_hours
     - smart_date
     - text
     - user
@@ -274,7 +274,7 @@ content:
     weight: 30
     region: content
   field_location_hours:
-    type: office_hours
+    type: sand_hours
     label: hidden
     settings:
       day_format: long
@@ -307,14 +307,13 @@ content:
     weight: 14
     region: content
   field_location_hours2:
-    type: office_hours
+    type: sand_hours
     label: hidden
     settings:
+      show_closed: all
+      office_hours_first_day: ''
       day_format: long
       time_format: G
-      compress: false
-      grouped: false
-      show_closed: all
       closed_format: Closed
       all_day_format: 'All day open'
       separator:
@@ -324,17 +323,19 @@ content:
         hours_hours: '-'
         more_hours: ', '
       current_status:
-        position: ''
-        open_text: 'Currently open!'
+        position: before
+        open_text: 'Currently open'
         closed_text: 'Currently closed'
       exceptions:
-        title: 'Exception hours'
-        restrict_exceptions_to_num_days: 7
+        restrict_exceptions_to_num_days: '7'
         date_format: long
-      timezone_field: ''
-      office_hours_first_day: ''
+        title: 'Exception hours'
+        all_day_format: 'All day open'
+      compress: 0
+      grouped: 0
       schema:
-        enabled: false
+        enabled: 0
+      timezone_field: ''
     third_party_settings: {  }
     weight: 18
     region: content
