@@ -43,10 +43,15 @@
     'paragraph--type--' ~ paragraph.bundle|clean_class,
   ]
 %}
+{% if content.field_icon.0 is null %}
+{% set iconclass = "" %}
+{% else %}
+{% set iconclass = " btn-icon l-padding-as l-flex-center" %}
+{% endif %}
 {% block paragraph %}
   {% if content.field_label.0 %}
     <div{{ attributes.addClass(classes) }}>
-      <a href="{{ content.field_link[0]['#url'] }}" title="{{ content.field_link[0]['#title'] }}" class="btn btn--wide btn--secondary btn--icon">
+      <a href="{{ content.field_link[0]['#url'] }}" title="{{ content.field_link[0]['#title'] }}" class="btn btn--wide btn--secondary{{ iconclass }}">
       {% block content %}
       {% if content.field_icon.0 is null %}
         <span class="no-icon">
