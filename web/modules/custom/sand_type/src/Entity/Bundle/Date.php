@@ -21,4 +21,12 @@ class Date extends Node implements DepartmentInterface {
 
   use DepartmentTraits;
 
+  function getStartDates():array {
+    $return = [];
+    $dates =  $this->get('field_date_date')->getValue();
+    foreach($dates as $date) {
+      $return[] = $date['value']; 
+    }
+    return $return;
+  }
 }
