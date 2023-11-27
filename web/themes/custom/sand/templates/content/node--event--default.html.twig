@@ -88,19 +88,19 @@
       <div class="cell small-12 medium-auto event-title l-padding-mobile-hm">
         <h1 class="main__heading">{{ label.0 }}</h1>
 
-        {% if content.field_subtitle[0] %}
-          <!--<div class="main__content subheading l-padding-desktop-hd">
+        {% if content.field_subtitle.0 %}
+          <p class="h3 heading--trim l-padding-desktop-ts">
             {{ content.field_subtitle.0 }}
-          </div>-->
+          </p>
         {% endif %}
         {% if content.field_event_date[0] %}
           {% if (url_params["event-date"]) is not empty %}
-          <div class="date-wrapper subheading l-padding-ts">
+          <div class="date-wrapper heading--subcolor l-padding-ts">
             {{ (url_params["event-date"]) }}
           </div>
           {% else %}
             {% if content.field_event_date.1["#value"] is empty %}
-            <div class="date-wrapper subheading l-padding-ts">
+            <div class="date-wrapper heading--subcolor l-padding-ts">
             {{ content.field_event_date }}
             </div>
             {% else %}
