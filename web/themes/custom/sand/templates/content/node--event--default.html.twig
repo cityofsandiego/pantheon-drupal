@@ -149,6 +149,17 @@
     <div class="cell medium-4">
       <!-- Address Card -->
       {% if content.field_event_location.0.address_line1["#value"] is not empty %}
+        <div class="Boone">{{ dump(content.field_event_location) }}</div>
+        {# Extracting individual address components #}
+        {% set street = content.field_event_location.0.address_line1['#value'] %}
+        {% set city = content.field_event_location.0.locality['#value'] %}
+        {% set state = content.field_event_location.0.administrative_area['#value'] %}
+
+        {# Formatting the address for display #}
+        {% set formatted_address = [street, city, state]|join(', ')|trim|replace({',,': ','}) %}
+
+        {# Formatting the address for URL (replacing spaces and commas) #}
+        {% set formatted_address_url = [street, city, state]|join(', ')|trim|replace({' ' : '+', ',,': ','}) %}
         <div class="l-padding-ad text-center--mobile l-margin-mobile-td background-off-white rounded-corners">
           <div class="grid-x">
             <div class="cell medium-3 text-center">
@@ -156,19 +167,12 @@
               <!--<img src="{{ url('<front>') }}themes/custom/sand/images/gmap-markers/marker.png" alt="" width="83" height="83">-->
             </div>
             <div class="cell medium-auto">
-              <address style="font-weight: bold">{{ content.field_event_location }}</address>
+              <address style="font-weight: bold">{{ formatted_address }}</address>
             </div>
           </div>
-          {% if content.field_address_pin.0 %}
-            {% set latlon %}
-              {{ content.field_address_pin.0 }}
-            {% endset %}	
-          
             <p class="text-center l-margin-td">
-              {% set formatted_address = content.field_event_location|render|striptags|trim|replace({' ' : '+'}) %}
-              <a href="https://maps.google.com/maps?&z=15&mrt=yp&t=m&q={% spaceless %}{{ formatted_address }}{% endspaceless %}" class="btn btn--secondary">Get Directions</a>
+              <a href="https://www.google.com/maps/place/{% spaceless %}{{ formatted_address_url }}{% endspaceless %}" class="btn btn--secondary">Get Directions</a>
             </p>
-          {% endif %}
         </div>
       {% endif %}
       <!-- // End Address Card -->
@@ -177,7 +181,7 @@
 </div>
 {% if content.field_event_do_not_show_map.0['#markup'] == 'Off' %}
 <div id="maprow" class="row">
-  <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBD0BdPQUod50DCv_vczFxEbO4ox7w9hnM&amp;q={% spaceless %}{{ formatted_address }}{% endspaceless %}" style="width: 100%; height: 300px; top: 0px; left: 0px; border: medium none;" frameborder="0"></iframe>
+  <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBD0BdPQUod50DCv_vczFxEbO4ox7w9hnM&amp;q={% spaceless %}{{ formatted_address_url }}{% endspaceless %}" style="width: 100%; height: 300px; top: 0px; left: 0px; border: medium none;" frameborder="0"></iframe>
 </div>
 {% endif %}
 {% if content.field_department.0["#title"] == "Special Events & Filming" %}
