@@ -50,6 +50,10 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     $config['search_api.index.content']['read_only'] = true;
     $config['search_api.index.remote']['read_only'] = true;
   }
+} else {
+  // read-only
+  $config['search_api.index.content']['read_only'] = true;
+  $config['search_api.index.remote']['read_only'] = true;
 }
 
 // Added by City of San Diego, the settings from these modules will not be exported in config
