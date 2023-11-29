@@ -1,0 +1,23 @@
+uuid: 2426aaf4-e81f-4fe4-a656-2aa923955663
+langcode: en
+status: true
+dependencies: {  }
+id: searchform
+name: SearchForm
+cache: false
+description: 'Insert a search OCD form with the ability to add facets.'
+shorttip: 'Insert search OCD form: [search=<path to search page>=<search facet1>=<search facet2>. Example: [search=/search/ocd=facet_committee:psns=facet_doc_type:council-committees-actions]'
+longtip: "Insert search OCD form. Note that you can include up to 2 facets in the search if they are on the page. To get the syntax, go to the search page and check the facets you want then get them from the URL. They will be of the form: xxx:yyy\r\n\r\nExample: [search=<path to search page>=<search facet1>=<search facet2>. Example: [search=/search/ocd=facet_committee:psns=facet_doc_type:council-committees-actions]"
+rules:
+  search:
+    rid: search
+    prid: ''
+    fid: searchform
+    name: Search
+    description: 'Insert a custom form to search OCD documents including facets'
+    enabled: true
+    matches: null
+    pattern: '#\[search=(.*?)(=(.*?))?(=(.*?))?\]#'
+    replacement: "$form = \\Drupal::formBuilder()->getForm('Drupal\\sand_search\\Form\\SearchForm', $matches[1], $matches[3], $matches[5]); \r\n$result = \\Drupal::service('renderer')->renderPlain($form);\r\n"
+    code: true
+    weight: 0
