@@ -41,10 +41,12 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   if (PANTHEON_ENVIRONMENT == 'live') {
     // Do not reroute email on Live
     $conf['reroute_email_enable'] = 0;
-    // enable search_api server: production and indexes
+    // enable search_api server: production and indexes and read-only to false
     $config['search_api.server.production']['status'] = true;
     $config['search_api.index.content']['status'] = true;
     $config['search_api.index.remote']['status'] = true;
+    $config['search_api.index.content']['read_only'] = false;
+    $config['search_api.index.remote']['read_only'] = false;
   } else {
     // read-only
     $config['search_api.index.content']['read_only'] = true;
