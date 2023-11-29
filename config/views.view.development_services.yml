@@ -2009,10 +2009,10 @@ display:
           condition: eq
           equalto: 'Information Bulletin'
           then: "<hr class=\"l-margin-vm\">\r\n<p class=\"l-margin-ts\"><a class=\"text-accent--desktop\" href=\"{{ field_media_document_1 }}\">{{ title }}</a> <span class=\"pull-right\">{{ edit_node }}</span></p>\r\n<p><strong class=\"text-upper\">{{ field_category }} {{ field_other_keywords }}</strong></p>\r\n{{ field_other_description }}\r\n<p class=\"fine-print\"><em>Revised {{ created }}</em></p>"
-          then_translate: 1
+          then_translate: true
           or: '{{ field_url }}'
-          or_translate: 1
-          strip_tags: 0
+          or_translate: true
+          strip_tags: false
       exposed_form:
         type: input_required
         options:
@@ -3843,13 +3843,13 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: combine
-          operator: allwords
+          operator: contains
           value: ''
           group: 1
           exposed: true
           expose:
             operator_id: combine_op
-            label: 'Combine fields filter'
+            label: 'Keyword(s) Search:'
             description: ''
             use_operator: false
             operator: combine_op
@@ -3862,6 +3862,7 @@ display:
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              administrator: '0'
               content_editor: '0'
               content_owner: '0'
               sand_admin_email: '0'
@@ -3872,8 +3873,6 @@ display:
               webform_results_photos_only: '0'
               outreach2_article: '0'
               sand_admin: '0'
-              if_administrator: '0'
-              administrator: '0'
               locations: '0'
             placeholder: ''
           is_grouped: false
@@ -3891,6 +3890,8 @@ display:
           fields:
             title: title
             field_resource_description: field_resource_description
+            field_phone: field_phone
+            field_contact: field_contact
             field_company: field_company
         title:
           id: title
@@ -7356,10 +7357,10 @@ display:
           condition: eq
           equalto: Blog
           then: '{{ field_other_description }}'
-          then_translate: 1
+          then_translate: true
           or: '{{ body }}'
-          or_translate: 1
-          strip_tags: 0
+          or_translate: true
+          strip_tags: false
         nothing:
           id: nothing
           table: views
