@@ -12,85 +12,91 @@ id: webform_1026701
 title: 'Emergency Excavation Notification'
 description: null
 category: null
-elements: |
+elements: |-
   fieldset_date_time_reported:
     '#type': fieldset
     '#open': true
-    '#title': 'Date Time Reported' 
-    '#description': ""
+    '#title': 'Date Time Reported'
+    '#description': ''
     date_reported_2:
       '#type': date
-      '#title': 'Date' 
-      '#description': ""
+      '#title': Date
+      '#description': ''
       '#required': true
     time_2:
       '#type': time
       '#time_format': 'g:i A'
-      '#title': 'Time' 
-      '#description': ""
+      '#title': Time
+      '#description': ''
       '#required': true
+    time:
+      '#type': webform_time
+      '#title': Time
+      '#required': true
+      '#timepicker': true
+      '#time_format': 'g:i A'
   agency_contact_person:
     '#type': textfield
-    '#title': 'Agency Contact Person' 
-    '#description': "The person reporting the emergency"
+    '#title': 'Agency Contact Person'
+    '#description': 'The person reporting the emergency'
     '#required': true
   agency_contact_phone_number:
     '#type': textfield
-    '#title': 'Agency Contact Phone Number' 
-    '#description': ""
+    '#title': 'Agency Contact Phone Number'
+    '#description': ''
     '#required': true
   agency_contact_email:
     '#type': email
     '#size': 20
-    '#title': 'Agency Contact Email' 
-    '#description': ""
+    '#title': 'Agency Contact Email'
+    '#description': ''
     '#required': true
   utility_agency_name_or_facility_owner:
     '#type': textfield
-    '#title': 'Utility/Agency Name or Facility Owner' 
-    '#description': ""
+    '#title': 'Utility/Agency Name or Facility Owner'
+    '#description': ''
     '#required': true
   description:
     '#type': textarea
-    '#title': 'Description' 
-    '#description': "(Describe the scope of work and include the service that needs to be restored or facility information, for example, fiber optic, gas, communication, electrical, etc.)"
+    '#title': Description
+    '#description': '(Describe the scope of work and include the service that needs to be restored or facility information, for example, fiber optic, gas, communication, electrical, etc.)'
     '#required': true
   excavation_required:
     '#type': radios
     '#options':
-      yes: 'Yes'
-      no: 'No'
-    '#title': 'Excavation required?' 
-    '#description': ""
+      'yes': 'Yes'
+      'no': 'No'
+    '#title': 'Excavation required?'
+    '#description': ''
     '#required': true
   address:
     '#type': textfield
-    '#title': 'Address of Excavation ' 
-    '#description': ""
+    '#title': 'Address of Excavation '
+    '#description': ''
     '#required': true
   street_road_side:
     '#type': textfield
-    '#title': 'Street/road side' 
-    '#description': "(east, west, north, south bound) "
+    '#title': 'Street/road side'
+    '#description': '(east, west, north, south bound) '
     '#required': true
   address_of_residences_without_services:
     '#type': textarea
-    '#title': 'Address of Residences without Services' 
-    '#description': ""
+    '#title': 'Address of Residences without Services'
+    '#description': ''
   nearest_cross_street:
     '#type': textfield
-    '#title': 'Nearest Cross Street' 
-    '#description': ""
+    '#title': 'Nearest Cross Street'
+    '#description': ''
     '#required': true
   number_of_residences_without_services:
     '#type': textfield
-    '#title': 'Number of Residences without Services' 
-    '#description': ""
+    '#title': 'Number of Residences without Services'
+    '#description': ''
     '#required': true
   street_restoration_completed_date:
     '#type': date
-    '#title': 'Street Restoration Completed Date' 
-    '#description': "Leave this field empty. To be completed by ROW Coordination Division, TSWD"
+    '#title': 'Street Restoration Completed Date'
+    '#description': 'Leave this field empty. To be completed by ROW Coordination Division, TSWD'
 css: ''
 javascript: ''
 settings:
@@ -130,15 +136,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: PCastro@sandiego.gov
+      from_mail: _default
       from_options: {  }
-      from_name: default
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: default
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nDATE/TIME REPORTED:\r\n[webform_submission:values:date_reported_2]\r\n[webform_submission:values:time]\r\n\r\nAGENCY CONTACT PERSON:\r\n[webform_submission:values:agency_contact_person]\r\n\r\nAGENCY CONTACT PHONE NUMBER:\r\n[webform_submission:values:agency_contact_phone_number]\r\n\r\nAGENCY CONTACT EMAIL:\r\n[webform_submission:values:agency_contact_email]\r\n\r\nUTILITY/AGENCY NAME OR FACILITY OWNER:\r\n[webform_submission:values:utility_agency_name_or_facility_owner]\r\n\r\nDESCRIPTION:\r\n[webform_submission:values:description]\r\n\r\nEXCAVATION REQUIRED?\r\n[webform_submission:values:excavation_required]\r\n\r\nADDRESS OF EXCAVATION:\r\n[webform_submission:values:address]\r\n\r\nSTREET/ROAD SIDE:\r\n[webform_submission:values:address]\r\n\r\nADDRESS OF RESIDENCES WITHOUT SERVICES:\r\n[webform_submission:values:address_of_residences_without_services]\r\n\r\nNEAREST CROSS STREET:\r\n[webform_submission:values:nearest_cross_street]\r\n\r\nNUMBER OF RESIDENCES WITHOUT SERVICES:\r\n[webform_submission:values:number_of_residences_without_services]\r\n\r\nSTREET RESTORATION COMPLETED DATE:\r\n[webform_submission:values:street_restoration_completed_date]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -155,7 +161,7 @@ handlers:
     handler_id: email_5
     label: 'Email 5'
     notes: ''
-    status: true
+    status: false
     conditions: {  }
     weight: 5
     settings:
@@ -167,15 +173,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: default
+      subject: _default
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -192,7 +198,7 @@ handlers:
     handler_id: email_6
     label: 'Email 6'
     notes: ''
-    status: true
+    status: false
     conditions: {  }
     weight: 6
     settings:
@@ -204,15 +210,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: default
+      subject: _default
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
