@@ -2009,10 +2009,10 @@ display:
           condition: eq
           equalto: 'Information Bulletin'
           then: "<hr class=\"l-margin-vm\">\r\n<p class=\"l-margin-ts\"><a class=\"text-accent--desktop\" href=\"{{ field_media_document_1 }}\">{{ title }}</a> <span class=\"pull-right\">{{ edit_node }}</span></p>\r\n<p><strong class=\"text-upper\">{{ field_category }} {{ field_other_keywords }}</strong></p>\r\n{{ field_other_description }}\r\n<p class=\"fine-print\"><em>Revised {{ created }}</em></p>"
-          then_translate: 1
+          then_translate: true
           or: '{{ field_url }}'
-          or_translate: 1
-          strip_tags: 0
+          or_translate: true
+          strip_tags: false
       exposed_form:
         type: input_required
         options:
@@ -3321,6 +3321,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: edit
+          output_url_as_text: false
+          absolute: false
         field_resource_description:
           id: field_resource_description
           table: node__field_resource_description
@@ -3458,7 +3511,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '<p><i class="icon-envelope l-margin-rs"></i> <a href="/development-services/contact/email-dsd?to={{ field_contact__value }}">Send Email<span class="visuallyhidden"> regarding {{ title }}</span></a></p>'
+            text: '<p><i class="icon-envelope l-margin-rs"></i> <a href="/development-services/contact/email-dsd?to={{ field_contact__value }}&subject={{ title }}">Send Email<span class="visuallyhidden"> regarding {{ title }}</span></a></p>'
             make_link: false
             path: ''
             absolute: false
@@ -3651,7 +3704,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr class=\"l-margin-ts l-margin-bd\" />\r\n<div class=\"row\">\r\n<div class=\"seven sm-twelve columns l-padding-desktop-ln\">\r\n<p class=\"l-margin-bn\"><strong>{{ title }}</strong> {{ field_url }}</p>\r\n{{ field_resource_description }} \r\n</div>\r\n<div class=\"three sm-six columns\">{{ field_phone }}</div>\r\n<div class=\"two sm-six columns\">{{ field_contact }}</div>\r\n</div>"
+            text: "<hr class=\"l-margin-ts l-margin-bd\" />\r\n<div class=\"row\">\r\n<div class=\"seven sm-twelve columns l-padding-desktop-ln\">\r\n<p class=\"l-margin-bn\"><strong>{{ title }}</strong> {{ field_url }} {{ edit_node }}</p>\r\n{{ field_resource_description }} \r\n</div>\r\n<div class=\"three sm-six columns\">{{ field_phone }}</div>\r\n<div class=\"two sm-six columns\">{{ field_contact }}</div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -7355,10 +7408,10 @@ display:
           condition: eq
           equalto: Blog
           then: '{{ field_other_description }}'
-          then_translate: 1
+          then_translate: true
           or: '{{ body }}'
-          or_translate: 1
-          strip_tags: 0
+          or_translate: true
+          strip_tags: false
         nothing:
           id: nothing
           table: views
