@@ -14,10 +14,22 @@ rules:
     prid: ''
     fid: searchform
     name: Search
-    description: 'Insert a custom form to search OCD documents including facets'
+    description: 'Insert a custom form to do a Solr search including facets for the main search (search field is called: search_api_fulltext)'
     enabled: true
     matches: null
-    pattern: '#\[search=(.*?)(=(.*?))?(=(.*?))?\]#'
-    replacement: "$form = \\Drupal::formBuilder()->getForm('Drupal\\sand_search\\Form\\SearchForm', $matches[1], $matches[3], $matches[5]); \r\n$result = \\Drupal::service('renderer')->renderPlain($form);\r\n"
+    pattern: '#\[search:(.*?)(=(.*?))?(=(.*?))?\]#'
+    replacement: "$result = sand_search_insert_form($matches[1], $matches[3], $matches[5], 'search_api_fulltext'); \r\n\r\n"
+    code: true
+    weight: 0
+  search_block:
+    rid: search_block
+    prid: ''
+    fid: searchform
+    name: 'Search Block'
+    description: 'Insert a custom form to do a Solr search including facets for content/media or ocd (search field is called: search_text)'
+    enabled: true
+    matches: null
+    pattern: '#\[search-block:(.*?)(=(.*?))?(=(.*?))?\]#'
+    replacement: "$result = sand_search_insert_form($matches[1], $matches[3], $matches[5], 'search_text'); \r\n"
     code: true
     weight: 0
