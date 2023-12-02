@@ -146,36 +146,48 @@
       {% endif %}
     </div>
 
+    
+    <!-- Address Card -->
+    {% if (content.field_event_location.0.organization["#value"] is not empty) or (content.field_event_location.0.address_line1["#value"] is not empty) %}
+      {# Extracting individual address components #}
+      {% set locname = content.field_event_location.0.organization['#value'] %}
+      {% set street = content.field_event_location.0.address_line1['#value'] %}
+      {% set city = content.field_event_location.0.locality['#value'] %}
+      {% set state = content.field_event_location.0.administrative_area['#value'] %}
+      {% set zip = content.field_event_location.0.postal_code['#value'] %}
+
+      {# If address only contains location name, center the name vertically in the address box #}
+      {% if (locname is not empty) and (street is empty) %}
+      {% set addressclass = " l-flex-center-v" %}
+      {% endif %}
+
+      {# Formatting the address for URL (replacing spaces and commas) #}
+      {% set formatted_address_url = [street, city, state, zip]|join('+')|trim|replace({' ' : '+', '++': '+'}) %}
     <div class="cell medium-4">
-      <!-- Address Card -->
-      {% if content.field_event_location.0.address_line1["#value"] is not empty %}
-        {# Extracting individual address components #}
-        {% set street = content.field_event_location.0.address_line1['#value'] %}
-        {% set city = content.field_event_location.0.locality['#value'] %}
-        {% set state = content.field_event_location.0.administrative_area['#value'] %}
-
-        {# Formatting the address for display #}
-        {% set formatted_address = [street, city, state]|join(', ')|trim|replace({',,': ','}) %}
-
-        {# Formatting the address for URL (replacing spaces and commas) #}
-        {% set formatted_address_url = [street, city, state]|join(', ')|trim|replace({' ' : '+', ',,': ','}) %}
-        <div class="l-padding-ad text-center--mobile l-margin-mobile-td background-off-white rounded-corners">
-          <div class="grid-x">
-            <div class="cell medium-3 text-center">
-              <p><i class="icon-map-marker icon--circle icon--ms cerulean-bg"></i></p>
-              <!--<img src="{{ url('<front>') }}themes/custom/sand/images/gmap-markers/marker.png" alt="" width="83" height="83">-->
-            </div>
-            <div class="cell medium-auto">
-              <address style="font-weight: bold">{{ formatted_address }}</address>
+      <div class="l-padding-ad text-center--mobile l-margin-mobile-td background-off-white rounded-corners">
+        <div class="grid-x">
+          <div class="cell medium-3 text-center">
+            <p><i class="icon-map-marker icon--circle icon--ms cerulean-bg"></i></p>
+            <!--<img src="{{ url('<front>') }}themes/custom/sand/images/gmap-markers/marker.png" alt="" width="83" height="83">-->
+          </div>
+          <div class="cell medium-auto{{ addressclass }}">
+            {% if locname is not empty %}
+            <p class="l-margin-bn"><strong>{{ locname }}</strong></p>
+            {% endif %}
+            {% if street is not empty %}
+            <address style="font-weight: bold">{{ street }}{% if street is not empty and (city is not empty or state is not empty or zip is not empty) %}<br>{% endif %}{{ city }}{% if city is not empty %}, {% endif %}{{ state }}{% if city is not empty or state is not empty %} {% endif %}{{ zip }}</address>
+              {% endif %}
             </div>
           </div>
+              {% if street is not empty %}
             <p class="text-center l-margin-td">
               <a href="https://www.google.com/maps/place/{% spaceless %}{{ formatted_address_url }}{% endspaceless %}" class="btn btn--secondary">Get Directions</a>
             </p>
+              {% endif %}
         </div>
+    </div>
       {% endif %}
       <!-- // End Address Card -->
-    </div>
   </div>
 </div>
   {% if content.field_event_location.0.address_line1["#value"] is not empty %}
