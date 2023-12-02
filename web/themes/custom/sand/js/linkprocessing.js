@@ -31,6 +31,12 @@
             }
           }
 
+          // Remove specific PDF icon image if it exists
+          var $pdfIcon = $link.closest('span.file').find('img.file-icon[src$="application-pdf.png"]');
+          if ($pdfIcon.length) {
+            $pdfIcon.remove();
+          }
+
           // Cleanup URL: Strip off the hostname part for sandiego.gov links and remove /index, /index.shtml, /index/index.shtml (with or without anchors)
           var cleanedHref = href.replace(sandiegoDomainRegex, '').replace(/\/index(\.shtml)?(\/index(\.shtml)?)?(#[^\/]*)?$/, '');
 
