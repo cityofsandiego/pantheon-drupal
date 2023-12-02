@@ -1,23 +1,25 @@
-uuid: 90f00f19-1024-4c25-ab20-89bad2ca545a
+uuid: 5ddedeba-46d6-4287-994d-4ac4acd2bf30
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.sand_remote.field_body
-    - field.storage.sand_remote.field_doc_date
-    - field.storage.sand_remote.field_document_url
-    - search_api.index.remote
+    - field.storage.node.field_event_date
+    - node.type.event
+    - taxonomy.vocabulary.location
+  content:
+    - 'taxonomy_term:location:fcc0968a-bb28-4292-b841-f82547807796'
   module:
-    - datetime
-    - search_api
-    - text
-id: search_ocd
-label: 'Search OCD'
+    - node
+    - smart_date
+    - taxonomy
+    - user
+id: sdpd_tech_events
+label: 'SDPD Tech Events'
 module: views
 description: ''
 tag: ''
-base_table: search_api_index_remote
-base_field: search_api_id
+base_table: node_field_data
+base_field: nid
 display:
   default:
     id: default
@@ -25,87 +27,16 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Search OCD'
+      title: Events
       fields:
-        field_doc_date:
-          id: field_doc_date
-          table: search_api_index_remote
-          field: field_doc_date
+        title:
+          id: title
+          table: node_field_data
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: search_api_field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: datetime_custom
-          settings:
-            timezone_override: ''
-            date_format: 'l, F j, Y - '
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: false
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-        field_document_url_1:
-          id: field_document_url_1
-          table: search_api_index_remote
-          field: field_document_url
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_field
+          plugin_id: field
           label: ''
           exclude: true
           alter:
@@ -150,7 +81,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: false
+            link_to_entity: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -161,27 +92,271 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          field_rendering: false
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-        label:
-          id: label
-          table: search_api_index_remote
-          field: label
+        field_event_date:
+          id: field_event_date
+          table: node__field_event_date
+          field: field_event_date
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: search_api_field
+          plugin_id: field
+          label: DOW
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: smartdate_custom
+          settings:
+            separator: ''
+            date_format: l
+            custom_date_format: ''
+            timezone: ''
+            join: ''
+            time_format: ''
+            time_hour_format: ''
+            allday_label: 'All day'
+            date_first: '1'
+            ampm_reduce: 0
+            site_time_toggle: 0
+          group_column: value
+          group_columns: {  }
+          group_rows: false
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_event_date_1:
+          id: field_event_date_1
+          table: node__field_event_date
+          field: field_event_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Month Day'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: smartdate_custom
+          settings:
+            separator: ''
+            date_format: 'F j'
+            custom_date_format: ''
+            timezone: ''
+            join: ''
+            time_format: ''
+            time_hour_format: ''
+            allday_label: 'All day'
+            date_first: '1'
+            ampm_reduce: 0
+            site_time_toggle: 0
+          group_column: value
+          group_columns: {  }
+          group_rows: false
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_event_date_value:
+          id: field_event_date_value
+          table: node__field_event_date
+          field: field_event_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: date
+          label: 'Time Start'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          date_format: custom
+          custom_date_format: 'g:i a'
+          timezone: ''
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
           label: ''
           exclude: false
           alter:
             alter_text: true
-            text: '<a target="_blank" href="{{ field_document_url_1 }}">{{ field_doc_date }} {{ label }}</a>'
-            make_link: true
+            text: "<div class=\"grid-x grid-margin-x event-listing-small\">\r\n    <div class=\"cell small-4 medium-3\">\r\n        <div class=\"event-date event--sunshade\">{{ field_event_date }}<br>{{ field_event_date_1 }}<br />\r\n            {{ field_event_date_value }}</div>\r\n    </div>\r\n\r\n    <div class=\"cell auto medium-auto\">\r\n        <div class=\"event-info\">\r\n            <p>{{ title }}</p>\r\n{{ edit_node }}\r\n        </div>\r\n    </div>\r\n</div>"
+            make_link: false
             path: ''
             absolute: false
             external: false
@@ -205,274 +380,113 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: h3
+          element_type: ''
           element_class: ''
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: false
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-        field_document_url:
-          id: field_document_url
-          table: search_api_index_remote
-          field: field_document_url
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: div
-          element_wrapper_class: search-result-url
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: false
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-        field_body:
-          id: field_body
-          table: search_api_index_remote
-          field: field_body
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 300
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: true
-            trim: true
-            preserve_tags: '<mark>'
-            html: true
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: l-margin-ld
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: text_default
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: false
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: true
-            multi_type: separator
-            multi_separator: ', '
+          hide_alter_empty: false
       pager:
-        type: full
+        type: some
         options:
           offset: 0
-          items_per_page: 10
-          total_pages: null
-          id: 0
-          tags:
-            next: ››
-            previous: ‹‹
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 5
+          items_per_page: 5
       exposed_form:
-        type: input_required
+        type: basic
         options:
-          submit_button: Search
+          submit_button: Apply
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
-          expose_sort_order: false
+          expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
-          text_input_required: ''
-          text_input_required_format: basic_html
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'access content'
       cache:
-        type: none
+        type: tag
         options: {  }
-      empty:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
+      empty: {  }
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: text_custom
-          empty: true
-          content: 'No results matched your search criteria.'
-          tokenize: false
-      sorts: {  }
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
       arguments: {  }
       filters:
-        search_api_fulltext:
-          id: search_api_fulltext
-          table: search_api_index_remote
-          field: search_api_fulltext
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            event: event
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_event_activity_type_cd_target_id:
+          id: field_event_activity_type_cd_target_id
+          table: node__field_event_activity_type_cd
+          field: field_event_activity_type_cd_target_id
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: search_api_fulltext
-          operator: and
-          value: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value:
+            5288: 5288
           group: 1
-          exposed: true
+          exposed: false
           expose:
-            operator_id: search_api_fulltext_op
-            label: '&nbsp;'
+            operator_id: ''
+            label: ''
             description: ''
             use_operator: false
-            operator: search_api_fulltext_op
+            operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: search_text
+            identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              content_editor: '0'
-              content_owner: '0'
-              sand_admin_email: '0'
-              sand_admin_email_solr: '0'
-              event: '0'
-              digital_archives_photos: '0'
-              webform_results: '0'
-              webform_results_photos_only: '0'
-              outreach2_article: '0'
-              sand_admin: '0'
-              locations: '0'
-            expose_fields: false
-            placeholder: ''
-            searched_fields_id: search_api_fulltext_searched_fields
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -485,43 +499,26 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          parse_mode: direct
-          min_length: 3
-          fields: {  }
+          reduce_duplicates: false
+          vid: location
+          type: select
+          hierarchy: true
+          limit: true
+          error_message: true
       style:
         type: default
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: false
       row:
         type: fields
-        options:
-          default_field_elements: false
-          inline: {  }
-          separator: ''
-          hide_empty: true
       query:
-        type: search_api_query
+        type: views_query
         options:
-          bypass_access: true
-          skip_access: true
-          preserve_facet_query_args: false
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
           query_tags: {  }
       relationships: {  }
-      css_class: search
-      header:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text_custom
-          empty: true
-          content: '<h2>Search Official City Documents</h2>'
-          tokenize: false
+      header: {  }
       footer: {  }
       display_extenders: {  }
     cache_metadata:
@@ -529,32 +526,25 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
-        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
       tags:
-        - 'config:field.storage.sand_remote.field_body'
-        - 'config:field.storage.sand_remote.field_doc_date'
-        - 'config:field.storage.sand_remote.field_document_url'
-        - 'config:search_api.index.remote'
-        - 'search_api_list:remote'
-  all:
-    id: all
-    display_title: Page
-    display_plugin: page
+        - 'config:field.storage.node.field_event_date'
+  block_1:
+    id: block_1
+    display_title: Block
+    display_plugin: block
     position: 1
     display_options:
       display_extenders: {  }
-      path: search/ocd
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
-        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
       tags:
-        - 'config:field.storage.sand_remote.field_body'
-        - 'config:field.storage.sand_remote.field_doc_date'
-        - 'config:field.storage.sand_remote.field_document_url'
-        - 'config:search_api.index.remote'
-        - 'search_api_list:remote'
+        - 'config:field.storage.node.field_event_date'

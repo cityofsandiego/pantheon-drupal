@@ -21,9 +21,9 @@ class SearchForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, $arg1 = null, $arg2 = null, $arg3 = null) {
+  public function buildForm(array $form, FormStateInterface $form_state, $arg1 = null, $arg2 = null, $arg3 = null, $arg4 = 'search_api_fulltext') {
 
-    $form['search_api_fulltext'] = [
+    $form['search'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Search'),
       '#required' => TRUE,
@@ -40,6 +40,10 @@ class SearchForm extends FormBase {
       '#type' => 'hidden',
       '#default_value' => $arg3,
     ];
+    $form['search_field_name'] = [
+      '#type' => 'hidden',
+      '#default_value' => $arg4,
+    ];
     $form['actions'] = [
       '#type' => 'actions',
     ];
@@ -54,9 +58,9 @@ class SearchForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state, $arg1 = null) {
-    if (mb_strlen($form_state->getValue('search_api_fulltext')) < 3) {
-      $form_state->setErrorByName('search_api_fulltext', $this->t('Search should be at least 3 characters.'));
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    if (mb_strlen($form_state->getValue('search')) < 3) {
+      $form_state->setErrorByName('search', $this->t('Search should be at least 3 characters.'));
     }
   }
 
@@ -66,7 +70,7 @@ class SearchForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $options = [
       'query' => [
-        'search_api_fulltext' => $form_state->getValue('search_api_fulltext'),
+        $form_state->getValue('search_field_name') => $form_state->getValue('search'),
       ],
     ];
     // Add facet 0 in if given.
