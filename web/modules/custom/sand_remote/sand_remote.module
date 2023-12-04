@@ -145,23 +145,24 @@ function sand_remote_sand_remote_update(\Drupal\Core\Entity\EntityInterface $ent
 }
 
 
-/**
- * Implements hook_node_insert().
- */
-function sand_remote_node_insert(\Drupal\node\NodeInterface $node): void {
-  if ($node->getType() == 'external_data') {
-    $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('node', $node);
-  }
-}
-
-/**
- * Implements hook_node_update().
- */
-function sand_remote_node_update(\Drupal\node\NodeInterface $node): void {
-  if ($node->getType() == 'external_data') {
-    $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('node', $node);
-  }
-}
+// DISABLE processing nodes of external_data type. We are now only processing sand_remote entity types.
+///**
+// * Implements hook_node_insert().
+// */
+//function sand_remote_node_insert(\Drupal\node\NodeInterface $node): void {
+//  if ($node->getType() == 'external_data') {
+//    $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('node', $node);
+//  }
+//}
+//
+///**
+// * Implements hook_node_update().
+// */
+//function sand_remote_node_update(\Drupal\node\NodeInterface $node): void {
+//  if ($node->getType() == 'external_data') {
+//    $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('node', $node);
+//  }
+//}
 
 function sand_remote_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
   $is_external_data_node = ($entity->getEntityTypeId() === 'node' && $entity->bundle() === 'external_data'); 

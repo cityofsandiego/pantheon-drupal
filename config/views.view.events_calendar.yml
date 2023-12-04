@@ -1336,10 +1336,10 @@ display:
           condition: eq
           equalto: 'All day'
           then: 'Time TBD'
-          then_translate: 1
+          then_translate: true
           or: '{{ field_event_date_4 }}'
-          or_translate: 1
-          strip_tags: 0
+          or_translate: true
+          strip_tags: false
         body:
           id: body
           table: node__body
@@ -2030,10 +2030,10 @@ display:
           condition: eq
           equalto: '(All day)'
           then: ', {{ field_address_additional_name }}'
-          then_translate: 1
+          then_translate: true
           or: '<br>{{ views_conditional }}<br>{{ field_address_additional_name }}'
-          or_translate: 1
-          strip_tags: 0
+          or_translate: true
+          strip_tags: false
         views_conditional_field_2:
           id: views_conditional_field_2
           table: views_conditional
@@ -2087,10 +2087,10 @@ display:
           condition: eq
           equalto: 'Commission for Arts and Culture, Public Art, Park Social, Event'
           then: "<div class=\"l-padding-hs\">\r\n  <a href=\"#popup-[nid]\" class=\"popup-modal\" style=\"color:#467c32\">[title]</a>{{ views_conditional_2 }}\r\n</div>\r\n<div id=\"popup-[nid]\" class=\"white-popup mfp-hide rounded-corners l-padding-desktop-am l-padding-mobile-ad l-padding-mobile-tm\" style=\"max-width: 800px;\">\r\n    <div class=\"l-padding-ad text-center l-margin-bd\" style=\"border: 5px solid #262526\">    \r\n        <h2 class=\"heading--trim l-margin-bs\">{{ title }}</h2>\r\n        <p class=\"l-margin-bn\">{{ field_event_non_public_contact }} - {{ field_event_media_contact_txt }}{{ field_event_public_contact_txt }}</p>\r\n    </div>\r\n    <p class=\"text-center\"><strong>{{ field_event_date_3 }} &nbsp;|&nbsp; {{ field_address_additional_name }}</strong>{{ field_address_address_line1 }}</p>\r\n    <p class=\"l-margin-bn\">{{ body }}</p>\r\n</div>"
-          then_translate: 1
+          then_translate: true
           or: '{{ field_event_date }}'
-          or_translate: 1
-          strip_tags: 0
+          or_translate: true
+          strip_tags: false
       pager:
         type: calendar_month
         options:
@@ -2917,59 +2917,6 @@ display:
           text: view
           output_url_as_text: true
           absolute: false
-        edit_node:
-          id: edit_node
-          table: node
-          field: edit_node
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          plugin_id: entity_link_edit
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: false
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: edit
-          output_url_as_text: true
-          absolute: false
         title:
           id: title
           table: node_field_data
@@ -3046,8 +2993,8 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: true
-            text: '{{ field_event_date }} <a class="edit" href="{{ edit_node }}">Edit</a>'
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -3103,6 +3050,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
       pager:
         type: calendar_month
         options:
