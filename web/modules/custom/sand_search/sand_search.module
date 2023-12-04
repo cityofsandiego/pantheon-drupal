@@ -26,3 +26,15 @@ function sand_search_search_api_items_indexed(\Drupal\search_api\IndexInterface 
   \Drupal::logger('sand_search')->info($message);
   
 }
+
+function sand_search_insert_form($path, $facet0 = null, $facet1 = null, $search_field_name = 'search_text') {
+  
+  // Check for invalid or paths used in D7.
+  if (!str_starts_with($path, '/')) {
+    return 'Search Currently Unavailable (given path must start with a slash)';
+  }
+  
+  $form = \Drupal::formBuilder()->getForm('Drupal\sand_search\Form\SearchForm', $path, $facet0, $facet1, $search_field_name);
+  $form_markup = \Drupal::service('renderer')->renderPlain($form);
+  return $form_markup;
+}

@@ -14,6 +14,8 @@ use Drupal\Core\File\Exception\InvalidStreamWrapperException;
 use GuzzleHttp\Exception\TransferException;
 use Drupal\Core\Logger\RfcLogLevel;
 
+use Drupal\sand_type\Entity\Bundle\ExternalData;
+
 /**
  * Service description.
  */
@@ -421,7 +423,12 @@ class ExtractText {
     if (!$entity instanceof ContentEntityInterface) {
       return FALSE;
     }
-
+    
+    // No longer process nodes of type External-Data.
+    if ($entity instanceof ExternalData) {
+        return FALSE;
+    }
+    
     $url = $this->getUrlField();
     
     // Target field name and value.
