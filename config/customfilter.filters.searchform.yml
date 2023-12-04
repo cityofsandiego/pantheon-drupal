@@ -3,11 +3,11 @@ langcode: en
 status: true
 dependencies: {  }
 id: searchform
-name: SearchForm
+name: 'Insert Solr Search Form'
 cache: false
-description: 'Insert a search OCD form with the ability to add facets.'
-shorttip: 'Insert search OCD form: [search=<path to search page>=<search facet1>=<search facet2>. Example: [search=/search/ocd=facet_committee:psns=facet_doc_type:council-committees-actions]'
-longtip: "Insert search OCD form. Note that you can include up to 2 facets in the search if they are on the page. To get the syntax, go to the search page and check the facets you want then get them from the URL. They will be of the form: xxx:yyy\r\n\r\nExample: [search=<path to search page>=<search facet1>=<search facet2>. Example: [search=/search/ocd=facet_committee:psns=facet_doc_type:council-committees-actions]"
+description: 'Insert a Solr search form with the ability to include settings facets'
+shorttip: 'Insert a Solr search form.  Usage: [search-block:{path to search page}={search facet1}={search facet2}].  Note that the facets are optional and the {} are not included.'
+longtip: "<p><strong>Insert a Solr search form.  Usage: [search-block:{path to search page}={search facet1}={search facet2}].</strong>  Note that the facets are optional and the {} are not included in the short-code.</p>\r\n\r\n<p>You can include up to 2 facets in the search if they are on the destination page. To get the names for the facets, go to the destination search page and check the facets you want then get copy and inspect the URL. The facets will be of the format -  facet-name:value</p>\r\n\r\n<p>Example: [search:/search/ocd=facet_committee:psns=facet_doc_type:council-committees-actions]</p>"
 rules:
   search:
     rid: search
