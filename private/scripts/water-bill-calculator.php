@@ -234,10 +234,6 @@
                                       $singleFamilyTier3 = $Water_Single_Family_Residential_Tier_3 * ($waterusage - 11);
                                       echo "<tr>\n<td class='l-padding-lm'>Single-family Residential Tier 3 (12+ HCF)</td>\n<td> " . ($waterusage - 11) . " HCF</td>\n<td class='commrow'>$" . number_format($singleFamilyTier3, 2, '.', '') . "</td></tr>\n";
                                       $rowtotal = $singleFamilyTier1 + $singleFamilyTier2 + $singleFamilyTier3;
-                                      echo $singleFamilyTier1 . ' - ';
-                                      echo $singleFamilyTier2 . ' - ';
-                                      echo $singleFamilyTier3 . ' - ';
-                                      echo $rowtotal . ' - ';
                                     }
                                     elseif ($waterusage > 5) {
                                       $singleFamilyTier1 = $Water_Single_Family_Residential_Tier_1 * 5;
@@ -252,11 +248,8 @@
                                       $rowtotal = $singleFamilyTier1;
                                     }
                                     $totalBill += $rowtotal;
-                                    echo $rowtotal . ' - ';
-                                    echo $totalBill . ' - ';
                                     echo "   <tr><td colspan='2' class='l-padding-lm'>Water Monthly Service Fee</td>\n<td class='commrow'>$" . number_format($Water_Meter[$watermetersize], 2, '.', '') . "</td></tr>\n";
                                     $totalBill += $Water_Meter[$watermetersize];
-                                    echo $totalBill . ' - ';
                                     break;
                                   case 2:
                                     $rowtotal = $Water_Multi_Family_Residential * $waterusage;
