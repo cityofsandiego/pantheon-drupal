@@ -93,13 +93,14 @@
       <div class="cell small-12 medium-auto content">
         {{ content.body }}
 
-
+        {% if content.field_amenities.0 or content.field_restrictions.0 %}
 				<div class="accordions js-toggle-accordion l-margin-tm l-margin-bn">
+          {% if content.field_amenities.0 %}
 					<div class="accordion">
 						<p class="h2 heading--trim accordion__heading">
             {% if content.field_alt_amenities_title.0 %}
               <a href="#" class="accordion__link">
-                {{ content.field_alt_amenities_title }}
+                {{ content.field_alt_amenities_title.0 }}
                 <span class="toggle-icon"></span>
               </a>
               {% else %}
@@ -112,11 +113,13 @@
               {{ content.field_amenities }}
 						</div>
 					</div>
+          {% endif %}
+          {% if content.field_restrictions.0 %}
 					<div class="accordion">
 						<p class="h2 heading--trim accordion__heading">
             {% if content.field_alt_restrictions_title.0 %}
               <a href="#" class="accordion__link">
-                {{ content.field_alt_restrictions_title }}
+                {{ content.field_alt_restrictions_title.0 }}
                 <span class="toggle-icon"></span>
               </a>
               {% else %}
@@ -129,7 +132,9 @@
               {{ content.field_restrictions }}
 						</div>
 					</div>
+          {% endif %}
         </div>
+        {% endif %}
 
       </div>
       <div class="cell medium-4 sidebar">
@@ -162,11 +167,14 @@
 
             {% if content.field_address.0 %}
               <div class="grid-x l-margin-td">
-                <div class="cell small-2">
-                  <i class="icon-map-marker icon--circle background--cerulean"></i>
+                <div class="cell small-2 text-left--mobile">
+                  <i class="icon-map-marker icon--ms icon--circle background--cerulean"></i>
                 </div>
-                <div class="cell auto">
+                <div class="cell auto text-left--mobile">
                   {{ content.field_address }}
+                </div>
+                <div class="cell small-1 l-padding-ts text-center">
+                  <p><a class="no-underline" href="https://www.google.com/maps/place/{% spaceless %}{{ formatted_address_url }}{% endspaceless %}" title="View in Google Maps" target="_blank"><i class="icon-map2 icon--ms"></i></a></p>
                 </div>
               </div>
             {% endif %}
@@ -222,7 +230,7 @@
               {% if content.field_location_contact_name.0 or content.field_location_contact_title.0 %}
                 <div class="grid-x l-margin-td">
                   <div class="cell small-2">
-                    <i class="icon-user icon--circle background--cerulean"></i>
+                    <i class="icon-user icon--ms icon--circle background--cerulean"></i>
                   </div>
                   <div class="cell small-10">
                     <div class="l-margin-an">
@@ -237,7 +245,7 @@
               {% if content.field_phone.0 %}
                 <div class="grid-x l-margin-td">
                   <div class="cell small-2">
-                    <i class="icon-telephone icon--circle background--cerulean"></i>
+                    <i class="icon-telephone icon--ms icon--circle background--cerulean"></i>
                   </div>
                   <div class="cell small-10">
                     <address class="l-margin-an">
@@ -249,7 +257,7 @@
               {% if content.field_email.0 %}
                 <div class="grid-x l-margin-td">
                   <div class="cell small-2">
-                    <i class="icon-at-sign icon--circle background--cerulean"></i>
+                    <i class="icon-at-sign icon--ms icon--circle background--cerulean"></i>
                   </div>
                   <div class="cell small-10">
                     <address class="l-margin-an">
