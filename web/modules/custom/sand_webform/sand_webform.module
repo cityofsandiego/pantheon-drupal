@@ -5,6 +5,11 @@ use Drupal\Core\StreamWrapper\StreamWrapperManager;
 use Drupal\webform\Access\WebformAccessResult;
 
 function sand_webform_webform_submission_access(\Drupal\webform\WebformSubmissionInterface $webform_submission, $operation, \Drupal\Core\Session\AccountInterface $account) {
+  // If authenicated bail out. This is only for anonymous access overrides.
+  if (\Drupal::currentUser()->isAuthenticated()) {
+    return \Drupal\Core\Access\AccessResult::neutral();
+  }
+  
   if (isset($operation) && $operation === 'view' && is_object($webform_submission)) { 
     // Get all the data on the webform so we can check if a hidden public field exists and is set to true.
     $data = $webform_submission->getData();
