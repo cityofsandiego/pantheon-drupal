@@ -1,0 +1,133 @@
+<?php
+
+
+use Drupal\Core\StreamWrapper\StreamWrapperManager;
+use Drupal\webform\Access\WebformAccessResult;
+
+function sand_webform_webform_submission_access(\Drupal\webform\WebformSubmissionInterface $webform_submission, $operation, \Drupal\Core\Session\AccountInterface $account) {
+  if (isset($operation) && $operation === 'view' && is_object($webform_submission)) { 
+    $data = $webform_submission->getData();
+    if (isset($data['public']) && $data['public']) {
+      $isPublic = TRUE;
+      $request_uri = $_SERVER["REQUEST_URI"];
+      $public_query_parameter = \Drupal::request()->query->get('public');
+      $uri = 'private:/' . str_replace('/system/files/','', $request_uri);
+      $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['uri' => $uri]);
+      $uri = 'private://system/files/webform/test2/3783/photos-installation-configuration-media.pdf';
+      $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['uri' => $uri]);
+      $uri = 'private://files/webform/test2/3783/photos-installation-configuration-media.pdf';
+      $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['uri' => $uri]);
+      $uri = 'private://webform/test2/3783/photos-installation-configuration-media.pdf';
+      $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['uri' => $uri]);
+      /** @var \Drupal\file\FileInterface|null $file */
+      $file = reset($files) ?: NULL;
+    }
+  }    
+  /** @var \Drupal\webform\WebformAccessRulesManagerInterface $access_rules_manager */
+  $access_rules_manager = \Drupal::service('webform.access_rules_manager');
+
+  // Add support for some module *_any and *_own access rules.
+  $access_rules = \Drupal::moduleHandler()->invoke('sand_webform', 'webform_access_rules');
+  $access_any = isset($access_rules[$operation . '_any']) ? $access_rules_manager->checkWebformSubmissionAccess($operation . '_any', $account, $webform_submission) : \Drupal\Core\Access\AccessResult::forbidden();
+  $access_own = (isset($access_rules[$operation . '_own']) && $webform_submission->isOwner($account)) ? $access_rules_manager->checkWebformSubmissionAccess($operation . '_own', $account, $webform_submission) : \Drupal\Core\Access\AccessResult::forbidden();
+  $access = $access_any->orIf($access_own);
+  
+  if ($access->isAllowed()) {
+    return $access;
+  }
+  else {
+    return \Drupal\Core\Access\AccessResult::neutral();
+  }
+  
+
+}
+
+/**
+ * Control access to private file downloads and specify HTTP headers.
+ *
+ * This hook allows modules to enforce permissions on file downloads whenever
+ * Drupal is handling file download, as opposed to the web server bypassing
+ * Drupal and returning the file from a public directory. Modules can also
+ * provide headers to specify information like the file's name or MIME type.
+ *
+ * @param $uri
+ *   The URI of the file.
+ *
+ * @return string[]|int
+ *   If the user does not have permission to access the file, return -1. If the
+ *   user has permission, return an array with the appropriate headers. If the
+ *   file is not controlled by the current module, the return value should be
+ *   NULL.
+ *
+ * @see \Drupal\system\FileDownloadController::download()
+ */
+function sand_webform_file_download($uri) {
+    // Do a quick test for low overhead to see if we need to address access status
+    if (str_starts_with($uri, 'private://webform')) {
+       $uuid = \Drupal::request()->query->get('public');
+        // Check to see if this is a config download.
+        $scheme = StreamWrapperManager::getScheme($uri);
+        $target = StreamWrapperManager::getTarget($uri);
+        $files = \Drupal::entityTypeManager()
+            ->getStorage('file')
+            ->loadByProperties(['uri' => $uri]);
+        /** @var \Drupal\file\FileInterface|null $file */
+        $file = reset($files) ?: NULL;
+        $file_uuid = $file->uuid();
+        if (empty($uuid)) {
+          
+        } else {
+          if ($uuid == $file_uuid) {
+            
+          }
+          
+        }
+        
+        
+//    if ($scheme == 'temporary' && $target == 'config.tar.gz') {
+//        return [
+//            'Content-disposition' => 'attachment; filename="config.tar.gz"',
+//        ];
+//    }
+    }
+}
+
+//function glen() {
+//    $webform = $webform_submission->getWebform();
+//
+//    $access_rules = $this->getAccessRules($webform);
+//    $cache_per_user = $this->cachePerUser($access_rules);
+//
+//// Check operation.
+//    if ($this->checkAccessRules($operation, $account, $access_rules)) {
+//        return WebformAccessResult::allowed($webform_submission, $cache_per_user);
+//    }
+//
+//// Check *_own operation.
+//    if ($webform_submission->isOwner($account)
+//        && isset($access_rules[$operation . '_own'])
+//        && $this->checkAccessRule($access_rules[$operation . '_own'], $account)) {
+//        return WebformAccessResult::allowed($webform_submission, $cache_per_user);
+//    }
+//
+//// Check *_any operation.
+//    if (isset($access_rules[$operation . '_any'])
+//        && $this->checkAccessRule($access_rules[$operation . '_any'], $account)) {
+//        return WebformAccessResult::allowed($webform_submission, $cache_per_user);
+//    }
+//
+//    return WebformAccessResult::neutral($webform_submission, $cache_per_user);
+
+
+
+
+//    if (preg_match('/private:\/\//i', $file_entity->getFileUri())) {
+//        $query = \Drupal::requestStack()->getCurrentRequest()->query->all();
+//
+//        if (!empty($query)) {
+//            $options['query'] = $query;
+//        }
+//
+//        $variables['#cache']['contexts'][] = 'url.query_args';
+//    }
+//}
