@@ -11,34 +11,37 @@ archive: false
 id: webform_1037338
 title: 'Ask a Certified Access Specialist (CASp)'
 description: null
-category: null
-elements: |
+categories: {  }
+elements: |-
   first_name:
     '#type': textfield
-    '#title': 'First Name' 
-    '#description': ""
+    '#title': 'First Name'
+    '#description': ''
     '#required': true
   last_name:
     '#type': textfield
-    '#title': 'Last Name' 
-    '#description': ""
+    '#title': 'Last Name'
+    '#description': ''
     '#required': true
   email_address:
     '#type': email
     '#size': 20
-    '#title': 'Email Address' 
-    '#description': ""
+    '#title': 'Email Address'
+    '#description': ''
     '#required': true
   question:
-    '#title': 'Question' 
-    '#description': ""
+    '#type': textarea
+    '#title': Question
+    '#autocomplete': 'off'
     '#required': true
+    '#counter_type': word
+    '#counter_maximum': 250
   attachment:
     '#type': managed_file
     '#max_filesize': '5'
     '#file_extensions': 'gif jpg jpeg png pdf'
-    '#title': 'Attachment' 
-    '#description': "You may attach one file only."
+    '#title': Attachment
+    '#description': 'You may attach one file only.'
 css: ''
 javascript: ''
 settings:
@@ -78,35 +81,22 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
-      reply_to: ''
+      from_name: _default
+      reply_to: '[webform_submission:values:email_address:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: |-
-        Submitted on [webform_submission:date:long]
-
-        NAME:
-        [webform_submission:values:first_name:nolabel] [webform_submission:values:last_name:nolabel]
-
-        EMAIL ADDRESS:
-        [webform_submission:values:email_address:nolabel]
-
-        QUESTION:
-        [webform_submission:values:question:nolabel]
-
-        ATTACHMENT:
-        [webform_submission:values:attachment:nolabel]
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nNAME:\r\n[webform_submission:values:first_name] [webform_submission:values:last_name]\r\n\r\nEMAIL ADDRESS:\r\n[webform_submission:values:email_address]\r\n\r\nQUESTION:\r\n[webform_submission:values:question]\r\n\r\nATTACHMENT:\r\n[webform_submission:values:attachment]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
       exclude_attachments: false
       html: false
-      attachments: false
+      attachments: true
       twig: false
       theme_name: ''
       parameters: {  }
