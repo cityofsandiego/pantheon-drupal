@@ -90,10 +90,14 @@
         <ul class="slides">
           {% if page.hero_image is not empty %}
             <li>
-              <div class="hero__bg" style="background-image: url('{{ page.hero_image }}');"></div>
+              <div id="hero-bg-image" class="hero__bg" style="background-image: url('{{ page.hero_image }}');"></div>
+              <div class="hero--credit">
+                <p id="hero-bg-credit" ></p>
+              </div>
               {{ drupal_block('hero_block') }}
             </li>
           {% endif %}
+
         </ul>
       </div>
 
