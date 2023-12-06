@@ -6,40 +6,36 @@ use Drupal\webform\Access\WebformAccessResult;
 
 function sand_webform_webform_submission_access(\Drupal\webform\WebformSubmissionInterface $webform_submission, $operation, \Drupal\Core\Session\AccountInterface $account) {
   if (isset($operation) && $operation === 'view' && is_object($webform_submission)) { 
+    // Get all the data on the webform so we can check if a hidden public field exists and is set to true.
     $data = $webform_submission->getData();
-    if (isset($data['public']) && $data['public']) {
-      $isPublic = TRUE;
-      $request_uri = $_SERVER["REQUEST_URI"];
-      $public_query_parameter = \Drupal::request()->query->get('public');
-      $uri = 'private:/' . str_replace('/system/files/','', $request_uri);
-      $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['uri' => $uri]);
-      $uri = 'private://system/files/webform/test2/3783/photos-installation-configuration-media.pdf';
-      $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['uri' => $uri]);
-      $uri = 'private://files/webform/test2/3783/photos-installation-configuration-media.pdf';
-      $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['uri' => $uri]);
-      $uri = 'private://webform/test2/3783/photos-installation-configuration-media.pdf';
+    // Get the public query parameter if it exists.
+    $public_query_parameter = \Drupal::request()->query->get('public');
+    // If the form has a public field and the request has a public query parameter - see if we should allow request.
+    if (isset($data['public']) && $data['public'] && !empty($public_query_parameter)) {
+      // Get just the URL minus query parameter.
+      $request_uri = \Drupal::request()->getPathInfo();
+      // @todo I'm assuming that this is a private file, is there a way not to assume that?
+      $uri = 'private://' . str_replace('/system/files/','', $request_uri);
+      // Now load the file object so we can get the FID.
       $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['uri' => $uri]);
       /** @var \Drupal\file\FileInterface|null $file */
       $file = reset($files) ?: NULL;
+      
+      // If no file then just return.
+      if (empty($file)) {
+        return \Drupal\Core\Access\AccessResult::neutral();
+      }
+      
+      // If the file's FID equals the public query parameter given, allow access, else deny.
+      if ($file->id() == $public_query_parameter) {
+        return \Drupal\Core\Access\AccessResult::allowed();
+      } else {
+        return \Drupal\Core\Access\AccessResult::forbidden();
+      }
     }
-  }    
-  /** @var \Drupal\webform\WebformAccessRulesManagerInterface $access_rules_manager */
-  $access_rules_manager = \Drupal::service('webform.access_rules_manager');
-
-  // Add support for some module *_any and *_own access rules.
-  $access_rules = \Drupal::moduleHandler()->invoke('sand_webform', 'webform_access_rules');
-  $access_any = isset($access_rules[$operation . '_any']) ? $access_rules_manager->checkWebformSubmissionAccess($operation . '_any', $account, $webform_submission) : \Drupal\Core\Access\AccessResult::forbidden();
-  $access_own = (isset($access_rules[$operation . '_own']) && $webform_submission->isOwner($account)) ? $access_rules_manager->checkWebformSubmissionAccess($operation . '_own', $account, $webform_submission) : \Drupal\Core\Access\AccessResult::forbidden();
-  $access = $access_any->orIf($access_own);
-  
-  if ($access->isAllowed()) {
-    return $access;
   }
-  else {
-    return \Drupal\Core\Access\AccessResult::neutral();
-  }
-  
-
+  // This function has no opinion on this access request.
+  return \Drupal\Core\Access\AccessResult::neutral();
 }
 
 /**
@@ -62,72 +58,26 @@ function sand_webform_webform_submission_access(\Drupal\webform\WebformSubmissio
  * @see \Drupal\system\FileDownloadController::download()
  */
 function sand_webform_file_download($uri) {
-    // Do a quick test for low overhead to see if we need to address access status
-    if (str_starts_with($uri, 'private://webform')) {
-       $uuid = \Drupal::request()->query->get('public');
-        // Check to see if this is a config download.
-        $scheme = StreamWrapperManager::getScheme($uri);
-        $target = StreamWrapperManager::getTarget($uri);
-        $files = \Drupal::entityTypeManager()
-            ->getStorage('file')
-            ->loadByProperties(['uri' => $uri]);
-        /** @var \Drupal\file\FileInterface|null $file */
-        $file = reset($files) ?: NULL;
-        $file_uuid = $file->uuid();
-        if (empty($uuid)) {
-          
-        } else {
-          if ($uuid == $file_uuid) {
-            
-          }
-          
-        }
-        
-        
-//    if ($scheme == 'temporary' && $target == 'config.tar.gz') {
-//        return [
-//            'Content-disposition' => 'attachment; filename="config.tar.gz"',
-//        ];
-//    }
-    }
-}
-
-//function glen() {
-//    $webform = $webform_submission->getWebform();
-//
-//    $access_rules = $this->getAccessRules($webform);
-//    $cache_per_user = $this->cachePerUser($access_rules);
-//
-//// Check operation.
-//    if ($this->checkAccessRules($operation, $account, $access_rules)) {
-//        return WebformAccessResult::allowed($webform_submission, $cache_per_user);
-//    }
-//
-//// Check *_own operation.
-//    if ($webform_submission->isOwner($account)
-//        && isset($access_rules[$operation . '_own'])
-//        && $this->checkAccessRule($access_rules[$operation . '_own'], $account)) {
-//        return WebformAccessResult::allowed($webform_submission, $cache_per_user);
-//    }
-//
-//// Check *_any operation.
-//    if (isset($access_rules[$operation . '_any'])
-//        && $this->checkAccessRule($access_rules[$operation . '_any'], $account)) {
-//        return WebformAccessResult::allowed($webform_submission, $cache_per_user);
-//    }
-//
-//    return WebformAccessResult::neutral($webform_submission, $cache_per_user);
-
-
-
-
-//    if (preg_match('/private:\/\//i', $file_entity->getFileUri())) {
-//        $query = \Drupal::requestStack()->getCurrentRequest()->query->all();
-//
-//        if (!empty($query)) {
-//            $options['query'] = $query;
+//    // Do a quick test for low overhead to see if we need to address access status
+//    if (str_starts_with($uri, 'private://webform')) {
+//       $fid_from_query_paramter = \Drupal::request()->query->get('public');
+//        // Check to see if this is a config download.
+//        $scheme = StreamWrapperManager::getScheme($uri);
+//        $target = StreamWrapperManager::getTarget($uri);
+//        $files = \Drupal::entityTypeManager()
+//            ->getStorage('file')
+//            ->loadByProperties(['uri' => $uri]);
+//        /** @var \Drupal\file\FileInterface|null $file */
+//        $file = reset($files) ?: NULL;
+//        $fid_from_file = $file->id();
+//        if (empty($fid_from_query_paramter)) {
+//          return null; 
+//        } else {
+//          if ($fid_from_query_paramter === $fid_from_file) {
+//            return []; 
+//          } else {
+//            return -1; 
+//          }
 //        }
-//
-//        $variables['#cache']['contexts'][] = 'url.query_args';
 //    }
-//}
+}
