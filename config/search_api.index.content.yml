@@ -3,27 +3,27 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.body
+    - field.storage.media.field_department
     - field.storage.media.field_media_document
     - field.storage.node.field_attachment
+    - field.storage.node.body
     - field.storage.node.field_body_bottom
     - field.storage.node.field_department
     - field.storage.node.field_keywords
     - field.storage.node.field_mayor
-    - field.storage.node.field_sidebar
-    - field.storage.node.field_top_content
-    - field.storage.media.field_department
     - field.storage.node.field_search_keymatch
     - field.storage.node.field_sections_outreach2
     - field.storage.paragraph.field_body
+    - field.storage.node.field_sidebar
+    - field.storage.node.field_top_content
     - search_api.server.production
   module:
     - search_api_solr
-    - node
     - media
     - taxonomy
-    - paragraphs
     - file
+    - node
+    - paragraphs
     - search_api
     - search_api_attachments
     - search_api_exclude_entity
@@ -333,6 +333,13 @@ field_settings:
         - field.storage.media.field_media_document
       module:
         - file
+  url_1:
+    label: URI
+    property_path: search_api_url
+    type: text
+    boost: 1.1
+    configuration:
+      absolute: false
 datasource_settings:
   'entity:media':
     bundles:
@@ -417,6 +424,7 @@ processor_settings:
       - type
       - uri
       - url
+      - url_1
     title: true
     alt: true
     tags:
