@@ -39,10 +39,10 @@ $baseline-px: 16 !default;
     @if type-of( $value ) == "number" and unit( $value ) == "px" {
 
         // Slightly hacky way of removing unit
-        $unitless-value: $value / ( $value * 0 + 1px );
+        $unitless-value: calc($value / ( $value * 0 + 1px ));
 
         // Return rem value
-        @return #{$unitless-value / $baseline-px}rem;
+        @return #{calc($unitless-value / $baseline-px)}rem;
     }
 
     // Non-numeric value, just return
