@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * Allow access to download files for a webform submission if the form has been
+ * set up correctly. First used for public comments form.
+ *
+ * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+ * @param $operation
+ * @param \Drupal\Core\Session\AccountInterface $account
+ *
+ * @return \Drupal\Core\Access\AccessResultAllowed|\Drupal\Core\Access\AccessResultForbidden|\Drupal\Core\Access\AccessResultNeutral
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ */
+function sand_webform_webform_submission_access(\Drupal\webform\WebformSubmissionInterface $webform_submission, $operation, \Drupal\Core\Session\AccountInterface $account) {
+  
+  // If authenicated bail out. This is only for anonymous access overrides.
+  if (\Drupal::currentUser()->isAuthenticated()) {
+    return \Drupal\Core\Access\AccessResult::neutral();
+  }
+
+  if (isset($operation) && $operation === 'view' && is_object($webform_submission)) {
+    // Get the "sand_allow_public_access" query parameter if it exists.
+    $access_query_parameter = \Drupal::request()->query->get('access');
+    $id_query_parameter = \Drupal::request()->query->get('id');
+
+    // If there is no query parameter of "sand_allow_public_access" on the
+    // request then we have no opinion on access. just return.
+    if (empty($access_query_parameter) || empty($id_query_parameter)) {
+      return \Drupal\Core\Access\AccessResult::neutral();
+    }
+
+    // Otherwise the request "sand_allow_public_access" query parameter - see if we should allow request.
+    // Get just the URL minus query parameter.
+    $request_uri = \Drupal::request()->getPathInfo();
+    // @todo I'm assuming that this is a private file, is there a way not to assume that?
+    $uri = 'private://' . str_replace('/system/files/', '', $request_uri);
+    // Now load the file object, so we can get the FID.
+    $files = \Drupal::entityTypeManager()
+      ->getStorage('file')
+      ->loadByProperties(['uri' => $uri]);
+    /** @var \Drupal\file\FileInterface|null $file */
+    $file = reset($files) ?: NULL;
+
+    // If no file then just return.
+    if (empty($file)) {
+      return \Drupal\Core\Access\AccessResult::neutral();
+    }
+
+    // If the file's FID equals the public query parameter given, allow access, else deny.
+    if ($file->id() === $access_query_parameter && $webform_submission->uuid() === $id_query_parameter) {
+      return \Drupal\Core\Access\AccessResult::allowed();
+    }
+    else {
+      return \Drupal\Core\Access\AccessResult::forbidden();
+    }
+  }
+  //  }
+  // This function has no opinion on this access request.
+  return \Drupal\Core\Access\AccessResult::neutral();
+}

@@ -11,7 +11,7 @@ archive: false
 id: sdpl_books_unbanned_card_sign_up
 title: 'SDPL Books Unbanned Card Sign Up'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   contact_information:
     '#type': fieldset
@@ -50,7 +50,6 @@ elements: |-
         '#type': textfield
         '#title': City
         '#required': true
-        '#default_value': 'San Diego'
         '#wrapper_attributes':
           class:
             - cell
@@ -60,7 +59,6 @@ elements: |-
         '#title': 'State or U.S. Territory'
         '#input_mask': '''casing'': ''upper'''
         '#required': true
-        '#default_value': CA
         '#wrapper_attributes':
           class:
             - cell
@@ -74,6 +72,24 @@ elements: |-
     '#options': yes_no
     '#options_display': two_columns
     '#required': true
+  how_did_you_hear_about_books_unbanned_:
+    '#type': radios
+    '#title': 'How did you hear about Books Unbanned?'
+    '#options':
+      'Social Media': 'Social Media'
+      'Library Website': 'Library Website'
+      'Library Foundation SD': 'Library Foundation SD'
+      ' Partner Books Unbanned Library (Boston, Seattle, Los Angeles Brooklyn)': ' Partner Books Unbanned Library -- (Boston, Seattle, Los Angeles Brooklyn)'
+      'Word of Mouth': 'Word of Mouth'
+      Other: Other
+    '#required': true
+  other:
+    '#type': textarea
+    '#title': Other
+    '#states':
+      visible:
+        ':input[name="how_did_you_hear_about_books_unbanned_"]':
+          value: Other
 css: ''
 javascript: ''
 settings:
