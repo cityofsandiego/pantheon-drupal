@@ -20,7 +20,9 @@
     view_mode ? 'media--view-mode-' ~ view_mode.id()|clean_class,
   ]
 %}
+<figure{{ attributes.addClass(classes) }}>
   {{ title_suffix.contextual_links }}
   {% if content %}
     {{ content }}
   {% endif %}
+</figure>
