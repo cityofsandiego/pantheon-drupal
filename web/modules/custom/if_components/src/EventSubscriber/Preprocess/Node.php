@@ -458,7 +458,7 @@ final class Node implements EventSubscriberInterface {
       if ($cache) {
         $unique_hero_js_array = $cache->data;
         $content = $variables->get('content');
-        $myMarkup = "<script>const a=" . $unique_hero_js_array . ";const rIdx=Math.floor(Math.random()*a.length);const sA=a[rIdx];const hBg=document.getElementById('hero-bg-image');hBg.style.backgroundImage='url('+sA[0]+')';const bgC=document.getElementById('hero-bg-credit');const hC=document.getElementById('hero--credit');if(bgC){if(sA[1]!==null){bgC.textContent=sA[1];if(sA[2]!==null){const br=document.createElement('br');bgC.appendChild(br);bgC.appendChild(document.createTextNode(sA[2]));}}else if(sA[2]!==null){bgC.textContent=sA[2];}}if(!bgC.textContent||bgC.textContent.includes('null')){hC.style.display='none';}</script>";
+        $myMarkup = "<script>const a=" . $unique_hero_js_array . ";const rIdx=Math.floor(Math.random()*a.length);const sA=a[rIdx];const hBg=document.getElementById('hero-bg-image');hBg.style.backgroundImage='url('+sA[0]+')';const bgC=document.getElementById('hero-bg-credit');const hC=document.getElementById('hero--credit');if(bgC){if(sA[1]!==null){bgC.textContent=sA[1];if(sA[2]!==null){const br=document.createElement('br');bgC.appendChild(br);bgC.appendChild(document.createTextNode(sA[2]));}}else if(sA[2]!==null){bgC.textContent=sA[2];}}if(!bgC.textContent||bgC.textContent.includes('null')){hC.style.display='none';}else{hC.style.display='block';}</script>";
         $content['#markup'] = $myMarkup;
         $variables->set('content', $content);
       }
@@ -477,7 +477,7 @@ final class Node implements EventSubscriberInterface {
       if ($cache) {
         $unique_hero_js_array = $cache->data;
         $content = $variables->get('content');
-        $myMarkup = "<script>const a=" . $unique_hero_js_array . ";const rIdx=Math.floor(Math.random()*a.length);const sA=a[rIdx];const hBg=document.getElementById('hero-bg-image');hBg.style.backgroundImage='url('+sA[0]+')';const bgC=document.getElementById('hero-bg-credit');const hC=document.getElementById('hero--credit');if(bgC){if(sA[1]!==null){bgC.textContent=sA[1];if(sA[2]!==null){const br=document.createElement('br');bgC.appendChild(br);bgC.appendChild(document.createTextNode(sA[2]));}}else if(sA[2]!==null){bgC.textContent=sA[2];}}if(!bgC.textContent||bgC.textContent.includes('null')){hC.style.display='none';}</script>";
+        $myMarkup = "<script>const a=" . $unique_hero_js_array . ";const rIdx=Math.floor(Math.random()*a.length);const sA=a[rIdx];const hBg=document.getElementById('hero-bg-image');hBg.style.backgroundImage='url('+sA[0]+')';const bgC=document.getElementById('hero-bg-credit');const hC=document.getElementById('hero--credit');if(bgC){if(sA[1]!==null){bgC.textContent=sA[1];if(sA[2]!==null){const br=document.createElement('br');bgC.appendChild(br);bgC.appendChild(document.createTextNode(sA[2]));}}else if(sA[2]!==null){bgC.textContent=sA[2];}}if(!bgC.textContent||bgC.textContent.includes('null')){hC.style.display='none';}else{hC.style.display='block';}</script>";
         if (isset($content['#markup'])) {
           $content['#markup'] .= $myMarkup;
         } else {
