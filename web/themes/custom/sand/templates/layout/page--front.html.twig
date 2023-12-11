@@ -63,8 +63,8 @@
     <header role="banner" class="header">
       {{ page.header }}
     </header>
-      {{ page.help }}
-      {{ page.content_top }}
+    {{ page.help }}
+    {{ page.content_top }}
     <div class="hero__slides">
       <div class="grid-container l-padding-desktop-hn">
         <div class="grid-x slide-container">
@@ -91,12 +91,13 @@
           {% if page.hero_image is not empty %}
             <li>
               <div id="hero-bg-image" class="hero__bg" style="background-image: url('{{ page.hero_image }}');"></div>
-              <div id="hero--credit" class="hero--credit">
+              <div class="hero--credit">
                 <p id="hero-bg-credit" ></p>
               </div>
               {{ drupal_block('hero_block') }}
             </li>
           {% endif %}
+
         </ul>
       </div>
 
@@ -104,67 +105,67 @@
 
     <div class="grid-container main-grid-container">
       <main role="main" class="row white-bg homepage-content">
-          <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+        <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
 
-          <div class="layout-content clearfix col">
-            {# {{ page.content }} #}
-            <div class="grid-x">
-              <div class="cell small-12">
-                <div class="get-it-done l-padding-am">
-                  <h2 class="heading--snug">Get It Done</h2>
-                  {{ drupal_entity('webform', 'webform_13161') }}
-                  
-                  <div class="get-it-done-app l-margin-mobile-bd text-center--mobile">
-                    {# Get it Done app block #}
-                    {{ drupal_block('block_content:7500dd99-1c24-428f-97a2-2581f90d4d96') }}
-                  </div>
+        <div class="layout-content clearfix col">
+          {# {{ page.content }} #}
+          <div class="grid-x">
+            <div class="cell small-12">
+              <div class="get-it-done l-padding-am">
+                <h2 class="heading--snug">Get It Done</h2>
+                {{ drupal_entity('webform', 'webform_13161') }}
+
+                <div class="get-it-done-app l-margin-mobile-bd text-center--mobile">
+                  {# Get it Done app block #}
+                  {{ drupal_block('block_content:7500dd99-1c24-428f-97a2-2581f90d4d96') }}
                 </div>
-                <div class="featured-items l-container background-off-white text-center l-padding-am">
-                  {# Featured Items block #}
-                  {{ drupal_block('block_content:0c0583e3-04f3-429f-98d0-494fc9d45b24') }}
-                </div>
+              </div>
+              <div class="featured-items l-container background-off-white text-center l-padding-am">
+                {# Featured Items block #}
+                {{ drupal_block('block_content:0c0583e3-04f3-429f-98d0-494fc9d45b24') }}
               </div>
             </div>
-            <div class="grid-x grid-padding-x l-padding-hd l-padding-vm">
-              <div class="cell medium-9 l-padding-desktop-rn">
-                <h2 class="heading--snug l-margin-bd">Our San Diego</h2>
-                {{ drupal_view('blog_cards')}}
-              </div>
-              <div class="cell medium-3 l-padding-mobile-tm">
-                <div class="notifications">
+          </div>
+          <div class="grid-x grid-padding-x l-padding-hd l-padding-vm">
+            <div class="cell medium-9 l-padding-desktop-rn">
+              <h2 class="heading--snug l-margin-bd">Our San Diego</h2>
+              {{ drupal_view('blog_cards')}}
+            </div>
+            <div class="cell medium-3 l-padding-mobile-tm">
+              <div class="notifications">
                 <h2 class="heading--snug l-margin-bd">Notifications</h2>
-                  {{ drupal_view('homepage_notifications', 'block_1')}}
-                </div>  
-                {{ drupal_block('block_content:4134a824-c052-4c61-af3a-2720cdb9e660') }}
+                {{ drupal_view('homepage_notifications', 'block_1')}}
               </div>
+              {{ drupal_block('block_content:4134a824-c052-4c61-af3a-2720cdb9e660') }}
             </div>
+          </div>
 
-            <div class="l-padding-hm l-margin-bm">
-                <h2 class="heading--snug">Calendar</h2>
-              <div class="grid-x grid-padding-x l-margin-bm">
-                <div class="cell medium-6 l-margin-mobile-bd l-padding-mobile-hn border border--right no-border-on-mobile">
-                  <h3 class="heading--snug">Meetings</h3>
-                  {{ drupal_view('events', 'meetings')}}
-                  <p><a class="fine-print" href="/city-clerk/officialdocs/meetings-calendar">View All Meetings</a></p>
-                </div>
-                <div class="cell medium-6 l-padding-mobile-hn">
-                  <h3 class="heading--snug">Events</h3>
-                  {{ drupal_view('events', 'events')}}
-                  <p><a class="fine-print" href="/events">View All Events</a></p>
-                </div>
+          <div class="l-padding-hm l-margin-bm">
+            <h2 class="heading--snug">Calendar</h2>
+            <div class="grid-x grid-padding-x l-margin-bm">
+              <div class="cell medium-6 l-margin-mobile-bd l-padding-mobile-hn border border--right no-border-on-mobile">
+                <h3 class="heading--snug">Meetings</h3>
+                {{ drupal_view('events', 'meetings')}}
+                <p><a class="fine-print" href="/city-clerk/officialdocs/meetings-calendar">View All Meetings</a></p>
+              </div>
+              <div class="cell medium-6 l-padding-mobile-hn">
+                <h3 class="heading--snug">Events</h3>
+                {{ drupal_view('events', 'events')}}
+                <p><a class="fine-print" href="/events">View All Events</a></p>
               </div>
             </div>
-          </div>{# /.layout-content #}
+          </div>
+        </div>{# /.layout-content #}
 
       </main>
 
     </div>{# /.grid-container #}
 
     {% if page.footer %}
-    <footer role="contentinfo" class="footer">
-      {{ page.footer }}
-    </footer>
+      <footer role="contentinfo" class="footer">
+        {{ page.footer }}
+      </footer>
     {% endif %}
   </section>
 </div>
