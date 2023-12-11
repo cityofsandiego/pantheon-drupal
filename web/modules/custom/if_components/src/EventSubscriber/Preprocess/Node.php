@@ -165,11 +165,22 @@ final class Node implements EventSubscriberInterface {
             ->getSourceFieldValue($hero_image);
           $file = File::load($hero_image_file);
 
+          $prefix = $hero_node->get('field_hero_prefix_image_by')->value;
+          $imageBy = $hero_node->get('field_hero_image_by')->value;
+          $caption = $hero_node->get('field_hero_caption')->value;
+          if ($prefix !== null && $imageBy !== null) {
+            $imageBy = $prefix . ' ' . $imageBy;
+          } elseif ($prefix !== null) {
+            $imageBy = $prefix;
+          } elseif ($imageBy === null) {
+            $imageBy = null;
+          }
+
           if ($file && ($file_url = $file->createFileUrl())) {
             return [
               $file_url,
-              $hero_node->get('field_hero_image_by')->value,
-              $hero_node->get('field_hero_prefix_image_by')->value,
+              $caption,
+              $imageBy,
             ];
           }
         }
@@ -180,8 +191,8 @@ final class Node implements EventSubscriberInterface {
         $unique_hero_js_array = array_map('unserialize', array_unique(array_map('serialize', $hero_js_array)));
         $hero_one_time = $unique_hero_js_array[array_rand($unique_hero_js_array)];
         $variables->set('hero_image', $hero_one_time[0]);
-        $variables->set('hero_image_by', $hero_one_time[1] ?? null);
-        $variables->set('hero_prefix_image_by', $hero_one_time[2] ?? null);
+        $variables->set('hero_caption', $hero_one_time[1] ?? null);
+        $variables->set('hero_image_by', $hero_one_time[2] ?? null);
 
         if (count($unique_hero_js_array) >= 2) {
           $attached = $variables->get('#attached');
@@ -446,17 +457,9 @@ final class Node implements EventSubscriberInterface {
       $cache = \Drupal::cache()->get($cid);
       if ($cache) {
         $unique_hero_js_array = $cache->data;
-
         $content = $variables->get('content');
-        $is_front = $variables->get('is_front') ?? \Drupal::service('path.matcher')->isFrontPage();
-
-        if ($is_front) {
-          $myMarkup = "<script>const arr=" . $unique_hero_js_array . ";const randomIndex=Math.floor(Math.random()*arr.length);const selectedArray=arr[randomIndex];const heroBgImage=document.getElementById('hero-bg-image');heroBgImage.style.backgroundImage=heroBgImage.style.backgroundImage.replace(/url\(.*?\)/i,'url('+selectedArray[0]+')');const bg_credit=document.getElementById('hero-bg-credit');if(bg_credit){bg_credit.textContent=selectedArray[2]+' '+selectedArray[1];};if(bg_credit.textContent.includes('null')){bg_credit.remove();};console.log(arr);console.log(selectedArray);</script>";
-        } else {
-          $myMarkup = "<script>const arr=" . $unique_hero_js_array . ";const randomIndex=Math.floor(Math.random()*arr.length);const selectedArray=arr[randomIndex];const heroBgImage=document.getElementById('hero-bg-image');heroBgImage.style.backgroundImage=heroBgImage.style.backgroundImage.replace(/url\(.*?\)/i,'url('+selectedArray[0]+')');console.log(arr);console.log(selectedArray);</script>";
-        }
+        $myMarkup = "<script>const a=" . $unique_hero_js_array . ";const rIdx=Math.floor(Math.random()*a.length);const sA=a[rIdx];const hBg=document.getElementById('hero-bg-image');hBg.style.backgroundImage='url('+sA[0]+')';const bgC=document.getElementById('hero-bg-credit');const hC=document.getElementById('hero--credit');if(bgC){if(sA[1]!==null){bgC.textContent=sA[1];if(sA[2]!==null){const br=document.createElement('br');bgC.appendChild(br);bgC.appendChild(document.createTextNode(sA[2]));}}else if(sA[2]!==null){bgC.textContent=sA[2];}}if(!bgC.textContent||bgC.textContent.includes('null')){hC.style.display='none';}</script>";
         $content['#markup'] = $myMarkup;
-
         $variables->set('content', $content);
       }
     }
@@ -464,8 +467,6 @@ final class Node implements EventSubscriberInterface {
 
   public function preprocessHeroBlock(BlockPreprocessEvent $event): void {
     $variables = $event->getVariables();
-    $is_front = $variables->get('is_front') ?? \Drupal::service('path.matcher')->isFrontPage();
-
 
     if ($variables->get('base_plugin_id') == 'hero_block') {
       $current_url = Url::fromRoute('<current>');
@@ -475,21 +476,13 @@ final class Node implements EventSubscriberInterface {
       $cache = \Drupal::cache()->get($cid);
       if ($cache) {
         $unique_hero_js_array = $cache->data;
-
         $content = $variables->get('content');
-
-        if ($is_front) {
-          $myMarkup = "<script>const arr=" . $unique_hero_js_array . ";const randomIndex=Math.floor(Math.random()*arr.length);const selectedArray=arr[randomIndex];const heroBgImage=document.getElementById('hero-bg-image');heroBgImage.style.backgroundImage=heroBgImage.style.backgroundImage.replace(/url\(.*?\)/i,'url('+selectedArray[0]+')');const bg_credit=document.getElementById('hero-bg-credit');if(bg_credit){bg_credit.textContent=selectedArray[2]+' '+selectedArray[1];};if(bg_credit.textContent.includes('null')){bg_credit.remove();};console.log(arr);console.log(selectedArray);</script>";
-        } else {
-          $myMarkup = "<script>const arr=" . $unique_hero_js_array . ";const randomIndex=Math.floor(Math.random()*arr.length);const selectedArray=arr[randomIndex];const heroBgImage=document.getElementById('hero-bg-image');heroBgImage.style.backgroundImage=heroBgImage.style.backgroundImage.replace(/url\(.*?\)/i,'url('+selectedArray[0]+')');console.log(arr);console.log(selectedArray);</script>";
-        }
-
+        $myMarkup = "<script>const a=" . $unique_hero_js_array . ";const rIdx=Math.floor(Math.random()*a.length);const sA=a[rIdx];const hBg=document.getElementById('hero-bg-image');hBg.style.backgroundImage='url('+sA[0]+')';const bgC=document.getElementById('hero-bg-credit');const hC=document.getElementById('hero--credit');if(bgC){if(sA[1]!==null){bgC.textContent=sA[1];if(sA[2]!==null){const br=document.createElement('br');bgC.appendChild(br);bgC.appendChild(document.createTextNode(sA[2]));}}else if(sA[2]!==null){bgC.textContent=sA[2];}}if(!bgC.textContent||bgC.textContent.includes('null')){hC.style.display='none';}</script>";
         if (isset($content['#markup'])) {
           $content['#markup'] .= $myMarkup;
         } else {
           $content['#markup'] = $myMarkup;
         }
-
         $variables->set('content', $content);
       }
     }

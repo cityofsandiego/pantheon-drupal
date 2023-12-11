@@ -67,33 +67,36 @@
       {{ page.header }}
     </header>
 
-        {{ page.help }}
+    {{ page.help }}
 
-        {{ page.content_top }}
+    {{ page.content_top }}
     {% if node_type == "bucket" %}
-      <div id="hero-bg-image" class="hero__bg hero__bg--secondary"></div>
+    <div id="hero-bg-image" class="hero__bg hero__bg--secondary"></div>
 
-      <div class="grid-container main-grid-container">
-    {% else %}
+    <div class="grid-container main-grid-container">
+      {% else %}
 
 
       {% if page.hero_image is not empty %}
-        {% set heroclass = " page-with hero" %}
-        <div id="hero-bg-image" class="hero__bg hero__bg--secondary" style="background-image: url('{{ page.hero_image }}');">
-        </div>
-        {{ drupal_block('hero_block') }}
+      {% set heroclass = " page-with hero" %}
+      <div id="hero-bg-image" class="hero__bg hero__bg--secondary" style="background-image: url('{{ page.hero_image }}');">
+      </div>
+      <div id="hero--credit" class="hero--credit">
+        <p id="hero-bg-credit" ></p>
+      </div>
+      {{ drupal_block('hero_block') }}
 
-        <div class="grid-container main-grid-container page-with-hero">
-      {% else %}
+      <div class="grid-container main-grid-container page-with-hero">
+        {% else %}
         {% set heroclass = "" %}
         <div id="hero-bg-image" class="hero__bg hero__bg--secondary"></div>
 
         <div class="grid-container main-grid-container">
-      {% endif %}
-    {% endif %}
+          {% endif %}
+          {% endif %}
 
-        <main role="main">
-          <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+          <main role="main">
+            <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
             {% if page.sidebar_first %}
               <aside class="layout-sidebar-first col percent-25" role="complementary">
@@ -111,14 +114,13 @@
               </aside>
             {% endif %}
 
-        </main>
+          </main>
 
-
-      {% if page.footer %}
-      <footer role="contentinfo" class="footer alto-bg">
-        {{ page.footer }}
-      </footer>
-      {% endif %}
-    </div>{# /.grid-container #}
+          {% if page.footer %}
+            <footer role="contentinfo" class="footer alto-bg">
+              {{ page.footer }}
+            </footer>
+          {% endif %}
+        </div>{# /.grid-container #}
   </section>
 </div>
