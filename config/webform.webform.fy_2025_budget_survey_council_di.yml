@@ -1,116 +1,100 @@
-uuid: 56b8d566-8eee-4097-90e5-8b96c72dbdcd
+uuid: 65e927d4-e83c-4afc-bebe-b9505a771021
 langcode: en
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 23
+uid: 353
 template: false
 archive: false
-id: webform_522361
-title: 'Submit an Issue or Concern'
-description: null
+id: fy_2025_budget_survey_council_di
+title: 'FY 2025 Budget Survey - Council District 3'
+description: ''
 categories: {  }
 elements: |-
-  name:
-    '#type': textfield
-    '#title': Name
-    '#description': ''
-    '#required': true
-  street_address:
-    '#type': textfield
-    '#title': 'Street Address'
-    '#description': ''
-  city:
-    '#type': textfield
-    '#title': City
-  state:
-    '#type': select
-    '#options':
-      AL: Alabama
-      AK: Alaska
-      AS: 'American Samoa'
-      AZ: Arizona
-      AR: Arkansas
-      CA: California
-      CO: Colorado
-      CT: Connecticut
-      DE: Delaware
-      DC: 'District of Columbia'
-      FL: Florida
-      GA: Georgia
-      GU: Guam
-      HI: Hawaii
-      ID: Idaho
-      IL: Illinois
-      IN: Indiana
-      IA: Iowa
-      KS: Kansas
-      KY: Kentucky
-      LA: Louisiana
-      ME: Maine
-      MH: 'Marshall Islands'
-      MD: Maryland
-      MA: Massachusetts
-      MI: Michigan
-      MN: Minnesota
-      MS: Mississippi
-      MO: Missouri
-      MT: Montana
-      NE: Nebraska
-      NV: Nevada
-      NH: 'New Hampshire'
-      NJ: 'New Jersey'
-      NM: 'New Mexico'
-      NY: 'New York'
-      NC: 'North Carolina'
-      ND: 'North Dakota'
-      MP: 'Northern Marianas Islands'
-      OH: Ohio
-      OK: Oklahoma
-      OR: Oregon
-      PW: Palau
-      PA: Pennsylvania
-      PR: 'Puerto Rico'
-      RI: 'Rhode Island'
-      SC: 'South Carolina'
-      SD: 'South Dakota'
-      TN: Tennessee
-      TX: Texas
-      UT: Utah
-      VT: Vermont
-      VI: 'Virgin Islands'
-      VA: Virginia
-      WA: Washington
-      WV: 'West Virginia'
-      WI: Wisconsin
-      WY: Wyoming
-    '#title': State
-    '#description': ''
-  zip:
-    '#title': Zip
-    '#description': ''
-  phone:
-    '#type': textfield
-    '#title': Phone
-    '#description': ''
-    '#required': true
-  email:
-    '#type': email
-    '#size': 20
-    '#title': Email
-    '#description': ''
-    '#required': true
-  concern:
+  contact_info:
+    '#type': fieldset
+    '#title': 'Contact Info'
+    '#attributes':
+      class:
+        - l-margin-bd
+    name:
+      '#type': textfield
+      '#title': Name
+      '#wrapper_attributes':
+        class:
+          - six
+          - columns
+          - l-padding-ln
+      '#required': true
+    email:
+      '#type': email
+      '#title': Email
+      '#wrapper_attributes':
+        class:
+          - six
+          - columns
+          - l-padding-rn
+      '#required': true
+    neighborhood:
+      '#type': select
+      '#title': Neighborhood
+      '#options':
+        balboapark: 'Balboa Park'
+        bankershill: 'Bankers Hill/Park West'
+        downtown: Downtown
+        gh: 'Golden Hill'
+        hill: Hillcrest
+        little: 'Little Italy'
+        middletown: Middletown
+        mh: 'Mission Hills'
+        mv: 'Mission Valley'
+        np: 'North Park'
+        sp: 'South Park'
+        uh: 'University Heights'
+      '#empty_option': '-Select one-'
+      '#wrapper_attributes':
+        class:
+          - l-margin-td
+      '#required': true
+  budget_priorities:
+    '#type': fieldset
+    '#title': 'Budget Priorities'
+    budget_priorities_first_choice_:
+      '#type': select
+      '#title': 'Budget priorities (first choice)'
+      '#options':
+        hs: 'Homelessness Solutions'
+        af: 'Affordable Housing'
+        inf: 'Infrastructure (streets, stormwater, sidewalks, etc)'
+        ca: 'Climate Action and Resiliency'
+        ps: 'Public Safety'
+      '#empty_option': '-Select one-'
+      '#required': true
+    bp_second:
+      '#type': select
+      '#title': 'Budget priorities (second choice)'
+      '#options':
+        hs: 'Homelessness Solutions'
+        af: 'Affordable Housing'
+        inf: 'Infrastructure (streets, stormwater, sidewalks, etc)'
+        ca: 'Climate Action and Resiliency'
+        ps: 'Public Safety'
+      '#empty_option': '-Select one-'
+    bp_third:
+      '#type': select
+      '#title': 'Budget priorities (third choice)'
+      '#options':
+        hs: 'Homelessness Solutions'
+        af: 'Affordable Housing'
+        inf: 'Infrastructure (streets, stormwater, sidewalks, etc)'
+        ca: 'Climate Action and Resiliency'
+        ps: 'Public Safety'
+      '#empty_option': '-Select one-'
+  add_info:
     '#type': textarea
-    '#title': 'Issue or Concern'
-    '#description': ''
-    '#required': true
-  requested_action:
-    '#type': textarea
-    '#title': 'Requested Action'
-    '#description': ''
+    '#title': 'Additional information you’d like to note'
 css: ''
 javascript: ''
 settings:
@@ -208,15 +192,15 @@ settings:
   preview_excluded_elements: {  }
   preview_exclude_empty: true
   preview_exclude_empty_checkbox: false
-  draft: '0'
+  draft: none
   draft_multiple: false
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: inline
-  confirmation_url: ''
+  confirmation_type: url
+  confirmation_url: /citycouncil/cd3/fy25-budget-survey-response
   confirmation_title: ''
   confirmation_message: ''
   confirmation_attributes: {  }
@@ -247,19 +231,58 @@ settings:
   token_update: false
   token_delete: false
   serial_disabled: false
-  form_submit_label: ''
-  wizard_complete: 1
 access:
   create:
     roles:
       - anonymous
       - authenticated
     users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
 handlers:
-  cd4recipient:
+  email:
     id: email
-    handler_id: cd4recipient
-    label: CD4Recipient
+    handler_id: email
+    label: Email
     notes: ''
     status: true
     conditions: {  }
@@ -267,7 +290,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: councildistrict4@sandiego.gov
+      to_mail: rdarsey@sandiego.gov
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
@@ -281,7 +304,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: _default
-      body: "Submitted on [webform_submission:created]\r\n\r\nSubmitted values are:\r\n\r\nNAME:\r\n[webform_submission:values:name]\r\n\r\nADDRESS:\r\n[webform_submission:values:street_address]\r\n[webform_submission:values:city], [webform_submission:values:state] \r\n\r\nPHONE:\r\n[webform_submission:values:phone]\r\n\r\nEMAIL:\r\n[webform_submission:values:email]\r\n\r\nISSUE OR CONCERN:\r\n[webform_submission:values:concern]\r\n\r\nREQUESTED ACTION:\r\n[webform_submission:values:requested_action]\r\n\r\n"
+      body: "Submitted on [webform_submission:created]\r\n\r\nSubmitted values are:\r\n\r\nNAME:\r\n[webform_submission:values:name]\r\n\r\nEMAIL:\r\n[webform_submission:values:email]\r\n\r\nNEIGHBORHOOD:\r\n[webform_submission:values:neighborhood]\r\n\r\nBUDGET PRIORITIES (FIRST CHOICE):\r\n[webform_submission:values:budget_priorities_first_choice_]\r\n\r\nBUDGET PRIORITIES (SECOND CHOICE):\r\n[webform_submission:values:bp_second]\r\n\r\nBUDGET PRIORITIES (THIRD CHOICE):\r\n[webform_submission:values:bp_third]\r\n\r\nADDITIONAL INFO:\r\n[webform_submission:values:add_info]\r\n\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

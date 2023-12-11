@@ -916,6 +916,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
         body:
           id: body
           table: node__body
@@ -1023,7 +1076,7 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: false
-          empty: ''
+          empty: '{{ view_node }}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -1296,6 +1349,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '<span class="pull-right">{{ edit_node }}</span>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
         views_conditional_field:
           id: views_conditional_field
           table: views_conditional
@@ -1348,11 +1454,11 @@ display:
           if: field_department
           condition: eq
           equalto: 'Ongoing Planning'
-          then: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-rm\">\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\t</div>"
-          then_translate: 1
-          or: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-lm\">\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t</div>"
-          or_translate: 1
-          strip_tags: 0
+          then: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-rm\">\r\n{{ edit_node }}\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\t</div>"
+          then_translate: true
+          or: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-lm\">\r\n{{ edit_node }}\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t</div>"
+          or_translate: true
+          strip_tags: false
       pager:
         type: none
         options:
@@ -1626,6 +1732,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
         body:
           id: body
           table: node__body
@@ -1733,7 +1892,7 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: false
-          empty: ''
+          empty: '{{ view_node }}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -2006,6 +2165,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '<span class="pull-right">{{ edit_node }}</span>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
         views_conditional_field:
           id: views_conditional_field
           table: views_conditional
@@ -2058,11 +2270,11 @@ display:
           if: field_department
           condition: eq
           equalto: 'Ongoing Planning'
-          then: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-rm\">\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\t</div>"
-          then_translate: 1
-          or: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-lm\">\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t</div>"
-          or_translate: 1
-          strip_tags: 0
+          then: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-rm\">\r\n\r\n{{ edit_node }}\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\t</div>"
+          then_translate: true
+          or: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-lm\">\r\n\r\n{{ edit_node }}\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t</div>"
+          or_translate: true
+          strip_tags: false
       pager:
         type: none
         options:
@@ -2336,6 +2548,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
         body:
           id: body
           table: node__body
@@ -2443,7 +2708,7 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: false
-          empty: ''
+          empty: '{{ view_node }}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -2716,6 +2981,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '<p class="pull-right">{{ edit_node }}</p>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
         views_conditional_field:
           id: views_conditional_field
           table: views_conditional
@@ -2768,11 +3086,11 @@ display:
           if: field_department
           condition: eq
           equalto: 'Ongoing Planning'
-          then: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-rm\">\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\t</div>"
-          then_translate: 1
-          or: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-lm\">\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t</div>"
-          or_translate: 1
-          strip_tags: 0
+          then: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-rm\">\r\n{{ edit_node }}\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\t</div>"
+          then_translate: true
+          or: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-lm\">\r\n{{ edit_node }}\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t</div>"
+          or_translate: true
+          strip_tags: false
       pager:
         type: none
         options:
@@ -5038,6 +5356,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
         body:
           id: body
           table: node__body
@@ -5145,7 +5516,7 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: false
-          empty: ''
+          empty: '{{ view_node }}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -5418,6 +5789,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '<span class="pull-right">{{ edit_node }}</span>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
         views_conditional_field:
           id: views_conditional_field
           table: views_conditional
@@ -5470,11 +5894,11 @@ display:
           if: field_department
           condition: eq
           equalto: 'Ongoing Planning'
-          then: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-rm\">\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\t</div>"
-          then_translate: 1
-          or: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-lm\">\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t</div>"
-          or_translate: 1
-          strip_tags: 0
+          then: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-rm\">\r\n{{ edit_node }}\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\t</div>"
+          then_translate: true
+          or: "<div class=\"grid-x grid-padding-x l-margin-bm\">\r\n\t\t<div class=\"cell medium-4\">\r\n\t\t\t<p><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"cell medium-auto l-padding-desktop-lm\">\r\n{{ edit_node }}\r\n\t\t\t<h3 class=\"heading--snug\"><a href=\"{{ field_website }}\">{{ title }}</a></h3>\r\n\r\n\t\t\t{{ field_other_description }}\r\n\t\t</div>\r\n\t</div>"
+          or_translate: true
+          strip_tags: false
       pager:
         type: none
         options:
@@ -6794,63 +7218,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        views_conditional_field:
-          id: views_conditional_field
-          table: views_conditional
-          field: views_conditional_field
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: views_conditional_field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          if: field_category
-          condition: eq
-          equalto: 'Public Hearings'
-          then: riptide
-          then_translate: 1
-          or: ''
-          or_translate: 1
-          strip_tags: 0
         views_conditional_field_1:
           id: views_conditional_field_1
           table: views_conditional
@@ -6904,10 +7271,67 @@ display:
           condition: eq
           equalto: 'Public Engagement'
           then: texasrose
-          then_translate: 1
+          then_translate: true
           or: manz
-          or_translate: 1
-          strip_tags: 0
+          or_translate: true
+          strip_tags: false
+        views_conditional_field:
+          id: views_conditional_field
+          table: views_conditional
+          field: views_conditional_field
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: views_conditional_field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          if: field_category
+          condition: eq
+          equalto: 'Public Hearings'
+          then: riptide
+          then_translate: true
+          or: '{{ views_conditional_field_1 }}'
+          or_translate: true
+          strip_tags: false
         edit_node:
           id: edit_node
           table: node_field_revision
@@ -6973,7 +7397,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border l-padding-bl pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>{{ edit_node }}\r\n  </div>\r\n  <div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn pin-bottom\">\r\n  <p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field_1 }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n  <p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n</div>"
+            text: "<div class=\"card background--off-white border l-padding-bl pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>{{ edit_node }}\r\n  </div>\r\n  <div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn pin-bottom\">\r\n  <p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n  <p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -7055,6 +7479,34 @@ display:
             label: 'Projected Completion'
             field_identifier: field_subtitle_value
           exposed: true
+        field_category_target_id:
+          id: field_category_target_id
+          table: node__field_category
+          field: field_category_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: DESC
+          expose:
+            label: Status
+            field_identifier: status
+          exposed: true
+        title_1:
+          id: title_1
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       filters:
         status:
           id: status

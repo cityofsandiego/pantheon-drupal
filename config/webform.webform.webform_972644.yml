@@ -57,18 +57,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
+      from_name: '[webform_submission:values:email:raw]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: |-
-        Submitted on [webform_submission:date:long]
-
-        [webform_submission:values]
+      subject: 'New subscriber for "The People''s Business"'
+      body: "Submitted on [webform_submission:created]\r\n\r\nEMAIL:\r\n[webform_submission:values:email]\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
