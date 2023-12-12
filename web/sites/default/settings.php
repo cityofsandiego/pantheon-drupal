@@ -62,7 +62,6 @@ if (defined('PANTHEON_ENVIRONMENT')) {
 $settings['config_exclude_modules'] = [
   'devel',
   'examples',
-  'sand_search',
   'search_api_solr_devel',
   'webprofiler',
   'yaml_editor',
