@@ -141,7 +141,6 @@ final class Node implements EventSubscriberInterface {
     $defaultBGImageURL = '/themes/custom/sand/images/home-hero-1.jpg'; // default background image
     $is_front = $variables->get('is_front') ?? \Drupal::service('path.matcher')->isFrontPage();
     $nids = [];
-
     if ($is_front) {
       $nids = $this->if_components_hero_query_hero_home_page();
     } elseif ($node = $variables->getNode()) {
@@ -448,6 +447,24 @@ final class Node implements EventSubscriberInterface {
 
         }
       }
+      else {
+        // This is not a node page.
+        $path = \Drupal::request()->getPathInfo();
+        $this->getSidebarContextsByPath($path);
+        if (!empty($this->context_ids)) {
+          foreach ($this->context_ids as $nid) {
+            $context_node = $this->entityTypeManager->getStorage('node')->load($nid);
+            if (count($context_node->field_top_menu_id->getValue()) > 0) {
+              $this->top_menu_id = $context_node->field_top_menu_id->getValue()[0]['value'];
+            }
+          }
+          $this->buildMenuLinks('topmenu');
+          array_multisort(array_column($this->topMenuLinkData, 'weight'), SORT_ASC, $this->topMenuLinkData);
+          $variables->set('topmenu', [
+            'items' => $this->topMenuLinkData,
+          ]);
+        }
+      }
     }
     if ($variables->get('base_plugin_id') == 'hero_block') {
       $current_url = Url::fromRoute('<current>');
@@ -636,6 +653,24 @@ final class Node implements EventSubscriberInterface {
         }
       }
     }
+  }
+
+
+  /*
+   * Helper function to add context node ids based on path.
+   */
+  public function getSidebarContextsByPath(string $path): void {
+      $query = $this->entityTypeManager
+        ->getStorage('node')
+        ->getQuery();
+      $query->condition('type', 'sidebar_block_context')
+        ->condition('field_path', $path . "%", 'LIKE');
+      $nids = $query->execute();
+      foreach ($nids as $nid) {
+        if (!in_array($nid, $this->context_ids)) {
+          $this->context_ids[] = $nid;
+        }
+      }
   }
 
   /**
