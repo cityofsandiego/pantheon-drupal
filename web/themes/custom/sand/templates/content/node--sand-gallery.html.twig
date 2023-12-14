@@ -81,7 +81,7 @@
     'background-white'
   ]
 %}
-
+{{ content.content_moderation_control }}
 <article {{ attributes.addClass(classes) }}>
   <div {{ content_attributes.addClass('node__content') }}>
     <div class="grid-x">
@@ -91,19 +91,20 @@
           {{ content.body }}
         </div>
         <div class="sand-gallery">
-          {% if content.field_sand_gallery_display_as == 'Album' %}
+          {% if content.field_sand_gallery_display_as.0 == 'Album' %}
             {{ drupal_view('sand_gallery_albums', 'embed_1') }}
           {% endif %}
 
-          {% if content.field_sand_gallery_no_events == 'Display other albums' %}
+          {% if content.field_sand_gallery_no_events.0 == 'Display other albums' %}
             {{ drupal_view('sand_gallery_events', 'embed_1') }}
           {% endif %}
 
-          {% if content.field_sand_gallery_display == 'Default Layout with Image Title & Description' %}
+          {% if content.field_sand_gallery_display.0['#markup'] == 'Default Layout with Image Title & Description' %}
             {{ drupal_view('sand_gallery', 'embed_2') }}
           {% else %}
             {{ drupal_view('sand_gallery', 'embed_1') }}
           {% endif %}
+
         </div>
         {% if content.field_body_bottom is not empty %}
         <div class="l-padding-bm l-padding-hm l-padding-mobile-tn">

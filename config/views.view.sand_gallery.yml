@@ -10,6 +10,7 @@ dependencies:
     - node.type.sand_gallery
   module:
     - colorbox
+    - flexslider_views
     - media
     - node
     - text
@@ -463,15 +464,15 @@ display:
         type: html_list
         options:
           grouping: {  }
-          row_class: card__wrap
-          default_row_class: true
+          row_class: ''
+          default_row_class: false
           type: ul
-          wrapper_class: 'flexslider--mobile view-content card__container l-margin-vd'
+          wrapper_class: 'flexslider flexslider--default'
           class: slides
       row:
         type: fields
         options:
-          default_field_elements: true
+          default_field_elements: false
           inline: {  }
           separator: ''
           hide_empty: true
@@ -539,7 +540,7 @@ display:
           admin_label: ''
           plugin_id: field
           label: ''
-          exclude: true
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -574,148 +575,18 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: colorbox_view_modes
+          type: entity_reference_entity_view
           settings:
-            colorbox_view_mode: gallery_medium
-            colorbox_modal_view_mode: 100_full_width
-            colorbox_gallery: post
-            colorbox_gallery_custom: ''
+            view_mode: default
           group_column: target_id
           group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_description:
-          id: field_description
-          table: media__field_description
-          field: field_description
-          relationship: field_sand_gallery_items
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: text_default
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        name:
-          id: name
-          table: media_field_data
-          field: name
-          relationship: field_sand_gallery_items
-          group_type: group
-          admin_label: ''
-          entity_type: media
-          entity_field: name
-          plugin_id: field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
+          group_rows: false
           delta_limit: 0
           delta_offset: 0
           delta_reversed: false
@@ -735,8 +606,8 @@ display:
           label: ''
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<p class="text-center l-margin-vs">{{ edit_media }}</span>'
             make_link: false
             path: ''
             absolute: false
@@ -768,65 +639,33 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: 'edit link'
-          output_url_as_text: false
-          absolute: false
-        nothing:
-          id: nothing
-          table: views
-          field: nothing
-          relationship: none
-          group_type: group
-          admin_label: 'Rewrite of Fields'
-          plugin_id: custom
-          label: ''
-          exclude: false
-          alter:
-            alter_text: true
-            text: "<div class=\"card__image\">\r\n    {{ field_sand_gallery_items }}\r\n </div>"
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: 'card background-off-white'
           element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
-          hide_alter_empty: false
+          hide_alter_empty: true
+          text: 'Edit this Image'
+          output_url_as_text: false
+          absolute: false
       defaults:
+        use_ajax: false
+        group_by: false
+        relationships: false
         fields: false
+        header: false
+      relationships:
+        field_sand_gallery_items:
+          id: field_sand_gallery_items
+          table: node__field_sand_gallery_items
+          field: field_sand_gallery_items
+          relationship: none
+          group_type: group
+          admin_label: 'field_sand_gallery_items: Media'
+          plugin_id: standard
+          required: false
+      use_ajax: false
+      group_by: false
+      header: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -837,7 +676,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.media.field_description'
         - 'config:field.storage.node.field_sand_gallery_items'
   embed_2:
     id: embed_2
@@ -896,15 +734,12 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: colorbox_view_modes
+          type: entity_reference_entity_view
           settings:
-            colorbox_view_mode: gallery_medium
-            colorbox_modal_view_mode: 100_full_width
-            colorbox_gallery: post
-            colorbox_gallery_custom: ''
+            view_mode: default
           group_column: target_id
           group_columns: {  }
-          group_rows: true
+          group_rows: false
           delta_limit: 0
           delta_offset: 0
           delta_reversed: false
@@ -945,7 +780,7 @@ display:
             more_link: false
             more_link_text: ''
             more_link_path: ''
-            strip_tags: false
+            strip_tags: true
             trim: false
             preserve_tags: ''
             html: false
@@ -956,7 +791,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -1051,8 +886,8 @@ display:
           label: ''
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<span class="l-margin-ld">{{ edit_media }}</span>'
             make_link: false
             path: ''
             absolute: false
@@ -1084,12 +919,12 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          text: 'edit link'
+          text: 'Edit this Image'
           output_url_as_text: false
           absolute: false
         nothing:
@@ -1104,7 +939,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card__image\">\r\n    {{ field_sand_gallery_items }}\r\n </div>\r\n <div class=\"card__content\">\r\n    <div class=\"card__headline title l-margin-bd\">\r\n      {{ name }}\r\n    </div>\r\n   {{ field_description }}\r\n</div>"
+            text: '{{ field_sand_gallery_items }}<span class="flex-caption text-center">{{ field_description }}{{ edit_media }}</span>'
             make_link: false
             path: ''
             absolute: false
@@ -1135,15 +970,21 @@ display:
           element_label_class: ''
           element_label_colon: false
           element_wrapper_type: ''
-          element_wrapper_class: 'card background-off-white'
+          element_wrapper_class: ''
           element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
           hide_alter_empty: false
       defaults:
+        use_ajax: false
+        group_by: false
         fields: false
+        header: false
+      use_ajax: false
+      group_by: false
       display_description: ''
+      header: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -1284,4 +1125,203 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.media.field_description'
+        - 'config:field.storage.node.field_sand_gallery_items'
+  embed_slider:
+    id: embed_slider
+    display_title: Slider
+    display_plugin: embed
+    position: 1
+    display_options:
+      fields:
+        field_sand_gallery_items:
+          id: field_sand_gallery_items
+          table: node__field_sand_gallery_items
+          field: field_sand_gallery_items
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_entity_view
+          settings:
+            view_mode: default
+          group_column: target_id
+          group_columns: {  }
+          group_rows: false
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+      defaults:
+        use_ajax: false
+        group_by: false
+        relationships: false
+        fields: false
+        header: false
+      relationships: {  }
+      use_ajax: false
+      group_by: false
+      display_description: ''
+      header: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_sand_gallery_items'
+  flexslider:
+    id: flexslider
+    display_title: Flexslider
+    display_plugin: block
+    position: 6
+    display_options:
+      fields:
+        field_sand_gallery_items:
+          id: field_sand_gallery_items
+          table: node__field_sand_gallery_items
+          field: field_sand_gallery_items
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_entity_view
+          settings:
+            view_mode: default
+          group_column: target_id
+          group_columns: {  }
+          group_rows: false
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+      style:
+        type: flexslider
+        options:
+          grouping: {  }
+          flexslider: null
+          optionset: slide
+          captionfield: ''
+          id: ''
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: true
+      defaults:
+        use_ajax: false
+        group_by: false
+        style: false
+        row: false
+        relationships: false
+        fields: false
+      relationships: {  }
+      use_ajax: false
+      group_by: false
+      display_description: ''
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
         - 'config:field.storage.node.field_sand_gallery_items'

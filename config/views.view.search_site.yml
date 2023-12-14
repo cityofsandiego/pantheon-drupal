@@ -17,7 +17,6 @@ dependencies:
     - 'taxonomy_term:department:ebaf80c1-9d2f-4311-8fa9-240f11c37d6b'
   module:
     - better_exposed_filters
-    - facets
     - search_api
     - search_api_attachments
     - text
@@ -884,7 +883,7 @@ display:
             strip_tags: true
             trim: true
             preserve_tags: '<mark>'
-            html: false
+            html: true
           element_type: ''
           element_class: ''
           element_label_type: ''
@@ -892,6 +891,55 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: l-margin-ld
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+        nothing_1:
+          id: nothing_1
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: "<div class=\"l-margin-ld\">\r\n{{ nothing_1 }}\r\n</div>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
           element_default_classes: true
           empty: ''
           hide_empty: false
@@ -5701,7 +5749,7 @@ display:
             strip_tags: true
             trim: true
             preserve_tags: '<mark>'
-            html: false
+            html: true
           element_type: ''
           element_class: ''
           element_label_type: ''
@@ -5911,7 +5959,7 @@ display:
             operator: search_api_fulltext_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: search_api_fulltext
+            identifier: search_text
             required: false
             remember: false
             multiple: false
@@ -6952,7 +7000,7 @@ display:
             operator: search_api_fulltext_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: search_api_fulltext
+            identifier: search_text
             required: false
             remember: false
             multiple: false
@@ -6989,67 +7037,6 @@ display:
           parse_mode: terms
           min_length: null
           fields: {  }
-        type:
-          id: type
-          table: search_api_index_content
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_options
-          operator: not
-          value:
-            application: application
-            article: article
-            bucket: bucket
-            business_resource: business_resource
-            date: date
-            department_document: department_document
-            digital_archives_photos: digital_archives_photos
-            external_data: external_data
-            hero: hero
-            mayoral_artifacts: mayoral_artifacts
-            notification: notification
-            outreach: outreach
-            outreach2: outreach2
-            outreach_article2: outreach_article2
-            registration: registration
-            resources: resources
-            reusable_component: reusable_component
-            sand_gallery: sand_gallery
-            sidebar_block_context: sidebar_block_context
-            slide: slide
-            slider_image: slider_image
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
         field_department:
           id: field_department
           table: search_api_index_content
@@ -7205,18 +7192,39 @@ display:
                   min: ''
                   max: ''
                   value: ''
-        facets:
-          id: facets
+        type:
+          id: type
           table: search_api_index_content
-          field: facets
+          field: type
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: facets_filter
-          operator: '='
-          value: ''
+          plugin_id: search_api_options
+          operator: not
+          value:
+            application: application
+            article: article
+            bucket: bucket
+            business_resource: business_resource
+            date: date
+            department_document: department_document
+            digital_archives_photos: digital_archives_photos
+            external_data: external_data
+            hero: hero
+            mayoral_artifacts: mayoral_artifacts
+            notification: notification
+            outreach: outreach
+            outreach2: outreach2
+            outreach_article2: outreach_article2
+            registration: registration
+            resources: resources
+            reusable_component: reusable_component
+            sand_gallery: sand_gallery
+            sidebar_block_context: sidebar_block_context
+            slide: slide
+            slider_image: slider_image
           group: 1
-          exposed: true
+          exposed: false
           expose:
             operator_id: ''
             label: ''
@@ -7225,12 +7233,13 @@ display:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: facet_e0GojXH1
+            identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -7243,9 +7252,7 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          facets:
-            facet_content_type_planning: facet_content_type_planning
-          label_display: 0
+          reduce_duplicates: false
       filter_groups:
         operator: AND
         groups:
@@ -7260,7 +7267,7 @@ display:
         filter_groups: false
       use_ajax: true
       display_description: ''
-      exposed_block: true
+      exposed_block: false
       display_extenders: {  }
       block_description: 'Search Planning'
       block_category: Search
@@ -7988,7 +7995,7 @@ display:
             operator: search_api_fulltext_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: search_api_fulltext
+            identifier: search_text
             required: false
             remember: false
             multiple: false
