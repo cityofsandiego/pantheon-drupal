@@ -1,0 +1,289 @@
+uuid: 21d3940b-c82f-4f17-8051-a6acdfc5ac27
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_27785
+title: 'Ask Parks and Get It Done'
+description: null
+category: null
+elements: |
+  name:
+    '#type': textfield
+    '#title': 'Name' 
+    '#description': ""
+    '#required': true
+  address:
+    '#type': textfield
+    '#title': 'Address' 
+    '#description': ""
+  phone:
+    '#type': textfield
+    '#title': 'Phone' 
+    '#description': ""
+  email:
+    '#type': textfield
+    '#title': 'Email' 
+    '#description': ""
+    '#required': true
+  subject:
+    '#type': select
+    '#options':
+      balboa_park: 'Balboa Park'
+      mission_bay_park: 'Mission Bay Park'
+      beaches: 'Beaches'
+      community_parks: 'Community Parks'
+      park_maintenance: 'Park Maintenance'
+      park_project: 'Park Project'
+      pools: 'Pools'
+      permits: 'Permits'
+      golf_courses: 'Golf Courses'
+      volunteer_internships: 'Volunteer/Internships'
+      general: 'General'
+      brush_management: 'Brush Management'
+    '#title': 'Subject' 
+    '#description': ""
+    '#required': true
+  message:
+    '#type': textarea
+    '#title': 'Message' 
+    '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<div class=\"row l-margin-ad l-padding-am\" style=\"background-color: white;\">\r\n\t<div class=\"twelve columns\">\r\n\t\t<p>Thank you! &nbsp;Below is what you submitted to the Park &amp; Recreation Department on [submission:date:long].</p>\r\n\t\t<table align=\"left\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%;\" summary=\"Submitted Data\">\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"l-padding-bd\" style=\"width:200px;\"><strong>Tracking Number:</strong></td>\r\n\t\t\t\t\t<td>[submission:sid]</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"l-padding-bd\"><strong>Name:</strong></td>\r\n\t\t\t\t\t<td>[submission:values:name]</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"l-padding-bd\"><strong>Address;</strong></td>\r\n\t\t\t\t\t<td>[submission:values:address]</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"l-padding-bd\"><strong>Phone:</strong></td>\r\n\t\t\t\t\t<td>[submission:values:phone]</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"l-padding-bd\"><strong>Email:</strong></td>\r\n\t\t\t\t\t<td>[submission:values:email]</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"l-padding-bd\"><strong>Subject:</strong></td>\r\n\t\t\t\t\t<td>[submission:values:subject]</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"l-padding-bd\"><strong>Message:</strong></td>\r\n\t\t\t\t\t<td>[submission:values:message]</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n\t</div>\r\n</div>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: askparks@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: askparks@sandiego.gov
+      from_options: {  }
+      from_name: 'Ask Parks'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '[webform_submission:values:subject:raw]'
+      body: |
+        Tracking Number: [webform_submission:sid]
+
+        Submitted on [webform_submission:date:long]
+
+        Submitted values are:
+        [webform_submission:values]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: VHara@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:subject:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_4:
+    id: email
+    handler_id: email_4
+    label: 'Email 4'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: mrodrigues@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_5:
+    id: email
+    handler_id: email_5
+    label: 'Email 5'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 5
+    settings:
+      states:
+        - completed
+      to_mail: nmcneil@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

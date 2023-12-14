@@ -1,0 +1,174 @@
+uuid: c4dc4773-76c1-4c33-96eb-0f4f981cf3d0
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 58
+template: false
+archive: false
+id: webform_300
+title: 'Noise Complaint Form'
+description: null
+category: null
+elements: |
+  fieldset_items_marked_with_an_asterisk____are_required:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Items marked with an asterisk ( * ) are required.' 
+    '#description': ""
+  fieldset_reported_by:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Reported by' 
+    '#description': ""
+    name_2:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+    address_2:
+      '#type': textfield
+      '#title': 'Address' 
+      '#description': ""
+      '#required': true
+    city_2:
+      '#type': textfield
+      '#title': 'City' 
+      '#description': ""
+      '#required': true
+    zip_code_2:
+      '#type': textfield
+      '#title': 'Zip code' 
+      '#description': ""
+      '#required': true
+    phone_2:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+    email_2:
+      '#type': textfield
+      '#title': 'Email' 
+      '#description': ""
+  fieldset_description_of_event:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Description of Event' 
+    '#description': ""
+    date_of_event_9:
+      '#type': textfield
+      '#title': 'Date of event' 
+      '#description': ""
+      '#required': true
+    time_of_event_9:
+      '#type': textfield
+      '#title': 'Time of event' 
+      '#description': ""
+      '#required': true
+    type_of_aircraft_9:
+      '#type': radios
+      '#options':
+        1: 'Single-Prop'
+        2: 'Multi-Prop'
+        3: 'Helicopter'
+        4: 'Jet'
+        5: 'Unknown'
+      '#title': 'Type of Aircraft' 
+      '#description': ""
+    type_of_operation_9:
+      '#type': radios
+      '#options':
+        1: 'Departure'
+        2: 'Arrival'
+      '#title': 'Type of Operation' 
+      '#description': ""
+  fieldset_contact:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact' 
+    '#description': ""
+    would_you_like_someone_to_contact_you_17:
+      '#type': radios
+      '#options':
+        yes: 'Yes'
+        no: 'No'
+      '#title_display': inline
+      '#title': 'Would you like someone to contact you?' 
+      '#description': ""
+    how_would_you_like_to_be_contacted_17:
+      '#type': radios
+      '#options':
+        email: 'Email'
+        phone: 'Phone'
+      '#title_display': inline
+      '#title': 'How would you like to be contacted?' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="would_you_like_someone_to_contact_you_17"]':
+            value: 'yes'
+            
+  comments:
+    '#type': textarea
+    '#title': 'Comments' 
+    '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: airports@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: airports@sandiego.gov
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }
