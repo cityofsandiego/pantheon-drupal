@@ -56,6 +56,8 @@ final class Node implements EventSubscriberInterface {
    */
   public array $context_ids = [];
 
+  public array $context_ids_for_path = [];
+
   /**
    * Departments to traverse through for sidebar contexts.
    *
@@ -451,8 +453,8 @@ final class Node implements EventSubscriberInterface {
         // This is not a node page.
         $path = \Drupal::request()->getPathInfo();
         $this->getSidebarContextsByPath($path);
-        if (!empty($this->context_ids)) {
-          foreach ($this->context_ids as $nid) {
+        if (!empty($this->context_ids_for_path)) {
+          foreach ($this->context_ids_for_path as $nid) {
             $context_node = $this->entityTypeManager->getStorage('node')->load($nid);
             if (count($context_node->field_top_menu_id->getValue()) > 0) {
               $this->top_menu_id = $context_node->field_top_menu_id->getValue()[0]['value'];
@@ -668,7 +670,7 @@ final class Node implements EventSubscriberInterface {
       $nids = $query->execute();
       foreach ($nids as $nid) {
         if (!in_array($nid, $this->context_ids)) {
-          $this->context_ids[] = $nid;
+          $this->context_ids_for_path[] = $nid;
         }
       }
   }
