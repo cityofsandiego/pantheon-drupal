@@ -1,0 +1,211 @@
+uuid: 8ee99023-cf43-41df-8cf6-a633c4f723aa
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 58
+template: false
+archive: false
+id: webform_303
+title: 'Traffic Service Request'
+description: null
+category: null
+elements: |
+  fieldset_if_you_need_assistance_with_this_form_contact_us_by_phone_at_619_533_3126_or_e_mail_trafficopssandiegogov:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Location Information' 
+    '#description': "If you need assistance with this form, contact us by phone at (619) 533-3126 or e-mail trafficops@sandiego.gov."
+    street_3:
+      '#type': textfield
+      '#title': 'Street:' 
+      '#description': ""
+      '#required': true
+    closest_cross_street_3:
+      '#type': textfield
+      '#title': 'Closest Cross Street:' 
+      '#description': ""
+      '#required': true
+    request_limited_to_2000_characters_3:
+      '#type': textarea
+      '#title': 'Request: (Limited to 2000 characters)' 
+      '#description': ""
+      '#required': true
+  fieldset_your_information:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Your Information' 
+    '#description': ""
+    full_name_7:
+      '#type': textfield
+      '#title': 'Full Name:' 
+      '#description': ""
+    business_7:
+      '#type': textfield
+      '#title': 'Business:' 
+      '#description': ""
+    street_address_7:
+      '#type': textfield
+      '#title': 'Street Address:' 
+      '#description': ""
+      '#required': true
+    apt_suite_other_7:
+      '#type': textfield
+      '#title': 'Apt/Suite/Other:' 
+      '#description': ""
+    city_7:
+      '#type': textfield
+      '#title': 'City:' 
+      '#description': ""
+    state_7:
+      '#type': select
+      '#options':
+        AL: 'Alabama'
+        AK: 'Alaska'
+        AS: 'American Samoa'
+        AZ: 'Arizona'
+        AR: 'Arkansas'
+        CA: 'California'
+        CO: 'Colorado'
+        CT: 'Connecticut'
+        DE: 'Delaware'
+        DC: 'District of Columbia'
+        FL: 'Florida'
+        GA: 'Georgia'
+        GU: 'Guam'
+        HI: 'Hawaii'
+        ID: 'Idaho'
+        IL: 'Illinois'
+        IN: 'Indiana'
+        IA: 'Iowa'
+        KS: 'Kansas'
+        KY: 'Kentucky'
+        LA: 'Louisiana'
+        ME: 'Maine'
+        MH: 'Marshall Islands'
+        MD: 'Maryland'
+        MA: 'Massachusetts'
+        MI: 'Michigan'
+        MN: 'Minnesota'
+        MS: 'Mississippi'
+        MO: 'Missouri'
+        MT: 'Montana'
+        NE: 'Nebraska'
+        NV: 'Nevada'
+        NH: 'New Hampshire'
+        NJ: 'New Jersey'
+        NM: 'New Mexico'
+        NY: 'New York'
+        NC: 'North Carolina'
+        ND: 'North Dakota'
+        MP: 'Northern Marianas Islands'
+        OH: 'Ohio'
+        OK: 'Oklahoma'
+        OR: 'Oregon'
+        PW: 'Palau'
+        PA: 'Pennsylvania'
+        PR: 'Puerto Rico'
+        RI: 'Rhode Island'
+        SC: 'South Carolina'
+        SD: 'South Dakota'
+        TN: 'Tennessee'
+        TX: 'Texas'
+        UT: 'Utah'
+        VT: 'Vermont'
+        VI: 'Virgin Islands'
+        VA: 'Virginia'
+        WA: 'Washington'
+        WV: 'West Virginia'
+        WI: 'Wisconsin'
+        WY: 'Wyoming'
+      '#title': 'State:' 
+      '#description': ""
+    zip_postal_code_99999_or_99999_9999_7:
+      '#type': textfield
+      '#title': 'Zip/Postal Code: (99999 or 99999-9999)' 
+      '#description': ""
+    phone_number_999_999_9999_7:
+      '#type': textfield
+      '#title': 'Phone Number: (999-999-9999)' 
+      '#description': ""
+    email_youyourdomaincom_7:
+      '#type': textfield
+      '#title': 'Email: (you@yourdomain.com)' 
+      '#description': ""
+  upload_photo:
+    '#type': managed_file
+    '#max_filesize': '5'
+    '#file_extensions': 'gif jpg jpeg png'
+    '#multiple': true
+    '#title': 'Upload Photo' 
+    '#description': "You can upload up to 3 photo files."
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: trafficops@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |-
+        Submitted on [webform_submission:completed_date:long]
+        Submitted by user: [webform_submission:user]
+
+        Submitted values are:
+        [webform_submission:values]
+
+        The results of this submission may be viewed at:
+        [webform_submission:url]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

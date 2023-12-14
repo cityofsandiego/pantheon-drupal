@@ -1,0 +1,1004 @@
+uuid: 6f787e52-663c-4534-bd92-9ba06e90105c
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1450754
+title: 'Request a Letter'
+description: null
+category: null
+elements: |
+  fieldset_contact:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info' 
+    '#description': ""
+    first_name_1:
+      '#type': textfield
+      '#title': 'First Name' 
+      '#description': ""
+      '#required': true
+    last_name_1:
+      '#type': textfield
+      '#title': 'Last Name' 
+      '#description': ""
+      '#required': true
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    mailing_address_1:
+      '#type': textfield
+      '#title': 'Mailing Address' 
+      '#description': ""
+      '#required': true
+    city_1:
+      '#type': textfield
+      '#title': 'City' 
+      '#description': ""
+      '#required': true
+    state_1:
+      '#type': textfield
+      '#title': 'State' 
+      '#description': ""
+      '#required': true
+    zip_1:
+      '#type': textfield
+      '#title': 'Zip' 
+      '#description': ""
+      '#required': true
+    organization_1:
+      '#type': textfield
+      '#title': 'Organization' 
+      '#description': ""
+      '#required': true
+    requestors_title_role_1:
+      '#type': textfield
+      '#title': 'Requestor’s Title/Role' 
+      '#description': ""
+      '#required': true
+  fieldset_request:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Letter Info' 
+    '#description': ""
+    letter_purpose_10:
+      '#type': textfield
+      '#title': 'What is the purpose of the letter?' 
+      '#description': ""
+      '#required': true
+    published_on_social_media_10:
+      '#type': radios
+      '#options':
+        yes: 'Yes'
+        no: 'No'
+      '#title': 'Will this be published on social media?' 
+      '#description': ""
+      '#required': true
+    program_book_10:
+      '#type': radios
+      '#options':
+        yes: 'Yes'
+        no: 'No'
+      '#title': 'Will this be included in a program book?' 
+      '#description': ""
+      '#required': true
+    type_of_request_10:
+      '#type': radios
+      '#options':
+        anniversary: 'Anniversary Letter'
+        birthdayletter: 'Birthday Letter'
+        condolence: 'Condolence Letter'
+        congratulatory: 'Congratulatory Letter'
+        greetings: 'Greetings/Welcome Letter'
+        support: 'Letter of Support (grant)'
+        programbook: 'Program Book'
+      '#title': 'Type of Request' 
+      '#description': ""
+      '#required': true
+    fieldset_content_of_letter_10:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Content of Letter' 
+      '#description': ""
+      date_letter_should_be_addressed_29:
+        '#type': date
+        '#title': 'Date letter should be addressed' 
+        '#description': ""
+        '#required': true
+      name_address_line_29:
+        '#type': textfield
+        '#title': 'Name of Individual or Organization to list on the address line of the letter' 
+        '#description': ""
+        '#required': true
+      letter_address_29:
+        '#type': textfield
+        '#title': 'Address to include on the letter' 
+        '#description': ""
+        '#required': true
+      sample_language_29:
+        '#type': textarea
+        '#title': 'Sample language' 
+        '#description': ""
+        '#required': true
+      sample_language_file_29:
+        '#type': managed_file
+        '#max_filesize': '2'
+        '#file_extensions': 'pdf'
+        '#title': 'Sample language in uploaded file' 
+        '#description': ""
+    delivery_method_10:
+      '#type': radios
+      '#options':
+        city_hall: 'Obtain at City Hall (202 C Street San Diego, CA 92101)'
+        email: 'Email as a PDF'
+        mail: 'Mail to address'
+      '#title': 'Delivery Method' 
+      '#description': ""
+      '#required': true
+  date_of_event:
+    '#type': date
+    '#title': 'Date of Event' 
+    '#description': ""
+    '#required': true
+  date_letter_needed_by:
+    '#type': date
+    '#title': 'Date letter needed by' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /mayor/request-a-letter-response
+  confirmation_message: "<p>Hi,</p>\r\n\r\n<p>Thank you for your submission request to Mayor Todd Gloria’s Office. This email confirms we’ve received your request and will begin processing it as soon as possible.&nbsp; Please be aware that all requests are subject to the office’s multi-layered approval process. Not all requests are guaranteed to be completed.</p>\r\n\r\n<p>Additionally, office policy requires a minimum of 10 business days’ notice&nbsp;to ensure there is enough time to process and follow up with any questions or issues. Please submit draft language with all requests as this will help us complete the requested documents sooner.</p>\r\n\r\n<p><b>If you have questions or would like to check on the status of your&nbsp;request, please reach out to me directly. I am available via call, text, and email&nbsp;at:</b></p>\r\n\r\n<ul>\r\n\t<li>Cell: 619-753-4586</li>\r\n\t<li>Email:&nbsp;<a href=\"mailto:acsilva@sandiego.gov\">acsilva@sandiego.gov</a></li>\r\n</ul>\r\n\r\n<p>Due to the volume of email our office receives please do not contact other staff regarding the status of your request. I’ll do my best to respond in a timely manner,&nbsp;however,&nbsp;please understand we have a significant number of requests, and I am not always available for immediate response.</p>\r\n\r\n<p>Thank you in advance for your patience, and again thank you for your request. The&nbsp;Mayor&nbsp;loves to support the San Diego community in as many ways as possible!</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit Request'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        <p>Hi,</p>
+
+        <p>Thank you for your submission request to Mayor Todd Gloria’s Office. This email confirms we’ve received your request and will begin processing it as soon as possible.&nbsp; Please be aware that all requests are subject to the office’s multi-layered approval process. Not all requests are guaranteed to be completed.</p>
+
+        <p>Additionally, office policy requires a minimum of 10 business days’ notice&nbsp;to ensure there is enough time to process and follow up with any questions or issues. Please submit draft language with all requests as this will help us complete the requested documents sooner.</p>
+
+        <p><strong>If you have questions or would like to check on the status of your&nbsp;request, please reach out to me directly. I am available via call, text, and email&nbsp;at:</strong></p>
+
+        <ul>
+        	<li>Cell: 619-753-4586</li>
+        	<li>Email:&nbsp;<a href="mailto:acsilva@sandiego.gov">acsilva@sandiego.gov</a></li>
+        </ul>
+
+        <p>Due to the volume of email our office receives please do not contact other staff regarding the status of your request. I’ll do my best to respond in a timely manner,&nbsp;however,&nbsp;please understand we have a significant number of requests, and I am not always available for immediate response.</p>
+
+        <p>Thank you in advance for your patience, and again thank you for your request. The&nbsp;Mayor&nbsp;loves to support the San Diego community in as many ways as possible!</p>
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:type_of_request:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |
+        Submitted on [webform_submission:completed_date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_4:
+    id: email
+    handler_id: email_4
+    label: 'Email 4'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+
+        == CONTACT INFO ==
+
+        FIRST NAME: 
+        [webform_submission:values:contact:first_name:nolabel]
+
+        LAST NAME: 
+        [webform_submission:values:contact:last_name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact:email:nolabel]
+
+        MAILING ADDRESS:
+        [webform_submission:values:contact:mailing_address:nolabel]
+
+        CITY: 
+        [webform_submission:values:contact:city:nolabel]
+
+        STATE: 
+        [webform_submission:values:contact:state:nolabel]
+
+        ZIP: 
+        [webform_submission:values:contact:zip:nolabel]
+
+        ORGANIZATION: 
+        [webform_submission:values:contact:organization:nolabel]
+
+        REQUESTOR’S TITLE/ROLE: 
+        [webform_submission:values:contact:requestors_title_role:nolabel]
+
+        == LETTER INFO ==
+
+        PURPOSE OF THE LETTER: 
+        [webform_submission:values:request:letter_purpose:nolabel]
+
+        PUBLISHING ON SOCIAL MEDIA? 
+        [webform_submission:values:request:published_on_social_media:nolabel]
+
+        INCLUDED IN PROGRAM BOOK? 
+        [webform_submission:values:request:program_book:nolabel]
+
+        TYPE OF REQUEST: 
+        [webform_submission:values:request:type_of_request:nolabel]
+
+        == CONTENT OF LETTER ==
+
+        NAME OF INDIVIDUAL OR ORGANIZATION IN ADDRESS LINE:
+        [webform_submission:values:request:content_of_letter:name_address_line:nolabel]
+
+        ADDRESS ON LETTER:
+        [webform_submission:values:request:content_of_letter:letter_address:nolabel]
+
+        SAMPLE LANGUAGE:
+        [webform_submission:values:request:content_of_letter:sample_language:nolabel]
+
+        SAMPLE LANGUAGE FILE:
+        [webform_submission:values:request:content_of_letter:sample_language_file:nolabel]
+
+        DELIVERY  METHOD:
+        [webform_submission:values:request:delivery_method:nolabel]
+
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_5:
+    id: email
+    handler_id: email_5
+    label: 'Email 5'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 5
+    settings:
+      states:
+        - completed
+      to_mail: mvalk@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+
+        == CONTACT INFO ==
+
+        FIRST NAME: 
+        [webform_submission:values:contact:first_name:nolabel]
+
+        LAST NAME: 
+        [webform_submission:values:contact:last_name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact:email:nolabel]
+
+        MAILING ADDRESS:
+        [webform_submission:values:contact:mailing_address:nolabel]
+
+        CITY: 
+        [webform_submission:values:contact:city:nolabel]
+
+        STATE: 
+        [webform_submission:values:contact:state:nolabel]
+
+        ZIP: 
+        [webform_submission:values:contact:zip:nolabel]
+
+        ORGANIZATION: 
+        [webform_submission:values:contact:organization:nolabel]
+
+        REQUESTOR’S TITLE/ROLE: 
+        [webform_submission:values:contact:requestors_title_role:nolabel]
+
+        == LETTER INFO ==
+
+        PURPOSE OF THE LETTER: 
+        [webform_submission:values:request:letter_purpose:nolabel]
+
+        PUBLISHING ON SOCIAL MEDIA? 
+        [webform_submission:values:request:published_on_social_media:nolabel]
+
+        INCLUDED IN PROGRAM BOOK? 
+        [webform_submission:values:request:program_book:nolabel]
+
+        TYPE OF REQUEST: 
+        [webform_submission:values:request:type_of_request:nolabel]
+
+        == CONTENT OF LETTER ==
+
+        NAME OF INDIVIDUAL OR ORGANIZATION IN ADDRESS LINE:
+        [webform_submission:values:request:content_of_letter:name_address_line:nolabel]
+
+        ADDRESS ON LETTER:
+        [webform_submission:values:request:content_of_letter:letter_address:nolabel]
+
+        SAMPLE LANGUAGE:
+        [webform_submission:values:request:content_of_letter:sample_language:nolabel]
+
+        SAMPLE LANGUAGE FILE:
+        [webform_submission:values:request:content_of_letter:sample_language_file:nolabel]
+
+        DELIVERY  METHOD:
+        [webform_submission:values:request:delivery_method:nolabel]
+
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_6:
+    id: email
+    handler_id: email_6
+    label: 'Email 6'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 6
+    settings:
+      states:
+        - completed
+      to_mail: epiatanesi@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+
+        == CONTACT INFO ==
+
+        FIRST NAME: 
+        [webform_submission:values:contact:first_name:nolabel]
+
+        LAST NAME: 
+        [webform_submission:values:contact:last_name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact:email:nolabel]
+
+        MAILING ADDRESS:
+        [webform_submission:values:contact:mailing_address:nolabel]
+
+        CITY: 
+        [webform_submission:values:contact:city:nolabel]
+
+        STATE: 
+        [webform_submission:values:contact:state:nolabel]
+
+        ZIP: 
+        [webform_submission:values:contact:zip:nolabel]
+
+        ORGANIZATION: 
+        [webform_submission:values:contact:organization:nolabel]
+
+        REQUESTOR’S TITLE/ROLE: 
+        [webform_submission:values:contact:requestors_title_role:nolabel]
+
+        == LETTER INFO ==
+
+        PURPOSE OF THE LETTER: 
+        [webform_submission:values:request:letter_purpose:nolabel]
+
+        PUBLISHING ON SOCIAL MEDIA? 
+        [webform_submission:values:request:published_on_social_media:nolabel]
+
+        INCLUDED IN PROGRAM BOOK? 
+        [webform_submission:values:request:program_book:nolabel]
+
+        TYPE OF REQUEST: 
+        [webform_submission:values:request:type_of_request:nolabel]
+
+        == CONTENT OF LETTER ==
+
+        NAME OF INDIVIDUAL OR ORGANIZATION IN ADDRESS LINE:
+        [webform_submission:values:request:content_of_letter:name_address_line:nolabel]
+
+        ADDRESS ON LETTER:
+        [webform_submission:values:request:content_of_letter:letter_address:nolabel]
+
+        SAMPLE LANGUAGE:
+        [webform_submission:values:request:content_of_letter:sample_language:nolabel]
+
+        SAMPLE LANGUAGE FILE:
+        [webform_submission:values:request:content_of_letter:sample_language_file:nolabel]
+
+        DELIVERY  METHOD:
+        [webform_submission:values:request:delivery_method:nolabel]
+
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_7:
+    id: email
+    handler_id: email_7
+    label: 'Email 7'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 7
+    settings:
+      states:
+        - completed
+      to_mail: javierg@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |
+        Submitted on [webform_submission:date:long]
+
+        == CONTACT INFO ==
+
+        FIRST NAME: 
+        [webform_submission:values:contact:first_name:nolabel]
+
+        LAST NAME: 
+        [webform_submission:values:contact:last_name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact:email:nolabel]
+
+        MAILING ADDRESS:
+        [webform_submission:values:contact:mailing_address:nolabel]
+
+        CITY: 
+        [webform_submission:values:contact:city:nolabel]
+
+        STATE: 
+        [webform_submission:values:contact:state:nolabel]
+
+        ZIP: 
+        [webform_submission:values:contact:zip:nolabel]
+
+        ORGANIZATION: 
+        [webform_submission:values:contact:organization:nolabel]
+
+        REQUESTOR’S TITLE/ROLE: 
+        [webform_submission:values:contact:requestors_title_role:nolabel]
+
+        == LETTER INFO ==
+
+        PURPOSE OF THE LETTER: 
+        [webform_submission:values:request:letter_purpose:nolabel]
+
+        PUBLISHING ON SOCIAL MEDIA? 
+        [webform_submission:values:request:published_on_social_media:nolabel]
+
+        INCLUDED IN PROGRAM BOOK? 
+        [webform_submission:values:request:program_book:nolabel]
+
+        TYPE OF REQUEST: 
+        [webform_submission:values:request:type_of_request:nolabel]
+
+        == CONTENT OF LETTER ==
+
+        DATE LETTER SHOULD BE ADDRESSED
+        [webform_submission:values:request:content_of_letter:date_letter_should_be_addressed:nolabel]
+
+        NAME OF INDIVIDUAL OR ORGANIZATION IN ADDRESS LINE:
+        [webform_submission:values:request:content_of_letter:name_address_line:nolabel]
+
+        ADDRESS ON LETTER:
+        [webform_submission:values:request:content_of_letter:letter_address:nolabel]
+
+        SAMPLE LANGUAGE:
+        [webform_submission:values:request:content_of_letter:sample_language:nolabel]
+
+        SAMPLE LANGUAGE FILE:
+        [webform_submission:values:request:content_of_letter:sample_language_file:nolabel]
+
+        DELIVERY  METHOD:
+        [webform_submission:values:request:delivery_method:nolabel]
+
+        DATE OF EVENT
+        [webform_submission:values:request: date_of_event:nolabel]
+
+        DATE LETTER NEEDED BY
+        [webform_submission:values:request:date_letter_needed_by:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_8:
+    id: email
+    handler_id: email_8
+    label: 'Email 8'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 8
+    settings:
+      states:
+        - completed
+      to_mail: acsilva@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+
+        == CONTACT INFO ==
+
+        FIRST NAME: 
+        [webform_submission:values:contact:first_name:nolabel]
+
+        LAST NAME: 
+        [webform_submission:values:contact:last_name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact:email:nolabel]
+
+        MAILING ADDRESS:
+        [webform_submission:values:contact:mailing_address:nolabel]
+
+        CITY: 
+        [webform_submission:values:contact:city:nolabel]
+
+        STATE: 
+        [webform_submission:values:contact:state:nolabel]
+
+        ZIP: 
+        [webform_submission:values:contact:zip:nolabel]
+
+        ORGANIZATION: 
+        [webform_submission:values:contact:organization:nolabel]
+
+        REQUESTOR’S TITLE/ROLE: 
+        [webform_submission:values:contact:requestors_title_role:nolabel]
+
+        == LETTER INFO ==
+
+        PURPOSE OF THE LETTER: 
+        [webform_submission:values:request:letter_purpose:nolabel]
+
+        PUBLISHING ON SOCIAL MEDIA? 
+        [webform_submission:values:request:published_on_social_media:nolabel]
+
+        INCLUDED IN PROGRAM BOOK? 
+        [webform_submission:values:request:program_book:nolabel]
+
+        TYPE OF REQUEST: 
+        [webform_submission:values:request:type_of_request:nolabel]
+
+        == CONTENT OF LETTER ==
+
+        DATE LETTER SHOULD BE ADDRESSED
+        [webform_submission:values:request:content_of_letter:date_letter_should_be_addressed:nolabel]
+
+        NAME OF INDIVIDUAL OR ORGANIZATION IN ADDRESS LINE:
+        [webform_submission:values:request:content_of_letter:name_address_line:nolabel]
+
+        ADDRESS ON LETTER:
+        [webform_submission:values:request:content_of_letter:letter_address:nolabel]
+
+        SAMPLE LANGUAGE:
+        [webform_submission:values:request:content_of_letter:sample_language:nolabel]
+
+        SAMPLE LANGUAGE FILE:
+        [webform_submission:values:request:content_of_letter:sample_language_file:nolabel]
+
+        DELIVERY  METHOD:
+        [webform_submission:values:request:delivery_method:nolabel]
+
+        DATE OF EVENT
+        [webform_submission:values:request: date_of_event:nolabel]
+
+        DATE LETTER NEEDED BY
+        [webform_submission:values:request:date_letter_needed_by:nolabel]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_9:
+    id: email
+    handler_id: email_9
+    label: 'Email 9'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 9
+    settings:
+      states:
+        - completed
+      to_mail: callio@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+
+        == CONTACT INFO ==
+
+        FIRST NAME: 
+        [webform_submission:values:contact:first_name:nolabel]
+
+        LAST NAME: 
+        [webform_submission:values:contact:last_name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact:email:nolabel]
+
+        MAILING ADDRESS:
+        [webform_submission:values:contact:mailing_address:nolabel]
+
+        CITY: 
+        [webform_submission:values:contact:city:nolabel]
+
+        STATE: 
+        [webform_submission:values:contact:state:nolabel]
+
+        ZIP: 
+        [webform_submission:values:contact:zip:nolabel]
+
+        ORGANIZATION: 
+        [webform_submission:values:contact:organization:nolabel]
+
+        REQUESTOR’S TITLE/ROLE: 
+        [webform_submission:values:contact:requestors_title_role:nolabel]
+
+        == LETTER INFO ==
+
+        PURPOSE OF THE LETTER: 
+        [webform_submission:values:request:letter_purpose:nolabel]
+
+        PUBLISHING ON SOCIAL MEDIA? 
+        [webform_submission:values:request:published_on_social_media:nolabel]
+
+        INCLUDED IN PROGRAM BOOK? 
+        [webform_submission:values:request:program_book:nolabel]
+
+        TYPE OF REQUEST: 
+        [webform_submission:values:request:type_of_request:nolabel]
+
+        == CONTENT OF LETTER ==
+
+        DATE LETTER SHOULD BE ADDRESSED
+        [webform_submission:values:request:content_of_letter:date_letter_should_be_addressed:nolabel]
+
+        NAME OF INDIVIDUAL OR ORGANIZATION IN ADDRESS LINE:
+        [webform_submission:values:request:content_of_letter:name_address_line:nolabel]
+
+        ADDRESS ON LETTER:
+        [webform_submission:values:request:content_of_letter:letter_address:nolabel]
+
+        SAMPLE LANGUAGE:
+        [webform_submission:values:request:content_of_letter:sample_language:nolabel]
+
+        SAMPLE LANGUAGE FILE:
+        [webform_submission:values:request:content_of_letter:sample_language_file:nolabel]
+
+        DELIVERY  METHOD:
+        [webform_submission:values:request:delivery_method:nolabel]
+
+        DATE OF EVENT
+        [webform_submission:values:request: date_of_event:nolabel]
+
+        DATE LETTER NEEDED BY
+        [webform_submission:values:request:date_letter_needed_by:nolabel]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_10:
+    id: email
+    handler_id: email_10
+    label: 'Email 10'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 10
+    settings:
+      states:
+        - completed
+      to_mail: abrizuela@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+
+        == CONTACT INFO ==
+
+        FIRST NAME: 
+        [webform_submission:values:contact:first_name:nolabel]
+
+        LAST NAME: 
+        [webform_submission:values:contact:last_name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact:email:nolabel]
+
+        MAILING ADDRESS:
+        [webform_submission:values:contact:mailing_address:nolabel]
+
+        CITY: 
+        [webform_submission:values:contact:city:nolabel]
+
+        STATE: 
+        [webform_submission:values:contact:state:nolabel]
+
+        ZIP: 
+        [webform_submission:values:contact:zip:nolabel]
+
+        ORGANIZATION: 
+        [webform_submission:values:contact:organization:nolabel]
+
+        REQUESTOR’S TITLE/ROLE: 
+        [webform_submission:values:contact:requestors_title_role:nolabel]
+
+        == LETTER INFO ==
+
+        PURPOSE OF THE LETTER: 
+        [webform_submission:values:request:letter_purpose:nolabel]
+
+        PUBLISHING ON SOCIAL MEDIA? 
+        [webform_submission:values:request:published_on_social_media:nolabel]
+
+        INCLUDED IN PROGRAM BOOK? 
+        [webform_submission:values:request:program_book:nolabel]
+
+        TYPE OF REQUEST: 
+        [webform_submission:values:request:type_of_request:nolabel]
+
+        == CONTENT OF LETTER ==
+
+        DATE LETTER SHOULD BE ADDRESSED
+        [webform_submission:values:request:content_of_letter:date_letter_should_be_addressed:nolabel]
+
+        NAME OF INDIVIDUAL OR ORGANIZATION IN ADDRESS LINE:
+        [webform_submission:values:request:content_of_letter:name_address_line:nolabel]
+
+        ADDRESS ON LETTER:
+        [webform_submission:values:request:content_of_letter:letter_address:nolabel]
+
+        SAMPLE LANGUAGE:
+        [webform_submission:values:request:content_of_letter:sample_language:nolabel]
+
+        SAMPLE LANGUAGE FILE:
+        [webform_submission:values:request:content_of_letter:sample_language_file:nolabel]
+
+        DELIVERY  METHOD:
+        [webform_submission:values:request:delivery_method:nolabel]
+
+        DATE OF EVENT
+        [webform_submission:values:request: date_of_event:nolabel]
+
+        DATE LETTER NEEDED BY
+        [webform_submission:values:request:date_letter_needed_by:nolabel]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

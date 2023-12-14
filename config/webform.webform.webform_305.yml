@@ -1,0 +1,117 @@
+uuid: 53561207-3190-4d51-926e-22c76ad65b78
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 57
+template: false
+archive: false
+id: webform_305
+title: 'Contact SDPHB'
+description: null
+category: null
+elements: |
+  beginning_note:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<p><strong>Contact Form</strong>[[{'fid':'91','view_mode':'default','fields':{'format':'default','field_file_image_alt_text[und][0][value]':'','field_file_image_title_text[und][0][value]':'','media_title[und][0][value]':'','media_description[und][0][value]':'','media_description[und][0][format]':'filtered_html','field_tags[und]':'','field_license[und]':'none'},'type':'media','link_text':null,'attributes':{'height':'120','width':'120','style':'float: right;','class':'media-element file-default'}}]]</p><p><span style='color:#ff0000;'><strong>* </strong></span>Indicates required fields.</p><p>&nbsp;</p><p>&nbsp;</p>"
+    '#title': 'Beginning Note' 
+    '#description': ""
+  contact_information:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<p><strong>Contact Information</strong></p><hr><p>&nbsp;</p>"
+    '#title': 'Contact Information' 
+    '#description': ""
+  name:
+    '#type': textfield
+    '#title': 'Name' 
+    '#description': ""
+    '#required': true
+  email_youyourdomaincom:
+    '#type': textfield
+    '#title': 'Email: (you@yourdomain.com)' 
+    '#description': ""
+    '#required': true
+  additional_information:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<p><strong>Additional Information</strong></p>"
+    '#title': 'Additional Information' 
+    '#description': ""
+  subject:
+    '#type': select
+    '#options':
+      start_new_aed: 'Start a New AED Program'
+      aed_equipment: 'AED Equipment'
+      member_login: 'Member Login'
+      program_management: 'Program Management'
+      other: 'Other'
+    '#title': 'Subject ' 
+    '#description': ""
+  your_message:
+    '#type': textarea
+    '#title': 'Your Message' 
+    '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: heartbeatadmin@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: heartbeatadmin@sandiego.gov
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

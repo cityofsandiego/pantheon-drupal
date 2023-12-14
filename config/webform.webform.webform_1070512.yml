@@ -1,0 +1,163 @@
+uuid: 5f11dcc2-aabc-445b-b7fe-516391a10f48
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_1070512
+title: 'Meeting Request '
+description: null
+category: null
+elements: |
+  fieldset_contact_info_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Information' 
+    '#description': ""
+    contact_name_1:
+      '#type': textfield
+      '#title_display': inline
+      '#title': 'Name' 
+      '#description': ""
+      '#required': true
+    contact_phone_1:
+      '#type': textfield
+      '#title_display': inline
+      '#title': 'Phone Number' 
+      '#description': ""
+      '#required': true
+    contact_email_1:
+      '#type': email
+      '#size': 20
+      '#title_display': inline
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+  fieldset_event_info_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Event Information' 
+    '#description': ""
+    event_name_5:
+      '#type': textfield
+      '#title': 'Name/Topic of Event/Meeting' 
+      '#description': ""
+      '#required': true
+    event_organization_5:
+      '#type': textfield
+      '#title': 'Organization Name' 
+      '#description': ""
+      '#required': true
+    event_speak_date_5:
+      '#type': date
+      '#title': 'Elected Speaking Date' 
+      '#description': ""
+    event_speak_time_5:
+      '#type': time
+      '#title': 'Elected Speaking Time' 
+      '#description': ""
+    event_meeting_description_5:
+      '#type': textarea
+      '#title': 'Event/Meeting Description' 
+      '#description': ""
+      '#required': true
+  fieldset_additional_comments_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Additional Comments' 
+    '#description': ""
+    comments_27:
+      '#type': textarea
+      '#title': 'Comments' 
+      '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: GPartida@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Meeting Request from [submission:values:contact_info_set:contact_name:nolabel]'
+      body: |-
+        Submitted on [webform_submission:date:long]
+
+        == CONTACT INFORMATION ==
+
+        NAME:
+        [webform_submission:values:contact_info_set:contact_name:nolabel]
+
+        PHONE:
+        [webform_submission:values:contact_info_set:contact_phone:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact_info_set:contact_email:nolabel]
+
+        == EVENT INFORMATION ==
+
+        NAME/TOPIC OF EVENT/MEETING:
+        [webform_submission:values:event_info_set:event_name:nolabel]
+
+        ORGANIZATION NAME:
+        [webform_submission:values:event_info_set:event_organization:nolabel]
+
+        EVENT/MEETING DESCRIPTION:
+        [webform_submission:values:event_info_set:event_meeting_description:nolabel]
+
+        == ADDITIONAL COMMENTS ==
+
+        [webform_submission:values:additional_comments_set:comments:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }
