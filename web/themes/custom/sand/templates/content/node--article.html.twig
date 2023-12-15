@@ -129,7 +129,7 @@
             {% endif %}
             <h1>{{ label }}</h1>
             {% if content.field_subtitle.0 %}
-            <h3 class="l-padding-desktop-hs">{{ content.field_subtitle }}</h3>
+            <p class="h3 l-margin-bd">{{ content.field_subtitle.0 }}</p>
             {% endif %}
             {% if content.field_article_exclude.0['#markup'] != "All Views" %}
               <div class="byline l-margin-bd">
@@ -142,14 +142,18 @@
             {% endif %}
           </div>
           {% endif %}
+          {% if content.field_image.0 %}
+          <div class="l-padding-hm l-padding-bm">
+          {{ content.field_image }}
+          </div>
+          {% endif %}
           {% if content.field_body_no_margin.0 %}
-          <div class="l-padding-vm">
+          <div class="l-padding-hm l-padding-bm">
             {{ content.field_body_no_margin }}
           </div>
           {% endif %}
           {% if content.body.0 %}
           <div class="l-padding-hm l-padding-bm">
-            {{ content.field_image }}
             {{ content.body }}
           </div>
           {% endif %}

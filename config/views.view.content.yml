@@ -3484,7 +3484,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           batch: true
-          batch_size: 20
+          batch_size: 100
           form_step: true
           ajax_loader: false
           buttons: false
@@ -3492,14 +3492,14 @@ display:
           clear_on_exposed: true
           force_selection_info: false
           selected_actions:
-            0:
-              action_id: node_unpublish_by_keyword_action
-              preconfiguration:
-                add_confirmation: false
-            5:
+            2:
               action_id: node_assign_owner_action
               preconfiguration:
                 add_confirmation: true
+            3:
+              action_id: node_unpublish_by_keyword_action
+              preconfiguration:
+                add_confirmation: false
             7:
               action_id: views_bulk_edit
               preconfiguration:
@@ -3508,13 +3508,13 @@ display:
             8:
               action_id: views_bulk_operations_delete_entity
             9:
-              action_id: 'entity:unpublish_action:node'
-              preconfiguration:
-                add_confirmation: true
-            10:
               action_id: 'entity:publish_action:node'
               preconfiguration:
                 add_confirmation: false
+            10:
+              action_id: 'entity:unpublish_action:node'
+              preconfiguration:
+                add_confirmation: true
         title:
           id: title
           table: node_field_data
@@ -4062,7 +4062,7 @@ display:
         type: full
         options:
           offset: 0
-          items_per_page: 40
+          items_per_page: 100
           total_pages: null
           id: 0
           tags:
