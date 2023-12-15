@@ -132,7 +132,7 @@
             <p class="h3 l-margin-bd">{{ content.field_subtitle.0 }}</p>
             {% endif %}
             {% if content.field_article_exclude.0['#markup'] != "All Views" %}
-              <div class="byline l-margin-bd">
+              <div class="byline">
               {% if (content.field_byline.0) and (node.title.value != "Inside San Diego Home") %}
               <p>{{ node.created.value|date("F j, Y") }} | {{ content.field_byline.0 }}</p>
               {% else %}
@@ -143,17 +143,25 @@
           </div>
           {% endif %}
           {% if content.field_image.0 %}
-          <div class="l-padding-hm l-padding-bm">
+          <div class="l-padding-hm l-padding-td l-padding-bm">
           {{ content.field_image }}
           </div>
           {% endif %}
           {% if content.field_body_no_margin.0 %}
+          {% if node.title.value != "Inside San Diego Home"%}
           <div class="l-padding-hm l-padding-bm">
+          {% else %}
+          <div class="l-padding-am">
+          {% endif %}
             {{ content.field_body_no_margin }}
           </div>
           {% endif %}
           {% if content.body.0 %}
+          {% if node.title.value != "Inside San Diego Home"%}
           <div class="l-padding-hm l-padding-bm">
+          {% else %}
+          <div class="l-padding-am">
+          {% endif %}
             {{ content.body }}
           </div>
           {% endif %}
