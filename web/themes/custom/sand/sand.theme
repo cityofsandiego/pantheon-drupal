@@ -218,6 +218,12 @@ function sand_theme_suggestions_paragraph_alter(array &$suggestions, array $vari
  * Implements hook_preprocess_HOOK() for node templates.
  */
 function sand_preprocess_node(&$variables) {
+  $node = &$variables['node'];
   // put query parameters in url_params variable
   $variables['url_params'] = \Drupal::request()->query->all();
+  
+  // If it's a blog content type get the URL;
+  if ($node instanceof \Drupal\sand_type\Entity\Bundle\Blog) {
+    $variables['website_url'] = $node->getWebSiteURL();
+  }
 }
