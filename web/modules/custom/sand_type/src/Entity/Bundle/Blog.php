@@ -21,4 +21,24 @@ class Blog extends Node implements DepartmentInterface {
 
   use DepartmentTraits;
 
+  /**
+   * Get the processed form of the URL.
+   * 
+   * Basically processes the 'internal:'  and 'entity:' schemas. Initially used
+   * for the node--blog.html.twig template.
+   * 
+   * @return string
+   */
+  public function getWebSiteURL(): string {
+    $website_url = $this->get('field_website')->getString('uri') ?? '';
+    if (str_starts_with($website_url, 'internal:')) {
+      return str_replace('internal:', '', $website_url);
+    }
+    elseif (str_starts_with($website_url, 'entity:')) {
+      return str_replace('entity:', '/', $website_url);
+    } 
+    else {
+      return $website_url;
+    }
+  }
 }
