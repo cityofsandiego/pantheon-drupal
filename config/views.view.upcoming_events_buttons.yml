@@ -167,6 +167,79 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
+          label: DOW
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: smartdate_custom
+          settings:
+            separator: ''
+            date_format: l
+            custom_date_format: ''
+            timezone: ''
+            join: ''
+            time_format: ''
+            time_hour_format: ''
+            allday_label: ''
+            date_first: '1'
+            ampm_reduce: 0
+            site_time_toggle: 0
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_event_date_4:
+          id: field_event_date_4
+          table: node__field_event_date
+          field: field_event_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
           label: Day
           exclude: true
           alter:
@@ -203,7 +276,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -212,13 +285,13 @@ display:
           type: smartdate_custom
           settings:
             separator: ''
-            date_format: D
+            date_format: j
             custom_date_format: ''
             timezone: ''
             join: ''
             time_format: ''
             time_hour_format: ''
-            allday_label: ''
+            allday_label: 'All day'
             date_first: '1'
             ampm_reduce: 0
             site_time_toggle: 0
@@ -240,7 +313,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: Date
+          label: Month
           exclude: true
           alter:
             alter_text: false
@@ -276,7 +349,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -285,7 +358,7 @@ display:
           type: smartdate_custom
           settings:
             separator: ''
-            date_format: 'M d'
+            date_format: F
             custom_date_format: ''
             timezone: ''
             join: ''
@@ -452,7 +525,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card__wrap card__container width-100--mobile l-margin-mobile-bd l-margin-mobile-hn l-padding-desktop-hd\">\r\n\t\t\t<div class=\"row card__wrap width-100 l-padding-hn l-padding-vn l-margin-mobile-hn think-blue-event\">\r\n\t\t\t\t<div class=\"three sm-four columns text-white l-padding-vd text-center background--endeavour\">\r\n<p class=\"visuallyhidden\">{{ field_event_date_3 }}</p>\r\n\t\t\t\t\t<p class=\"l-margin-bn text-upper\">{{ field_event_date }}</p>\r\n\r\n\t\t\t\t\t<p class=\"l-margin-bn text-upper text-accent\">{{ field_event_date_1 }}</p>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"nine sm-eight columns l-padding-ad background-white\">\r\n\t\t\t\t\t<p class=\"text-accent text-upper l-margin-bn\">{{ title }}</p>\r\n\t\t\t\t{{ field_event_location_txt }}\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>"
+            text: "<div class=\"grid-x grid-margin-x event-listing-large\">\r\n    <div class=\"cell small-4 medium-3\">\r\n        <div class=\"event-date\"><span class=\"event--month\">{{ field_event_date_2 }}</span> <span class=\"event--day\">{{ field_event_date_4 }}</span> <span class=\"event--dow\">{{ field_event_date_1 }}</span></div>\r\n    </div>\r\n\r\n    <div class=\"cell auto medium-auto\">\r\n        <div class=\"event-info\">\r\n            <h3 class=\"l-margin-tn\">{{ title }}</h3>\r\n\r\n            <p class=\"post__date l-margin-bs\"><strong>{{ field_event_date_3 }}</strong></p>\r\n{{ field_event_location_txt }}\r\n        </div>\r\n    </div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -511,7 +584,20 @@ display:
       cache:
         type: tag
         options: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: 'Events will be posted when available.'
+            format: basic_html
+          tokenize: false
       sorts:
         field_event_date_value:
           id: field_event_date_value
@@ -563,14 +649,13 @@ display:
             format: default_summary
           specify_validation: true
           validate:
-            type: 'entity:taxonomy_term'
+            type: taxonomy_term_name_into_id
             fail: 'not found'
           validate_options:
-            bundles:
-              department: department
+            bundles: {  }
             access: false
             operation: view
-            multiple: 0
+            transform: false
           break_phrase: false
           not: false
       filters:
@@ -612,7 +697,7 @@ display:
             min: ''
             max: ''
             value: now
-            type: date
+            type: offset
             granularity: second
           group: 1
           exposed: false
