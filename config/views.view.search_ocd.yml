@@ -539,12 +539,35 @@ display:
         - 'search_api_list:remote'
   all:
     id: all
-    display_title: Page
+    display_title: 'Page OCD'
     display_plugin: page
     position: 1
     display_options:
+      display_description: ''
       display_extenders: {  }
       path: search/ocd
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+      tags:
+        - 'config:field.storage.sand_remote.field_body'
+        - 'config:field.storage.sand_remote.field_doc_date'
+        - 'config:field.storage.sand_remote.field_document_url'
+        - 'config:search_api.index.remote'
+        - 'search_api_list:remote'
+  ccc:
+    id: ccc
+    display_title: 'Page CCC'
+    display_plugin: page
+    position: 1
+    display_options:
+      display_description: ''
+      display_extenders: {  }
+      path: search/ccc
     cache_metadata:
       max-age: -1
       contexts:
