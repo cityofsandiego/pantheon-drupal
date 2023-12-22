@@ -4332,27 +4332,30 @@ section.homepage .hero__content {
   Styles for cards and featured cards.
   ============================================================ */
 /* Cards Styles from D7 */
-body.path-search aside.layout-sidebar-second .border.block {
+body.path-search aside.layout-sidebar-first .border.block, body.path-search aside.layout-sidebar-second .border.block {
   margin-bottom: 2em;
   padding-bottom: 2em; }
 
 @media print, screen and (min-width: 30em) {
-  body.path-search aside.layout-sidebar-second .block {
+  body.path-search aside.layout-sidebar-first .block, body.path-search aside.layout-sidebar-second .block {
     margin-top: 1em;
     margin-bottom: 1em; } }
 
-body.path-search aside.layout-sidebar-second .block h3 {
+body.path-search aside.layout-sidebar-first .block h3, body.path-search aside.layout-sidebar-second .block h3 {
   margin: 0; }
 
-body.path-search aside.layout-sidebar-second .block ul {
+body.path-search aside.layout-sidebar-first .block ul, body.path-search aside.layout-sidebar-second .block ul {
   padding: 0 1em 0 0 !important; }
 
-body.path-search aside.layout-sidebar-second .block li.facet-item {
-  list-style-type: none; }
-  body.path-search aside.layout-sidebar-second .block li.facet-item label {
-    margin-right: 5px; }
+body.path-search aside.layout-sidebar-first .block li.facet-item, body.path-search aside.layout-sidebar-second .block li.facet-item {
+  list-style-type: none;
+  display: flex; }
+  body.path-search aside.layout-sidebar-first .block li.facet-item label, body.path-search aside.layout-sidebar-second .block li.facet-item label {
+    display: block;
+    width: 85%;
+    padding-right: 5px; }
 
-body.path-search aside.layout-sidebar-second .block .facets-checkbox {
+body.path-search aside.layout-sidebar-first .block .facets-checkbox, body.path-search aside.layout-sidebar-second .block .facets-checkbox {
   width: 1em; }
 
 .view-content mark {
@@ -4370,7 +4373,10 @@ header form[action="/search/site"] .form-type-textfield label {
   display: none; }
 
 div.block.block-facets {
-  margin-top: 1em; }
+  margin-top: 1em;
+  margin-right: 1em; }
+  div.block.block-facets h3 {
+    margin-top: 0; }
   div.block.block-facets ul {
     padding-left: 0; }
   div.block.block-facets li {

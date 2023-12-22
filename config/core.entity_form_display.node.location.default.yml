@@ -28,6 +28,8 @@ dependencies:
     - field.field.node.location.field_location_hours_title_2
     - field.field.node.location.field_location_type
     - field.field.node.location.field_meta_tags
+    - field.field.node.location.field_misc_field_1
+    - field.field.node.location.field_misc_field_2
     - field.field.node.location.field_partial_re_open_citywide
     - field.field.node.location.field_phone
     - field.field.node.location.field_resources
@@ -72,7 +74,7 @@ third_party_settings:
       label: 'Main Tabs'
       region: content
       parent_name: ''
-      weight: 5
+      weight: 3
       format_type: tabs
       format_settings:
         classes: ''
@@ -154,7 +156,7 @@ third_party_settings:
       label: Notes
       region: content
       parent_name: ''
-      weight: 19
+      weight: 18
       format_type: details_sidebar
       format_settings:
         classes: ''
@@ -167,6 +169,8 @@ third_party_settings:
     group_import_in:
       children:
         - field_title_sort
+        - field_misc_field_1
+        - field_misc_field_2
         - field_location_external_id
         - field_location_external_place_id
       label: 'Additional Info'
@@ -307,7 +311,7 @@ content:
         hide_guidelines: '0'
   created:
     type: datetime_timestamp
-    weight: 8
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -444,7 +448,7 @@ content:
     third_party_settings: {  }
   field_location_external_id:
     type: string_textfield
-    weight: 11
+    weight: 13
     region: content
     settings:
       size: 60
@@ -452,7 +456,7 @@ content:
     third_party_settings: {  }
   field_location_external_place_id:
     type: string_textfield
-    weight: 12
+    weight: 14
     region: content
     settings:
       size: 60
@@ -522,6 +526,22 @@ content:
       sidebar: true
       use_details: true
     third_party_settings: {  }
+  field_misc_field_1:
+    type: string_textfield
+    weight: 11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_misc_field_2:
+    type: string_textfield
+    weight: 12
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_partial_re_open_citywide:
     type: boolean_checkbox
     weight: 11
@@ -576,7 +596,7 @@ content:
     third_party_settings: {  }
   field_search_exclude_entity:
     type: search_api_exclude_entity_widget
-    weight: 28
+    weight: 22
     region: content
     settings:
       field_label: 'Yes, exclude this entity from the search indexes.'
@@ -604,7 +624,7 @@ content:
         hide_guidelines: '0'
   field_subtitle:
     type: string_textfield
-    weight: 3
+    weight: 2
     region: content
     settings:
       size: 60
@@ -628,7 +648,7 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 2
+    weight: 1
     region: content
     settings:
       include_locked: true
@@ -647,7 +667,7 @@ content:
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 9
+    weight: 7
     region: content
     settings:
       display_label: true
@@ -660,23 +680,23 @@ content:
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 15
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 20
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
   simple_sitemap:
-    weight: 7
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 18
+    weight: 17
     region: content
     settings:
       display_label: true
@@ -698,7 +718,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 6
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -714,12 +734,12 @@ content:
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 16
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 17
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
