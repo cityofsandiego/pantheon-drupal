@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.media.field_media_document
     - field.storage.node.field_url
     - node.type.department_document
     - taxonomy.vocabulary.department
@@ -161,21 +162,19 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        uri:
-          id: uri
-          table: file_managed
-          field: uri
-          relationship: field_media_document_target_id
+        field_media_document:
+          id: field_media_document
+          table: media__field_media_document
+          field: field_media_document
+          relationship: field_attachment
           group_type: group
           admin_label: ''
-          entity_type: file
-          entity_field: uri
           plugin_id: field
           label: ''
           exclude: false
           alter:
             alter_text: true
-            text: "<span>\r\n<span class=\"file-icon\">\r\n   <img alt=\"PDF icon\" title=\"application/pdf\" src=\"/core/themes/classy/images/icons/application-pdf.png\">\r\n</span> \r\n <a href=\"{{ uri }}\">{{ title }}</a>\r\n</span>"
+            text: "<p><a href=\"{{ field_media_document }}\">{{ title }}</a></p>\r\n"
             make_link: false
             path: ''
             absolute: false
@@ -207,17 +206,15 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
-          empty: '{{ title }}'
+          element_default_classes: false
+          empty: "<p>{{ title }}</p>\r\n"
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: file_uri
-          settings:
-            link_to_file: false
-            file_download_path: false
-          group_column: value
+          click_sort_column: target_id
+          type: file_url_plain
+          settings: {  }
+          group_column: ''
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -360,10 +357,15 @@ display:
         type: default
         options:
           grouping: {  }
-          row_class: l-margin-bd
-          default_row_class: true
+          row_class: ''
+          default_row_class: false
       row:
         type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
       query:
         type: views_query
         options:
@@ -382,15 +384,6 @@ display:
           admin_label: 'field_attachment: Media'
           plugin_id: standard
           required: false
-        field_media_document_target_id:
-          id: field_media_document_target_id
-          table: media__field_media_document
-          field: field_media_document_target_id
-          relationship: field_attachment
-          group_type: group
-          admin_label: 'file from field_media_document'
-          plugin_id: standard
-          required: false
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -404,6 +397,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_media_document'
         - 'config:field.storage.node.field_url'
   block:
     id: block
@@ -425,4 +419,5 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_media_document'
         - 'config:field.storage.node.field_url'
