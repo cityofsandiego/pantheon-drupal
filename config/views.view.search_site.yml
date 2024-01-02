@@ -5071,6 +5071,18 @@ display:
           use_highlighting: true
           multi_type: separator
           multi_separator: ', '
+      exposed_form:
+        type: input_required
+        options:
+          submit_button: Search
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: basic_html
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -5092,7 +5104,7 @@ display:
             operator: search_api_fulltext_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: search_api_fulltext
+            identifier: search_text
             required: false
             remember: false
             multiple: false
@@ -5221,7 +5233,7 @@ display:
             max: ''
             value: csc
           group: 1
-          exposed: true
+          exposed: false
           expose:
             operator_id: uri_op
             label: 'Document » File » URI'
@@ -5315,6 +5327,7 @@ display:
       defaults:
         title: false
         use_ajax: false
+        exposed_form: false
         fields: false
         filters: false
         filter_groups: false
@@ -6026,6 +6039,18 @@ display:
           use_highlighting: true
           multi_type: separator
           multi_separator: ', '
+      exposed_form:
+        type: input_required
+        options:
+          submit_button: Search
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: basic_html
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -6352,6 +6377,7 @@ display:
       defaults:
         title: false
         use_ajax: false
+        exposed_form: false
         fields: false
         filters: false
         filter_groups: false
