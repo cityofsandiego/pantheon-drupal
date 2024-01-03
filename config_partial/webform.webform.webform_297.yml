@@ -1,0 +1,152 @@
+uuid: 742403b4-b4af-449b-a81d-36c1f037b9ea
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 57
+template: false
+archive: false
+id: webform_297
+title: 'Complaint Form'
+description: null
+categories: {  }
+elements: |
+  name_of_company:
+    '#type': textfield
+    '#title': 'Name of Company:' 
+    '#description': ""
+    '#required': true
+  name:
+    '#type': textfield
+    '#title': 'Name:' 
+    '#description': ""
+    '#required': true
+  address:
+    '#type': textfield
+    '#title': 'Address:' 
+    '#description': ""
+    '#required': true
+  phone:
+    '#type': textfield
+    '#title': 'Phone: (999-999-9999)' 
+    '#description': ""
+    '#required': true
+  emailyouyourdomaincom:
+    '#type': textfield
+    '#title': 'Email: (you@yourdomain.com)' 
+    '#description': ""
+    '#required': true
+  project_number:
+    '#type': textfield
+    '#title': 'Project Number:' 
+    '#description': ""
+    '#required': true
+  project_name:
+    '#type': textfield
+    '#title': 'Project Name:' 
+    '#description': ""
+    '#required': true
+  name_of_prime_contractor:
+    '#type': textfield
+    '#title': 'Name of Prime Contractor:' 
+    '#description': ""
+    '#required': true
+  type_of_complaint:
+    '#type': select
+    '#options':
+      illegal_substitution: 'Illegal Substitution'
+      non_payment: 'Non-Payment'
+      slow_payment: 'Slow-Payment'
+      non_utilization: 'Non-utilization of Listed Sub-contractor'
+      prevailing_wage_issue: 'Prevailing Wage Issue'
+      discrimination: 'Discrimination (Based on race, gender, nation origin, religion, disability, age etc.)'
+    '#title': 'Type of Complaint:' 
+    '#description': ""
+    '#required': true
+  complaintlimited_to_2000_characters:
+    '#type': textarea
+    '#title': 'Complaint: (Limited to 2000 characters)' 
+    '#description': "Please state the nature of your complaint. Be specific. This information is necessary in order to fully investigate, and conclude your complaint."
+    '#required': true
+  remedy_requestedlimited_to_2000_characters:
+    '#type': textarea
+    '#title': 'Remedy Requested: (Limited to 2000 characters)' 
+    '#description': ""
+    '#required': true
+  name_of_agency:
+    '#type': textfield
+    '#title': 'Name of Agency:' 
+    '#description': ""
+    '#required': true
+  datemm_dd_yyyy:
+    '#type': textfield
+    '#title': 'Date: (mm-dd-yyyy)' 
+    '#description': ""
+    '#required': true
+  status_of_previous_complaintlimited_to_2000_characters:
+    '#type': textarea
+    '#title': 'Status of Previous Complaint: (Limited to 2000 characters)' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: ContactEOC@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ContactEOC@sandiego.gov
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

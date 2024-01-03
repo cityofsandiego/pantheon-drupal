@@ -1,0 +1,242 @@
+uuid: 9523b3f3-6a18-4386-b3dc-ecf44f4497f8
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_977592
+title: 'San Diego Building Energy Benchmarking Exemption Form'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info' 
+    '#description': ""
+    first_name_1:
+      '#type': textfield
+      '#title': 'First Name' 
+      '#description': ""
+      '#required': true
+    last_name_1:
+      '#type': textfield
+      '#title': 'Last Name' 
+      '#description': ""
+      '#required': true
+    job_title_1:
+      '#type': textfield
+      '#title': 'Job Title' 
+      '#description': ""
+    company_name_1:
+      '#type': textfield
+      '#title': 'Company Name' 
+      '#description': ""
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    phone_1:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+      '#required': true
+    you_are_1:
+      '#type': select
+      '#options':
+        owner: 'Building Owner'
+        manager: 'Property Manager'
+        provider: 'Service Provider'
+        consultant: 'Consultant'
+        other: 'Other'
+      '#title_display': inline
+      '#title': 'You are:' 
+      '#description': ""
+  fieldset_building_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Building Info' 
+    '#description': ""
+    san_diego_building_id__8:
+      '#type': textfield
+      '#title_display': inline
+      '#title': 'San Diego Building ID #' 
+      '#description': ""
+    sd_id__8:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<p><em>(All covered buildings should have a unique 6-digit San Diego Building ID number. Please check the <a href='https://sandiego.maps.arcgis.com/apps/InformationLookup/index.html?appid=80d535e3c3d74c2fbf7af4e4f3c0f266'>benchmarking map</a> for your Building ID. If you are not assigned a unique 6-digit number, please include this information below.)</em></p>\n"
+      '#title': 'SD ID #' 
+      '#description': ""
+    building_name_8:
+      '#type': textfield
+      '#title': 'Building Name' 
+      '#description': ""
+    street_address_8:
+      '#type': textfield
+      '#title': 'Street Address' 
+      '#description': ""
+    zip_code_8:
+      '#type': textfield
+      '#title': 'Zip Code' 
+      '#description': ""
+  please_describe_reason_for_exemption_request:
+    '#type': textarea
+    '#title': 'Please describe reason for exemption request' 
+    '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /sustainability/exemption-submittal
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit Request'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:last_name:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '12'
+      body: |
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: energybenchmarking@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:last_name:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '12'
+      body: |+
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: energybenchmarking@sandiego.gov
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Please allow up to 5 business days before being contacted either by email and/or phone for additional instructions.
+
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

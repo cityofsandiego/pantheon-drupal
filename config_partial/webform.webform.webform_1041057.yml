@@ -1,0 +1,570 @@
+uuid: 7ea17522-93ea-4855-8be4-0fbe40cacd58
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 52
+template: false
+archive: false
+id: webform_1041057
+title: 'Unsubscribe email updates - CDs and Mayor'
+description: null
+categories: {  }
+elements: |
+  outer_fieldset:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Receive Email Updates:' 
+    '#description': ""
+    required_first_8:
+      '#type': textfield
+      '#title_display': invisible
+      '#title': 'First Name' 
+      '#description': ""
+      '#required': true
+    required_last_8:
+      '#type': textfield
+      '#title_display': invisible
+      '#title': 'Last Name' 
+      '#description': ""
+      '#required': true
+    required_valid_email_8:
+      '#type': email
+      '#size': 20
+      '#title_display': invisible
+      '#title': 'Email Address' 
+      '#description': ""
+      '#required': true
+    submit_button_8:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='three column'><input class='btn form-submit width-100' name='op' type='submit' value='Subscribe'></div>\n"
+      '#title': 'Submit Button' 
+      '#description': ""
+  opt:
+    '#type': radios
+    '#options':
+      EMAIL.OPTIN: 'Subscribe'
+      EMAIL.OPTOUT: 'Unsubscribe'
+    '#default_value': 'EMAIL.OPTIN' 
+    '#title': 'Subscription' 
+    '#description': ""
+  opt_first:
+    '#type': textfield
+    '#default_value': 'EMAIL.OPTIN' 
+    '#title': 'OPT_FIRST' 
+    '#description': ""
+  opt_second:
+    '#type': textfield
+    '#default_value': 'EMAIL.OPTOUT' 
+    '#title': 'OPT_SECOND' 
+    '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: citycouncil/cd1/response
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: dbrabon@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter UNSubscribe'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_4:
+    id: email
+    handler_id: email_4
+    label: 'Email 4'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: CouncilDistrict1@cityofsandiego.lmhostediq.com
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter Subscribe'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_5:
+    id: email
+    handler_id: email_5
+    label: 'Email 5'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 5
+    settings:
+      states:
+        - completed
+      to_mail: CouncilDistrict2@cityofsandiego.lmhostediq.com
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter Subscribe'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_6:
+    id: email
+    handler_id: email_6
+    label: 'Email 6'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 6
+    settings:
+      states:
+        - completed
+      to_mail: CouncilDistrict3@cityofsandiego.lmhostediq.com
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter Subscribe'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_7:
+    id: email
+    handler_id: email_7
+    label: 'Email 7'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 7
+    settings:
+      states:
+        - completed
+      to_mail: CouncilDistrict4@cityofsandiego.lmhostediq.com
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter Subscribe'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_8:
+    id: email
+    handler_id: email_8
+    label: 'Email 8'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 8
+    settings:
+      states:
+        - completed
+      to_mail: CouncilDistrict5@cityofsandiego.lmhostediq.com
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter Subscribe'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_9:
+    id: email
+    handler_id: email_9
+    label: 'Email 9'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 9
+    settings:
+      states:
+        - completed
+      to_mail: CouncilDistrict6@cityofsandiego.lmhostediq.com
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter Subscribe'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_10:
+    id: email
+    handler_id: email_10
+    label: 'Email 10'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 10
+    settings:
+      states:
+        - completed
+      to_mail: CouncilDistrict7@cityofsandiego.lmhostediq.com
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter Subscribe'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_11:
+    id: email
+    handler_id: email_11
+    label: 'Email 11'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 11
+    settings:
+      states:
+        - completed
+      to_mail: CouncilDistrict8@cityofsandiego.lmhostediq.com
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter Subscribe'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_12:
+    id: email
+    handler_id: email_12
+    label: 'Email 12'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 12
+    settings:
+      states:
+        - completed
+      to_mail: CouncilDistrict9@cityofsandiego.lmhostediq.com
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter Subscribe'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_13:
+    id: email
+    handler_id: email_13
+    label: 'Email 13'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 13
+    settings:
+      states:
+        - completed
+      to_mail: Mayor@cityofsandiego.lmhostediq.com
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter Subscribe'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

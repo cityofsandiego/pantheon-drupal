@@ -1,0 +1,329 @@
+uuid: 8e8cdabf-7618-4043-8239-a996d9a806c0
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_41301
+title: 'FTZ Program Eligibility Screening Tool'
+description: null
+categories: {  }
+elements: |
+  first_page:
+    '#type': webform_wizard_page
+    '#title': Start
+    introduction:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<p>Thank you for your interest in the federal Foreign-Trade Zones Program.</p>\n<p>The purpose of this tool is to identify if your company is eligible to participate in the Foreign-Trade Zones Program.</p>\n<div class='row message message--error l-margin-bd'>\n	<div class='sm-two one columns text-center'><i class='icon-cross-circle'></i></div>\n	<div class='sm-ten eleven columns'>\n		<p>Imports from Canada and Mexico are not eligible due to the North American Free Trade Agreement (NAFTA).</p>\n	</div>\n</div>\n"
+      '#title': 'Introduction' 
+      '#description': ""
+  page_break_1:
+    '#type': webform_wizard_page
+    '#title': 1
+    importing_foreign_goods_title:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<h3>Are you importing foreign goods?</h3>\n"
+      '#title': 'Importing Foreign Goods Title' 
+      '#description': ""
+    importing_foreign_goods:
+      '#type': radios
+      '#options':
+        Yes: 'Yes'
+        Ineligible: 'No'
+      '#title_display': invisible
+      '#title': 'Importing Foreign Goods' 
+      '#description': ""
+      '#required': true
+    importing_foreign_goods_ineligible:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row message message--error'>\n	<div class='sm-two one columns text-center'>\n		<p><i class='icon-warning' style='font-size:2em'></i></p>\n	</div>\n	<div class='sm-ten eleven columns'>\n		<p style='margin-bottom:1em;'>Unfortunately, you are ineligible because this program is for companies importing goods into the United States.</p>\n	</div>\n</div>\n<p>&nbsp;</p>\n"
+      '#title': 'Importing Foreign Goods Ineligible' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="importing_foreign_goods"]':
+            value: Ineligible
+            
+  page_break_2:
+    '#type': webform_wizard_page
+    '#title': 2
+    importer_of_record_title:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<h3>Are you the Importer of Record?</h3>\n"
+      '#title': 'Importer of Record Title' 
+      '#description': ""
+    importer_of_record:
+      '#type': radios
+      '#options':
+        Yes: 'Yes'
+        No: 'No'
+      '#title_display': invisible
+      '#title': 'Importer of Record' 
+      '#description': ""
+      '#required': true
+  page_break_3:
+    '#type': webform_wizard_page
+    '#title': 3
+    foreign_countries_title:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<h3>What foreign country(s) are you importing goods from?</h3>\n<div class='message message--warning'>\n	<p><i class='icon-notification-circle'></i> Canada and Mexico are exempt due to NAFTA.</p>\n</div>\n"
+      '#title': 'Foreign Countries Title' 
+      '#description': ""
+    foreign_countries:
+      '#type': textfield
+      '#title': 'Country(s):' 
+      '#description': "Separate multiple countries with commas."
+      '#required': true
+  page_break_4:
+    '#type': webform_wizard_page
+    '#title': 4
+    goods_title:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<h3>What foreign good are you importing?</h3>\n<div class='message message--warning'>\n	<p><i class='icon-notification-circle'></i> If you have multiple goods, list the item with the highest tariff.</p>\n</div>\n"
+      '#title': 'Goods Title' 
+      '#description': ""
+    goods:
+      '#type': textfield
+      '#title': 'Imported Good:' 
+      '#description': ""
+      '#required': true
+  page_break_5:
+    '#type': webform_wizard_page
+    '#title': 5
+    import_duty_rate_title:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<h3>What Import Duty Rate (tariff) are you paying on this item?</h3>\n"
+      '#title': 'Import Duty Rate Title' 
+      '#description': ""
+    import_duty_rate:
+      '#type': textfield
+      '#title': 'Import Duty Rate in Percentage (%):' 
+      '#description': "<em>If you do not know the exact tariff, enter your best estimate.</em>"
+      '#required': true
+  page_break_6:
+    '#type': webform_wizard_page
+    '#title': 6
+    ushts_title:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<h3>What is the U.S. Harmonized Tariff Schedule (USHTS) number of the item?</h3>\n<div class='message message--warning'>\n	<p><i class='icon-notification-circle'></i> Leave this blank if you or your Customs Broker do not have this information.</p>\n</div>"
+      '#title': 'USHTS Title' 
+      '#description': ""
+    ushts:
+      '#type': textfield
+      '#title': 'USHTS Number:' 
+      '#description': "<a href='https://www.usitc.gov/tata/hts/bychapter/index.htm'>Find your USHTS Number</a> <em>Example:</em> 0601.10.60 00"
+  page_break_7:
+    '#type': webform_wizard_page
+    '#title': 7
+    shipments_title:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<h3>How often do you receive shipments of this imported good?</h3>\n"
+      '#title': 'Shipments Title' 
+      '#description': ""
+    shipments:
+      '#type': textfield
+      '#title': 'Enter frequency of shipments:' 
+      '#description': ""
+  page_break_8:
+    '#type': webform_wizard_page
+    '#title': 8
+    production_process_title:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<h3>Are you using the imported good in a manufacturing or production process?</h3>\n"
+      '#title': 'Production Process Title' 
+      '#description': ""
+    production_process:
+      '#type': radios
+      '#options':
+        Yes: 'Yes'
+        No: 'No'
+      '#title_display': invisible
+      '#title': 'Production Process' 
+      '#description': ""
+      '#required': true
+  page_break_9:
+    '#type': webform_wizard_page
+    '#title': 9
+    contact_title:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<h3>Your company may be eligible to participate in the FTZ Program!</h3>\n<p>Please provide your contact information so we can follow up with you.</p>\n"
+      '#title': 'Contact Title' 
+      '#description': ""
+    contact_name:
+      '#type': textfield
+      '#title': 'Full name:' 
+      '#description': ""
+      '#required': true
+    contact_phone:
+      '#type': textfield
+      '#title': 'Phone number:' 
+      '#description': ""
+      '#required': true
+    contact_email:
+      '#type': textfield
+      '#title': 'Email address:' 
+      '#description': ""
+      '#required': true
+    contact_company:
+      '#type': textfield
+      '#title': 'Name of company:' 
+      '#description': ""
+      '#required': true
+    contact_company_addr:
+      '#type': textfield
+      '#title': 'Company Address:' 
+      '#description': "Address, City, State, Zip"
+      '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /economic-development/sandiego/trade/tradezone/ftz-screened
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: rvazquez@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Form submission from: FTZ Eligibility Screening Tool'
+      body: |
+        Submitted on [webform_submission:date:long]
+
+        Submitted values are:
+        [webform_submission:values]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: sdbusiness@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_4:
+    id: email
+    handler_id: email_4
+    label: 'Email 4'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: jchirazi@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

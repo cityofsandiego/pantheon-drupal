@@ -1,0 +1,164 @@
+uuid: c4e6a0c3-bd02-4b16-b225-c1183df8cf73
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 58
+template: false
+archive: false
+id: webform_315
+title: 'Sign up for FREE Evaluation'
+description: null
+categories: {  }
+elements: |
+  fieldset_city_of_san_diego_green_business_network:
+    '#type': fieldset
+    '#open': true
+    '#title': 'City of San Diego Green Business Network' 
+    '#description': "Request for Membership Application:"
+    business_name_1:
+      '#type': textfield
+      '#title': 'Business Name' 
+      '#description': ""
+    business_type_1:
+      '#type': textfield
+      '#title': 'Business Type' 
+      '#description': ""
+    address_1:
+      '#type': textfield
+      '#title': 'Address' 
+      '#description': ""
+    contact_name_1:
+      '#type': textfield
+      '#title': 'Contact Name' 
+      '#description': ""
+    phone_1:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title_display': inline
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    preferred_time_day_of_the_week_for_evaluation_1:
+      '#type': textfield
+      '#title': 'Preferred time/day of the week for evaluation' 
+      '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: environmental-services/sustainable/free_evaluation_response
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: sustainability@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: sustainability@sandiego.gov
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: sustainability@sandiego.gov
+      from_options: {  }
+      from_name: 'City of San Diego, ESD Sustainability'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'FREE Evaluation'
+      body: |-
+        Dear Prospective City of San Diego GBN Member:
+
+        Thank you for your interest in joining the City of San Diego Green Business Network (GBN). We applaud your business energy savings improvement efforts, and ultimately contributing to a more sustainable San Diego. We are in the process of expanding membership benefits and incentives. The program is scheduled to re-launch early 2016.
+
+        We will keep your interest inquiry in our system and touch base with you soon. For immediate questions or assistance, please contact (858) 627-3334. 
+        Thank you and we look forward to a “greener” 2016 with you!
+
+
+
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+        The results of this submission may be viewed at:
+        [webform_submission:url]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

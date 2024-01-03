@@ -1,0 +1,152 @@
+uuid: 08085a7e-4fa9-4f44-8a8a-55795066defb
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_355243
+title: 'Email Development Services'
+description: null
+categories: {  }
+elements: |
+  recipient:
+    '#type': hidden
+    '#default_value': '[current-page:query:to]@sandiego.gov' 
+    '#title': 'Recipient Email' 
+    '#description': ""
+  sender:
+    '#type': email
+    '#size': 20
+    '#title': 'Your Email Address' 
+    '#description': ""
+    '#required': true
+  subject:
+    '#type': textfield
+    '#default_value': '[current-page:query:subject]' 
+    '#title': 'Subject' 
+    '#description': ""
+    '#required': true
+  message:
+    '#type': textarea
+    '#title': 'Message' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: 'https://www.sandiego.gov/development-services/contact/email-dsd/sent'
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:recipient:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:sender:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |-
+        <p>Submitted on [webform_submission:date:long]</p>
+
+        <p>SENDER:<br>
+        <a href="mailto:[webform_submission:values:sender:nolabel]">[webform_submission:values:sender:nolabel]</a></p>
+
+        <p>SUBJECT:<br>
+        [webform_submission:values:subject:nolabel]</p>
+
+        <p>MESSAGE:<br>
+        [webform_submission:values:message:nolabel]</p>
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:sender:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Thanks for your email!'
+      body: |
+        <p>Your email was successfully submitted to the City of San Diego's Development Services Department for response. Your inquiry will be responded to as soon as possible in the order that it was received.</p>
+        <p>**Please note that response times to inquiries vary based on the number of inquiries received and the complexity of the request.** </p>
+        <hr>
+        <p>Subject:<br>[webform_submission:values:subject:nolabel]</p>
+         <p>Message:<br>[webform_submission:values:message:nolabel]</p>
+
+        ******
+        <p>Please do not reply to this email. This email was automatically generated.</p>
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

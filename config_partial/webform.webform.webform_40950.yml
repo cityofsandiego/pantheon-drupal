@@ -1,0 +1,238 @@
+uuid: d95a465a-3105-403c-aa9f-34f5effe70bd
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_40950
+title: 'Get It Done - Parking'
+description: null
+categories: {  }
+elements: |
+  get_it_done:
+    '#type': hidden
+    '#default_value': 'TRUE' 
+    '#title': 'get_it_done' 
+    '#description': ""
+  fieldset_step_1:
+    '#type': fieldset
+    '#open': true
+    '#title': 'I Need To...' 
+    '#description': ""
+    i_need_to_2:
+      '#type': select
+      '#options':
+        apply: 'Apply'
+        contact: 'Contact'
+        learn: 'Learn'
+        review: 'Review'
+        view: 'View'
+      '#default_value': 'apply' 
+      '#title_display': invisible
+      '#title': 'I need to' 
+      '#description': ""
+  fieldset_apply_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Apply...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: apply
+          
+    apply_4:
+      '#type': select
+      '#options':
+        apply_temp: 'Temporary Overnight Recreational Vehicle Permit'
+      '#default_value': 'apply_temp' 
+      '#title_display': invisible
+      '#title': 'Apply' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: apply
+            
+  fieldset_contact_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: contact
+          
+    contact_12:
+      '#type': select
+      '#options':
+        contact_parking_admin: 'Parking Administration'
+      '#default_value': 'contact_parking_admin' 
+      '#title_display': invisible
+      '#title': 'Contact' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: contact
+            
+  fieldset_review_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Review...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: learn
+          
+        ':input[name="i_need_to_2"]':
+          value: review
+          
+    review_14:
+      '#type': select
+      '#options':
+        review_faqs: 'View frequently asked questions'
+      '#default_value': 'review_faqs' 
+      '#title_display': invisible
+      '#title': 'Review' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: learn
+            
+          ':input[name="i_need_to_2"]':
+            value: review
+            
+  fieldset_view_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'View...' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: view
+          
+    view_74:
+      '#type': select
+      '#options':
+        view_holidays: 'View parking enforcement holidays'
+      '#default_value': 'view_holidays' 
+      '#title_display': invisible
+      '#title': 'View' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: view
+            
+  fieldset_apply_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Apply Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: apply
+          
+    apply_temp_permit_18:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Apply for a temporary overnight recreational vehicle permit</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Apply for a temporary overnight recreational vehicle permit' href='/parking/permits/torvp'>Apply Now</a></div>\n</div>"
+      '#title': 'Temporary Overnight Recreational Vehicle Permit' 
+      '#description': ""
+  fieldset_contact_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: contact
+          
+    contact_parking_admin_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n<div class='eight columns'>\n<p class='l-padding-desktop-ts'>Contact Parking administration</p>\n</div>\n<div class='four columns'><a class='btn btn--wide' title='Contact Parking Administration' href='/parking/contact'>Contact Now</a></div>\n</div>"
+      '#title': 'Parking Administration' 
+      '#description': ""
+  fieldset_learn_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Learn Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: learn
+          
+    learn_regulations_34:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n	<div class='eight columns'>\n		<p class='l-padding-desktop-ts'>Learn about parking regulations</p>\n	</div>\n	<div class='four columns'><a class='btn btn--wide' href='/parking/enforcement' title='Learn about parking regulations'>Learn Now</a></div>\n</div>\n"
+      '#title': 'Parking Regulations' 
+      '#description': ""
+  fieldset_review_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Review Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: review
+          
+    review_faqs_76:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n	<div class='eight columns'>\n		<p class='l-padding-desktop-ts'>Review frequently asked questions</p>\n	</div>\n	<div class='four columns'><a class='btn btn--wide' href='/parking/faqs' title='Review frequently asked questions'>Review Now</a></div>\n</div>\n\n"
+      '#title': 'Frequently Asked Questions' 
+      '#description': ""
+  fieldset_view_options:
+    '#type': fieldset
+    '#open': true
+    '#title': 'View Now' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: view
+          
+    view_parking_holidays_26:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='row'>\n	<div class='eight columns'>\n		<p class='l-padding-desktop-ts'>View parking enforcement holidays</p>\n	</div>\n	<div class='four columns'><a class='btn btn--wide' href='/parking/enforcement/holidays' title='View parking enforcement holidays'>View Now</a></div>\n</div>\n"
+      '#title': 'Parking enforcement holidays' 
+      '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers: {  }
+variants: {  }

@@ -1,0 +1,358 @@
+uuid: 3b4bd257-9011-4926-8109-e275177b1340
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_986918
+title: 'Submit Your Project'
+description: null
+categories: {  }
+elements: |-
+  rapid_review_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': |
+      <p class='message message--warning l-padding-ad l-margin-bd'>NOTE: Your project MAY qualify for <a href='https://www.sandiego.gov/development-services/permits-inspections/rapid-review'>Rapid Review</a>.</p>
+    '#title': 'Rapid Review Markup'
+    '#description': ''
+    '#states':
+      visible:
+        ':input[name="submittal_type"]':
+          value: 'Rapid Review'
+  submittal_type:
+    '#type': select
+    '#title': 'Submittal Type'
+    '#title_display': invisible
+    '#options':
+      'Changes to Building Permit': 'Changes to Building Permit'
+      'Changes to Grading and Public Improvements': 'Changes to Grading and Public Improvements'
+    '#required': true
+  fieldset_applicant_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Applicant Information'
+    '#description': ''
+    name_1:
+      '#type': textfield
+      '#title': Name
+      '#description': ''
+      '#required': true
+    address_1:
+      '#type': textfield
+      '#title': 'Street Address'
+      '#description': ''
+      '#required': true
+    city_1:
+      '#type': textfield
+      '#title': City
+      '#description': ''
+      '#required': true
+    state_1:
+      '#type': select
+      '#options':
+        AL: Alabama
+        AK: Alaska
+        AS: 'American Samoa'
+        AZ: Arizona
+        AR: Arkansas
+        CA: California
+        CO: Colorado
+        CT: Connecticut
+        DE: Delaware
+        DC: 'District of Columbia'
+        FL: Florida
+        GA: Georgia
+        GU: Guam
+        HI: Hawaii
+        ID: Idaho
+        IL: Illinois
+        IN: Indiana
+        IA: Iowa
+        KS: Kansas
+        KY: Kentucky
+        LA: Louisiana
+        ME: Maine
+        MH: 'Marshall Islands'
+        MD: Maryland
+        MA: Massachusetts
+        MI: Michigan
+        MN: Minnesota
+        MS: Mississippi
+        MO: Missouri
+        MT: Montana
+        NE: Nebraska
+        NV: Nevada
+        NH: 'New Hampshire'
+        NJ: 'New Jersey'
+        NM: 'New Mexico'
+        NY: 'New York'
+        NC: 'North Carolina'
+        ND: 'North Dakota'
+        MP: 'Northern Marianas Islands'
+        OH: Ohio
+        OK: Oklahoma
+        OR: Oregon
+        PW: Palau
+        PA: Pennsylvania
+        PR: 'Puerto Rico'
+        RI: 'Rhode Island'
+        SC: 'South Carolina'
+        SD: 'South Dakota'
+        TN: Tennessee
+        TX: Texas
+        UT: Utah
+        VT: Vermont
+        VI: 'Virgin Islands'
+        VA: Virginia
+        WA: Washington
+        WV: 'West Virginia'
+        WI: Wisconsin
+        WY: Wyoming
+      '#title': State
+      '#description': ''
+      '#required': true
+    zip_1:
+      '#type': textfield
+      '#title': 'Zip Code'
+      '#description': ''
+      '#required': true
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': Email
+      '#description': ''
+      '#required': true
+    phone_1:
+      '#type': textfield
+      '#title': Phone
+      '#description': ''
+      '#required': true
+  fieldset_project_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Project Information'
+    '#description': ''
+    project_number_6:
+      '#type': textfield
+      '#title': 'Project Number (if applicable)'
+      '#description': ''
+      '#states':
+        invisible:
+          ':input[name="submittal_type"]':
+            value: 'Changes to Building Permit'
+    original_project_number_6:
+      '#type': textfield
+      '#title': 'Original Project Number'
+      '#description': ''
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="submittal_type"]':
+            value: 'Changes to Building Permit'
+    project_address_6:
+      '#type': textfield
+      '#title': 'Project Address'
+      '#description': ''
+      '#required': true
+    assessor_parcel_number_6:
+      '#type': textfield
+      '#title': 'Assessor Parcel Number'
+      '#description': ''
+    project_scope_6:
+      '#type': textarea
+      '#title': 'Project Scope'
+      '#description': ''
+      '#required': true
+  express:
+    '#type': radios
+    '#options':
+      'Yes': 'Yes'
+      'No': 'No'
+    '#default_value': 'No'
+    '#title': 'Express Processing Requested for an Additional Charge'
+    '#description': 'Express services are not available for all project types and is based upon staff availability.  <strong>If your project qualifies for express processing, additional fees will be charged.</strong>  See <a href=''https://www.sandiego.gov/sites/default/files/dsdib501.pdf''>Information Bulletin 501</a> and <a href=''https://www.sandiego.gov/sites/default/files/dsdib502.pdf''>Information Bulletin 502</a> for additional information and fees for express processing.'
+    '#states':
+      visible:
+        ':input[name="submittal_type"]':
+          value: 'Minor Right of Way Permit'
+  is_this_an_as_built_or_construction_change_to_an_existing_grading_permit:
+    '#type': radios
+    '#options':
+      'Yes': 'Yes'
+      'No': 'No'
+    '#title': 'Is this an As-Graded or construction change to an existing Grading Permit/Right-of-Way Permit?'
+    '#description': ''
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="submittal_type"]':
+          value: 'Grading and Public Improvements'
+  is_this_a_construction_change_to_an_existing_right_of_way_permit:
+    '#type': radios
+    '#options':
+      'Yes': 'Yes'
+      'No': 'No'
+    '#title': 'Is this a construction change to an existing Right-of-Way Permit?'
+    '#description': ''
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="submittal_type"]':
+          value: 'Minor Right of Way Permit'
+  are_you_requesting_a_processing_by_professional_certifications_per_information_bulletin_514:
+    '#type': radios
+    '#options':
+      'Yes': 'Yes'
+      'No': 'No'
+    '#title': 'Are you submitting by Professional Certification per Information Bulletin 514?'
+    '#description': 'View <a href=''https://www.sandiego.gov/sites/default/files/dsdib514.pdf''>Information Bulletin 514</a>'
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="submittal_type"]':
+          value: 'Discretionary Approval'
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /development-services/permits/submit-your-project/response
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:submittal_type:raw]'
+      to_options:
+        -
+          value: 'Changes to Building Permit'
+          text: dsd-change2bldgperm@sandiego.gov
+        -
+          value: 'Changes to Grading and Public Improvements'
+          text: dsd-gnpimprove@sandiego.gov
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: false
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: rvazquez@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email_1:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Thank you for your application!'
+      body: "Your application will be processed within two business days. If you have any questions, please contact DSD Customer Service at 619-446-5000.\r\n\r\nHere's the information that you submitted.\r\n\r\n[webform_submission:values]\r\n\r\nRegards,\r\nCity of San Diego Development Services Department"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

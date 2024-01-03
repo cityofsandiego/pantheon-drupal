@@ -1,0 +1,261 @@
+uuid: 2da46d89-a2b6-44d9-a819-3ab375f1bf93
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_60804
+title: 'How Can I Get Involved?'
+description: null
+categories: {  }
+elements: |
+  first_page:
+    '#type': webform_wizard_page
+    '#title': Start
+    fieldset_org_information:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Contact Info' 
+      '#description': ""
+      organization_name_1:
+        '#type': textfield
+        '#title': 'Organization Name' 
+        '#description': ""
+        '#required': true
+      entity_type_1:
+        '#type': select
+        '#options':
+          private: 'Private Sector'
+          local: 'Local Government'
+          tribal: 'Tribal Agency'
+          state: 'Government'
+          federal: 'Federal Government'
+        '#title': 'Entity Type' 
+        '#description': ""
+        '#required': true
+      point_of_contact_1:
+        '#type': textfield
+        '#title': 'Point of Contact' 
+        '#description': ""
+        '#required': true
+      website_1:
+        '#type': textfield
+        '#title': 'Website' 
+        '#description': ""
+        '#required': true
+      full_address_1:
+        '#type': textfield
+        '#title': 'Full Address' 
+        '#description': ""
+        '#required': true
+      email_1:
+        '#type': email
+        '#size': 20
+        '#title': 'Email' 
+        '#description': ""
+        '#required': true
+      phone_1:
+        '#type': textfield
+        '#title': 'Phone' 
+        '#description': ""
+        '#required': true
+  area:
+    '#type': webform_wizard_page
+    '#title': Focus Area
+    fieldset_focus_area:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Focus Area' 
+      '#description': ""
+      technology_being_tested_11:
+        '#type': checkboxes
+        '#options':
+          id: 'Identification'
+          counter: 'CounterUAS'
+          cyber: 'Cybersecurity'
+          utm: 'Unmanned Traffic Management'
+          detect: 'Detect and Avoid'
+          other: 'Other'
+        '#multiple': true
+        '#title': 'Technology Being Tested' 
+        '#description': ""
+        '#required': true
+      describe_11:
+        '#type': textfield
+        '#title': 'Describe' 
+        '#description': ""
+        '#required': true
+        '#states':
+          visible:
+            ':input[name="technology_being_tested_11[other]"]':
+              checked: true
+              
+      operations_11:
+        '#type': checkboxes
+        '#options':
+          night: 'Advancing Night Operations'
+          human: 'Advanced Operations Over Human Beings'
+          visual: 'Advancing Operations Beyond Visual Line of Sight'
+          other2: 'Other'
+        '#multiple': true
+        '#title': 'Operations' 
+        '#description': ""
+        '#required': true
+      describe2_11:
+        '#type': textfield
+        '#title': 'Describe' 
+        '#description': ""
+        '#required': true
+        '#states':
+          visible:
+            ':input[name="operations_11[other2]"]':
+              checked: true
+              
+      limits_of_operations_11:
+        '#type': checkboxes
+        '#options':
+          tfr: 'TFR'
+          alerts: 'Alerts/NOTAMS'
+          none: 'None'
+          other3: 'Other'
+        '#multiple': true
+        '#title': 'Limits of Operations' 
+        '#description': ""
+        '#required': true
+      describe3_11:
+        '#type': textfield
+        '#title': 'Describe' 
+        '#description': ""
+        '#required': true
+        '#states':
+          visible:
+            ':input[name="limits_of_operations_11[other3]"]':
+              checked: true
+              
+      altitude_of_testing_11:
+        '#type': checkboxes
+        '#options':
+          200: '0 to 200’ AGL'
+          400: '0-400’ AGL'
+        '#multiple': true
+        '#title': 'Altitude of Testing' 
+        '#description': ""
+        '#required': true
+      does_your_company_currently_provide_uas_services_to_any_government_agency_11:
+        '#type': radios
+        '#options':
+          yes: 'Yes'
+          no: 'No'
+        '#title_display': inline
+        '#title': 'Does your company currently provide UAS services to any government agency? ' 
+        '#description': ""
+        '#required': true
+      describe_your_organizations_experience_with_uas_11:
+        '#title': 'Describe your organization’s experience with UAS, including years of experience with UAS, type of UAS operated, and purpose of prior UAS operations' 
+        '#description': ""
+        '#required': true
+      iiiwhat_services_can_you_provide_11:
+        '#title': 'What services can you provide that are not offered through our existing partners?' 
+        '#description': ""
+        '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /sdartc/get-involved-response
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: unmannedsystems@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }
