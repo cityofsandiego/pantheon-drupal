@@ -1,0 +1,216 @@
+uuid: 72e466ab-d480-4c53-a4df-ac79691d4052
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 2463
+template: false
+archive: false
+id: webform_40816
+title: 'Contact the Economic Development Department'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_information:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Information' 
+    '#description': ""
+    business_intake_your_name_11:
+      '#type': textfield
+      '#title': 'Your Name' 
+      '#description': ""
+      '#required': true
+    your_email_11:
+      '#type': email
+      '#size': 20
+      '#title': 'Your Email' 
+      '#description': ""
+      '#required': true
+    phone_number_11:
+      '#type': textfield
+      '#title': 'Your Phone Number' 
+      '#description': ""
+      '#required': true
+  fieldset_about_your_business:
+    '#type': fieldset
+    '#open': true
+    '#title': 'About Your Business' 
+    '#description': ""
+    your_businesss_name_12:
+      '#type': textfield
+      '#title': 'Your Business"s Name' 
+      '#description': ""
+    business_address_12:
+      '#type': textfield
+      '#title': 'Business Address' 
+      '#description': ""
+    which_category_best_describes_your_business_12:
+      '#type': checkboxes
+      '#options':
+        food_and_beverage: 'Food and Beverage'
+        aerospace_and_defense: 'Aerospace and Defense'
+        information_technology: 'Information Technology'
+        distribution: 'Distribution'
+        maritime: 'Maritime'
+        manufacturing: 'Manufacturing'
+        agriculture: 'Agriculture'
+        finance: 'Finance'
+        retail: 'Retail'
+        professional_services: 'Professional Services'
+        other: 'Other'
+      '#multiple': true
+      '#title': 'Which best describes your business?' 
+      '#description': ""
+      '#required': true
+    which_resources_interest_you_12:
+      '#type': checkboxes
+      '#options':
+        grants: 'Grants'
+        equipment_purchases: 'Equipment Purchases'
+        workforce_development: 'Workforce Development'
+        relocation: 'Relocation'
+        construction_remodeling: 'Construction/Remodeling'
+        training: 'Training'
+        disaster_recovery: 'Disaster Recovery'
+        business_loans: 'Business Loans'
+        tax_credits: 'Tax Credits'
+        reimbursement: 'Reimbursement'
+        other: 'Other'
+      '#multiple': true
+      '#title': 'Which resources are you interested in?' 
+      '#description': ""
+    what_else_should_we_know_about_your_business_12:
+      '#type': textarea
+      '#title': 'What else should we know about your business?' 
+      '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<div class=\"row\">\r\n\t<div class=\"columns one\">&nbsp;</div>\r\n\t<div class=\"message message--success columns ten l-margin-vm\">\r\n\t\t<p><i class=\"icon-flag l-margin-rs\"></i> <strong>Thank you for submitting your information.</strong> Our staff will respond shortly within 1-2 business days at most. If you'd like to talk to staff promptly, please call the front desk at (619) 236-6700 during business hours. <a href=\"https://www.sandiego.gov/business-resources\">Click here to return to the resource matcher.</a></p>\r\n\t</div>\r\n</div>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:your_email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Your Message to the Economic Development Department was Received'
+      body: |-
+        Thank you for submitting your information. Our staff will respond shortly within 1-2 business days at most. If you'd like to talk to staff promptly, please call the front desk at (619) 236-6700 during business hours. 
+
+        Sincerely,
+
+        The San Diego Economic Development Department
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:which_category_best_describes_your_business:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'New EDD Contact Form Submission'
+      body: |
+        You've received this email because this is a(n) [webform_submission:values:about_your_business:which_category_best_describes_your_business] business, and you are the EDD's designated responder for this business type.
+
+        === Contact Information ===
+        - Name: [webform_submission:values:contact_information:business_intake_your_name]
+        - Email: [webform_submission:values:contact_information:your_email]
+        - Phone: [webform_submission:values:contact_information:phone_number]
+
+        === Business Information ===
+        - Business Name: [webform_submission:values:about_your_business:your_businesss_name]
+        - Business Address: [webform_submission:values:about_your_business:business_address]
+
+        === Type of Business ===
+        [webform_submission:values:about_your_business:which_category_best_describes_your_business]
+
+        === Requested Resources ===
+        [webform_submission:values:about_your_business:which_resources_interest_you]
+
+        === Additional Information ===
+        [webform_submission:values:about_your_business:what_else_should_we_know_about_your_business]
+
+        Submitted on [webform_submission:date:long]
+
+        === Helpful Administration Links ===
+        Export all requests for assistance to an Excel Spreadsheet (Drupal login required): https://www.sandiego.gov/node/40816/webform-results/download
+        View the top business types and requested resources (Drupal login required): https://www.sandiego.gov/node/40816/webform-results/analysis
+        View which resources have been getting the most views (Google Analytics login required): https://analytics.google.com
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

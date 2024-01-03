@@ -1,0 +1,152 @@
+uuid: bf17097c-e4e0-4c47-b9bf-2b7bfaba2034
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1397038
+title: 'Middle-Income Housing Working Group Comments'
+description: null
+categories: {  }
+elements: |
+  email_address:
+    '#type': email
+    '#size': 20
+    '#title': 'Email Address' 
+    '#description': ""
+    '#required': true
+  first_name:
+    '#type': textfield
+    '#title': 'First Name' 
+    '#description': ""
+  last_name:
+    '#type': textfield
+    '#title': 'Last Name' 
+    '#description': ""
+  comment:
+    '#type': textarea
+    '#title': 'Comment' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: 'https://www.sandiego.gov/working-group/comment-response'
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Share your thoughts'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+      - department_-_planning_department
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: HomesForAllofUs@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email_address:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Middle-Income Housing WG Comments'
+      body: |-
+        Submitted on [webform_submission:completed_date:long]
+
+        Name: 
+        [webform_submission:values:first_name:nolabel] [webform_submission:values:last_name:nolabel]
+
+        Email Address:
+        [webform_submission:values:email_address:nolabel]
+
+        Comment:
+        [webform_submission:values:comment:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email_address:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Middle-Income Housing WG Comments'
+      body: |-
+        Submitted on [webform_submission:completed_date:long]
+
+        Name: 
+        [webform_submission:values:first_name:nolabel] [webform_submission:values:last_name:nolabel]
+
+        Email Address:
+        [webform_submission:values:email_address:nolabel]
+
+        Comment:
+        [webform_submission:values:comment:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

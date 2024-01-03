@@ -1,0 +1,316 @@
+uuid: 87080233-16e9-43a4-988e-2ebf56450443
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_30190
+title: 'Applicant Contact Information'
+description: null
+categories: {  }
+elements: |
+  state_of_residence:
+    '#type': select
+    '#options':
+      AL: 'Alabama'
+      AK: 'Alaska'
+      AS: 'American Samoa'
+      AZ: 'Arizona'
+      AR: 'Arkansas'
+      CA: 'California'
+      CO: 'Colorado'
+      CT: 'Connecticut'
+      DE: 'Delaware'
+      DC: 'District of Columbia'
+      FL: 'Florida'
+      GA: 'Georgia'
+      GU: 'Guam'
+      HI: 'Hawaii'
+      ID: 'Idaho'
+      IL: 'Illinois'
+      IN: 'Indiana'
+      IA: 'Iowa'
+      KS: 'Kansas'
+      KY: 'Kentucky'
+      LA: 'Louisiana'
+      ME: 'Maine'
+      MH: 'Marshall Islands'
+      MD: 'Maryland'
+      MA: 'Massachusetts'
+      MI: 'Michigan'
+      MN: 'Minnesota'
+      MS: 'Mississippi'
+      MO: 'Missouri'
+      MT: 'Montana'
+      NE: 'Nebraska'
+      NV: 'Nevada'
+      NH: 'New Hampshire'
+      NJ: 'New Jersey'
+      NM: 'New Mexico'
+      NY: 'New York'
+      NC: 'North Carolina'
+      ND: 'North Dakota'
+      MP: 'Northern Marianas Islands'
+      OH: 'Ohio'
+      OK: 'Oklahoma'
+      OR: 'Oregon'
+      PW: 'Palau'
+      PA: 'Pennsylvania'
+      PR: 'Puerto Rico'
+      RI: 'Rhode Island'
+      SC: 'South Carolina'
+      SD: 'South Dakota'
+      TN: 'Tennessee'
+      TX: 'Texas'
+      UT: 'Utah'
+      VT: 'Vermont'
+      VI: 'Virgin Islands'
+      VA: 'Virginia'
+      WA: 'Washington'
+      WV: 'West Virginia'
+      WI: 'Wisconsin'
+      WY: 'Wyoming'
+    '#default_value': 'CA' 
+    '#title': 'State of Residence' 
+    '#description': ""
+    '#required': true
+  first_name:
+    '#type': textfield
+    '#title': 'First Name' 
+    '#description': ""
+    '#required': true
+  last_name:
+    '#type': textfield
+    '#title': 'Last Name' 
+    '#description': ""
+    '#required': true
+  previously_applied:
+    '#type': radios
+    '#options':
+      no: 'No'
+      yes-not-in-process: 'I applied previously, but I am not currently in the hiring process'
+      yes-in-process: 'I am currently in the process with San Diego Fire-Rescue (I have taken the written exam).'
+    '#title': 'Have you previously applied for the position of Fire Recruit with San Diego Fire-Rescue?' 
+    '#description': ""
+    '#required': true
+  email_address:
+    '#type': textfield
+    '#title': 'Email Address' 
+    '#description': ""
+    '#required': true
+  phone_number:
+    '#type': textfield
+    '#title': 'Phone Number' 
+    '#description': ""
+    '#required': true
+  zip_code:
+    '#type': textfield
+    '#title': 'Zip Code' 
+    '#description': ""
+    '#required': true
+  city_of_residence:
+    '#type': textfield
+    '#title': 'City of Residence' 
+    '#description': ""
+    '#required': true
+  event:
+    '#type': select
+    '#options':
+      Individual Recruiter contact: 'Individual Recruiter contact'
+      College Athletic Event: 'College Athletic Event'
+      Trade School Event: 'Trade School Event'
+      College Presentation: 'College Presentation'
+      Career / Job Fair: 'Career / Job Fair'
+      Community Event: 'Community Event'
+      Sporting / Fitness Event: 'Sporting / Fitness Event'
+      JoinSDFD Recruitment Video: 'JoinSDFD Recruitment Video'
+      Other: 'Other'
+    '#title': 'Event that generated the completion of this form' 
+    '#description': ""
+    '#required': true
+  name_of_recruiter:
+    '#type': select
+    '#options':
+      Anthony Tyquiengco: 'Anthony Tyquiengco'
+      Arsenio Ortanez: 'Arsenio Ortanez'
+      Bryan Bujarski: 'Bryan Bujarski'
+      Corey Teng: 'Corey Teng'
+      Grace Yamane: 'Grace Yamane'
+      James Buckley: 'James Buckley'
+      James Montgomery: 'James Montgomery'
+      Jason Shanley: 'Jason Shanley'
+      Jennifer Wolf: 'Jennifer Wolf'
+      John Hernandez: 'John Hernandez'
+      Jonathan Harris: 'Jonathan Harris'
+      Joseph Amador: 'Joseph Amador'
+      Joshua Schaeffer: 'Joshua Schaeffer'
+      Nikolaos Angel: 'Nikolaos Angel'
+      Pamela Thomas: 'Pamela Thomas'
+      Sacha Allen: 'Sacha Allen'
+      Sean Brambir: 'Sean Brambir'
+      Tony Hardy: 'Tony Hardy'
+      William Waugaman: 'William Waugaman'
+      Other: 'Other'
+    '#title': 'Name of Recruiter' 
+    '#description': ""
+    '#required': true
+  recruiter_other:
+    '#type': textfield
+    '#title': 'If "Other" for Recruiter, provide the name of the recruiter' 
+    '#description': ""
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="name_of_recruiter"]':
+          value: Other
+          
+      required:
+        ':input[name="name_of_recruiter"]':
+          value: Other
+          
+  current_emt_certificate:
+    '#type': radios
+    '#options':
+      Yes: 'Yes'
+      No: 'No'
+    '#title': 'Do yo have a current EMT Certificate?' 
+    '#description': "<em>Must be issued by the state of California, National Registry or by a EMT certifying agency approved by the state of California.</em>"
+    '#required': true
+  fieldset_optional:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Optional' 
+    '#description': "The following questions are completely OPTIONAL. This information will only be used for data collection purposes and will not be used in any way to evaluate or screen applicants."
+    age_14:
+      '#type': textfield
+      '#title': 'Age' 
+      '#description': ""
+    ethnicity_14:
+      '#type': checkboxes
+      '#options':
+        American Indian: 'American Indian'
+        Asian: 'Asian'
+        African American: 'African American'
+        Caucasian: 'Caucasian'
+        Filipino: 'Filipino'
+        Hispanic: 'Hispanic'
+        Other: 'Other'
+      '#multiple': true
+      '#title': 'Ethnicity (you may select more than one)' 
+      '#description': ""
+    gender_14:
+      '#type': radios
+      '#options':
+        Male: 'Male'
+        Female: 'Female'
+        Other: 'Other'
+      '#title': 'Gender' 
+      '#description': ""
+    are_you_a_veteran_14:
+      '#type': radios
+      '#options':
+        Yes: 'Yes'
+        No: 'No'
+      '#title': 'Are you a Veteran?' 
+      '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: false
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: rvazquez@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: joinsdfd@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

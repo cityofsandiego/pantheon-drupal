@@ -1,0 +1,146 @@
+uuid: 2da10703-6a67-4bb7-bcb6-f783dbe87b62
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 57
+template: false
+archive: false
+id: webform_8355
+title: 'Noise Complaint'
+description: null
+categories: {  }
+elements: |
+  reported_by:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<p><strong>Reported by:</strong></p>"
+    '#title': 'Reported by' 
+    '#description': ""
+  name:
+    '#type': textfield
+    '#title': 'Name' 
+    '#description': ""
+  address:
+    '#type': textfield
+    '#title': 'Address' 
+    '#description': ""
+    '#required': true
+  city:
+    '#type': textfield
+    '#title': 'City' 
+    '#description': ""
+    '#required': true
+  zip_code:
+    '#type': textfield
+    '#title': 'Zip code' 
+    '#description': ""
+    '#required': true
+  phone:
+    '#type': textfield
+    '#title': 'Phone' 
+    '#description': ""
+    '#required': true
+  email:
+    '#type': textfield
+    '#title': 'Email' 
+    '#description': ""
+  description_of_event:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<p><strong>Description of Event</strong></p>"
+    '#title': 'Description of Event' 
+    '#description': ""
+  date_of_event:
+    '#type': textfield
+    '#title': 'Date of event' 
+    '#description': ""
+    '#required': true
+  time_of_event:
+    '#type': textfield
+    '#title': 'Time of event' 
+    '#description': ""
+    '#required': true
+  type_of_aircraft:
+    '#type': radios
+    '#options':
+      single_prop: 'Single-Prop'
+      multi_prop: 'Multi-Prop'
+      helicopter: 'Helicopter'
+      jet: 'Jet'
+      unknown: 'Unknown'
+    '#title': 'Type of Aircraft' 
+    '#description': ""
+  type_of_operation:
+    '#type': radios
+    '#options':
+      departure: 'Departure'
+      arrival: 'Arrival'
+    '#title': 'Type of Operation' 
+    '#description': ""
+  comments:
+    '#type': textarea
+    '#title': 'Comments' 
+    '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: 'wreiter@sandiego.gov, lkosta@sandiego.gov'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nNAME:\r\n[webform_submission:values:name_2]\r\n\r\nADDRESS:\r\n[webform_submission:values:address_2]\r\n\r\nCITY, ZIP:\r\n[webform_submission:values:city_2], [webform_submission:values:zip_code_2]\r\n\r\nPHONE:\r\n[webform_submission:values:phone_2]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_2]\r\n\r\nDATE OF EVENT, TIME OF EVENT:\r\n[webform_submission:values:date_of_event_9], [webform_submission:values:time_of_event_9]\r\n\r\nTYPE OF AIRCRAFT:\r\n[webform_submission:values:type_of_aircraft_9]\r\n\r\nTYPE OF OPERATION:\r\n[webform_submission:values:type_of_operation_9]\r\n\r\nWOULD YOU LIKE SOMEONE TO CONTACT YOU?\r\n[webform_submission:values:would_you_like_someone_to_contact_you_17]\r\n\r\nHOW WOULD YOU LIKE TO BE CONTACTED?\r\n[webform_submission:values:how_would_you_like_to_be_contacted_17]\r\n\r\nCOMMENTS:\r\n[webform_submission:values:comments]\r\n"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

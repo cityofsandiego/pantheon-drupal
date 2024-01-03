@@ -1,0 +1,97 @@
+uuid: b85679f1-af23-419d-b36a-ec214bd49d6d
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1452004
+title: 'Share Your Thoughts About Our Economic Future'
+description: null
+categories: {  }
+elements: |
+  name:
+    '#type': textfield
+    '#title': 'Name' 
+    '#description': ""
+  email:
+    '#type': email
+    '#size': 20
+    '#title': 'Email' 
+    '#description': ""
+  phone:
+    '#type': textfield
+    '#title': 'Phone' 
+    '#description': ""
+  comments:
+    '#title': 'Comments' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /economic-development/share-your-thoughts-submittal
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: sdbusiness@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:completed_date:long]
+         
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

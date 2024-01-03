@@ -1,0 +1,199 @@
+uuid: 5869205d-3b56-4e47-9f68-c6e56c3ee904
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1401659
+title: 'Request a Proclamation or Certificate of Recognition'
+description: null
+categories: {  }
+elements: |
+  fieldset_person_making_request:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Person Making Request' 
+    '#description': ""
+    first_name_1:
+      '#type': textfield
+      '#title': 'First Name' 
+      '#description': ""
+    last_name_1:
+      '#type': textfield
+      '#title': 'Last Name' 
+      '#description': ""
+    phone_1:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+    mailing_address_1:
+      '#type': textfield
+      '#title': 'Mailing Address' 
+      '#description': ""
+    organization_business_community_group_if_applicable_1:
+      '#type': textfield
+      '#title': 'Organization/Business/Community Group (if applicable)' 
+      '#description': ""
+  fieldset_recognition_details:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Recognition Details' 
+    '#description': ""
+    type_of_request_9:
+      '#type': radios
+      '#options':
+        d3: 'District 3 Proclamation'
+        citywide: 'Citywide Proclamation*'
+        special: 'Special Recognition Certificate'
+      '#title': 'Type of Request' 
+      '#description': ""
+    note_for_citywide_proclamation_request_9:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<p><em><strong>*Requests for Citywide Proclamations need to be submitted at least 3 weeks prior to the date they will be voted on by the City Council.</strong></em></p>\n"
+      '#title': 'Note for Citywide Proclamation Request' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="type_of_request_9"]':
+            value: citywide
+            
+    purpose_of_recognition_9:
+      '#type': textfield
+      '#title': 'Purpose of Recognition' 
+      '#description': ""
+    proclamation_whereas_language_if_applicable_9:
+      '#type': managed_file
+      '#max_filesize': '10'
+      '#file_extensions': 'txt rtf pdf doc docx'
+      '#title': 'Proclamation Whereas Language (if applicable)' 
+      '#description': ""
+    date_the_recognition_will_be_presented_9:
+      '#type': date
+      '#title': 'Date the recognition will be presented' 
+      '#description': ""
+    delivery_method_9:
+      '#type': radios
+      '#options':
+        cityhall: 'Pick up from City Hall'
+        present: 'Request for Councilmember or staff to present at an event'
+        mail: 'Mail to address above'
+      '#title': 'Delivery Method' 
+      '#description': ""
+    present_at_event_9:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<ul>\n	<li>If you've not already done so, please submit the <a href='/citycouncil/cd3/request-appearance'>Request an Event/Public Appearance form</a>.</li>\n</ul>\n"
+      '#title': 'Present at Event' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="delivery_method_9"]':
+            value: present
+            
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<p>Your request for a proclamation/recognition has been received and we look forward to reviewing it. Due to the high volume of requests we receive, processing time can take up to one week. If you need immediate assistance, please contact Ryan Darsey at <a href=\"tel:1-619-236-6734\">619-236-6734</a>.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: rdarsey@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

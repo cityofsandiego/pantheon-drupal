@@ -1,0 +1,132 @@
+uuid: ea83368a-39fa-4a35-ac36-9ba055ef0183
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1040195
+title: 'Green Team Volunteer Application'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info' 
+    '#description': ""
+    name_1:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+      '#required': true
+    organization_1:
+      '#type': textfield
+      '#title': 'Organization' 
+      '#description': ""
+      '#required': true
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    phone_1:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+      '#required': true
+    your_address_1:
+      '#type': textfield
+      '#title': 'Your address' 
+      '#description': ""
+  i_can_help:
+    '#type': checkboxes
+    '#options':
+      coordinate: 'coordinate clean-ups'
+      participate: 'participate in clean-ups'
+      resources: 'provide resources'
+    '#multiple': true
+    '#title': 'I can help (select all that apply):' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /citycouncil/cd4/green-team-volunteer-application-response
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit Application'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+      - department_-_councilmember_monica_montgomery_(district_4)
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: cd4news@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:name:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |-
+        Submitted on [webform_submission:date:long]
+
+        Name:
+        [webform_submission:values:contact_info:name:nolabel]
+
+        Organization:
+        [webform_submission:values:contact_info:organization:nolabel]
+
+        Email:
+        [webform_submission:values:contact_info:email:nolabel]
+
+        Phone:
+        [webform_submission:values:contact_info:phone:nolabel]
+
+        The results of this submission may be viewed at:
+        [webform_submission:url]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

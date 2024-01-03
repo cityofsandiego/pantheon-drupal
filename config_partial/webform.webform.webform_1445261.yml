@@ -1,0 +1,179 @@
+uuid: c084904e-9f5e-49e0-86e6-10ecd089db0a
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1445261
+title: 'Lecture and Tour Sign Up Form'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info' 
+    '#description': ""
+    name_1:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+  fieldset_event_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Event Info' 
+    '#description': ""
+    event_4:
+      '#type': radios
+      '#options':
+        Oct14: 'Public Tour of the Archives, October 14, 2022, 2 p.m.'
+      '#default_value': 'Oct14' 
+      '#title': 'Event Attending' 
+      '#description': ""
+    how_4:
+      '#type': textfield
+      '#title': 'How did you hear about this event?' 
+      '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<p>Thank you for your interest of in the City of San Diego City Clerk 4th&nbsp;Annual Archives Month! &nbsp;Please wait for your confirmation of reservation.</p>\r\n"
+  limit_total: 25
+  limit_user: null
+  form_submit_label: 'Submit Registration'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Lecture and Tour Sign Up - October 14,  2 p.m'
+      body: |
+        Submitted on [webform_submission:date:long]
+
+        == CONTACT INFO ==
+
+        NAME:
+        [webform_submission:values:contact_info:name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact_info:email:nolabel]
+
+        == EVENT INFO ==
+
+        EVENT:
+        [webform_submission:values:event_info:event:nolabel]
+
+        HOW DID YOU HEAR ABOUT THE EVENT?:
+        [webform_submission:values:event_info:how:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: SEly@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Lecture and Tour Sign Up - October 14,  2 p.m'
+      body: |
+        Submitted on [webform_submission:date:long]
+
+        == SUBMITTAL NUMBER ==
+        [webform_submission:serial]
+
+        == CONTACT INFO ==
+
+        NAME:
+        [webform_submission:values:contact_info:name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact_info:email:nolabel]
+
+        == EVENT INFO ==
+
+        EVENT:
+        [webform_submission:values:event_info:event:nolabel]
+
+        HOW DID YOU HEAR ABOUT THE EVENT?:
+        [webform_submission:values:event_info:how:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

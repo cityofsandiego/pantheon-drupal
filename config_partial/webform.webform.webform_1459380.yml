@@ -1,0 +1,297 @@
+uuid: 585737ec-a420-4642-9d71-694682fed556
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1459380
+title: 'CPP Training Feedback Survey'
+description: null
+categories: {  }
+elements: |
+  fieldset_feedback:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Feedback' 
+    '#description': ""
+    three_general_topics_2:
+      '#type': textarea
+      '#title': 'What three general topics you believe are critical to cover during trainings for the newly appointed commissioners and staff at the Commission on Police Practices?' 
+      '#description': ""
+      '#required': true
+    three_specific_trainings_2:
+      '#type': textarea
+      '#title': 'What three specific trainings you would like to see the newly appointed commissioners and staff at the CPP undergo?' 
+      '#description': ""
+      '#required': true
+    specific_community_organizations_2:
+      '#type': textarea
+      '#title': 'What specific community organizations, leaders, and/or individuals you believe are important for the Commission on Police Practices newly appointed commissioners and staff to hear and learn from?' 
+      '#description': ""
+      '#required': true
+    anything_else_2:
+      '#type': textarea
+      '#title': 'Is there anything else you would like to share with us in regards to trainings for the newly appointed commissioners for the Commission on Police Practices?' 
+      '#description': ""
+  fieldset_contact_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info' 
+    '#description': ""
+    info_sharing_7:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<p><em>Sharing your contact information is optional but would help us reach out if we had further questions!</em></p>\n"
+      '#title': 'Info Sharing' 
+      '#description': ""
+    first_name_7:
+      '#type': textfield
+      '#title': 'First Name' 
+      '#description': ""
+    last_name_7:
+      '#type': textfield
+      '#title': 'Last Name' 
+      '#description': ""
+    phone_7:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+    email_7:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /cpp/training-feedback-submittal
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit Survey'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |-
+        Submitted on [webform_submission:completed_date:long]
+         
+        == CONTACT INFO ==
+
+        FIRST NAME:
+        [webform_submission:values:contact_info:first_name:nolabel]
+
+        LAST NAME:
+        [webform_submission:values:contact_info:last_name:nolabel]
+
+        PHONE:
+        [webform_submission:values:contact_info:phone:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact_info:email:nolabel]
+
+        == FEEDBACK ==
+
+        THREE GENERAL TOPICS:
+        [webform_submission:values:feedback:three_general_topics:nolabel]
+
+        THREE SPECIFIC TRAININGS:
+        [webform_submission:values:feedback:three_specific_trainings:nolabel]
+
+        SPECIFIC COMMUNITY ORGANIZATIONS, LEADERS, AND/OR INDIVIDUALS:
+        [webform_submission:values:feedback:specific_community_organizations:nolabel]
+
+        ANTYHING ELSE?:
+        [webform_submission:values:feedback:anything_else:nolabel]
+
+
+         
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: yobeid@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |-
+        Submitted on [webform_submission:completed_date:long]
+         
+        == CONTACT INFO ==
+
+        FIRST NAME:
+        [webform_submission:values:contact_info:first_name:nolabel]
+
+        LAST NAME:
+        [webform_submission:values:contact_info:last_name:nolabel]
+
+        PHONE:
+        [webform_submission:values:contact_info:phone:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact_info:email:nolabel]
+
+        == FEEDBACK ==
+
+        THREE GENERAL TOPICS:
+        [webform_submission:values:feedback:three_general_topics:nolabel]
+
+        THREE SPECIFIC TRAININGS:
+        [webform_submission:values:feedback:three_specific_trainings:nolabel]
+
+        SPECIFIC COMMUNITY ORGANIZATIONS, LEADERS, AND/OR INDIVIDUALS:
+        [webform_submission:values:feedback:specific_community_organizations:nolabel]
+
+        ANTYHING ELSE?:
+        [webform_submission:values:feedback:anything_else:nolabel]
+
+
+         
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: commissiononpolicepractices@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |-
+        Submitted on [webform_submission:completed_date:long]
+         
+        == CONTACT INFO ==
+
+        FIRST NAME:
+        [webform_submission:values:contact_info:first_name:nolabel]
+
+        LAST NAME:
+        [webform_submission:values:contact_info:last_name:nolabel]
+
+        PHONE:
+        [webform_submission:values:contact_info:phone:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact_info:email:nolabel]
+
+        == FEEDBACK ==
+
+        THREE GENERAL TOPICS:
+        [webform_submission:values:feedback:three_general_topics:nolabel]
+
+        THREE SPECIFIC TRAININGS:
+        [webform_submission:values:feedback:three_specific_trainings:nolabel]
+
+        SPECIFIC COMMUNITY ORGANIZATIONS, LEADERS, AND/OR INDIVIDUALS:
+        [webform_submission:values:feedback:specific_community_organizations:nolabel]
+
+        ANTYHING ELSE?:
+        [webform_submission:values:feedback:anything_else:nolabel]
+
+
+         
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

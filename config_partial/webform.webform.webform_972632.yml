@@ -1,0 +1,232 @@
+uuid: 0e5a6017-857c-408f-9c7a-5df0172d5b3a
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_972632
+title: 'Request for CAB Lobby Display'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info' 
+    '#description': ""
+    applicant_name_1:
+      '#type': textfield
+      '#title': 'Applicant"s Full Name' 
+      '#description': ""
+      '#required': true
+    title_1:
+      '#type': textfield
+      '#title': 'Title' 
+      '#description': ""
+      '#required': true
+    phone_1:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+      '#required': true
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    street_address_1:
+      '#type': textfield
+      '#title': 'Street Address' 
+      '#description': ""
+      '#required': true
+    city_1:
+      '#type': textfield
+      '#title': 'City' 
+      '#description': ""
+      '#required': true
+    state_1:
+      '#type': textfield
+      '#title': 'State' 
+      '#description': ""
+      '#required': true
+    zip_1:
+      '#type': textfield
+      '#title': 'Zip' 
+      '#description': ""
+      '#required': true
+  fieldset_display_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Display Info' 
+    '#description': ""
+    display_start_date_11:
+      '#type': date
+      '#title': 'Display Start Date' 
+      '#description': ""
+      '#required': true
+    display_end_date_11:
+      '#type': date
+      '#title': 'Display End Date' 
+      '#description': ""
+      '#required': true
+    display_title_11:
+      '#type': textfield
+      '#title': 'Display Title' 
+      '#description': ""
+      '#required': true
+    number_of_items_to_display_11:
+      '#type': textfield
+      '#title': 'Number of items to display' 
+      '#description': ""
+      '#required': true
+  fieldset_additional_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Additional Info' 
+    '#description': ""
+    will_there_be_any_social_events_18:
+      '#type': radios
+      '#options':
+        yes: 'Yes'
+        no: 'No'
+      '#title': 'Will there be any social events?' 
+      '#description': ""
+      '#required': true
+    please_briefly_explain_the_event_below_18:
+      '#type': textarea
+      '#title': 'Please briefly explain the event below' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="will_there_be_any_social_events_18"]':
+            value: 'yes'
+            
+  fieldset_disclaimer:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Disclaimer' 
+    '#description': ""
+    disclaimer_terms_19:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<ul>\n	<li>\n		<p>City staff is not available to assist before or during the display dates;</p>\n	</li>\n	<li>\n		<p>Items displayed must be placed within the delimited area marked on the lobby floor;</p>\n	</li>\n	<li>\n		<p>Display must be compliant with Americans with Disabilities Act regulations;</p>\n	</li>\n	<li>\n		<p>The City is not responsible for damage to or theft of displayed items; and</p>\n	</li>\n	<li>\n		<p>Changes to the approved request must be communicated to the Office of the City Clerk 619-533-4000 or <a href='mailto:cityclerk@sandiego.gov?subject=Request%20for%20CAB%20Lobby%20Display'>cityclerk@sandiego.gov</a> ) and may be subject to the approval process before they can be implemented.</p>\n	</li>\n</ul>\n"
+      '#title': 'Disclaimer Terms' 
+      '#description': ""
+    disclaimer_acceptance_19:
+      '#type': radios
+      '#options':
+        I have read, understood and agreed with the above: 'I have read, understood and agreed with the above.'
+      '#title': 'Disclaimer Acceptance' 
+      '#description': ""
+      '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: cityclerk@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:applicant_name:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:applicant_name:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

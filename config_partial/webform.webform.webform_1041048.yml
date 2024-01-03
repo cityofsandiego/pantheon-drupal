@@ -1,0 +1,155 @@
+uuid: 22a96091-f5a0-4842-bd33-a239f46be5ef
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1041048
+title: 'Municipal Energy Strategy Feedback Form'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info' 
+    '#description': ""
+    name_1:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+    age_1:
+      '#type': textfield
+      '#title': 'Age' 
+      '#description': ""
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+    zip_code_1:
+      '#type': textfield
+      '#title': 'Zip Code' 
+      '#description': ""
+  comment:
+    '#title': 'Comments' 
+    '#description': ""
+  additional_info:
+    '#type': radios
+    '#options':
+      yes: 'Yes'
+      no: 'No'
+    '#title': 'Do you want to receive email updates about climate action efforts in San Diego?' 
+    '#description': ""
+  please_provide_your_name_and_email_address:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<p><strong><em>Please provide your name and email address.</em></strong></p>\n"
+    '#title': 'Please provide your name and email address' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="additional_info"]':
+          value: 'yes'
+          
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<h2>Submitted</h2>\r\n\r\n<p>Thank you for sharing feedback on the City's Municipal Energy Strategy. We value your input.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit your feedback'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: energy@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

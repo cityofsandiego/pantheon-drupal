@@ -1,0 +1,172 @@
+uuid: a650b4b0-4f18-4c24-8a8b-4bef810da3a6
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 58
+template: false
+archive: false
+id: webform_308
+title: 'Agenda Comment Form'
+description: null
+categories: {  }
+elements: |-
+  your_name:
+    '#type': textfield
+    '#title': 'Name:'
+    '#description': ''
+    '#required': true
+  e_mail_address:
+    '#type': textfield
+    '#title': 'Email:'
+    '#description': ''
+  address:
+    '#type': textfield
+    '#title': 'Address:'
+    '#description': ''
+  city:
+    '#type': textfield
+    '#title': 'City:'
+    '#description': ''
+    '#required': true
+  state:
+    '#type': textfield
+    '#title': 'State:'
+    '#description': ''
+    '#required': true
+  zip_code:
+    '#type': textfield
+    '#title': 'Zip Code:'
+    '#description': ''
+    '#required': true
+  telephone_number:
+    '#type': textfield
+    '#title': 'Telephone Number'
+    '#description': ''
+  meeting_date:
+    '#type': date
+    '#title': 'Meeting Date:'
+    '#description': ''
+    '#required': true
+  comment_type:
+    '#type': radios
+    '#options':
+      agenda_key: 'City Council Comment'
+      closedsession_key: 'Closed Session Comment'
+      pffa_key: 'PFFA Comment'
+      housing_key: 'Housing Authority Comment'
+      nonagenda_key: 'Non-Agenda Comment'
+    '#title': 'Comment Type'
+    '#description': ''
+    '#required': true
+  agenda_item_number_only:
+    '#title': 'Agenda Item Number (for Agenda items that are preceded by an S, please drop the S and simply insert the three-digit number in the field below)'
+    '#description': ''
+    '#required': true
+  agenda_item_number:
+    '#type': number
+    '#title': "Agenda Item Number (for Agenda items that are preceded by an S, please drop the S and simply insert the three-digit number in the field below)\t"
+    '#required': true
+  comment:
+    '#title': 'Comments:'
+    '#description': ''
+    '#required': true
+  comment_new:
+    '#type': textarea
+    '#title': Comments
+    '#autocomplete': 'off'
+    '#required': true
+    '#counter_type': word
+    '#counter_maximum': 500
+  declaration:
+    '#type': radios
+    '#options':
+      'yes': 'Yes'
+      'no': 'No'
+    '#title': 'Declaration of Campaign Contribution to a Councilmember of more than $250 within the past year (effective Jan 1, 2023)'
+    '#description': ''
+  names_of_councilmembers:
+    '#type': textarea
+    '#title': 'Name(s) of Councilmember(s):'
+    '#description': ''
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="declaration"]':
+          value: 'yes'
+  attachments_multiple_file:
+    '#type': managed_file
+    '#max_filesize': '10'
+    '#file_extensions': 'gif jpg jpeg png txt pdf doc docx ppt pptx xls xlsx'
+    '#multiple': true
+    '#title': 'Attachments:'
+    '#description': 'You can upload up to 5 files with a maximum of 10MB for each file.'
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: cityclerk@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: cityclerk@sandiego.gov
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |-
+        Submitted on [webform_submission:date:long]
+
+        Submitted values are:
+        [webform_submission:values]
+
+        The results of this submission may be viewed at:
+        [webform_submission:url]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

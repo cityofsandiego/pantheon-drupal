@@ -1,0 +1,81 @@
+uuid: ca6b1484-826f-40fa-abf9-a0dc63c16bec
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_1412092
+title: 'Submit Comment on Draft SDPD Procedure'
+description: null
+categories: {  }
+elements: |
+  name:
+    '#type': textfield
+    '#title': 'Name' 
+    '#description': ""
+    '#required': true
+  email_address:
+    '#type': email
+    '#size': 20
+    '#title': 'Email Address' 
+    '#description': ""
+    '#required': true
+  phone_number:
+    '#type': textfield
+    '#title': 'Phone Number' 
+    '#description': ""
+  organization:
+    '#type': textfield
+    '#title': 'Organization' 
+    '#description': ""
+  comments:
+    '#type': textarea
+    '#title': 'Comments' 
+    '#description': "You can type your comment or upload a file below."
+  file_upload:
+    '#type': managed_file
+    '#max_filesize': '5'
+    '#file_extensions': 'gif jpg jpeg png txt pdf doc docx'
+    '#multiple': true
+    '#title': 'Upload Comment Document' 
+    '#description': ""
+  contact:
+    '#type': radios
+    '#options':
+      Yes: 'Yes'
+      No: 'No'
+    '#title': 'May we contact you if we need clarification about your comments?' 
+    '#description': ""
+    '#required': true
+  procedure:
+    '#type': hidden
+    '#default_value': '[current-page:query:pid]' 
+    '#title': 'Procedure' 
+    '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /police/data-transparency/public-comment-draft-procedures/submit-comment/response
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers: {  }
+variants: {  }

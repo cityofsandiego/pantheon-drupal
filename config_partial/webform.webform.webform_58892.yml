@@ -1,0 +1,248 @@
+uuid: 290c8277-1f72-4d23-8124-35db3dc7e0a5
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_58892
+title: 'Earned Sick Leave or Minimum Wage Complaint'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_information:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Information' 
+    '#description': ""
+    name_1:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+    mailing_address_1:
+      '#type': textfield
+      '#title': 'Mailing Address' 
+      '#description': ""
+    city_1:
+      '#type': textfield
+      '#title': 'City' 
+      '#description': ""
+    state_1:
+      '#type': select
+      '#options':
+        AL: 'Alabama'
+        AK: 'Alaska'
+        AS: 'American Samoa'
+        AZ: 'Arizona'
+        AR: 'Arkansas'
+        CA: 'California'
+        CO: 'Colorado'
+        CT: 'Connecticut'
+        DE: 'Delaware'
+        DC: 'District of Columbia'
+        FL: 'Florida'
+        GA: 'Georgia'
+        GU: 'Guam'
+        HI: 'Hawaii'
+        ID: 'Idaho'
+        IL: 'Illinois'
+        IN: 'Indiana'
+        IA: 'Iowa'
+        KS: 'Kansas'
+        KY: 'Kentucky'
+        LA: 'Louisiana'
+        ME: 'Maine'
+        MH: 'Marshall Islands'
+        MD: 'Maryland'
+        MA: 'Massachusetts'
+        MI: 'Michigan'
+        MN: 'Minnesota'
+        MS: 'Mississippi'
+        MO: 'Missouri'
+        MT: 'Montana'
+        NE: 'Nebraska'
+        NV: 'Nevada'
+        NH: 'New Hampshire'
+        NJ: 'New Jersey'
+        NM: 'New Mexico'
+        NY: 'New York'
+        NC: 'North Carolina'
+        ND: 'North Dakota'
+        MP: 'Northern Marianas Islands'
+        OH: 'Ohio'
+        OK: 'Oklahoma'
+        OR: 'Oregon'
+        PW: 'Palau'
+        PA: 'Pennsylvania'
+        PR: 'Puerto Rico'
+        RI: 'Rhode Island'
+        SC: 'South Carolina'
+        SD: 'South Dakota'
+        TN: 'Tennessee'
+        TX: 'Texas'
+        UT: 'Utah'
+        VT: 'Vermont'
+        VI: 'Virgin Islands'
+        VA: 'Virginia'
+        WA: 'Washington'
+        WV: 'West Virginia'
+        WI: 'Wisconsin'
+        WY: 'Wyoming'
+      '#title': 'State' 
+      '#description': ""
+    zip_1:
+      '#type': textfield
+      '#title': 'Zip' 
+      '#description': ""
+    best_way_to_contact_you_1:
+      '#type': radios
+      '#options':
+        email: 'Email'
+        phone: 'Phone'
+        both: 'Both'
+      '#title_display': inline
+      '#title': 'Best way to contact you' 
+      '#description': ""
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+    phone_1:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+  fieldset_work_information:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Work Information' 
+    '#description': ""
+    employer_name_10:
+      '#type': textfield
+      '#title': 'Employer Name' 
+      '#description': ""
+      '#required': true
+    manager_or_owner_name_10:
+      '#type': textfield
+      '#title': 'Manager or Owner Name' 
+      '#description': ""
+    address_where_you_work_this_must_be_within_the_city_of_san_diego_10:
+      '#type': textfield
+      '#title': 'Your Work Address  (this must be within the City of San Diego)' 
+      '#description': ""
+      '#required': true
+  describe_your_complaint_in_detail:
+    '#type': textarea
+    '#title': 'Describe your complaint in detail' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<p>Your Earned Sick Leave and Minimum Wage complaint has been submitted.&nbsp; A representative from the City of San Diego’s Minimum Wage Program will contact you regarding your complaint.&nbsp; For questions, please contact the Minimum Wage Program at <a href=\"tel:1-619-615-1565\">619-615-1565</a> or via email at&nbsp;<a href=\"mailto:sdminwage@sandiego.gov?subject=Minimum%20Wage%20Program\">sdminwage@sandiego.gov</a>.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit complaint'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: SDMinWage@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

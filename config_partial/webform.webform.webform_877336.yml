@@ -1,0 +1,150 @@
+uuid: 4b054121-33b1-4215-8fb0-4e600c9f4c42
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_877336
+title: 'Refer an Employee for Wellness Resources'
+description: null
+categories: {  }
+elements: |
+  fieldset_your_information:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Your Information' 
+    '#description': ""
+    markup_1:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<p><em>Leave blank to remain anonymous.</em></p>\n"
+      '#title': 'Markup' 
+      '#description': ""
+    name_1:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+    phone_number_1:
+      '#type': textfield
+      '#title': 'Phone Number' 
+      '#description': ""
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+  fieldset_candidate_information:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Candidate Information' 
+    '#description': ""
+    candidate_name_5:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+      '#required': true
+    candidate_phone_number_5:
+      '#type': textfield
+      '#title': 'Phone Number' 
+      '#description': ""
+    candidate_email_5:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    description_of_issue_5:
+      '#type': textarea
+      '#title': 'Description of Issue' 
+      '#description': ""
+      '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: inline
+  confirmation_url: ''
+  confirmation_message: "<p>Thank you for your submission.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: TheWellnessUnit@pd.sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |-
+        Submitted on [webform_submission:date:long]
+
+        == SUBMITTER INFORMATION ==
+
+        NAME:
+        [webform_submission:values:your_information:name]
+
+        PHONE NUMBER:
+        [webform_submission:values:your_information:phone_number]
+
+        EMAIL:
+        [webform_submission:values:your_information:email]
+
+        == CANDIDATE INFORMATION ==
+
+        NAME:
+        [webform_submission:values:candidate_information:candidate_name]
+
+        PHONE NUMBER:
+        [webform_submission:values:candidate_information:candidate_phone_number]
+
+        EMAIL:
+        [webform_submission:values:candidate_information:candidate_email]
+
+        DESCRIPTION OF ISSUE:
+        [webform_submission:values:candidate_information:description_of_issue]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

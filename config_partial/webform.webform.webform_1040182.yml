@@ -1,0 +1,186 @@
+uuid: 1e59de20-7719-41cc-bb18-bafa849f473d
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1040182
+title: 'TAP Appointment Request'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info' 
+    '#description': ""
+    name_1:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+      '#required': true
+    pernr_1:
+      '#type': textfield
+      '#size': 20
+      '#min': 
+      '#max': 
+      '#step': 
+      '#unique': false
+      '#title': 'PERNR' 
+      '#description': ""
+    preferred_method_of_contact_1:
+      '#type': radios
+      '#options':
+        email: 'Email'
+        phone: 'Phone'
+      '#title': 'Preferred Method of Contact' 
+      '#description': ""
+      '#required': true
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="preferred_method_of_contact_1"]':
+            value: email
+            
+    phone_1:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="preferred_method_of_contact_1"]':
+            value: phone
+            
+  fieldset_appointment_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Appointment Info' 
+    '#description': ""
+    preferred_time_of_day_for_appointment_7:
+      '#type': radios
+      '#options':
+        morning: 'Morning'
+        afternoon: 'Afternoon'
+      '#title': 'Preferred Time of Day for Appointment' 
+      '#description': ""
+    reason_for_appointment_request_7:
+      '#title': 'Reason for Appointment Request' 
+      '#description': ""
+      '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /risk-management/tap-appointment-request-submittal
+  confirmation_message: "<p>Thank you for your request.&nbsp;&nbsp;Someone will be in touch with you within three business days.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit Appointment Request'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: benefits@sandiego.gov
+      from_options: {  }
+      from_name: 'Flexible Benefits'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: TAPAdmin@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: TAPAdmin@sandiego.gov
+      from_options: {  }
+      from_name: 'Flexible Benefits'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }
