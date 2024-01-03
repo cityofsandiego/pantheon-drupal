@@ -12,10 +12,16 @@ dependencies:
     - field.storage.sand_remote.field_path
     - field.storage.sand_remote.field_r_object_id
     - field.storage.sand_remote.field_source_name
+    - user.role.authenticated
   module:
+    - csv_serialization
     - datetime
     - options
+    - rest
     - sand_remote
+    - serialization
+    - user
+    - views_data_export
 id: remote_data_ocd
 label: 'Remote Data (OCD)'
 module: views
@@ -848,7 +854,7 @@ display:
           separator: ', '
           field_api_classes: false
       pager:
-        type: mini
+        type: full
         options:
           offset: 0
           items_per_page: 20
@@ -857,14 +863,17 @@ display:
           tags:
             next: ››
             previous: ‹‹
+            first: '« First'
+            last: 'Last »'
           expose:
-            items_per_page: false
+            items_per_page: true
             items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options: '20, 100, 500'
             items_per_page_options_all: false
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
+          quantity: 5
       exposed_form:
         type: basic
         options:
@@ -876,8 +885,10 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: none
-        options: {  }
+        type: role
+        options:
+          role:
+            authenticated: authenticated
       cache:
         type: tag
         options: {  }
@@ -885,6 +896,60 @@ display:
       sorts: {  }
       arguments: {  }
       filters:
+        label:
+          id: label
+          table: sand_remote
+          field: label
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: sand_remote
+          entity_field: label
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: label_op
+            label: Label
+            description: ''
+            use_operator: false
+            operator: label_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: label
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              sand_admin: '0'
+              locations: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
         field_path_value:
           id: field_path_value
           table: sand_remote__field_path
@@ -1094,6 +1159,10 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       style:
         type: table
         options:
@@ -1243,6 +1312,56 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.roles
+      tags:
+        - 'config:field.storage.sand_remote.field_committee'
+        - 'config:field.storage.sand_remote.field_doc_date'
+        - 'config:field.storage.sand_remote.field_doc_date_year'
+        - 'config:field.storage.sand_remote.field_doc_num'
+        - 'config:field.storage.sand_remote.field_doc_type'
+        - 'config:field.storage.sand_remote.field_document_url'
+        - 'config:field.storage.sand_remote.field_path'
+        - 'config:field.storage.sand_remote.field_r_object_id'
+        - 'config:field.storage.sand_remote.field_source_name'
+  data_export_1:
+    id: data_export_1
+    display_title: 'Data export'
+    display_plugin: data_export
+    position: 2
+    display_options:
+      style:
+        type: data_export
+        options:
+          formats:
+            csv: csv
+          csv_settings:
+            delimiter: ','
+            enclosure: '"'
+            escape_char: \
+            strip_tags: true
+            trim: true
+            encoding: utf8
+            utf8_bom: '0'
+            use_serializer_encode_only: false
+      display_extenders: {  }
+      path: admin/content/remote/export
+      displays:
+        page_1: page_1
+        default: '0'
+      filename: remote.csv
+      automatic_download: true
+      store_in_public_file_directory: false
+      custom_redirect_path: false
+      redirect_to_display: none
+      include_query_params: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - request_format
+        - url
+        - user.roles
       tags:
         - 'config:field.storage.sand_remote.field_committee'
         - 'config:field.storage.sand_remote.field_doc_date'
@@ -1277,6 +1396,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.roles
       tags:
         - 'config:field.storage.sand_remote.field_committee'
         - 'config:field.storage.sand_remote.field_doc_date'
