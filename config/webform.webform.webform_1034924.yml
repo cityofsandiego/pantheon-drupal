@@ -11,7 +11,7 @@ archive: false
 id: webform_1034924
 title: 'Budget and Government Efficiency Committee Public Comment Form'
 description: null
-category: null
+categories: {  }
 elements: |
   your_name:
     '#type': textfield
@@ -63,13 +63,6 @@ elements: |
     '#title': 'Comments:' 
     '#description': ""
     '#required': true
-  attachments_multiple_file:
-    '#type': managed_file
-    '#max_filesize': '10'
-    '#file_extensions': 'gif jpg jpeg png txt pdf doc docx ppt pptx xls xlsx'
-    '#multiple': true
-    '#title': 'Attachments:' 
-    '#description': "You can upload up to 5 files with a maximum of 10MB for each file."
 css: ''
 javascript: ''
 settings:
@@ -257,6 +250,43 @@ handlers:
 
         The results of this submission may be viewed at:
         [webform_submission:url]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_4:
+    id: email
+    handler_id: email_4
+    label: 'Email 4'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: georgeap@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: 'City of San Diego Budget and Government Efficiency Committee Public Comment Form'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

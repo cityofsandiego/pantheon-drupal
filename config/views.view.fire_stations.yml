@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.field_misc_field_1
     - field.storage.node.field_title_sort
     - node.type.location
     - taxonomy.vocabulary.department
@@ -36,8 +37,8 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: ''
-          exclude: true
+          label: Station
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -148,11 +149,11 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: standard
-          label: ''
-          exclude: true
+          label: Address
+          exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<p><a href="https://www.google.com/maps/place/{{ field_address_address_line1 }} {{ field_address_postal_code }}">{{ field_address_address_line1 }}</a><br>San Diego, CA {{ field_address_postal_code }}</p>'
             make_link: false
             path: ''
             absolute: false
@@ -302,6 +303,122 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_misc_field_1:
+          id: field_misc_field_1
+          table: node__field_misc_field_1
+          field: field_misc_field_1
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Apparatus
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<span class="pull-right">{{ edit_node }}</span>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: false
         nothing:
           id: nothing
           table: views
@@ -311,10 +428,10 @@ display:
           admin_label: ''
           plugin_id: custom
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: true
-            text: "<hr id=\"hr-{{ counter }}\" class=\"l-margin-vd\">\r\n<div class=\"grid-x grid-margin-x\">\r\n<div class=\"cell medium-2\">\r\n{{ title }}\r\n</div>\r\n<div class='\"cell medium-4\">\r\n<p><a href=\"https://www.google.com/maps/place/{{ field_address_address_line1 }} {{ field_address_postal_code }}\">{{ field_address_address_line1 }}</a><br>San Diego, CA {{ field_address_postal_code }}</p>\r\n</div>\r\n<div class=\"cell medium-auto\">\r\n<p>{{ field_title_sort }}</p>\r\n</div>\r\n</div>"
+            text: "<hr id=\"hr-{{ counter }}\" class=\"l-margin-vd\">\r\n<div class=\"grid-x grid-margin-x\">\r\n<div class=\"cell medium-2\">\r\n{{ title }}\r\n</div>\r\n<div class='\"cell medium-4\">\r\n<p><a href=\"https://www.google.com/maps/place/{{ field_address_address_line1 }} {{ field_address_postal_code }}\">{{ field_address_address_line1 }}</a><br>San Diego, CA {{ field_address_postal_code }}</p>\r\n</div>\r\n<div class=\"cell medium-auto\">\r\n<p>{{ field_misc_field_1 }}<span class=\"pull-right\">{{ edit_node }}</span></p>\r\n</div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -360,10 +477,10 @@ display:
         type: basic
         options:
           submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
+          reset_button: true
+          reset_button_label: 'Show All'
           exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
+          expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
@@ -375,22 +492,19 @@ display:
         options: {  }
       empty: {  }
       sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
+        field_title_sort_value:
+          id: field_title_sort_value
+          table: node__field_title_sort
+          field: field_title_sort_value
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          order: DESC
+          plugin_id: standard
+          order: ASC
           expose:
             label: ''
             field_identifier: ''
           exposed: false
-          granularity: second
       arguments:
         field_address_postal_code:
           id: field_address_postal_code
@@ -505,12 +619,135 @@ display:
           hierarchy: false
           limit: true
           error_message: true
+        field_address_postal_code:
+          id: field_address_postal_code
+          table: node__field_address
+          field: field_address_postal_code
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_address_postal_code_op
+            label: 'Filter by Zip Code'
+            description: ''
+            use_operator: false
+            operator: field_address_postal_code_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: zip
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              sand_admin: '0'
+              locations: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       style:
-        type: default
+        type: table
         options:
           grouping: {  }
           row_class: ''
           default_row_class: false
+          columns:
+            title: title
+            field_address_address_line1: field_address_address_line1
+            field_address_postal_code: field_address_postal_code
+            counter: counter
+            field_title_sort: field_title_sort
+            field_misc_field_1: field_misc_field_1
+            edit_node: field_misc_field_1
+            nothing: nothing
+          default: '-1'
+          info:
+            title:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_address_address_line1:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_address_postal_code:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            counter:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_title_sort:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_misc_field_1:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            edit_node:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            nothing:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
       row:
         type: fields
       query:
@@ -535,6 +772,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.node.field_misc_field_1'
         - 'config:field.storage.node.field_title_sort'
   block_1:
     id: block_1
@@ -542,6 +780,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
+      exposed_block: false
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -553,4 +792,5 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.node.field_misc_field_1'
         - 'config:field.storage.node.field_title_sort'

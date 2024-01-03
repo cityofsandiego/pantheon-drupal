@@ -11,44 +11,44 @@ archive: false
 id: webform_308
 title: 'Agenda Comment Form'
 description: null
-category: null
-elements: |
+categories: {  }
+elements: |-
   your_name:
     '#type': textfield
-    '#title': 'Name:' 
-    '#description': ""
+    '#title': 'Name:'
+    '#description': ''
     '#required': true
   e_mail_address:
     '#type': textfield
-    '#title': 'Email:' 
-    '#description': ""
+    '#title': 'Email:'
+    '#description': ''
   address:
     '#type': textfield
-    '#title': 'Address:' 
-    '#description': ""
+    '#title': 'Address:'
+    '#description': ''
   city:
     '#type': textfield
-    '#title': 'City:' 
-    '#description': ""
+    '#title': 'City:'
+    '#description': ''
     '#required': true
   state:
     '#type': textfield
-    '#title': 'State:' 
-    '#description': ""
+    '#title': 'State:'
+    '#description': ''
     '#required': true
   zip_code:
     '#type': textfield
-    '#title': 'Zip Code:' 
-    '#description': ""
+    '#title': 'Zip Code:'
+    '#description': ''
     '#required': true
   telephone_number:
     '#type': textfield
-    '#title': 'Telephone Number' 
-    '#description': ""
+    '#title': 'Telephone Number'
+    '#description': ''
   meeting_date:
     '#type': date
-    '#title': 'Meeting Date:' 
-    '#description': ""
+    '#title': 'Meeting Date:'
+    '#description': ''
     '#required': true
   comment_type:
     '#type': radios
@@ -58,41 +58,51 @@ elements: |
       pffa_key: 'PFFA Comment'
       housing_key: 'Housing Authority Comment'
       nonagenda_key: 'Non-Agenda Comment'
-    '#title': 'Comment Type' 
-    '#description': ""
+    '#title': 'Comment Type'
+    '#description': ''
     '#required': true
   agenda_item_number_only:
-    '#title': 'Agenda Item Number (for Agenda items that are preceded by an S, please drop the S and simply insert the three-digit number in the field below)' 
-    '#description': ""
+    '#title': 'Agenda Item Number (for Agenda items that are preceded by an S, please drop the S and simply insert the three-digit number in the field below)'
+    '#description': ''
+    '#required': true
+  agenda_item_number:
+    '#type': number
+    '#title': "Agenda Item Number (for Agenda items that are preceded by an S, please drop the S and simply insert the three-digit number in the field below)\t"
     '#required': true
   comment:
-    '#title': 'Comments:' 
-    '#description': ""
+    '#title': 'Comments:'
+    '#description': ''
     '#required': true
+  comment_new:
+    '#type': textarea
+    '#title': Comments
+    '#autocomplete': 'off'
+    '#required': true
+    '#counter_type': word
+    '#counter_maximum': 500
   declaration:
     '#type': radios
     '#options':
-      yes: 'Yes'
-      no: 'No'
-    '#title': 'Declaration of Campaign Contribution to a Councilmember of more than $250 within the past year (effective Jan 1, 2023)' 
-    '#description': ""
+      'yes': 'Yes'
+      'no': 'No'
+    '#title': 'Declaration of Campaign Contribution to a Councilmember of more than $250 within the past year (effective Jan 1, 2023)'
+    '#description': ''
   names_of_councilmembers:
     '#type': textarea
-    '#title': 'Name(s) of Councilmember(s):' 
-    '#description': ""
+    '#title': 'Name(s) of Councilmember(s):'
+    '#description': ''
     '#required': true
     '#states':
       visible:
         ':input[name="declaration"]':
           value: 'yes'
-          
   attachments_multiple_file:
     '#type': managed_file
     '#max_filesize': '10'
     '#file_extensions': 'gif jpg jpeg png txt pdf doc docx ppt pptx xls xlsx'
     '#multiple': true
-    '#title': 'Attachments:' 
-    '#description': "You can upload up to 5 files with a maximum of 10MB for each file."
+    '#title': 'Attachments:'
+    '#description': 'You can upload up to 5 files with a maximum of 10MB for each file.'
 css: ''
 javascript: ''
 settings:
