@@ -11,7 +11,7 @@ archive: false
 id: webform_8355
 title: 'Noise Complaint'
 description: null
-category: null
+categories: {  }
 elements: |
   reported_by:
     '#type': processed_text
@@ -117,21 +117,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: wreiter@sandiego.gov
+      to_mail: 'wreiter@sandiego.gov, lkosta@sandiego.gov'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: wreiter@sandiego.gov
+      from_mail: _default
       from_options: {  }
-      from_name: default
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: default
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nNAME:\r\n[webform_submission:values:name_2]\r\n\r\nADDRESS:\r\n[webform_submission:values:address_2]\r\n\r\nCITY, ZIP:\r\n[webform_submission:values:city_2], [webform_submission:values:zip_code_2]\r\n\r\nPHONE:\r\n[webform_submission:values:phone_2]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_2]\r\n\r\nDATE OF EVENT, TIME OF EVENT:\r\n[webform_submission:values:date_of_event_9], [webform_submission:values:time_of_event_9]\r\n\r\nTYPE OF AIRCRAFT:\r\n[webform_submission:values:type_of_aircraft_9]\r\n\r\nTYPE OF OPERATION:\r\n[webform_submission:values:type_of_operation_9]\r\n\r\nWOULD YOU LIKE SOMEONE TO CONTACT YOU?\r\n[webform_submission:values:would_you_like_someone_to_contact_you_17]\r\n\r\nHOW WOULD YOU LIKE TO BE CONTACTED?\r\n[webform_submission:values:how_would_you_like_to_be_contacted_17]\r\n\r\nCOMMENTS:\r\n[webform_submission:values:comments]\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

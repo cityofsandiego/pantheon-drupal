@@ -11,7 +11,7 @@ archive: false
 id: webform_304
 title: 'Request for Investigation Form'
 description: null
-category: null
+categories: {  }
 elements: |
   top_markup:
     '#type': processed_text
@@ -432,84 +432,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: codeenf@sandiego.gov
+      from_mail: _default
       from_options: {  }
-      from_name: 'Code Enforcement'
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
       subject: default
-      body: |-
-        Submitted on [webform_submission:date:long]
-        ***********************************************************
-
-        INVESTIGATION TYPE:  [webform_submission:values:investigation_type_set:investigation_type:nolabel]
-        IF "NOISE":  [webform_submission:values:investigation_type_set:noise_selected:nolabel]
-
-        *** VIOLATION PROPERTY ***
-
-             ADDRESS:  [webform_submission:values:violation_property_set:violation_property_address:nolabel]
-             APT OR UNIT #:  [webform_submission:values:violation_property_set:violation_property_apt_unit:nolabel]
-             ZIP/POSTAL CODE:  [webform_submission:values:violation_property_set:violation_property_zip:nolabel]
-             CROSS STREET:  [webform_submission:values:violation_property_set:violation_property_cross_street:nolabel]
-
-        *** VIOLATION PROPERTY CONTACT ***
-
-             NAME:  [webform_submission:values:violation_property_contact_set:violation_property_contact_name:nolabel]
-             CONTACT TYPE:  [webform_submission:values:violation_property_contact_set:violation_property_contact_type:nolabel]
-             DAYTIME PHONE:  [webform_submission:values:violation_property_contact_set:violation_property_contact_phone:nolabel]
-             ADDRESS:  [webform_submission:values:violation_property_contact_set:violation_property_contact_address:nolabel]
-             CITY:  [webform_submission:values:violation_property_contact_set:violation_property_contact_city:nolabel]
-             STATE:  [webform_submission:values:violation_property_contact_set:violation_property_contact_state:nolabel]
-             ZIP CODE:  [webform_submission:values:violation_property_contact_set:violation_property_contact_zip:nolabel]
-
-        ALLEGED VIOLATION:  [webform_submission:values:alleged_violation:nolabel]
-
-        Is this RESIDENTIAL PROPERTY?  [webform_submission:values:residential_property_set:residential_property_type:nolabel]
-
-        OTHER:  [webform_submission:values:residential_property_set:residential_property_other:nolabel]
-
-        Is this a RENTAL PROPERTY?  [webform_submission:values:rental_property:nolabel]
-
-        Is there any DRUG ACTIVITY at this site?  [webform_submission:values:drug_activity:nolabel]
-
-        Are there LOOSE PETS at the site?  [webform_submission:values:loose_pets:nolabel]
-
-        THE NOISE OCCURS:
-        [webform_submission:values:noise_occurs:nolabel]
-
-        *** COMPLAINANT ***
-
-             NAME:  [webform_submission:values:complainant_set:complainant_name:nolabel]
-             ADDRESS:  [webform_submission:values:complainant_set:complainant_address:nolabel]
-             CITY:  [webform_submission:values:complainant_set:complainant_city:nolabel]
-             ZIP CODE:  [webform_submission:values:complainant_set:complainant_zip:nolabel]
-             DAYTIME PHONE:  [webform_submission:values:complainant_set:complainant_phone:nolabel]
-             EMAIL:  [webform_submission:values:complainant_set:complainant_email:nolabel]
-             LANGUAGE SPOKEN:  [webform_submission:values:complainant_set:complainant_language:nolabel]
-
-        *** SUPPORTER 1 ***
-
-             NAME:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_name:nolabel]
-             PHONE:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_phone:nolabel]
-             EMAIL:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_email:nolabel]
-             DATE:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_date:nolabel]
-             ADDRESS:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_address:nolabel]
-             ZIP CODE:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_zip:nolabel]
-
-        *** SUPPORTER 2 ***
-
-             NAME:  [webform_submission:values:supporters_set:supporter_2_set:supporter_2_name:nolabel]
-             PHONE:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_phone:nolabel]
-             EMAIL:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_email:nolabel]
-             DATE:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_date:nolabel]
-             ADDRESS:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_address:nolabel]
-             ZIP CODE:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_zip:nolabel]
-
-        *** ATTACHMENT ***
-
-             [webform_submission:values:photo_set:upload_photo:nolabel]
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -526,7 +457,7 @@ handlers:
     handler_id: email_2
     label: 'Email 2'
     notes: ''
-    status: true
+    status: false
     conditions: {  }
     weight: 2
     settings:
@@ -538,84 +469,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
       subject: default
-      body: |-
-        Submitted on [webform_submission:date:long]
-        ***********************************************************
-
-        INVESTIGATION TYPE:  [webform_submission:values:investigation_type_set:investigation_type:nolabel]
-        IF "NOISE":  [webform_submission:values:investigation_type_set:noise_selected:nolabel]
-
-        *** VIOLATION PROPERTY ***
-
-             ADDRESS:  [webform_submission:values:violation_property_set:violation_property_address:nolabel]
-             APT OR UNIT #:  [webform_submission:values:violation_property_set:violation_property_apt_unit:nolabel]
-             ZIP/POSTAL CODE:  [webform_submission:values:violation_property_set:violation_property_zip:nolabel]
-             CROSS STREET:  [webform_submission:values:violation_property_set:violation_property_cross_street:nolabel]
-
-        *** VIOLATION PROPERTY CONTACT ***
-
-             NAME:  [webform_submission:values:violation_property_contact_set:violation_property_contact_name:nolabel]
-             CONTACT TYPE:  [webform_submission:values:violation_property_contact_set:violation_property_contact_type:nolabel]
-             DAYTIME PHONE:  [webform_submission:values:violation_property_contact_set:violation_property_contact_phone:nolabel]
-             ADDRESS:  [webform_submission:values:violation_property_contact_set:violation_property_contact_address:nolabel]
-             CITY:  [webform_submission:values:violation_property_contact_set:violation_property_contact_city:nolabel]
-             STATE:  [webform_submission:values:violation_property_contact_set:violation_property_contact_state:nolabel]
-             ZIP CODE:  [webform_submission:values:violation_property_contact_set:violation_property_contact_zip:nolabel]
-
-        ALLEGED VIOLATION:  [webform_submission:values:alleged_violation:nolabel]
-
-        Is this RESIDENTIAL PROPERTY?  [webform_submission:values:residential_property_set:residential_property_type:nolabel]
-
-        OTHER:  [webform_submission:values:residential_property_set:residential_property_other:nolabel]
-
-        Is this a RENTAL PROPERTY?  [webform_submission:values:rental_property:nolabel]
-
-        Is there any DRUG ACTIVITY at this site?  [webform_submission:values:drug_activity:nolabel]
-
-        Are there LOOSE PETS at the site?  [webform_submission:values:loose_pets:nolabel]
-
-        THE NOISE OCCURS:
-        [webform_submission:values:noise_occurs:nolabel]
-
-        *** COMPLAINANT ***
-
-             NAME:  [webform_submission:values:complainant_set:complainant_name:nolabel]
-             ADDRESS:  [webform_submission:values:complainant_set:complainant_address:nolabel]
-             CITY:  [webform_submission:values:complainant_set:complainant_city:nolabel]
-             ZIP CODE:  [webform_submission:values:complainant_set:complainant_zip:nolabel]
-             DAYTIME PHONE:  [webform_submission:values:complainant_set:complainant_phone:nolabel]
-             EMAIL:  [webform_submission:values:complainant_set:complainant_email:nolabel]
-             LANGUAGE SPOKEN:  [webform_submission:values:complainant_set:complainant_language:nolabel]
-
-        *** SUPPORTER 1 ***
-
-             NAME:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_name:nolabel]
-             PHONE:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_phone:nolabel]
-             EMAIL:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_email:nolabel]
-             DATE:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_date:nolabel]
-             ADDRESS:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_address:nolabel]
-             ZIP CODE:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_zip:nolabel]
-
-        *** SUPPORTER 2 ***
-
-             NAME:  [webform_submission:values:supporters_set:supporter_2_set:supporter_2_name:nolabel]
-             PHONE:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_phone:nolabel]
-             EMAIL:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_email:nolabel]
-             DATE:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_date:nolabel]
-             ADDRESS:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_address:nolabel]
-             ZIP CODE:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_zip:nolabel]
-
-        *** ATTACHMENT ***
-
-             [webform_submission:values:photo_set:upload_photo:nolabel]
+      body: "Submitted on [webform_submission:created]\r\n***********************************************************\r\n\r\nINVESTIGATION TYPE:  [webform_submission:values:investigation_type_set:investigation_type:nolabel]\r\nIF \"NOISE\":  [webform_submission:values:investigation_type_set:noise_selected:nolabel]\r\n\r\n*** VIOLATION PROPERTY ***\r\n\r\n     ADDRESS:  [webform_submission:values:violation_property_set:violation_property_address:nolabel]\r\n     APT OR UNIT #:  [webform_submission:values:violation_property_set:violation_property_apt_unit:nolabel]\r\n     ZIP/POSTAL CODE:  [webform_submission:values:violation_property_set:violation_property_zip:nolabel]\r\n     CROSS STREET:  [webform_submission:values:violation_property_set:violation_property_cross_street:nolabel]\r\n\r\n*** VIOLATION PROPERTY CONTACT ***\r\n\r\n     NAME:  [webform_submission:values:violation_property_contact_set:violation_property_contact_name:nolabel]\r\n     CONTACT TYPE:  [webform_submission:values:violation_property_contact_set:violation_property_contact_type:nolabel]\r\n     DAYTIME PHONE:  [webform_submission:values:violation_property_contact_set:violation_property_contact_phone:nolabel]\r\n     ADDRESS:  [webform_submission:values:violation_property_contact_set:violation_property_contact_address:nolabel]\r\n     CITY:  [webform_submission:values:violation_property_contact_set:violation_property_contact_city:nolabel]\r\n     STATE:  [webform_submission:values:violation_property_contact_set:violation_property_contact_state:nolabel]\r\n     ZIP CODE:  [webform_submission:values:violation_property_contact_set:violation_property_contact_zip:nolabel]\r\n\r\nALLEGED VIOLATION:  [webform_submission:values:alleged_violation:nolabel]\r\n\r\nIs this RESIDENTIAL PROPERTY?  [webform_submission:values:residential_property_set:residential_property_type:nolabel]\r\n\r\nOTHER:  [webform_submission:values:residential_property_set:residential_property_other:nolabel]\r\n\r\nIs this a RENTAL PROPERTY?  [webform_submission:values:rental_property:nolabel]\r\n\r\nIs there any DRUG ACTIVITY at this site?  [webform_submission:values:drug_activity:nolabel]\r\n\r\nAre there LOOSE PETS at the site?  [webform_submission:values:loose_pets:nolabel]\r\n\r\nTHE NOISE OCCURS:\r\n[webform_submission:values:noise_occurs:nolabel]\r\n\r\n*** COMPLAINANT ***\r\n\r\n     NAME:  [webform_submission:values:complainant_set:complainant_name:nolabel]\r\n     ADDRESS:  [webform_submission:values:complainant_set:complainant_address:nolabel]\r\n     CITY:  [webform_submission:values:complainant_set:complainant_city:nolabel]\r\n     ZIP CODE:  [webform_submission:values:complainant_set:complainant_zip:nolabel]\r\n     DAYTIME PHONE:  [webform_submission:values:complainant_set:complainant_phone:nolabel]\r\n     EMAIL:  [webform_submission:values:complainant_set:complainant_email:nolabel]\r\n     LANGUAGE SPOKEN:  [webform_submission:values:complainant_set:complainant_language:nolabel]\r\n\r\n*** SUPPORTER 1 ***\r\n\r\n     NAME:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_name:nolabel]\r\n     PHONE:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_phone:nolabel]\r\n     EMAIL:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_email:nolabel]\r\n     DATE:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_date:nolabel]\r\n     ADDRESS:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_address:nolabel]\r\n     ZIP CODE:  [webform_submission:values:supporters_set:supporter_1_set:supporters_1_zip:nolabel]\r\n\r\n*** SUPPORTER 2 ***\r\n\r\n     NAME:  [webform_submission:values:supporters_set:supporter_2_set:supporter_2_name:nolabel]\r\n     PHONE:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_phone:nolabel]\r\n     EMAIL:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_email:nolabel]\r\n     DATE:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_date:nolabel]\r\n     ADDRESS:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_address:nolabel]\r\n     ZIP CODE:  [webform_submission:values:supporters_set:supporter_2_set:supporters_2_zip:nolabel]\r\n\r\n*** ATTACHMENT ***\r\n\r\n     [webform_submission:values:photo_set:upload_photo:nolabel]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

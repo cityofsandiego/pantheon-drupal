@@ -11,7 +11,7 @@ archive: false
 id: webform_1376606
 title: 'Send a Message to the Mayor'
 description: null
-category: null
+categories: {  }
 elements: |
   sender:
     '#type': email
@@ -68,25 +68,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:sender:raw]'
+      from_mail: _default
       from_options: {  }
-      from_name: default
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: |-
-        <p>Submitted on [webform_submission:date:long]</p>
-
-        <p>SENDER:<br>
-        <a href="mailto:[webform_submission:values:sender:nolabel]">[webform_submission:values:sender:nolabel]</a></p>
-
-        <p>SUBJECT:<br>
-        [webform_submission:values:subject:nolabel]</p>
-
-        <p>MESSAGE:<br>
-        [webform_submission:values:message:nolabel]</p>
+      subject: _default
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -115,22 +105,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: MayorToddGloria@sandiego.gov
+      from_mail: _default
       from_options: {  }
-      from_name: default
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
       subject: 'Thanks for your email!'
-      body: |
-        <p>Your email was successfully submitted to the Office of Mayor Todd Gloria. Your inquiry will be responded to as soon as possible in the order that it was received.</p>
-        <hr>
-        <p>Subject:<br>[webform_submission:values:subject:nolabel]</p>
-        <p>Message:<br>[webform_submission:values:message:nolabel]</p>
-
-        ******
-        <p>Please do not reply to this email. This email was automatically generated.</p>
+      body: "<p>Your email was successfully submitted to the Office of Mayor Todd Gloria. Your inquiry will be responded to as soon as possible in the order that it was received.</p>\r\n<hr>\r\n<p>Subject:<br>[webform_submission:values:subject:nolabel]</p>\r\n<p>Message:<br>[webform_submission:values:message:nolabel]</p>\r\n\r\n******\r\n<p>Please do not reply to this email. This email was automatically generated.</p>\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

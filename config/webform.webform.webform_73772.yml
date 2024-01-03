@@ -11,7 +11,7 @@ archive: false
 id: webform_73772
 title: 'Email a Staff Member'
 description: null
-category: null
+categories: {  }
 elements: |
   send_to:
     '#type': processed_text
@@ -89,25 +89,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:sender:raw]'
+      from_mail: _default
       from_options: {  }
-      from_name: default
-      reply_to: ''
+      from_name: _default
+      reply_to: '[webform_submission:values:sender:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: |-
-        <p>Submitted on [webform_submission:date:long]</p>
-
-        <p>SENDER:<br>
-        <a href="mailto:[webform_submission:values:sender:nolabel]">[webform_submission:values:sender:nolabel]</a></p>
-
-        <p>SUBJECT:<br>
-        [webform_submission:values:subject:nolabel]</p>
-
-        <p>MESSAGE:<br>
-        [webform_submission:values:message:nolabel]</p>
+      subject: '[webform_submission:values:subject:raw]'
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

@@ -11,65 +11,65 @@ archive: false
 id: webform_1034834
 title: 'Active Transport and Infrastructure Committee Public Comment Form'
 description: null
-category: null
-elements: |
+categories: {  }
+elements: |-
   your_name:
     '#type': textfield
-    '#title': 'Name:' 
-    '#description': ""
+    '#title': 'Name:'
+    '#description': ''
     '#required': true
   e_mail_address:
     '#type': textfield
-    '#title': 'Email:' 
-    '#description': ""
+    '#title': 'Email:'
+    '#input_mask': '''alias'': ''email'''
   city:
     '#type': textfield
-    '#title': 'City:' 
-    '#description': ""
+    '#title': 'City:'
+    '#description': ''
     '#required': true
   state:
     '#type': textfield
-    '#title': 'State:' 
-    '#description': ""
+    '#title': 'State:'
+    '#description': ''
     '#required': true
   meeting_date:
     '#type': date
-    '#title': 'Meeting Date:' 
-    '#description': ""
+    '#title': 'Meeting Date:'
+    '#description': ''
     '#required': true
   comment_type:
     '#type': radios
     '#options':
       agenda_key: 'Agenda Comment / Closed Session Comment'
       nonagenda_key: 'Non-Agenda Comment'
-    '#title': 'Comment Type' 
-    '#description': ""
+    '#title': 'Comment Type'
+    '#description': ''
     '#required': true
   agenda_item_number:
     '#type': textfield
-    '#title': 'Agenda Item Number' 
-    '#description': ""
+    '#title': 'Agenda Item Number'
+    '#description': ''
     '#required': true
     '#states':
       visible:
         ':input[name="comment_type"]':
           value: agenda_key
-          
       required:
         ':input[name="comment_type"]':
           value: agenda_key
-          
   comments:
-    '#title': 'Comments:' 
-    '#description': ""
+    '#type': textarea
+    '#title': Comments
     '#required': true
-  attachments_multiple_file:
-    '#type': managed_file
+    '#counter_type': word
+    '#counter_maximum': 200
+  file_upload:
+    '#type': webform_document_file
+    '#title': 'File Upload'
+    '#multiple': 5
     '#max_filesize': '10'
-    '#file_extensions': 'gif jpg jpeg png txt pdf doc docx ppt pptx xls xlsx'
-    '#multiple': true
-    '#title': 'Attachments:' 
-    '#description': "You can upload up to 5 files with a maximum of 10MB for each file."
+    '#file_extensions': 'txt rtf pdf doc docx ppt pptx xls xlsx'
+    '#sanitize': true
 css: ''
 javascript: ''
 settings:
@@ -103,35 +103,28 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: mwallace@sandiego.gov
+      to_mail: 'mwallace@sandiego.gov, jgarver@sandiego.gov, burcht@sandiego.gov, sarahj@sandiego.gov, nkessler@sandiego.gov'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: 'City of San Diego Active Transport and Infrastructure Committee Public Comment Form'
-      reply_to: ''
+      from_name: _default
+      reply_to: '[webform_submission:values:e_mail_address:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: |-
-        Submitted on [webform_submission:date:long]
-
-        Submitted values are:
-        [webform_submission:values]
-
-        The results of this submission may be viewed at:
-        [webform_submission:url]
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nNAME:\r\n[webform_submission:values:your_name]\r\n\r\nEMAIL:\r\n[webform_submission:values:e_mail_address]\r\n\r\nCITY, STATE:\r\n[webform_submission:values:city], [webform_submission:values:state]\r\n\r\nMEETING DATE:\r\n[webform_submission:values:meeting_date]\r\n\r\nCOMMENT TYPE:\r\n[webform_submission:values:comment_type]\r\n\r\nAGENDA ITEM NUMBER:\r\n[webform_submission:values:agenda_item_number]\r\n\r\nCOMMENTS:\r\n[webform_submission:values:comments]\r\n\r\nFILE UPLOAD:\r\n[webform_submission:values:file_upload]\r\n\r\nThe results of this submission may be viewed at:\r\n[webform_submission:url]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
       exclude_attachments: false
       html: false
-      attachments: false
+      attachments: true
       twig: false
       theme_name: ''
       parameters: {  }
@@ -141,7 +134,7 @@ handlers:
     handler_id: email_4
     label: 'Email 4'
     notes: ''
-    status: true
+    status: false
     conditions: {  }
     weight: 4
     settings:
@@ -153,9 +146,9 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: 'City of San Diego Active Transport and Infrastructure Committee Public Comment Form'
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
@@ -178,7 +171,7 @@ handlers:
     handler_id: email_5
     label: 'Email 5'
     notes: ''
-    status: true
+    status: false
     conditions: {  }
     weight: 5
     settings:
@@ -190,22 +183,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: 'City of San Diego Active Transport and Infrastructure Committee Public Comment Form'
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
       subject: default
-      body: |-
-        Submitted on [webform_submission:date:long]
-
-        Submitted values are:
-        [webform_submission:values]
-
-        The results of this submission may be viewed at:
-        [webform_submission:url]
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -222,7 +208,7 @@ handlers:
     handler_id: email_6
     label: 'Email 6'
     notes: ''
-    status: true
+    status: false
     conditions: {  }
     weight: 6
     settings:
@@ -234,22 +220,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: 'City of San Diego Active Transport and Infrastructure Committee Public Comment Form'
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
       subject: default
-      body: |-
-        Submitted on [webform_submission:date:long]
-
-        Submitted values are:
-        [webform_submission:values]
-
-        The results of this submission may be viewed at:
-        [webform_submission:url]
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -266,7 +245,7 @@ handlers:
     handler_id: email_7
     label: 'Email 7'
     notes: ''
-    status: true
+    status: false
     conditions: {  }
     weight: 7
     settings:
@@ -278,22 +257,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: 'City of San Diego Active Transport and Infrastructure Committee Public Comment Form'
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: |-
-        Submitted on [webform_submission:date:long]
-
-        Submitted values are:
-        [webform_submission:values]
-
-        The results of this submission may be viewed at:
-        [webform_submission:url]
+      subject: _default
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
