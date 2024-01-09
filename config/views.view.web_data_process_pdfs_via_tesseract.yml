@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.sand_remote.field_document_url
     - sand_remote.sand_remote_type.external
+    - user.role.authenticated
   module:
     - csv_serialization
     - rest
@@ -172,9 +173,10 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: perm
+        type: role
         options:
-          perm: 'administer sand_remote types'
+          role:
+            authenticated: authenticated
       cache:
         type: tag
         options: {  }
@@ -296,7 +298,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.sand_remote.field_document_url'
   page_webdataserver:
@@ -313,7 +315,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.sand_remote.field_document_url'
   rest_export_webdataserver:
@@ -352,6 +354,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - request_format
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.sand_remote.field_document_url'
