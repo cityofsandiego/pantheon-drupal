@@ -68,6 +68,8 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator('.')) as $
   }
 }
 
+echo PHP_EOL . 'Peak real memory MB: ' . memory_get_peak_usage(TRUE) / 1024 / 1024 . PHP_EOL;
+
 /**
  * Get/Map a mime type to it's media bundle name. Document or Image now.
  *
