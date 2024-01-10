@@ -29,10 +29,6 @@ use Drupal\media\Entity\Media;
  * 6772 image/jpeg
  */
 
-$database = \Drupal::database();
-$managed_files = $database->query("SELECT uri FROM {file_managed}")->fetchAllAssoc('uri');
-
-
 $uid = 422; // programatic user id.
 $mime_types = [
   'application/pdf',
@@ -41,6 +37,9 @@ $mime_types = [
   'image/tiff',
   'image/vnd.dwg'
 ];
+
+$database = \Drupal::database();
+$managed_files = $database->query("SELECT uri, 1 FROM {file_managed}")->fetchAllKeyed(0,1);
 
 chdir("sites/default/files");
 
