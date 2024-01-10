@@ -4,12 +4,15 @@ status: true
 dependencies:
   config:
     - field.field.node.webteam.body
+    - field.field.node.webteam.field_search_exclude_entity
     - node.type.webteam
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - search_api_exclude_entity
     - text
 id: node.webteam.default
 targetEntityType: node
@@ -31,6 +34,13 @@ content:
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_search_exclude_entity:
+    type: search_api_exclude_entity_widget
+    weight: 122
+    region: content
+    settings:
+      field_label: 'Yes, exclude this entity from the search indexes.'
     third_party_settings: {  }
   langcode:
     type: language_select
