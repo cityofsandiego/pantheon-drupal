@@ -4,7 +4,7 @@ use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 
 /**
- * Count from dev.sandiego.gov on 01/24
+ * Count of unmanaged files from dev.sandiego.gov on 01/24
  *
  * 1 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
  * 1 application/vnd.openxmlformats-officedocument.wordprocessingml.document
@@ -30,9 +30,10 @@ use Drupal\media\Entity\Media;
  */
 
 $database = \Drupal::database();
+$managed_files = $database->query("SELECT uri FROM {file_managed}")->fetchAllAssoc('uri');
 
 
-$uid = 422;
+$uid = 422; // programatic user id.
 $mime_types = [
   'application/pdf',
   'image/jpeg',
@@ -51,10 +52,10 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator('.')) as $
 
   // Build the uri so I can look in file_managed.
   $uri = 'public://' . substr($filename->getPathname(), 2);
-  $result = $database->query("SELECT fid FROM {file_managed} WHERE uri = :uri", [ ':uri' => $uri, ], )->fetchAll();
+//  $result = $database->query("SELECT fid FROM {file_managed} WHERE uri = :uri", [ ':uri' => $uri, ], )->fetchAll();
 
   // If it's empty then it's not managed.
-  if (empty($result)) {
+  if (!isset($managed_files[$uri])) {
     $mime = mime_content_type($filename->getPathname());
     $size = filesize($filename->getPathname());
 
@@ -68,14 +69,27 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator('.')) as $
   }
 }
 
-
-function getBundle($mime): string {
+/**
+ * Get/Map a mime type to it's media bundle name. Document or Image now.
+ *
+ * @param string $mime
+ *
+ * @return string
+ */
+function getBundle(string $mime): string {
   preg_match('#(.*)/(.*)#', $mime, $matches);
   return str_replace('application', 'document', $matches[1]);
 }
 
-function ignoreDir($haystack) {
-  $ignore = [ './.htaccess', './private/', './styles/', './css', './js/',  './media-youtube/', './vendor/', './php', './asset_injector/' ];
+/**
+ * Return True if we should avoid this directory.
+ *
+ * @param string $haystack
+ *
+ * @return bool
+ */
+function ignoreDir(string $haystack): bool {
+  $ignore = [ './.DS_Store', './.htaccess', './private/', './styles/', './css', './js/',  './media-youtube/', './vendor/', './php', './asset_injector/' ];
   foreach ($ignore as $ignore_path) {
     if (str_starts_with($haystack, $ignore_path)) {
       return TRUE;
@@ -84,7 +98,18 @@ function ignoreDir($haystack) {
   return FALSE;
 }
 
-function createFile($uri, $filename, $size, $uid): int {
+/**
+ * Create a file entity for a file that already exists.
+ *
+ * @param string $uri
+ * @param \SplFileInfo $filename
+ * @param $size
+ * @param int $uid
+ *
+ * @return int
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function createFile(string $uri, SplFileInfo $filename, $size, int $uid): int {
   $file = File::create([
     'filename' => basename($filename->getFilename()),
     'uri' => $uri,
@@ -96,9 +121,21 @@ function createFile($uri, $filename, $size, $uid): int {
   return $file->id();
 }
 
-function createMedia(SplFileInfo $filename, $uid, $fid, $bundle) {
+/**
+ * Create media entity of type document or image with file already existing.
+ *
+ * @param \SplFileInfo $filename
+ * @param int $uid
+ * @param int $fid
+ * @param string $bundle
+ *
+ * @return int
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function createMedia(SplFileInfo $filename, int $uid, int $fid, string $bundle): int {
 
   $file = File::load($fid);
+  // Note: We have just tested on pdf (document) and images (image) for bundles.
   $fieldname = 'field_media_' . $bundle;
 
   if ($file) {
@@ -115,16 +152,4 @@ function createMedia(SplFileInfo $filename, $uid, $fid, $bundle) {
     $media->save();
     return $media->id();
   }
-
-//  $image_media = Media::create([
-//    'name' => $filename->getFilename(),
-//    'bundle' => $bundle,
-//    'uid' => $uid,
-//    'langcode' => 'en',
-//    'status' => 1,
-//    'field_media_image' => [
-//      'target_id' => $fid,
-//    ],
-//  ]);
-//  $image_media->save();
 }
