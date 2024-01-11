@@ -8,6 +8,7 @@ dependencies:
     - field.storage.node.field_attachment
     - field.storage.node.body
     - field.storage.node.field_body_bottom
+    - field.storage.node.field_category
     - field.storage.node.field_department
     - field.storage.node.field_keywords
     - field.storage.node.field_mayor
@@ -25,6 +26,7 @@ dependencies:
     - node
     - paragraphs
     - search_api
+    - sand_search
     - search_api_attachments
     - search_api_exclude_entity
 third_party_settings:
@@ -246,6 +248,16 @@ field_settings:
     dependencies:
       module:
         - media
+  name_4:
+    label: 'Category » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_category:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_category
+      module:
+        - taxonomy
   nid:
     label: ID
     datasource_id: 'entity:node'
@@ -294,6 +306,16 @@ field_settings:
     dependencies:
       config:
         - field.storage.media.field_department
+      module:
+        - taxonomy
+  tid_category:
+    label: 'Category » Taxonomy term » Term ID'
+    datasource_id: 'entity:node'
+    property_path: 'field_category:entity:tid'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_category
       module:
         - taxonomy
   title:
@@ -418,6 +440,7 @@ processor_settings:
       - name_1
       - name_2
       - name_3
+      - name_4
       - processed
       - saa_field_media_document
       - title
