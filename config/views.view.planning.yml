@@ -6473,6 +6473,69 @@ display:
           text: Edit
           output_url_as_text: false
           absolute: false
+        field_media_image:
+          id: field_media_image
+          table: media__field_media_image
+          field: field_media_image
+          relationship: field_feature_video_img
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: image_url
+          settings:
+            image_style: 50_16x9
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         nothing:
           id: nothing
           table: views
@@ -6485,7 +6548,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>{{ edit_node }}\r\n  </div>\r\n</div>"
+            text: "<div class=\"card background--off-white border pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>{{ edit_node }}\r\n  </div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -6755,7 +6818,16 @@ display:
         sorts: false
         filters: false
         filter_groups: false
-      relationships: {  }
+      relationships:
+        field_feature_video_img:
+          id: field_feature_video_img
+          table: node__field_feature_video_img
+          field: field_feature_video_img
+          relationship: none
+          group_type: group
+          admin_label: 'field_feature_video_img: Media'
+          plugin_id: standard
+          required: false
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -6768,6 +6840,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_media_image'
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_feature_video_img'
         - 'config:field.storage.node.field_website'
@@ -7385,6 +7458,69 @@ display:
           text: Edit
           output_url_as_text: false
           absolute: false
+        field_media_image:
+          id: field_media_image
+          table: media__field_media_image
+          field: field_media_image
+          relationship: field_feature_video_img
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: image_url
+          settings:
+            image_style: 50_16x9
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         nothing:
           id: nothing
           table: views
@@ -7397,7 +7533,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border l-padding-bl pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>{{ edit_node }}\r\n  </div>\r\n  <div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn pin-bottom\">\r\n  <p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n  <p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n</div>"
+            text: "<div class=\"card background--off-white border l-padding-bl pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}></a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>{{ edit_node }}\r\n  </div>\r\n  <div class=\"text-center fine-print text-upper width-100 background-off-white l-padding-vs l-margin-bn pin-bottom\">\r\n  <p class=\"l-margin-bs\">Status: <span class=\"background--{{ views_conditional_field }} rounded-corners l-padding-hs\">{{ field_category }}</span></p>\r\n  <p class=\"l-margin-bn\">{{ field_subtitle }}</p></div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -7695,7 +7831,16 @@ display:
         sorts: false
         filters: false
         filter_groups: false
-      relationships: {  }
+      relationships:
+        field_feature_video_img:
+          id: field_feature_video_img
+          table: node__field_feature_video_img
+          field: field_feature_video_img
+          relationship: none
+          group_type: group
+          admin_label: 'field_feature_video_img: Media'
+          plugin_id: standard
+          required: false
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -7709,6 +7854,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_media_image'
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_category'
         - 'config:field.storage.node.field_feature_video_img'
@@ -8088,6 +8234,69 @@ display:
           text: Edit
           output_url_as_text: false
           absolute: false
+        field_media_image:
+          id: field_media_image
+          table: media__field_media_image
+          field: field_media_image
+          relationship: field_feature_video_img
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: image_url
+          settings:
+            image_style: 50_16x9
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         nothing:
           id: nothing
           table: views
@@ -8100,7 +8309,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\">{{ field_feature_video_img }}</a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>{{ edit_node }}\r\n  </div>\r\n</div>"
+            text: "<div class=\"card background--off-white border pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>{{ edit_node }}\r\n  </div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -8370,7 +8579,16 @@ display:
         sorts: false
         filters: false
         filter_groups: false
-      relationships: {  }
+      relationships:
+        field_feature_video_img:
+          id: field_feature_video_img
+          table: node__field_feature_video_img
+          field: field_feature_video_img
+          relationship: none
+          group_type: group
+          admin_label: 'field_feature_video_img: Media'
+          plugin_id: standard
+          required: false
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -8383,6 +8601,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_media_image'
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_feature_video_img'
         - 'config:field.storage.node.field_website'

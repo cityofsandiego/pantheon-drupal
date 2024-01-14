@@ -94,14 +94,13 @@
     <div class="grid-x">
       <div class="cell small-12 medium-auto content">
         <div class="l-padding-desktop-am l-padding-mobile-vm">
+          <h1>{{ label.0 }}</h1>
           <div class="grid-x grid-padding-x grid-padding-y">
-            <div class="cell small-12">
-              <h1>{{ label }}</h1>
-            </div>
 
             <div class="cell medium-7 text-center">
               <p><img id="main-image" src="{{ image }}" data-zoom-image="{{ imagezoom }}"/></p>
-              <p class="fine-print"><em>Magnify by hovering your mouse over the image. Zoom in/out with the mousewheel.</em></p>
+              <p class="fine-print hidden"><em>Magnify by hovering your mouse over the image. Zoom in/out with the mousewheel.</em></p>
+              <p><i class="icon-download2"></i> <a class="fine-print" href="{{ content.field_da_high_quality_url.0 }}">Download high resolution photo</a></p>
             </div>
             <div class="cell medium-5 photo-content">
               <p class="photographer-date">
@@ -109,9 +108,8 @@
                 {{ content.field_da_photo_date.0 }}</em>
               </p>
               {{ content.body }}
-             <p><i class="icon-bubble-text"></i> <a href="#feedback" class="popup-modal fine-print">Provide feedback for this photo</a></p> 
+             <p class="l-margin-td"><i class="icon-bubble-text"></i> <a href="#feedback" class="popup-modal fine-print">Provide feedback for this photo</a></p> 
              {% if content.field_da_high_quality_url[0] %}
-              <p><i class="icon-picture"></i> <a class="fine-print" href="{{ content.field_da_high_quality_url.0 }}">Download high resolution photo</a></p>
             {% endif %}
             </div>
           </div>
@@ -119,11 +117,11 @@
       </div>
 
       <div class="cell medium-3 large-3 background-off-white">
-        <div class="sidebar">
-          <div class="widget l-padding-hs l-margin-bd">
-            <h2 class="block block-menu contextual-links-region">Historical Photos</h2>
-            {{ drupal_entity('block_content', '22') }}
-          </div>
+        <div class="sidebar l-padding-mobile-hm">
+          <h2 class="block block-menu contextual-links-region">Historical Photos</h2>
+          <nav>
+          {{ drupal_entity('block_content', '22') }}
+          </nav>
         </div>
       </div>
     </div>

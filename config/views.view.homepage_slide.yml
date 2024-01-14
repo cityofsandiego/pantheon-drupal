@@ -409,10 +409,10 @@ display:
           condition: eq
           equalto: 'On'
           then: l-padding-home-slide
-          then_translate: 1
+          then_translate: true
           or: ''
-          or_translate: 1
-          strip_tags: 0
+          or_translate: true
+          strip_tags: false
         nothing:
           id: nothing
           table: views
@@ -485,7 +485,23 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts: {  }
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: minute
       arguments: {  }
       filters:
         status:
