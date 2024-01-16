@@ -52,7 +52,8 @@
       <ul class="calendar-view-day__rows">
         {% for row in rows %}
           {% set row_classes = [default_row_class ? 'views-row'] %}
-          <li{{ row.attributes.addClass(row_classes,'calendar-view-day__row', row.content["#row"]._entity.field_event_color.0.value) }}>
+          {# Remove title attribute since it's not needed and not working properly with timezones. #}
+          <li{{ row.attributes.removeAttribute('title').addClass(row_classes,'calendar-view-day__row', row.content["#row"]._entity.field_event_color.0.value) }}>
             {{- row.content -}}
           </li>
         {% endfor %}
