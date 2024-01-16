@@ -286,6 +286,38 @@ field_settings:
         - field.storage.paragraph.field_body
       module:
         - paragraphs
+  processed_1:
+    label: 'Body » Processed text'
+    datasource_id: 'entity:node'
+    property_path: 'body:processed'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  processed_2:
+    label: 'Body Bottom » Processed text'
+    datasource_id: 'entity:node'
+    property_path: 'field_body_bottom:processed'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_body_bottom
+  processed_3:
+    label: 'Sidebar Content » Processed text'
+    datasource_id: 'entity:node'
+    property_path: 'field_sidebar:processed'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_sidebar
+  processed_4:
+    label: 'Top Content » Processed text'
+    datasource_id: 'entity:node'
+    property_path: 'field_top_content:processed'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_top_content
   revision_timestamp:
     label: 'Revision create time'
     datasource_id: 'entity:node'
@@ -450,6 +482,10 @@ processor_settings:
       - name_3
       - name_4
       - processed
+      - processed_1
+      - processed_2
+      - processed_3
+      - processed_4
       - saa_field_media_document
       - title
       - type
