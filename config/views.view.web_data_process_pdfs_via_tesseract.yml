@@ -5,13 +5,11 @@ dependencies:
   config:
     - field.storage.sand_remote.field_document_url
     - sand_remote.sand_remote_type.external
-    - user.role.authenticated
   module:
     - csv_serialization
     - rest
     - sand_remote
     - serialization
-    - user
 id: web_data_process_pdfs_via_tesseract
 label: 'Web Data Process PDFs via Tesseract'
 module: views
@@ -173,10 +171,8 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: role
-        options:
-          role:
-            authenticated: authenticated
+        type: none
+        options: {  }
       cache:
         type: tag
         options: {  }
@@ -298,7 +294,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.roles
       tags:
         - 'config:field.storage.sand_remote.field_document_url'
   page_webdataserver:
@@ -315,7 +310,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.roles
       tags:
         - 'config:field.storage.sand_remote.field_document_url'
   rest_export_webdataserver:
@@ -354,6 +348,5 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - request_format
-        - user.roles
       tags:
         - 'config:field.storage.sand_remote.field_document_url'
