@@ -25,7 +25,6 @@ class SearchForm extends FormBase {
 
     $form['search'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Search'),
       '#required' => TRUE,
     ];
     $form['redirect_path'] = [
