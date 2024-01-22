@@ -30,6 +30,10 @@
       border: 1px solid #a7abad;
       font-size: 1em;
       margin-bottom: 0;
+
+      @include breakpoint(mobile-landscape down) {
+        margin-bottom: 1em;
+      }
     }
   }
 
@@ -89,10 +93,6 @@
   }
 
   .form--inline {
-    @include breakpoint(mobile-landscape down) {
-      border: 1px solid $spruce;
-      border-radius: 4px;
-    }
 
     .form-item {
       margin-right: 1em;
@@ -123,6 +123,13 @@
 
   @media print {
     display:none !important;
+  }
+}
+
+#views-exposed-form-search-site-all {
+  @include breakpoint(mobile-landscape down) {
+    border: 1px solid $spruce;
+    border-radius: 4px;
   }
 }
 
@@ -171,25 +178,6 @@
       }
     }
   }
-
-//Theme DSD Subdivision Cards view
-.view-dsd-subdivision-cards{
-  background: $alto;
-  padding: 1rem;
-
-  @include breakpoint(medium) {
-    padding: 2rem 0;
-  }
-
-  .form-actions{
-    background: $alto;  
-    margin-top: 0px;
-
-    @include breakpoint(medium) {
-      margin-top: 26px;
-    }
-  }
-}
 
 //Article category list view
 .view-id-article_category_list {
