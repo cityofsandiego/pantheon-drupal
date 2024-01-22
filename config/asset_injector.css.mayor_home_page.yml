@@ -1,7 +1,9 @@
 uuid: 99cbf0ba-3436-4ca7-947f-42645221b179
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - system
 id: mayor_home_page
 label: 'Mayor Home Page'
 code: |-
@@ -10,6 +12,10 @@ code: |-
   }
 media: all
 preprocess: true
-conditions: {  }
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /mayor
 contexts: {  }
 conditions_require_all: true
