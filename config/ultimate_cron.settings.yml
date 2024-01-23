@@ -2,10 +2,10 @@ _core:
   default_config_hash: xNvhVNcCJsZiYwYTw9TTnRv1SjLVO7H5BCK1U8Brvfo
 bypass_transactional_safe_connection: false
 queue:
-  enabled: false
+  enabled: true
   timeouts:
     lease_time: !!float 30
-    time: !!float 15
+    time: !!float 50
   delays:
     empty_delay: !!float 0
     item_delay: !!float 0
@@ -14,8 +14,8 @@ queue:
     threads: 4
     threshold: 10
 launcher:
-  thread: any
-  max_threads: 1
+  thread: '0'
+  max_threads: 4
   lock_timeout: 3600
   max_execution_time: 3600
 logger:

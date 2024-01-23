@@ -1,0 +1,20 @@
+uuid: 098cca2b-e46d-49cb-8fdb-7f738074ad75
+langcode: en
+status: true
+dependencies:
+  module:
+    - sand_remote
+title: 'Queue: Sand Remote Queue'
+id: ultimate_cron_queue_sand_remote_queue
+weight: 10
+module: sand_remote
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database
