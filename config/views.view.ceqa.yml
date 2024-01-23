@@ -1362,10 +1362,67 @@ display:
           hide_alter_empty: true
           if: field_department
           condition: eq
+          equalto: 'CEQA Planning'
+          then: "<div class=\"grid-x grid-padding-x l-margin-td\">\r\n<div class=\"cell medium-7\">\r\n<p class=\"fine-print\"><strong>Public Review ends {{ unpublish_on }}</strong> {{ unpublish_on_1 }}</p>\r\n</div>\r\n<div class=\"cell medium-auto\">\r\n<p class=\"fine-print\"><em>Posted by City Planning Department</em></p>\r\n</div>\r\n</div>"
+          then_translate: true
+          or: "<div class=\"grid-x grid-padding-x l-margin-td\">\r\n<div class=\"cell medium-7\">\r\n<p class=\"fine-print\"><strong>Public Review ends {{ unpublish_on }}</strong> {{ unpublish_on_1 }}</p>\r\n</div>\r\n<div class=\"cell medium-auto\">\r\n<p class=\"fine-print\"><em>Posted by Engineering & Capital Projects</em></p>\r\n</div>\r\n</div>"
+          or_translate: true
+          strip_tags: false
+        views_conditional_field_1:
+          id: views_conditional_field_1
+          table: views_conditional
+          field: views_conditional_field
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: views_conditional_field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          if: field_department
+          condition: eq
           equalto: 'CEQA DSD'
           then: "<div class=\"grid-x grid-padding-x l-margin-td\">\r\n<div class=\"cell medium-7\">\r\n<p class=\"fine-print\"><strong>Public Review ends {{ unpublish_on }}</strong> {{ unpublish_on_1 }}</p>\r\n</div>\r\n<div class=\"cell medium-auto\">\r\n<p class=\"fine-print\"><em>Posted by Development Services Department</em></p>\r\n</div>\r\n</div>"
           then_translate: true
-          or: '<p class="fine-print"><em>Posted by Planning Department</em></p>'
+          or: '{{ views_conditional_field }}'
           or_translate: true
           strip_tags: false
         body:
@@ -1380,7 +1437,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr id=\"hr-{{ counter }}\" class=\"l-margin-vd\">\r\n\r\n<div class=\"grid-x grid-padding-x\">\r\n<div class=\"cell medium-2\">\r\n<p class=\"date\">{{ publish_on }}</p>\r\n</div>\r\n<div class=\"cell medium-auto\">\r\n{{ field_media_document }}\r\n{{ body }}\r\n{{ views_conditional_field }}\r\n</div>\r\n</div>\r\n"
+            text: "<hr id=\"hr-{{ counter }}\" class=\"l-margin-vd\">\r\n\r\n<div class=\"grid-x grid-padding-x\">\r\n<div class=\"cell medium-2\">\r\n<p class=\"date\">{{ publish_on }}</p>\r\n</div>\r\n<div class=\"cell medium-auto\">\r\n{{ field_media_document }}\r\n{{ body }}\r\n{{ views_conditional_field_1 }}\r\n</div>\r\n</div>\r\n"
             make_link: false
             path: ''
             absolute: false
@@ -1995,10 +2052,67 @@ display:
           hide_alter_empty: true
           if: field_department
           condition: eq
+          equalto: 'CEQA Planning'
+          then: '<p class="fine-print"><em>Posted by City Planning Department</em></p>'
+          then_translate: true
+          or: '<p class="fine-print"><em>Posted by Engineering & Capital Projects</em></p>'
+          or_translate: true
+          strip_tags: false
+        views_conditional_field_1:
+          id: views_conditional_field_1
+          table: views_conditional
+          field: views_conditional_field
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: views_conditional_field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          if: field_department
+          condition: eq
           equalto: 'CEQA DSD'
           then: '<p class="fine-print"><em>Posted by Development Services Department</em></p>'
           then_translate: true
-          or: '<p class="fine-print"><em>Posted by Planning Department</em></p>'
+          or: '{{ views_conditional_field }}'
           or_translate: true
           strip_tags: false
         counter:
@@ -2063,7 +2177,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr id=\"hr-{{ counter }}\" class=\"hr--dashed\">\r\n\r\n<div class=\"grid-x grid-margin-x\">\r\n\t<div class=\"cell medium-2\">\r\n\t\t<p class=\"date\">{{ created }}</p>\r\n\t</div>\r\n\t<div class=\"cell medium-auto\">\r\n\t\t{{ field_media_document }}\r\n\t\t{{ body }}\r\n                {{ views_conditional_field }}\r\n\t</div>\r\n</div>"
+            text: "<hr id=\"hr-{{ counter }}\" class=\"hr--dashed\">\r\n\r\n<div class=\"grid-x grid-margin-x\">\r\n\t<div class=\"cell medium-2\">\r\n\t\t<p class=\"date\">{{ created }}</p>\r\n\t</div>\r\n\t<div class=\"cell medium-auto\">\r\n\t\t{{ field_media_document }}\r\n\t\t{{ body }}\r\n                {{ views_conditional_field_1 }}\r\n\t</div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -3061,9 +3175,9 @@ display:
           if: field_department
           condition: eq
           equalto: 'CEQA Planning'
-          then: "<div class=\"grid-x grid-padding-x l-margin-td\">\r\n<div class=\"cell medium-7\">\r\n<p class=\"fine-print\"><strong><a href=\"/ceqa/meetings/public-comment?t={{ title }}&m={{ created_1 }}&d={{ created_2 }}&y={{ created_3 }}&dept=planning\">Submit a Comment<span class=\"visuallyhidden\"> for {{ title }}</span></a></strong> by {{ unpublish_on }} ({{ unpublish_on_1 }})</p>\r\n</div>\r\n<div class=\"cell medium-5\">\r\n<p class=\"fine-print\"><em>Posted by City Planning</em></p>\r\n</div>\r\n</div>"
+          then: "<div class=\"grid-x grid-margin-x l-margin-td\">\r\n<div class=\"cell medium-7\">\r\n<p class=\"fine-print\"><strong><a href=\"/ceqa/meetings/public-comment?t={{ title }}&m={{ created_1 }}&d={{ created_2 }}&y={{ created_3 }}&dept=planning\">Submit a Comment<span class=\"visuallyhidden\"> for {{ title }}</span></a></strong> by {{ unpublish_on }} ({{ unpublish_on_1 }})</p>\r\n</div>\r\n<div class=\"cell medium-5\">\r\n<p class=\"fine-print\"><em>Posted by City Planning Department</em></p>\r\n</div>\r\n</div>"
           then_translate: true
-          or: "<div class=\"grid-x grid-padding-x l-margin-td\">\r\n<div class=\"cell medium-7\">\r\n<p class=\"fine-print\"><strong><a href=\"/ceqa/meetings/public-comment?t={{ title }}&m={{ created_1 }}&d={{ created_2 }}&y={{ created_3 }}&dept=ecp\">Submit a Comment<span class=\"visuallyhidden\"> for {{ title }}</span></a></strong> by {{ unpublish_on }} ({{ unpublish_on_1 }})</p>\r\n</div>\r\n<div class=\"cell medium-5\">\r\n<p class=\"fine-print\"><em>Posted by Engineering & Capital Projects</em></p>\r\n</div>\r\n</div>"
+          or: "<div class=\"grid-x grid-margin-x l-margin-td\">\r\n<div class=\"cell medium-7\">\r\n<p class=\"fine-print\"><strong><a href=\"/ceqa/meetings/public-comment?t={{ title }}&m={{ created_1 }}&d={{ created_2 }}&y={{ created_3 }}&dept=ecp\">Submit a Comment<span class=\"visuallyhidden\"> for {{ title }}</span></a></strong> by {{ unpublish_on }} ({{ unpublish_on_1 }})</p>\r\n</div>\r\n<div class=\"cell medium-5\">\r\n<p class=\"fine-print\"><em>Posted by Engineering & Capital Projects</em></p>\r\n</div>\r\n</div>"
           or_translate: true
           strip_tags: false
         views_conditional_field_1:
@@ -3118,7 +3232,7 @@ display:
           if: field_department
           condition: eq
           equalto: 'CEQA DSD'
-          then: "<div class=\"grid-x grid-padding-x l-margin-td\">\r\n<div class=\"cell medium-7\">\r\n<p class=\"fine-print\"><strong><a href=\"/ceqa/meetings/public-comment?t={{ title }}&m={{ created_1 }}&d={{ created_2 }}&y={{ created_3 }}&dept=dsd\">Submit a Comment<span class=\"visuallyhidden\"> for {{ title }}</span></a></strong> by {{ unpublish_on }} ({{ unpublish_on_1 }})</p>\r\n</div>\r\n<div class=\"cell medium-5\">\r\n<p class=\"fine-print\"><em>Posted by Development Services</em></p>\r\n</div>\r\n</div>"
+          then: "<div class=\"grid-x grid-margin-x l-margin-td\">\r\n<div class=\"cell medium-7\">\r\n<p class=\"fine-print\"><strong><a href=\"/ceqa/meetings/public-comment?t={{ title }}&m={{ created_1 }}&d={{ created_2 }}&y={{ created_3 }}&dept=dsd\">Submit a Comment<span class=\"visuallyhidden\"> for {{ title }}</span></a></strong> by {{ unpublish_on }} ({{ unpublish_on_1 }})</p>\r\n</div>\r\n<div class=\"cell medium-5\">\r\n<p class=\"fine-print\"><em>Posted by Development Services</em></p>\r\n</div>\r\n</div>"
           then_translate: true
           or: '{{ views_conditional_field }}'
           or_translate: true

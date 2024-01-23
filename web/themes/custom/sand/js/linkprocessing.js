@@ -10,6 +10,7 @@
   Drupal.behaviors.optimizeLinkProcessing = {
     attach: function (context, settings) {
       var sandiegoDomainRegex = /^(https?:\/\/|\/\/)?www\.sandiego\.gov/;
+      var sdgov2DomainRegex = /^(https?:\/\/|\/\/)sdgov2\.lndo\.site/;
 
       $('a', context).each(function () {
         var $link = $(this);
@@ -17,6 +18,8 @@
 
         // Process only if href attribute is present
         if (href) {
+          // Strip off the sdgov2.lndo.site domain
+          href = href.replace(sdgov2DomainRegex, '');
           // Add aria-label for PDF links and modify "(PDF)" text after the link
           if (href.endsWith('.pdf')) {
             var currentText = $link.text();
