@@ -11,6 +11,7 @@ dependencies:
   module:
     - feeds
     - user
+    - views_field_view
 id: feeds
 label: Feeds
 module: views
@@ -329,17 +330,17 @@ display:
           text: edit
           output_url_as_text: false
           absolute: false
-        created:
-          id: created
+        changed:
+          id: changed
           table: feeds_feed
-          field: created
+          field: changed
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: feeds_feed
-          entity_field: created
+          entity_field: changed
           plugin_id: field
-          label: 'Authored on'
+          label: 'Changed / Created'
           exclude: false
           alter:
             alter_text: false
@@ -396,17 +397,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        changed:
-          id: changed
+        created:
+          id: created
           table: feeds_feed
-          field: changed
+          field: created
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: feeds_feed
-          entity_field: changed
+          entity_field: created
           plugin_id: field
-          label: Changed
+          label: 'Authored on'
           exclude: false
           alter:
             alter_text: false
@@ -607,7 +608,7 @@ display:
           entity_field: feeds_log
           plugin_id: field
           label: Log
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -672,7 +673,7 @@ display:
           admin_label: ''
           plugin_id: field
           label: Sort
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -717,6 +718,134 @@ display:
           settings:
             thousand_separator: ''
             prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_source_name:
+          id: field_source_name
+          table: feeds_feed__field_source_name
+          field: field_source_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Source Name / CSV / Source Type'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        source:
+          id: source
+          table: feeds_feed
+          field: source
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: feeds_feed
+          entity_field: source
+          plugin_id: field
+          label: 'Fetch Source'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -790,17 +919,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        source:
-          id: source
-          table: feeds_feed
-          field: source
+        view:
+          id: view
+          table: views
+          field: view
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: feeds_feed
-          entity_field: source
-          plugin_id: field
-          label: Source
+          plugin_id: view
+          label: View
           exclude: false
           alter:
             alter_text: false
@@ -841,83 +968,9 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_source_name:
-          id: field_source_name
-          table: feeds_feed__field_source_name
-          field: field_source_name
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: 'Source Name'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
+          view: feeds_log_entries
+          display: block_1
+          arguments: '{{ raw_fields.fid }}'
       pager:
         type: mini
         options:
@@ -1079,21 +1132,30 @@ display:
           row_class: ''
           default_row_class: true
           columns:
+            fid: fid
             title: title
             type: title
             view_feeds_feed: title
             edit_feeds_feed: title
-            created: created
             changed: changed
+            created: changed
             item_count: item_count
             imported: imported
             feeds_log: feeds_log
             field_sort1: field_sort1
-            field_source: field_source
-            source: source
             field_source_name: field_source_name
+            source: field_source_name
+            field_source: field_source_name
+            view: view
           default: '-1'
           info:
+            fid:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             title:
               sortable: true
               default_sort_order: asc
@@ -1122,14 +1184,14 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            created:
+            changed:
               sortable: true
               default_sort_order: desc
               align: ''
-              separator: ''
+              separator: '<br />'
               empty_column: false
               responsive: ''
-            changed:
+            created:
               sortable: true
               default_sort_order: desc
               align: ''
@@ -1164,11 +1226,11 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_source:
+            field_source_name:
               sortable: true
               default_sort_order: asc
               align: ''
-              separator: ''
+              separator: '<br />'
               empty_column: false
               responsive: ''
             source:
@@ -1178,9 +1240,14 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_source_name:
+            field_source:
               sortable: true
               default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            view:
               align: ''
               separator: ''
               empty_column: false

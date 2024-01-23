@@ -1,0 +1,20 @@
+uuid: 0f455397-fb25-47a6-9fed-bc3e6c274e7b
+langcode: en
+status: true
+dependencies:
+  module:
+    - feeds
+title: 'Queue: Feed refresh: Sand Remote Documentum City Charter'
+id: ultimate_cron_queue_feeds_feed_refresh__sand_remote_documentum_city_char
+weight: 10
+module: feeds
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database
