@@ -60,7 +60,6 @@ if (defined('PANTHEON_ENVIRONMENT')) {
 
 // Added by City of San Diego, the settings from these modules will not be exported in config
 $settings['config_exclude_modules'] = [
-  'basic_auth',
   'devel',
   'examples',
   'search_api_solr_devel',
