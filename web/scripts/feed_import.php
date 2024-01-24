@@ -28,7 +28,9 @@ if (!$feed instanceof FeedInterface) {
 } else {
   /** @var \Drupal\feeds\Entity\Feed $feed */
   if (!$feed->isLocked()) {
+    \Drupal::logger('feed_import.php')->info("About to start feed # :id",[':id' => $id]);
     $feed->startCronImport();
+    \Drupal::logger('feed_import.php')->info("Started feed # :id",[':id' => $id]);
   } else {
     \Drupal::logger('feed_import.php')->warning("Called feed import script for id number :id, but the feed is locked",[':id' => $id]);
   }

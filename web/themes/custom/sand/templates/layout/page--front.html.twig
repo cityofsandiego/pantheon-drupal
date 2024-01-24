@@ -67,14 +67,16 @@
     {{ page.content_top }}
     <div class="hero__slides">
       <div class="grid-container l-padding-desktop-hn">
+        <!--div id="hero__slides--primary" class="hero__slides--content"-->
+        {% set view = drupal_view_result('homepage_slide', 'block_1')|length %}
+        {% if view > 0 %}
+        {% if view == 1 %}
+        <div class="grid-x slide-container l-padding-mobile-bn">
+        {% else %}
         <div class="grid-x slide-container">
+        {% endif %}
           <div class="cell medium-6 small-12 mobile-landscape-12 hero__content">
-            <!--div id="hero__slides--primary" class="hero__slides--content"-->
-            {% set view = drupal_view_result('homepage_slide', 'block_1')|length %}
-            {% if view > 0 %}
               {{ drupal_view('homepage_slide', 'block_1') }}
-            {% endif %}
-            <!--/div-->
             <div class="custom-navigation custom-navigation--primary l-padding-home-slide hidden">
               <a href="#" class="flex-prev">
                 <i class="icon-chevron-left"></i>
@@ -85,6 +87,8 @@
             </div>
           </div>
         </div>
+        {% endif %}
+        <!--/div-->
       </div>
       <div class="hero__slides--img">
         <ul class="slides">
