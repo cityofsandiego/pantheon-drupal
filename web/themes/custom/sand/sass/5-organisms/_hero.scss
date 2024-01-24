@@ -54,7 +54,7 @@
 }
 
 .slide-container {
-  padding: 1em 0 3.5em;
+  padding: 170px 0 2.5em;
 
   @include breakpoint(mobile-landscape) {
     padding: 5em 0 12em;
@@ -67,6 +67,10 @@
   z-index: 0;
   width: 100%;
   height: 100% !important;
+
+  @include breakpoint(mobile-landscape down) {
+    height: 150px !important;
+  }
 
   li {
     &:after {
@@ -217,7 +221,11 @@ section.homepage {
       //height: 3em;
 
       a {
-        background: white;
+        background: $cerulean;
+
+        @include breakpoint(mobile-landscape) {
+          background: white;
+        }
       }
 
       @include breakpoint(mobile-landscape) {
@@ -228,7 +236,11 @@ section.homepage {
       }
 
       .flex-active {
-        background: $sunshade;
+        background: black;
+
+        @include breakpoint(mobile-landscape) {
+          background: $sunshade;
+        }
       }
     }
 
@@ -256,6 +268,12 @@ section.homepage {
         &:focus-visible {
           outline: solid;
           outline-color: $picton;
+        }
+
+        @include breakpoint(mobile-landscape down) {
+          &::before {
+            color: $cerulean;
+          }
         }
       }
 
