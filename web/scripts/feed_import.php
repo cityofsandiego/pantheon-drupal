@@ -39,7 +39,10 @@ if (!$feed instanceof FeedInterface) {
   if (!$feed->isLocked()) {
     \Drupal::logger('feed_import.php')->info("About to start feed # :id (:schedule)",[':id' => $id, ':schedule' => $schedule]);
     $feed->startCronImport();
-    \Drupal::logger('feed_import.php')->info("Started feed # :id (:schedule)",[':id' => $id, ':schedule' => $schedule]);
+    \Drupal::logger('feed_import.php')->info(
+      "Started feed # :id (:schedule) - :label",
+      [':id' => $id, ':schedule' => $schedule, ':label' => $feed->label()]
+    );
   } else {
     \Drupal::logger('feed_import.php')->warning("Called feed import script for id number :id, but the feed is locked (:schedule)",[':id' => $id, ':schedule' => $schedule]);
   }
