@@ -288,7 +288,7 @@ display:
           alter:
             alter_text: false
             text: ''
-            make_link: false
+            make_link: true
             path: ''
             absolute: false
             external: false
@@ -300,7 +300,7 @@ display:
             link_class: ''
             prefix: ''
             suffix: ''
-            target: ''
+            target: _blank
             nl2br: false
             max_length: 0
             word_boundary: true
@@ -969,6 +969,58 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        view_1:
+          id: view_1
+          table: views
+          field: view
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: view
+          label: View
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          view: feeds_log
+          display: block_1
+          arguments: '{{ raw_fields.fid }}'
         view:
           id: view
           table: views
@@ -1139,6 +1191,7 @@ display:
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              administrator: '0'
               content_editor: '0'
               content_owner: '0'
               sand_admin_email: '0'
@@ -1149,9 +1202,8 @@ display:
               webform_results_photos_only: '0'
               outreach2_article: '0'
               sand_admin: '0'
-              if_administrator: '0'
-              administrator: '0'
               locations: '0'
+              remote_data: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -1166,11 +1218,12 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           fields:
+            fid: fid
             title: title
             type: type
-            field_source: field_source
-            source: source
             field_source_name: field_source_name
+            source: source
+            field_source: field_source
         type:
           id: type
           table: feeds_feed
@@ -1293,6 +1346,7 @@ display:
           row_class: ''
           default_row_class: true
           columns:
+            counter: counter
             fid: fid
             title: title
             type: title
@@ -1307,9 +1361,18 @@ display:
             field_source_name: field_source_name
             source: field_source_name
             field_source: field_source_name
+            view_1: field_source_name
             view: field_source_name
+            rendered_entity: rendered_entity
           default: '-1'
           info:
+            counter:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             fid:
               sortable: false
               default_sort_order: asc
@@ -1408,7 +1471,19 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
+            view_1:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             view:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            rendered_entity:
+              sortable: false
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false

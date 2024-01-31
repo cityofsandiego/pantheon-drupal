@@ -273,7 +273,7 @@ display:
         type: some
         options:
           offset: 0
-          items_per_page: 5
+          items_per_page: 3
       exposed_form:
         type: basic
         options:
@@ -388,7 +388,18 @@ display:
           plugin_id: standard
           required: true
       group_by: true
-      header: {  }
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: false
+          content: '<strong>Latest Changes</strong>'
+          tokenize: false
       footer: {  }
       display_extenders: {  }
     cache_metadata:

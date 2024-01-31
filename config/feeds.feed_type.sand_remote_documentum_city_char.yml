@@ -21,6 +21,7 @@ dependencies:
     - field.field.sand_remote.external.field_title_long
     - sand_remote.sand_remote_type.external
   module:
+    - feeds_log
     - feeds_tamper
     - sand_remote
 third_party_settings:
@@ -64,6 +65,20 @@ third_party_settings:
         source: document_url
         weight: 1
         label: Required
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      failed: failed
+    source: true
 label: 'Sand Remote Documentum City Charter'
 id: sand_remote_documentum_city_char
 description: 'Sand Remote External Data'
