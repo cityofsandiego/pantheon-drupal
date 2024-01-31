@@ -21,17 +21,17 @@ display:
     display_options:
       title: 'Feeds Log'
       fields:
-        end:
-          id: end
+        start:
+          id: start
           table: feeds_import_log
-          field: end
+          field: start
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: feeds_import_log
-          entity_field: end
+          entity_field: start
           plugin_id: field
-          label: 'Import finish time'
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -64,7 +64,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -88,17 +88,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        start:
-          id: start
+        end:
+          id: end
           table: feeds_import_log
-          field: start
+          field: end
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: feeds_import_log
-          entity_field: start
+          entity_field: end
           plugin_id: field
-          label: 'Import start time'
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -131,7 +131,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -164,12 +164,12 @@ display:
           admin_label: ''
           entity_type: feeds_import_log
           plugin_id: entity_link
-          label: 'Link to Feeds Import Log'
+          label: ''
           exclude: false
           alter:
             alter_text: false
             text: ''
-            make_link: false
+            make_link: true
             path: ''
             absolute: false
             external: false
@@ -181,7 +181,7 @@ display:
             link_class: ''
             prefix: ''
             suffix: ''
-            target: ''
+            target: _blank
             nl2br: false
             max_length: 0
             word_boundary: true
@@ -197,7 +197,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -227,10 +227,26 @@ display:
         type: none
         options: {  }
       cache:
-        type: tag
+        type: none
         options: {  }
       empty: {  }
-      sorts: {  }
+      sorts:
+        start:
+          id: start
+          table: feeds_import_log
+          field: start
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: feeds_import_log
+          entity_field: start
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
       arguments:
         fid:
           id: fid
@@ -270,9 +286,21 @@ display:
           not: false
       filters: {  }
       style:
-        type: table
+        type: default
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: false
       row:
         type: fields
+        options:
+          default_field_elements: false
+          inline:
+            start: start
+            end: end
+            view_feeds_import_log: view_feeds_import_log
+          separator: '&nbsp;-&nbsp;'
+          hide_empty: false
       query:
         type: views_query
         options:
@@ -293,7 +321,18 @@ display:
           entity_field: feed
           plugin_id: standard
           required: true
-      header: {  }
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: false
+          content: '<strong>Latest Imports</strong>'
+          tokenize: false
       footer: {  }
       display_extenders: {  }
     cache_metadata:
