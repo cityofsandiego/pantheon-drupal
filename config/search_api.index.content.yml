@@ -10,8 +10,11 @@ dependencies:
     - field.storage.node.field_body_bottom
     - field.storage.node.field_category
     - field.storage.node.field_department
+    - field.storage.node.field_dept_doc_id
     - field.storage.node.field_keywords
     - field.storage.node.field_mayor
+    - field.storage.node.field_other_description
+    - field.storage.node.field_other_keywords
     - field.storage.node.field_search_keymatch
     - field.storage.node.field_sections_outreach2
     - field.storage.paragraph.field_body
@@ -164,6 +167,15 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_department
+  field_dept_doc_id:
+    label: ID
+    datasource_id: 'entity:node'
+    property_path: field_dept_doc_id
+    type: text
+    boost: 1.2
+    dependencies:
+      config:
+        - field.storage.node.field_dept_doc_id
   field_keywords:
     label: Keywords
     datasource_id: 'entity:node'
@@ -192,6 +204,15 @@ field_settings:
         - field.storage.node.field_attachment
       module:
         - media
+  field_other_keywords:
+    label: 'Other Keywords'
+    datasource_id: 'entity:node'
+    property_path: field_other_keywords
+    type: text
+    boost: !!float 13
+    dependencies:
+      config:
+        - field.storage.node.field_other_keywords
   field_sidebar:
     label: 'Sidebar Content'
     datasource_id: 'entity:node'
@@ -318,6 +339,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_top_content
+  processed_5:
+    label: 'Other Description » Processed text'
+    datasource_id: 'entity:node'
+    property_path: 'field_other_description:processed'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_other_description
   revision_timestamp:
     label: 'Revision create time'
     datasource_id: 'entity:node'
@@ -471,9 +500,11 @@ processor_settings:
       - entity_type
       - field_attachment
       - field_body_bottom
+      - field_dept_doc_id
       - field_keywords
       - field_mayor
       - field_media_document
+      - field_other_keywords
       - field_sidebar
       - field_top_content
       - name
@@ -486,6 +517,7 @@ processor_settings:
       - processed_2
       - processed_3
       - processed_4
+      - processed_5
       - saa_field_media_document
       - title
       - type
