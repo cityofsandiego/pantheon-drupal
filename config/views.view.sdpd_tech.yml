@@ -11,7 +11,6 @@ dependencies:
     - 'taxonomy_term:categories:8f50cf73-48a1-4548-a2ed-3c15143a5c6c'
   module:
     - node
-    - semanticviews
     - taxonomy
     - user
 id: sdpd_tech
@@ -282,6 +281,11 @@ display:
           class: ''
       row:
         type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
       query:
         type: views_query
         options:
@@ -313,6 +317,25 @@ display:
     display_plugin: block
     position: 1
     display_options:
+      style:
+        type: html_list
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          type: ul
+          wrapper_class: ''
+          class: two-columns--desktop
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        style: false
+        row: false
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -569,7 +592,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -693,29 +716,22 @@ display:
         groups:
           1: AND
       style:
-        type: semanticviews_style
+        type: default
         options:
           grouping:
             -
               field: field_dept_doc_id
               rendered: true
               rendered_strip: false
-          group:
-            element_type: h2
-            attributes: class|heading--subcolor
-          list:
-            element_type: ''
-            attributes: ''
-          row:
-            element_type: div
-            attributes: class|
-            last_every_nth: '0'
-            first_class: first
-            last_class: last
-            striping_classes: 'odd even'
+          row_class: ''
+          default_row_class: false
       row:
         type: fields
-        options: {  }
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
       defaults:
         group_by: false
         style: false
