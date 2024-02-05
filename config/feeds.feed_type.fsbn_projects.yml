@@ -1,0 +1,230 @@
+uuid: 5dba8cac-e821-4e58-a10e-177adbbde8ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.blog.body
+    - field.field.node.blog.field_category
+    - field.field.node.blog.field_department
+    - field.field.node.blog.field_dept_doc_id
+    - field.field.node.blog.field_misc_field_1
+    - field.field.node.blog.field_misc_field_2
+    - field.field.node.blog.field_other_keywords
+    - field.field.node.blog.field_subtitle
+    - field.field.node.blog.field_top_content
+    - node.type.blog
+  module:
+    - feeds_log
+    - feeds_tamper
+    - node
+third_party_settings:
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+    source: true
+  feeds_tamper:
+    tampers:
+      9168d12f-8410-4772-8491-8a77fcdced71:
+        separator: ','
+        limit: null
+        uuid: 9168d12f-8410-4772-8491-8a77fcdced71
+        plugin: explode
+        source: department
+        weight: 0
+        label: Explode
+      64facd46-a8cc-4637-86d1-c3ece54caa2a:
+        default_value: published
+        only_if_empty: false
+        uuid: 64facd46-a8cc-4637-86d1-c3ece54caa2a
+        plugin: default_value
+        source: moderation_state
+        weight: 0
+        label: 'Set value or default value'
+      0546bf18-df4b-4527-928e-6eca3bcf949d:
+        default_value: Projects
+        only_if_empty: false
+        uuid: 0546bf18-df4b-4527-928e-6eca3bcf949d
+        plugin: default_value
+        source: category
+        weight: 0
+        label: 'Set value or default value'
+label: 'FSBN Projects'
+id: fsbn_projects
+description: ''
+help: ''
+import_period: 3600
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: 'txt csv tsv xml opml'
+  directory: 'private://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: blog
+  langcode: en
+  insert_new: 1
+  update_existing: 0
+  update_non_existent: _keep
+  skip_hash_check: false
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 0
+custom_sources:
+  project_title:
+    value: 'Project Title'
+    label: 'Project Title'
+    machine_name: project_title
+    type: csv
+  fsbn_goal:
+    value: 'FSBN Goal'
+    label: 'FSBN Goal'
+    machine_name: fsbn_goal
+    type: csv
+  project_focus_area:
+    value: 'Project Focus Area'
+    label: 'Project Focus Area'
+    machine_name: project_focus_area
+    type: csv
+  project_by:
+    value: 'Project By'
+    label: 'Project By'
+    machine_name: project_by
+    type: csv
+  zip_code:
+    value: 'Zip code'
+    label: 'Zip code'
+    machine_name: zip_code
+    type: csv
+  description:
+    value: Description
+    label: Description
+    machine_name: description
+    type: csv
+  department:
+    value: Department
+    label: Department
+    machine_name: department
+    type: csv
+  moderation_state:
+    value: MODERATION_STATE
+    label: MODERATION_STATE
+    machine_name: moderation_state
+    type: blank
+  category:
+    value: CATEGORY
+    label: CATEGORY
+    machine_name: category
+    type: blank
+  artist_1:
+    value: 'Artist 1'
+    label: 'Artist 1'
+    machine_name: artist_1
+    type: csv
+  artist_filename:
+    value: 'Artist Filename'
+    label: 'Artist Filename'
+    machine_name: artist_filename
+    type: csv
+mappings:
+  -
+    target: title
+    map:
+      value: project_title
+    settings:
+      language: null
+    unique:
+      value: 1
+  -
+    target: field_subtitle
+    map:
+      value: fsbn_goal
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_top_content
+    map:
+      value: project_focus_area
+    settings:
+      language: null
+      format: plain_text
+  -
+    target: field_dept_doc_id
+    map:
+      value: project_by
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: body
+    map:
+      value: description
+      summary: ''
+    settings:
+      language: null
+      format: full_html
+  -
+    target: field_department
+    map:
+      target_id: department
+    settings:
+      language: null
+      reference_by: name
+      autocreate: false
+      autocreate_bundle: department
+  -
+    target: moderation_state
+    map:
+      value: moderation_state
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_category
+    map:
+      target_id: category
+    settings:
+      language: null
+      reference_by: name
+      autocreate: false
+      autocreate_bundle: categories
+  -
+    target: field_other_keywords
+    map:
+      value: zip_code
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_misc_field_1
+    map:
+      value: artist_1
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_misc_field_2
+    map:
+      value: artist_filename
+    settings:
+      language: null
+    unique: {  }
