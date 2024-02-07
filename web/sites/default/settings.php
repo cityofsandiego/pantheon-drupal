@@ -41,6 +41,10 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   if (PANTHEON_ENVIRONMENT == 'live') {
     // Do not reroute email on Live
     $conf['reroute_email_enable'] = 0;
+    // Set env color
+    $config['environment_indicator.indicator']['bg_color'] = '#AE4343';
+    $config['environment_indicator.indicator']['fg_color'] = 'black';
+    $config['environment_indicator.indicator']['name'] = 'Prod';
     // enable search_api server: production and indexes and read-only to false
     $config['search_api.server.production']['status'] = true;
     $config['search_api.index.content']['status'] = true;
@@ -57,6 +61,25 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   $config['search_api.index.content']['read_only'] = true;
   $config['search_api.index.remote']['read_only'] = true;
 }
+
+// TEST Env
+if (defined('PANTHEON_ENVIRONMENT')) {
+  if (PANTHEON_ENVIRONMENT == 'test') {
+     $config['environment_indicator.indicator']['bg_color'] = '#5D79AE';
+     $config['environment_indicator.indicator']['fg_color'] = 'black';
+     $config['environment_indicator.indicator']['name'] = 'Test';
+  }
+}
+
+// DEV Env
+if (defined('PANTHEON_ENVIRONMENT')) {
+  if (PANTHEON_ENVIRONMENT == 'dev') {
+     $config['environment_indicator.indicator']['bg_color'] = '#72AD89';
+     $config['environment_indicator.indicator']['fg_color'] = 'black';
+     $config['environment_indicator.indicator']['name'] = 'Dev';
+  }
+}
+
 
 // Added by City of San Diego, the settings from these modules will not be exported in config
 $settings['config_exclude_modules'] = [
