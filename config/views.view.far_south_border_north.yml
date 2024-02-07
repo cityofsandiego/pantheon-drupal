@@ -3657,6 +3657,69 @@ display:
           text: Edit
           output_url_as_text: false
           absolute: false
+        field_dept_doc_id:
+          id: field_dept_doc_id
+          table: node__field_dept_doc_id
+          field: field_dept_doc_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '<p><a href="/far-south-border-north/projects/round-1/project?project={{ field_dept_doc_id }}&artist={{ nid }}" class="no-underline" target="_blank" title="Opens in a new tab"><strong>VIEW PROJECT</strong></a></p>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         nothing:
           id: nothing
           table: views
@@ -3669,7 +3732,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"cell medium-4 white-bg rounded-corners overflow-h\">\r\n  <div class=\"grid-x l-flex-center-v\">\r\n    <div class=\"cell medium-5 small-4\">\r\n      <p><a href=\"#{{ nid }}\" class=\"popup-modal\"><img src=\"https://webdocs.sandiego.gov/fsbn/round1/{{ field_keywords }}\" alt=\"{{ field_subtitle }} {{ title }}\"></a></p>\r\n    </div>\r\n    <div class=\"cell medium-auto auto l-padding-hd\">\r\n      <p><a href=\"#{{ nid }}\" class=\"popup-modal text-accent--desktop\">{{ field_subtitle }} {{ title }}</a></p>\r\n      {{ edit_node }}\r\n    </div>\r\n  </div>\r\n</div>\r\n<div id=\"{{ nid }}\" class=\"white-popup mw-800 mfp-hide rounded-corners l-padding-am\">\r\n  <div class=\"grid-x\">\r\n    <div class=\"cell medium-4\">\r\n      <div class=\"grid-x\">\r\n        <div class=\"cell medium-12 small-6 l-padding-bd\">\r\n          <figure><img class=\"rounded-corners\" src=\"https://webdocs.sandiego.gov/fsbn/round1/{{ field_keywords }}\" alt=\"{{ field_subtitle }} {{ title }}\" /></figure>\r\n        </div>\r\n        <div class=\"cell medium-12 small-6 l-padding-bs text-center\">\r\n          {{ field_website }}\r\n          <ul class=\"social-links l-flex-center-h l-margin-tn\">\r\n            {{ field_other_keywords }}{{ field_misc_field_1 }}{{ field_misc_field_2 }}\r\n          </ul>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"cell medium-auto l-padding-desktop-lm\">\r\n      <h2>{{ field_subtitle }} {{ title }}</h2>\r\n      <p><strong>{{ field_top_content }} County</strong></p>\r\n      {{ body }}\r\n    </div>\r\n  </div>\r\n</div>"
+            text: "<div class=\"cell medium-4 white-bg rounded-corners overflow-h\">\r\n  <div class=\"grid-x l-flex-center-v\">\r\n    <div class=\"cell medium-5 small-4\">\r\n      <p><a href=\"#{{ nid }}\" class=\"popup-modal\"><img src=\"https://webdocs.sandiego.gov/fsbn/round1/{{ field_keywords }}\" alt=\"{{ field_subtitle }} {{ title }}\"></a></p>\r\n    </div>\r\n    <div class=\"cell medium-auto auto l-padding-hd\">\r\n      <p><a href=\"#{{ nid }}\" class=\"popup-modal text-accent--desktop\">{{ field_subtitle }} {{ title }}</a></p>\r\n      {{ edit_node }}\r\n    </div>\r\n  </div>\r\n</div>\r\n<div id=\"{{ nid }}\" class=\"white-popup mw-800 mfp-hide rounded-corners l-padding-am\">\r\n  <div class=\"grid-x\">\r\n    <div class=\"cell medium-4\">\r\n      <div class=\"grid-x\">\r\n        <div class=\"cell medium-12 small-6 l-padding-bd\">\r\n          <figure><img class=\"rounded-corners\" src=\"https://webdocs.sandiego.gov/fsbn/round1/{{ field_keywords }}\" alt=\"{{ field_subtitle }} {{ title }}\" /></figure>\r\n        </div>\r\n        <div class=\"cell medium-12 small-6 l-padding-bs text-center\">\r\n          <ul class=\"social-links l-flex-center-h l-margin-tn l-margin-bd\">\r\n            {{ field_other_keywords }}{{ field_misc_field_1 }}{{ field_misc_field_2 }}\r\n          </ul>\r\n          {{ field_website }}\r\n{{ field_dept_doc_id }}\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"cell medium-auto l-padding-desktop-lm\">\r\n      <h2>{{ field_subtitle }} {{ title }}</h2>\r\n      <p><strong>{{ field_top_content }} County</strong></p>\r\n      {{ body }}\r\n    </div>\r\n  </div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -3900,6 +3963,7 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_dept_doc_id'
         - 'config:field.storage.node.field_keywords'
         - 'config:field.storage.node.field_misc_field_1'
         - 'config:field.storage.node.field_misc_field_2'
@@ -6259,6 +6323,69 @@ display:
           text: Edit
           output_url_as_text: false
           absolute: false
+        field_dept_doc_id:
+          id: field_dept_doc_id
+          table: node__field_dept_doc_id
+          field: field_dept_doc_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '<p><a href="/far-south-border-north/projects/round-1/project?project={{ field_dept_doc_id }}&artist={{ nid }}" class="no-underline" target="_blank" title="Opens in a new tab"><strong>VIEW PROJECT</strong></a></p>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         nothing:
           id: nothing
           table: views
@@ -6271,7 +6398,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"cell medium-4 white-bg rounded-corners overflow-h\">\r\n  <div class=\"grid-x l-flex-center-v\">\r\n    <div class=\"cell medium-5 small-4\">\r\n      <p><a href=\"#{{ nid }}\" class=\"popup-modal\"><img src=\"https://webdocs.sandiego.gov/fsbn/round1/{{ field_keywords }}\" alt=\"{{ field_subtitle }} {{ title }}\"></a></p>\r\n    </div>\r\n    <div class=\"cell medium-auto auto l-padding-hd\">\r\n      <p><a href=\"#{{ nid }}\" class=\"popup-modal text-accent--desktop\">{{ field_subtitle }} {{ title }}</a></p>\r\n      {{ edit_node }}\r\n    </div>\r\n  </div>\r\n</div>\r\n<div id=\"{{ nid }}\" class=\"white-popup mw-800 mfp-hide rounded-corners l-padding-am\">\r\n  <div class=\"grid-x\">\r\n    <div class=\"cell medium-4\">\r\n      <div class=\"grid-x\">\r\n        <div class=\"cell medium-12 small-6 l-padding-bd\">\r\n          <figure><img class=\"rounded-corners\" src=\"https://webdocs.sandiego.gov/fsbn/round1/{{ field_keywords }}\" alt=\"{{ field_subtitle }} {{ title }}\" /></figure>\r\n        </div>\r\n        <div class=\"cell medium-12 small-6 l-padding-bs text-center\">\r\n          {{ field_website }}\r\n          <ul class=\"social-links l-flex-center-h l-margin-tn\">\r\n            {{ field_other_keywords }}{{ field_misc_field_1 }}{{ field_misc_field_2 }}\r\n          </ul>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"cell medium-auto l-padding-desktop-lm\">\r\n      <h2>{{ field_subtitle }} {{ title }}</h2>\r\n      <p><strong>{{ field_top_content }} County</strong></p>\r\n      {{ body }}\r\n    </div>\r\n  </div>\r\n</div>"
+            text: "<div class=\"cell medium-4 white-bg rounded-corners overflow-h\">\r\n  <div class=\"grid-x l-flex-center-v\">\r\n    <div class=\"cell medium-5 small-4\">\r\n      <p><a href=\"#{{ nid }}\" class=\"popup-modal\"><img src=\"https://webdocs.sandiego.gov/fsbn/round1/{{ field_keywords }}\" alt=\"{{ field_subtitle }} {{ title }}\"></a></p>\r\n    </div>\r\n    <div class=\"cell medium-auto auto l-padding-hd\">\r\n      <p><a href=\"#{{ nid }}\" class=\"popup-modal text-accent--desktop\">{{ field_subtitle }} {{ title }}</a></p>\r\n      {{ edit_node }}\r\n    </div>\r\n  </div>\r\n</div>\r\n<div id=\"{{ nid }}\" class=\"white-popup mw-800 mfp-hide rounded-corners l-padding-am\">\r\n  <div class=\"grid-x\">\r\n    <div class=\"cell medium-4\">\r\n      <div class=\"grid-x\">\r\n        <div class=\"cell medium-12 small-6 l-padding-bd\">\r\n          <figure><img class=\"rounded-corners\" src=\"https://webdocs.sandiego.gov/fsbn/round1/{{ field_keywords }}\" alt=\"{{ field_subtitle }} {{ title }}\" /></figure>\r\n        </div>\r\n        <div class=\"cell medium-12 small-6 l-padding-bs text-center\">\r\n          <ul class=\"social-links l-flex-center-h l-margin-tn l-margin-bd\">\r\n            {{ field_other_keywords }}{{ field_misc_field_1 }}{{ field_misc_field_2 }}\r\n          </ul>\r\n          {{ field_website }}\r\n{{ field_dept_doc_id }} \r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"cell medium-auto l-padding-desktop-lm\">\r\n      <h2>{{ field_subtitle }} {{ title }}</h2>\r\n      <p><strong>{{ field_top_content }} County</strong></p>\r\n      {{ body }}\r\n    </div>\r\n  </div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -6527,6 +6654,7 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_dept_doc_id'
         - 'config:field.storage.node.field_keywords'
         - 'config:field.storage.node.field_misc_field_1'
         - 'config:field.storage.node.field_misc_field_2'
