@@ -302,6 +302,16 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      query:
+        type: views_query
+        options:
+          query_comment: 'web_data_process_pdfs_via_tesseract,page_webdataserver'
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
+      defaults:
+        query: false
       display_extenders: {  }
       path: webdataserver
     cache_metadata:
@@ -338,6 +348,16 @@ display:
             field_document_url:
               alias: ''
               raw_output: false
+      query:
+        type: views_query
+        options:
+          query_comment: 'web_data_process_pdfs_via_tesseract,rest_export_webdataserver'
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
+      defaults:
+        query: false
       display_extenders: {  }
       path: webdataserver/export
       auth:
