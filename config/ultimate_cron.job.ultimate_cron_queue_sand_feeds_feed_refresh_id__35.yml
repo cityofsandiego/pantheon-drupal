@@ -1,0 +1,20 @@
+uuid: 163aad30-bc36-4438-97f7-d60692718025
+langcode: en
+status: true
+dependencies:
+  module:
+    - sand_feeds
+title: 'Queue: Sand Feed Refresh ID:35 - Doc scs_ccagenda_psns'
+id: ultimate_cron_queue_sand_feeds_feed_refresh_id__35
+weight: 10
+module: sand_feeds
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database

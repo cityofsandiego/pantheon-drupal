@@ -1,0 +1,20 @@
+uuid: 04b4a68c-6eb0-456e-a02a-02fbdaeff41e
+langcode: en
+status: true
+dependencies:
+  module:
+    - sand_feeds
+title: 'Queue: Sand Feed Refresh ID:24 - Doc scs_ccagenda_budgetfinance'
+id: ultimate_cron_queue_sand_feeds_feed_refresh_id__24
+weight: 10
+module: sand_feeds
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database
