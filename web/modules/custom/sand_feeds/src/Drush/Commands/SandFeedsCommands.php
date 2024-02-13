@@ -84,6 +84,7 @@ class SandFeedsCommands extends DrushCommands {
       }
     }
     catch (Exception $exception) {
+      \Drupal::logger('sand_feeds')->error($exception->getMessage());
       \Drupal::logger('sand_feeds')->notice("Feed NOT Submitted for #%id", ['%id' => $id]);
       $this->logger()->success(dt('Feed NOT Submitted.'));
     }
