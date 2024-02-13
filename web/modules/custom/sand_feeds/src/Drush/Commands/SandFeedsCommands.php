@@ -72,6 +72,7 @@ class SandFeedsCommands extends DrushCommands {
     $entity_type = $this->entityTypeManager->getDefinition('feeds_feed');
     $handler = SandFeedImportHandler::createInstance($this->container, $entity_type);
     $handler->startCronImport($feed);
+    \Drupal::logger('sand_feeds')->notice("Feed Submitted #%id, %label", ['%id' => $feed->id(), '%label' => $feed->label()]);
     $this->logger()->success(dt('Feed Submitted.'));
   }
 
