@@ -2,7 +2,9 @@
 
 namespace Drupal\sand_feeds\Drush\Commands;
 
+use Drupal\facets\Exception\Exception;
 use Drupal\feeds\Entity\Feed;
+use Drupal\feeds\FeedInterface;
 use Drupal\sand_feeds\SandFeedImportHandler;
 use Drush\Commands\DrushCommands;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -68,12 +70,24 @@ class SandFeedsCommands extends DrushCommands {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function import($id, array $options = ['option-name' => 'default']) {
-    $feed = Feed::load($id);
-    $entity_type = $this->entityTypeManager->getDefinition('feeds_feed');
-    $handler = SandFeedImportHandler::createInstance($this->container, $entity_type);
-    $handler->startCronImport($feed);
-    \Drupal::logger('sand_feeds')->notice("Feed Submitted #%id, %label", ['%id' => $feed->id(), '%label' => $feed->label()]);
-    $this->logger()->success(dt('Feed Submitted.'));
+    try {
+      $feed = Feed::load($id);
+      if ($feed instanceof FeedInterface) {
+        $entity_type = $this->entityTypeManager->getDefinition('feeds_feed');
+        $handler = SandFeedImportHandler::createInstance($this->container, $entity_type);
+        $handler->startCronImport($feed);
+        \Drupal::logger('sand_feeds')->notice("Feed Submitted #%id, %label", ['%id' => $feed->id(), '%label' => $feed->label()]);
+        $this->logger()->success(dt('Feed Submitted.'));
+      } else {
+        \Drupal::logger('sand_feeds')->notice("Feed NOT Submitted for #%id", ['%id' => $id]);
+        $this->logger()->success(dt('Feed NOT Submitted.'));
+      }
+    }
+    catch (Exception $exception) {
+      \Drupal::logger('sand_feeds')->notice("Feed NOT Submitted for #%id", ['%id' => $id]);
+      $this->logger()->success(dt('Feed NOT Submitted.'));
+    }
+
   }
 
 
