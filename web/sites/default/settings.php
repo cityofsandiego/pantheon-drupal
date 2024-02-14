@@ -65,7 +65,7 @@ if (defined('PANTHEON_ENVIRONMENT')) {
 // TEST Env
 if (defined('PANTHEON_ENVIRONMENT')) {
   if (PANTHEON_ENVIRONMENT == 'test') {
-     $config['environment_indicator.indicator']['bg_color'] = '#5D79AE';
+     $config['environment_indicator.indicator']['bg_color'] = '#AEA75D';
      $config['environment_indicator.indicator']['fg_color'] = 'black';
      $config['environment_indicator.indicator']['name'] = 'Test';
   }
