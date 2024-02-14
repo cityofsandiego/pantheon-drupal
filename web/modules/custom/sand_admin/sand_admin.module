@@ -6,6 +6,10 @@
 
 declare(strict_types=1);
 
+
+use Drupal\node\NodeInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Access\AccessResult;
 /**
  * Implements hook_help().
  */
@@ -45,4 +49,23 @@ function sand_admin_editor_js_settings_alter(array &$settings) {
 function sand_admin_page_attachments(array &$attachments) {
   // Attach the Google Translate library on every page.
   $attachments['#attached']['library'][] = 'sand_admin/google_translate';
+}
+
+/**
+ * Implements hook_node_access().
+ *
+ * This disallows any anonymous user from seeing the webteam nodes. They are
+ * for internal documentation only.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ * @param $op
+ * @param \Drupal\Core\Session\AccountInterface $account
+ *
+ * @return \Drupal\Core\Access\AccessResultForbidden|\Drupal\Core\Access\AccessResultNeutral
+ */
+function sand_admin_node_access(NodeInterface $node, $op, AccountInterface $account) {
+  if ($account->isAnonymous() && $node->gettype() == 'webteam') {
+    return AccessResult::forbidden()->cachePerPermissions();
+  }
+  return AccessResult::neutral()->cachePerPermissions();
 }
