@@ -52,12 +52,13 @@ third_party_settings:
   field_group:
     group_text_extract_info:
       children:
+        - group_general_info
         - field_body_status
         - field_internal_notes
       label: 'Text Extract Info'
       parent_name: ''
       region: content
-      weight: 14
+      weight: 15
       format_type: fieldset
       format_settings:
         classes: ''
@@ -78,7 +79,7 @@ third_party_settings:
       label: Dates
       parent_name: ''
       region: content
-      weight: 15
+      weight: 16
       format_type: fieldset
       format_settings:
         classes: ''
@@ -130,6 +131,32 @@ third_party_settings:
         show_empty_fields: false
         id: ''
         description: ''
+    group_general_info:
+      children:
+        - label
+        - field_title_long
+        - status
+        - field_skip_text_extract_queuing
+        - field_search_keymatch
+        - field_object_name
+        - field_r_object_id
+        - field_doc_set
+        - field_doc_type
+        - field_doc_num
+        - field_path
+        - field_committee
+        - field_muni_code_chapter
+        - field_sort1
+      label: 'General Info'
+      parent_name: group_text_extract_info
+      region: hidden
+      weight: 22
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
 _core:
   default_config_hash: IuBxIs2_vVGpk-AVec_hDLhhrCfZ-JwAclrpLevSAqg
 id: sand_remote.external.default
@@ -169,7 +196,7 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 17
+    weight: 18
     region: content
   field_body_status:
     type: string
@@ -177,14 +204,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 25
+    weight: 23
     region: content
   field_committee:
     type: list_default
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 11
+    weight: 12
     region: content
   field_doc_date:
     type: datetime_default
@@ -217,7 +244,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 9
+    weight: 10
     region: content
   field_doc_set:
     type: string
@@ -225,14 +252,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 7
+    weight: 8
     region: content
   field_doc_type:
     type: list_default
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 8
+    weight: 9
     region: content
   field_document_url:
     type: string
@@ -248,14 +275,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 26
+    weight: 24
     region: content
   field_muni_code_chapter:
     type: list_default
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 12
+    weight: 13
     region: content
   field_object_name:
     type: string
@@ -263,7 +290,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   field_path:
     type: string
@@ -271,7 +298,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 10
+    weight: 11
     region: content
   field_pn_category:
     type: string
@@ -279,7 +306,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 22
+    weight: 21
     region: content
   field_pn_comm_plan_group:
     type: string
@@ -329,7 +356,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 6
+    weight: 7
     region: content
   field_search_keymatch:
     type: entity_reference_label
@@ -337,14 +364,14 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
   field_skip_text_extract_queuing:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   field_sort1:
     type: number_integer
@@ -353,7 +380,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 13
+    weight: 14
     region: content
   field_source:
     type: string
@@ -376,7 +403,7 @@ content:
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   label:
     type: string
@@ -384,7 +411,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   status:
     type: boolean
@@ -394,14 +421,14 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   uid:
     type: author
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 16
+    weight: 17
     region: content
 hidden:
   description: true
