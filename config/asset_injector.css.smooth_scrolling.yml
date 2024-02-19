@@ -1,0 +1,21 @@
+uuid: 60e18e9d-b3a8-466a-be12-61ae2ef1fc30
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: smooth_scrolling
+label: 'Smooth Scrolling'
+code: |-
+  html {
+      scroll-behavior:smooth;
+  }
+media: all
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/police/services/*'
+contexts: {  }
+conditions_require_all: true
