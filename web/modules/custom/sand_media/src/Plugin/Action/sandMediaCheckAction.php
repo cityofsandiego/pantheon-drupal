@@ -24,14 +24,16 @@ use Drupal\views_bulk_operations\Action\ViewsBulkOperationsPreconfigurationInter
 class sandMediaCheckAction  extends ViewsBulkOperationsActionBase implements ViewsBulkOperationsPreconfigurationInterface, PluginFormInterface {
 
   private $filename;
+  private $uri;
 
   private function createFile() {
 
     $this->filename = pathinfo( $this->configuration['sand_media_check_filename'], PATHINFO_FILENAME) . '.csv';
+    $this->uri = 'public://' . $this->filename;
     if (!file_exists($this->filename)) {
       $file = File::create([
         'filename' => basename($this->filename),
-        'uri' => $this->filename,
+        'uri' => $this->uri,
         'uid' => \Drupal::currentUser()->id(),
         'status' => 1,
       ]);
@@ -56,16 +58,17 @@ class sandMediaCheckAction  extends ViewsBulkOperationsActionBase implements Vie
     $id = $entity->id();
     $fid = $entity->getSource()->getSourceFieldValue($entity);
     if (!is_numeric($fid)) {
+      $this->createFile();
       $message = 'MediaID,' . $id . ',MissingFID,' . $fid . PHP_EOL;
-      file_put_contents($this->filename, $message,FILE_APPEND);
-      $this->messenger()->addMessage('Media id: ' . $id . ' file does not exist: ' . $uri);
+      file_put_contents($this->uri, $message,FILE_APPEND);
+      $this->messenger()->addMessage('Media id: ' . $id);
     } else {
       $file = File::load($fid);
       $uri = $file->getFileUri();
       if (!file_exists($uri)) {
         $this->createFile();
         $message = 'MediaID,' . $id . ',' . $uri . PHP_EOL;
-        file_put_contents($this->filename, $message,FILE_APPEND);
+        file_put_contents($this->uri, $message,FILE_APPEND);
         $this->messenger()->addMessage('Media id: ' . $id . ' file does not exist: ' . $uri);
       }
     }
