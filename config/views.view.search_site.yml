@@ -6473,6 +6473,259 @@ display:
         - 'config:field.storage.node.field_top_content'
         - 'config:search_api.index.content'
         - 'search_api_list:content'
+  page_1:
+    id: page_1
+    display_title: 'Page TEST Site'
+    display_plugin: page
+    position: 1
+    display_options:
+      title: 'Search TEST Site'
+      filters:
+        search_api_fulltext:
+          id: search_api_fulltext
+          table: search_api_index_content
+          field: search_api_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_fulltext
+          operator: and
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: search_api_fulltext_op
+            label: '&nbsp;'
+            description: ''
+            use_operator: false
+            operator: search_api_fulltext_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: search_text
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              sand_admin: '0'
+              locations: '0'
+              remote_data: '0'
+              sand_admin_environment_indicator: '0'
+            expose_fields: false
+            placeholder: ''
+            searched_fields_id: search_api_fulltext_searched_fields
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          parse_mode: sloppy_terms
+          min_length: null
+          fields: {  }
+        entity_type:
+          id: entity_type
+          table: search_api_index_content
+          field: entity_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_string
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: entity_type_op
+            label: 'Entity type'
+            description: null
+            use_operator: false
+            operator: entity_type_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: entity_type
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: null
+            max_placeholder: null
+            placeholder: null
+          is_grouped: true
+          group_info:
+            label: Type
+            description: ''
+            identifier: entity_type
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: 'Web Pages'
+                operator: '='
+                value:
+                  min: ''
+                  max: ''
+                  value: node
+              2:
+                title: Documents
+                operator: '='
+                value:
+                  min: ''
+                  max: ''
+                  value: media
+              3:
+                title: ''
+                operator: '='
+                value:
+                  min: ''
+                  max: ''
+                  value: ''
+        type:
+          id: type
+          table: search_api_index_content
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: not
+          value:
+            date: date
+            department_document: department_document
+            event: event
+            hero: hero
+            registration: registration
+            reusable_component: reusable_component
+            sidebar_block_context: sidebar_block_context
+            slide: slide
+            slider_image: slider_image
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        url_1:
+          id: url_1
+          table: search_api_index_content
+          field: url_1
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_text
+          operator: '!='
+          value:
+            min: ''
+            max: ''
+            value: /staging/
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      exposed_block: false
+      display_extenders: {  }
+      path: search/sitetest
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+      tags:
+        - 'config:field.storage.media.field_media_document'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_body_bottom'
+        - 'config:field.storage.node.field_sidebar'
+        - 'config:field.storage.node.field_top_content'
+        - 'config:search_api.index.content'
+        - 'search_api_list:content'
   planning:
     id: planning
     display_title: 'Block Planning'
