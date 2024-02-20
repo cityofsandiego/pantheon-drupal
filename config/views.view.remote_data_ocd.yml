@@ -11,6 +11,7 @@ dependencies:
     - field.storage.sand_remote.field_doc_type
     - field.storage.sand_remote.field_document_url
     - field.storage.sand_remote.field_internal_notes
+    - field.storage.sand_remote.field_object_name
     - field.storage.sand_remote.field_path
     - field.storage.sand_remote.field_r_object_id
     - field.storage.sand_remote.field_source_name
@@ -597,7 +598,70 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: 'R Object ID'
+          label: 'R-Object-ID / Object Name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_object_name:
+          id: field_object_name
+          table: sand_remote__field_object_name
+          field: field_object_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Object Name'
           exclude: false
           alter:
             alter_text: false
@@ -1716,6 +1780,7 @@ display:
             field_body_status: label
             field_internal_notes: label
             field_r_object_id: field_r_object_id
+            field_object_name: field_r_object_id
             created: created
             changed: changed
             field_doc_date: field_doc_date
@@ -1756,7 +1821,7 @@ display:
               sortable: true
               default_sort_order: asc
               align: ''
-              separator: '<br>'
+              separator: '<br />'
               empty_column: false
               responsive: ''
             field_document_url:
@@ -1789,6 +1854,13 @@ display:
               responsive: ''
             field_r_object_id:
               sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: '<br />'
+              empty_column: false
+              responsive: ''
+            field_object_name:
+              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
@@ -1898,6 +1970,7 @@ display:
         - 'config:field.storage.sand_remote.field_doc_type'
         - 'config:field.storage.sand_remote.field_document_url'
         - 'config:field.storage.sand_remote.field_internal_notes'
+        - 'config:field.storage.sand_remote.field_object_name'
         - 'config:field.storage.sand_remote.field_path'
         - 'config:field.storage.sand_remote.field_r_object_id'
         - 'config:field.storage.sand_remote.field_source_name'
@@ -1959,6 +2032,7 @@ display:
         - 'config:field.storage.sand_remote.field_doc_type'
         - 'config:field.storage.sand_remote.field_document_url'
         - 'config:field.storage.sand_remote.field_internal_notes'
+        - 'config:field.storage.sand_remote.field_object_name'
         - 'config:field.storage.sand_remote.field_path'
         - 'config:field.storage.sand_remote.field_r_object_id'
         - 'config:field.storage.sand_remote.field_source_name'
@@ -2006,6 +2080,7 @@ display:
         - 'config:field.storage.sand_remote.field_doc_type'
         - 'config:field.storage.sand_remote.field_document_url'
         - 'config:field.storage.sand_remote.field_internal_notes'
+        - 'config:field.storage.sand_remote.field_object_name'
         - 'config:field.storage.sand_remote.field_path'
         - 'config:field.storage.sand_remote.field_r_object_id'
         - 'config:field.storage.sand_remote.field_source_name'
