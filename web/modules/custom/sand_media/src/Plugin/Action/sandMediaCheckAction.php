@@ -30,7 +30,7 @@ class sandMediaCheckAction  extends ViewsBulkOperationsActionBase implements Vie
 
     $this->filename = pathinfo( $this->configuration['sand_media_check_filename'], PATHINFO_FILENAME) . '.csv';
     $this->uri = 'public://' . $this->filename;
-    if (!file_exists($this->filename)) {
+    if (!file_exists($this->uri)) {
       $file = File::create([
         'filename' => basename($this->filename),
         'uri' => $this->uri,
