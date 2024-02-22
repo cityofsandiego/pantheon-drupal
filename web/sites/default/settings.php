@@ -57,6 +57,10 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     $config['search_api.index.remote']['read_only'] = true;
   }
 } else {
+  // env indicator for local
+  $config['environment_indicator.indicator']['bg_color'] = '#307249'; #local
+  $config['environment_indicator.indicator']['fg_color'] = 'black';
+  $config['environment_indicator.indicator']['name'] = 'Local';
   // read-only
   $config['search_api.index.content']['read_only'] = true;
   $config['search_api.index.remote']['read_only'] = true;
