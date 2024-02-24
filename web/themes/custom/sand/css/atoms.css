@@ -2112,7 +2112,12 @@ input[type="radio"] {
 .form-type-radio,
 .form-type-checkbox {
   display: flex;
-  padding-left: 0.5em; }
+  padding-left: 0.5rem;
+  margin-bottom: 0.5rem; }
+  .form-type-radio .labelgroup,
+  .form-type-checkbox .labelgroup {
+    margin-left: 5px;
+    break-inside: avoid-column; }
   .form-type-radio input.form-radio,
   .form-type-checkbox input.form-radio {
     width: 13px;
@@ -2126,11 +2131,15 @@ input[type="radio"] {
     width: 13px;
     height: 13px;
     margin-left: 0;
-    margin-right: 0.5rem; }
+    margin-right: 0.5rem;
+    top: 8px; }
   .form-type-radio label.option,
   .form-type-checkbox label.option {
     display: table-cell;
     font-size: 1em; }
+  .form-type-radio .description,
+  .form-type-checkbox .description {
+    margin-bottom: 0; }
 
 .form-radios > .form-item {
   margin: 0 0 0.2em; }
