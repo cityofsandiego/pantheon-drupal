@@ -8,7 +8,7 @@
  */
 
 function resizedw(label) {
-  $(".stellar-window").each(function () {
+  $(".stellar-windows").each(function () {
     var divWidth = $(this).width();
     var javaScriptSelector = $(this).attr("id");
     var selector = "#" + $(this).attr("id");
@@ -24,14 +24,18 @@ function resizedw(label) {
     }
 
     // if we are on a larger screen
+    var backSize = $(selector).attr("data-sand-background-size");
+    if (backSize) {
+      background_size = backSize;
+    }
     if (window.matchMedia("(min-width: 48em)").matches) {
       var adjWidth = $(selector).attr("data-sand-adjustment-width");
       if (adjWidth && (divWidth < adjWidth)) {
         // If on this image they put in an overrides for a smaller width.
-        var backSize = $(selector).attr("data-sand-background-size");
+        /*var backSize = $(selector).attr("data-sand-background-size");
         if (backSize) {
           background_size = backSize;
-        }
+        }*/
         // Set min-height for smaller width (used to really fine tune)
         var adjHeight = $(selector).attr("data-sand-adjustment-height");
         if (adjHeight) {
