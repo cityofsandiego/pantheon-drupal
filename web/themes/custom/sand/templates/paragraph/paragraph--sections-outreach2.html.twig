@@ -42,7 +42,7 @@
 {% if background_size is not empty %}
   {% set bg_size = 'background-size: ' ~ background_size ~ ';' %}
 {% else %}
-  {% set bg_size = '' %}
+  {% set bg_size = 'background-size: cover;' %}
 {% endif %}
 
 {% if min_height is not empty %}
@@ -111,7 +111,7 @@
       <div {{ img_attributes.addClass(img_classes)
         .setAttribute('id', 'img-' ~ paragraph.id())
         .setAttribute('style', 
-          'background-size: ' ~ background_size ~ '; ' ~ 
+          'background-size: ' ~ background_size ~ '; ' ~
           'background-position-x: ' ~ percent_horizontal ~ '%; ' ~
           'background-position-y: ' ~ percent_vertical ~ '%; ' ~
           'background-image: url(' ~ image_url ~ '); ' ~
