@@ -7,12 +7,14 @@ dependencies:
     - field.field.node.webform.field_d7_nid
     - field.field.node.webform.field_department
     - field.field.node.webform.field_exhibit_attachments
+    - field.field.node.webform.field_meta_tags
     - field.field.node.webform.field_search_exclude_entity
     - field.field.node.webform.field_search_keymatch
     - field.field.node.webform.field_sidebar
     - field.field.node.webform.webform
     - node.type.webform
   module:
+    - metatag
     - text
     - user
     - webform
@@ -42,6 +44,13 @@ content:
       link: true
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
     region: content
   field_sidebar:
     type: text_default
