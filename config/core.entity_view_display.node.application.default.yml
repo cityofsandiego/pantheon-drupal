@@ -6,10 +6,12 @@ dependencies:
     - field.field.node.application.body
     - field.field.node.application.field_d7_nid
     - field.field.node.application.field_edit_notes
+    - field.field.node.application.field_meta_tags
     - field.field.node.application.field_search_exclude_entity
     - field.field.node.application.field_search_keymatch
     - node.type.application
   module:
+    - metatag
     - text
     - user
 id: node.application.default
@@ -24,12 +26,24 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   field_edit_notes:
     type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
     weight: 2
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
     region: content
   field_search_keymatch:
     type: entity_reference_label
