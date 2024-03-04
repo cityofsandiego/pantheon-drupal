@@ -16,6 +16,7 @@ dependencies:
     - smart_date
     - taxonomy
     - user
+    - views_conditional
 id: legis_calendar
 label: 'Legis Calendar'
 module: views
@@ -330,6 +331,63 @@ display:
           text: Edit
           output_url_as_text: false
           absolute: false
+        views_conditional_field:
+          id: views_conditional_field
+          table: views_conditional
+          field: views_conditional_field
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: views_conditional_field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          if: field_event_date_value
+          condition: eq
+          equalto: '12:00 am'
+          then: 'All Day'
+          then_translate: true
+          or: '{{ field_event_date_value }}'
+          or_translate: true
+          strip_tags: false
         title:
           id: title
           table: node_field_data
@@ -342,7 +400,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<a href=\"{{ field_website }}\">{{ title }}</a><br>\r\n<span class=\"fine-print\">{{ field_event_date_value }}</span>\r\n<span class=\"pull-right\">{{ edit_node }}</span>"
+            text: "<a href=\"{{ field_website }}\">{{ title }}</a><br>\r\n<span class=\"fine-print\">{{ views_conditional_field }}</span>\r\n<span class=\"pull-right\">{{ edit_node }}</span>"
             make_link: false
             path: ''
             absolute: false
