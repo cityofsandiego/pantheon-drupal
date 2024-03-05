@@ -12,11 +12,8 @@ dependencies:
     - field.field.node.event.field_event_host_nm
     - field.field.node.event.field_event_location_txt
     - field.field.node.event.field_event_management_cd
-    - field.field.node.event.field_event_media_contact_txt
-    - field.field.node.event.field_event_non_public_contact
     - field.field.node.event.field_event_organizer_nm
     - field.field.node.event.field_event_seq_num
-    - field.field.node.event.field_event_vendor_contact_txt
     - field.field.node.event.field_subtitle
     - node.type.event
   module:
@@ -44,9 +41,9 @@ third_party_settings:
   feeds_tamper:
     tampers:
       e7730a48-c73c-4d0e-bc9e-77364df5c81d:
-        num_char: 255
-        ellipses: false
-        wordsafe: false
+        num_char: 250
+        ellipses: true
+        wordsafe: true
         uuid: e7730a48-c73c-4d0e-bc9e-77364df5c81d
         plugin: truncate_text
         source: project_name
@@ -66,6 +63,22 @@ third_party_settings:
         source: date
         weight: 0
         label: 'String to Unix Timestamp'
+      50a2555f-3c7e-4a59-b128-56abaa327eed:
+        default_value: 'Community Planners Committee'
+        only_if_empty: false
+        uuid: 50a2555f-3c7e-4a59-b128-56abaa327eed
+        plugin: default_value
+        source: department
+        weight: 0
+        label: 'Set value or default value'
+      8b953c8a-d581-4f3f-968c-1a777e003e4a:
+        default_value: IB620
+        only_if_empty: false
+        uuid: 8b953c8a-d581-4f3f-968c-1a777e003e4a
+        plugin: default_value
+        source: category
+        weight: 0
+        label: 'Set value or default value'
 label: 'Community Planning Group Recommendations'
 id: community_planning_group_recomme
 description: 'Community Planning Group Recommendations'
@@ -237,6 +250,7 @@ mappings:
       language: null
       reference_by: name
       autocreate: false
+      autocreate_bundle: department
   -
     target: moderation_state
     map:
@@ -251,27 +265,6 @@ mappings:
       end_value: ''
     settings:
       language: null
-  -
-    target: field_event_non_public_contact
-    map:
-      value: attachment_1_optional_
-    settings:
-      language: null
-    unique: {  }
-  -
-    target: field_event_media_contact_txt
-    map:
-      value: attachment_2_optional_
-    settings:
-      language: null
-    unique: {  }
-  -
-    target: field_event_vendor_contact_txt
-    map:
-      value: attachment_3_optional_
-    settings:
-      language: null
-    unique: {  }
   -
     target: field_event_organizer_nm
     map:
@@ -307,4 +300,4 @@ mappings:
       guid: reference_id
     settings: {  }
     unique:
-      guid: '1'
+      guid: 1
