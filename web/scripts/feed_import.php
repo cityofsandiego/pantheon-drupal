@@ -25,7 +25,7 @@ if (!is_numeric($id)) {
 if (!empty($extra[1])) {
   $schedule = $extra[1];
 } else {
-  $schedule = 'not given';
+  $schedule = 'schedule not given';
 }
 
 
