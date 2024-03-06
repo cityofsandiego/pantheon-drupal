@@ -90,6 +90,7 @@ $settings['config_exclude_modules'] = [
   'devel',
   'examples',
   'search_api_solr_devel',
+  'upgrade_status',
   'webprofiler',
   'yaml_editor',
 ];
