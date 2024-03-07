@@ -8,6 +8,7 @@ class DigitalArchivesPhotosQuery {
 
   public static function getIds(): array {
     return \Drupal::entityQuery('node')
+      ->accessCheck(TRUE)
       ->condition('status', 1)
       ->condition('type', 'digital_archives_photos')
       ->execute();

@@ -31,6 +31,7 @@ class DateQuery {
    */
   public static function getIds(): array {
     return \Drupal::entityQuery('node')
+      ->accessCheck(TRUE)
       ->condition('status', 1)
       ->condition('type', 'date')
       ->execute();
@@ -47,6 +48,7 @@ class DateQuery {
    */
   public static function getDates(array $days, array $tids, bool $include_empty_tids = TRUE): array {
     $query = \Drupal::entityQuery('node')
+      ->accessCheck(TRUE)
       ->condition('type', 'date')
       ->condition('field_date_date', $days, 'IN')
       ->accessCheck(FALSE);
