@@ -295,6 +295,7 @@ final class Node implements EventSubscriberInterface {
     }
 
     $query = \Drupal::entityQuery('node')
+      ->accessCheck(FALSE)
       ->condition('type', 'hero')
       ->condition('status', NodeInterface::PUBLISHED)
       ->condition('field_hero_frontpage', TRUE)
@@ -330,6 +331,7 @@ final class Node implements EventSubscriberInterface {
     $entity_ids = [];
     if (!empty($departments)) {
       $query = \Drupal::entityQuery('node')
+        ->accessCheck(FALSE)
         ->condition('type', 'hero')
         ->condition('status', NodeInterface::PUBLISHED)
         ->condition('field_hero_time_of_day', $times_of_day, 'IN')
@@ -339,6 +341,7 @@ final class Node implements EventSubscriberInterface {
 
     if (empty($entity_ids) && !empty($departmentParents)) {
       $query = \Drupal::entityQuery('node')
+        ->accessCheck(FALSE)
         ->condition('type', 'hero')
         ->condition('status', NodeInterface::PUBLISHED)
         ->condition('field_hero_time_of_day', $times_of_day, 'IN')
@@ -348,6 +351,7 @@ final class Node implements EventSubscriberInterface {
 
     if (empty($entity_ids)) {
       $query = \Drupal::entityQuery('node')
+        ->accessCheck(FALSE)
         ->condition('type', 'hero')
         ->condition('status', NodeInterface::PUBLISHED)
         ->condition('field_hero_time_of_day', $times_of_day, 'IN')

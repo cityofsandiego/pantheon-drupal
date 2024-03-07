@@ -75,6 +75,7 @@ class InsertReusableComponentFilter extends FilterBase implements ContainerFacto
           ->getStorage('node')
           ->getQuery();
         $query->condition('type', 'reusable_component')
+          ->accessCheck(FALSE)
           ->condition('field_block_delta', $value);
         $query_result = $query->execute();
         if (!empty($query_result)) {
