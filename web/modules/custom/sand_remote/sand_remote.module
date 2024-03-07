@@ -81,6 +81,7 @@ function sand_remote_user_cancel($edit, UserInterface $account, $method) {
       // Unpublish sand_remotes.
       $storage = \Drupal::entityTypeManager()->getStorage('sand_remote');
       $sand_remote_ids = $storage->getQuery()
+        ->accessCheck(FALSE)
         ->condition('uid', $account->id())
         ->condition('status', 1)
         ->execute();
@@ -94,6 +95,7 @@ function sand_remote_user_cancel($edit, UserInterface $account, $method) {
       // Anonymize sand_remotes.
       $storage = \Drupal::entityTypeManager()->getStorage('sand_remote');
       $sand_remote_ids = $storage->getQuery()
+        ->accessCheck(FALSE)
         ->condition('uid', $account->id())
         ->execute();
       foreach ($storage->loadMultiple($sand_remote_ids) as $sand_remote) {
@@ -111,6 +113,7 @@ function sand_remote_user_predelete(UserInterface $account) {
   // Delete sand_remotes.
   $storage = \Drupal::entityTypeManager()->getStorage('sand_remote');
   $sand_remote_ids = $storage->getQuery()
+    ->accessCheck(FALSE)
     ->condition('uid', $account->id())
     ->execute();
   $sand_remotes = $storage->loadMultiple($sand_remote_ids);
