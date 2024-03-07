@@ -37,8 +37,9 @@ function sand_admin_multiple_field_remove_button_skip_widgets_alter(array &$skip
  */
 function sand_admin_editor_js_settings_alter(array &$settings) {
   foreach (array_keys($settings['editor']['formats']) as $text_format_id) {
-    if ($settings['editor']['formats'][$text_format_id]['editor'] === 'ckeditor') {          
-      $settings['editor']['formats'][$text_format_id]['editorSettings']['customConfig'] = base_path() . drupal_get_path('module', 'sand_admin') . '/ckeditor_config.js';           
+    if ($settings['editor']['formats'][$text_format_id]['editor'] === 'ckeditor') {
+      $module_path = \Drupal::service('extension.list.module')->getPath('sand_admin');
+      $settings['editor']['formats'][$text_format_id]['editorSettings']['customConfig'] = base_path() . $module_path . '/js/ckeditor_config.js';
     }
   }        
 }
