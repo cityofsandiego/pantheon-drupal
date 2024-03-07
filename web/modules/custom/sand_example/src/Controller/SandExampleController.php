@@ -64,6 +64,7 @@ class SandExampleController extends ControllerBase {
 
     // Example of node query.
     $nids = \Drupal::entityQuery('node')
+      ->accessCheck(TRUE)
       ->condition('status', 1)
       ->condition('type', ['article','hero'], 'in')
       ->range(0,200)
