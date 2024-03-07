@@ -109,7 +109,7 @@ function sand_preprocess_media(&$variables) {
     // Get image URL.
     $file_uri = $file->getFileUri();
     // Create URL for image.
-    $file_url = Url::fromUri(file_create_url($file_uri))->toString();
+    $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
     // Create variable for image URL.
     $variables['img_url'] = $file_uri;
     $variables['img_url_string'] = $file_url;
@@ -131,7 +131,7 @@ function sand_preprocess_media(&$variables) {
     // Get thumbnail image URL.
     $file_uri = $thumbnail->getFileUri();
     // Create URL for image.
-    $file_url = Url::fromUri(file_create_url($file_uri))->toString();
+    $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
     // Create variable for video URL.
     $variables['video_url'] = $video_url;
     // Create variable for video URL.
@@ -165,7 +165,7 @@ function sand_preprocess_paragraph(array &$variables) {
       // Get image URL.
       $file_uri = $file->getFileUri();
       // Create URL for image.
-      $file_url = Url::fromUri(file_create_url($file_uri))->toString();
+      $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
 
       if (!empty($file) && method_exists($file, 'getFileUri')) {
         // Get the image URL + alt txt.

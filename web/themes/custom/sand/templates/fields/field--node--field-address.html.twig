@@ -38,5 +38,5 @@
 #}
 
 {% for item in items %}
-  <address class="address" translate="no"><strong><span itemprop="streetAddress">{{ item.content.address_line1 }}</span><br><span itemprop="addressLocality">{% spaceless %}{{ item.content.locality }}{% endspaceless %}</span>, <span itemprop="addressRegion">CA</span> <span itemprop="postalCode">{{ item.content.postal_code }}</span></strong></address>
+  <address class="address" translate="no"><strong><span itemprop="streetAddress">{{ item.content.address_line1 }}</span><br><span itemprop="addressLocality">{% apply spaceless %}{{ item.content.locality }}{% endapply %}</span>, <span itemprop="addressRegion">CA</span> <span itemprop="postalCode">{{ item.content.postal_code }}</span></strong></address>
 {% endfor %}
