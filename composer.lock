@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b94319489c687e1b39075cf72440198",
+    "content-hash": "c332e7a41192621b66ea169799980ea0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5929,22 +5929,23 @@
         },
         {
             "name": "drupal/flexslider",
-            "version": "2.0.0",
+            "version": "3.0.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/flexslider.git",
-                "reference": "8.x-2.0"
+                "reference": "3.0.0-alpha1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/flexslider-8.x-2.0.zip",
-                "reference": "8.x-2.0",
-                "shasum": "040e3f19200a3b6e008ad51abaa4cced009ec838"
+                "url": "https://ftp.drupal.org/files/projects/flexslider-3.0.0-alpha1.zip",
+                "reference": "3.0.0-alpha1",
+                "shasum": "6a2458db101bba5d1d4d4eb6c94fa2f1d88367bb"
             },
             "require": {
-                "drupal/core": "^8.8.0 || ^9.0"
+                "drupal/core": "^9 || ^10"
             },
             "require-dev": {
+                "dropfort/dropfort_module_build": "^2.0@beta",
                 "drupal/flexslider_fields": "*",
                 "drupal/flexslider_views": "*"
             },
@@ -5954,11 +5955,20 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.0",
-                    "datestamp": "1596904945",
+                    "version": "3.0.0-alpha1",
+                    "datestamp": "1694114706",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                },
+                "drupal-scaffold": {
+                    "gitignore": false,
+                    "allowed-packages": [
+                        "dropfort/dropfort_module_build"
+                    ],
+                    "locations": {
+                        "web-root": "drupal-ignore/"
                     }
                 }
             },
@@ -24983,6 +24993,7 @@
         "drupal/views_taxonomy_term_name_into_id": 5,
         "drupal/calendar": 15,
         "drupal/calendar_datetime": 15,
+        "drupal/flexslider": 15,
         "drupal/filter_perms": 5,
         "drupal/config_partial_export": 15,
         "drupal/ckeditor5_fullscreen": 10,
