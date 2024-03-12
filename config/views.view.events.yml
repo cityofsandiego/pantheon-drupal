@@ -2662,6 +2662,20 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: '<p class="text-center">There are no upcoming events at this time. Please check back soon for updates.</p>'
+            format: full_html
+          tokenize: false
       sorts:
         field_event_date_value:
           id: field_event_date_value
@@ -2798,6 +2812,7 @@ display:
         groups:
           1: AND
       defaults:
+        empty: false
         title: false
         pager: false
         relationships: false
