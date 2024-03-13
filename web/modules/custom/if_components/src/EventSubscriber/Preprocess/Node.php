@@ -5,7 +5,8 @@ namespace Drupal\if_components\EventSubscriber\Preprocess;
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Menu\MenuActiveTrail;
+//use Drupal\Core\Menu\MenuActiveTrail;
+//use Drupal\Core\ProxyClass\Menu\MenuActiveTrail;
 use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Url;
@@ -119,7 +120,7 @@ final class Node implements EventSubscriberInterface {
    */
   public function __construct(
     CurrentRouteMatch          $current_route_match,
-    MenuActiveTrail            $menu_active_trail,
+    $menu_active_trail,
     EntityTypeManagerInterface $entity_type_manager
   ) {
     $this->currentRouteMatch = $current_route_match;
