@@ -12,25 +12,54 @@ id: webform_1425485
 title: 'Receive Email Updates - IBA'
 description: null
 categories: {  }
-elements: |
+elements: |-
   fieldset_receive_email_updates:
     '#type': fieldset
+    '#title': 'Receive Email Updates'
     '#open': true
-    '#title': 'Receive Email Updates' 
-    '#description': ""
+    '#attributes':
+      class:
+        - l-padding-bn
+    first_name:
+      '#type': textfield
+      '#title': 'First Name'
+      '#title_display': none
+      '#placeholder': 'First Name'
+      '#wrapper_attributes':
+        class:
+          - three
+          - columns
+    last_name:
+      '#type': textfield
+      '#title': 'Last Name'
+      '#title_display': none
+      '#placeholder': 'Last Name'
+      '#wrapper_attributes':
+        class:
+          - three
+          - columns
     email_address_1:
       '#type': email
-      '#size': 20
+      '#title': 'Email Address'
       '#title_display': invisible
-      '#title': 'Email Address' 
-      '#description': ""
+      '#size': 20
+      '#placeholder': 'Email Address'
       '#required': true
+      '#wrapper_attributes':
+        class:
+          - three
+          - columns
     submit_button_1:
       '#type': processed_text
+      '#title': 'Submit Button'
+      '#description': ''
+      '#wrapper_attributes':
+        class:
+          - three
+          - columns
+      '#text': |
+        <p><input class="btn form-submit width-100" name="op" type="submit" value="Subscribe" /></p>
       '#format': full_html
-      '#text': "<div class='three column'><input class='btn form-submit width-100' name='op' type='submit' value='Subscribe'></div>\n"
-      '#title': 'Submit Button' 
-      '#description': ""
 css: ''
 javascript: ''
 settings:
@@ -70,7 +99,7 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
       from_name: 'City of San Diego IBA Website'
       reply_to: ''
@@ -78,7 +107,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: 'IBA Mailing List'
-      body: default
+      body: "Submitted on [webform_submission:created]\r\n\r\nSubmitted values are:\r\n[webform_submission:values]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

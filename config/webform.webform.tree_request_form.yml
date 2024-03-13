@@ -1,69 +1,85 @@
-uuid: b08a5220-b847-4657-b7a8-49cedbee36b2
+uuid: 2eb4af20-9855-43da-a800-c61f8c810ed8
 langcode: en
 status: open
 dependencies: {  }
 weight: 0
 open: null
 close: null
-uid: 53
+uid: 353
 template: false
 archive: false
-id: webform_1157395
-title: 'Audit Committee Sign-up'
-description: null
+id: tree_request_form
+title: 'Tree Request Form'
+description: ''
 categories: {  }
 elements: |-
-  fieldset_sign_up_for_email_updates:
+  owner_occupant_contact_information:
     '#type': fieldset
-    '#title': 'Sign up for email updates'
-    '#open': true
-    '#attributes':
-      class:
-        - l-padding-ld
-        - l-padding-bn
-    first_name_4:
+    '#title': 'Owner/Occupant Contact Information'
+    first_name:
       '#type': textfield
       '#title': 'First Name'
-      '#title_display': invisible
-      '#placeholder': 'First Name'
       '#wrapper_attributes':
         class:
-          - three
+          - six
           - columns
           - l-padding-ln
-    last_name_4:
+      '#required': true
+    last_name:
       '#type': textfield
       '#title': 'Last Name'
-      '#title_display': invisible
-      '#placeholder': 'Last Name'
       '#wrapper_attributes':
         class:
-          - three
+          - six
           - columns
-    email_4:
+          - l-padding-rn
+      '#required': true
+    email:
       '#type': email
       '#title': Email
-      '#title_display': invisible
-      '#size': 20
-      '#placeholder': Email
       '#wrapper_attributes':
         class:
-          - three
+          - six
           - columns
-    subscribe_button_4:
-      '#type': processed_text
-      '#title': 'Subscribe button'
-      '#description': ''
+          - l-padding-ln
+      '#required': true
+    phone:
+      '#type': tel
+      '#title': Phone
+      '#placeholder': xxx-xxx-xxxx
       '#wrapper_attributes':
         class:
-          - three
+          - six
           - columns
-      '#text': |
-        <p><input class="btn form-submit width-100" name="op" type="submit" value="Subscribe" /></p>
-      '#format': full_html
+          - l-padding-rn
+      '#required': true
+    resident_communit:
+      '#type': select
+      '#title': 'Your Resident Community'
+      '#options':
+        barrio: 'Barrio Logan'
+        logan: 'Logan Heights '
+        sherman: 'Sherman Heights '
+        grant: 'Grant Hill '
+        stockton: Stockton
+        sy: 'San Ysidro'
+        mh: 'Mt. Hope'
+        mv: 'Mountain View'
+        southcrest: Southcrest
+        shelltown: Shelltown
+      '#required': true
+      '#wrapper_attributes':
+        class:
+          - twelve
+          - columns
+          - l-margin-tn
+  comments_questions:
+    '#type': textarea
+    '#title': 'Comments / Questions'
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'
+    '#submit__label': 'Submit Request'
 css: ''
 javascript: ''
 settings:
@@ -161,7 +177,7 @@ settings:
   preview_excluded_elements: {  }
   preview_exclude_empty: true
   preview_exclude_empty_checkbox: false
-  draft: '0'
+  draft: none
   draft_multiple: false
   draft_auto_save: false
   draft_saved_message: ''
@@ -169,9 +185,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
-  confirmation_url: /city-council/audit-response
+  confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Your request has been forwarded to the list administrator.</p>'
+  confirmation_message: '<p>Thank you for contacting the Urban Forestry Program. We will be in touch.</p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -200,67 +216,66 @@ settings:
   token_update: false
   token_delete: false
   serial_disabled: false
-  form_submit_label: Subscribe
-  wizard_complete: 1
 access:
   create:
     roles:
       - anonymous
       - authenticated
     users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
 handlers:
-  email_2:
+  email:
     id: email
-    handler_id: email_2
-    label: 'Email 2'
+    handler_id: email
+    label: Email
     notes: ''
     status: true
     conditions: {  }
-    weight: 2
+    weight: 0
     settings:
       states:
         - completed
-      to_mail: mwallace@sandiego.gov
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: default
-      from_options: {  }
-      from_name: default
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Sign Up for Audit Committee Updates'
-      body: |+
-        Submitted values are:
-        [webform_submission:values]
-
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: false
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_3:
-    id: email
-    handler_id: email_3
-    label: 'Email 3'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 3
-    settings:
-      states:
-        - completed
-      to_mail: 'burcht@sandiego.gov, NKessler@sandiego.gov, SarahJ@sandiego.gov'
+      to_mail: omabee@sandiego.gov
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
@@ -273,8 +288,8 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Audit Committee Sign-up'
-      body: "Submitted values are:\r\n[webform_submission:values]\r\n\r\n"
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nSubmitted values are:\r\n[webform_submission:values]\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
