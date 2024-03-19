@@ -51,7 +51,6 @@ dependencies:
   module:
     - address
     - datetime
-    - geocoder_field
     - link
     - metatag
     - options
@@ -265,13 +264,12 @@ content:
     weight: 33
     region: content
   field_event_pin_address:
-    type: geocoder_geocode_formatter
-    label: hidden
+    type: string
+    label: above
     settings:
-      dumper: wkt
-      providers: {  }
+      link_to_entity: false
     third_party_settings: {  }
-    weight: 27
+    weight: 42
     region: content
   field_event_public_contact_txt:
     type: string
