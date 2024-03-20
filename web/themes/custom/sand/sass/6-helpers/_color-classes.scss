@@ -2,36 +2,36 @@
   Styles for background colors/gradients, opacity, and type color.
   ============================================================ */
 $colors: (
-  'cerulean': $cerulean,
-  'robin': $robin,
-  'teal': $teal,
-  'pine': $pine,
-  'sunshade': $sunshade,
-  'schoolbus': $schoolbus,
-  'spruce': $spruce,
-  'westar': $westar,
-  'white': $white,
-  'tulip': $tulip,
-  'chateau': $chateau,
-  'science': $science,
-  'shuttle': $shuttle,
-  'gold': $gold,
-  'picton': $picton,
-  'riptide': $riptide,
-  'texasrose': $texasrose,
-  'manz': $manz,
-  'endeavour': $endeavour,
-  'off-white': $off-white,
-  'off-black': $off-black,
-  'mercury': $mercury,
-  'alto': $alto,
-  'gray': $gray,
-  'light-gray': $light-gray,
-  'charcoal': $charcoal,
-  'pomegranate': $pomegranate, // red
-  'purple': $purple,
-  'warning': $warning-lt,
-  'mayor': $mayor
+  "cerulean": $cerulean,
+  "robin": $robin,
+  "teal": $teal,
+  "pine": $pine,
+  "sunshade": $sunshade,
+  "schoolbus": $schoolbus,
+  "spruce": $spruce,
+  "westar": $westar,
+  "white": $white,
+  "tulip": $tulip,
+  "chateau": $chateau,
+  "science": $science,
+  "shuttle": $shuttle,
+  "gold": $gold,
+  "picton": $picton,
+  "riptide": $riptide,
+  "texasrose": $texasrose,
+  "manz": $manz,
+  "endeavour": $endeavour,
+  "off-white": $off-white,
+  "off-black": $off-black,
+  "mercury": $mercury,
+  "alto": $alto,
+  "gray": $gray,
+  "light-gray": $light-gray,
+  "charcoal": $charcoal,
+  "pomegranate": $pomegranate, 
+  "purple": $purple,
+  "warning": $warning-lt,
+  "mayor": $mayor
 );
 
 // Global
@@ -71,6 +71,7 @@ $colors: (
   //background-color: lighten( $mercury, 2% ) !important;
   background-color: #f6f6f6;
 }
+
 .background--even {
   //background-color: darken( $mercury, 4% );
   background-color: #e4e9eb;
@@ -78,57 +79,58 @@ $colors: (
 
 .message--dark,
 .background--dark {
-    background-color: $spruce !important;
-    &.text-white {
-        > * {
-            color: white;
-        }
+  background-color: $spruce !important;
+
+  &.text-white {
+    > * {
+      color: white;
     }
+  }
 }
 
 .message-off-white,
 .background-off-white {
-    background-color: lighten( $mercury, 2% ) !important;
+  background-color: lighten($mercury, 2%) !important;
 }
 
 .message-off-white-darker,
 .background-off-white-darer {
-    background-color: darken( $mercury, 4% );
+  background-color: darken($mercury, 4%);
 }
 
 .message-white,
 .background-white {
-    background-color: white !important;
+  background-color: white !important;
 }
 
 .message--cerulean,
 .background--cerulean {
-    background-color: $cerulean !important;
+  background-color: $cerulean !important;
 }
 
 .message--science,
 .background--science {
-    background-color: $science !important;
+  background-color: $science !important;
 }
 
 .message--sunshade,
 .background--sunshade {
-    background: $sunshade !important;
+  background: $sunshade !important;
 }
 
 .message--robin,
 .background--robin {
-    background: $robin !important;
+  background: $robin !important;
 }
 
 .message--westar,
 .background--westar {
-    background: $westar !important;
+  background: $westar !important;
 }
 
 .message--off-white,
 .background--off-white {
-    background: $off-white !important;
+  background: $off-white !important;
 }
 
 .message--riptide,
@@ -148,47 +150,47 @@ $colors: (
 
 // Overlays
 .overlay {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(55, 66, 74, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(55 66 74 / 50%);
 }
-
 
 /* Gradient
    ========================================================================== */
 %black-gradient {
-    background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 75%, rgba(0,0,0,0.6) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(75%,rgba(0,0,0,0.45)), color-stop(100%,rgba(0,0,0,0.6))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.45) 75%,rgba(0,0,0,0.6) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.45) 75%,rgba(0,0,0,0.6) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.45) 75%,rgba(0,0,0,0.6) 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.45) 75%,rgba(0,0,0,0.6) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#99000000',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(0 0 0 / 0%)), color-stop(75%, rgb(0 0 0 / 45%)), color-stop(100%, rgb(0 0 0 / 60%))); /* Chrome,Safari4+ */
+  background: linear-gradient(top, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* Chrome10+,Safari5.1+ */
+  background: linear-gradient(top, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* Opera 11.10+ */
+  background: linear-gradient(top, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* W3C */
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr="#00000000", endColorstr="#99000000", GradientType=0); /* IE6-9 */
 }
 
 %white-gradient {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&amp;0.9+0,1+100 */
-    background: -moz-linear-gradient(top,  rgba(255,255,255,0.9) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.9)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  rgba(255,255,255,0.9) 0%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  rgba(255,255,255,0.9) 0%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  rgba(255,255,255,0.9) 0%,rgba(255,255,255,1) 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  rgba(255,255,255,0.9) 0%,rgba(255,255,255,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&amp;0.9+0,1+100 */
+  background: linear-gradient(top, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(255 255 255 / 90%)), color-stop(100%, rgb(255 255 255 / 100%))); /* Chrome,Safari4+ */
+  background: linear-gradient(top, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* Chrome10+,Safari5.1+ */
+  background: linear-gradient(top, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* Opera 11.10+ */
+  background: linear-gradient(top, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* W3C */
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr="#e6ffffff", endColorstr="#ffffff", GradientType=0); /* IE6-9 */
 }
 
 @mixin gray-gradient {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,d4d4d4+100 */
-    background: #ffffff; /* Old browsers */
-    background: -moz-linear-gradient(top,  #ffffff 0%, #d4d4d4 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#d4d4d4)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #ffffff 0%,#d4d4d4 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #ffffff 0%,#d4d4d4 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #ffffff 0%,#d4d4d4 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #ffffff 0%,#d4d4d4 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d4d4d4',GradientType=0 ); /* IE6-9 */
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,d4d4d4+100 */
+  background: #fff; /* Old browsers */
+  background: linear-gradient(top, #fff 0%, #d4d4d4 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #d4d4d4)); /* Chrome,Safari4+ */
+  background: linear-gradient(top, #fff 0%, #d4d4d4 100%); /* Chrome10+,Safari5.1+ */
+  background: linear-gradient(top, #fff 0%, #d4d4d4 100%); /* Opera 11.10+ */
+  background: linear-gradient(top, #fff 0%, #d4d4d4 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #fff 0%, #d4d4d4 100%); /* W3C */
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr="#ffffff", endColorstr="#d4d4d4", GradientType=0); /* IE6-9 */
 }
 
 /* Think Blue specific colors
@@ -198,7 +200,6 @@ $color-names: cerulean, robin, sunshade, schoolbus, spruce, westar, teal, tulip,
 $color-values: $cerulean, $robin, $sunshade, $schoolbus, $spruce, $westar, $teal, $tulip, $gold, $science, $endeavour, $purple, $success, $error;
 
 @for $c from 1 through 14 {
-
   $color-name: nth($color-names, $c);
   $color-value: nth($color-values, $c);
 
@@ -209,14 +210,16 @@ $color-values: $cerulean, $robin, $sunshade, $schoolbus, $spruce, $westar, $teal
 
 // Status indicators
 
-.status-available, .status-open {
-background-color: $success !important;
+.status-available,
+.status-open {
+  background-color: $success !important;
 }
 
-.status-unavailable, .status-closed {
-background-color: $error !important;
+.status-unavailable,
+.status-closed {
+  background-color: $error !important;
 }
 
 .status-impacted {
-background-color: $sunshade !important;
+  background-color: $sunshade !important;
 }

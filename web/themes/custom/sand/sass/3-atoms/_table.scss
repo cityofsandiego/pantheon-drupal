@@ -29,7 +29,7 @@ table:not(.calendar-view-table) {
     tr {
       &:first-child {
         th {
-          background: rgba(55, 66, 74, 0.1);
+          background: rgb(55 66 74 / 10%);
         }
       }
 
@@ -55,11 +55,11 @@ table:not(.calendar-view-table) {
       font-family: $font-family-secondary;
       border-top: 1px solid #d1d4d3;
       border-bottom: 1px solid #d1d4d3;
-      background: rgba(55, 66, 74, 0.1);
+      background: rgb(55 66 74 / 10%);
 
-      /*&:last-child {
+      /* &:last-child {
         border-right: 1px solid #d1d4d3;
-      }*/
+      } */
     }
 
     th[colspan]:not([colspan="1"]) {
@@ -87,7 +87,7 @@ table:not(.calendar-view-table) {
       }
 
       &:nth-child(even) {
-        background: rgba(55, 66, 74, 0.05);
+        background: rgb(55 66 74 / 5%);
       }
 
       &:nth-child(odd) {
@@ -105,6 +105,7 @@ table:not(.calendar-view-table) {
 
         td {
           padding-left: 0;
+
           // @include breakpoint(medium) {
           //   line-height: 2.5;
           //   @include rem("font-size", 16px);
@@ -223,7 +224,7 @@ table:not(.calendar-view-table) {
     thead {
       tr {
         th {
-          background: rgba(0, 152, 219, 0.2);
+          background: rgb(0 152 219 / 20%);
         }
       }
     }
@@ -233,7 +234,7 @@ table:not(.calendar-view-table) {
 
       tr {
         &:nth-child(even) {
-          background: rgba(0, 152, 219, 0.08);
+          background: rgb(0 152 219 / 8%);
         }
       }
     }
@@ -243,7 +244,7 @@ table:not(.calendar-view-table) {
     thead {
       tr {
         th {
-          background: rgba(0, 149, 129, 0.2);
+          background: rgb(0 149 129 / 20%);
         }
       }
     }
@@ -253,7 +254,7 @@ table:not(.calendar-view-table) {
 
       tr {
         &:nth-child(even) {
-          background: rgba(0, 149, 129, 0.08);
+          background: rgb(0 149 129 / 8%);
         }
       }
     }
@@ -307,9 +308,11 @@ table:not(.calendar-view-table) {
     }
   }
 
-  &.t-blue, &.t-green {
+  &.t-blue,
+  &.t-green {
     border-left: 1px solid #adafaf;
     border-bottom: 1px solid #adafaf;
+
     thead {
       tr {
         th:last-child {
@@ -321,16 +324,14 @@ table:not(.calendar-view-table) {
         border-top: 1px solid #adafaf;
         border-bottom: 1px solid #adafaf;
 
-        /*&:last-child {
+        /* &:last-child {
           border-right: 1px solid #adafaf;
-        }*/
+        } */
       }
     }
 
     tbody {
-
       tr {
-
         td {
           &:last-child {
             border-right: 1px solid #adafaf;
@@ -404,6 +405,7 @@ table:not(.calendar-view-table) {
         tbody tr td {
           border-bottom: 1px solid $spruce;
         }
+
         tbody tr:last-child td {
           border-bottom: none;
         }
@@ -420,6 +422,7 @@ table:not(.calendar-view-table) {
         }
       }
     }
+
     tbody {
       tr {
         td {
@@ -435,6 +438,7 @@ table:not(.calendar-view-table) {
 .table--thirds {
   p {
     margin: 0;
+
     //line-height: 1.7;
   }
 }
@@ -457,6 +461,7 @@ th {
   thead {
     background-color: white;
   }
+
   table.table-condensed {
     border: none !important;
 
@@ -465,12 +470,14 @@ th {
         border-bottom: none !important;
         text-align: center;
       }
+
       th.next {
         text-align: right;
       }
     }
-    
-    thead tr th, tbody tr td {
+
+    thead tr th,
+    tbody tr td {
       border: none !important;
       background-color: white !important;
       padding: 0;
@@ -480,6 +487,7 @@ th {
       span.focused {
         background-color: white;
       }
+
       span.active.focused {
         color: black;
         background-color: $off-white;
@@ -488,8 +496,8 @@ th {
     }
   }
 }
-.dataTables_wrapper {
 
+.dataTables_wrapper {
   .dataTables_length {
     margin-right: 1rem;
     margin-bottom: 1rem;
@@ -521,11 +529,13 @@ th {
     }
   }
 
-  table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting_asc:before {
+  table.dataTable thead > tr > th.sorting::before,
+  table.dataTable thead > tr > th.sorting_asc::before {
     bottom: 52%;
   }
 
-  table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_asc:after {
+  table.dataTable thead > tr > th.sorting::after,
+  table.dataTable thead > tr > th.sorting_asc::after {
     top: 52%;
   }
 }

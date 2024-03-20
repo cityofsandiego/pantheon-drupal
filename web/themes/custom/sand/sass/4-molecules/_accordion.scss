@@ -3,9 +3,9 @@
   ============================================================ */
 
 .accordion {
-  margin: 0 0 1em 0;
-  -webkit-transition: border 0.25s;
-  -moz-transition: border 0.25s;
+  margin: 0 0 1em;
+  transition: border 0.25s;
+  transition: border 0.25s;
   transition: border 0.25s;
 
   .accordion:last-child {
@@ -13,7 +13,6 @@
   }
 
   .accordion-title {
-    color: $mercury;
     background-color: $mercury;
     font-size: 1.6875rem;
     color: $font-color;
@@ -23,13 +22,13 @@
       color: $cerulean;
     }
 
-    &:before {
+    &::before {
       margin-top: -0.8rem;
     }
   }
 
   .accordion__drawer {
-    padding: 0 1em 1em 1em;
+    padding: 0 1em 1em;
     display: none;
   }
 }
@@ -37,7 +36,7 @@
 /* Accordion D7
    ========================================================================== */
 .accordions {
-  margin: 0 0 1em 0;
+  margin: 0 0 1em;
 
   #list-container & {
     margin: 0;
@@ -45,7 +44,7 @@
 }
 
 .accordion {
-  margin: 0 0 1em 0;
+  margin: 0 0 1em;
   transition: border 0.25s;
 
   #list-container & {
@@ -60,8 +59,8 @@
   background: $mercury;
   position: relative;
   border: 1px solid white;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+  transition: all 0.5s;
   transition: all 0.5s;
 
   #list-container & {
@@ -78,13 +77,15 @@
   #list-container & i {
     font-size: 0.75em;
   }
+
   &:focus {
     color: $font-color;
     text-decoration: none;
   }
+
   &:hover {
     text-decoration: none;
-    color: lighten( $link-color, 10% );
+    color: lighten($link-color, 10%);
   }
 }
 
@@ -95,6 +96,7 @@
   .no-js & {
     display: block;
   }
+
   .accordion__link {
     font-size: 1rem;
   }
@@ -110,15 +112,15 @@
   right: 20px;
   top: 50%;
   overflow: hidden;
-  -webkit-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transform-origin: center;
+  transform: rotate(0deg);
   transform-origin: center;
-  -webkit-transition: transform .25s;
-  transition: transform .25s;
+  transform-origin: center;
+  transition: transform 0.25s;
+  transition: transform 0.25s;
 
-  &:before {
-    font-family: 'icomoon';
+  &::before {
+    font-family: icomoon;
     content: "\7c";
     font-size: 1.5rem;
 
@@ -138,13 +140,13 @@
     }
 
     .toggle-icon.open {
-      -webkit-transition: -webkit-transform .25s;
-      -moz-transition: -moz-transform .25s;
-      transition: transform .25s;
-      -webkit-transform: rotate(180deg);
-      -moz-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-      -o-transform: rotate(180deg);
+      transition: -webkit-transform 0.25s;
+      transition: -moz-transform 0.25s;
+      transition: transform 0.25s;
+      transform: rotate(180deg);
+      transform: rotate(180deg);
+      transform: rotate(180deg);
+      transform: rotate(180deg);
       transform: rotate(180deg);
     }
   }
@@ -162,6 +164,7 @@
     padding: 0;
     border: none;
     display: block;
+
     @include breakpoint(medium down) {
       display: none;
     }
@@ -176,7 +179,7 @@
     }
 
     @include breakpoint(mobile-landscape up) {
-      @include rem('font-size', 18px);
+      @include rem("font-size", 18px);
     }
   }
 
@@ -198,9 +201,8 @@
     transform: rotate(0deg);
     transform: all 25s;
 
-
-    &:after,
-    &:before {
+    &::after,
+    &::before {
       display: none;
     }
 
@@ -232,6 +234,7 @@
     td,
     th {
       border: none;
+
       // @include span(4);
 
       &:nth-child(2),
@@ -245,8 +248,9 @@
     }
 
     .accordion__heading {
-      padding: .75em .5em;
-      @include rem('font-size', 18px);
+      padding: 0.75em 0.5em;
+
+      @include rem("font-size", 18px);
     }
   }
 

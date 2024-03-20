@@ -3,12 +3,7 @@ Styles for calendars.
 ============================================================ */
 
 table.calendar-view-table {
-
   border: 1px solid $alto;
-
-  @include breakpoint (mobile-landscape) {
-    margin-top: -104px;
-  }
 
   caption {
     font-family: $font-family-secondary;
@@ -22,20 +17,22 @@ table.calendar-view-table {
     }
   }
 
-  thead, tbody, tfoot {
+  thead,
+  tbody,
+  tfoot {
     border: none;
   }
 
   tbody {
+    tr:nth-child(even),
+    tr:hover {
+      background-color: white;
+    }
 
     @include breakpoint(mobile-landscape) {
       tr:first-child {
         border-top: none;
       }
-    }
-
-    tr:nth-child(even), tr:hover {
-      background-color: white;
     }
   }
 
@@ -66,10 +63,6 @@ table.calendar-view-table {
     padding: 0;
     border: none;
 
-    @include breakpoint(mobile-landscape) {
-      border-right: 1px solid $alto;
-    }
-
     &:last-child {
       border-right: none;
     }
@@ -87,10 +80,6 @@ table.calendar-view-table {
         font-size: 1rem;
         line-height: 1.3;
 
-        @include breakpoint(mobile-landscape) {
-          font-size: 1em;
-        }
-
         &:hover {
           color: lighten($link-color, 10%);
         }
@@ -101,9 +90,15 @@ table.calendar-view-table {
           bottom: 0.3125rem;
           font-size: 1em;
         }
+
+        @include breakpoint(mobile-landscape) {
+          font-size: 1em;
+        }
       }
 
-      &.is-multi--first, &.is-multi--middle, &.is-multi--last {
+      &.is-multi--first,
+      &.is-multi--middle,
+      &.is-multi--last {
         margin-left: 0;
         margin-right: 0;
         padding: 0.5rem;
@@ -114,6 +109,10 @@ table.calendar-view-table {
       &.is-multi:not(.is-multi--first) > * {
         opacity: 1;
       }
+    }
+
+    @include breakpoint(mobile-landscape) {
+      border-right: 1px solid $alto;
     }
 
     @include breakpoint(mobile-landscape down) {
@@ -129,21 +128,21 @@ table.calendar-view-table {
     width: 100%;
     text-align: left;
 
-    @include breakpoint(mobile-landscape) {
-      width: auto;
-    }
-
     span.dow {
       float: right;
 
       @include breakpoint(mobile-landscape up) {
         display: none;
       }
+    }
 
+    @include breakpoint(mobile-landscape) {
+      width: auto;
     }
   }
 
-  .sunday, .saturday {
+  .sunday,
+  .saturday {
     background-color: $off-white;
 
     .calendar-view-day__number {
@@ -151,10 +150,11 @@ table.calendar-view-table {
     }
   }
 
-  .previous-month, .next-month {
+  .previous-month,
+  .next-month {
     background-color: $alto;
     border-right: 1px solid #d1d4d3;
-    
+
     &:last-child {
       border-right: none;
     }
@@ -176,13 +176,17 @@ table.calendar-view-table {
     }
   }
 
-  .sunday {z-index: 100;}
-  .monday {z-index: 90;}
-  .tuesday {z-index: 80;}
-  .wednesday {z-index: 70;}
-  .thursday {z-index: 60;}
-  .friday {z-index: 50;}
-  .saturday {z-index: 40;}
+  .sunday { z-index: 100; }
+  .monday { z-index: 90; }
+  .tuesday { z-index: 80; }
+  .wednesday { z-index: 70; }
+  .thursday { z-index: 60; }
+  .friday { z-index: 50; }
+  .saturday { z-index: 40; }
+
+  @include breakpoint (mobile-landscape) {
+    margin-top: -104px;
+  }
 }
 
 .calendar-view-pager {
@@ -191,29 +195,29 @@ table.calendar-view-table {
   .pager__item {
     margin: 0 !important;
 
-    @include breakpoint(mobile-landscape) {
-      margin: 0 0 10px 0 !important;
-    }
-
     &.pager__current {
       display: none;
     }
 
-    &.pager__previous a:before {
-      font-family: 'icomoon';
-      content: '\3c';
+    &.pager__previous a::before {
+      font-family: icomoon;
+      content: "\3c";
       font-size: 0.8em;
     }
 
-    &.pager__next a:after {
-      font-family: 'icomoon';
-      content: '\3e';
+    &.pager__next a::after {
+      font-family: icomoon;
+      content: "\3e";
       font-size: 0.8em;
     }
 
     a {
       background-color: white;
       border: none;
+    }
+
+    @include breakpoint(mobile-landscape) {
+      margin: 0 0 10px !important;
     }
   }
 }
@@ -238,12 +242,11 @@ table.calendar-view-table {
     */
   &.focusable:active,
   &.focusable:focus {
-      clip: auto;
-      height: auto;
-      margin: 0;
-      overflow: visible;
-      position: static;
-      width: auto;
-
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
   }
 }

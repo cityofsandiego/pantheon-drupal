@@ -49,6 +49,12 @@
 
 %clearfix {
   /*
+     * For IE 6/7 only
+     * Include this rule to trigger hasLayout and contain floats.
+     */
+  *zoom: 1;
+
+  /*
      * Clearfix: contain floats
      *
      * For modern browsers
@@ -59,21 +65,15 @@
      * 2. The use of `table` rather than `block` is only necessary if using
      *    `:before` to contain the top-margins of child elements.
      */
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     content: " "; /* 1 */
     display: table; /* 2 */
   }
 
-  &:after {
+  &::after {
     clear: both;
   }
-
-  /*
-     * For IE 6/7 only
-     * Include this rule to trigger hasLayout and contain floats.
-     */
-  *zoom: 1;
 }
 
 /**
@@ -86,10 +86,9 @@
 
   /* Non standard for webkit */
   word-break: break-word;
-
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
+  hyphens: auto;
+  hyphens: auto;
+  hyphens: auto;
   hyphens: auto;
 }
 
@@ -146,6 +145,7 @@
   //margin-bottom: 1em;
   //padding-bottom: 1em;
   border: 1px solid $alto !important;
+
   &.border--dark {
     border-color: $chateau !important;
   }
@@ -235,12 +235,14 @@
 .pull-center {
   margin: 0 auto;
   display: block;
+
   &--desktop {
     @include breakpoint(medium up) {
       margin: 0 auto;
       display: block;
     }
   }
+
   &--mobile {
     @include breakpoint(medium down) {
       margin: 0 auto;
@@ -251,11 +253,13 @@
 
 .pull-left {
   float: left;
+
   &--desktop {
     @include breakpoint(medium up) {
       float: left;
     }
   }
+
   &--mobile {
     @include breakpoint(medium down) {
       float: left;
@@ -265,11 +269,13 @@
 
 .pull-right {
   float: right;
+
   &--desktop {
     @include breakpoint(medium up) {
       float: right;
     }
   }
+
   &--mobile {
     @include breakpoint(medium down) {
       float: right;
@@ -330,6 +336,7 @@
   //background-color: lighten( $mercury, 2% ) !important;
   background-color: #f6f6f6;
 }
+
 .background--even {
   //background-color: darken( $mercury, 4% );
   background-color: #e4e9eb;
@@ -338,6 +345,7 @@
 .message--dark,
 .background--dark {
   background-color: $spruce !important;
+
   &.text-white {
     > * {
       color: white;
@@ -412,83 +420,85 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(55, 66, 74, 0.5);
+  background: rgb(55 66 74 / 50%);
 }
 
 /* Gradient
    ========================================================================== */
 %black-gradient {
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 75%, rgba(0, 0, 0, 0.6) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(75%, rgba(0, 0, 0, 0.45)), color-stop(100%, rgba(0, 0, 0, 0.6))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 75%, rgba(0, 0, 0, 0.6) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 75%, rgba(0, 0, 0, 0.6) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 75%, rgba(0, 0, 0, 0.6) 100%); /* IE10+ */
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 75%, rgba(0, 0, 0, 0.6) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#99000000',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(0 0 0 / 0%)), color-stop(75%, rgb(0 0 0 / 45%)), color-stop(100%, rgb(0 0 0 / 60%))); /* Chrome,Safari4+ */
+  background: linear-gradient(top, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* Chrome10+,Safari5.1+ */
+  background: linear-gradient(top, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* Opera 11.10+ */
+  background: linear-gradient(top, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* W3C */
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr="#00000000", endColorstr="#99000000", GradientType=0); /* IE6-9 */
 }
 
 %white-gradient {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&amp;0.9+0,1+100 */
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.9)), color-stop(100%, rgba(255, 255, 255, 1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 1) 100%); /* IE10+ */
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 1) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(255 255 255 / 90%)), color-stop(100%, rgb(255 255 255 / 100%))); /* Chrome,Safari4+ */
+  background: linear-gradient(top, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* Chrome10+,Safari5.1+ */
+  background: linear-gradient(top, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* Opera 11.10+ */
+  background: linear-gradient(top, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* W3C */
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr="#e6ffffff", endColorstr="#ffffff", GradientType=0); /* IE6-9 */
 }
 
 @mixin gray-gradient {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,d4d4d4+100 */
-  background: #ffffff; /* Old browsers */
-  background: -moz-linear-gradient(top, #ffffff 0%, #d4d4d4 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #d4d4d4)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #ffffff 0%, #d4d4d4 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #ffffff 0%, #d4d4d4 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #ffffff 0%, #d4d4d4 100%); /* IE10+ */
-  background: linear-gradient(to bottom, #ffffff 0%, #d4d4d4 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d4d4d4',GradientType=0 ); /* IE6-9 */
+  background: #fff; /* Old browsers */
+  background: linear-gradient(top, #fff 0%, #d4d4d4 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #d4d4d4)); /* Chrome,Safari4+ */
+  background: linear-gradient(top, #fff 0%, #d4d4d4 100%); /* Chrome10+,Safari5.1+ */
+  background: linear-gradient(top, #fff 0%, #d4d4d4 100%); /* Opera 11.10+ */
+  background: linear-gradient(top, #fff 0%, #d4d4d4 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #fff 0%, #d4d4d4 100%); /* W3C */
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr="#ffffff", endColorstr="#d4d4d4", GradientType=0); /* IE6-9 */
 }
 
 /* Images
    ========================================================================== */
 
 .img-left {
-  /* apply to element containing img, typically a <div> or <p> */
-  @include breakpoint(medium down) {
-    width: 100% !important;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-  @include breakpoint(medium up) {
-    float: left;
-    margin: 0 1.5rem 1.2rem 0;
-    padding-top: 5px;
-  }
-
   &.width-50--mobile {
     float: left;
     margin-right: 1.5rem;
     padding-top: 5px;
   }
-}
 
-.img-right {
   /* apply to element containing img, typically a <div> or <p> */
   @include breakpoint(medium down) {
     width: 100% !important;
     text-align: center;
     margin-bottom: 1em;
   }
+
   @include breakpoint(medium up) {
-    float: right;
-    margin: 0 0 1.2rem 1.5rem;
+    float: left;
+    margin: 0 1.5rem 1.2rem 0;
     padding-top: 5px;
   }
+}
 
+.img-right {
   &.width-50--mobile {
     float: right;
     margin-left: 1.5rem;
+    padding-top: 5px;
+  }
+
+  /* apply to element containing img, typically a <div> or <p> */
+  @include breakpoint(medium down) {
+    width: 100% !important;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+
+  @include breakpoint(medium up) {
+    float: right;
+    margin: 0 0 1.2rem 1.5rem;
     padding-top: 5px;
   }
 }
@@ -507,7 +517,7 @@
   margin: 0;
 }
 
-.img-circle {border-radius: 50% !important;}
+.img-circle { border-radius: 50% !important; }
 
 /* Widths by Percentage
    ========================================================================== */
@@ -525,6 +535,7 @@
 
 .width-50 {
   width: 50% !important;
+
   &--mobile {
     @include breakpoint(medium down) {
       width: 50% !important;
@@ -543,6 +554,7 @@
 .width-100 {
   width: 100% !important;
   text-align: center;
+
   &--mobile {
     @include breakpoint(medium down) {
       width: 100% !important;
@@ -641,15 +653,15 @@
 
 .bg-opacity-3 {
   &-3 {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgb(0 0 0 / 30%);
   }
 
   &-5 {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgb(0 0 0 / 50%);
   }
 
   &-8 {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgb(0 0 0 / 80%);
   }
 }
 
@@ -662,7 +674,7 @@ div.focal-point-derxxxivative-preview {
   background-image: url("/web/themes/custom/sand/images/hero-inside-sd.jpg");
 }
 
-a[href$=".pdf"]:after {
+a[href$=".pdf"]::after {
   //font-family: "icomoon";
   //content: "\e6d9";
   content: url("/themes/custom/sand/images/pdf-icon.svg");
@@ -672,24 +684,24 @@ a[href$=".pdf"]:after {
   width: 1.5rem;
 }
 
-a[href$=".pdf"].no-pdf-icon:after {
-    content: none;
+a[href$=".pdf"].no-pdf-icon::after {
+  content: none;
 }
 
 .overflow-h {
-    overflow: hidden;
+  overflow: hidden;
 
-    &-d {
-        @include breakpoint(mobile-landscape up) {
-            overflow: hidden;
-        }
+  &-d {
+    @include breakpoint(mobile-landscape up) {
+      overflow: hidden;
     }
+  }
 
-    &-m {
-        @include breakpoint(mobile-landscape down) {
-            overflow: hidden;
-        }
+  &-m {
+    @include breakpoint(mobile-landscape down) {
+      overflow: hidden;
     }
+  }
 }
 
 .lh1 {

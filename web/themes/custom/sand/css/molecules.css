@@ -309,6 +309,11 @@ textarea {
 */
 .leave-feedback, .comment-list article.comment-body footer {
   /*
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+  *zoom: 1;
+  /*
    * Clearfix: contain floats
    *
    * For modern browsers
@@ -319,22 +324,17 @@ textarea {
    * 2. The use of `table` rather than `block` is only necessary if using
    *    `:before` to contain the top-margins of child elements.
    */
-  /*
-   * For IE 6/7 only
-   * Include this rule to trigger hasLayout and contain floats.
-   */
-  *zoom: 1;
 }
-.leave-feedback:before, .comment-list article.comment-body footer:before, .leave-feedback:after, .comment-list article.comment-body footer:after {
+.leave-feedback::before, .comment-list article.comment-body footer::before, .leave-feedback::after, .comment-list article.comment-body footer::after {
   content: " "; /* 1 */
   display: table; /* 2 */
 }
-.leave-feedback:after, .comment-list article.comment-body footer:after {
+.leave-feedback::after, .comment-list article.comment-body footer::after {
   clear: both;
 }
 
 @font-face {
-  font-family: "icomoon";
+  font-family: icomoon;
   font-style: normal;
   font-weight: normal;
   src: url("../fonts/icomoon/icomoon.eot?cbmbn6");
@@ -342,7 +342,7 @@ textarea {
 }
 [class^=icon-],
 [class*=" icon-"] {
-  font-family: "icomoon";
+  font-family: icomoon;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-style: normal;
@@ -1934,7 +1934,7 @@ textarea {
 }
 
 @font-face {
-  font-family: "socials";
+  font-family: socials;
   font-style: normal;
   font-weight: normal;
   src: url("../fonts/socials/socials.eot");
@@ -1961,7 +1961,7 @@ textarea {
 .icon-reddit::before,
 .icon-tiktok::before,
 .icon-threads::before {
-  font-family: "socials";
+  font-family: socials;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-style: normal;
@@ -2166,16 +2166,15 @@ textarea {
   Styles for accordions.
   ============================================================ */
 .accordion {
-  margin: 0 0 1em 0;
-  -webkit-transition: border 0.25s;
-  -moz-transition: border 0.25s;
+  margin: 0 0 1em;
+  transition: border 0.25s;
+  transition: border 0.25s;
   transition: border 0.25s;
 }
 .accordion .accordion:last-child {
   margin-bottom: 0;
 }
 .accordion .accordion-title {
-  color: #e4e9eb;
   background-color: #e4e9eb;
   font-size: 1.6875rem;
   color: #37424a;
@@ -2184,25 +2183,25 @@ textarea {
 .accordion .accordion-title:hover {
   color: #0098db;
 }
-.accordion .accordion-title:before {
+.accordion .accordion-title::before {
   margin-top: -0.8rem;
 }
 .accordion .accordion__drawer {
-  padding: 0 1em 1em 1em;
+  padding: 0 1em 1em;
   display: none;
 }
 
 /* Accordion D7
    ========================================================================== */
 .accordions {
-  margin: 0 0 1em 0;
+  margin: 0 0 1em;
 }
 #list-container .accordions {
   margin: 0;
 }
 
 .accordion {
-  margin: 0 0 1em 0;
+  margin: 0 0 1em;
   transition: border 0.25s;
 }
 #list-container .accordion {
@@ -2216,8 +2215,8 @@ textarea {
   background: #e4e9eb;
   position: relative;
   border: 1px solid white;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+  transition: all 0.5s;
   transition: all 0.5s;
 }
 #list-container .accordion__heading {
@@ -2263,19 +2262,19 @@ textarea {
   right: 20px;
   top: 50%;
   overflow: hidden;
-  -webkit-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transform-origin: center;
+  transform: rotate(0deg);
   transform-origin: center;
-  -webkit-transition: transform 0.25s;
+  transform-origin: center;
+  transition: transform 0.25s;
   transition: transform 0.25s;
 }
-.toggle-icon:before {
-  font-family: "icomoon";
+.toggle-icon::before {
+  font-family: icomoon;
   content: "|";
   font-size: 1.5rem;
 }
-.csstransforms3d .toggle-icon:before {
+.csstransforms3d .toggle-icon::before {
   margin-top: auto;
 }
 
@@ -2287,13 +2286,13 @@ textarea {
   background: white;
 }
 .current.is-open.accordion .toggle-icon.open {
-  -webkit-transition: -webkit-transform 0.25s;
-  -moz-transition: -moz-transform 0.25s;
+  transition: -webkit-transform 0.25s;
+  transition: -moz-transform 0.25s;
   transition: transform 0.25s;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  transform: rotate(180deg);
+  transform: rotate(180deg);
+  transform: rotate(180deg);
   transform: rotate(180deg);
 }
 
@@ -2344,7 +2343,7 @@ textarea {
   transform: rotate(0deg);
   transform: all 25s;
 }
-.table__accordion .toggle-icon:after, .table__accordion .toggle-icon:before {
+.table__accordion .toggle-icon::after, .table__accordion .toggle-icon::before {
   display: none;
 }
 .table__accordion .toggle-icon i {
@@ -2403,10 +2402,10 @@ textarea {
   color: white;
   padding: 0.2em 0.5em;
   margin-bottom: 0.5em;
-  font-size: 24px;
-  font-size: 1.5rem;
   font-family: "Merriweather", serif;
   background: #0067d5;
+  font-size: 24px;
+  font-size: 1.5rem;
 }
 .alert .alert__content {
   padding: 0 0.75em;
@@ -2458,30 +2457,23 @@ textarea {
 .card__container {
   position: relative;
   display: block;
-  display: -webkit-flex; /* Safari */
+  display: flex; /* Safari */
   display: flex;
-  -webkit-justify-content: flex-start; /* Safari */
+  justify-content: flex-start; /* Safari */
   justify-content: flex-start;
-  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  /*@include breakpoint(large) {*/
-  /*}*/
-}
-@media print, screen and (min-width: 30em) {
-  .card__container {
-    margin-left: -0.5em;
-    margin-right: -0.5em;
-    margin-bottom: -0.5em;
-  }
+  flex-wrap: wrap;
+  /* @include breakpoint(large) { */
+  /* } */
 }
 .card__container .slides {
   display: block;
-  display: -webkit-flex; /* Safari */
+  display: flex; /* Safari */
   display: flex;
-  -webkit-justify-content: flex-start; /* Safari */
+  justify-content: flex-start; /* Safari */
   justify-content: flex-start;
   margin: 0;
-  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
   flex-flow: row wrap;
   padding-left: 0;
   width: 100%;
@@ -2502,7 +2494,7 @@ textarea {
 .card__container .card__wrap,
 .card__container .card--wrap {
   height: auto;
-  display: -webkit-flex; /* Safari */
+  display: flex; /* Safari */
   display: flex !important;
   margin: 0;
   padding-left: 1.0416588541%;
@@ -2510,18 +2502,18 @@ textarea {
   padding-bottom: 1em;
   width: 33.333333%;
 }
-@media print, screen and (max-width: 37.49875em) {
-  .card__container .card__wrap,
-  .card__container .card--wrap {
-    width: 100%;
-  }
-}
 .card__container .card__wrap .card,
 .card__container .card--wrap .card {
   flex: 0 1 auto;
   justify-content: flex-start;
   overflow: unset;
   color: #37424a;
+}
+@media print, screen and (max-width: 37.49875em) {
+  .card__container .card__wrap,
+  .card__container .card--wrap {
+    width: 100%;
+  }
 }
 .card__container .card__wrap_s,
 .card__container .card--wrap-s {
@@ -2534,7 +2526,7 @@ textarea {
   .card__container .card--wrap-s {
     margin: 0;
     padding: 0.75em;
-    display: -webkit-flex; /* Safari */
+    display: flex; /* Safari */
     display: flex;
   }
   .card__container .card__wrap_s .card,
@@ -2553,7 +2545,7 @@ textarea {
   .card__container .card--wrap-m {
     margin: 0;
     padding: 0.75em;
-    display: -webkit-flex; /* Safari */
+    display: flex; /* Safari */
     display: flex;
   }
   .card__container .card__wrap_m .card,
@@ -2564,15 +2556,15 @@ textarea {
 .card__container .card__content {
   padding: 1.5em;
 }
+.card__container .card__content > a {
+  font-size: 16px;
+  font-size: 1rem;
+}
 @media print, screen and (min-width: 30em) {
   .card__container .card__content {
     font-size: 13px;
     font-size: 0.8125rem;
   }
-}
-.card__container .card__content > a {
-  font-size: 16px;
-  font-size: 1rem;
 }
 .card__container .card__headline.title,
 .card__container .card__headline a {
@@ -2597,6 +2589,13 @@ textarea {
   display: block;
   font-weight: 600;
 }
+@media print, screen and (min-width: 30em) {
+  .card__container {
+    margin-left: -0.5em;
+    margin-right: -0.5em;
+    margin-bottom: -0.5em;
+  }
+}
 
 .card__cta--graphic {
   text-align: center;
@@ -2609,7 +2608,7 @@ textarea {
   padding: 1.5em;
   position: relative;
 }
-.card__cta--graphic > a:before {
+.card__cta--graphic > a::before {
   content: "";
   display: block;
   background: black;
@@ -2624,7 +2623,7 @@ textarea {
 .card__cta--graphic > a:hover {
   text-decoration: none;
 }
-.card__cta--graphic > a:hover:before {
+.card__cta--graphic > a:hover::before {
   opacity: 0.1;
 }
 .card__cta--graphic a {
@@ -2633,9 +2632,9 @@ textarea {
 }
 .card__cta--graphic p {
   color: white;
+  font-family: "Merriweather", serif;
   font-size: 18px;
   font-size: 1.125rem;
-  font-family: "Merriweather", serif;
 }
 
 .card--stats {
@@ -2671,9 +2670,9 @@ textarea {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  font-family: "Merriweather", serif;
   font-size: 12px;
   font-size: 0.75rem;
-  font-family: "Merriweather", serif;
 }
 
 .card-icons {
@@ -2683,15 +2682,18 @@ textarea {
 .card-icons p:last-child {
   margin-bottom: 0;
 }
-.card-icons a, .card-icons a p {
+.card-icons a,
+.card-icons a p {
   display: block;
   text-decoration: none;
   color: #007db3 !important;
 }
-.card-icons a:hover, .card-icons a p:hover {
+.card-icons a:hover,
+.card-icons a p:hover {
   color: #00a1e6 !important;
 }
-.card-icons a span, .card-icons a p span {
+.card-icons a span,
+.card-icons a p span {
   display: block;
 }
 
@@ -2749,8 +2751,8 @@ textarea {
 }
 .comment-list .reply {
   position: absolute;
-  bottom: 0px;
-  right: 0px;
+  bottom: 0;
+  right: 0;
 }
 .comment-list .reply > a {
   padding: 10px;
@@ -2808,28 +2810,12 @@ textarea {
   position: fixed;
   left: 100%;
   top: 50%;
-  -webkit-transform: translateY(-40%);
+  transform: translateY(-40%);
   transform: translateY(-40%);
   transition: left 1s, border 1s;
   width: 280px;
   z-index: 1000000;
   font-family: "Open Sans", sans-serif;
-}
-@media print {
-  .leave-feedback {
-    display: none;
-  }
-}
-@media print, screen and (min-width: 20em) and (max-width: 29.99875em) {
-  .leave-feedback {
-    padding: 20px 25px;
-    width: 290px;
-  }
-}
-@media print, screen and (max-width: 63.99875em) {
-  .leave-feedback {
-    top: 120px;
-  }
 }
 .leave-feedback.is-visible {
   border-color: #e4e9eb;
@@ -2838,14 +2824,6 @@ textarea {
 @media print, screen and (min-width: 20em) and (max-width: 29.99875em) {
   .leave-feedback.is-visible {
     left: calc(100% - 290px);
-  }
-}
-@media print, screen and (min-width: 30em) and (max-width: 63.99875em) {
-  .leave-feedback {
-    width: 500px;
-  }
-  .leave-feedback.is-visible {
-    left: calc(100% - 500px);
   }
 }
 .leave-feedback__link-wrapper {
@@ -2872,7 +2850,7 @@ textarea {
   position: absolute;
   right: 140%;
   top: 50%;
-  -webkit-transform: rotate(-90deg) translate(10%, 280%);
+  transform: rotate(-90deg) translate(10%, 280%);
   transform: rotate(-90deg) translate(10%, 280%);
 }
 .leave-feedback.is-visible .leave-feedback__close {
@@ -2887,7 +2865,7 @@ textarea {
 .leave-feedback.is-visible .leave-feedback__close:hover {
   opacity: 0.7;
 }
-.leave-feedback.is-visible .leave-feedback__close:before, .leave-feedback.is-visible .leave-feedback__close:after {
+.leave-feedback.is-visible .leave-feedback__close::before, .leave-feedback.is-visible .leave-feedback__close::after {
   border: none;
   content: "";
   height: 3px;
@@ -2898,11 +2876,11 @@ textarea {
   position: absolute;
   top: 0.5em;
   left: 0;
-  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-.leave-feedback.is-visible .leave-feedback__close:after {
-  -webkit-transform: rotate(45deg);
+.leave-feedback.is-visible .leave-feedback__close::after {
+  transform: rotate(45deg);
   transform: rotate(45deg);
 }
 .leave-feedback__label {
@@ -2917,83 +2895,104 @@ textarea {
   clear: both;
   float: right;
 }
-
-#get_it_done form, .get-it-done form {
-  margin-bottom: 1rem;
-}
-@media print, screen and (min-width: 30em) {
-  #get_it_done form, .get-it-done form {
-    display: grid;
-    grid-template-columns: 25% 25% 1fr;
-    gap: 1rem;
+@media print {
+  .leave-feedback {
+    display: none;
   }
 }
-#get_it_done form fieldset, .get-it-done form fieldset {
+@media print, screen and (min-width: 20em) and (max-width: 29.99875em) {
+  .leave-feedback {
+    padding: 20px 25px;
+    width: 290px;
+  }
+}
+@media print, screen and (max-width: 63.99875em) {
+  .leave-feedback {
+    top: 120px;
+  }
+}
+@media print, screen and (min-width: 30em) and (max-width: 63.99875em) {
+  .leave-feedback {
+    width: 500px;
+  }
+  .leave-feedback.is-visible {
+    left: calc(100% - 500px);
+  }
+}
+
+#get_it_done form,
+.get-it-done form {
+  margin-bottom: 1rem;
+}
+#get_it_done form fieldset,
+.get-it-done form fieldset {
   background-color: #fff;
   border-radius: 4px;
   border: 1px solid #222;
   margin-bottom: 2.5em;
   padding: 1.5em 1em 1em;
 }
-@media print, screen and (min-width: 30em) {
-  #get_it_done form fieldset, .get-it-done form fieldset {
-    width: 100%;
-    margin-bottom: 0;
-  }
-}
-#get_it_done form fieldset.form-item, .get-it-done form fieldset.form-item {
+#get_it_done form fieldset.form-item,
+.get-it-done form fieldset.form-item {
   margin-bottom: 0;
   font-size: 1rem;
 }
-#get_it_done form fieldset.form-item .form-select, .get-it-done form fieldset.form-item .form-select {
+#get_it_done form fieldset.form-item .form-select,
+.get-it-done form fieldset.form-item .form-select {
   min-width: 100%;
   max-width: 100%;
   width: 100%;
   min-height: 44px;
   line-height: 1.3;
 }
-#get_it_done form fieldset.form-item:last-child, .get-it-done form fieldset.form-item:last-child {
+#get_it_done form fieldset.form-item:last-child,
+.get-it-done form fieldset.form-item:last-child {
   margin-bottom: 0;
 }
-#get_it_done form fieldset:after, .get-it-done form fieldset:after {
+#get_it_done form fieldset::after,
+.get-it-done form fieldset::after {
   content: "";
   width: 0;
   height: 0;
   position: absolute;
   border-style: solid;
-  border-width: 10px 16px 0 16px;
+  border-width: 10px 16px 0;
   border-color: #222 transparent transparent transparent;
   bottom: -10px;
   left: 50%;
-  -ms-transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  transform: translateX(-50%);
   transform: translateX(-50%);
 }
 @media print, screen and (min-width: 30em) {
-  #get_it_done form fieldset:after, .get-it-done form fieldset:after {
+  #get_it_done form fieldset::after,
+  .get-it-done form fieldset::after {
     border-width: 16px 0 16px 10px;
     border-color: transparent transparent transparent #222;
     bottom: auto;
     left: auto;
     top: 47px;
     right: -10px;
-    -ms-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    transform: translateY(-50%);
     transform: translateY(-50%);
   }
 }
-#get_it_done form fieldset legend, .get-it-done form fieldset legend {
+#get_it_done form fieldset legend,
+.get-it-done form fieldset legend {
   margin-top: -0.4rem;
   margin-bottom: 0;
   padding: 0 0.5rem;
   font-family: "Merriweather", serif, "Open Sans", sans-serif;
 }
-#get_it_done form fieldset legend .fieldset-legend, .get-it-done form fieldset legend .fieldset-legend {
+#get_it_done form fieldset legend .fieldset-legend,
+.get-it-done form fieldset legend .fieldset-legend {
   color: #37424a;
   text-transform: capitalize;
   font-size: 1rem;
 }
-#get_it_done form fieldset legend .fieldset-legend:before, .get-it-done form fieldset legend .fieldset-legend:before {
+#get_it_done form fieldset legend .fieldset-legend::before,
+.get-it-done form fieldset legend .fieldset-legend::before {
   content: "";
   width: 2em;
   height: 2em;
@@ -3006,42 +3005,66 @@ textarea {
   border-radius: 50%;
   margin-right: 0.5rem;
 }
-#get_it_done form fieldset .fieldset-wrapper, .get-it-done form fieldset .fieldset-wrapper {
+#get_it_done form fieldset .fieldset-wrapper,
+.get-it-done form fieldset .fieldset-wrapper {
   padding-top: 0.3rem;
 }
-#get_it_done form .step-1 legend .fieldset-legend:before, .get-it-done form .step-1 legend .fieldset-legend:before {
+@media print, screen and (min-width: 30em) {
+  #get_it_done form fieldset,
+  .get-it-done form fieldset {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+#get_it_done form .step-1 legend .fieldset-legend::before,
+.get-it-done form .step-1 legend .fieldset-legend::before {
   content: "1";
 }
-#get_it_done form .step-2 legend .fieldset-legend:before, .get-it-done form .step-2 legend .fieldset-legend:before {
+#get_it_done form .step-2 legend .fieldset-legend::before,
+.get-it-done form .step-2 legend .fieldset-legend::before {
   content: "2";
 }
-#get_it_done form .step-3 legend .fieldset-legend:before, .get-it-done form .step-3 legend .fieldset-legend:before {
+#get_it_done form .step-3 legend .fieldset-legend::before,
+.get-it-done form .step-3 legend .fieldset-legend::before {
   content: "3";
 }
-#get_it_done form .step-3 label, .get-it-done form .step-3 label {
+#get_it_done form .step-3 label,
+.get-it-done form .step-3 label {
   display: none;
 }
-#get_it_done form .step-3 .btn, .get-it-done form .step-3 .btn {
+#get_it_done form .step-3 .btn,
+.get-it-done form .step-3 .btn {
   padding: 0.75em 1em;
 }
+#get_it_done form .step-3::after,
+.get-it-done form .step-3::after {
+  display: none;
+}
 @media print, screen and (min-width: 30em) {
-  #get_it_done form .step-3 .row, .get-it-done form .step-3 .row {
+  #get_it_done form .step-3 .row,
+  .get-it-done form .step-3 .row {
     display: flex;
     justify-content: space-between;
   }
 }
-#get_it_done form .step-3:after, .get-it-done form .step-3:after {
+#get_it_done form .form-actions,
+.get-it-done form .form-actions {
   display: none;
-}
-#get_it_done form .form-actions, .get-it-done form .form-actions {
-  display: none;
-  /*@include breakpoint(medium) {
+  /* @include breakpoint(medium) {
     margin-top: 0;
     margin-bottom: 1rem;
     display: block;
     grid-column: 1/4;
     grid-row: 2/3;
-  }*/
+  } */
+}
+@media print, screen and (min-width: 30em) {
+  #get_it_done form,
+  .get-it-done form {
+    display: grid;
+    grid-template-columns: 25% 25% 1fr;
+    gap: 1rem;
+  }
 }
 
 /* ============================================================
@@ -3063,19 +3086,6 @@ textarea {
   position: relative;
   background-color: rgba(0, 0, 0, 0.35);
 }
-@media print, screen and (min-width: 30em) {
-  .main__message {
-    padding: 2.5em 1em;
-  }
-  .node-type-article .main__message {
-    padding: 3em 0;
-  }
-}
-@media print, screen and (max-width: 63.99875em) {
-  .main__message {
-    padding: 1.5em 1em;
-  }
-}
 .main__message .main__heading {
   margin: 0;
   color: white;
@@ -3093,16 +3103,15 @@ textarea {
 }
 .main__message .main__tagline {
   margin: 0;
-  margin-top: 10px;
   color: white;
-  font-size: 16px;
-  font-size: 1rem;
   text-align: left;
   font-weight: bold;
   margin-top: 10px;
   line-height: 1rem;
   background-color: transparent;
   text-shadow: 0 0 #555, 0 2px 0.5em black, 2px 0 0.5em black, 0 0 black;
+  font-size: 16px;
+  font-size: 1rem;
 }
 @media print, screen and (max-width: 63.99875em) {
   .main__message .main__tagline {
@@ -3124,7 +3133,8 @@ textarea {
     font-size: 1em;
   }
 }
-.main__message a, .main__message a:hover {
+.main__message a,
+.main__message a:hover {
   color: #fed100;
 }
 .main__message.main__message--white {
@@ -3146,6 +3156,19 @@ textarea {
   color: white;
   text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black;
 }
+@media print, screen and (min-width: 30em) {
+  .main__message {
+    padding: 2.5em 1em;
+  }
+  .node-type-article .main__message {
+    padding: 3em 0;
+  }
+}
+@media print, screen and (max-width: 63.99875em) {
+  .main__message {
+    padding: 1.5em 1em;
+  }
+}
 
 /* ============================================================
   Styles for office hours.
@@ -3159,7 +3182,7 @@ textarea {
 }
 
 .office-hours-status {
-  margin: 1.4rem 0 1.5rem 0;
+  margin: 1.4rem 0 1.5rem;
 }
 .office-hours-status.office-hours-status--open, .office-hours-status.office-hours-status--closed {
   font-style: normal;
@@ -3169,7 +3192,7 @@ textarea {
 }
 .office-hours-status.office-hours-status--open .message {
   border: 1px solid #659f13;
-  color: #195A16 !important;
+  color: #195a16 !important;
 }
 .office-hours-status.office-hours-status--closed .message {
   border: 1px solid #940500;
@@ -3193,42 +3216,40 @@ textarea {
 .progress-bar li {
   margin: 0;
 }
-.progress-bar li:first-child a, .progress-bar li:first-child > span {
+.progress-bar li:first-child a,
+.progress-bar li:first-child > span {
   border-radius: 4px 4px 0 0;
 }
-.progress-bar li:first-child a:before, .progress-bar li:first-child > span:before {
+.progress-bar li:first-child a::before,
+.progress-bar li:first-child > span::before {
   content: normal;
   border-style: none;
 }
 @media print, screen and (min-width: 30em) {
-  .progress-bar li:first-child a, .progress-bar li:first-child > span {
+  .progress-bar li:first-child a,
+  .progress-bar li:first-child > span {
     border-radius: 4px 0 0 4px;
   }
 }
-.progress-bar li:last-child a, .progress-bar li:last-child span {
+.progress-bar li:last-child a,
+.progress-bar li:last-child span {
   border-radius: 0 0 4px 4px;
 }
-.progress-bar li:last-child a:after, .progress-bar li:last-child span:after {
+.progress-bar li:last-child a::after,
+.progress-bar li:last-child span::after {
   content: normal;
   border-style: none;
 }
 @media print, screen and (min-width: 30em) {
-  .progress-bar li:last-child a, .progress-bar li:last-child span {
+  .progress-bar li:last-child a,
+  .progress-bar li:last-child span {
     border-radius: 0 4px 4px 0;
-  }
-}
-@media print, screen and (min-width: 30em) {
-  .progress-bar li {
-    min-width: 25%;
-    display: inline-block;
-    padding-right: 3px;
-    margin: 0 -4px 3px 0;
   }
 }
 .progress-bar li.is-active > span {
   background-color: #0098db;
 }
-.progress-bar li.is-active > span:after {
+.progress-bar li.is-active > span::after {
   border-color: transparent transparent transparent #0098db;
 }
 .progress-bar li.is-active > span .progress__label {
@@ -3247,47 +3268,6 @@ textarea {
 }
 .progress-bar li a:hover, .progress-bar li > span:hover {
   color: #37424a;
-}
-@media print, screen and (min-width: 30em) {
-  .progress-bar li a:before, .progress-bar li a:after, .progress-bar li > span:before, .progress-bar li > span:after {
-    content: "";
-    margin-top: -21.5px;
-    width: 0;
-    height: 0;
-    position: absolute;
-    top: 50%;
-    border-style: solid;
-    border-width: 21.5px 0 21.5px 12px;
-  }
-  .progress-bar li a:before, .progress-bar li > span:before {
-    left: 0;
-    border-color: transparent transparent transparent white;
-  }
-  .progress-bar li a:after, .progress-bar li > span:after {
-    right: -12px;
-    z-index: 2;
-    border-color: transparent transparent transparent #e4e9eb;
-  }
-  li:first-child .progress-bar li a, li:first-child .progress-bar li > span {
-    border-radius: 4px 0 0 4px;
-  }
-  li:first-child .progress-bar li a:before, li:first-child .progress-bar li > span:before {
-    content: normal;
-  }
-}
-@media print, screen and (min-width: 30em) and (min-width: 30em) {
-  li:first-child .progress-bar li a, li:first-child .progress-bar li > span {
-    padding-left: 40px;
-    padding-left: 2.5rem;
-  }
-}
-@media print, screen and (min-width: 30em) {
-  li:last-child .progress-bar li a, li:last-child .progress-bar li > span {
-    border-radius: 0 4px 4px 0;
-  }
-  li:last-child .progress-bar li a:after, li:last-child .progress-bar li > span:after {
-    content: normal;
-  }
 }
 .progress-bar li a .progress__num, .progress-bar li > span .progress__num {
   margin-top: -12px;
@@ -3322,6 +3302,47 @@ a:hover .progress-bar li a .progress__num, a:hover .progress-bar li > span .prog
 .is-active .progress-bar li a .progress__label, .is-active .progress-bar li > span .progress__label {
   color: white;
 }
+@media print, screen and (min-width: 30em) {
+  .progress-bar li a::before, .progress-bar li a::after, .progress-bar li > span::before, .progress-bar li > span::after {
+    content: "";
+    margin-top: -21.5px;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    border-style: solid;
+    border-width: 21.5px 0 21.5px 12px;
+  }
+  .progress-bar li a::before, .progress-bar li > span::before {
+    left: 0;
+    border-color: transparent transparent transparent white;
+  }
+  .progress-bar li a::after, .progress-bar li > span::after {
+    right: -12px;
+    z-index: 2;
+    border-color: transparent transparent transparent #e4e9eb;
+  }
+  li:first-child .progress-bar li a, li:first-child .progress-bar li > span {
+    border-radius: 4px 0 0 4px;
+  }
+  li:first-child .progress-bar li a::before, li:first-child .progress-bar li > span::before {
+    content: normal;
+  }
+}
+@media print, screen and (min-width: 30em) and (min-width: 30em) {
+  li:first-child .progress-bar li a, li:first-child .progress-bar li > span {
+    padding-left: 40px;
+    padding-left: 2.5rem;
+  }
+}
+@media print, screen and (min-width: 30em) {
+  li:last-child .progress-bar li a, li:last-child .progress-bar li > span {
+    border-radius: 0 4px 4px 0;
+  }
+  li:last-child .progress-bar li a::after, li:last-child .progress-bar li > span::after {
+    content: normal;
+  }
+}
 .progress-bar li a:hover .progress__num {
   background-color: #0098db;
   color: white;
@@ -3332,21 +3353,29 @@ a:hover .progress-bar li a .progress__num, a:hover .progress-bar li > span .prog
     margin: 0.09375rem 0 0.09375rem 0;
   }
 }
+@media print, screen and (min-width: 30em) {
+  .progress-bar li {
+    min-width: 25%;
+    display: inline-block;
+    padding-right: 3px;
+    margin: 0 -4px 3px 0;
+  }
+}
 
 .field--name-field-resources {
+  justify-content: center;
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
 }
 .field--name-field-resources > .field__item {
   display: flex;
+  margin: 0 0 1.125rem;
+  justify-content: center;
+  flex-direction: column;
   flex: 0 0 auto;
   width: calc(100% - 1.25rem);
   margin-left: 0.625rem;
   margin-right: 0.625rem;
-  margin: 0 0 1.125rem;
-  justify-content: center;
-  flex-direction: column;
 }
 @media print, screen and (min-width: 30em) {
   .field--name-field-resources > .field__item {
@@ -3398,7 +3427,8 @@ a:hover .progress-bar li a .progress__num, a:hover .progress-bar li > span .prog
 .section-outreach2 a {
   text-decoration: none;
 }
-.section-outreach2 h1, .section-outreach2 h2 {
+.section-outreach2 h1,
+.section-outreach2 h2 {
   padding: 0;
 }
 
@@ -3440,11 +3470,6 @@ a:hover .progress-bar li a .progress__num, a:hover .progress-bar li > span .prog
   display: block;
 }
 
-@media print {
-  .social-share__wrap {
-    display: none;
-  }
-}
 .social-share__wrap .department-socials {
   list-style-type: none;
 }
@@ -3468,6 +3493,11 @@ a:hover .progress-bar li a .progress__num, a:hover .progress-bar li > span .prog
 }
 .social-share__wrap .stButton .stLarge:hover {
   background-position: top left;
+}
+@media print {
+  .social-share__wrap {
+    display: none;
+  }
 }
 
 .social-links {
@@ -3506,27 +3536,27 @@ a {
 }
 a.icon--twitter:hover {
   color: white !important;
-  background-color: #1DA1F2;
+  background-color: #1da1f2;
 }
 a.icon--facebook:hover {
   color: white !important;
-  background-color: #4267B2;
+  background-color: #4267b2;
 }
 a.icon--google:hover {
   color: white !important;
-  background-color: #C20806;
+  background-color: #c20806;
 }
 a.icon--instagram:hover {
   color: white !important;
-  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
 }
 a.icon--youtube:hover {
   color: white !important;
-  background-color: #FF0000;
+  background-color: #f00;
 }
 a.icon--pinterest:hover {
   color: white !important;
-  background-color: #C91517;
+  background-color: #c91517;
 }
 a.icon--nextdoor:hover {
   color: white !important;
@@ -3538,11 +3568,11 @@ a.icon--linkedin:hover {
 }
 a.icon--reddit:hover {
   color: white !important;
-  background-color: #FF5700;
+  background-color: #ff5700;
 }
 a.icon--tiktok:hover {
   color: white !important;
-  background-color: #FE2C55;
+  background-color: #fe2c55;
 }
 a.icon--threads:hover {
   color: white !important;
@@ -3552,7 +3582,7 @@ a.icon--threads:hover {
 /* Steps
    ========================================================================== */
 .step__single {
-  margin: 0 0 1rem 0;
+  margin: 0 0 1rem;
   background: white;
   position: relative;
   padding: 0.5em 0.75em;
@@ -3575,12 +3605,19 @@ a.icon--threads:hover {
   font-size: 22px;
   font-size: 1.375rem;
 }
+.step__single.accordion__heading {
+  padding: 1rem 3.5rem 1rem 1rem;
+  margin-bottom: 0;
+}
+.step__single .medium-11 p:last-child {
+  margin-bottom: 0.75em;
+}
 @media print, screen and (max-width: 37.49875em) {
   .step__single {
-    margin: 0 0 0.75em 0;
+    margin: 0 0 0.75em;
     text-align: left;
   }
-  .step__single:before {
+  .step__single::before {
     right: 1em;
     top: -0.85em;
     transform: none;
@@ -3595,13 +3632,6 @@ a.icon--threads:hover {
   .step__single .columns {
     display: block;
   }
-}
-.step__single.accordion__heading {
-  padding: 1rem 3.5rem 1rem 1rem;
-  margin-bottom: 0;
-}
-.step__single .medium-11 p:last-child {
-  margin-bottom: 0.75em;
 }
 
 .step__header {
@@ -3638,9 +3668,9 @@ a.icon--threads:hover {
   border: 1px solid #a7abad;
   border-radius: 4px;
   text-align: center;
-  padding: 2em 1em 1.5em 1em;
+  padding: 2em 1em 1.5em;
   position: relative;
-  margin: 0 1em 2em 1em;
+  margin: 0 1em 2em;
   width: calc(50% - 2em);
 }
 .step-tiles .step .step-number {
@@ -3719,16 +3749,11 @@ a.icon--threads:hover {
 }
 
 .field--name-field-featured-items {
-  display: flex;
-  flex-flow: row wrap;
   text-align: center;
   justify-content: center;
   row-gap: 1rem;
-}
-@media print, screen and (min-width: 30em) {
-  .field--name-field-featured-items {
-    justify-content: center;
-  }
+  display: flex;
+  flex-flow: row wrap;
 }
 .field--name-field-featured-items > .field__item {
   flex: 0 0 auto;
@@ -3744,6 +3769,11 @@ a.icon--threads:hover {
     margin-right: 0.9375rem;
   }
 }
+@media print, screen and (min-width: 30em) {
+  .field--name-field-featured-items {
+    justify-content: center;
+  }
+}
 
 .featured-items a,
 .featured-items a:hover {
@@ -3752,7 +3782,7 @@ a.icon--threads:hover {
 }
 .featured-items .featured-item-label {
   display: block;
-  margin: 1em 0 0.5em 0;
+  margin: 1em 0 0.5em;
 }
 .featured-items .field--name-field-license {
   display: none;
@@ -3768,6 +3798,35 @@ a.icon--threads:hover {
   position: relative;
 }
 @media print, screen and (min-width: 30em) {
+  .stellar-window.repeat-x {
+    background-size: auto auto;
+    background-repeat: repeat-x;
+  }
+}
+.stellar-window h1,
+.stellar-window h2,
+.stellar-window h3,
+.stellar-window h4,
+.stellar-window p {
+  color: white;
+  text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black;
+}
+.stellar-window .no-shadow h1,
+.stellar-window .no-shadow h2,
+.stellar-window .no-shadow h3,
+.stellar-window .no-shadow h4,
+.stellar-window .no-shadow p,
+.stellar-window .no-styling h1,
+.stellar-window .no-styling h2,
+.stellar-window .no-styling h3,
+.stellar-window .no-styling h4,
+.stellar-window .no-styling p {
+  text-shadow: none;
+}
+.stellar-window p.noshadow {
+  text-shadow: none;
+}
+@media print, screen and (min-width: 30em) {
   .stellar-window {
     min-height: 300px;
     background-size: 100% auto;
@@ -3779,38 +3838,12 @@ a.icon--threads:hover {
     background-size: auto 100%;
   }
 }
-@media print, screen and (min-width: 30em) {
-  .stellar-window.repeat-x {
-    background-size: auto auto;
-    background-repeat: repeat-x;
-  }
-}
-.stellar-window h1, .stellar-window h2, .stellar-window h3, .stellar-window h4, .stellar-window p {
-  color: white;
-  text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black;
-}
-.stellar-window .no-shadow h1, .stellar-window .no-shadow h2, .stellar-window .no-shadow h3, .stellar-window .no-shadow h4, .stellar-window .no-shadow p,
-.stellar-window .no-styling h1,
-.stellar-window .no-styling h2,
-.stellar-window .no-styling h3,
-.stellar-window .no-styling h4,
-.stellar-window .no-styling p {
-  text-shadow: none;
-}
-.stellar-window p.noshadow {
-  text-shadow: none;
-}
 
 /* ============================================================
 Styles for calendars.
 ============================================================ */
 table.calendar-view-table {
   border: 1px solid #dde2e5;
-}
-@media print, screen and (min-width: 30em) {
-  table.calendar-view-table {
-    margin-top: -104px;
-  }
 }
 table.calendar-view-table caption {
   font-family: "Merriweather", serif;
@@ -3824,16 +3857,19 @@ table.calendar-view-table caption {
     float: left;
   }
 }
-table.calendar-view-table thead, table.calendar-view-table tbody, table.calendar-view-table tfoot {
+table.calendar-view-table thead,
+table.calendar-view-table tbody,
+table.calendar-view-table tfoot {
   border: none;
+}
+table.calendar-view-table tbody tr:nth-child(even),
+table.calendar-view-table tbody tr:hover {
+  background-color: white;
 }
 @media print, screen and (min-width: 30em) {
   table.calendar-view-table tbody tr:first-child {
     border-top: none;
   }
-}
-table.calendar-view-table tbody tr:nth-child(even), table.calendar-view-table tbody tr:hover {
-  background-color: white;
 }
 table.calendar-view-table tr {
   border-bottom: 1px solid #dde2e5;
@@ -3859,11 +3895,6 @@ table.calendar-view-table td {
   padding: 0;
   border: none;
 }
-@media print, screen and (min-width: 30em) {
-  table.calendar-view-table td {
-    border-right: 1px solid #dde2e5;
-  }
-}
 table.calendar-view-table td:last-child {
   border-right: none;
 }
@@ -3879,11 +3910,6 @@ table.calendar-view-table td .calendar-view-day__row a {
   font-size: 1rem;
   line-height: 1.3;
 }
-@media print, screen and (min-width: 30em) {
-  table.calendar-view-table td .calendar-view-day__row a {
-    font-size: 1em;
-  }
-}
 table.calendar-view-table td .calendar-view-day__row a:hover {
   color: #00a1e6;
 }
@@ -3892,6 +3918,11 @@ table.calendar-view-table td .calendar-view-day__row a.edit {
   right: 0.3125rem;
   bottom: 0.3125rem;
   font-size: 1em;
+}
+@media print, screen and (min-width: 30em) {
+  table.calendar-view-table td .calendar-view-day__row a {
+    font-size: 1em;
+  }
 }
 table.calendar-view-table td .calendar-view-day__row.is-multi--first, table.calendar-view-table td .calendar-view-day__row.is-multi--middle, table.calendar-view-table td .calendar-view-day__row.is-multi--last {
   margin-left: 0;
@@ -3902,6 +3933,11 @@ table.calendar-view-table td .calendar-view-day__row.is-multi--first, table.cale
 }
 table.calendar-view-table td .calendar-view-day__row.is-multi:not(.is-multi--first) > * {
   opacity: 1;
+}
+@media print, screen and (min-width: 30em) {
+  table.calendar-view-table td {
+    border-right: 1px solid #dde2e5;
+  }
 }
 @media print, screen and (max-width: 37.49875em) {
   table.calendar-view-table td {
@@ -3916,11 +3952,6 @@ table.calendar-view-table .calendar-view-day__number {
   width: 100%;
   text-align: left;
 }
-@media print, screen and (min-width: 30em) {
-  table.calendar-view-table .calendar-view-day__number {
-    width: auto;
-  }
-}
 table.calendar-view-table .calendar-view-day__number span.dow {
   float: right;
 }
@@ -3929,20 +3960,30 @@ table.calendar-view-table .calendar-view-day__number span.dow {
     display: none;
   }
 }
-table.calendar-view-table .sunday, table.calendar-view-table .saturday {
+@media print, screen and (min-width: 30em) {
+  table.calendar-view-table .calendar-view-day__number {
+    width: auto;
+  }
+}
+table.calendar-view-table .sunday,
+table.calendar-view-table .saturday {
   background-color: #f6f6f6;
 }
-table.calendar-view-table .sunday .calendar-view-day__number, table.calendar-view-table .saturday .calendar-view-day__number {
+table.calendar-view-table .sunday .calendar-view-day__number,
+table.calendar-view-table .saturday .calendar-view-day__number {
   background-color: #f6f6f6;
 }
-table.calendar-view-table .previous-month, table.calendar-view-table .next-month {
+table.calendar-view-table .previous-month,
+table.calendar-view-table .next-month {
   background-color: #dde2e5;
   border-right: 1px solid #d1d4d3;
 }
-table.calendar-view-table .previous-month:last-child, table.calendar-view-table .next-month:last-child {
+table.calendar-view-table .previous-month:last-child,
+table.calendar-view-table .next-month:last-child {
   border-right: none;
 }
-table.calendar-view-table .previous-month .calendar-view-day__number, table.calendar-view-table .next-month .calendar-view-day__number {
+table.calendar-view-table .previous-month .calendar-view-day__number,
+table.calendar-view-table .next-month .calendar-view-day__number {
   background-color: #dde2e5;
 }
 table.calendar-view-table .calendar-view-table td:hover {
@@ -3975,6 +4016,11 @@ table.calendar-view-table .friday {
 table.calendar-view-table .saturday {
   z-index: 40;
 }
+@media print, screen and (min-width: 30em) {
+  table.calendar-view-table {
+    margin-top: -104px;
+  }
+}
 
 .calendar-view-pager {
   flex-direction: row;
@@ -3982,27 +4028,27 @@ table.calendar-view-table .saturday {
 .calendar-view-pager .pager__item {
   margin: 0 !important;
 }
-@media print, screen and (min-width: 30em) {
-  .calendar-view-pager .pager__item {
-    margin: 0 0 10px 0 !important;
-  }
-}
 .calendar-view-pager .pager__item.pager__current {
   display: none;
 }
-.calendar-view-pager .pager__item.pager__previous a:before {
-  font-family: "icomoon";
+.calendar-view-pager .pager__item.pager__previous a::before {
+  font-family: icomoon;
   content: "<";
   font-size: 0.8em;
 }
-.calendar-view-pager .pager__item.pager__next a:after {
-  font-family: "icomoon";
+.calendar-view-pager .pager__item.pager__next a::after {
+  font-family: icomoon;
   content: ">";
   font-size: 0.8em;
 }
 .calendar-view-pager .pager__item a {
   background-color: white;
   border: none;
+}
+@media print, screen and (min-width: 30em) {
+  .calendar-view-pager .pager__item {
+    margin: 0 0 10px !important;
+  }
 }
 
 .calendar-view-pager__reset {
@@ -4075,11 +4121,11 @@ table.calendar-view-table .saturday {
 .tooltip--bottom {
   top: 150%;
   left: 50%;
-  -ms-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
+  transform: translateX(-50%);
+  transform: translateX(-50%);
   transform: translateX(-50%);
 }
-.tooltip--bottom:before {
+.tooltip--bottom::before {
   content: "";
   width: 0;
   height: 0;
@@ -4087,21 +4133,23 @@ table.calendar-view-table .saturday {
   border-style: solid;
   top: -8px;
   left: 50%;
-  -ms-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
   transform: translateX(-50%);
-  border-width: 0 9px 8px 9px;
+  transform: translateX(-50%);
+  transform: translateX(-50%);
+  border-width: 0 9px 8px;
   border-color: transparent transparent #37424a transparent;
 }
 
-.tooltip--right, .tooltip--left {
+.tooltip--right,
+.tooltip--left {
   top: 50%;
   left: 150%;
-  -ms-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
+  transform: translateY(-50%);
   transform: translateY(-50%);
 }
-.tooltip--right:before, .tooltip--left:before {
+.tooltip--right::before,
+.tooltip--left::before {
   content: "";
   width: 0;
   height: 0;
@@ -4110,8 +4158,8 @@ table.calendar-view-table .saturday {
   left: -8px;
   top: 50%;
   border-width: 9px 8px 9px 0;
-  -ms-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
+  transform: translateY(-50%);
   transform: translateY(-50%);
   border-color: transparent #37424a transparent transparent;
 }

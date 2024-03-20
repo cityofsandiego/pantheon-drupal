@@ -11,7 +11,7 @@
   }
 
   &-content {
-    margin-top: 0px;
+    margin-top: 0;
     z-index: 5;
     position: relative;
 
@@ -21,7 +21,6 @@
   }
 
   .view-display-id-meetings {
-
     h3 {
       padding: 0;
     }
@@ -36,7 +35,6 @@
   }
 
   .view-id-events {
-
     h3 {
       padding: 0;
     }
@@ -53,7 +51,7 @@
   }
 
   .featured-item {
-    margin: 2rem 0 1rem 0;
+    margin: 2rem 0 1rem;
 
     a {
       text-decoration: none;
@@ -61,21 +59,12 @@
   }
 
   h2 {
-    margin: 1em 0 .5em 0;
+    margin: 1em 0 0.5em;
     padding: 0;
   }
 
   .view-blog-cards {
-    @include breakpoint(mobile-landscape) {
-      padding-right: 0.2rem;
-    }
-
     .slides {
-      @include breakpoint(mobile) {
-        flex-wrap: wrap;
-        display: flex;
-      }
-
       .card__wrap {
         width: 100%;
 
@@ -87,6 +76,15 @@
           width: 33%;
         }
       }
+
+      @include breakpoint(mobile) {
+        flex-wrap: wrap;
+        display: flex;
+      }
+    }
+
+    @include breakpoint(mobile-landscape) {
+      padding-right: 0.2rem;
     }
   }
 }

@@ -14,20 +14,14 @@ nav.pager,
     text-align: center;
   }
 
-  li, 
-  .pager-item
-  .pager__item {
+  li,
+  .pager-item .pager__item {
     background: none;
     border: 0;
     display: inline-block;
     font-weight: bold;
     list-style: none;
-    margin: 0 1em 1em 1em;
-
-    @include breakpoint(mobile-landscape) {
-      @include rem('font-size', 13px);
-      margin: 0;
-    }
+    margin: 0 1em 1em;
 
     a {
       background: none;
@@ -51,6 +45,12 @@ nav.pager,
         border: 0;
         color: $font-color;
       }
+    }
+
+    @include breakpoint(mobile-landscape) {
+      margin: 0;
+
+      @include rem("font-size", 13px);
     }
   }
 }

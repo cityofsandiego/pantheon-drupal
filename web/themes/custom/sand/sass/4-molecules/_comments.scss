@@ -1,117 +1,127 @@
-
 // ==========================================================================
 // Comments
 // ==========================================================================
 
 .comments-title {
-    color: $font-color;
-    @include rem( 'font-size', 24px );
+  color: $font-color;
+
+  @include rem( "font-size", 24px );
 }
+
 .comment-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+  article.comment-body {
+    margin: 1em 0;
+    overflow: hidden;
+    position: relative;
+
+    footer {
+      width: 25%;
+      float: left;
+      position: relative;
+      text-align: center;
+
+      @extend %clearfix;
+    }
+  }
+
+  .comment-author {
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    > .says {
+      display: none;
+    }
+
+    @include rem( "font-size", 14px );
+  }
+
+  .comment-metadata {
+    margin-top: 0.5em;
+
+    > a {
+      text-decoration: none;
+      color: darken($mercury, 20%);
+
+      @include rem( "font-size", 12px );
+    }
+
+    time {
+      text-transform: uppercase;
+    }
+  }
+
+  .comment-content {
+    width: 75%;
+    float: left;
+    padding: 0.5em;
+    position: relative;
+    background-color: white;
+  }
+
+  .reply {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    > a {
+      padding: 10px;
+      display: inline-block;
+      background-color: white;
+
+      &:hover {
+        background-color: $off-white;
+      }
+
+      @include rem( "font-size", 12px );
+    }
+  }
+
+  .edit-link {
+    position: absolute;
+    bottom: -3px;
+    left: -3px;
+
+    > a {
+      padding: 4px;
+      display: inline-block;
+      background-color: $success;
+      border: 1px solid white;
+      color: white;
+
+      &:hover {
+        background-color: white;
+        border: 1px solid $mercury;
+        color: $success;
+      }
+
+      @include rem( "font-size", 12px );
+    }
+  }
+
+  .comment-awaiting-moderation {
+    margin-top: 0;
+    background-color: $success;
+    text-align: center;
+    color: white;
+  }
+
+  .children {
     margin: 0;
     padding: 0;
     list-style-type: none;
 
-    article.comment-body {
-        margin: 1em 0;
-        overflow: hidden;
-        position: relative;
-        footer {
-            @extend %clearfix;
-            width: 25%;
-            float: left;
-            position: relative;
-            text-align: center;
-        }
-    }
-
-    .comment-author {
-        @include rem( 'font-size', 14px );
-        img {
-            display: block;
-            margin: 0 auto;
-        }
-        > .says {
-            display: none;
-        }
-    }
-
-    .comment-metadata {
-        margin-top: .5em;
-
-        > a {
-            text-decoration: none;
-            color: darken( $mercury, 20% );
-            @include rem( 'font-size', 12px );
-        }
-
-        time {
-            text-transform: uppercase;
-        }
-    }
-
-    .comment-content {
-        width: 75%;
-        float: left;
-        padding: .5em;
-        position: relative;
-        background-color: white;
-    }
-
-    .reply {
-        position: absolute;
-        bottom: 0px;
-        right: 0px;
-
-        > a {
-            padding: 10px;
-            display: inline-block;
-            background-color: white;
-            @include rem( 'font-size', 12px );
-
-            &:hover {
-                background-color: $off-white;
-            }
-        }
-    }
-
-    .edit-link {
-        position: absolute;
-        bottom: -3px;
-        left: -3px;
-
-        > a {
-            padding: 4px;
-            display: inline-block;
-            background-color: $success;
-            border: 1px solid white;
-            color: white;
-            @include rem( 'font-size', 12px );
-
-            &:hover {
-                background-color: white;
-                border: 1px solid $mercury;
-                color: $success;
-            }
-        }
-    }
-
-    .comment-awaiting-moderation {
-        margin-top: 0;
-        background-color: $success;
-        text-align: center;
-        color: white;
-    }
-
-    .children {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-        // breakpoint(medium){
-        //     margin: 0 0 0 1em;
-        // }
-    }
+    // breakpoint(medium){
+    //     margin: 0 0 0 1em;
+    // }
+  }
 }
+
 .form-allowed-tags {
-    font-size: 80%;
+  font-size: 80%;
 }

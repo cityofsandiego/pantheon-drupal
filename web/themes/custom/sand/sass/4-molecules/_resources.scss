@@ -1,24 +1,23 @@
-
 .field--name-field-resources {
-  @include xy-grid;
   justify-content: center;
 
   > .field__item {
     display: flex;
-    @include xy-cell(12);
     margin: 0 0 1.125rem;
     justify-content: center;
     flex-direction: column;
 
+    @include xy-cell(12);
+
     @include breakpoint(medium) {
       @include xy-cell(3);
     }
-
   }
+
+  @include xy-grid;
 }
 
 .resources {
-
   .field__label {
     color: $font-color;
     font-family: $font-family-secondary;

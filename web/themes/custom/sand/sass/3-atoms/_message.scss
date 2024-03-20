@@ -18,7 +18,8 @@
   i {
     vertical-align: middle;
     margin-right: 0.5em;
-    @include rem('font-size', 24px);
+
+    @include rem("font-size", 24px);
   }
 
   &.message--success {
@@ -48,9 +49,11 @@
   &.message--emergency {
     background-color: $emergency-lt;
     font-size: 1.375rem;
-    padding: .8em 1em;
+    padding: 0.8em 1em;
 
-    i, a, p {
+    i,
+    a,
+    p {
       color: $emergency;
     }
 
@@ -65,16 +68,18 @@
 }
 
 /* New set of classes. Requested by Ron */
-.message--success, .alert-success {
+.message--success,
+.alert-success {
   background-color: $success-lt;
-  color: #195A16;
+  color: #195a16;
 
-  /*i {
+  /* i {
     color: $success;
-  }*/
+  } */
 }
 
-.message--warning, .alert-warning {
+.message--warning,
+.alert-warning {
   background-color: $warning-lt;
   color: $font-color;
 
@@ -83,21 +88,25 @@
   }
 }
 
-.message--error, .alert-error {
+.message--error,
+.alert-error {
   background-color: $error-lt;
   color: #940500;
 
-  /*i {
+  /* i {
     color: $error;
-  }*/
+  } */
 }
 
-.message--emergency, .alert-emergency {
+.message--emergency,
+.alert-emergency {
   background-color: $emergency-lt;
   font-size: 1.375rem;
-  padding: .8em 1em;
+  padding: 0.8em 1em;
 
-  i, a, p {
+  i,
+  a,
+  p {
     color: $emergency;
   }
 
@@ -112,16 +121,18 @@
 
 .messages {
   max-width: $global-width;
-  margin: 1rem auto 0 auto;
+  margin: 1rem auto 0;
 
   @include breakpoint(mobile-landscape down) {
     margin: 1rem;
   }
 }
 
-.path-admin .messages.messages--, .messages.messages-- {
-
-  &status, &warning, &error {
+.path-admin .messages.messages--,
+.messages.messages-- {
+  &status,
+  &warning,
+  &error {
     position: relative;
     z-index: 1;
     margin-top: 1em;

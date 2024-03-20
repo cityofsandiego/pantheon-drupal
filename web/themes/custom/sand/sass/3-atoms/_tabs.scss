@@ -4,7 +4,7 @@
   background-color: rgba($alto, 0.75);
   border-bottom: solid 2px $white;
   z-index: 1;
-  
+
   .local-tasks {
     display: flex;
 
@@ -13,7 +13,7 @@
       border-bottom: 0;
       display: flex;
       justify-content: start;
-      margin: 0.5rem 0 0 0;
+      margin: 0.5rem 0 0;
 
       li {
         width: auto;
@@ -67,14 +67,16 @@
   background: white;
   display: inline-block;
   border-bottom: 1px solid $alto;
-  @include rem("font-size", 14px);
   border-left: 1px solid $alto;
+
   &:first-child {
     border-left: none;
   }
+
   &:last-child {
     border-right: 1px solid $alto;
   }
+
   &.is-active {
     border-bottom: 1px solid white;
 
@@ -82,6 +84,8 @@
       background-color: aliceblue;
     }
   }
+
+  @include rem("font-size", 14px);
 
   @include breakpoint(mobile-landscape down) {
     width: 100%;
@@ -95,6 +99,7 @@
 .tabs-list__link {
   padding: 0.5rem 1rem;
   display: block;
+
   //color: $chateau;
   text-decoration: none;
   border-top: 3px solid transparent;
@@ -104,7 +109,7 @@
     color: $link-color;
     text-decoration: none;
   }
-  
+
   .is-active & {
     border-color: $cerulean;
     color: $font-color;
@@ -149,20 +154,16 @@
 
 .tabs {
   &.primary {
-    @media print {
-      display: none;
-    }
-
-    .admin-menu & {
-      //margin-top:169px;
-      margin-top: 20px;
-    }
-
     width: 100%;
     max-width: $site-constraint;
     margin-left: auto !important;
     margin-right: auto !important;
     padding: 0 1em 0 0;
+
+    .admin-menu & {
+      //margin-top:169px;
+      margin-top: 20px;
+    }
 
     li {
       display: inline-block;
@@ -178,7 +179,11 @@
     }
 
     .node-type-application & {
-      margin-top: 0px;
+      margin-top: 0;
+    }
+
+    @media print {
+      display: none;
     }
   }
 }

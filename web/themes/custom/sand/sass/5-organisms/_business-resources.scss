@@ -20,11 +20,11 @@
 }
 
 #business-resources {
-
   .main__message {
     .btn--primary {
       color: #fff;
     }
+
     .btn--outline {
       color: $cerulean;
 
@@ -38,73 +38,79 @@
     #clear-business-resources-search {
       cursor: pointer;
     }
-    .main__navigation>ul>.target-business:hover>a, .main__navigation>ul>.target-business:hover>a>span {
-        background-color: $robin !important;
+
+    .main__navigation > ul > .target-business:hover > a,
+    .main__navigation > ul > .target-business:hover > a > span {
+      background-color: $robin !important;
     }
 
-    .main__navigation>ul>li>a {
+    .main__navigation > ul > li > a {
       min-height: initial;
     }
-    .main__navigation>ul>.resource-type:hover>a, .main__navigation>ul>.resource-type:hover>a>span {
-        background-color: $sunshade !important;
+
+    .main__navigation > ul > .resource-type:hover > a,
+    .main__navigation > ul > .resource-type:hover > a > span {
+      background-color: $sunshade !important;
     }
 
     .has__dropdown {
-        width: 50%;
-        background-color: #fff;
-        &:before {
-          width: 0px;
-        }
+      width: 50%;
+      background-color: #fff;
 
-        &:first-child {
-          margin-right: 25px;
-        }
+      &::before {
+        width: 0;
+      }
 
-        &.target-business {
-          a {
-            .icon-chevron-down {
-              position: absolute;
-              right: 0px;
-              background-color: $robin;
-            }
-          }
-        }
+      &:first-child {
+        margin-right: 25px;
+      }
 
-        &.resource-type {
-          a {
-            .icon-chevron-down {
-              position: absolute;
-              right: 0px;
-              background-color: $sunshade;
-            }
-          }
-        }
-
+      &.target-business {
         a {
-          border: 1px solid $chateau;
-          border-radius: 4px;
-          padding: 0px;
-
           .icon-chevron-down {
-            float: right;
-            padding: 13px;
-            border-radius: 0px 4px 4px 0px;
-            color: white;
+            position: absolute;
+            right: 0;
+            background-color: $robin;
           }
+        }
+      }
 
-          &:after {
-            width: 0px;
+      &.resource-type {
+        a {
+          .icon-chevron-down {
+            position: absolute;
+            right: 0;
+            background-color: $sunshade;
           }
         }
-        .filter-text {
-          display: inline-block;
-          padding: 10px;
-          font-size: 15px;
+      }
+
+      a {
+        border: 1px solid $chateau;
+        border-radius: 4px;
+        padding: 0;
+
+        .icon-chevron-down {
+          float: right;
+          padding: 13px;
+          border-radius: 0 4px 4px 0;
+          color: white;
         }
+
+        &::after {
+          width: 0;
+        }
+      }
+
+      .filter-text {
+        display: inline-block;
+        padding: 10px;
+        font-size: 15px;
+      }
     }
 
     .card {
-      border-radius: 0px 0px 0px 0px;
+      border-radius: 0;
       border-top: 1px solid $chateau;
     }
 
@@ -117,6 +123,7 @@
         padding: 0.5em;
       }
     }
+
     .accordion {
       background-color: none;
     }
@@ -131,7 +138,6 @@
   }
 
   .resources {
-
     hr {
       border-top: 1px solid $chateau;
     }
@@ -141,18 +147,19 @@
     }
 
     .responsive-row {
-      margin: 0px;
+      margin: 0;
       padding-top: 0.75em;
       background-color: #fff;
       transition: background 0.25s ease;
 
-      &:nth-child(even){
+      &:nth-child(even) {
         background-color: $mercury;
       }
 
-      &:nth-child(odd){
+      &:nth-child(odd) {
         background-color: $off-white;
       }
+
       &:hover {
         background-color: #fff;
         cursor: pointer;
@@ -161,26 +168,29 @@
 
       .resource-tag {
         margin-bottom: 5px;
+
         &.type-of-assistance a {
-          &:before {
-            content: '• ';
-            color: $sunshade;
-          }
           color: $font-color;
           display: inline-block;
-          padding: 0px 4px;
+          padding: 0 4px;
           text-decoration: none;
+
+          &::before {
+            content: "• ";
+            color: $sunshade;
+          }
         }
 
         &.target-business a {
-          &:before {
-            content: '• ';
-            color: $robin;
-          }
           color: $font-color;
           display: inline-block;
           padding: 2px 4px;
           text-decoration: none;
+
+          &::before {
+            content: "• ";
+            color: $robin;
+          }
         }
       }
 

@@ -303,7 +303,7 @@ textarea {
  * General Mixins (put specific ones in component files where applicable)
 */
 @font-face {
-  font-family: "icomoon";
+  font-family: icomoon;
   font-style: normal;
   font-weight: normal;
   src: url("../fonts/icomoon/icomoon.eot?cbmbn6");
@@ -311,7 +311,7 @@ textarea {
 }
 [class^=icon-],
 [class*=" icon-"] {
-  font-family: "icomoon";
+  font-family: icomoon;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-style: normal;
@@ -1903,7 +1903,7 @@ textarea {
 }
 
 @font-face {
-  font-family: "socials";
+  font-family: socials;
   font-style: normal;
   font-weight: normal;
   src: url("../fonts/socials/socials.eot");
@@ -1930,7 +1930,7 @@ textarea {
 .icon-reddit::before,
 .icon-tiktok::before,
 .icon-threads::before {
-  font-family: "socials";
+  font-family: socials;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-style: normal;
@@ -2153,7 +2153,7 @@ textarea {
   z-index: 90001;
   position: fixed;
   outline: none !important;
-  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
@@ -2165,19 +2165,19 @@ textarea {
   left: 0;
   top: 0;
   padding: 0 8px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  box-sizing: border-box;
   box-sizing: border-box;
 }
 
-.mfp-container:before {
+.mfp-container::before {
   content: "";
   display: inline-block;
   height: 100%;
   vertical-align: middle;
 }
 
-.mfp-align-top .mfp-container:before {
+.mfp-align-top .mfp-container::before {
   display: none;
 }
 
@@ -2190,7 +2190,8 @@ textarea {
   z-index: 90002;
 }
 
-.mfp-inline-holder .mfp-content, .mfp-ajax-holder .mfp-content {
+.mfp-inline-holder .mfp-content,
+.mfp-ajax-holder .mfp-content {
   width: 100%;
   cursor: auto;
 }
@@ -2199,16 +2200,17 @@ textarea {
   cursor: progress;
 }
 
-.mfp-zoom-out-cur, .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
-  cursor: -moz-zoom-out;
-  cursor: -webkit-zoom-out;
+.mfp-zoom-out-cur,
+.mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+  cursor: zoom-out;
+  cursor: zoom-out;
   cursor: zoom-out;
 }
 
 .mfp-zoom {
   cursor: pointer;
-  cursor: -webkit-zoom-in;
-  cursor: -moz-zoom-in;
+  cursor: zoom-in;
+  cursor: zoom-in;
   cursor: zoom-in;
 }
 
@@ -2216,9 +2218,12 @@ textarea {
   cursor: auto;
 }
 
-.mfp-close, .mfp-arrow, .mfp-preloader, .mfp-counter {
-  -webkit-user-select: none;
-  -moz-user-select: none;
+.mfp-close,
+.mfp-arrow,
+.mfp-preloader,
+.mfp-counter {
+  user-select: none;
+  user-select: none;
   user-select: none;
 }
 
@@ -2231,7 +2236,7 @@ textarea {
 }
 
 .mfp-preloader {
-  color: #CCC;
+  color: #ccc;
   position: absolute;
   top: 50%;
   width: auto;
@@ -2243,11 +2248,11 @@ textarea {
 }
 
 .mfp-preloader a {
-  color: #CCC;
+  color: #ccc;
 }
 
 .mfp-preloader a:hover {
-  color: #FFF;
+  color: #fff;
 }
 
 .mfp-s-ready .mfp-preloader {
@@ -2258,18 +2263,19 @@ textarea {
   display: none;
 }
 
-button.mfp-close, button.mfp-arrow {
+button.mfp-close,
+button.mfp-arrow {
   overflow: visible;
   cursor: pointer;
   background: transparent;
   border: 0;
-  -webkit-appearance: none;
+  appearance: none;
   appearance: none;
   display: block;
   outline: none;
   padding: 0;
   z-index: 1046;
-  -webkit-box-shadow: none;
+  box-shadow: none;
   box-shadow: none;
 }
 
@@ -2290,13 +2296,14 @@ button::-moz-focus-inner {
   opacity: 0.65;
   filter: alpha(opacity=65);
   padding: 0 0 18px 10px;
-  color: #FFF;
+  color: #fff;
   font-style: normal;
   font-size: 28px;
   font-family: Arial, Baskerville, monospace;
 }
 
-.mfp-close:hover, .mfp-close:focus {
+.mfp-close:hover,
+.mfp-close:focus {
   opacity: 1;
   filter: alpha(opacity=100);
 }
@@ -2309,8 +2316,9 @@ button::-moz-focus-inner {
   color: #333;
 }
 
-.mfp-image-holder .mfp-close, .mfp-iframe-holder .mfp-close {
-  color: #FFF;
+.mfp-image-holder .mfp-close,
+.mfp-iframe-holder .mfp-close {
+  color: #fff;
   right: -6px;
   text-align: right;
   padding-right: 6px;
@@ -2321,7 +2329,7 @@ button::-moz-focus-inner {
   position: absolute;
   top: 0;
   right: 0;
-  color: #CCC;
+  color: #ccc;
   font-size: 12px;
   line-height: 18px;
   white-space: nowrap;
@@ -2344,12 +2352,16 @@ button::-moz-focus-inner {
   margin-top: -54px;
 }
 
-.mfp-arrow:hover, .mfp-arrow:focus {
+.mfp-arrow:hover,
+.mfp-arrow:focus {
   opacity: 1;
   filter: alpha(opacity=100);
 }
 
-.mfp-arrow:before, .mfp-arrow:after, .mfp-arrow .mfp-b, .mfp-arrow .mfp-a {
+.mfp-arrow::before,
+.mfp-arrow::after,
+.mfp-arrow .mfp-b,
+.mfp-arrow .mfp-a {
   content: "";
   display: block;
   width: 0;
@@ -2362,13 +2374,15 @@ button::-moz-focus-inner {
   border: medium inset transparent;
 }
 
-.mfp-arrow:after, .mfp-arrow .mfp-a {
+.mfp-arrow::after,
+.mfp-arrow .mfp-a {
   border-top-width: 13px;
   border-bottom-width: 13px;
   top: 8px;
 }
 
-.mfp-arrow:before, .mfp-arrow .mfp-b {
+.mfp-arrow::before,
+.mfp-arrow .mfp-b {
   border-top-width: 21px;
   border-bottom-width: 21px;
   opacity: 0.7;
@@ -2378,27 +2392,31 @@ button::-moz-focus-inner {
   left: 0;
 }
 
-.mfp-arrow-left:after, .mfp-arrow-left .mfp-a {
-  border-right: 17px solid #FFF;
+.mfp-arrow-left::after,
+.mfp-arrow-left .mfp-a {
+  border-right: 17px solid #fff;
   margin-left: 31px;
 }
 
-.mfp-arrow-left:before, .mfp-arrow-left .mfp-b {
+.mfp-arrow-left::before,
+.mfp-arrow-left .mfp-b {
   margin-left: 25px;
-  border-right: 27px solid #3F3F3F;
+  border-right: 27px solid #3f3f3f;
 }
 
 .mfp-arrow-right {
   right: 0;
 }
 
-.mfp-arrow-right:after, .mfp-arrow-right .mfp-a {
-  border-left: 17px solid #FFF;
+.mfp-arrow-right::after,
+.mfp-arrow-right .mfp-a {
+  border-left: 17px solid #fff;
   margin-left: 39px;
 }
 
-.mfp-arrow-right:before, .mfp-arrow-right .mfp-b {
-  border-left: 27px solid #3F3F3F;
+.mfp-arrow-right::before,
+.mfp-arrow-right .mfp-b {
+  border-left: 27px solid #3f3f3f;
 }
 
 .mfp-iframe-holder {
@@ -2441,10 +2459,10 @@ img.mfp-img {
   height: auto;
   display: block;
   line-height: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 40px 0 40px;
+  box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 40px 0;
   margin: 0 auto;
 }
 
@@ -2453,7 +2471,7 @@ img.mfp-img {
   line-height: 0;
 }
 
-.mfp-figure:after {
+.mfp-figure::after {
   content: "";
   position: absolute;
   left: 0;
@@ -2469,7 +2487,7 @@ img.mfp-img {
 }
 
 .mfp-figure small {
-  color: #BDBDBD;
+  color: #bdbdbd;
   display: block;
   font-size: 12px;
   line-height: 14px;
@@ -2491,7 +2509,7 @@ img.mfp-img {
 .mfp-title {
   text-align: left;
   line-height: 18px;
-  color: #F3F3F3;
+  color: #f3f3f3;
   word-wrap: break-word;
   padding-right: 36px;
 }
@@ -2515,7 +2533,7 @@ img.mfp-img {
   .mfp-img-mobile img.mfp-img {
     padding: 0;
   }
-  .mfp-img-mobile .mfp-figure:after {
+  .mfp-img-mobile .mfp-figure::after {
     top: 0;
     bottom: 0;
   }
@@ -2530,8 +2548,8 @@ img.mfp-img {
     top: auto;
     padding: 3px 5px;
     position: fixed;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    box-sizing: border-box;
     box-sizing: border-box;
   }
   .mfp-img-mobile .mfp-bottom-bar:empty {
@@ -2555,15 +2573,15 @@ img.mfp-img {
 }
 @media all and (max-width: 900px) {
   .mfp-arrow {
-    -webkit-transform: scale(0.75);
+    transform: scale(0.75);
     transform: scale(0.75);
   }
   .mfp-arrow-left {
-    -webkit-transform-origin: 0;
+    transform-origin: 0;
     transform-origin: 0;
   }
   .mfp-arrow-right {
-    -webkit-transform-origin: 100%;
+    transform-origin: 100%;
     transform-origin: 100%;
   }
   .mfp-container {
@@ -2634,7 +2652,9 @@ img.mfp-img {
 .white-popup.mw-900 {
   max-width: 900px;
 }
-.white-popup h1, .white-popup h2, .white-popup h3 {
+.white-popup h1,
+.white-popup h2,
+.white-popup h3 {
   margin-top: 0;
 }
 .white-popup p:last-child {
@@ -2671,8 +2691,8 @@ img.mfp-img {
  */
 .mfp-fade.mfp-bg {
   opacity: 0;
-  -webkit-transition: all 0.15s ease-out;
-  -moz-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
   transition: all 0.15s ease-out;
 }
 
@@ -2686,8 +2706,8 @@ img.mfp-img {
 
 .mfp-fade.mfp-wrap .mfp-content {
   opacity: 0;
-  -webkit-transition: all 0.15s ease-out;
-  -moz-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
   transition: all 0.15s ease-out;
 }
 
@@ -2705,33 +2725,33 @@ img.mfp-img {
 /* start state */
 .mfp-animation .mfp-modal {
   opacity: 0;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  -o-transform: scale(0.8);
+  transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  transform: scale(0.8);
+  transform: scale(0.8);
+  transform: scale(0.8);
+  transform: scale(0.8);
   transform: scale(0.8);
 }
 
 /* animate in */
 .mfp-animation.mfp-ready .mfp-modal {
   opacity: 1;
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
+  transform: scale(1);
+  transform: scale(1);
+  transform: scale(1);
+  transform: scale(1);
   transform: scale(1);
 }
 
 /* animate out */
 .mfp-animation.mfp-removing .mfp-modal {
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  -o-transform: scale(0.8);
+  transform: scale(0.8);
+  transform: scale(0.8);
+  transform: scale(0.8);
+  transform: scale(0.8);
   transform: scale(0.8);
   opacity: 0;
 }
@@ -2739,9 +2759,9 @@ img.mfp-img {
 /* Dark overlay, start state */
 .mfp-animation.mfp-bg {
   opacity: 0;
-  -webkit-transition: opacity 0.3s ease-out;
-  -moz-transition: opacity 0.3s ease-out;
-  -o-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
   transition: opacity 0.3s ease-out;
 }
 
@@ -2759,10 +2779,17 @@ img.mfp-img {
   .node-type-outreach article {
     page-break-before: unset !important;
   }
-  .node-type-outreach .off-canvas, .node-type-outreach .preheader, .node-type-outreach header, .node-type-outreach footer, .node-type-outreach .off-canvas, .node-type-outreach .no-print {
+  .node-type-outreach .off-canvas,
+  .node-type-outreach .preheader,
+  .node-type-outreach header,
+  .node-type-outreach footer,
+  .node-type-outreach .off-canvas,
+  .node-type-outreach .no-print {
     display: none !important;
   }
-  header, .messages.message--status, footer {
+  header,
+  .messages.message--status,
+  footer {
     display: none !important;
   }
 }

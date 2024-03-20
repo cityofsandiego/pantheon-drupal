@@ -25,7 +25,7 @@
   .dept-parent-logo {
     width: 100%;
     text-align: center;
-    
+
     img {
       //border-right: 1px solid $alto;
       //padding: 1rem;
@@ -41,7 +41,7 @@
       padding: 0;
 
       li {
-        margin: 0 0 0.5rem 0;
+        margin: 0 0 0.5rem;
 
         .btn {
           font-size: 0.9rem !important;
@@ -53,7 +53,7 @@
       &.list-normal {
         font-size: 1em;
         list-style-type: disc;
-        margin: 0 0 1em 0;
+        margin: 0 0 1em;
         padding-inline-start: 1em;
 
         li {
@@ -73,12 +73,7 @@
 
     .card__wrap {
       width: 100%;
-      padding: 0 0 0.75em 0;
-
-      @include breakpoint(medium) {
-        width: 33.3%;
-        padding: 0 0.5rem 0.75rem 0.5rem;
-      }
+      padding: 0 0 0.75em;
 
       .card {
         margin: 0;
@@ -86,6 +81,11 @@
 
       .card__headline a {
         font-size: 1rem;
+      }
+
+      @include breakpoint(medium) {
+        width: 33.3%;
+        padding: 0 0.5rem 0.75rem;
       }
     }
   }
@@ -107,7 +107,6 @@
     }
   }
 
-
   .hero__slides--content {
     .slides {
       overflow: hidden;
@@ -117,17 +116,8 @@
   .hero__slides--secondary {
     padding: 2em;
 
-    @include breakpoint(mobile-landscape) {
-      padding: 4em 0 9em;
-      min-height: 100px;
-    }
-
     .hero__content {
       text-align: center;
-      
-      @include breakpoint(mobile-landscape) {
-        margin: 0 auto !important;
-      }
 
       p {
         margin: 0;
@@ -138,6 +128,9 @@
         font-size: 1rem;
       }
 
+      @include breakpoint(mobile-landscape) {
+        margin: 0 auto !important;
+      }
     }
 
     .flex-control-nav {
@@ -147,11 +140,17 @@
         bottom: 0;
       }
     }
+
+    @include breakpoint(mobile-landscape) {
+      padding: 4em 0 9em;
+      min-height: 100px;
+    }
   }
 
   .main-section {
     border-top: 1px solid #d1d8dc;
   }
+
   .sidebar {
     border-left: 1px solid #d1d8dc;
   }

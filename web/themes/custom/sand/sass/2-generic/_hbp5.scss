@@ -11,13 +11,13 @@
    ========================================================================== */
 
 body {
-    font-size: 16px;
-    font-size: 1em;
-    line-height: 1.4;
-    background-color: $alto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: $font-family;
+  font-size: 16px;
+  font-size: 1em;
+  line-height: 1.4;
+  background-color: $alto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $font-family;
 }
 
 /*
@@ -28,24 +28,24 @@ body {
  * Customize the background color to match your design.
  */
 
-::-moz-selection {
-    background: $selection-highlight;
-    text-shadow: none;
-    color: $font-color !important;
+::selection {
+  background: $selection-highlight;
+  text-shadow: none;
+  color: $font-color !important;
 
-    a {
-        color: $link-color !important;
-    }    
+  a {
+    color: $link-color !important;
+  }
 }
 
 ::selection {
-    background: $selection-highlight;
-    text-shadow: none;
-    color: $font-color !important;
+  background: $selection-highlight;
+  text-shadow: none;
+  color: $font-color !important;
 
-    a {
-        color: $link-color !important;
-    }   
+  a {
+    color: $link-color !important;
+  }
 }
 
 /*
@@ -53,12 +53,12 @@ body {
  */
 
 hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid $alto;
-    margin: 1em 0;
-    padding: 0;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid $alto;
+  margin: 1em 0;
+  padding: 0;
 }
 
 /*
@@ -73,7 +73,7 @@ iframe,
 img,
 svg,
 video {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 /*
@@ -81,7 +81,7 @@ video {
  */
 
 textarea {
-    resize: vertical;
+  resize: vertical;
 }
 
 /* ==========================================================================
@@ -89,10 +89,10 @@ textarea {
    ========================================================================== */
 
 .browserupgrade {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
 }
 
 /* ==========================================================================
@@ -102,90 +102,93 @@ textarea {
    ========================================================================== */
 
 @media print {
-    *,
-    *:before,
-    *:after {
-        background: transparent !important;
-        color: #000 !important;
-        /* Black prints faster:
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+
+    /* Black prints faster:
                                           http://www.sanbeiji.com/archives/953 */
-        box-shadow: none !important;
-        text-shadow: none !important;
-    }
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
 
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
 
-    a[href]:after {
-        content: " (" attr(href) ")";
-    }
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
 
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
+  abbr[title]::after {
+    content: " (" attr(title) ")";
+  }
 
-    /*
+  /*
      * Don't show links that are fragment identifiers,
      * or use the `javascript:` pseudo protocol
      */
 
-    a[href^="#"]:after,
-    a[href^="javascript:"]:after {
-        content: "";
-    }
+  a[href^="#"]::after,
+  a[href^="javascript:"]::after {
+    content: "";
+  }
 
-    pre,
-    blockquote {
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
 
-    /*
+  /*
      * Printing Tables:
      * http://css-discuss.incutio.com/wiki/Printing_Tables
      */
 
-    thead {
-        display: table-header-group;
-    }
+  thead {
+    display: table-header-group;
+  }
 
-    tr,
-    img {
-        page-break-inside: avoid;
-    }
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
 
-    img {
-        max-width: 100% !important;
-    }
+  img {
+    max-width: 100% !important;
+  }
 
-    p,
-    h2,
-    h3 {
-        orphans: 3;
-        widows: 3;
-    }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
 
-    h2,
-    h3 {
-        page-break-after: avoid;
-    }
-    /*
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+
+  /*
     * ID of contracts for cip reports forecast of projects to be awarded shows all table columns while printing.
     */
-    .node-type-application {
-        & table#contracts {
-            font-size: 0.95vw;
-            border-collapse: collapse;
-            border: 1px solid #666666;
-            & td {
-                border: 1px solid #666666;
-            }
-        }
+  .node-type-application {
+    & table#contracts {
+      font-size: 0.95vw;
+      border-collapse: collapse;
+      border: 1px solid #666;
+
+      & td {
+        border: 1px solid #666;
+      }
     }
+  }
 }
 
 address {
-    font-style: normal;
+  font-style: normal;
 }
