@@ -12,21 +12,21 @@
 
 /* General
    ========================================================================== */
-::-webkit-input-placeholder {
+::input-placeholder {
   color: $shuttle;
 }
 
-:-moz-placeholder {
+:placeholder {
   /* Firefox 18- */
   color: $shuttle;
 }
 
-::-moz-placeholder {
+::placeholder {
   /* Firefox 19+ */
   color: $shuttle;
 }
 
-:-ms-input-placeholder {
+:input-placeholder {
   color: $shuttle;
 }
 
@@ -36,8 +36,8 @@
 
 %select {
   display: block;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
+  appearance: none;
   appearance: none;
   border-radius: 0;
   border: none;
@@ -46,27 +46,32 @@
   padding: 0.5em;
   width: 100%;
   height: 40px;
+
   @include rem("font-size", 14px);
+
   /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
-  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @media screen and (min-device-pixel-ratio: 0) {
     select {
       padding-right: 18px;
     }
   }
 }
+
 input,
 textarea {
-  /*color: $shuttle;*/
+  /* color: $shuttle; */
   color: $font-color;
-  margin: 0 0 1em 0;
+  margin: 0 0 1em;
   padding: 0.75em;
   width: 100%;
   font-weight: 400;
   border-radius: 4px;
   display: inline-block;
   border: 1px solid $chateau;
-  @include rem("font-size", 13px);
   box-shadow: none !important;
+
+  @include rem("font-size", 13px);
+
   // @include transition( border .15s, box-shadow .15s, background .15s );
 }
 
@@ -76,6 +81,7 @@ textarea {
   background-color: white;
   border-width: inherit;
   border: 1px solid #a7abad;
+
   //border-radius: 4px;
 }
 
@@ -97,9 +103,11 @@ button[type="submit"] {
   height: auto;
   width: auto;
   border: none;
+
   //outline: solid;
-  -webkit-appearance: none;
   appearance: none;
+  appearance: none;
+
   &[value="None"] {
     display: none;
   }
@@ -114,7 +122,7 @@ select.form-select {
   color: $font-color;
   border: 1px solid $chateau;
   box-shadow: 0 0 0 0 transparent inset;
-  -webkit-transition: color 0.1s ease, border-color 0.1s ease;
+  transition: color 0.1s ease, border-color 0.1s ease;
   transition: color 0.1s ease, border-color 0.1s ease;
   font-size: 1rem;
   font-weight: normal;
@@ -127,8 +135,8 @@ fieldset {
     display: block;
     background-color: white;
     border: 1px solid $chateau;
-    margin: 2em 0 1.5em 0;
-    padding: 1.5em 1.3em 1.3em 1.3em;
+    margin: 2em 0 1.5em;
+    padding: 1.5em 1.3em 1.3em;
     position: relative;
 
     > legend {
@@ -143,7 +151,7 @@ fieldset {
     }
 
     fieldset:not(.fieldgroup) {
-      padding: 1.5em 1.3em 1.3em 1.3em;
+      padding: 1.5em 1.3em 1.3em;
     }
   }
 
@@ -165,7 +173,7 @@ fieldset.radios--wrapper {
   }
 
   .form-item {
-    margin: 0 0 0.2em 0;
+    margin: 0 0 0.2em;
     padding-left: 0;
     display: flex;
     align-items: center;
@@ -178,7 +186,6 @@ fieldset.radios--wrapper {
     }
 
     label {
-      display: table-cell;
       font-size: 1em;
       text-transform: none;
       font-weight: normal;
@@ -195,6 +202,7 @@ fieldset.radios--wrapper {
 input.search-type,
 input[type="search"] {
   margin: 0;
+
   @include box-sizing(border-box); /* 1 */
 }
 
@@ -245,9 +253,9 @@ input[type="radio"] {
   margin: 0 0 0.2em;
 }
 
-/*.form-radios, .form-checkboxes {
+/* .form-radios, .form-checkboxes {
      margin-top: .5em;
- }*/
+ } */
 label {
   color: $font-color;
   font-size: 0.8em;
@@ -267,16 +275,19 @@ label.element-invisible + div.form-checkboxes {
 .form-textarea {
   background-color: white;
   border: 1px solid #a7abad;
+
   //border-radius: 4px;
   font-size: 1em;
   line-height: 1.5;
   color: $font-color;
 }
+
 legend {
   font-weight: 600;
   padding: 0 0.5em;
-  @include rem("font-size", 13px);
   font-family: $font-family-secondary;
+
+  @include rem("font-size", 13px);
 
   @include breakpoint(medium) {
     @include rem("font-size", 14px);
@@ -286,14 +297,17 @@ legend {
     @include rem("font-size", 16px);
   }
 }
+
 .form-file {
   background-color: $off-white;
   border: 1px solid #a7abad;
+
   //border-radius: 4px;
 }
 
 .form-error {
   color: $error;
+
   @include rem("font-size", 11px);
 }
 
@@ -310,6 +324,7 @@ legend {
 
 .form {
   overflow: hidden;
+
   input[type="email"],
   input.search-type,
   input[type="search"] {
@@ -319,7 +334,9 @@ legend {
     margin-bottom: 0;
     padding: 0.25em 0.5em;
     background: $off-white;
+
     @include rem("font-size", 16px);
+
     @include breakpoint(medium) {
       float: left;
       width: 80%;
@@ -327,38 +344,48 @@ legend {
       margin-right: 0.5em;
     }
   }
+
   button[type="submit"] {
     color: white;
     background-color: $sunshade;
+
     i {
       @include rem("font-size", 24px);
     }
+
+    &:hover {
+      background: lighten($sunshade, 10%);
+    }
+
     @include breakpoint(medium) {
       min-height: 40px;
       padding: 0.25em 0.5em;
     }
-    &:hover {
-      background: lighten($sunshade, 10%);
-    }
   }
+
   label {
     font-weight: 600;
     text-transform: uppercase;
+
     @include rem("font-size", 12px);
   }
+
   select {
     @extend %select;
   }
+
   .select-wrap {
     position: relative;
   }
-  .select-wrap:after {
+
+  .select-wrap::after {
     content: "";
     color: $sunshade;
     background: url(../img/select-arrow.png) no-repeat;
     display: block;
     width: 8px;
     height: 18px;
+
     // -webkit-transform:rotate(90deg) translateX(-50%);
     // -moz-transform:rotate(90deg) translateX(-50%);
     // -ms-transform:rotate(90deg) translateX(-50%);
@@ -370,10 +397,11 @@ legend {
     position: absolute;
     pointer-events: none;
   }
-  .select-wrap:before {
+
+  .select-wrap::before {
     content: "";
     right: 6px;
-    top: 0px;
+    top: 0;
     width: 20px;
     height: 20px;
     position: absolute;
@@ -395,18 +423,22 @@ legend {
     width: auto;
     color: white;
     background: darken($sunshade, 10%);
+
     @include breakpoint(medium) {
       min-height: 48px;
     }
   }
+
   button[type="submit"] {
     color: $sunshade;
+
+    &:hover {
+      background: white;
+    }
+
     @include breakpoint(medium) {
       min-height: 48px;
       padding: 0.25em 1.5em;
-    }
-    &:hover {
-      background: white;
     }
   }
 }
@@ -425,19 +457,17 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
 
 .form--comments {
   .form-actions {
-    @include breakpoint(medium) {
-      text-align: right;
-    }
-
     input[type="submit"] {
       @include rem("font-size", 13px);
+    }
+
+    @include breakpoint(medium) {
+      text-align: right;
     }
   }
 }
 
 .form--newsletter {
-  @extend %clearfix;
-
   .form-item,
   .form-actions {
     padding-left: 0.5em;
@@ -450,8 +480,11 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
 
   input[type="submit"] {
     width: 100%;
+
     @include rem("font-size", 13px);
   }
+
+  @extend %clearfix;
 }
 
 .views-submit-button {
@@ -459,6 +492,7 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
     background-color: $cerulean;
     color: white;
   }
+
   @include breakpoint(medium down) {
     clear: left;
   }
@@ -471,7 +505,7 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
 
   // So drop shadow aligns for views-exposed search filter
   .views-exposed-widgets {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   .input-group {
@@ -494,25 +528,31 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
     padding: 0.75em;
     text-indent: -9999px;
     border-radius: 0 4px 4px 0;
+
     //border: 1px solid $mercury;
     background-image: url(/images/blue-search-icon.svg);
     background-repeat: no-repeat;
     background-position: center center;
     background-color: $mercury;
-    @include rem("font-size", 13px);
+
     &:hover {
       background-color: lighten($cerulean, 10%);
+
       //border-color: lighten( $cerulean, 10% );
     }
+
+    @include rem("font-size", 13px);
   }
 
   .form-item {
     width: 85%;
   }
+
   .views-submit-button,
   .form-actions {
     width: 15%;
   }
+
   .views-submit-button,
   .form-item,
   .form-actions {
@@ -528,7 +568,8 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
     border: none;
     outline: none;
 
-    &:focus, &:active {
+    &:focus,
+    &:active {
       border: none !important;
       outline: solid;
       outline-color: $science;
@@ -540,8 +581,10 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
       border-bottom-right-radius: 0;
     }
   }
+
   input[type="submit"] {
     border-left: none;
+
     //border-color: $mercury;
     background-color: $mercury;
     background-image: url(../images/blue-search-icon.svg);
@@ -578,14 +621,15 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
   }
 }
 
-
 .form-coll-search {
   .form-item {
     margin-bottom: 0.5em;
   }
+
   .input-group {
     border: 1px solid $shuttle;
     border-radius: 4px;
+
     //overflow: hidden;
 
     input.form-submit {
@@ -595,7 +639,7 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
 }
 
 .form-actions {
-  padding: 0px;
+  padding: 0;
   position: relative;
   left: 0;
   bottom: 0;
@@ -608,10 +652,6 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
 .form-actions {
   margin-bottom: 1.5em;
 
-  @include breakpoint(mobile-landscape down) {
-    text-align: center;
-  }
-
   input {
     width: auto !important;
   }
@@ -623,6 +663,10 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
       font-size: 1.2em;
     }
   }
+
+  @include breakpoint(mobile-landscape down) {
+    text-align: center;
+  }
 }
 
 .webform-submission-form {
@@ -632,10 +676,12 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
 }
 
 #edit-reset {
+  padding: 0.75em 1em !important;
+
   @extend .btn;
   @extend .btn--success;
-  padding: 0.75em 1em !important;
 }
+
 [type="text"]:last-child,
 .form-item:last-child {
   margin-bottom: 0.5em;
@@ -656,11 +702,31 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
   margin-left: 4px;
 }
 
-.form-text:focus, .form-tel:focus, .form-email:focus, .form-url:focus, .form-number:focus, .form-color:focus, .form-file:focus, .form-textarea:focus, .form-date:focus, .form-time:focus, .form-select:focus {
+.form-text:focus,
+.form-tel:focus,
+.form-email:focus,
+.form-url:focus,
+.form-number:focus,
+.form-color:focus,
+.form-file:focus,
+.form-textarea:focus,
+.form-date:focus,
+.form-time:focus,
+.form-select:focus {
   border: 1px solid #a7abad;
 }
 
-.form-text:focus-visible, .form-tel:focus-visible, .form-email:focus-visible, .form-url:focus-visible, .form-number:focus-visible, .form-color:focus-visible, .form-file:focus-visible, .form-textarea:focus-visible, .form-date:focus-visible, .form-time:focus-visible, .form-select:focus-visible {
+.form-text:focus-visible,
+.form-tel:focus-visible,
+.form-email:focus-visible,
+.form-url:focus-visible,
+.form-number:focus-visible,
+.form-color:focus-visible,
+.form-file:focus-visible,
+.form-textarea:focus-visible,
+.form-date:focus-visible,
+.form-time:focus-visible,
+.form-select:focus-visible {
   outline: solid;
   outline-color: $science;
   outline-width: thin;
@@ -688,7 +754,7 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
       color: $deepcerulean;
       font-weight: normal;
       float: left;
-    
+
       &:hover,
       &:focus {
         background-color: lighten($deepcerulean, 10%);
@@ -698,12 +764,15 @@ fieldset.form-wrapper fieldset.radios--wrapper:last-child {
     }
   }
 }
+
 .hide-form-actions-input #edit-actions {
   display: none;
 }
+
 span.text-count {
   color: $font-color !important;
 }
+
 .sand-search-search {
   .form-actions {
     margin-top: 0;

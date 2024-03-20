@@ -39,22 +39,32 @@
 .l-margin-am { margin: 2em !important; }
 .l-margin-al { margin: 4em !important; }
 .l-margin-ax { margin: 6em !important; }
-img.photoLeft{
-	float:left;
-	padding-right:10px;
-	padding-bottom:10px;
-	clear:left;
-	}
-img.photoRight{
-	float:right;
-	padding-left:10px;
-	padding-bottom:10px;
-	clear:right;
-	}
-.main a[name]:not([name=""]):before, .anchor:before{display:block;content:" ";margin-top:-5px;height:5px;visibility:hidden;}
-@media screen and (min-width: 47.99em){.main a[name]:not([name=""]):before, .anchor:before{display:block;content:" ";margin-top:-15px;height:15px;visibility:hidden;outline:none;}}
-@media screen and (min-width: 59.99em){.main a[name]:not([name=""]):before, .anchor:before{display:block;content:" ";margin-top:-125px;height:125px;visibility:hidden;outline:none;}}
-@media screen and (min-width: 74.99em){.main a[name]:not([name=""]):before, .anchor:before{display:block;content:" ";margin-top:-80px;height:80px;visibility:hidden;outline:none;}}
+
+img.photoLeft {
+  float: left;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  clear: left;
+}
+
+img.photoRight {
+  float: right;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  clear: right;
+}
+.main a[name]:not([name=""])::before,
+.anchor::before { display: block; content: " "; margin-top: -5px; height: 5px; visibility: hidden; }
+
+@media screen and (min-width: 47.99em) { .main a[name]:not([name=""])::before,
+  .anchor::before { display: block; content: " "; margin-top: -15px; height: 15px; visibility: hidden; outline: none; } }
+
+@media screen and (min-width: 59.99em) { .main a[name]:not([name=""])::before,
+  .anchor::before { display: block; content: " "; margin-top: -125px; height: 125px; visibility: hidden; outline: none; } }
+
+@media screen and (min-width: 74.99em) { .main a[name]:not([name=""])::before,
+  .anchor::before { display: block; content: " "; margin-top: -80px; height: 80px; visibility: hidden; outline: none; } }
+
 /* Vertical */
 
 .l-padding-vn { padding-top: 0 !important; padding-bottom: 0 !important; }
@@ -150,10 +160,6 @@ img.photoRight{
 .l-margin-rm { margin-right: 2em !important; }
 .l-margin-rl { margin-right: 4em !important; }
 .l-margin-rx { margin-right: 6em !important; }
-
-
-
-
 
 /* Mobile
    ========================================================================== */
@@ -269,9 +275,6 @@ img.photoRight{
 .l-margin-mobile-rm { @include breakpoint(medium down) { margin-right: 2em !important; } }
 .l-margin-mobile-rl { @include breakpoint(medium down) { margin-right: 4em !important; } }
 .l-margin-mobile-rx { @include breakpoint(medium down) { margin-right: 6em !important; } }
-
-
-
 
 /* Desktop
    ========================================================================== */

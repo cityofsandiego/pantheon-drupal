@@ -17,7 +17,7 @@
 .tooltip {
   z-index: 5;
   color: white;
-  padding: .5em 1em;
+  padding: 0.5em 1em;
   display: none;
   font-weight: 600;
   position: absolute;
@@ -25,7 +25,8 @@
   left: 0;
   border-radius: 2px;
   background: $spruce;
-  @include rem('font-size', 14px);
+
+  @include rem("font-size", 14px);
 }
 
 .tooltip--wide {
@@ -43,35 +44,36 @@
 .tooltip--bottom {
   top: 150%;
   left: 50%;
-  -ms-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
+  transform: translateX(-50%);
+  transform: translateX(-50%);
   transform: translateX(-50%);
 
-  &:before {
-    content: '';
+  &::before {
+    content: "";
     width: 0;
     height: 0;
     position: absolute;
     border-style: solid;
     top: -8px;
     left: 50%;
-    -ms-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
     transform: translateX(-50%);
-    border-width: 0 9px 8px 9px;
+    transform: translateX(-50%);
+    transform: translateX(-50%);
+    border-width: 0 9px 8px;
     border-color: transparent transparent $spruce transparent;
   }
 }
 
-.tooltip--right, .tooltip--left { //Should be right, not left. Left stays in case it's being referenced somewhere
+.tooltip--right,
+.tooltip--left { //Should be right, not left. Left stays in case it's being referenced somewhere
   top: 50%;
   left: 150%;
-  -ms-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
+  transform: translateY(-50%);
   transform: translateY(-50%);
 
-  &:before {
-    content: '';
+  &::before {
+    content: "";
     width: 0;
     height: 0;
     position: absolute;
@@ -79,8 +81,8 @@
     left: -8px;
     top: 50%;
     border-width: 9px 8px 9px 0;
-    -ms-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
+    transform: translateY(-50%);
+    transform: translateY(-50%);
     transform: translateY(-50%);
     border-color: transparent $spruce transparent transparent;
   }

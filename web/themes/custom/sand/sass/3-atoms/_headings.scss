@@ -19,10 +19,6 @@ h1 {
   font-size: 2.125rem;
   color: $font-color;
 
-  @include breakpoint(mobile) {
-    font-size: 2.375rem;
-  }
-
   &.page-title {
     color: $white;
     font-family: $font-family-secondary;
@@ -30,11 +26,16 @@ h1 {
     text-align: center;
     text-shadow: 0 0 #555, 0 2px 0.3em #000, 2px 0 0.3em #000, 0 0 #000;
     margin: 0;
-    @include rem( 'font-size', 32px );
+
+    @include rem( "font-size", 32px );
 
     @include breakpoint(medium) {
-      @include rem( 'font-size', 48px );
+      @include rem( "font-size", 48px );
     }
+  }
+
+  @include breakpoint(mobile) {
+    font-size: 2.375rem;
   }
 }
 
@@ -42,12 +43,12 @@ h2 {
   font-size: 1.875rem;
   color: $font-color;
 
-  @include breakpoint(mobile) {
-    font-size: 2.125rem;
-  }
-
   &:first-child {
     margin-top: 0;
+  }
+
+  @include breakpoint(mobile) {
+    font-size: 2.125rem;
   }
 }
 

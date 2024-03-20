@@ -4,7 +4,7 @@
 .node--type-digital-archives-photos {
   h1 {
     font-size: 2.25rem;
-    margin: 0.5rem 0 2rem 0;
+    margin: 0.5rem 0 2rem;
     padding: 0;
   }
 
@@ -13,14 +13,9 @@
     height: 100%;
     padding: 0.5em 2em;
 
-    @include breakpoint(mobile-landscape) {
-      padding: 2.5rem 1.5rem 2rem 1.5rem;
-      border-left: 1px solid #dde2e5;
-    }
-
-    /*& > h2 {
+    /* & > h2 {
       margin-top: 0;
-    }*/
+    } */
 
     ul {
       padding: 0;
@@ -28,7 +23,7 @@
       margin: 0;
 
       li {
-        margin: 0 0 0.5rem 0;
+        margin: 0 0 0.5rem;
 
         .btn {
           font-size: 0.9rem !important;
@@ -40,7 +35,7 @@
       &.list-normal {
         font-size: 1em;
         list-style-type: disc;
-        margin: 0 0 1em 0;
+        margin: 0 0 1em;
         padding-inline-start: 1em;
 
         li {
@@ -54,7 +49,7 @@
 
         li {
           padding: 0.2em 0.5em 0 0;
-          margin: 0 0 0.3rem 0;
+          margin: 0 0 0.3rem;
           line-height: 1.2;
 
           a {
@@ -77,16 +72,18 @@
             }
           }
 
-          &.expanded, &.menu-item--expanded {
+          &.expanded,
+          &.menu-item--expanded {
             list-style-image: url("../images/menu-expanded.png");
             list-style-type: circle;
             margin-left: -2px;
             padding-left: 2px;
-            
-            a[href=""], a[href="#"] {
+
+            a[href=""],
+            a[href="#"] {
               color: #0a0a0a;
               text-decoration: none;
-              cursor:default;
+              cursor: default;
             }
 
             ul {
@@ -131,6 +128,11 @@
         }
       }
     }
+
+    @include breakpoint(mobile-landscape) {
+      padding: 2.5rem 1.5rem 2rem;
+      border-left: 1px solid #dde2e5;
+    }
   }
 
   .resources {
@@ -143,10 +145,6 @@
   list-style: none;
   margin: 0 !important;
   font-family: $font-family;
-
-  @include breakpoint(medium) {
-    display: flex;
-  }
 
   li {
     margin: 0 0.5rem 0 0;
@@ -167,19 +165,19 @@
       width: 100%;
       border-radius: 4px 4px 0 0;
 
-      @include breakpoint(medium) {
-        font-size: 0.8125rem;
-        padding: 0.5rem 0.75rem;
-        line-height: 1.2;
-        height: 100%;
-      }
-
       &:hover {
         background-color: $teal;
       }
 
       &.is-active {
         color: $black;
+      }
+
+      @include breakpoint(medium) {
+        font-size: 0.8125rem;
+        padding: 0.5rem 0.75rem;
+        line-height: 1.2;
+        height: 100%;
       }
     }
 
@@ -189,6 +187,10 @@
         background-color: white;
       }
     }
+  }
+
+  @include breakpoint(medium) {
+    display: flex;
   }
 }
 
@@ -212,8 +214,8 @@
           color: $white;
         }
 
-        .toggle-icon:before,
-        .toggle-icon:after {
+        .toggle-icon::before,
+        .toggle-icon::after {
           background: transparent;
         }
       }
@@ -236,8 +238,8 @@
             color: $font-color;
           }
 
-          .toggle-icon:before,
-          .toggle-icon:after {
+          .toggle-icon::before,
+          .toggle-icon::after {
             background: transparent;
           }
         }

@@ -16,33 +16,32 @@
 }
 
 .featured-image {
-
   img {
     padding: 0.8rem 0 0.8rem 1.3rem;
   }
 }
 
 figure {
-
   img {
     margin-bottom: 0;
   }
-
 }
 
-figcaption, .figcaption {
+figcaption,
+.figcaption {
   background-color: #e4e9eb;
-  padding: .5em;
+  padding: 0.5em;
   font-style: italic;
-  @include rem('font-size', 13px);
 
   p {
     margin-bottom: 0;
   }
 
   .photo-credit {
-    padding: 0 0 .5em 0;
+    padding: 0 0 0.5em;
   }
+
+  @include rem("font-size", 13px);
 }
 
 // Videos
@@ -54,13 +53,14 @@ figcaption, .figcaption {
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    color: rgba(255, 255, 255, 0.75);
-    @include rem('font-size', 48px);
+    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: rgb(255 255 255 / 75%);
+
+    @include rem("font-size", 48px);
   }
 
   img {
@@ -71,11 +71,14 @@ figcaption, .figcaption {
 .video-wrapper {
   position: relative;
   padding-bottom: 56.25%;
+
   //padding-top: 30px;
   //height: 0;
   overflow: hidden;
 
-  iframe, object, embed {
+  iframe,
+  object,
+  embed {
     position: absolute;
     top: 0;
     left: 0;
@@ -92,49 +95,50 @@ figcaption, .figcaption {
 /* Images
    ========================================================================== */
 
-   .img-left { /* apply to element containing img, typically a <div> or <p> */
-
-    @include breakpoint(medium down) {
-      width: 100% !important;
-      text-align: center;
-      margin-bottom: 1em;
-    }
-
-    @include breakpoint(medium){
-      float: left;
-      margin: 0 1em 1em 0;
-    }
+.img-left { /* apply to element containing img, typically a <div> or <p> */
+  @include breakpoint(medium down) {
+    width: 100% !important;
+    text-align: center;
+    margin-bottom: 1em;
   }
 
-  .img-right { /* apply to element containing img, typically a <div> or <p> */
-    @include breakpoint(medium down) {
-      width: 100% !important;
-      text-align: center;
-      margin-bottom: 1em;
-    }
-    @include breakpoint(medium){
-      float: right;
-      margin: 0 0 1em 1em;
-    }
+  @include breakpoint(medium) {
+    float: left;
+    margin: 0 1em 1em 0;
+  }
+}
+
+.img-right { /* apply to element containing img, typically a <div> or <p> */
+  @include breakpoint(medium down) {
+    width: 100% !important;
+    text-align: center;
+    margin-bottom: 1em;
   }
 
-  .photo-credit {
-    text-align: right;
-    line-height: 1.5;
-    font-size: .6rem;
-    padding: .5em;
-    margin: 0;
+  @include breakpoint(medium) {
+    float: right;
+    margin: 0 0 1em 1em;
   }
+}
 
-/*.field--name-field-media-oembed-video {
+.photo-credit {
+  text-align: right;
+  line-height: 1.5;
+  font-size: 0.6rem;
+  padding: 0.5em;
+  margin: 0;
+}
+
+/* .field--name-field-media-oembed-video {
   position: relative;
   overflow: hidden;
   width: 100%;
   padding-top: 61%;
-}*/
+} */
 
 /* Then style the iframe to fit in the container div with full height and width */
-/*.media-oembed-content {
+
+/* .media-oembed-content {
   position: absolute;
   top: 0;
   left: 0;
@@ -143,20 +147,21 @@ figcaption, .figcaption {
   width: 100%;
   height: 100%;
   padding: 0;
-}*/
+} */
 
 /* cold case photos */
 .masonry-gallery {
-
   > .field--type-entity-reference {
-    -moz-column-count: 2;
-    -webkit-column-count: 2;
     column-count: 2;
-    -moz-column-gap: 10px;
-    -webkit-column-gap: 10px;
+    column-count: 2;
+    column-count: 2;
+    column-gap: 10px;
+    column-gap: 10px;
     column-gap: 10px;
 
-    .field__item, article, img {
+    .field__item,
+    article,
+    img {
       width: 100%;
       display: block;
     }
@@ -164,25 +169,23 @@ figcaption, .figcaption {
     .field__item {
       margin-bottom: 10px;
     }
-
   }
 
   &.col-3 {
     .field--type-entity-reference {
-      -moz-column-count: 3;
-      -webkit-column-count: 3;
+      column-count: 3;
+      column-count: 3;
       column-count: 3;
     }
   }
 
   &.col-4 {
     .field--type-entity-reference {
-      -moz-column-count: 4;
-      -webkit-column-count: 4;
+      column-count: 4;
+      column-count: 4;
       column-count: 4;
     }
   }
-
 }
 
 .caption > figcaption {

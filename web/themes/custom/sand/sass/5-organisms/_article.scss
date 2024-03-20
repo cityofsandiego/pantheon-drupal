@@ -1,7 +1,7 @@
 .node-type-article {
   .simple-header {
     background: $white;
-    box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 3px -3px rgb(0 0 0 / 30%);
     z-index: 1;
     position: relative;
   }
@@ -33,23 +33,24 @@
   }
 
   .article-menu {
-    @include breakpoint(medium) {
-      justify-content: end;
-      //padding-top: 1.5rem;
-    }
-
     li {
       a {
         background-color: $endeavour;
 
         &:hover {
-          background-color: lighten($endeavour,10%);
+          background-color: lighten($endeavour, 10%);
         }
       }
 
       &:last-child {
         margin-right: 0;
       }
+    }
+
+    @include breakpoint(medium) {
+      justify-content: end;
+
+      //padding-top: 1.5rem;
     }
   }
 
@@ -60,6 +61,7 @@
       text-decoration: none;
     }
   }
+
   .page-title {
     text-align: left;
     padding: 1.5rem 2rem 0;
@@ -70,11 +72,11 @@
   }
 
   .field--name-field-body-no-margin {
-    margin: 0 -1em 0;
+    margin: 0 -1em;
   }
 
   .main__tagline {
-    margin: 0 0 0.7em 0;
+    margin: 0 0 0.7em;
     color: white;
     font-size: 16px;
     font-size: 1.5em;
@@ -83,6 +85,7 @@
     font-style: italic;
     line-height: 1.8rem;
     background-color: transparent;
+
     //text-shadow: 0 0 #555, 0 2px 0.5em black, 2px 0 0.5em black, 0 0 black;
     padding: 0;
 
@@ -96,6 +99,7 @@
   .sub-navigation-mobile .accordions .accordion__drawer {
     color: #fff;
     background: $endeavour;
+
     // border: none;
   }
 
@@ -115,7 +119,7 @@
     background-color: $sunshade;
 
     &:hover {
-      background-color: lighten($sunshade,10%);
+      background-color: lighten($sunshade, 10%);
     }
   }
 }
@@ -130,12 +134,12 @@
   }
 
   @include breakpoint(medium) {
-    @include rem("font-size", 13px);
-
     .social-share__wrap {
       margin: 1em 0;
       text-align: center;
     }
+
+    @include rem("font-size", 13px);
   }
 }
 
@@ -176,7 +180,6 @@
   @include breakpoint(medium) {
     padding-left: 5em;
     padding-right: 5em;
-    @include rem("font-size", 13px);
 
     .entry--prev {
       text-align: right;
@@ -190,5 +193,7 @@
     .six:first-child {
       border-right: 1px solid $alto;
     }
+
+    @include rem("font-size", 13px);
   }
 }

@@ -1,14 +1,14 @@
 .grid-container {
+  padding: 0;
+  transition: 0.15s all ease;
+
+  @include breakpoint(mobile-landscape) {
+    padding: 0 1rem;
+  }
+
+  @include breakpoint(site-constraint) {
     padding: 0;
-    transition: 0.15s all ease;
-
-    @include breakpoint(mobile-landscape) {
-        padding: 0 1rem;
-    }
-
-    @include breakpoint(site-constraint) {
-        padding: 0;
-    }
+  }
 }
 
 .main-grid-container {
@@ -23,7 +23,6 @@ div.l-section {
   padding: 2em;
 }
 
-
 // ==========================================================================
 // Layout
 // ==========================================================================
@@ -31,28 +30,31 @@ div.l-section {
 /* Containers
    ========================================================================== */
 .l-constrained {
-    @extend %l-constrained;
+  @extend %l-constrained;
 }
 
 .l-constrained--main {
-    position: relative;
+  position: relative;
 }
 
 .l-constrained--site {
-    @extend %l-constrained;
-    max-width: $site;
+  max-width: $site;
+
+  @extend %l-constrained;
 }
 
 .l-constrained--wide {
-    @extend %l-constrained;
-    max-width: $site-constraint;
+  max-width: $site-constraint;
+
+  @extend %l-constrained;
 }
 
 .l-constrained--desktop {
-    @extend %l-constrained;
-    max-width: $desktop-wide;
+  max-width: $desktop-wide;
+
+  @extend %l-constrained;
 }
 
 .l-container {
-    @extend %clearfix;
+  @extend %clearfix;
 }

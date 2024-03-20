@@ -5,15 +5,15 @@
     position: relative;
     margin-top: -50px;
 
-    @include breakpoint(site) {
-      .sub-navigation {
-        margin-top: 0;
-      }
-    }
-
     .breadcrumbs {
       + .l-container {
         background: white;
+      }
+    }
+
+    @include breakpoint(site) {
+      .sub-navigation {
+        margin-top: 0;
       }
     }
   }
@@ -26,6 +26,7 @@
         font-size: 1.3em;
         font-family: $headline, serif;
       }
+
       // Titles for block attached to announcements block.
       .view-display-id-attachment_1 {
         .card__headline.heading--snug a {
@@ -39,107 +40,17 @@
       color: inherit;
       text-decoration: none;
     }
+
     // Announcements view more-link.
     .more-link {
       float: left;
       clear: both;
-      @extend .view-more;
+
       a {
         text-decoration: none;
       }
-    }
-  }
 
-  @media screen and (min-width: 48em) {
-    .logo:before {
-      height: 105px;
-      box-shadow: 0px 1px 7px 1px rgba(0, 0, 0, 0.3);
-    }
-    .logo img {
-      top: 0;
-    }
-    .l-constrained--main {
-      margin-top: -50px;
-      z-index: 4;
-    }
-    header {
-      background-color: #009581;
-    }
-    .main__navigation--portal {
-      background-color: transparent;
-    }
-    .main__navigation--portal li:last-child {
-      float: none;
-    }
-    .main__navigation > ul {
-      min-height: 0;
-      -webkit-justify-content: flex-start;
-      justify-content: flex-start;
-    }
-    .main__navigation > ul > li {
-      width: auto;
-    }
-    .hero__slides > .row {
-      padding: 40px 0 0 0;
-    }
-    .hero--credit {
-      bottom: 4em;
-    }
-    // Dept Name top and bottom padding
-    #citynet-title a,
-    #citynet-title {
-      color: white;
-    }
-    .card--container .card--wrap,
-    .card__container .card__wrap {
-      width: 25%;
-    }
-  }
-
-  @media screen and (max-width: 74.99em) {
-    .main__navigation > ul > li > a {
-      min-height: 0;
-    }
-  }
-
-  @media screen and (max-width: 59.99em) {
-    .hero__slides--secondary {
-      padding-bottom: 0;
-    }
-    .hero__slides--img li:after {
-      background-color: rgba(0, 0, 0, 0);
-    }
-    #citynet-title {
-      font-size: 1.7rem;
-      margin-top: 1.3rem;
-    }
-  }
-
-  @media screen and (max-width: 47.99em) {
-    [role="main"] {
-      margin-top: 0;
-    }
-    .menu-toggle {
-      top: 0.5em;
-    }
-    .hero__slides--secondary {
-      padding-bottom: 1.5em;
-    }
-    .hero__slides--img li:after {
-      background-color: rgba(0, 0, 0, 0);
-    }
-    .hero__slides > .row {
-      padding: 1em 0;
-    }
-    .main__message .main__heading {
-      font-size: 1.5rem;
-      margin-top: 40px;
-    }
-    header .form--search {
-      top: 80px;
-    }
-    #citynet-title a {
-      color: $font-color;
+      @extend .view-more;
     }
   }
 
@@ -162,7 +73,7 @@
 
   header,
   .main__navigation {
-    box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 3px -3px rgb(0 0 0 / 30%);
   }
 
   .navigation__wrap {
@@ -187,6 +98,7 @@
 
   .tb-megamenu {
     background-color: white;
+
     ul.nav {
       > li,
       > li.active {
@@ -203,16 +115,19 @@
           font-size: 13px;
           font-size: 0.8125rem;
           font-weight: 600;
+
           //border-right: 1px solid #ccc;
           &:focus {
             background: $tulip;
             color: white;
           }
+
           &:hover {
             background: $tulip;
             color: white;
           }
         }
+
         &.dropdown.open {
           .dropdown-toggle {
             background: $tulip;
@@ -220,42 +135,52 @@
           }
         }
       }
+
       > li.dropdown.active > .dropdown-toggle {
         background-color: white;
         border-color: #ccc;
         color: #37242a;
+
         .caret {
           border-top-color: #666;
           border-bottom-color: #666;
         }
+
         &:focus {
           background: $tulip;
           color: white;
         }
+
         &:hover {
           background: $tulip;
           color: white;
         }
       }
     }
+
     .dropdown-menu {
       margin: 0;
       padding: 0;
       z-index: 10;
-      @extend %white-gradient;
       border: none;
+
+      @extend %white-gradient;
     }
+
     .mega-align-justify > .dropdown-menu {
       top: 102%;
     }
+
     .field-item {
       a:hover {
         color: $cerulean !important;
       }
+
       > ul {
         width: 100%;
         display: block;
         margin-bottom: 1em;
+
         > li {
           float: left;
           margin-right: 5em;
@@ -263,20 +188,25 @@
         }
       }
     }
+
     .tb-block {
       margin-bottom: 0;
     }
+
     @media screen and (max-width: 979px) {
       .nav-collapse {
         background-color: white;
-        box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 4px 3px -3px rgb(0 0 0 / 50%);
+
         .nav > li > a {
           border: none;
         }
+
         &.collapse {
           margin-top: 20px;
         }
       }
+
       .always-show .mega > .mega-dropdown-menu,
       .always-show .dropdown-menu {
         display: none !important;
@@ -286,10 +216,12 @@
 
   nav.sub-navigation {
     background-color: white;
+
     a {
       font-size: 1rem;
       color: $font-color;
     }
+
     ul.contextual-links li {
       background-color: white;
       position: relative;
@@ -299,15 +231,18 @@
       a {
         background-color: white;
         font-size: 1rem;
+
         &:hover {
           background-color: grey;
         }
       }
     }
+
     .content {
       border-bottom: 1px solid #37424a;
       border-bottom: none;
-      box-shadow: 0 4px 3px -3px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 3px -3px rgb(0 0 0 / 50%);
+
       li.leaf,
       li.tb-megamenu-item {
         background-color: white;
@@ -330,14 +265,16 @@
           font-size: 0.8125rem;
           font-weight: 600;
           border-right: 1px solid #ccc;
-          @media screen and (max-width: 979px) {
-            border-right: none;
-          }
+
           &:focus,
           &:hover,
           &.active {
             background: $tulip;
             color: white;
+          }
+
+          @media screen and (max-width: 979px) {
+            border-right: none;
           }
         }
 
@@ -345,21 +282,24 @@
           width: 100%;
 
           .tb-megamenu-column-inner {
-            padding: 2em 2em 0 2em;
+            padding: 2em 2em 0;
           }
         }
       }
+
       li.tb-megamenu-item.active {
         > a,
         > a.dropdown-toggle {
           background: $tulip;
           color: white;
+
           .caret {
             border-top-color: white;
             border-bottom-color: white;
           }
         }
       }
+
       .mega-dropdown-inner .content {
         box-shadow: none;
       }
@@ -378,12 +318,6 @@
 
   // Style search page.
   &.page-search {
-    @include breakpoint(medium-large up) {
-      header.header--fixed + div.container {
-        position: relative;
-        margin-top: 0;
-      }
-    }
     .facets {
       h2 {
         font-size: 0.9em;
@@ -394,7 +328,14 @@
       h2.sand_entity_type,
       .bean-bean-html-block h2 {
         font-size: 1.2em;
-        margin-left: 0px;
+        margin-left: 0;
+      }
+    }
+
+    @include breakpoint(medium-large up) {
+      header.header--fixed + div.container {
+        position: relative;
+        margin-top: 0;
       }
     }
   }
@@ -402,17 +343,6 @@
   // Search results visited
   div.search-result-wrapper h3.title a:visited {
     color: $link-color-visited;
-  }
-
-  // Adjustments after changing sandiego.gov to shorter header.
-  @include breakpoint(site) {
-    &.logged-in.admin-menu header.header--fixed {
-      top: 0;
-      position: relative;
-      &.has-alert {
-        top: 0;
-      }
-    }
   }
 
   // Align the dropshadow effect on the search box.
@@ -431,6 +361,131 @@
   // to update the state
   &.page-node-draft .workbench-info-block {
     margin-bottom: 60px;
+  }
+
+  @media screen and (min-width: 48em) {
+    .logo::before {
+      height: 105px;
+      box-shadow: 0 1px 7px 1px rgb(0 0 0 / 30%);
+    }
+
+    .logo img {
+      top: 0;
+    }
+
+    .l-constrained--main {
+      margin-top: -50px;
+      z-index: 4;
+    }
+
+    header {
+      background-color: #009581;
+    }
+
+    .main__navigation--portal {
+      background-color: transparent;
+    }
+
+    .main__navigation--portal li:last-child {
+      float: none;
+    }
+
+    .main__navigation > ul {
+      min-height: 0;
+      justify-content: flex-start;
+      justify-content: flex-start;
+    }
+
+    .main__navigation > ul > li {
+      width: auto;
+    }
+
+    .hero__slides > .row {
+      padding: 40px 0 0;
+    }
+
+    .hero--credit {
+      bottom: 4em;
+    }
+
+    // Dept Name top and bottom padding
+    #citynet-title a,
+    #citynet-title {
+      color: white;
+    }
+
+    .card--container .card--wrap,
+    .card__container .card__wrap {
+      width: 25%;
+    }
+  }
+
+  @media screen and (max-width: 74.99em) {
+    .main__navigation > ul > li > a {
+      min-height: 0;
+    }
+  }
+
+  @media screen and (max-width: 59.99em) {
+    .hero__slides--secondary {
+      padding-bottom: 0;
+    }
+
+    .hero__slides--img li::after {
+      background-color: rgb(0 0 0 / 0%);
+    }
+
+    #citynet-title {
+      font-size: 1.7rem;
+      margin-top: 1.3rem;
+    }
+  }
+
+  @media screen and (max-width: 47.99em) {
+    [role="main"] {
+      margin-top: 0;
+    }
+
+    .menu-toggle {
+      top: 0.5em;
+    }
+
+    .hero__slides--secondary {
+      padding-bottom: 1.5em;
+    }
+
+    .hero__slides--img li::after {
+      background-color: rgb(0 0 0 / 0%);
+    }
+
+    .hero__slides > .row {
+      padding: 1em 0;
+    }
+
+    .main__message .main__heading {
+      font-size: 1.5rem;
+      margin-top: 40px;
+    }
+
+    header .form--search {
+      top: 80px;
+    }
+
+    #citynet-title a {
+      color: $font-color;
+    }
+  }
+
+  // Adjustments after changing sandiego.gov to shorter header.
+  @include breakpoint(site) {
+    &.logged-in.admin-menu header.header--fixed {
+      top: 0;
+      position: relative;
+
+      &.has-alert {
+        top: 0;
+      }
+    }
   }
 }
 

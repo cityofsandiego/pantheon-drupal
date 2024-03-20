@@ -24,9 +24,9 @@
 
 // Box Sizing
 @mixin box-sizing( $box-model ) {
-    -webkit-box-sizing: $box-model; // Safari <= 5
-       -moz-box-sizing: $box-model; // Firefox <= 19
-            box-sizing: $box-model;
+  box-sizing: $box-model; // Safari <= 5
+  box-sizing: $box-model; // Firefox <= 19
+  box-sizing: $box-model;
 }
 
 // Baseline
@@ -34,36 +34,32 @@ $baseline-px: 16 !default;
 
 // Get the rem equivalent of a value
 @function rem-value( $value ) {
+  // If value is a number, do some magic rem stuff
+  @if type-of( $value ) == "number" and unit( $value ) == "px" {
+    // Slightly hacky way of removing unit
+    $unitless-value: calc($value / ( $value * 0 + 1px ));
 
-    // If value is a number, do some magic rem stuff
-    @if type-of( $value ) == "number" and unit( $value ) == "px" {
+    // Return rem value
+    @return #{calc($unitless-value / $baseline-px)}rem;
+  }
 
-        // Slightly hacky way of removing unit
-        $unitless-value: calc($value / ( $value * 0 + 1px ));
-
-        // Return rem value
-        @return #{calc($unitless-value / $baseline-px)}rem;
-    }
-
-    // Non-numeric value, just return
-    @return $value;
+  // Non-numeric value, just return
+  @return $value;
 }
 
 // Rem mixin
 @mixin rem( $property, $values ) {
+  // Loop over pixel values to get rem values
+  $rem-values: unquote("");
 
-    // Loop over pixel values to get rem values
-    $rem-values: unquote("");
+  @each $value in $values {
+    $rem-values: append($rem-values, rem-value($value));
+  }
 
-    @each $value in $values {
-        $rem-values: append( $rem-values, rem-value( $value ) );
-    }
-
-    // Set the pixel/rem values
-    #{$property}: $values;
-    #{$property}: $rem-values;
+  // Set the pixel/rem values
+  #{$property}: $values;
+  #{$property}: $rem-values;
 }
-
 
 // Reusable variables
 
@@ -72,6 +68,12 @@ $desktop-wide: 1500px;
 $site: 960px;
 
 %clearfix {
+  /*
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+  *zoom: 1;
+
   /*
    * Clearfix: contain floats
    *
@@ -83,26 +85,21 @@ $site: 960px;
    * 2. The use of `table` rather than `block` is only necessary if using
    *    `:before` to contain the top-margins of child elements.
    */
-  &:before, &:after {
-      content: " "; /* 1 */
-      display: table; /* 2 */
+  &::before,
+  &::after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
   }
 
-  &:after {
-      clear: both;
+  &::after {
+    clear: both;
   }
-
-  /*
-   * For IE 6/7 only
-   * Include this rule to trigger hasLayout and contain floats.
-   */
-  *zoom: 1;
 }
 
-
 %l-constrained {
-    @extend %clearfix;
-    margin: 0 auto;
-    width: 100%;
-    max-width: $site-constraint;
+  margin: 0 auto;
+  width: 100%;
+  max-width: $site-constraint;
+
+  @extend %clearfix;
 }

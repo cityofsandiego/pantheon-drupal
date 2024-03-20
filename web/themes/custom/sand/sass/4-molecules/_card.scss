@@ -18,7 +18,6 @@
 }
 
 .card {
-  @extend %card;
   border: none;
 
   > a,
@@ -30,39 +29,37 @@
   &.background-off-white {
     background: $off-white;
   }
+
+  @extend %card;
 }
 
 .card__container {
   position: relative;
   display: block;
-  display: -webkit-flex; /* Safari */
+  display: flex; /* Safari */
   display: flex;
-  -webkit-justify-content: flex-start; /* Safari */
+  justify-content: flex-start; /* Safari */
   justify-content: flex-start;
-  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
   flex-wrap: wrap;
 
-  @include breakpoint(mobile-landscape) {
-    margin-left: -0.5em;
-    margin-right: -0.5em;
-    margin-bottom: -0.5em;
-  }
-
   // If .mobile-flexslider exists, it creates a ul.slides wrapping the .cards
-  /*@include breakpoint(large) {*/
+
+  /* @include breakpoint(large) { */
   .slides {
     display: block;
-    display: -webkit-flex; /* Safari */
+    display: flex; /* Safari */
     display: flex;
-    -webkit-justify-content: flex-start; /* Safari */
+    justify-content: flex-start; /* Safari */
     justify-content: flex-start;
     margin: 0;
-    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
     flex-flow: row wrap;
     padding-left: 0;
     width: 100%;
   }
-  /*}*/
+
+  /* } */
 
   &.mobile-flexslider {
     height: 100% !important;
@@ -88,7 +85,7 @@
   .card__wrap,
   .card--wrap {
     height: auto;
-    display: -webkit-flex; /* Safari */
+    display: flex; /* Safari */
     display: flex !important;
     margin: 0;
     padding-left: 1.0416588541%;
@@ -96,16 +93,17 @@
     padding-bottom: 1em;
     width: 33.333333%;
 
-    @include breakpoint(mobile-landscape down) {
-      width: 100%;
-    }
-
     .card {
-      @extend %card;
       flex: 0 1 auto;
       justify-content: flex-start;
       overflow: unset;
       color: $font-color;
+
+      @extend %card;
+    }
+
+    @include breakpoint(mobile-landscape down) {
+      width: 100%;
     }
   }
 
@@ -118,7 +116,7 @@
     @include breakpoint(large) {
       margin: 0;
       padding: 0.75em;
-      display: -webkit-flex; /* Safari */
+      display: flex; /* Safari */
       display: flex;
 
       .card {
@@ -136,7 +134,7 @@
     @include breakpoint(large) {
       margin: 0;
       padding: 0.75em;
-      display: -webkit-flex; /* Safari */
+      display: flex; /* Safari */
       display: flex;
 
       .card {
@@ -148,12 +146,12 @@
   .card__content {
     padding: 1.5em;
 
-    @include breakpoint(medium) {
-      @include rem("font-size", 13px);
-    }
-
     > a {
       @include rem("font-size", 16px);
+    }
+
+    @include breakpoint(medium) {
+      @include rem("font-size", 13px);
     }
   }
 
@@ -162,6 +160,7 @@
     color: $font-color;
     text-decoration: none;
     font-family: $font-family-secondary;
+
     @include rem("font-size", 16px);
   }
 
@@ -185,6 +184,12 @@
     display: block;
     font-weight: 600;
   }
+
+  @include breakpoint(mobile-landscape) {
+    margin-left: -0.5em;
+    margin-right: -0.5em;
+    margin-bottom: -0.5em;
+  }
 }
 
 .card__cta--graphic {
@@ -198,7 +203,7 @@
     padding: 1.5em;
     position: relative;
 
-    &:before {
+    &::before {
       content: "";
       display: block;
       background: black;
@@ -214,7 +219,7 @@
     &:hover {
       text-decoration: none;
 
-      &:before {
+      &::before {
         opacity: 0.1;
       }
     }
@@ -226,8 +231,9 @@
 
   p {
     color: white;
-    @include rem("font-size", 18px);
     font-family: $font-family-secondary;
+
+    @include rem("font-size", 18px);
   }
 }
 
@@ -269,8 +275,9 @@
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    @include rem("font-size", 12px);
     font-family: $font-family-secondary;
+
+    @include rem("font-size", 12px);
   }
 }
 
@@ -283,7 +290,9 @@
       margin-bottom: 0;
     }
   }
-  a, a p {
+
+  a,
+  a p {
     display: block;
     text-decoration: none;
     color: $link-color !important;

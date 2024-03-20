@@ -1,7 +1,7 @@
 /* Steps
    ========================================================================== */
 .step__single {
-  margin: 0 0 1rem 0;
+  margin: 0 0 1rem;
   background: white;
   position: relative;
   padding: 0.5em 0.75em;
@@ -22,14 +22,24 @@
     vertical-align: middle;
     font-family: $font-family;
     font-weight: 600;
+
     @include rem("font-size", 22px);
   }
 
+  &.accordion__heading {
+    padding: 1rem 3.5rem 1rem 1rem;
+    margin-bottom: 0;
+  }
+
+  .medium-11 p:last-child {
+    margin-bottom: 0.75em;
+  }
+
   @include breakpoint(mobile-landscape down) {
-    margin: 0 0 0.75em 0;
+    margin: 0 0 0.75em;
     text-align: left;
 
-    &:before {
+    &::before {
       right: 1em;
       top: -0.85em;
       transform: none;
@@ -47,15 +57,6 @@
       display: block;
     }
   }
-
-  &.accordion__heading {
-    padding: 1rem 3.5rem 1rem 1rem;
-    margin-bottom: 0;
-  }
-
-  .medium-11 p:last-child {
-    margin-bottom: 0.75em;
-  }
 }
 
 .step__header {
@@ -63,11 +64,12 @@
   padding: 0;
   margin: 0.7em 0;
   font-weight: 600;
-  @include rem("font-size", 16px); // 1.25em
 
   .step__desc {
     font-family: $font-family;
   }
+
+  @include rem("font-size", 16px); // 1.25em
 }
 
 .step__num {
@@ -91,9 +93,9 @@
     border: 1px solid #a7abad;
     border-radius: 4px;
     text-align: center;
-    padding: 2em 1em 1.5em 1em;
+    padding: 2em 1em 1.5em;
     position: relative;
-    margin: 0 1em 2em 1em;
+    margin: 0 1em 2em;
     width: calc(50% - 2em);
 
     .step-number {

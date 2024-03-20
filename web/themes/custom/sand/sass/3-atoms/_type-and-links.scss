@@ -3,8 +3,9 @@
   ============================================================ */
 
 // Override Foundation's base ul styles
-ul, ol {
-  margin: 0 0 0.75em 0;
+ul,
+ol {
+  margin: 0 0 0.75em;
   padding-inline-start: 1em;
   line-height: 1.5;
 
@@ -21,7 +22,8 @@ ul, ol {
     }
   }
 
-  & ul, ol {
+  & ul,
+  ol {
     margin: 0.5em 0;
   }
 }
@@ -36,14 +38,13 @@ ul {
 }
 
 .accordion__drawer {
-
-  ul, ol {
-
+  ul,
+  ol {
     &.department-menu {
       padding-inline-start: 0;
 
       li {
-        margin: 0 0 0.5rem 0;
+        margin: 0 0 0.5rem;
 
         @include breakpoint(mobile-landscape down) {
           margin: 0;
@@ -67,20 +68,23 @@ ul {
   padding: 0;
 }
 
-p.date, .date {
+p.date,
+.date {
   font-weight: 600;
   margin-bottom: 0.75em !important;
 
-  @include breakpoint(mobile-landscape) {
-    margin-bottom: 0 !important;
-  }
-
-  .notification &, .doc-list-compact &, .card--notification & {
+  .notification &,
+  .doc-list-compact &,
+  .card--notification & {
     font-weight: 600;
     margin-bottom: 0 !important;
     font-size: 0.8em;
     text-transform: uppercase;
     font-family: $font-family;
+  }
+
+  @include breakpoint(mobile-landscape) {
+    margin-bottom: 0 !important;
   }
 }
 

@@ -30,21 +30,18 @@
     border-radius: 2px;
     text-decoration: none;
     background: $off-white;
-    @include rem("font-size", 16px);
 
     i {
       height: 1.5em;
       line-height: 1.5em;
       display: block;
     }
+
+    @include rem("font-size", 16px);
   }
 }
 
 .social-share__wrap {
-  @media print {
-    display: none;
-  }
-
   .department-socials {
     list-style-type: none;
 
@@ -55,7 +52,7 @@
 
     .socials-link {
       font-size: 1.2rem;
-      background: rgba(246, 246, 246, 0.8);
+      background: rgb(246 246 246 / 80%);
     }
   }
 
@@ -75,6 +72,10 @@
       }
     }
   }
+
+  @media print {
+    display: none;
+  }
 }
 
 .social-links {
@@ -87,11 +88,11 @@
     list-style: none;
     margin: 0 0.25rem;
     padding: 0;
-  
+
     &:first-child {
       margin-left: 0;
     }
-  
+
     a {
       background: $off-white;
       border-radius: 2px;
@@ -104,7 +105,7 @@
       text-align: center;
       text-decoration: none;
       width: 2rem;
-  
+
       &:hover {
         color: $link-color;
       }
@@ -114,16 +115,19 @@
 
 a {
   /* Change background-color to matching social media platform color */
-  &.icon--twitter:hover    {color: white !important; background-color: $twitter;}    
-  &.icon--facebook:hover   {color: white !important; background-color: $facebook;}
-  &.icon--google:hover     {color: white !important; background-color: $googleplus;}
-  &.icon--instagram:hover  {color: white !important;
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);}
-  &.icon--youtube:hover    {color: white !important; background-color: $youtube;}
-  &.icon--pinterest:hover  {color: white !important; background-color: $pinterest;}
-  &.icon--nextdoor:hover   {color: white !important; background-color: $nextdoor;}
-  &.icon--linkedin:hover   {color: white !important; background-color: $linkedin;}
-  &.icon--reddit:hover   {color: white !important; background-color: $reddit;}
-  &.icon--tiktok:hover   {color: white !important; background-color: $tiktok;}
-  &.icon--threads:hover   {color: white !important; background-color: $threads;}
+  &.icon--twitter:hover { color: white !important; background-color: $twitter; }
+  &.icon--facebook:hover { color: white !important; background-color: $facebook; }
+  &.icon--google:hover { color: white !important; background-color: $googleplus; }
+
+  &.icon--instagram:hover {
+    color: white !important;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+  }
+  &.icon--youtube:hover { color: white !important; background-color: $youtube; }
+  &.icon--pinterest:hover { color: white !important; background-color: $pinterest; }
+  &.icon--nextdoor:hover { color: white !important; background-color: $nextdoor; }
+  &.icon--linkedin:hover { color: white !important; background-color: $linkedin; }
+  &.icon--reddit:hover { color: white !important; background-color: $reddit; }
+  &.icon--tiktok:hover { color: white !important; background-color: $tiktok; }
+  &.icon--threads:hover { color: white !important; background-color: $threads; }
 }
