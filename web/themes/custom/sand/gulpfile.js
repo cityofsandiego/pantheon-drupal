@@ -4,13 +4,21 @@ const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const terser = require('gulp-terser');
+const through2 = require('through2');
+const cleanCSS = require('gulp-clean-css');
+var postcss = require('gulp-postcss');
+var prefixSelector = require('postcss-prefix-selector');
+
+const sassPaths = [
+  'node_modules'
+];
 
 // Task for compiling your main Sass files
 gulp.task('styles', function() {
   return gulp.src('sass/**/*.scss')
       .pipe(sourcemaps.init())
       .pipe(sass({
-        includePaths: ['node_modules/susy/sass']
+        includePaths: sassPaths
       }).on('error', sass.logError))
       .pipe(rename({dirname: ''}))
       .pipe(sourcemaps.write('./'))
@@ -18,14 +26,11 @@ gulp.task('styles', function() {
 });
 
 // Task for compiling Foundation Sass files
-gulp.task('foundation', function() {
+gulp.task('foundation', function () {
   return gulp.src('zurb-foundation/*.scss')
       .pipe(sourcemaps.init())
       .pipe(sass({
-        includePaths: [
-          'node_modules/foundation-sites/scss',
-          'node_modules/motion-ui/src'
-        ]
+        includePaths: sassPaths
       }).on('error', sass.logError))
       .pipe(rename({dirname: ''}))
       .pipe(sourcemaps.write('./'))
@@ -42,6 +47,24 @@ gulp.task('scripts', function() {
       .pipe(gulp.dest('dist/js')); // Adjust the destination to where you want your compiled JS to go
 });
 
+gulp.task('ckeditor', function() {
+  return gulp.src('sass/**/*.scss')
+      .pipe(sourcemaps.init())
+      .pipe(sass({
+        includePaths: sassPaths
+      }).on('error', sass.logError))
+      .pipe(postcss([
+        prefixSelector({
+          prefix: 'div.ck.ck-editor__main',
+          // Exclude selectors you don't want to prefix here
+          exclude: [':root', '.ck-editor__main', /.*ckeditor.*/]
+        })
+      ]))
+      .pipe(concat('ckeditor5_styles.css')) // Combine all CSS into a single file
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest('css'));
+});
+
 // Watch task to watch for file changes and run appropriate tasks
 gulp.task('watch', function() {
   gulp.watch('sass/**/*.scss', gulp.series('styles'));
@@ -50,4 +73,4 @@ gulp.task('watch', function() {
 });
 
 // Default task to run when you just type `gulp` in the terminal
-gulp.task('default', gulp.parallel('styles')); // , 'foundation', 'scripts', 'watch'
+gulp.task('default', gulp.parallel('styles', 'ckeditor')); // , 'foundation', 'scripts', 'watch'
