@@ -3763,14 +3763,13 @@ display:
             format: default_summary
           specify_validation: true
           validate:
-            type: 'entity:taxonomy_term'
+            type: taxonomy_term_name_into_id
             fail: 'not found'
           validate_options:
-            bundles:
-              location: location
+            bundles: {  }
             access: false
             operation: view
-            multiple: 0
+            transform: false
           break_phrase: false
           depth: 1
           use_taxonomy_term_path: false
