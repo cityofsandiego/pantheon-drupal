@@ -410,6 +410,10 @@ final class Node implements EventSubscriberInterface {
         $department_title = NULL;
         foreach ($node->field_department->getValue() as $department) {
           $term = Term::load($department['target_id']);
+          // If no term then don't try and set department_title.
+          if (empty($term)) {
+            continue;
+          }
           $parent_id = $term->get('parent')->getValue()[0]['target_id'];
           if ($parent_id == 0) {
             $department_title = $term->getName();
@@ -568,6 +572,10 @@ final class Node implements EventSubscriberInterface {
         $side_title = NULL;
         foreach (array_unique($this->departments) as $department) {
           $term = Term::load($department);
+          // If no term then don't try and set side_title.
+          if (empty($term)) {
+            continue;
+          }
           $parent_id = $term->get('parent')->getValue()[0]['target_id'];
           if ($parent_id != 0) {
             $side_title = $term->getName();
