@@ -10,7 +10,6 @@ dependencies:
     - field.field.node.application.field_search_exclude_entity
     - field.field.node.application.field_search_keymatch
     - node.type.application
-    - workflows.workflow.editorial
   module:
     - allowed_formats
     - content_moderation
@@ -29,7 +28,7 @@ third_party_settings:
       label: 'Moderation State'
       region: content
       parent_name: ''
-      weight: 19
+      weight: 17
       format_type: details_sidebar
       format_settings:
         classes: ''
@@ -45,7 +44,7 @@ third_party_settings:
       label: Notes
       region: content
       parent_name: ''
-      weight: 20
+      weight: 18
       format_type: details_sidebar
       format_settings:
         classes: ''
@@ -62,7 +61,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 15
+    weight: 14
     region: content
     settings:
       rows: 9
@@ -89,7 +88,7 @@ content:
     third_party_settings: {  }
   field_meta_tags:
     type: metatag_firehose
-    weight: 26
+    weight: 19
     region: content
     settings:
       sidebar: true
@@ -97,14 +96,14 @@ content:
     third_party_settings: {  }
   field_search_exclude_entity:
     type: search_api_exclude_entity_widget
-    weight: 18
+    weight: 16
     region: content
     settings:
       field_label: 'Yes, exclude this entity from the search indexes.'
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete
-    weight: 17
+    weight: 15
     region: content
     settings:
       match_operator: CONTAINS
@@ -140,13 +139,18 @@ content:
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 8
+    weight: 52
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 10
+    weight: 53
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 50
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -157,7 +161,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 14
+    weight: 13
     region: content
     settings:
       display_label: true
@@ -189,13 +193,13 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 9
+    weight: 54
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 11
+    weight: 55
     region: content
     settings: {  }
     third_party_settings: {  }

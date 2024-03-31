@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.webform.field_sidebar
     - field.field.node.webform.webform
     - node.type.webform
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - field_group
@@ -35,7 +36,7 @@ third_party_settings:
       label: 'Main Tabs'
       region: content
       parent_name: ''
-      weight: 4
+      weight: 3
       format_type: tabs
       format_settings:
         classes: ''
@@ -95,7 +96,7 @@ third_party_settings:
       label: 'Moderation State'
       region: content
       parent_name: ''
-      weight: 18
+      weight: 16
       format_type: details_sidebar
       format_settings:
         classes: ''
@@ -139,7 +140,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 7
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -163,7 +164,7 @@ content:
     third_party_settings: {  }
   field_meta_tags:
     type: metatag_firehose
-    weight: 27
+    weight: 19
     region: content
     settings:
       sidebar: true
@@ -171,7 +172,7 @@ content:
     third_party_settings: {  }
   field_search_exclude_entity:
     type: search_api_exclude_entity_widget
-    weight: 26
+    weight: 18
     region: content
     settings:
       field_label: 'Yes, exclude this entity from the search indexes.'
@@ -209,49 +210,49 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 9
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 17
+    weight: 15
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 10
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 13
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 20
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   simple_sitemap:
-    weight: 6
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 16
+    weight: 14
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 8
+    weight: 7
     region: content
     settings:
       display_label: true
@@ -266,7 +267,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -282,18 +283,18 @@ content:
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 14
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 15
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   webform:
     type: webform_entity_reference_select
-    weight: 3
+    weight: 2
     region: content
     settings:
       default_data: true
