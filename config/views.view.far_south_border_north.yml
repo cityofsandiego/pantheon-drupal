@@ -5923,8 +5923,8 @@ display:
           label: 'Zip Codes'
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: "{% set zips = field_other_keywords|split(', ') %}\r\n{% set lzip = zips|last %}\r\n{% for zip in zips %}\r\n{% if zip == lzip %}\r\n <a href=\"https://sandiego.maps.arcgis.com/apps/instant/nearby/index.html?appid=3d018233cc6048a7af26715a0d36c910&find={{ zip }}\">{{ zip }}</a>\r\n{% else %}\r\n<a href=\"https://sandiego.maps.arcgis.com/apps/instant/nearby/index.html?appid=3d018233cc6048a7af26715a0d36c910&find={{ zip }}\">{{ zip }}</a>, \r\n{% endif %}\r\n{% endfor %}"
             make_link: false
             path: ''
             absolute: false
@@ -10745,8 +10745,8 @@ display:
           label: 'Zip Codes'
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: "{% set zips = field_other_keywords|split(', ') %}\r\n{% set lzip = zips|last %}\r\n{% for zip in zips %}\r\n{% if zip == lzip %}\r\n <a href=\"https://sandiego.maps.arcgis.com/apps/instant/nearby/index.html?appid=3d018233cc6048a7af26715a0d36c910&find={{ zip }}\">{{ zip }}</a>\r\n{% else %}\r\n<a href=\"https://sandiego.maps.arcgis.com/apps/instant/nearby/index.html?appid=3d018233cc6048a7af26715a0d36c910&find={{ zip }}\">{{ zip }}</a>, \r\n{% endif %}\r\n{% endfor %}"
             make_link: false
             path: ''
             absolute: false
