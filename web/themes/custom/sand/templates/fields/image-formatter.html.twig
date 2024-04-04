@@ -12,8 +12,4 @@
  * @see template_preprocess_image_formatter()
  */
 #}
-{% if url %}
-  <a href="{{ url }}"><img src="{{ image.uri }}" alt="{{ image.alt }}" width="{{ image.width }}" height="{{ image.height }}"></a>
-{% else %}
-  <img src="{{ file_url(image['#uri']) }}" alt="{{ image['#alt'] }}" width="{{ image['#width'] }}" height="{{ image['#height'] }}">
-{% endif %}
+{{  image }}
