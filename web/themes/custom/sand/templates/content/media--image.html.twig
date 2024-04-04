@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% if view_mode =='25_desktop_50_mobile' %}
+   {% set view_classes = 'width-25 width-50--mobile' %}
+{% elseif view_mode == '33_desktop_50_mobile' %}
+   {% set view_classes = 'width-33 width-50--mobile' %}
+{% elseif view_mode == '50_desktop_50_mobile' %}
+   {% set view_classes = 'width-50 width-50--mobile' %}
+{% elseif view_mode == '25_desktop_100_mobile' %}
+   {% set view_classes = 'width-25 width-100--mobile' %}
+{% elseif view_mode == '33_desktop_100_mobile' %}
+   {% set view_classes = 'width-33 width-100--mobile' %}
+{% elseif view_mode == '50_desktop_100_mobile' %}
+   {% set view_classes = 'width-50 width-100--mobile' %}
+{% else %}
+   {% set view_classes = 'width-100' %}
+{% endif %}
+{%
+  set classes = [
+    'media--type-' ~ media.bundle()|clean_class,
+    not media.isPublished() ? 'media--unpublished',
+    view_classes
+  ]
+%}
+<figure{{ attributes.addClass(classes) }}>
+  {{ title_suffix.contextual_links }}
+  {% if content %}
+    {{ content }}
+  {% endif %}
+</figure>
