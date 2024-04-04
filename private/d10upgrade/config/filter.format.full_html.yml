@@ -3,8 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.1000px_width
-    - core.entity_view_mode.media.100_full_width
+    - core.entity_view_mode.media.100_desktop_mobile
+    - core.entity_view_mode.media.25_desktop_100_mobile
+    - core.entity_view_mode.media.25_desktop_50_mobile
+    - core.entity_view_mode.media.33_desktop_100_mobile
+    - core.entity_view_mode.media.33_desktop_50_mobile
+    - core.entity_view_mode.media.50_desktop_100_mobile
+    - core.entity_view_mode.media.50_desktop_50_mobile
   module:
     - customfilter
     - editor
@@ -174,11 +179,15 @@ filters:
     status: true
     weight: -44
     settings:
-      default_view_mode: default
+      default_view_mode: 100_desktop_mobile
       allowed_view_modes:
-        default: default
-        1000px_width: 1000px_width
-        100_full_width: 100_full_width
+        100_desktop_mobile: 100_desktop_mobile
+        25_desktop_100_mobile: 25_desktop_100_mobile
+        25_desktop_50_mobile: 25_desktop_50_mobile
+        33_desktop_100_mobile: 33_desktop_100_mobile
+        33_desktop_50_mobile: 33_desktop_50_mobile
+        50_desktop_100_mobile: 50_desktop_100_mobile
+        50_desktop_50_mobile: 50_desktop_50_mobile
       allowed_media_types:
         image: image
   views_embed:
