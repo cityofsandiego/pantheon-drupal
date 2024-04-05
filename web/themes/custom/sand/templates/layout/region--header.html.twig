@@ -21,10 +21,14 @@
           {{ drupal_entity('block', 'sitebranding') }}
         </div>
         <div class="cell medium-auto l-flex-center-h hide-on-mobile" style="padding-top: 10px">
+        {% if path('<current>') != "/connect" %}
             <p><a class="btn btn--pill" href="/connect" style="padding:5px 15px 5px 5px"><img class="img-circle" src="/themes/custom/sand/images/icon-users.png" width="40" height="40" style="margin-right: 8px"><strong>CONNECT</strong> with the City</a></p>
+        {% endif %}
         </div>
         <div class="cell small-6 text-center l-padding-td hide-on-desktop">
+        {% if path('<current>') != "/connect" %}
             <p><a class="btn btn--pill" href="/connect" style="padding:5px 15px 5px 5px;line-height:1.2"><img class="img-circle" src="/themes/custom/sand/images/icon-users.png" width="40" height="40" style="margin-right: 8px"><span class="hide-on-desktop fine-print pull-right text-left" style="padding-top:4px"><strong>CONNECT</strong><br>with the City</span></a></p>
+        {% endif %}
         </div>
         <div class="cell small-4 text-center l-padding-td hidden">
           <a href="#" class="no-underline"><i class="icon-translate icon--lg"></i></a>
