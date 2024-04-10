@@ -1,16 +1,17 @@
 <?php
 
-namespace Drupal\sand_admin\Commands;
+namespace Drupal\sand_admin\Drush\Commands;
 
 use Drush\Commands\DrushCommands;
 
 /**
  * A Drush commandline.
  */
-class SandAdminDrushCommands extends DrushCommands {
+class SandAdminCommands extends DrushCommands {
 
 private $search_and_replace = [
   ['&amp;', '&'],
+  ['&#44;', '&'],
   ['&quot;', "'"],
   ['&#039;', "'"],
 ];
@@ -40,6 +41,20 @@ private $search_and_replace = [
     $this->updateTitles('media', 'name');
   }
 
+
+  /**
+   * Updates node titles using predefined search and replace pairs.
+   *
+   * @command sand_admin:update_file_titles
+   * @aliases sand-admin-updft
+   * @usage sand_admin:update_file_titles
+   *   Clean up file names.
+   */
+  public function updateFileTitles(): void {
+    $this->updateTitles('file', 'filename');
+  }
+
+
   /**
    * Update "titles" ($field_name) on the entity type given.
    *
@@ -53,9 +68,11 @@ private $search_and_replace = [
    */
   private function updateTitles($entity_type, $field_name): void {
 
+    $kount = 0;
     foreach ($this->search_and_replace as $pair) {
       [$search, $replace] = $pair;
       $entity_ids = \Drupal::entityQuery($entity_type)
+        ->accessCheck(FALSE)
         ->condition($field_name, '%' . $search . '%', 'LIKE')
         ->execute();
 
@@ -68,6 +85,7 @@ private $search_and_replace = [
           if ($title !== $newTitle) {
             $entity->set($field_name, $newTitle);
             $entity->save();
+            $kount++;
             \Drupal::logger('sand_admin')->notice('@type ID @id title updated from @oldTitle to @newTitle.', [
               '@type' => ucfirst($entity_type),
               '@id' => $id,
@@ -78,7 +96,10 @@ private $search_and_replace = [
         }
       }
     }
-    $this->logger()->success(dt('@type titles have been updated.', ['@type' => ucfirst($entity_type)]));
+    $this->logger()->success(dt('@kount of @type titles have been updated.', [
+      '@kount' => $kount,
+      '@type' => ucfirst($entity_type)
+    ]));
   }
 
 }
