@@ -11,7 +11,7 @@ class SandAdminCommands extends DrushCommands {
 
 private $search_and_replace = [
   ['&amp;', '&'],
-  ['&#44;', '&'],
+  ['&#44;', ','],
   ['&quot;', "'"],
   ['&#039;', "'"],
 ];
