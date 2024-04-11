@@ -6166,66 +6166,56 @@ html[xmlns] .flexslider .slides {
    ========================================================================== */
 /* Images
    ========================================================================== */
-.img-left, figure.align-left {
+.img-left {
   /* apply to element containing img, typically a <div> or <p> */
 }
+.img-left.width-50--mobile {
+  float: left;
+  margin-right: 1.5rem;
+  padding-top: 5px;
+}
 @media print, screen and (max-width: 63.99875em) {
-  .img-left, figure.align-left {
+  .img-left {
+    width: 100% !important;
     text-align: center;
     margin-bottom: 1em;
   }
 }
 @media print, screen and (min-width: 30em) {
-  .img-left, figure.align-left {
+  .img-left {
     float: left;
     margin: 0 1.5rem 1.2rem 0;
     padding-top: 5px;
   }
 }
-.img-left.width-50--mobile, figure.align-left.width-50--mobile {
-  float: left;
-  margin-right: 1.5rem;
-  padding-top: 5px;
-}
 
-.img-right, figure.align-right {
+.img-right {
   /* apply to element containing img, typically a <div> or <p> */
 }
+.img-right.width-50--mobile {
+  float: right;
+  margin-left: 1.5rem;
+  padding-top: 5px;
+}
 @media print, screen and (max-width: 63.99875em) {
-  .img-right, figure.align-right {
+  .img-right {
+    width: 100% !important;
     text-align: center;
     margin-bottom: 1em;
   }
 }
 @media print, screen and (min-width: 30em) {
-  .img-right, figure.align-right {
+  .img-right {
     float: right;
     margin: 0 0 1.2rem 1.5rem;
     padding-top: 5px;
   }
 }
-.img-right.width-50--mobile, figure.align-right.width-50--mobile {
-  float: right;
-  margin-left: 1.5rem;
-  padding-top: 5px;
-}
 
-.img-center, figure.align-center {
+.img-center {
   clear: both;
   float: none;
   margin: 1.2rem auto;
-}
-
-figure.media--type-image {
-  margin-bottom: 1.2rem;
-}
-figure.caption > figure.media--type-image {
-  margin-bottom: 0 !important;
-}
-
-figure.caption > figure {
-  width: 100% !important;
-  margin: 0 !important;
 }
 
 .photo-credit {
@@ -6385,7 +6375,7 @@ div.focal-point-derxxxivative-preview {
   background-image: url("/web/themes/custom/sand/images/hero-inside-sd.jpg");
 }
 
-a[href$=".pdf"]:after {
+a[href$=".pdf"]::after {
   content: url("/themes/custom/sand/images/pdf-icon.svg");
   -webkit-alt: "PDF icon";
   padding-left: 5px;
@@ -6393,7 +6383,7 @@ a[href$=".pdf"]:after {
   width: 1.5rem;
 }
 
-a[href$=".pdf"].no-pdf-icon:after {
+a[href$=".pdf"].no-pdf-icon::after {
   content: none;
 }
 
