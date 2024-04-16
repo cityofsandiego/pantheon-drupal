@@ -1,68 +1,36 @@
-/*
-We keep things pretty simple here:
-  - Require Gulp
-  - Require Gulp Load Plugins and load all dependencies (gulp-rename and gulp-sourcemaps)
-  - Require gulp-sass, the greatest gift.
-*/
-var gulp = require('gulp'),
-  $      = require('gulp-load-plugins')(),
-  sass   = require('gulp-sass')(require('node-sass')),
-  gulpStylelint = require('@ronilaukkarinen/gulp-stylelint');
+const gulp = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
+const rename = require('gulp-rename');
+const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
+const terser = require('gulp-terser');
+const through2 = require('through2');
+const cleanCSS = require('gulp-clean-css');
+var postcss = require('gulp-postcss');
+var prefixSelector = require('postcss-prefix-selector');
 
-var sassPaths = [
-  'node_modules/foundation-sites/scss',
-  'node_modules/motion-ui/src'
+const sassPaths = [
+  'node_modules'
 ];
 
-/*
-The main styles compliation function:
-  1. Set source to be all .scss files in the sass directory.
-  2. Create source maps.
-  3. Compile the sass.
-  4. Remove the directories so all CSS files are output into the specified dir.
-  5. Write the sourcemaps to the specified dir.
-  6. Specify the dir as css.
-*/
-
-gulp.task('styles', function(){
+// Task for compiling your main Sass files
+gulp.task('styles', function() {
   return gulp.src('sass/**/*.scss')
-    .pipe($.sourcemaps.init())
-    .pipe(sass({
-      includePaths: ['node_modules/susy/sass']
-    })
-    .on('error', sass.logError))
-    .pipe($.rename({dirname: ''}))
-    .pipe($.sourcemaps.write('./'))
-    .pipe(gulp.dest('css'))
-});
-
-gulp.task('foundation', function(){
-  return gulp.src('zurb-foundation/*.scss')
-    .pipe($.sourcemaps.init())
+    .pipe(sourcemaps.init())
     .pipe(sass({
       includePaths: sassPaths
-    })
-    .on('error', sass.logError))
-    .pipe($.rename({dirname: ''}))
-    .pipe($.sourcemaps.write('./'))
-    .pipe(gulp.dest('css'))
+    }).on('error', sass.logError))
+    .pipe(rename({dirname: ''}))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('css'));
 });
 
-gulp.task('lint-scss', function lintCssTask() {
-  return gulp.src('sass/**/*.scss')
-    .pipe(gulpStylelint({
-      reporters: [
-        {formatter: 'string', console: true}
-      ]
-  }));
-});
-
-/*
-The main watch function:
-  1. Look in the SASS dir for changes to .scss files.
-  2. Run the 'styles' task on anything that changes.
-*/
-
-gulp.task('watch', function(){
+// Watch task to watch for file changes and run appropriate tasks
+gulp.task('watch', function() {
   gulp.watch('sass/**/*.scss', gulp.series('styles'));
+  // gulp.watch('zurb-foundation/*.scss', gulp.series('foundation'));
+  // gulp.watch('js/**/*.js', gulp.series('scripts')); // Watch for changes in JS files
 });
+
+// Default task to run when you just type `gulp` in the terminal
+gulp.task('default', gulp.parallel('styles')); // , 'foundation', 'scripts', 'watch'
