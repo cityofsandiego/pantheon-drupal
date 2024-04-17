@@ -16,14 +16,15 @@ const sassPaths = [
 // Task for compiling your main Sass files
 gulp.task('styles', function() {
   return gulp.src('sass/**/*.scss')
-    .pipe(sourcemaps.init())
-    .pipe(sass({
-      includePaths: sassPaths
-    }).on('error', sass.logError))
-    .pipe(rename({dirname: ''}))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('css'));
+      .pipe(sourcemaps.init())
+      .pipe(sass({
+        includePaths: sassPaths
+      }).on('error', sass.logError))
+      .pipe(rename({dirname: ''}))
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest('css'));
 });
+
 
 // Watch task to watch for file changes and run appropriate tasks
 gulp.task('watch', function() {
