@@ -108,13 +108,15 @@
   <div{{ content_attributes.addClass('node__content') }}>
     <div class="grid-x">
       <div class="cell medium-2 l-padding-tm hide-on-mobile">
-        <div class="dept-parent-logo">
-          {% if content.field_image[0] %}
-            {{ content.field_image }}
-          {% else %}
-            <img src="/{{ directory }}/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg" alt="San Diego logo" />
-          {% endif %}
+        {% if content.field_image[0] %}
+        <div class="dept-parent-custom-logo">
+          {{ content.field_image }}
         </div>
+        {% else %}
+        <div class="dept-parent-logo">
+          <img src="/{{ directory }}/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg" alt="San Diego logo" />
+        </div>
+        {% endif %}
       </div>
       <div class="cell small-12 medium-auto">
         <div class="l-padding-am l-padding-desktop-ln l-padding-mobile-td">
