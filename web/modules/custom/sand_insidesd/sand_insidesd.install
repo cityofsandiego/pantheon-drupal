@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the sand_insidesd module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function sand_insidesd_schema() {
+  $schema['sand_insidesd_cleanup'] = [
+    'description' => 'A table to store cleanup data to Create InsideSD',
+    'fields' => [
+      'id' => [
+        'description' => 'Sand InsideSD id value',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'mid' => [
+        'description' => 'Holds the media id used in insidesd',
+        'type' => 'int',
+        'unsigned' => TRUE,
+      ],
+      'fid' => [
+        'description' => 'Holds the file id used in insidesd',
+        'type' => 'int',
+        'unsigned' => TRUE,
+      ],
+      'bundle' => [
+        'description' => 'Holds the bundle name',
+        'type' => 'varchar',
+        'length' => 128,
+      ],
+      'description' => [
+        'description' => 'Description of this row',
+        'type' => 'varchar',
+        'length' => 128,
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'mid' => [
+        'mid',
+      ],
+      'fid' => [
+        'fid',
+      ],
+    ],
+  ];
+  return $schema;
+}
