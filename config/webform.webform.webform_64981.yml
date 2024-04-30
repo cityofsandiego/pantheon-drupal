@@ -58,7 +58,7 @@ elements: |-
     processed_text:
       '#type': processed_text
       '#text': |
-        <p>You must accept the conditions of agreement to submit this request for a free tree. By clicking the box below, you agree to the watering schedule noted above AND that the property for which you are requesting a tree, is in the City of San Diego limits.</p>
+        <p>You must accept the conditions of agreement to submit this&nbsp;form to express interest in receiving a free tree. By clicking the box below, you agree to the watering schedule noted above AND that the property for which you are requesting a tree, is in the City of San Diego limits&nbsp;should you receive a free tree if funding becomes available.&nbsp;</p>
       '#format': basic_html
     accept:
       '#type': checkbox
@@ -171,7 +171,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: '<p>Thank you for your interest in the Free Tree SD program. Tree planting season is typically from November 1&nbsp;to June 1. It may take up to nine months for a new tree to be planted. An informational flyer will be left at your home several weeks before your tree is planted. You will be contacted if we are unable to plant a street tree adjacent to your property.</p>'
+  confirmation_message: '<p>Thank you for your interest in the Free Tree SD program. Due to budget considerations in the upcoming fiscal year (FY25), Free Tree SD is not currently active. If funding becomes available, you will be notified. </p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: 'Back to Form'
@@ -234,7 +234,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: _default
-      body: "Submitted on [webform_submission:created]\r\n\r\n**** OWNER/OCCUPANT CONTACT INFORMATION ****\r\n\r\nNAME:\r\n[webform_submission:values:owner_occupant_first_name_12] [webform_submission:values:owner_occupant_last_name_12]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_address_12]\r\n\r\nPHONE:\r\n[webform_submission:values:phone_12]\r\n\r\n**** TREE ADDRESS ****\r\n\r\n[webform_submission:values:street_3], [webform_submission:values:zip_code_3]\r\n"
+      body: "Submitted on [webform_submission:created]\r\n\r\n== OWNER/OCCUPANT CONTACT INFORMATION ==\r\n\r\nNAME:\r\n[webform_submission:values:owner_occupant_first_name_12] [webform_submission:values:owner_occupant_last_name_12]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_address_12]\r\n\r\nPHONE:\r\n[webform_submission:values:phone_12]\r\n\r\n== TREE ADDRESS ==\r\n\r\n[webform_submission:values:street_3], [webform_submission:values:zip_code_3]\r\n\r\n== CONDITIONS OF AGREEMENT ==\r\n\r\nI accept\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
