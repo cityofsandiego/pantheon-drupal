@@ -978,7 +978,7 @@ display:
           expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
-          text_input_required: ''
+          text_input_required: 'Enter your search terms, then click the Search button.'
           text_input_required_format: basic_html
       access:
         type: none
@@ -1661,16 +1661,15 @@ display:
           use_highlighting: true
           multi_type: separator
           multi_separator: ', '
-        field_other_description:
-          id: field_other_description
-          table: search_api_datasource_content_entity_node
-          field: field_other_description
+        processed_5:
+          id: processed_5
+          table: search_api_index_content
+          field: processed_5
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          plugin_id: search_api_field
-          label: 'Other Description'
+          plugin_id: search_api
+          label: ''
           exclude: true
           alter:
             alter_text: false
@@ -1697,13 +1696,13 @@ display:
             more_link_path: ''
             strip_tags: true
             trim: false
-            preserve_tags: '<p> <mark>'
+            preserve_tags: '<mark> <p>'
             html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: false
@@ -1711,26 +1710,10 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: text_default
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
+          link_to_item: false
+          use_highlighting: true
           multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
+          multi_separator: ', '
         field_other_keywords:
           id: field_other_keywords
           table: search_api_datasource_content_entity_node
@@ -2195,9 +2178,9 @@ display:
           if: type
           condition: eq
           equalto: blog
-          then: '{{ field_other_description }}'
+          then: '<p>{{ processed_5 }}</p>'
           then_translate: true
-          or: '{{ processed_1 }}'
+          or: '<p>{{ processed_1 }}</p>'
           or_translate: true
           strip_tags: false
         field_media_document_1:
@@ -2448,7 +2431,7 @@ display:
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
-            label: Search
+            label: 'Enter a keyword or number:'
             description: ''
             use_operator: false
             operator: search_api_fulltext_op
@@ -2474,6 +2457,7 @@ display:
               sand_admin: '0'
               locations: '0'
               remote_data: '0'
+              sand_admin_environment_indicator: '0'
             expose_fields: false
             placeholder: ''
             searched_fields_id: search_api_fulltext_searched_fields
@@ -2711,7 +2695,6 @@ display:
         - 'config:field.storage.node.field_dept_doc_id'
         - 'config:field.storage.node.field_keywords'
         - 'config:field.storage.node.field_misc_field_1'
-        - 'config:field.storage.node.field_other_description'
         - 'config:field.storage.node.field_other_keywords'
         - 'config:field.storage.node.field_url'
         - 'config:search_api.index.content'
@@ -3114,16 +3097,15 @@ display:
           use_highlighting: true
           multi_type: separator
           multi_separator: ', '
-        field_other_description:
-          id: field_other_description
-          table: search_api_datasource_content_entity_node
-          field: field_other_description
+        processed_5:
+          id: processed_5
+          table: search_api_index_content
+          field: processed_5
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          plugin_id: search_api_field
-          label: 'Other Description'
+          plugin_id: search_api
+          label: ''
           exclude: true
           alter:
             alter_text: false
@@ -3156,7 +3138,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: false
@@ -3164,27 +3146,10 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: text_trimmed
-          settings:
-            trim_length: 600
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
+          link_to_item: false
+          use_highlighting: true
           multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: false
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
+          multi_separator: ', '
         field_other_keywords:
           id: field_other_keywords
           table: search_api_datasource_content_entity_node
@@ -3649,9 +3614,9 @@ display:
           if: type
           condition: eq
           equalto: blog
-          then: '{{ field_other_description }}'
+          then: '<p>{{ processed_5 }}</p>'
           then_translate: true
-          or: '{{ processed_1 }}'
+          or: '<p>{{ processed_1 }}</p>'
           or_translate: true
           strip_tags: false
         nothing:
@@ -3713,7 +3678,7 @@ display:
           expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
-          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required: 'Enter your search terms, then click the Search button.'
           text_input_required_format: basic_html
       empty:
         area:
@@ -3745,7 +3710,7 @@ display:
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
-            label: Search
+            label: 'Enter a keyword or number:'
             description: ''
             use_operator: false
             operator: search_api_fulltext_op
@@ -3771,6 +3736,7 @@ display:
               sand_admin: '0'
               locations: '0'
               remote_data: '0'
+              sand_admin_environment_indicator: '0'
             expose_fields: false
             placeholder: ''
             searched_fields_id: search_api_fulltext_searched_fields
@@ -3995,7 +3961,6 @@ display:
         - 'config:field.storage.node.field_dept_doc_id'
         - 'config:field.storage.node.field_keywords'
         - 'config:field.storage.node.field_misc_field_1'
-        - 'config:field.storage.node.field_other_description'
         - 'config:field.storage.node.field_other_keywords'
         - 'config:field.storage.node.field_url'
         - 'config:search_api.index.content'
@@ -4323,16 +4288,15 @@ display:
           use_highlighting: true
           multi_type: separator
           multi_separator: ', '
-        field_other_description:
-          id: field_other_description
-          table: search_api_datasource_content_entity_node
-          field: field_other_description
+        processed_5:
+          id: processed_5
+          table: search_api_index_content
+          field: processed_5
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          plugin_id: search_api_field
-          label: 'Other Description'
+          plugin_id: search_api
+          label: ''
           exclude: true
           alter:
             alter_text: false
@@ -4357,7 +4321,7 @@ display:
             more_link: false
             more_link_text: ''
             more_link_path: ''
-            strip_tags: true
+            strip_tags: false
             trim: false
             preserve_tags: '<mark> <p>'
             html: false
@@ -4365,7 +4329,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: false
@@ -4373,26 +4337,10 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: text_default
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
+          link_to_item: false
+          use_highlighting: true
           multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
+          multi_separator: ', '
         field_other_keywords:
           id: field_other_keywords
           table: search_api_datasource_content_entity_node
@@ -4857,9 +4805,9 @@ display:
           if: type
           condition: eq
           equalto: blog
-          then: '{{ field_other_description }}'
+          then: '<p>{{ processed_5 }}</p>'
           then_translate: true
-          or: '{{ processed_1 }}'
+          or: '<p>{{ processed_1 }}</p>'
           or_translate: true
           strip_tags: false
         nothing:
@@ -4925,9 +4873,253 @@ display:
             value: '<p>No information bulletins found. Please refine your search.</p>'
             format: full_html
           tokenize: false
+      filters:
+        search_api_fulltext:
+          id: search_api_fulltext
+          table: search_api_index_content
+          field: search_api_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_fulltext
+          operator: and
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: search_api_fulltext_op
+            label: 'Enter a keyword or number:'
+            description: ''
+            use_operator: false
+            operator: search_api_fulltext_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: search_text
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              sand_admin: '0'
+              locations: '0'
+              remote_data: '0'
+              sand_admin_environment_indicator: '0'
+            expose_fields: false
+            placeholder: ''
+            searched_fields_id: search_api_fulltext_searched_fields
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          parse_mode: direct
+          min_length: null
+          fields: {  }
+        type:
+          id: type
+          table: search_api_index_content
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: or
+          value:
+            blog: blog
+            department_document: department_document
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        field_department:
+          id: field_department
+          table: search_api_index_content
+          field: field_department
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_term
+          operator: or
+          value:
+            - 3290
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: department
+          type: textfield
+          hierarchy: false
+          limit: true
+          error_message: true
+        field_category:
+          id: field_category
+          table: search_api_index_content
+          field: field_category
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_term
+          operator: or
+          value:
+            - 2097
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: categories
+          type: textfield
+          hierarchy: false
+          limit: true
+          error_message: true
+        nid:
+          id: nid
+          table: search_api_index_content
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_numeric
+          operator: '!='
+          value:
+            min: ''
+            max: ''
+            value: '234480'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       defaults:
         empty: false
         fields: false
+        filters: false
+        filter_groups: false
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -4944,7 +5136,6 @@ display:
         - 'config:field.storage.node.field_dept_doc_id'
         - 'config:field.storage.node.field_keywords'
         - 'config:field.storage.node.field_misc_field_1'
-        - 'config:field.storage.node.field_other_description'
         - 'config:field.storage.node.field_other_keywords'
         - 'config:search_api.index.content'
         - 'search_api_list:content'
@@ -5271,16 +5462,15 @@ display:
           use_highlighting: true
           multi_type: separator
           multi_separator: ', '
-        field_other_description:
-          id: field_other_description
-          table: search_api_datasource_content_entity_node
-          field: field_other_description
+        processed_5:
+          id: processed_5
+          table: search_api_index_content
+          field: processed_5
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          plugin_id: search_api_field
-          label: 'Other Description'
+          plugin_id: search_api
+          label: ''
           exclude: true
           alter:
             alter_text: false
@@ -5313,7 +5503,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: false
@@ -5321,26 +5511,10 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: text_default
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
+          link_to_item: false
+          use_highlighting: true
           multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
+          multi_separator: ', '
         field_other_keywords:
           id: field_other_keywords
           table: search_api_datasource_content_entity_node
@@ -5805,9 +5979,9 @@ display:
           if: type
           condition: eq
           equalto: blog
-          then: '{{ field_other_description }}'
+          then: '<p>{{ processed_5 }}</p>'
           then_translate: true
-          or: '{{ processed_1 }}'
+          or: '<p>{{ processed_1 }}</p>'
           or_translate: true
           strip_tags: false
         nothing:
@@ -5888,7 +6062,7 @@ display:
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
-            label: Search
+            label: 'Enter a keyword or number:'
             description: ''
             use_operator: false
             operator: search_api_fulltext_op
@@ -5914,6 +6088,7 @@ display:
               sand_admin: '0'
               locations: '0'
               remote_data: '0'
+              sand_admin_environment_indicator: '0'
             expose_fields: false
             placeholder: ''
             searched_fields_id: search_api_fulltext_searched_fields
@@ -6135,7 +6310,6 @@ display:
         - 'config:field.storage.node.field_dept_doc_id'
         - 'config:field.storage.node.field_keywords'
         - 'config:field.storage.node.field_misc_field_1'
-        - 'config:field.storage.node.field_other_description'
         - 'config:field.storage.node.field_other_keywords'
         - 'config:search_api.index.content'
         - 'search_api_list:content'

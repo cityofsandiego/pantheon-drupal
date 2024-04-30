@@ -150,8 +150,8 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Search
-          reset_button: true
+          submit_button: Apply
+          reset_button: false
           reset_button_label: 'Clear Search'
           exposed_sorts_label: 'Sort by'
           expose_sort_order: false
@@ -6259,8 +6259,8 @@ display:
           label: ''
           exclude: true
           alter:
-            alter_text: true
-            text: '<a class="text-accent--desktop" href="{{ field_media_document }}" target="_blank">{{ title }}</a>'
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -6322,7 +6322,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '<a class="text-accent--desktop" href="{{ field_url }}" target="_blank">{{ title }}</a>'
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -6442,7 +6442,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr id=\"hr-{{ counter }}\" class=\"l-margin-vm\">\r\n\r\n<p class=\"l-margin-desktop-ts\">{{ field_url }} <span class=\"pull-right\">{{ edit_node }}</p>\r\n<p><strong>FORM {{ field_dept_doc_id }}</strong></p>\r\n{{ body }} \r\n<p class=\"fine-print\"><em>Revised {{ created }}</em></p>"
+            text: "<hr id=\"hr-{{ counter }}\" class=\"l-margin-vm\">\r\n\r\n<div class=\"grid-x grid-margin-x\">\r\n<div class=\"cell medium-3\">\r\n<p class=\"text-center lh1 l-margin-an hide-on-mobile\"><a class=\"pine-bg text-white rounded-corners l-padding-ad align-center no-underline no-pdf-icon\" href=\"{{ field_url }}\" target=\"_blank\"><strong class=\"fine-print\">FORM</strong><br><strong class=\"text-accent text-white\">{{ field_dept_doc_id }}</strong></a></p>\r\n<p class=\"hide-on-desktop l-margin-bs\"><strong>FORM {{ field_dept_doc_id }}</strong></p>\r\n</div>\r\n<div class=\"cell medium-auto\">\r\n<p class=\"text-accent--desktop l-margin-desktop-ts\"><a href=\"{{ field_url }}\" target=\"_blank\">{{ title }}</a>  <span class=\"fine-print pull-right\">{{ edit_node }}</span></p>\r\n{{ body }} \r\n<p class=\"fine-print\"><em>Revised {{ created }}</em></p>\r\n</div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -6494,6 +6494,19 @@ display:
             format: basic_html
           tokenize: false
       sorts:
+        field_misc_field_1_value:
+          id: field_misc_field_1_value
+          table: node__field_misc_field_1
+          field: field_misc_field_1_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: Number
+            field_identifier: number
+          exposed: true
         title:
           id: title
           table: node_field_data
@@ -6508,19 +6521,6 @@ display:
           expose:
             label: Title
             field_identifier: title
-          exposed: true
-        field_misc_field_1_value:
-          id: field_misc_field_1_value
-          table: node__field_misc_field_1
-          field: field_misc_field_1_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: standard
-          order: ASC
-          expose:
-            label: Number
-            field_identifier: number
           exposed: true
         nid:
           id: nid
@@ -6685,63 +6685,6 @@ display:
           hierarchy: false
           limit: true
           error_message: true
-        combine:
-          id: combine
-          table: views
-          field: combine
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: combine
-          operator: allwords
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: combine_op
-            label: 'Keyword(s) Search:'
-            description: ''
-            use_operator: false
-            operator: combine_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: search
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              content_editor: '0'
-              content_owner: '0'
-              sand_admin_email: '0'
-              sand_admin_email_solr: '0'
-              event: '0'
-              digital_archives_photos: '0'
-              webform_results: '0'
-              webform_results_photos_only: '0'
-              outreach2_article: '0'
-              sand_admin: '0'
-              locations: '0'
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          fields:
-            field_dept_doc_id: field_dept_doc_id
-            title: title
-            body: body
-            field_keywords: field_keywords
       filter_groups:
         operator: AND
         groups:
@@ -6788,7 +6731,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
         - 'url.query_args:sort_by'
         - user
@@ -7672,7 +7614,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr id=\"hr-{{ counter }}\" class=\"l-margin-vm\">\r\n\r\n<div class=\"grid-x grid-margin-x\">\r\n<div class=\"cell medium-3\">\r\n<p class=\"text-center lh1 l-margin-an hide-on-mobile\"><a class=\"cerulean-bg text-white rounded-corners l-padding-ad align-center no-underline no-pdf-icon\" href=\"{{ field_media_document }}\" target=\"_blank\"><strong class=\"fine-print\">INFORMATION BULLETIN</strong><br><span class=\"h2 text-white\">{{ field_other_keywords }}</span></a></p>\r\n<p class=\"hide-on-desktop l-margin-bs\"><strong>INFORMATION BULLETIN {{ field_other_keywords }}</strong></p>\r\n</div>\r\n<div class=\"cell medium-auto\">\r\n<p class=\"text-accent--desktop l-margin-desktop-ts\"><a href=\"{{ field_media_document }}\" target=\"_blank\">{{ title }}</a> <span class=\"fine-print pull-right\">{{ edit_node }}</span></p>\r\n{{ views_conditional_field }}\r\n<p class=\"fine-print\"><em>Revised {{ created }}</em></p>\r\n</div>\r\n</div>"
+            text: "<hr id=\"hr-{{ counter }}\" class=\"l-margin-vm\">\r\n\r\n<div class=\"grid-x grid-margin-x\">\r\n<div class=\"cell medium-3\">\r\n<p class=\"text-center lh1 l-margin-an hide-on-mobile\"><a class=\"cerulean-bg text-white rounded-corners l-padding-ad align-center no-underline no-pdf-icon\" href=\"{{ field_media_document }}\" target=\"_blank\"><strong class=\"fine-print\">INFORMATION BULLETIN</strong><br><strong class=\"text-accent text-white\">{{ field_other_keywords }}</strong></a></p>\r\n<p class=\"hide-on-desktop l-margin-bs\"><strong>INFORMATION BULLETIN {{ field_other_keywords }}</strong></p>\r\n</div>\r\n<div class=\"cell medium-auto\">\r\n<p class=\"text-accent--desktop l-margin-desktop-ts\"><a href=\"{{ field_media_document }}\" target=\"_blank\">{{ title }}</a> <span class=\"fine-print pull-right\">{{ edit_node }}</span></p>\r\n{{ views_conditional_field }}\r\n<p class=\"fine-print\"><em>Revised {{ created }}</em></p>\r\n</div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -7724,6 +7666,19 @@ display:
             format: basic_html
           tokenize: false
       sorts:
+        field_misc_field_1_value:
+          id: field_misc_field_1_value
+          table: node__field_misc_field_1
+          field: field_misc_field_1_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: Number
+            field_identifier: number
+          exposed: true
         title:
           id: title
           table: node_field_data
@@ -7738,19 +7693,6 @@ display:
           expose:
             label: Title
             field_identifier: title
-          exposed: true
-        field_misc_field_1_value:
-          id: field_misc_field_1_value
-          table: node__field_misc_field_1
-          field: field_misc_field_1_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: standard
-          order: ASC
-          expose:
-            label: Number
-            field_identifier: number
           exposed: true
         created:
           id: created
@@ -7917,64 +7859,6 @@ display:
           hierarchy: false
           limit: true
           error_message: true
-        combine:
-          id: combine
-          table: views
-          field: combine
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: combine
-          operator: allwords
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: combine_op
-            label: 'Keyword(s) Search:'
-            description: ''
-            use_operator: false
-            operator: combine_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: search
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              content_editor: '0'
-              content_owner: '0'
-              sand_admin_email: '0'
-              sand_admin_email_solr: '0'
-              event: '0'
-              digital_archives_photos: '0'
-              webform_results: '0'
-              webform_results_photos_only: '0'
-              outreach2_article: '0'
-              sand_admin: '0'
-              locations: '0'
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          fields:
-            field_dept_doc_id: field_dept_doc_id
-            title: title
-            body: body
-            field_other_keywords: field_other_keywords
-            field_keywords: field_keywords
         nid:
           id: nid
           table: node_field_data
@@ -8067,7 +7951,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
         - 'url.query_args:sort_by'
         - user
@@ -13994,6 +13877,19 @@ display:
             format: basic_html
           tokenize: false
       sorts:
+        field_misc_field_1_value:
+          id: field_misc_field_1_value
+          table: node__field_misc_field_1
+          field: field_misc_field_1_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: Number
+            field_identifier: number
+          exposed: true
         title:
           id: title
           table: node_field_data
@@ -14008,19 +13904,6 @@ display:
           expose:
             label: Title
             field_identifier: title
-          exposed: true
-        field_misc_field_1_value:
-          id: field_misc_field_1_value
-          table: node__field_misc_field_1
-          field: field_misc_field_1_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: standard
-          order: ASC
-          expose:
-            label: Number
-            field_identifier: number
           exposed: true
         field_dept_doc_id_value:
           id: field_dept_doc_id_value
@@ -14184,64 +14067,6 @@ display:
           hierarchy: false
           limit: true
           error_message: true
-        combine:
-          id: combine
-          table: views
-          field: combine
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: combine
-          operator: allwords
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: combine_op
-            label: 'Keyword(s) Search:'
-            description: ''
-            use_operator: false
-            operator: combine_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: search
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              content_editor: '0'
-              content_owner: '0'
-              sand_admin_email: '0'
-              sand_admin_email_solr: '0'
-              event: '0'
-              digital_archives_photos: '0'
-              webform_results: '0'
-              webform_results_photos_only: '0'
-              outreach2_article: '0'
-              sand_admin: '0'
-              locations: '0'
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          fields:
-            field_dept_doc_id: field_dept_doc_id
-            title: title
-            body: body
-            field_other_keywords: field_other_keywords
-            field_keywords: field_keywords
         nid:
           id: nid
           table: node_field_data
@@ -14334,7 +14159,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
         - 'url.query_args:sort_by'
         - user
