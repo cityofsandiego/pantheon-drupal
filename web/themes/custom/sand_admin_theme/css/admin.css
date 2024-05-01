@@ -214,9 +214,20 @@ input#edit-media-type-video, label[for=edit-media-type-video] {
   font-family: "Courier New", Monospace;
 }
 
+/* make sure that when in ckeditor5 the source is full height */
+.ck-source-editing-area textarea {
+  height: 100% !important;
+}
+
+/* take away the ul choices of square and circle */
+button[data-cke-tooltip-text=Square],
+button[data-cke-tooltip-text=Circle] {
+  display: none !important;
+}
+
 /* Fix overflow for outreach2 add/edit form. Replaced the display: table. */
 @media screen and (min-width: 1025px) {
-  form table#field-sections-outreach2-values {
+  form table[id^=field-sections-outreach2-values] {
     display: flow-root;
   }
 }
