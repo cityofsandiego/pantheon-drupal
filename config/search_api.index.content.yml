@@ -209,7 +209,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: field_other_keywords
     type: text
-    boost: !!float 13
+    boost: 13.0
     dependencies:
       config:
         - field.storage.node.field_other_keywords
@@ -242,7 +242,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: 'field_department:entity:name'
     type: text
-    boost: !!float 2
+    boost: 2.0
     dependencies:
       config:
         - field.storage.node.field_department
@@ -263,7 +263,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: 'field_search_keymatch:entity:name'
     type: text
-    boost: !!float 2
+    boost: 2.0
     dependencies:
       config:
         - field.storage.node.field_search_keymatch
@@ -392,7 +392,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: title
     type: text
-    boost: !!float 13
+    boost: 13.0
     dependencies:
       module:
         - node
@@ -543,13 +543,13 @@ processor_settings:
       preprocess_query: 0
     boosts:
       changed:
-        boost: !!float 13
+        boost: 13.0
         resolution: NOW
         m: '3.16e-11'
         a: 0.1
         b: 0.05
       created:
-        boost: !!float 8
+        boost: 8.0
         resolution: NOW
         m: '3.16e-11'
         a: 0.1
@@ -562,12 +562,12 @@ processor_settings:
       preprocess_index: 0
     boosts:
       'entity:node':
-        datasource_boost: !!float 1
+        datasource_boost: 1.0
         bundle_boosts:
-          department: !!float 2
-          department_parent: !!float 21
+          department: 2.0
+          department_parent: 21.0
           mayoral_artifacts: 1.1
-          outreach: !!float 13
+          outreach: 13.0
 tracker_settings:
   default:
     indexing_order: lifo

@@ -80,7 +80,7 @@ $config = [
      * root directory.
      */
     'certdir' => 'cert/',
-    'loggingdir' => 'log/',
+    'loggingdir' => NULL,
     'datadir' => 'data/',
     'tempdir' => '/tmp/simplesaml',
 
