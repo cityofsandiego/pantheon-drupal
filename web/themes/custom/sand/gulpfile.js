@@ -13,6 +13,11 @@ const sassPaths = [
   'node_modules'
 ];
 
+const sassPathsFoundation = [
+  'node_modules',
+  'node_modules/foundation-sites/scss',
+  'node_modules/motion-ui/src'
+];
 // Task for compiling your main Sass files
 gulp.task('styles', function() {
   return gulp.src('sass/**/*.scss')
@@ -65,6 +70,33 @@ gulp.task('ckeditor', function() {
       .pipe(gulp.dest('css'));
 });
 
+/**
+ * Generate Foundation CSS for CKEditor5.
+ *
+ * This generates the foundation css wrapped in a prefix so it only affects
+ * Ckeditor5 fields. It's then used in the sand.info.yml file for the ckeditor5.
+ * The code was copied from the foundation task and then the prefix portion of
+ * the ckeditor task.
+ */
+gulp.task('ckeditor5_foundation', function () {
+  return gulp.src('zurb-foundation/*.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass({
+      includePaths: sassPathsFoundation
+    }).on('error', sass.logError))
+    .pipe(postcss([
+      prefixSelector({
+        prefix: 'div.ck.ck-editor__main',
+        // Exclude selectors you don't want to prefix here
+        exclude: [':root', '.ck-editor__main', /.*ckeditor.*/]
+      })
+    ]))
+    .pipe(rename({dirname: ''}))
+    .pipe(concat('ckeditor5_foundation.css')) // Combine all CSS into a single file
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('css'));
+});
+
 // Watch task to watch for file changes and run appropriate tasks
 gulp.task('watch', function() {
   gulp.watch('sass/**/*.scss', gulp.series('styles'));
@@ -73,4 +105,4 @@ gulp.task('watch', function() {
 });
 
 // Default task to run when you just type `gulp` in the terminal
-gulp.task('default', gulp.parallel('styles', 'ckeditor')); // , 'foundation', 'scripts', 'watch'
+gulp.task('default', gulp.parallel('styles', 'ckeditor', 'ckeditor5_foundation')); // , 'foundation', 'scripts', 'watch'
