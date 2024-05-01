@@ -4,6 +4,7 @@ namespace Drupal\sand_hours\Plugin\Field\FieldFormatter;
 
 use DateTime;
 use DateTimeZone;
+use Drupal\Component\Utility\SortArray;
 use Drupal\Core\Field\Annotation\FieldFormatter;
 use Drupal\Core\Field\FieldItemListInterface;
 
@@ -125,15 +126,17 @@ class SandHoursFormatter extends OfficeHoursFormatterBase {
       ],
     ];
 
-    $elements = $this->addSchemaFormatter($items, $langcode, $elements);
-    $elements = $this->addStatusFormatter($items, $langcode, $elements);
+    $elements = $this->attachSchemaFormatter($items, $langcode, $elements);
+    $elements = $this->attachStatusFormatter($items, $langcode, $elements);
+    // Sort elements, to have Statusformattor on correct position.
+    usort($elements, [SortArray::class, 'sortByWeightProperty']);
 
-    // Enable dynamic field update in office_hours_status_update.js.
-    // Since Field cache does not work properly for Anonymous users.
-    $elements = $this->attachStatusUpdateJS($items, $langcode, $elements);
-    // Add a ['#cache']['max-age'] attribute to $elements.
-    // Note: This invalidates a previous Cache in Status Formatter.
-    $elements = $this->addCacheData($items, $elements);
+    if ($this->attachCache) {
+      // Since Field cache does not work properly for Anonymous users,
+      // .. enable dynamic field update in office_hours_status_update.js.
+      // .. add a ['#cache']['max-age'] attribute to $elements.
+      $elements += $this->attachCacheData($items, $langcode);
+    }
 
     return $elements;
   }
