@@ -5077,48 +5077,15 @@ div.ck.ck-editor__main .dataTables_wrapper table.dataTable thead > tr > th.sorti
   top: 52%;
 }
 
-div.ck.ck-editor__main .block-local-tasks-block {
-  position: relative;
-  margin-bottom: 0;
-  background-color: rgba(221, 226, 229, 0.75);
-  border-bottom: solid 2px #fff;
-  z-index: 1;
-}
-div.ck.ck-editor__main .block-local-tasks-block .local-tasks {
-  display: flex;
-}
-div.ck.ck-editor__main .block-local-tasks-block .local-tasks-tabs {
-  background-color: transparent;
-  border-bottom: 0;
-  display: flex;
-  justify-content: start;
-  margin: 0.5rem 0 0;
-}
-div.ck.ck-editor__main .block-local-tasks-block .local-tasks-tabs li {
-  width: auto;
-  margin-right: 5px;
-  border-radius: 4px 4px 0 0;
-}
-div.ck.ck-editor__main .block-local-tasks-block .local-tasks-tabs li:last-child {
-  margin-right: 0;
-}
-div.ck.ck-editor__main .block-local-tasks-block .local-tasks-tabs li.is-active {
-  background-color: #fff;
-}
-div.ck.ck-editor__main .block-local-tasks-block .tabs {
-  background-color: transparent;
-  border: none;
-  width: 1200px;
-  margin: 0 auto;
-}
-@media print {
-  div.ck.ck-editor__main .block-local-tasks-block {
-    display: none;
-  }
-}
-
 /* Tabs
    ========================================================================== */
+div.ck.ck-editor__main .tabs {
+  margin: 0;
+  border: 1px solid #e6e6e6;
+  background: #fefefe;
+  list-style-type: none;
+}
+
 div.ck.ck-editor__main .tabs-list {
   z-index: 1;
   padding: 0;
@@ -5127,6 +5094,14 @@ div.ck.ck-editor__main .tabs-list {
   background: #f6f6f6;
   display: block;
 }
+
+div.ck.ck-editor__main .tabs__bucket {
+  display: block !important;
+  border-style: double;
+  margin: 20px 0;
+  padding: 10px;
+}
+
 @media print, screen and (min-width: 30em) {
   div.ck.ck-editor__main .tabs-list {
     display: flex;
@@ -16299,26 +16274,39 @@ div.ck.ck-editor__main div.ck-source-editing-area textarea {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.tabs, .tabs.primary {
+div.ck.ck-editor__main .accordion {
+  border: 1px solid #a7abad !important;
+}
+
+div.ck.ck-editor__main .accordion .accordion__drawer {
+  display:block !important;
+}
+
+.block-local-tasks-block .tabs, .block-local-tasks-block .tabs.primary {
   background:transparent !important;
   border: none !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: initial;
 }
 
-.tabs.primary > li > a {
+.block-local-tasks-block .tabs.primary > li > a {
   color: #0678be !important;
   background-color: transparent !important;
 }
 
-h1, h2, h3, h4, h5 {
+.block-page-title-block h1, .block-page-title-block h2, .block-page-title-block h3, .block-page-title-blockh4, .block-page-title-block h5 {
   font-family: 'Ubuntu', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: initial;
 }
 
 h4.label {
+  font-family: 'Ubuntu', sans-serif !important;
   font-size: 16px;
   background: transparent;
   color: inherit;
+}
+
+div.ck.ck-editor__main span.ck-widget.html-object-embed {
+  display: unset;
 }
