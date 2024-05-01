@@ -26,6 +26,7 @@ gulp.task('styles', function() {
         includePaths: sassPaths
       }).on('error', sass.logError))
       .pipe(rename({dirname: ''}))
+      .pipe(cleanCSS({removeDuplicateRules: 'true', format: 'beautify'}))
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest('css'));
 });
@@ -38,6 +39,7 @@ gulp.task('foundation', function () {
         includePaths: sassPaths
       }).on('error', sass.logError))
       .pipe(rename({dirname: ''}))
+      .pipe(cleanCSS({removeDuplicateRules: 'true', format: 'beautify'}))
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest('css'));
 });
@@ -48,6 +50,7 @@ gulp.task('scripts', function() {
       .pipe(sourcemaps.init())
       .pipe(concat('app.js')) // This will concatenate all js files into a single file named 'app.js'
       .pipe(terser()) // Uncomment this line if you want to minify your JavaScript files
+      .pipe(cleanCSS({removeDuplicateRules: 'true', format: 'beautify'}))
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest('dist/js')); // Adjust the destination to where you want your compiled JS to go
 });
@@ -66,6 +69,7 @@ gulp.task('ckeditor', function() {
         })
       ]))
       .pipe(concat('ckeditor5_styles.css')) // Combine all CSS into a single file
+      .pipe(cleanCSS({removeDuplicateRules: 'true', format: 'beautify'}))
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest('css'));
 });
@@ -93,6 +97,7 @@ gulp.task('ckeditor5_foundation', function () {
     ]))
     .pipe(rename({dirname: ''}))
     .pipe(concat('ckeditor5_foundation.css')) // Combine all CSS into a single file
+      .pipe(cleanCSS({removeDuplicateRules: 'true', format: 'beautify'}))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('css'));
 });
