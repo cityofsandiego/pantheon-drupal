@@ -98,10 +98,11 @@ gulp.task('ckeditor5_foundation', function () {
     ]))
     .pipe(rename({dirname: ''}))
     .pipe(concat('ckeditor5_foundation.css')) // Combine all CSS into a single file
-      .pipe(cleanCSS({removeDuplicateRules: 'true', format: 'beautify'}))
+    .pipe(cleanCSS({removeDuplicateRules: 'true', format: 'beautify'}))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('css'));
 });
+
 
 // Watch task to watch for file changes and run appropriate tasks
 gulp.task('watch', function() {
