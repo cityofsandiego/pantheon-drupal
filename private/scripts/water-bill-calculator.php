@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Water Bill Calculator 2023 | City of San Diego Official
+    <title>Water Bill Calculator | City of San Diego Official
         Website</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,800,700|Merriweather:400,700'
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="nine columns">
-                    <h1 class="text-white heading--trim">Water Bill Calculator 2023</h1>
+                    <h1 class="text-white heading--trim">Water Bill Calculator</h1>
                     <p class="text-white l-margin-bn">Public Utilities Department</p> <!-- optional -->
                 </div>
             </div>
@@ -51,7 +51,7 @@
 
                               // *** Edit these values below ***
 
-                              $Date_YYYYMM = 202312;
+                              $Effective_Date_YYYYMMDD = 20231201;
 
                               $Water_Meter_Size_5_8_inch = 24.11;
                               $Water_Meter_Size_3_4_inch = 24.11;
@@ -215,7 +215,9 @@
                                 echo "<h2>Bill Estimate</h2>";
                                 echo "<p>Here is your water bill estimate based on the information you entered:</p>";
                                 echo "<table border='1' cellpadding='1' cellspacing='1' style='width:100%;' >\n<tbody>\n";
-                                echo "	<tr>\n<th colspan='2'>Period</td>\n<th class='commrow'>Rates Effective December 1, 2023</td>\n</tr>\n";
+                                $effectiveDate = DateTime::createFromFormat('Ymd', $Effective_Date_YYYYMMDD);
+                                $formattedDate = $effectiveDate->format('F j, Y');
+                                echo "  <tr>\n<th colspan='2'>Period</th>\n<th class='commrow'>Rates Effective $formattedDate</th>\n</tr>\n";
 
                                 $totalBill = 0;
                                 $rowtotal = 0;
