@@ -168,7 +168,7 @@
                               ];
 
                               $showCalculation = FALSE;
-                              $sewerservicechargefrombill = "Estimate: ";
+//                              $sewerservicechargefrombill = "Estimate: ";
 
                               if (isset($_GET["customertype"])) {
                                 $customertype = $_GET["customertype"];
@@ -179,15 +179,15 @@
                               if (isset($_GET["waterusage"])) {
                                 $waterusage = $_GET["waterusage"];
                               }
-                              if (isset($_GET["sewerservicecharge"])) {
-                                $sewerservicecharge = $_GET["sewerservicecharge"];
-                              }
-                              if(is_numeric($sewerservicecharge)) {
-                                $sewerservicewinterhcf = $sewerservicecharge;
-                                $sewerservicechargefrombill = "From Water Bill: ";
-                              } else {
-                                $sewerservicewinterhcf = $waterusage;
-                              }
+//                              if (isset($_GET["sewerservicecharge"])) {
+//                                $sewerservicecharge = $_GET["sewerservicecharge"];
+//                              }
+//                              if(is_numeric($sewerservicecharge)) {
+//                                $sewerservicewinterhcf = $sewerservicecharge;
+//                                $sewerservicechargefrombill = "From Water Bill: ";
+//                              } else {
+//                                $sewerservicewinterhcf = $waterusage;
+//                              }
                               if ($customertype and $watermetersize) {
                                 if ($waterusage) {
                                   $showCalculation = TRUE;
@@ -286,36 +286,36 @@
                                 }
 
                                 //             Display Wastewater Fees
-                                if ($customertype >= 1 and $customertype <=2) {
-                                  echo "	<tr><td colspan='2'><strong>Sewer Service Charge</strong></td>\n";
-                                  echo "           <td class ='commrow'>&nbsp;</td> \n</tr>\n";
-                                }
-                                switch ($customertype) {
-                                  case 1:
-                                    $sewerservicechargefrombill = "$" . $Wastewater_Single_Family_Residential . " * " . $sewerservicechargefrombill . $sewerservicewinterhcf . " HCF";
-                                    $rowtotal = $Wastewater_Single_Family_Residential * $sewerservicewinterhcf;
-                                    $rowtotal = $Wastewater_Single_Family_Residential;
-                                    $totalBill += $rowtotal;
-                                    echo "<tr>\n<td class='l-padding-lm' colspan='2'>Single-family Residential (monthly amount calculated)</td>\n<td class='commrow'><strong>$" . number_format($totalBill, 2, '.', '') . "</strong></td></tr>\n";
-                                    $totalBill += $Wastewater_Service_Fee;
-                                    echo "   <tr><td colspan='2' class='l-padding-lm'>Sewer Monthly Service Fee</td>\n<td class='commrow'>$" . number_format($Wastewater_Service_Fee, 2, '.', '') . "</td></tr>\n";
-                                    echo "   <tr><td colspan='3'><strong>*</strong> Residential sewer charges are based on the account's water usage (HCF) from the past winter and are not calculated based on current water usage.</td></tr>\n";
-                                    break;
-                                  case 2:
-                                    $sewerservicechargefrombill = "$" . $Wastewater_Multi_Family_Residential . " * " . $sewerservicechargefrombill . $sewerservicewinterhcf . " HCF";
-                                    $rowtotal = $Wastewater_Multi_Family_Residential * $sewerservicewinterhcf;
-                                    $totalBill += $rowtotal;
-                                    echo "<tr>\n<td class='l-padding-lm' colspan='2'>Multi-family Residential (monthly amount calculated)</td>\n<td class='commrow'>$" . number_format($rowtotal, 2, '.', '') . "</td></tr>\n";
-                                    $totalBill += $Wastewater_Service_Fee;
-                                    echo "   <tr><td colspan='2' class='l-padding-lm'>Sewer Monthly Service Fee</td>\n<td class='commrow'>$" . number_format($Wastewater_Service_Fee, 2, '.', '') . "</td></tr>\n";
-                                    echo "   <tr><td colspan='3'><strong>*</strong> Residential sewer charges are based on the account's water usage (HCF) from the past winter and are not calculated based on current water usage.</td></tr>\n";
-                                    break;
-                                  case 3:
-                                    echo "   <tr><td colspan='3'><strong>*</strong> Non-Residential Wastewater customers are charged based on the flow and strength of wastewater, which is dependent on business operations. All factors (flow and strength for non-residential) and base meter fees are expected to decrease for non-residential customers and the class as a whole is expected to result in a 12% decrease in costs from the prior rates in effect. Individual bills will vary due to the unique characteristics  of each customer.</td></tr>\n";
-                                    break;
-                                  default:
-                                    break;
-                                }
+//                                if ($customertype >= 1 and $customertype <=2) {
+//                                  echo "	<tr><td colspan='2'><strong>Sewer Service Charge</strong></td>\n";
+//                                  echo "           <td class ='commrow'>&nbsp;</td> \n</tr>\n";
+//                                }
+//                                switch ($customertype) {
+//                                  case 1:
+//                                    $sewerservicechargefrombill = "$" . $Wastewater_Single_Family_Residential . " * " . $sewerservicechargefrombill . $sewerservicewinterhcf . " HCF";
+//                                    $rowtotal = $Wastewater_Single_Family_Residential * $sewerservicewinterhcf;
+//                                    $rowtotal = $Wastewater_Single_Family_Residential;
+//                                    $totalBill += $rowtotal;
+//                                    echo "<tr>\n<td class='l-padding-lm' colspan='2'>Single-family Residential (monthly amount calculated)</td>\n<td class='commrow'><strong>$" . number_format($totalBill, 2, '.', '') . "</strong></td></tr>\n";
+//                                    $totalBill += $Wastewater_Service_Fee;
+//                                    echo "   <tr><td colspan='2' class='l-padding-lm'>Sewer Monthly Service Fee</td>\n<td class='commrow'>$" . number_format($Wastewater_Service_Fee, 2, '.', '') . "</td></tr>\n";
+//                                    echo "   <tr><td colspan='3'><strong>*</strong> Residential sewer charges are based on the account's water usage (HCF) from the past winter and are not calculated based on current water usage.</td></tr>\n";
+//                                    break;
+//                                  case 2:
+//                                    $sewerservicechargefrombill = "$" . $Wastewater_Multi_Family_Residential . " * " . $sewerservicechargefrombill . $sewerservicewinterhcf . " HCF";
+//                                    $rowtotal = $Wastewater_Multi_Family_Residential * $sewerservicewinterhcf;
+//                                    $totalBill += $rowtotal;
+//                                    echo "<tr>\n<td class='l-padding-lm' colspan='2'>Multi-family Residential (monthly amount calculated)</td>\n<td class='commrow'>$" . number_format($rowtotal, 2, '.', '') . "</td></tr>\n";
+//                                    $totalBill += $Wastewater_Service_Fee;
+//                                    echo "   <tr><td colspan='2' class='l-padding-lm'>Sewer Monthly Service Fee</td>\n<td class='commrow'>$" . number_format($Wastewater_Service_Fee, 2, '.', '') . "</td></tr>\n";
+//                                    echo "   <tr><td colspan='3'><strong>*</strong> Residential sewer charges are based on the account's water usage (HCF) from the past winter and are not calculated based on current water usage.</td></tr>\n";
+//                                    break;
+//                                  case 3:
+//                                    echo "   <tr><td colspan='3'><strong>*</strong> Non-Residential Wastewater customers are charged based on the flow and strength of wastewater, which is dependent on business operations. All factors (flow and strength for non-residential) and base meter fees are expected to decrease for non-residential customers and the class as a whole is expected to result in a 12% decrease in costs from the prior rates in effect. Individual bills will vary due to the unique characteristics  of each customer.</td></tr>\n";
+//                                    break;
+//                                  default:
+//                                    break;
+//                                }
 
                                 // Display Recycled Water Fees
                                 if ($recycledwatermetersize and $recycledwaterusage) {
@@ -384,10 +384,10 @@
                                         <td><label for="waterusage" class="l-padding-lm">Monthly Water Usage (HCF)</label>:</td>
                                         <td><input id="waterusage" maxlength="9" name="waterusage" size="6" type="Text"><input id="hiddenfield" style="width:0; border:none;" type="hidden"></td>
                                     </tr>
-                                    <tr>
-                                        <td><label for="sewerservicecharge" class="l-padding-lm">Sewer Service Charge</label>:</td>
-                                        <td><input id="sewerservicecharge" maxlength="9" name="sewerservicecharge" size="6" type="Text" class="sewerservicechargeinput" style="display: none;"> <span class="sewerservicechargeinput" style="display: none;">(Use Bi-Monthly amount from bill)</span> <span class="sewerservicechargeinputdisabled">(Only for residential estimates)</span><input id="hiddenfield" style="width:0; border:none;" type="hidden"></td>
-                                    </tr>
+<!--                                    <tr>-->
+<!--                                        <td><label for="sewerservicecharge" class="l-padding-lm">Sewer Service Charge</label>:</td>-->
+<!--                                        <td><input id="sewerservicecharge" maxlength="9" name="sewerservicecharge" size="6" type="Text" class="sewerservicechargeinput" style="display: none;"> <span class="sewerservicechargeinput" style="display: none;">(Use Bi-Monthly amount from bill)</span> <span class="sewerservicechargeinputdisabled">(Only for residential estimates)</span><input id="hiddenfield" style="width:0; border:none;" type="hidden"></td>-->
+<!--                                    </tr>-->
                                     <tr>
                                         <td><label for="recycledwatermetersize">Recycled Water Meter Size</label>:</td>
                                         <td colspan="2"><select id="recycledwatermetersize" name="recycledwatermetersize">
@@ -443,17 +443,17 @@
                             <p>This calculator is only for a portion of your City of San Diego utility bill. It does not include storm water portions.</p>
                             <p>If you have any questions or comments, please contact the Public Utilities Department at 619-515-3516 or <a href="mailto:customercare@sandiego.gov">customercare@sandiego.gov</a>.</p>
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                            <script>
-                              jQuery('#customertype').change(function(){
-                                if(jQuery(this).val() == '1' || jQuery(this).val() == '2'){
-                                  jQuery('.sewerservicechargeinput').show();
-                                  jQuery('.sewerservicechargeinputdisabled').hide();
-                                } else {
-                                  jQuery('.sewerservicechargeinput').hide();
-                                  jQuery('.sewerservicechargeinputdisabled').show();
-                                }
-                              });
-                            </script>
+<!--                            <script>-->
+<!--                              jQuery('#customertype').change(function(){-->
+<!--                                if(jQuery(this).val() == '1' || jQuery(this).val() == '2'){-->
+<!--                                  jQuery('.sewerservicechargeinput').show();-->
+<!--                                  jQuery('.sewerservicechargeinputdisabled').hide();-->
+<!--                                } else {-->
+<!--                                  jQuery('.sewerservicechargeinput').hide();-->
+<!--                                  jQuery('.sewerservicechargeinputdisabled').show();-->
+<!--                                }-->
+<!--                              });-->
+<!--                            </script>-->
 
                         </div>
                     </div>
