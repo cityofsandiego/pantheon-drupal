@@ -12,69 +12,70 @@ id: webform_60013
 title: 'Meeting with the Chief Request Form'
 description: null
 categories: {  }
-elements: |
+elements: |-
   first_page:
     '#type': webform_wizard_page
     '#title': Start
     fieldset_meeting_overview:
       '#type': fieldset
       '#open': true
-      '#title': 'Meeting Overview' 
-      '#description': ""
+      '#title': 'Meeting Overview'
+      '#description': ''
       topic_1:
         '#type': textfield
-        '#title': 'Topic' 
-        '#description': ""
+        '#title': Topic
+        '#description': ''
         '#required': true
       meeting_date_1:
         '#type': date
-        '#title': 'Meeting Date' 
-        '#description': ""
+        '#title': 'Meeting Date'
+        '#description': ''
         '#required': true
       flexible_date_1:
         '#type': radios
         '#options':
-          yes: 'Yes'
-          no: 'No'
-        '#title': 'Flexible Date?' 
-        '#description': ""
+          'yes': 'Yes'
+          'no': 'No'
+        '#title': 'Flexible Date?'
+        '#description': ''
         '#required': true
       location_1:
         '#type': radios
         '#options':
           chief: 'Chief"s Office'
-          other: 'Other'
-        '#title': 'Location' 
-        '#description': ""
+          other: Other
+        '#title': Location
+        '#description': ''
         '#required': true
       address_1:
         '#type': textfield
-        '#title': 'Address' 
-        '#description': ""
+        '#title': Address
+        '#description': ''
         '#states':
           visible:
             ':input[name="location_1"]':
               value: other
-              
-      start_time_1:
-        '#type': time
-        '#time_format': 'g:i A'
-        '#title': 'Start Time' 
-        '#description': ""
+      start_time:
+        '#type': webform_time
+        '#title': 'Start Time'
         '#required': true
-      end_time_1:
-        '#type': time
+        '#timepicker': true
         '#time_format': 'g:i A'
-        '#title': 'End Time' 
-        '#description': ""
+        '#step': 900
+      end_time:
+        '#type': webform_time
+        '#title': 'End Time'
         '#required': true
+        '#timepicker': true
+        '#time_format': 'g:i A'
+        '#step': 900
       flexible_time_1:
         '#type': radios
         '#options':
-          yes: 'Yes'
-          no: 'No'
-        '#title': 'Flexible Time?' 
-        '#description': ""
+          'yes': 'Yes'
+          'no': 'No'
+        '#title': 'Flexible Time?'
+        '#description': ''
         '#required': true
   continue:
     '#type': webform_wizard_page
@@ -82,70 +83,72 @@ elements: |
     fieldset_organization__contact_details:
       '#type': fieldset
       '#open': true
-      '#title': 'Organization & Contact Details' 
-      '#description': ""
+      '#title': 'Organization & Contact Details'
+      '#description': ''
       organization_business_11:
         '#type': textfield
-        '#title': 'Organization/Business' 
-        '#description': ""
+        '#title': Organization/Business
+        '#description': ''
         '#required': true
       about_your_organization_11:
-        '#title': 'About Your Organization' 
-        '#description': ""
+        '#title': 'About Your Organization'
+        '#description': ''
         '#required': true
       first_and_last_name_11:
         '#type': textfield
-        '#title': 'First and Last Name' 
-        '#description': ""
+        '#title': 'First and Last Name'
+        '#description': ''
         '#required': true
       title_11:
         '#type': textfield
-        '#title': 'Title' 
-        '#description': ""
+        '#title': Title
+        '#description': ''
         '#required': true
       email2_11:
         '#type': email
         '#size': 20
-        '#title': 'Email' 
-        '#description': ""
+        '#title': Email
+        '#description': ''
         '#required': true
       phone_11:
         '#type': textfield
-        '#title': 'Phone' 
-        '#description': ""
+        '#title': Phone
+        '#description': ''
         '#required': true
       cell_phone_11:
         '#type': textfield
-        '#title': 'Cell Phone' 
-        '#description': ""
+        '#title': 'Cell Phone'
+        '#description': ''
         '#required': true
   continue2:
     '#type': webform_wizard_page
-    '#title': Meeting Details
+    '#title': 'Meeting Details'
     fieldset_event_details:
       '#type': fieldset
       '#open': true
-      '#title': 'Meeting Details' 
-      '#description': ""
+      '#title': 'Meeting Details'
+      '#description': ''
       other_speakers_or_invited_guests_will_there_be_any_other_elected_officials_dignitaries_21:
         '#type': textarea
-        '#title': 'Additional invited guests:' 
-        '#description': ""
+        '#title': 'Additional invited guests:'
+        '#description': ''
         '#required': true
       number_of_attendees_21:
         '#type': textfield
-        '#title': 'Number of Attendees' 
-        '#description': ""
+        '#title': 'Number of Attendees'
+        '#description': ''
         '#required': true
       tentative_agenda_21:
         '#type': managed_file
         '#max_filesize': '2'
         '#file_extensions': 'txt rtf pdf doc docx'
-        '#title': 'Tentative Agenda' 
-        '#description': ""
-      additional_comments_21:
-        '#title': 'Additional comments' 
-        '#description': ""
+        '#title': 'Tentative Agenda'
+        '#description': ''
+      additional_comments:
+        '#type': textarea
+        '#title': 'Additional comments'
+        '#counter_type': character
+        '#counter_maximum': 500
 css: ''
 javascript: ''
 settings:
@@ -168,47 +171,10 @@ access:
       - authenticated
     users: {  }
 handlers:
-  email_1:
-    id: email
-    handler_id: email_1
-    label: 'Email 1'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 1
-    settings:
-      states:
-        - completed
-      to_mail: '2'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: default
-      from_options: {  }
-      from_name: default
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: default
-      body: default
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: false
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
   email_3:
     id: email
     handler_id: email_3
-    label: 'Email 3'
+    label: Response
     notes: ''
     status: true
     conditions: {  }
@@ -216,65 +182,21 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform_submission:values:email2:raw]'
+      to_mail: '[webform_submission:values:email2_11:raw]'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: |+
-        Thank you for your submission to Chief Nisleit's Office.
-
-        Submitted on [webform_submission:date:long]
-        Submitted by user: [webform_submission:user]
-        Submitted values are:
-        [webform_submission:values]
-
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: false
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_4:
-    id: email
-    handler_id: email_4
-    label: 'Email 4'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 4
-    settings:
-      states:
-        - completed
-      to_mail: lkosta@sandiego.gov
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:email2:raw]'
-      from_options: {  }
-      from_name: default
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: default
-      body: default
+      subject: 'Request for a Meeting with the Police Chief (City of San Diego)'
+      body: 'Thank you for your request. A representative from the Chief’s Office will respond within 7-10 business days. If you require any further information, call 619-531-2777 for assistance.'
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -289,7 +211,7 @@ handlers:
   email_5:
     id: email
     handler_id: email_5
-    label: 'Email 5'
+    label: Staff
     notes: ''
     status: true
     conditions: {  }
@@ -303,15 +225,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:email2:raw]'
+      from_mail: _default
       from_options: {  }
-      from_name: '[webform_submission:values:first_and_last_name:raw]'
-      reply_to: ''
+      from_name: _default
+      reply_to: '[webform_submission:values:email2_11:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: default
+      subject: 'Meeting Request from [webform_submission:values:first_and_last_name_11]'
+      body: "Submitted on [webform_submission:created]\r\n\r\n** MEETING OVERVIEW **\r\n\r\nTOPIC:\r\n[webform_submission:values:topic_1]\r\n\r\nMEETING DATE:\r\n[webform_submission:values:meeting_date_1]\r\n\r\nFLEXIBLE DATE:\r\n[webform_submission:values:flexible_date_1]\r\n\r\nLOCATION:\r\n[webform_submission:values:location_1]\r\n\r\nADDRESS:\r\n[webform_submission:values:address_1]\r\n\r\nSTART TIME:\r\n[webform_submission:values:start_time]\r\n\r\nEND TIME:\r\n[webform_submission:values:end_time]\r\n\r\nFLEXIBLE TIME:\r\n[webform_submission:values:flexible_time_1]\r\n\r\n** ORGANIZATION/CONTACT DETAILS **\r\n\r\nORGANIZATION/BUSINESS:\r\n[webform_submission:values:organization_business_11]\r\n\r\nABOUT YOUR ORGANIZATION:\r\n[webform_submission:values:about_your_organization_11]\r\n\r\nFIRST AND LAST NAME:\r\n[webform_submission:values:first_and_last_name_11]\r\n\r\nTITLE:\r\n[webform_submission:values:title_11]\r\n\r\nEMAIL:\r\n[webform_submission:values:email2_11]\r\n\r\nPHONE:\r\n[webform_submission:values:phone_11]\r\n\r\nCELL PHONE:\r\n[webform_submission:values:cell_phone_11]\r\n\r\n** MEETING DETAILS **\r\n\r\nADDITIONAL INVITED GUESTS:\r\n[webform_submission:values:other_speakers_or_invited_guests_will_there_be_any_other_elected_officials_dignitaries_21]\r\n\r\nNUMBER OF ATTENDEES:\r\n[webform_submission:values:number_of_attendees_21]\r\n\r\nTENTATIVE AGENDA:\r\n[webform_submission:values:tentative_agenda_21]\r\n\r\nADDITIONAL COMMENTS:\r\n[webform_submission:values:additional_comments]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
