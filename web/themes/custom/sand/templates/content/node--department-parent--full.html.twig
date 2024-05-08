@@ -142,7 +142,11 @@
         </div>
       {% else %}
         <div class="l-padding-desktop-am l-padding-mobile-an">
-          {{ content.field_feature_video_img }}
+          {% if content.field_feature_image_url[0] %}
+            <a href="{{ content.field_feature_image_url[0]['#url'] }}">{{ content.field_feature_video_img }}</a>
+          {% else %}
+            {{ content.field_feature_video_img }}
+          {% endif %}
           {% if content.field_feature_video_image_cap[0] %}
             <div class="figcaption text-center">
               {{ content.field_feature_video_image_cap[0] }}

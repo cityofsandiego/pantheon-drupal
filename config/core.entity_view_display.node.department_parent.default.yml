@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.department_parent.field_department
     - field.field.node.department_parent.field_edit_notes
     - field.field.node.department_parent.field_feature_alt_text
+    - field.field.node.department_parent.field_feature_image_url
     - field.field.node.department_parent.field_feature_video_image_cap
     - field.field.node.department_parent.field_feature_video_img
     - field.field.node.department_parent.field_featured_content
@@ -29,6 +30,7 @@ dependencies:
     - node.type.department_parent
   module:
     - entity_reference_revisions
+    - link
     - media
     - metatag
     - text
@@ -57,6 +59,18 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 5
+    region: content
+  field_feature_image_url:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 17
     region: content
   field_feature_video_image_cap:
     type: text_default
