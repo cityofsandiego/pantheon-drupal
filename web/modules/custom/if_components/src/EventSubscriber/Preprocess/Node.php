@@ -550,21 +550,23 @@ final class Node implements EventSubscriberInterface {
           }
           foreach ($context_node->field_block->getValue() as $paragraph_id) {
             $paragraph = Paragraph::load($paragraph_id['target_id']);
-            switch ($paragraph->field_region->getValue()[0]['value']) {
-              case 'sidebar':
-                $sidebar[] = [
-                  'weight' => $paragraph->field_weight->getValue()[0]['value'],
-                  'value' => $this->entityTypeManager->getViewBuilder('paragraph')
-                    ->view($paragraph, 'full'),
-                ];
-                break;
-              case 'sidebar_bottom':
-                $sidebar_bottom[] = [
-                  'weight' => $paragraph->field_weight->getValue()[0]['value'],
-                  'value' => $this->entityTypeManager->getViewBuilder('paragraph')
-                    ->view($paragraph, 'full'),
-                ];
-                break;
+            if (!empty($paragraph->field_region->getValue())) {
+              switch ($paragraph->field_region->getValue()[0]['value']) {
+                case 'sidebar':
+                  $sidebar[] = [
+                    'weight' => $paragraph->field_weight->getValue()[0]['value'],
+                    'value' => $this->entityTypeManager->getViewBuilder('paragraph')
+                      ->view($paragraph, 'full'),
+                  ];
+                  break;
+                case 'sidebar_bottom':
+                  $sidebar_bottom[] = [
+                    'weight' => $paragraph->field_weight->getValue()[0]['value'],
+                    'value' => $this->entityTypeManager->getViewBuilder('paragraph')
+                      ->view($paragraph, 'full'),
+                  ];
+                  break;
+              }
             }
           }
         }
