@@ -51,7 +51,7 @@
 
                               // *** Edit these values below ***
 
-                              $Effective_Date_YYYYMMDD = 20231201;
+                              $Effective_Date_YYYYMMDD = 20240101;
 
                               $Water_Meter_Size_5_8_inch = 24.11;
                               $Water_Meter_Size_3_4_inch = 24.11;
@@ -73,29 +73,29 @@
                               $Water_Irrigation = 8.2000;
                               $Water_Temporary_Construction = 7.8600;
 
-                              $Wastewater_Service_Fee = 14.71; // Wastewater Base Fee
-                              $Wastewater_Single_Family_Residential = 4.9770;
-                              $Wastewater_Multi_Family_Residential = 4.9770;
-                              $Wastewater_Commercial_Industrial_Flow = 3.319;
-                              $Wastewater_Commercial_Industrial_COD = 0.216;
-                              $Wastewater_Commercial_Industrial_TSS = 0.488;
-                              $Wastewater_Trucked_Waste_Flow = 3.260;
-                              $Wastewater_Trucked_Waste_COD = 0.216;
-                              $Wastewater_Trucked_Waste_TSS = 0.488;
+                              $Wastewater_Service_Fee = 15.29; // Wastewater Base Fee
+                              $Wastewater_Single_Family_Residential = 5.1770;
+                              $Wastewater_Multi_Family_Residential = 5.1770;
+                              $Wastewater_Commercial_Industrial_Flow = 3.451;
+                              $Wastewater_Commercial_Industrial_COD = 0.225;
+                              $Wastewater_Commercial_Industrial_TSS = 0.507;
+                              $Wastewater_Trucked_Waste_Flow = 3.451;
+                              $Wastewater_Trucked_Waste_COD = 0.225;
+                              $Wastewater_Trucked_Waste_TSS = 0.507;
 
-                              $Recycled_Water_Meter_Size_5_8_inch = 19.74;
-                              $Recycled_Water_Meter_Size_3_4_inch = 19.74;
-                              $Recycled_Water_Meter_Size_1_inch = 30.48;
-                              $Recycled_Water_Meter_Size_1_1_2_inch = 57.34;
-                              $Recycled_Water_Meter_Size_2_inch = 89.55;
-                              $Recycled_Water_Meter_Size_3_inch = 191.59;
-                              $Recycled_Water_Meter_Size_4_inch = 341.95;
-                              $Recycled_Water_Meter_Size_6_inch = 701.76;
-                              $Recycled_Water_Meter_Size_8_inch = 1507.29;
-                              $Recycled_Water_Meter_Size_10_inch = 2259.12;
-                              $Recycled_Water_Meter_Size_12_inch = 2849.84;
-                              $Recycled_Water_Meter_Size_16_inch = 4192.40;
-                              $Recycled_Water_Fee = 2.30;
+                              $Recycled_Water_Meter_Size_5_8_inch = 20.53;
+                              $Recycled_Water_Meter_Size_3_4_inch = 20.53;
+                              $Recycled_Water_Meter_Size_1_inch = 31.70;
+                              $Recycled_Water_Meter_Size_1_1_2_inch = 59.63;
+                              $Recycled_Water_Meter_Size_2_inch = 93.14;
+                              $Recycled_Water_Meter_Size_3_inch = 199.25;
+                              $Recycled_Water_Meter_Size_4_inch = 355.63;
+                              $Recycled_Water_Meter_Size_6_inch = 729.83;
+                              $Recycled_Water_Meter_Size_8_inch = 1567.58;
+                              $Recycled_Water_Meter_Size_10_inch = 2349.48;
+                              $Recycled_Water_Meter_Size_12_inch = 2963.83;
+                              $Recycled_Water_Meter_Size_16_inch = 4360.09;
+                              $Recycled_Water_Fee = 2.39;
 
                               $Fireline_Size_1_inch = 3.00;
                               $Fireline_Size_1_1_2_inch = 3.00;
