@@ -16,6 +16,11 @@ $settings['container_yamls'][] = __DIR__ . '/services.yml';
  */
 include __DIR__ . "/settings.pantheon.php";
 
+$local_site_file = __DIR__ .  '/settings.localsite.php';
+if(file_exists($local_site_file)) {
+  include $local_site_file;
+}
+
 /**
  * Skipping permissions hardening will make scaffolding
  * work better, but will also raise a warning when you
@@ -84,6 +89,42 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   }
 }
 
+// Activate the proper config-splits based on the pantheon or local environment.
+// In your local you should have a file called settings.localsite.php
+if (defined('PANTHEON_ENVIRONMENT') && isset($_ENV['PANTHEON_SITE_NAME'])) {
+  switch ($_ENV['PANTHEON_SITE_NAME']) {
+    case 'sandgov':
+      // Activate sandgov split
+      break;
+    case 'insidesd':
+      // Activate insidesd split
+      break;
+    case 'citynet':
+      // Activate citynet split
+      break;
+  }
+} else {
+  if (!defined('LOCALSITE')) {
+    echo "ERROR - Local site must have a settings.localsite.php to set the constant LOCALSITE like: define('LOCALSITE', 'sandgov');";
+    exit(1);
+  }
+  switch (LOCALSITE) {
+    case 'sandgov':
+      // Activate sandgov split
+      break;
+    case 'insidesd':
+      // Activate insidesd split
+      break;
+    case 'citynet':
+      // Activate citynet split
+      break;
+    default:
+      echo "ERROR - BAD Local site file check your settings.localsite.php to make sure it is configured correctly like: define('LOCALSITE', 'sandgov');";
+      echo LOCALSITE;
+      exit(2);
+      break;
+  }
+}
 
 // Added by City of San Diego, the settings from these modules will not be exported in config
 $settings['config_exclude_modules'] = [
