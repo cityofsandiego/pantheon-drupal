@@ -12,45 +12,48 @@ id: webform_40595
 title: 'Art Tours @ the Central Library'
 description: null
 categories: {  }
-elements: |
+elements: |-
   fieldset_contact_information:
     '#type': fieldset
     '#open': true
-    '#title': 'Contact Information' 
-    '#description': ""
+    '#title': 'Contact Information'
+    '#description': ''
     first_name_1:
       '#type': textfield
-      '#title': 'First Name' 
-      '#description': ""
+      '#title': 'First Name'
+      '#description': ''
       '#required': true
     last_name_1:
       '#type': textfield
-      '#title': 'Last Name' 
-      '#description': ""
+      '#title': 'Last Name'
+      '#description': ''
       '#required': true
     email_1:
       '#type': email
       '#size': 20
-      '#title': 'Email' 
-      '#description': ""
+      '#title': Email
+      '#description': ''
       '#required': true
   fieldset_tour:
     '#type': fieldset
     '#open': true
-    '#title': 'Tour' 
-    '#description': ""
+    '#title': Tour
+    '#description': ''
     date_preference_5:
       '#type': date
-      '#title': 'Date Preference' 
-      '#description': ""
-    time_preference_5:
-      '#type': time
-      '#title': 'Time Preference' 
-      '#description': ""
-    total_number_of_people_in_group_5:
-      '#min': 0
-      '#title': 'Total Number of People in Group' 
-      '#description': ""
+      '#title': 'Date Preference'
+      '#description': ''
+      '#required': true
+    time_preference:
+      '#type': webform_time
+      '#title': 'Time Preference'
+      '#required': true
+      '#timepicker': true
+      '#time_format': 'g:i A'
+      '#step': 900
+    total_number_of_people_in_group:
+      '#type': number
+      '#title': 'Total Number of People in Group'
       '#required': true
 css: ''
 javascript: ''
@@ -77,7 +80,7 @@ handlers:
   email_1:
     id: email
     handler_id: email_1
-    label: 'Email 1'
+    label: Email
     notes: ''
     status: true
     conditions: {  }
@@ -91,15 +94,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
-      reply_to: ''
+      from_name: _default
+      reply_to: '[webform_submission:values:email_1:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: default
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nNAME:\r\n[webform_submission:values:first_name_1] [webform_submission:values:last_name_1]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_1]\r\n\r\nDATE PREFERENCE:\r\n[webform_submission:values:date_preference_5]\r\n\r\nTIME PREFERENCE:\r\n[webform_submission:values:time_preference]\r\n\r\nNUMBER OF PEOPLE IN GROUP:\r\n[webform_submission:values:total_number_of_people_in_group]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

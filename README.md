@@ -1,34 +1,22 @@
-# Local development
+# Composer-enabled Drupal template
 
-## Prerequisites
+This is Pantheon's recommended starting point for forking new [Drupal](https://www.drupal.org/) upstreams
+that work with the Platform's Integrated Composer build process. It is also the
+Platform's standard Drupal 9 upstream.
 
-- Authorized Pantheon account with SSH keys uploaded and generated machine token
-- Lando
+Unlike with earlier Pantheon upstreams, files such as Drupal Core that you are
+unlikely to adjust while building sites are not in the main branch of the 
+repository. Instead, they are referenced as dependencies that are installed by
+Composer.
 
-## Standing up local dev env
+For more information and detailed installation guides, please visit the
+Integrated Composer Pantheon documentation: https://pantheon.io/docs/integrated-composer
 
-1. Clone project `git clone git@bitbucket.org:interpersonal-frequency/sand02.git`
-2. Go into project `cd sand02`
-3. Spin up Lando env `lando start`
-4. Pull in database and files from dev `lando pull` _DO NOT PULL CODE!_
+## Contributing
 
-## Pipelines
+Contributions are welcome in the form of GitHub pull requests. However, the
+`pantheon-upstreams/drupal-composer-managed` repository is a mirror that does not
+directly accept pull requests.
 
-### Pantheon downstream
-
-Weekly on Mondays at 7AM EST a pipeline is run which creates a new pull request
-into the `main` branch which includes the latest changes from the Pantheon
-`master` branch.
-
-Default project developers from IF need to review these changes every Monday.
-
-### Pull requests
-
-When pull requests are created a pipeline runs which tests if merging the
-Pantheon `master` branch into the `main` branch will succeed.
-
-### Deploys to Pantheon
-
-When code is pushed or merged to the `main` branch a pipeline runs which will
-merge the latest changes to `main` into the Pantheon `master` branch and push
-the code up to the Pantheon "Dev" environment.
+Instead, to propose a change, please fork [pantheon-systems/drupal-composer-managed](https://github.com/pantheon-systems/drupal-composer-managed)
+and submit a PR to that repository.

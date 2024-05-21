@@ -79,7 +79,7 @@ handlers:
   email_3:
     id: email
     handler_id: email_3
-    label: 'Email 3'
+    label: Email
     notes: ''
     status: true
     conditions: {  }
@@ -93,15 +93,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:email:raw]'
+      from_mail: _default
       from_options: {  }
-      from_name: default
-      reply_to: ''
+      from_name: _default
+      reply_to: '[webform_submission:values:email:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: "Submitted on [webform_submission:created]\r\nSubmitted by user: [webform_submission:user]\r\nSubmitted values are:\r\n[webform_submission:values]\r\n"
+      subject: _default
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
