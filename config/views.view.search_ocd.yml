@@ -7,10 +7,12 @@ dependencies:
     - field.storage.sand_remote.field_doc_date
     - field.storage.sand_remote.field_document_url
     - search_api.index.remote
+    - user.role.administrator
   module:
     - datetime
     - search_api
     - text
+    - user
 id: search_ocd
 label: 'Search OCD'
 module: views
@@ -434,7 +436,7 @@ display:
         type: full
         options:
           offset: 0
-          items_per_page: 10
+          items_per_page: 20
           total_pages: null
           id: 0
           tags:
@@ -1803,6 +1805,36 @@ display:
         - url
         - url.query_args
         - 'url.query_args:sort_by'
+      tags:
+        - 'config:field.storage.sand_remote.field_body'
+        - 'config:field.storage.sand_remote.field_doc_date'
+        - 'config:field.storage.sand_remote.field_document_url'
+        - 'config:search_api.index.remote'
+        - 'search_api_list:remote'
+  page_3:
+    id: page_3
+    display_title: 'Page OCD'
+    display_plugin: page
+    position: 1
+    display_options:
+      access:
+        type: role
+        options:
+          role:
+            administrator: administrator
+      defaults:
+        access: false
+      display_description: ''
+      display_extenders: {  }
+      path: search/ocdtest
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.roles
       tags:
         - 'config:field.storage.sand_remote.field_body'
         - 'config:field.storage.sand_remote.field_doc_date'
