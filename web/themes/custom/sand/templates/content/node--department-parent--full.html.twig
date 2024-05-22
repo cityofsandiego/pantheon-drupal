@@ -176,7 +176,7 @@
           {% if drupal_view_result('department_news_and_announcements', 'block') is not empty %}
           <div class="l-padding-am l-padding-desktop-rd l-padding-mobile-bd background-off-white">
             {% if content.field_feature_alt_text[0] %}
-              {% if 'none' in content.field_feature_alt_text[0] %}
+              {% if content.field_feature_alt_text[0]['#context'].value != 'none' %}
                 <h2 class="heading--snug">{{ content.field_feature_alt_text }}</h2>
               {% endif %}
             {% else %}
