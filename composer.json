@@ -4,17 +4,17 @@
     "type": "project",
     "license": "MIT",
     "repositories": [
-       {
+        {
             "type": "package",
             "package": {
-              "name": "northernco/ckeditor5-anchor-drupal",
-              "version": "0.5.0",
-            "type": "drupal-library",
-              "dist": {
-                "url": "https://registry.npmjs.org/@northernco/ckeditor5-anchor-drupal/-/ckeditor5-anchor-drupal-0.5.0.tgz",
-                "type": "tar"
-              }
-           }
+                "name": "northernco/ckeditor5-anchor-drupal",
+                "version": "0.5.0",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://registry.npmjs.org/@northernco/ckeditor5-anchor-drupal/-/ckeditor5-anchor-drupal-0.5.0.tgz",
+                    "type": "tar"
+                }
+            }
         },
         {
             "type": "composer",
@@ -287,7 +287,7 @@
                 "Fix block issue with custom block insertions.": "patches/insert_custom_block.patch"
             },
             "drupal/ultimate_cron": {
-              "Pending bugfix for issue #3001044.": "https://www.drupal.org/files/issues/2018-09-20/ultimate_cron-3001044-2.patch"
+                "Pending bugfix for issue #3001044.": "https://www.drupal.org/files/issues/2018-09-20/ultimate_cron-3001044-2.patch"
             },
             "drupal/simplesamlphp_auth": {
                 "Fix logout error": "https://www.drupal.org/files/issues/2022-06-16/2124117-21.patch"
@@ -307,25 +307,25 @@
     "autoload": {
         "classmap": ["upstream-configuration/scripts/ComposerScripts.php"]
     },
-"scripts": {
-    "pre-update-cmd": ["DrupalComposerManaged\\ComposerScripts::preUpdate"],
-    "post-update-cmd": [
-        "DrupalComposerManaged\\ComposerScripts::postUpdate",
-        "rm -rf vendor/simplesamlphp/simplesamlphp/config && ln -sf ../../../private/simplesamlphp/config vendor/simplesamlphp/simplesamlphp/config",
-        "rm -rf vendor/simplesamlphp/simplesamlphp/metadata && ln -sf ../../../private/simplesamlphp/metadata vendor/simplesamlphp/simplesamlphp/metadata",
-        "rm -rf vendor/simplesamlphp/simplesamlphp/cert && ln -sf ../../../private/simplesamlphp/cert vendor/simplesamlphp/simplesamlphp/cert"
-    ],
-    "post-install-cmd": [
-        "rm -rf vendor/simplesamlphp/simplesamlphp/config && ln -sf ../../../private/simplesamlphp/config vendor/simplesamlphp/simplesamlphp/config",
-        "rm -rf vendor/simplesamlphp/simplesamlphp/metadata && ln -sf ../../../private/simplesamlphp/metadata vendor/simplesamlphp/simplesamlphp/metadata",
-        "rm -rf vendor/simplesamlphp/simplesamlphp/cert && ln -sf ../../../private/simplesamlphp/cert vendor/simplesamlphp/simplesamlphp/cert"
-    ]
-},
+    "scripts": {
+        "pre-update-cmd": ["DrupalComposerManaged\\ComposerScripts::preUpdate"],
+        "post-update-cmd": [
+            "DrupalComposerManaged\\ComposerScripts::postUpdate",
+            "rm -rf vendor/simplesamlphp/simplesamlphp/config && ln -sf ../../../private/simplesamlphp/config vendor/simplesamlphp/simplesamlphp/config",
+            "rm -rf vendor/simplesamlphp/simplesamlphp/metadata && ln -sf ../../../private/simplesamlphp/metadata vendor/simplesamlphp/simplesamlphp/metadata",
+            "rm -rf vendor/simplesamlphp/simplesamlphp/cert && ln -sf ../../../private/simplesamlphp/cert vendor/simplesamlphp/simplesamlphp/cert"
+        ],
+        "post-install-cmd": [
+            "rm -rf vendor/simplesamlphp/simplesamlphp/config && ln -sf ../../../private/simplesamlphp/config vendor/simplesamlphp/simplesamlphp/config",
+            "rm -rf vendor/simplesamlphp/simplesamlphp/metadata && ln -sf ../../../private/simplesamlphp/metadata vendor/simplesamlphp/simplesamlphp/metadata",
+            "rm -rf vendor/simplesamlphp/simplesamlphp/cert && ln -sf ../../../private/simplesamlphp/cert vendor/simplesamlphp/simplesamlphp/cert"
+        ]
+    },
     "config": {
         "preferred-install": "dist",
         "sort-packages": false,
         "platform": {
-            "php": "8.1"
+            "php": "8.2.0"
         },
         "allow-plugins": {
             "composer/installers": true,
