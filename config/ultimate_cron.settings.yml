@@ -1,0 +1,35 @@
+_core:
+  default_config_hash: xNvhVNcCJsZiYwYTw9TTnRv1SjLVO7H5BCK1U8Brvfo
+bypass_transactional_safe_connection: false
+queue:
+  enabled: true
+  timeouts:
+    lease_time: 30.0
+    time: 60.0
+  delays:
+    empty_delay: 0.0
+    item_delay: 0.0
+  throttle:
+    enabled: true
+    threads: 4
+    threshold: 10
+launcher:
+  thread: '0'
+  max_threads: 8
+  lock_timeout: 3600
+  max_execution_time: 14400
+logger:
+  cache:
+    bin: ultimate_cron_logger
+    timeout: -1
+  database:
+    method: 3
+    expire: 1209600
+    retain: 1000
+scheduler:
+  crontab:
+    catch_up: 86400
+    rules:
+      - '*/10+@ * * * *'
+  simple:
+    rule: '*/5+@ * * * *'

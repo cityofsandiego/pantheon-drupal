@@ -1,0 +1,210 @@
+uuid: de1118f4-bfdc-41dd-a67e-800eb280773a
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_1284697
+title: 'Yêu Cầu Sự Kiện/Cuộc Họp'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_info_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Thông Tin Liên Hệ:' 
+    '#description': ""
+    contact_name_1:
+      '#type': textfield
+      '#title_display': inline
+      '#title': 'Tên' 
+      '#description': ""
+      '#required': true
+    contact_phone_1:
+      '#type': textfield
+      '#title_display': inline
+      '#title': 'Số Điện Thoại' 
+      '#description': ""
+      '#required': true
+    contact_email_1:
+      '#type': email
+      '#size': 20
+      '#title_display': inline
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+  fieldset_event_info_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Thông Tin Sự Kiện:' 
+    '#description': ""
+    event_name_5:
+      '#type': textfield
+      '#title': 'Tên/Chủ Đề Sự Kiện/Cuộc Họp' 
+      '#description': ""
+      '#required': true
+    event_organization_5:
+      '#type': textfield
+      '#title': 'Tên Tổ Chức' 
+      '#description': ""
+      '#required': true
+    how_many_people_are_attending_5:
+      '#type': textfield
+      '#title': 'Bao nhiêu người tham gia?' 
+      '#description': ""
+      '#required': true
+    event_meeting_description_5:
+      '#type': textarea
+      '#title': 'Mô Tả Sự Kiện/Cuộc Họp' 
+      '#description': ""
+      '#required': true
+  fieldset_additional_comments_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Ý Kiến Khác' 
+    '#description': ""
+    comments_27:
+      '#type': textarea
+      '#title': 'Ý Kiến' 
+      '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Gửi Yêu Cầu'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: CherylW@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:contact_email:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:contact_name:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |-
+        Submitted on [webform_submission:date:long]
+
+        Submitted values are:
+
+        == CONTACT INFORMATION ==
+
+        NAME:
+        [webform_submission:values:contact_info_set:contact_name:nolabel]
+
+        PHONE:
+        [webform_submission:values:contact_info_set:contact_phone:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact_info_set:contact_email:nolabel]
+
+        == EVENT INFORMATION ==
+
+        NAME/TOPIC OF EVENT/MEETING:
+        [webform_submission:values:event_info_set:event_name:nolabel]
+
+        ORGANIZATION NAME:
+        [webform_submission:values:event_info_set:event_organization:nolabel]
+
+        ELECTED SPEAKING DATE:
+        [webform_submission:values:event_info_set:event_speak_date:nolabel]
+
+        ELECTED SPEAKING TIME:
+        [webform_submission:values:event_info_set:event_speak_time:nolabel]
+
+        ELECTED SPEAKING LENGTH OF TIME:
+        [webform_submission:values:event_info_set:event_speak_length_of_time:nolabel] minutes
+
+        EVENT/MEETING DESCRIPTION:
+        [webform_submission:values:event_info_set:event_meeting_description:nolabel]
+
+        == EVENT PREPARATION ==
+
+        ** FOR EVENT REQUEST **
+
+        Will reserved parking be held for elected officials?
+        [webform_submission:values:event_preparation_set:event_request_set:reserved_parking:nolabel]
+
+        Are you requesting sponsorship?
+        [webform_submission:values:event_preparation_set:event_request_set:requesting_sponsorship:nolabel]
+
+        Is this a ticketed event?
+        [webform_submission:values:event_preparation_set:event_request_set:ticketed_event:nolabel] $[webform_submission:values:event_preparation_set:event_request_set:monetary_value:nolabel]
+
+        Estimated number of attendees?
+        [webform_submission:values:event_preparation_set:event_request_set:estimated_number_of_attendees:nolabel]
+
+        Is the event indoor or outdoor?
+        [webform_submission:values:event_preparation_set:event_request_set:indoor_or_outdoor:nolabel]
+
+        What is the attire?
+        [webform_submission:values:event_preparation_set:event_request_set:attire:nolabel]
+
+        Does a logo or picture need to be provided for marketing?
+        [webform_submission:values:event_preparation_set:event_request_set:logo_or_picture_marketing:nolabel]
+
+        Is there a podium available?
+        [webform_submission:values:event_preparation_set:event_request_set:podium_available:nolabel]
+
+        ** FOR MEETING REQUEST **
+
+        Are there any audio/visual or tech needs?
+        [webform_submission:values:event_preparation_set:meeting_request_set:audio_visual_tech:nolabel]
+
+        How many people are attending?
+        [webform_submission:values:event_preparation_set:meeting_request_set:people_attending:nolabel]
+
+        Names of attendees:
+        [webform_submission:values:event_preparation_set:meeting_request_set:names_of_attendees:nolabel]
+
+        == ADDITIONAL COMMENTS ==
+
+        [webform_submission:values:additional_comments_set:comments:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

@@ -1,0 +1,95 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region div.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+
+{% if content %}
+  <section class="header-first">
+    <div class="grid-container l-padding-mobile-hd">
+      <div class="grid-x grid-margin-y">
+        <div class="site-branding cell small-3 medium-3">
+          {{ drupal_entity('block', 'sitebranding') }}
+        </div>
+        <div class="cell medium-auto l-flex-center-h hide-on-mobile" style="padding-top: 10px">
+        {% if path('<current>') != "/connect" %}
+            <p><a class="btn btn--pill" href="/connect" style="padding:5px 15px 5px 5px"><img class="img-circle" src="/themes/custom/sand/images/icon-users.png" width="40" height="40" style="margin-right: 8px"><strong>CONNECT</strong> with the City</a></p>
+        {% endif %}
+        </div>
+        <div class="cell small-6 text-center l-padding-td hide-on-desktop">
+        {% if path('<current>') != "/connect" %}
+            <p><a class="btn btn--pill" href="/connect" style="padding:5px 15px 5px 5px;line-height:1.2"><img class="img-circle" src="/themes/custom/sand/images/icon-users.png" width="40" height="40" style="margin-right: 8px"><span class="hide-on-desktop fine-print pull-right text-left" style="padding-top:4px"><strong>CONNECT</strong><br>with the City</span></a></p>
+        {% endif %}
+        </div>
+        <div class="cell small-4 text-center l-padding-td hidden">
+          <a href="#" class="no-underline"><i class="icon-translate icon--lg"></i></a>
+        </div>
+        <div class="search-bar cell medium-3 grid-container">
+          <div class="header-tools hide-on-mobile grid-x">
+            <div class="sd-weather cell medium-2 hide-on-mobile">
+              {{ elements.sandiegoweather["#markup"] }}
+            </div>
+            <div class="accessibility-toggle cell medium-5">
+              <a href="#" data-open="accessibility-modal">Accessibility Tools</a>
+            </div>
+            <div id="google_translate_element" class="cell medium-3"></div>
+          </div>
+          <div class="form--search grid-x">
+            <div class="cell medium-auto">
+             {{ drupal_block('views_exposed_filter_block:search_site-all', wrapper=false) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="header-second">
+    <div class="grid-container main-grid-container show-for-medium">
+      <div class="grid-x">
+        <div class="main-menu cell medium-12">
+          <div class="grid-x">
+            <div class="cell medium-12">
+              {{ drupal_entity('block', 'mainnavigation_mega_menu')}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="accessibility-modal" class="reveal accessibility-tools rounded-corners" title="Accessibility Tools" data-reveal style="width: 400px">
+    <h2 class="h3 heading--snug l-margin-bd">Accessibility Tools</h2>
+
+    <div class="grid-x l-margin-bd">
+      <div class="cell small-6">
+        <p><strong>Audio/Vision Assist:</strong></p>
+      </div>
+      <div class="cell small-6">
+        <p><a title="Turn audio/vision assist on/off" href="javascript:;" onclick="BrowseAloud.panel.toggleBar(true,event);return false;">Turn On/Off</a></p>
+      </div>
+    </div>
+    <div class="grid-x">
+	    <div class="cell small-6">
+        <p><strong>High Contrast:</strong></p>
+      </div>
+      <div class="cell small-6">
+        <div class="highcontrast">{{ drupal_entity('block', 'highcontrast')}}</div>
+      </div>
+    </div>
+    <p class="text-center l-margin-tm l-margin-bn"><a title="More information on accessibility" href="/accessibility" class="btn btn--outline btn--sm">More Info<span class="visuallyhidden"> on accessibility</span></a></p>
+
+    <button class="close-button" data-close aria-label="Close reveal" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endif %}

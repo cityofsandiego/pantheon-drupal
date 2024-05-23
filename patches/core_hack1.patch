@@ -1,0 +1,13 @@
+diff --git a/core/modules/views/src/Plugin/views/field/EntityField.php b/core/modules/views/src/Plugin/views/field/EntityField.php
+index 972703ec5..940973639 100644
+--- a/core/modules/views/src/Plugin/views/field/EntityField.php
++++ b/core/modules/views/src/Plugin/views/field/EntityField.php
+@@ -734,7 +734,7 @@ protected function prepareItemsByDelta(array $all_values) {
+ 
+     // We are supposed to show only certain deltas.
+     if ($this->limit_values) {
+-      $row = $this->view->result[$this->view->row_index];
++      if (!isset($GLOBALS['hack1'])) { $row = $this->view->result[$this->view->row_index]; }
+ 
+       // Offset is calculated differently when row grouping for a field is not
+       // enabled. Since there are multiple rows, delta needs to be taken into

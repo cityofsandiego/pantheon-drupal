@@ -1,0 +1,184 @@
+uuid: 932c7ba3-e807-4e83-8bd6-de79c360852f
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1412188
+title: 'Build Better SD Workshop Registration Form'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info' 
+    '#description': ""
+    first__last_name__primer_nombre_y_apellido_4:
+      '#type': textfield
+      '#title': 'First & Last Name | Primer Nombre y Apellido ' 
+      '#description': ""
+      '#required': true
+    email__correo_electronico_4:
+      '#type': email
+      '#size': 20
+      '#title': 'Email | correo electrónico ' 
+      '#description': ""
+      '#required': true
+    zip_code__codigo_postal_4:
+      '#type': textfield
+      '#title': 'Zip code | código postal ' 
+      '#description': ""
+      '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /buildbettersd/build-better-sd-workshop-registration-submittal
+  confirmation_message: ''
+  limit_total: 1000
+  limit_user: null
+  form_submit_label: 'Submit Registration'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email__correo_electronico:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:first__last_name__primer_nombre_y_apellido:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'San Ysidro Library Workshop Registration'
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email__correo_electronico:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Thank you for registering for the Build Better SD workshop!  
+
+        If you have any questions please email publicspaces@sandiego.gov.  
+        ==============================================================================================
+        ¡Gracias por registrarse en el taller Build Better SD workshop!   
+
+        Si tiene una pregunta por favor mándelas a publicspaces@sandiego.gov.  
+
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: publicspaces@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email__correo_electronico:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:first__last_name__primer_nombre_y_apellido:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Build Better SD Workshop Registration'
+      body: |+
+        Submitted on [webform_submission:completed_date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

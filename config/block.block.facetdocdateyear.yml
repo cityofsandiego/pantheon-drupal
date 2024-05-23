@@ -1,0 +1,29 @@
+uuid: 66476b0b-4fae-408b-ba60-d9d8abb96858
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.facet_doc_date_year
+  module:
+    - facets
+    - system
+  theme:
+    - sand
+id: facetdocdateyear
+theme: sand
+region: sidebar_first
+weight: -22
+provider: null
+plugin: 'facet_block:facet_doc_date_year'
+settings:
+  id: 'facet_block:facet_doc_date_year'
+  label: Year
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: facetdocdateyear
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/search/ocd*'

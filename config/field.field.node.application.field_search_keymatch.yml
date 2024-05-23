@@ -1,0 +1,29 @@
+uuid: a81b938e-96ec-4585-bcb6-a32b70f67f59
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_search_keymatch
+    - node.type.application
+    - taxonomy.vocabulary.search_keymatch
+id: node.application.field_search_keymatch
+field_name: field_search_keymatch
+entity_type: node
+bundle: application
+label: 'Search KeyMatch'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      search_keymatch: search_keymatch
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

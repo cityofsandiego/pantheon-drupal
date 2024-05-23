@@ -1,0 +1,308 @@
+/* ============================================================
+  Styles for cards and featured cards.
+  ============================================================ */
+
+/* Cards Styles from D7 */
+%card {
+  background: white;
+  border-radius: 4px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
+
+  &.border {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.card {
+  border: none;
+
+  > a,
+  > p > a,
+  > p > strong > a {
+    text-decoration: none;
+  }
+
+  &.background-off-white {
+    background: $off-white;
+  }
+
+  @extend %card;
+}
+
+.card__container {
+  position: relative;
+  display: block;
+  display: flex; /* Safari */
+  display: flex;
+  justify-content: flex-start; /* Safari */
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  // If .mobile-flexslider exists, it creates a ul.slides wrapping the .cards
+
+  /* @include breakpoint(large) { */
+  .slides {
+    display: block;
+    display: flex; /* Safari */
+    display: flex;
+    justify-content: flex-start; /* Safari */
+    justify-content: flex-start;
+    margin: 0;
+    flex-flow: row wrap;
+    flex-flow: row wrap;
+    padding-left: 0;
+    width: 100%;
+  }
+
+  /* } */
+
+  &.mobile-flexslider {
+    height: 100% !important;
+  }
+
+  // this gets used on gallery pages
+  &.flexslider--mobile {
+    @include breakpoint(mobile-landscape down) {
+      .slides {
+        .card__wrap {
+          padding: 0;
+          width: 100%;
+          margin: 0;
+        }
+
+        .card__content {
+          padding: 1.5em 2.2em;
+        }
+      }
+    }
+  }
+
+  .card__wrap,
+  .card--wrap {
+    height: auto;
+    display: flex; /* Safari */
+    display: flex !important;
+    margin: 0;
+    padding-left: 1.0416588541%;
+    padding-right: 1.0416588541%;
+    padding-bottom: 1em;
+    width: 33.333333%;
+
+    .card {
+      flex: 0 1 auto;
+      justify-content: flex-start;
+      overflow: unset;
+      color: $font-color;
+
+      @extend %card;
+    }
+
+    @include breakpoint(mobile-landscape down) {
+      width: 100%;
+    }
+  }
+
+  .card__wrap_s,
+  .card--wrap-s {
+    height: auto;
+    margin: 0 0.5em;
+    width: 100%;
+
+    @include breakpoint(large) {
+      margin: 0;
+      padding: 0.75em;
+      display: flex; /* Safari */
+      display: flex;
+
+      .card {
+        flex: 0 1 auto;
+      }
+    }
+  }
+
+  .card__wrap_m,
+  .card--wrap-m {
+    height: auto;
+    margin: 0 0.5em;
+    width: 100%;
+
+    @include breakpoint(large) {
+      margin: 0;
+      padding: 0.75em;
+      display: flex; /* Safari */
+      display: flex;
+
+      .card {
+        flex: 0 1 auto;
+      }
+    }
+  }
+
+  .card__content {
+    padding: 1.5em;
+
+    > a {
+      @include rem("font-size", 16px);
+    }
+
+    @include breakpoint(medium) {
+      @include rem("font-size", 13px);
+    }
+  }
+
+  .card__headline.title,
+  .card__headline a {
+    color: $font-color;
+    text-decoration: none;
+    font-family: $font-family-secondary;
+
+    @include rem("font-size", 16px);
+  }
+
+  .card__meta {
+    margin: 1em 0;
+
+    a {
+      color: $cerulean;
+      text-decoration: underline;
+    }
+  }
+
+  .card__image {
+    img {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+    }
+  }
+
+  .card__btn {
+    display: block;
+    font-weight: 600;
+  }
+
+  @include breakpoint(mobile-landscape) {
+    margin-left: -0.5em;
+    margin-right: -0.5em;
+    margin-bottom: -0.5em;
+  }
+}
+
+.card__cta--graphic {
+  text-align: center;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+
+  & > a {
+    display: block;
+    padding: 1.5em;
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      background: black;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    &:hover {
+      text-decoration: none;
+
+      &::before {
+        opacity: 0.1;
+      }
+    }
+  }
+
+  a {
+    @include rem("font-size", 16px);
+  }
+
+  p {
+    color: white;
+    font-family: $font-family-secondary;
+
+    @include rem("font-size", 18px);
+  }
+}
+
+.card--stats {
+  color: white;
+  padding: 0.75em;
+  border-radius: 0;
+  text-align: center;
+  background-color: $cerulean;
+
+  p {
+    margin: 0;
+  }
+
+  .card__headline {
+    line-height: 1;
+    font-weight: 700;
+    font-size: 2.5em;
+  }
+}
+
+.card--notification {
+  p {
+    margin-bottom: 0;
+  }
+
+  i {
+    color: white;
+    padding: 0.3em;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+    font-size: 1.5rem;
+  }
+
+  .date {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: $font-family-secondary;
+
+    @include rem("font-size", 12px);
+  }
+}
+
+.card-icons {
+  justify-content: center;
+  text-align: center;
+
+  p {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a,
+  a p {
+    display: block;
+    text-decoration: none;
+    color: $link-color !important;
+
+    &:hover {
+      color: lighten($link-color, 10%) !important;
+    }
+
+    span {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,173 @@
+uuid: 7d119ee5-98f9-49fb-be00-9d4088bb8cdb
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1421447
+title: 'District 3 Budget Forum Registration'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info' 
+    '#description': ""
+    name_1:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+      '#required': true
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    zip_code_1:
+      '#type': textfield
+      '#title': 'Zip Code' 
+      '#description': ""
+  check_this_box:
+    '#description': " I would like to subscribe to District 3 newsletters and updates."
+    '#type': checkbox
+    '#options':
+      yes: ' I would like to subscribe to District 3 newsletters and updates.'
+    '#multiple': true
+    '#title_display': invisible
+    '#title': 'Would you like to subscribe to our list?' 
+    '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<p>Thank you for your interest in the District 3 Independent Budget Analyst Forum scheduled for Friday, May 20 from 6 - 7&nbsp;p.m. at the <a href=\"https://www.google.com/maps/place/330+Park+Blvd,+San+Diego,+CA+92101/@32.7087056,-117.1564167,17z/data=!3m1!4b1!4m5!3m4!1s0x80d9535cf39f4c8d:0x1615e92b9177b5a2!8m2!3d32.7088714!4d-117.1542444\">San Diego Central Library</a>. Additional information will be emailed to you in advance of the event. For more information, please contact our office at <a href=\"tel:1-619-236-6633\">619-236-6633</a> or&nbsp;<a href=\"mailto:stephenwhitburn@sandiego.gov?subject=District%203%20Budget%20Forum\">stephenwhitburn@sandiego.gov</a>.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Friday, May 20, 2022 Budget Registration'
+      body: |
+        Submitted on [webform_submission:date:long]
+
+        == CONTACT INFORMATION ==
+
+        NAME:
+        [webform_submission:values:contact_info:name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact_info:email:nolabel]
+
+        ZIP:
+        [webform_submission:values:contact_info:zip_code:nolabel]
+
+        == WOULD YOU LIKE TO SUBSCRIBE TO OUR EMAIL LIST? ==
+
+        [webform_submission:values:check_this_box:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: rdarsey@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Friday, May 20, 2022 Budget Forum Registration'
+      body: |
+        Submitted on [webform_submission:date:long]
+
+        == CONTACT INFORMATION ==
+
+        NAME:
+        [webform_submission:values:contact_info:name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:contact_info:email:nolabel]
+
+        ZIP:
+        [webform_submission:values:contact_info:zip_code:nolabel]
+
+        == WOULD YOU LIKE TO SUBSCRIBE TO OUR EMAIL LIST? ==
+
+        [webform_submission:values:check_this_box:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

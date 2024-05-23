@@ -1,0 +1,33 @@
+uuid: f98360ad-2624-4364-a1f9-291f976f96ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_department
+    - node.type.mayoral_artifacts
+    - taxonomy.vocabulary.department
+  content:
+    - 'taxonomy_term:department:46777169-53b6-4104-8fcf-cdaad14d9bed'
+id: node.mayoral_artifacts.field_department
+field_name: field_department
+entity_type: node
+bundle: mayoral_artifacts
+label: Department
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    target_uuid: 46777169-53b6-4104-8fcf-cdaad14d9bed
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      department: department
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,55 @@
+uuid: 16208b26-ca06-42e0-86ec-0814b57678a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_block
+    - node.type.sidebar_block_context
+    - paragraphs.paragraphs_type.block
+  module:
+    - entity_reference_revisions
+id: node.sidebar_block_context.field_block
+field_name: field_block
+entity_type: node
+bundle: sidebar_block_context
+label: Block
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      block: block
+    negate: 0
+    target_bundles_drag_drop:
+      amenities_restrictions:
+        weight: 10
+        enabled: false
+      block:
+        weight: 11
+        enabled: true
+      card:
+        weight: 12
+        enabled: false
+      featured_cards:
+        weight: 13
+        enabled: false
+      featured_item:
+        weight: 14
+        enabled: false
+      resources:
+        weight: 15
+        enabled: false
+      sections:
+        weight: 16
+        enabled: false
+      sections_outreach2:
+        weight: 17
+        enabled: false
+      social_links:
+        weight: 18
+        enabled: false
+field_type: entity_reference_revisions

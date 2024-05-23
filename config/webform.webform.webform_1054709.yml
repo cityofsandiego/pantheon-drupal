@@ -1,0 +1,227 @@
+uuid: e1bfa517-95f9-426d-b4af-2514d4953e86
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1054709
+title: 'SNAPSHOT: A Photo Journal of Life During the Pandemic'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info' 
+    '#description': ""
+    first_name_1:
+      '#type': textfield
+      '#title': 'First Name' 
+      '#description': ""
+      '#required': true
+    last_name_1:
+      '#type': textfield
+      '#title': 'Last Name' 
+      '#description': ""
+      '#required': true
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    phone_1:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+      '#required': true
+    street_address_1:
+      '#type': textfield
+      '#title': 'Street Address' 
+      '#description': ""
+    city_1:
+      '#type': textfield
+      '#title': 'City' 
+      '#description': ""
+    state_1:
+      '#type': textfield
+      '#title': 'State' 
+      '#description': ""
+    zip_code_1:
+      '#title': 'Zip Code' 
+      '#description': ""
+  fieldset_image_photograph:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Image/Photograph' 
+    '#description': ""
+    photo_image_upload_10:
+      '#type': managed_file
+      '#max_filesize': '5'
+      '#file_extensions': 'jpg jpeg png tif jp2 jpx j2c j2k jpf'
+      '#multiple': true
+      '#title': 'File Upload' 
+      '#description': ""
+    date_photo_taken_yyy_mm_dd_10:
+      '#type': textfield
+      '#title': 'Date Photo Taken (YYYY-MM-DD)' 
+      '#description': ""
+    location_of_photo_10:
+      '#type': textfield
+      '#title': 'Location of Photo' 
+      '#description': ""
+    names_of_people_in_photo_10:
+      '#type': textfield
+      '#title': 'Names of People in Photo' 
+      '#description': ""
+    caption_10:
+      '#type': textarea
+      '#title': 'Caption' 
+      '#description': "Put your submission into context; provide a caption of up to 200 words per image or per set of images"
+  fieldset_informed_consent__copyright_permission:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Informed Consent & Copyright Permission' 
+    '#description': ""
+    informed_consent_and_copyright_permission_16:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<p>The San Diego Public Library (Library) is a Department of the City of San Diego, and all terms of this form will be construed to benefit the City of San Diego.</p>\n\n<p>'I hereby certify that I am at least eighteen years of age, or if under the age of eighteen (in such a case this form must be completed by a parent or legal guardian), I certify that I am submitting this form through a parent or legal guardian. I voluntarily agree to share my photographic images, and any other submission (collectively “Submission(s)”), with the Library’s SNAPSHOT: A Photo Journal of Life During the Pandemic project for Library's unrestricted use of my Submission(s).'</p>\n\n<p>I understand and agree that, while not an exhaustive list, the following items may be created from my Submission(s) in this project, and Library may use my submission for:</p>\n\n<ul>\n	<li>additional digital derivatives</li>\n	<li>promotional materials</li>\n	<li>social media posts</li>\n</ul>\n\n<p>I also waive any right to claim any form of remuneration for the Library's use of the Submission(s), in any way. I also understand and agree that my Submission(s) will be curated and may be edited or manipulated by Library in any way.</p>\n\n<p>Further, I agree to hold the Library, its affiliates, representative, officials, employees, and agents harmless against any claim, action, loss, damage, or alleged infringement of any copyright, trademark, or other third party rights, arising from or related to the publication, exhibition, telecast, or other use of my Submission(s) as part of this project.</p>\n\n<p>I represent and warrant that: 1) all of my Submission(s) are original works to which I independently hold all intellectual property rights necessary for their submission, and my agreement to all terms in this form; 2) no third party has any claim whatsoever to my Submission(s); and 3) I obtained all legal consents and releases necessary regarding all privacy rights that may be impacted by use of the Submission(s) by me or the Library.</p>\n\n<p>I understand and agree that I will receive no compensation for my Submission(s). I also understand and agree that there is no guarantee my Submission(s) will be included in the project; and that if not included, then such exclusion may be for any reason whatsoever.</p>\n\n<p>Contact the Special Collections department with questions at&nbsp;<a href='mailto:speccoll@sandiego.gov?subject=Informed%20Consent%20and%20Copyright%20Permission'>speccoll@sandiego.gov</a>.</p>\n\n<p>In order to contribute Submission(s) to the project, you must have read, understood, and agreed to all terms in this Informed Consent and Copyright Permission Form.</p>\n"
+      '#title': 'Informed Consent and Copyright Permission' 
+      '#description': ""
+    acknowledgement_16:
+      '#type': radios
+      '#options':
+        read: 'I have read, understood, and I agree to all terms herein'
+      '#title': 'Acknowledgement' 
+      '#description': ""
+      '#required': true
+    submitters_age_16:
+      '#type': radios
+      '#options':
+        18: 'I am 18 years old or older'
+        under 18: 'I am under the age of 18 (permission of parent/legal guardian required)'
+      '#title': 'Submitter"s Age' 
+      '#description': ""
+      '#required': true
+    full_name_16:
+      '#type': textfield
+      '#title': 'Full Name' 
+      '#description': ""
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="submitters_age_16"]':
+            value: '18'
+            
+    full_name_of_parent_legal_guardian_16:
+      '#type': textfield
+      '#title': 'Full Name of Parent/Legal Guardian' 
+      '#description': ""
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="submitters_age_16"]':
+            value: 'under 18'
+            
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<p>Thank you for your submission.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: speccoll@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

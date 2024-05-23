@@ -1,0 +1,212 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ *
+ * @todo Remove the id attribute (or make it a class), because if that gets
+ *   rendered twice on a page this is invalid CSS for example: two lists
+ *   in different view modes.
+ */
+#}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'background-white'
+  ]
+%}
+
+{% if drupal_view_result('department_news_and_announcements', 'block') is empty %}
+  {% set features = 'no' %}
+{% else %}
+  {% set features = 'yes' %}
+{% endif %}
+
+{% if ('Yes' in content.field_single_line_title[0]) or (content.field_feature_video_img[0] is empty) %}
+  {% set lineclass = 'single-line' %}
+{% else %}
+  {% set lineclass = 'multi-line' %}
+{% endif %}
+
+{{ content.content_moderation_control }}
+<article{{ attributes.addClass(classes) }}>
+
+  {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  <div{{ content_attributes.addClass('node__content') }}>
+    <div class="grid-x">
+      <div class="cell medium-2 l-padding-tm hide-on-mobile">
+        {% if content.field_image[0] %}
+        <div class="dept-parent-custom-logo">
+          {{ content.field_image }}
+        </div>
+        {% else %}
+        <div class="dept-parent-logo">
+          <img src="/{{ directory }}/images/cosd-logo/cosd-logo-initials-blue-color-sails.svg" alt="San Diego logo" />
+        </div>
+        {% endif %}
+      </div>
+      <div class="cell small-12 medium-auto">
+        <div class="l-padding-am l-padding-desktop-ln l-padding-mobile-td">
+          <h1 class="{{ lineclass }} dp-title">{{ label }}</h1>
+
+          {{ content.field_contact_info_grid }}
+
+          {{ content.field_social_links }}
+        </div>
+      </div>
+      {% if content.field_feature_video_img[0] %}
+      <div class="cell medium-6">
+      {%if node.field_feature_video_img.entity.field_media_oembed_video.value is not empty %}
+        <div class="l-padding-desktop-am l-padding-mobile-an">
+          <div class="video-wrapper">
+            <iframe width="560" height="315" src="{{ node.field_feature_video_img.entity.field_media_oembed_video.value|replace({"/watch?v=":"/embed/"}) }}?rel=0&wmode=transparent" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            {% if content.field_feature_video_image_cap[0] %}
+              <div class="figcaption text-center">
+                {{ content.field_feature_video_image_cap[0] }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% else %}
+        <div class="l-padding-desktop-am l-padding-mobile-an">
+          {% if content.field_feature_image_url[0] %}
+            <a href="{{ content.field_feature_image_url[0]['#url'] }}">{{ content.field_feature_video_img }}</a>
+          {% else %}
+            {{ content.field_feature_video_img }}
+          {% endif %}
+          {% if content.field_feature_video_image_cap[0] %}
+            <div class="figcaption text-center">
+              {{ content.field_feature_video_image_cap[0] }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+      </div>
+      {% endif %}
+    </div>
+    {% if content.field_top_content[0] %}
+    <div class="grid-x">
+      <div class="cell small-12">
+        <div class="l-padding-am l-padding-tn">
+          {{ content.field_top_content }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+      {% if features == "yes" %}
+      <div class="grid-x">
+      {% else %}
+      <div class="grid-x border border--top">
+      {% endif %}
+        <div class="cell small-12 medium-auto white-bg">
+          {% if drupal_view_result('department_news_and_announcements', 'block') is not empty %}
+          <div class="l-padding-am l-padding-desktop-rd l-padding-mobile-bd background-off-white">
+            {% if content.field_feature_alt_text[0] %}
+              {% if content.field_feature_alt_text[0]['#context'].value != 'none' %}
+                <h2 class="heading--snug">{{ content.field_feature_alt_text }}</h2>
+              {% endif %}
+            {% else %}
+              <h2 class="heading--snug">Features</h2>
+            {% endif %}
+            {{ drupal_view('department_news_and_announcements', 'block') }}
+          </div>
+          {% endif %}
+          {% if content.field_featured_content.0 is not empty %}
+          <div class="bottom-section l-padding-am white-bg">
+            {{ content.field_featured_content }}
+          </div>
+          {% endif %}
+
+        </div>
+
+        <div class="cell medium-3 sidebar l-padding-vm l-padding-desktop-hd l-padding-mobile-hm background-off-white">
+            {% if 'No' in content.field_hide_news_feed[0] %}
+              {% if content.field_news_alt_text[0] %}
+                <h2 class="heading--snug">{{ content.field_news_alt_text }}</h2>
+              {% else %}
+                <h2 class="heading--snug">News</h2>
+              {% endif %}
+              {{ drupal_view('department_notifications', 'block') }}
+            {% endif %}
+            {% if content.field_sidebar[0] %}
+              {{ content.field_sidebar }}
+            {% endif %}
+        </div>
+      </div>
+  </div>
+
+</article>

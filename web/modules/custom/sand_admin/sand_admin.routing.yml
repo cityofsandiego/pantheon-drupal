@@ -1,0 +1,14 @@
+system.admin_config_webteam:
+  path: '/admin/config/webteam'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'WebTeam'
+  requirements:
+    _permission: 'access administration pages'
+sand_admin.settings:
+  path: '/admin/config/webteam/settings/sand_admin'
+  defaults:
+    _title: 'Sand Admin Settings'
+    _form: 'Drupal\sand_admin\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'    

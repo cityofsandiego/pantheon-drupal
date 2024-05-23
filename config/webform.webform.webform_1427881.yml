@@ -1,0 +1,180 @@
+uuid: 9e25fa94-7c02-45f3-b4af-75f4692cce5a
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1427881
+title: 'Agenda Item Request Form'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info' 
+    '#description': ""
+    name_1:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+      '#required': true
+    city_department_or_organization_1:
+      '#type': textfield
+      '#title': 'City Department or Organization' 
+      '#description': ""
+      '#required': true
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    phone_1:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+      '#required': true
+  fieldset_item_details:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Item Details' 
+    '#description': ""
+    title_6:
+      '#type': textfield
+      '#title': 'Title (this will be public)' 
+      '#description': ""
+      '#required': true
+    brief_summary_6:
+      '#title': 'Brief Summary' 
+      '#description': "This will be shared prior to the meeting with the working group members and included in the agenda."
+      '#required': true
+    is_this_item_regarding_climate_equity_6:
+      '#type': radios
+      '#options':
+        yes: 'Yes'
+        no: 'No'
+        unsure: 'Unsure'
+      '#title': 'Is this item regarding climate equity?' 
+      '#description': ""
+      '#required': true
+    please_provide_a_description_of_your_item_and_asks_for_the_working_group_6:
+      '#title': 'Please provide a description of your item and asks for the working group.' 
+      '#description': ""
+      '#required': true
+    meeting_date_6:
+      '#type': date
+      '#title': 'Meeting Date' 
+      '#description': ""
+      '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /sustainability/climateequity/agenda-item-request-form-submittal
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit Request'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:name:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:completed_date:long]
+         
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: sustainability@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:name:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:completed_date:long]
+         
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

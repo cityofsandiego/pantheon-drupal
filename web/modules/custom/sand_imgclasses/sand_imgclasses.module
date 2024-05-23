@@ -1,0 +1,86 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function sand_imgclasses_form_editor_media_dialog_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (isset($form['align'])) {
+    if (isset($form_state->getUserInput()['editor_object'])) {
+      $editor_object = $form_state->getUserInput()['editor_object'];
+      $media_embed_element = $editor_object['attributes'];
+    } else {
+      // Retrieve the user input from form state.
+      $media_embed_element = $form_state->get('media_embed_element');
+    }
+    $classes = $media_embed_element['class'];
+    if (!empty($classes)) {
+      $arrClasses = explode(" ",$classes);
+      $defPlacement = $arrClasses[0];
+      $defDSize = $arrClasses[1];
+      $defMSize = $arrClasses[2];
+    } else {
+      $defPlacement = "img-center";
+      $defDSize = "width-25";
+      $defMSize = "width-100--mobile";
+    }
+
+    // Placement field.
+    $form['placement_class'] = [
+      '#type' => 'select',
+      '#title' => t('Placement'),
+      '#description' => t('Select placement of image.'),
+      '#default_value' => $defPlacement,
+      '#options' => [ "img-center" => "Centered Image No Wrap", "img-left" => "Left Image Wrap", "img-right" => "Right Image Wrap"]
+    ];
+    // Desktop Size field.
+    $form['dsize_class'] = [
+      '#type' => 'select',
+      '#title' => t('Image Size on Desktop'),
+      '#description' => t('Select size of image in desktop view. If placement is Centered Image No Wrap, set width to 100%.'),
+      '#default_value' => $defDSize,
+      '#options' => ["width-25" => "25% width", "width-33" => "33% width", "width-50" => "50% width", "width-100" => "100% width"]
+    ];
+    // Mobile Size field.
+    $form['msize_class'] = [
+      '#type' => 'select',
+      '#title' => t('Image Size on Mobile'),
+      '#description' => t('Select size of image in mobile view.'),
+      '#default_value' => $defMSize,
+      '#options' => ["width-50--mobile" => "50% width", "width-100--mobile" => "100% width"]
+    ];
+    // Add submit handler.
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' &&
+        isset($form['actions'][$action]['#type']) &&
+        $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'sand_imgclasses_media_dialog_submit';
+      }
+    }
+  }
+}
+
+/**
+ * Submit handler for editor_media_dialog form.
+ *
+ * @param array $form
+ *   Form fields array.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   Form state object.
+ */
+function sand_imgclasses_media_dialog_submit(array &$form, FormStateInterface $form_state) {
+  // Get selected classes.
+  $placement_class = $form_state->getValue('placement_class');
+  $dsize_class = $form_state->getValue('dsize_class');
+  $msize_class = $form_state->getValue('msize_class');
+  $corners_class = $form_state->getValue('corners_class');
+  $classes = $placement_class . " " . $dsize_class . " " . $msize_class;
+  if (!empty($classes)) {
+    $attributes = $form_state->getValue('attributes', []);
+    $attributes['class'] = $classes;
+
+    // Set embed class.
+    $form_state->setValue('attributes', $attributes);
+  }
+}

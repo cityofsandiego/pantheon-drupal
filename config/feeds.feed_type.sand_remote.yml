@@ -1,0 +1,319 @@
+uuid: a2f996dc-4480-4ba1-839f-06fd4d6d1ad7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.sand_remote.external.field_a_webc_url
+    - field.field.sand_remote.external.field_action
+    - field.field.sand_remote.external.field_back_date
+    - field.field.sand_remote.external.field_doc_date
+    - field.field.sand_remote.external.field_doc_date_num
+    - field.field.sand_remote.external.field_doc_num
+    - field.field.sand_remote.external.field_doc_set
+    - field.field.sand_remote.external.field_document_url
+    - field.field.sand_remote.external.field_object_name
+    - field.field.sand_remote.external.field_path
+    - field.field.sand_remote.external.field_pn_end_date
+    - field.field.sand_remote.external.field_pn_end_date_date
+    - field.field.sand_remote.external.field_r_modify_date
+    - field.field.sand_remote.external.field_r_object_id
+    - field.field.sand_remote.external.field_sort1
+    - field.field.sand_remote.external.field_source
+    - field.field.sand_remote.external.field_source_name
+    - field.field.sand_remote.external.field_title_long
+    - sand_remote.sand_remote_type.external
+  module:
+    - feeds_log
+    - feeds_tamper
+    - sand_remote
+third_party_settings:
+  feeds_tamper:
+    tampers: {  }
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      failed: failed
+    source: true
+label: 'Sand Remote Feed Type'
+id: sand_remote
+description: 'Sand Remote External Data'
+help: ''
+import_period: -1
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  always_download: true
+  fallback_hub: ''
+  request_timeout: 30
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:sand_remote'
+processor_configuration:
+  values:
+    bundle: external
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _delete
+  skip_hash_check: false
+  authorize: false
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 0
+custom_sources:
+  title:
+    value: TITLE
+    label: TITLE
+    machine_name: title
+    type: csv
+  doc_date:
+    value: DOC_DATE
+    label: DOC_DATE
+    machine_name: doc_date
+    type: csv
+  object_name:
+    value: OBJECT_NAME
+    label: OBJECT_NAME
+    machine_name: object_name
+    type: csv
+  document_url:
+    value: DOCUMENT_URL
+    label: DOCUMENT_URL
+    machine_name: document_url
+    type: csv
+  path:
+    value: PATH
+    label: PATH
+    machine_name: path
+    type: csv
+  a_webc_url:
+    value: A_WEBC_URL
+    label: A_WEBC_URL
+    machine_name: a_webc_url
+    type: csv
+  doc_set:
+    value: DOC_SET
+    label: DOC_SET
+    machine_name: doc_set
+    type: csv
+  r_object_id:
+    value: R_OBJECT_ID
+    label: R_OBJECT_ID
+    machine_name: r_object_id
+    type: csv
+  doc_num:
+    value: DOC_NUM
+    label: DOC_NUM
+    machine_name: doc_num
+    type: csv
+  r_modify_date:
+    value: R_MODIFY_DATE
+    label: R_MODIFY_DATE
+    machine_name: r_modify_date
+    type: csv
+  action:
+    value: ACTION
+    label: ACTION
+    machine_name: action
+    type: csv
+  doc_date_num:
+    value: DOC_DATE_NUM
+    label: DOC_DATE_NUM
+    machine_name: doc_date_num
+    type: csv
+  back_date:
+    value: BACK_DATE
+    label: BACK_DATE
+    machine_name: back_date
+    type: csv
+  sand_tamper_set_sort1:
+    value: SAND_TAMPER_SET_SORT1
+    label: SAND_TAMPER_SET_SORT1
+    machine_name: sand_tamper_set_sort1
+    type: blank
+  sand_tamper_set_source:
+    value: SAND_TAMPER_SET_SOURCE
+    label: SAND_TAMPER_SET_SOURCE
+    machine_name: sand_tamper_set_source
+    type: blank
+  sand_tamper_set_source_name:
+    value: SAND_TAMPER_SET_SOURCE_NAME
+    label: SAND_TAMPER_SET_SOURCE_NAME
+    machine_name: sand_tamper_set_source_name
+    type: blank
+  pn_end_date_date:
+    value: PN_END_DATE_DATE
+    label: PN_END_DATE_DATE
+    machine_name: pn_end_date_date
+    type: csv
+  pn_end_date:
+    value: PN_END_DATE
+    label: PN_END_DATE
+    machine_name: pn_end_date
+    type: csv
+  pn_end_date_date2:
+    value: PN_END_DATE_DATE
+    label: PN_END_DATE_DATE
+    machine_name: pn_end_date_date2
+    type: csv
+  pn_end_date2:
+    value: PN_END_DATE
+    label: PN_END_DATE
+    machine_name: pn_end_date2
+    type: csv
+  pn_end_date_date_unique:
+    value: PN_END_DATE_DATE
+    label: PN_END_DATE_DATE
+    machine_name: pn_end_date_date_unique
+    type: csv
+  pn_end_date_unique:
+    value: PN_END_DATE
+    label: PN_END_DATE
+    machine_name: pn_end_date_unique
+    type: csv
+mappings:
+  -
+    target: label
+    map:
+      value: title
+    settings: {  }
+    unique: {  }
+  -
+    target: field_title_long
+    map:
+      value: title
+    settings:
+      language: null
+  -
+    target: field_doc_date
+    map:
+      value: doc_date
+    settings:
+      language: ''
+      timezone: __SITE__
+  -
+    target: field_object_name
+    map:
+      value: object_name
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_document_url
+    map:
+      value: document_url
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_path
+    map:
+      value: path
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_a_webc_url
+    map:
+      value: a_webc_url
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_doc_set
+    map:
+      value: doc_set
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_r_object_id
+    map:
+      value: r_object_id
+    settings:
+      language: null
+    unique:
+      value: 1
+  -
+    target: field_doc_num
+    map:
+      value: doc_num
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_r_modify_date
+    map:
+      value: r_modify_date
+    settings:
+      language: ''
+      timezone: __SITE__
+  -
+    target: field_action
+    map:
+      value: action
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_doc_date_num
+    map:
+      value: doc_date_num
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_back_date
+    map:
+      value: back_date
+    settings:
+      language: ''
+      timezone: __SITE__
+  -
+    target: field_sort1
+    map:
+      value: sand_tamper_set_sort1
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_source
+    map:
+      value: sand_tamper_set_source
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_source_name
+    map:
+      value: sand_tamper_set_source_name
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_pn_end_date_date
+    map:
+      value: pn_end_date_date_unique
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_pn_end_date
+    map:
+      value: pn_end_date_unique
+    settings:
+      language: null
+    unique: {  }

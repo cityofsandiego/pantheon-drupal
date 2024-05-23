@@ -1,0 +1,180 @@
+<?php
+
+use Drupal\Core\Url;
+
+/**
+ * @file
+ * Provides a sand_remote entity type.
+ */
+use Drupal\Core\Render\Element;
+use Drupal\user\UserInterface;
+use Drupal\sand_remote\ExtractText;
+use Drupal\sand_remote\RemoteETL;
+
+/**
+ * Implements hook_requirements().
+ */
+function sand_remote_requirements($phase) {
+  // Only check requirements during the run-time (aka Status Report).
+  if ($phase != 'runtime') {
+    return [];
+  }
+
+
+  $queue = \Drupal::config('sand_remote.settings')->get('queue');
+  if (!empty($queue)) {
+    $requirements['sand_remote'] = [
+      'title' => t('San Diego<br> Remote Text Extraction'),
+      'value' => t('Queuing NOT enabled for remote extraction. <a href=":url">You can change it here</a>.', [
+        ':url' => Url::fromRoute('sand_remote.settings')->setAbsolute()->toString(),
+      ]),
+      'severity' => REQUIREMENT_WARNING,
+    ];  
+  } else {
+    $requirements['sand_remote'] = [
+      'title' => t('San Diego Remote Text Extraction'),
+      'value' => t('Queuing is enabled for remote extraction. <a href=":url">You can change it here</a>.', [
+        ':url' => Url::fromRoute('sand_remote.settings')->setAbsolute()->toString(),
+      ]),
+      'severity' => REQUIREMENT_INFO,
+    ];
+  }
+  
+  return $requirements;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sand_remote_theme() {
+  return [
+    'sand_remote' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for sand_remote templates.
+ *
+ * Default template: sand_remote.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the sand_remote information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_sand_remote(array &$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function sand_remote_user_cancel($edit, UserInterface $account, $method) {
+  switch ($method) {
+    case 'user_cancel_block_unpublish':
+      // Unpublish sand_remotes.
+      $storage = \Drupal::entityTypeManager()->getStorage('sand_remote');
+      $sand_remote_ids = $storage->getQuery()
+        ->accessCheck(FALSE)
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->execute();
+      foreach ($storage->loadMultiple($sand_remote_ids) as $sand_remote) {
+        $sand_remote->set('status', FALSE);
+        $sand_remote->save();
+      }
+      break;
+
+    case 'user_cancel_reassign':
+      // Anonymize sand_remotes.
+      $storage = \Drupal::entityTypeManager()->getStorage('sand_remote');
+      $sand_remote_ids = $storage->getQuery()
+        ->accessCheck(FALSE)
+        ->condition('uid', $account->id())
+        ->execute();
+      foreach ($storage->loadMultiple($sand_remote_ids) as $sand_remote) {
+        $sand_remote->setOwnerId(0);
+        $sand_remote->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function sand_remote_user_predelete(UserInterface $account) {
+  // Delete sand_remotes.
+  $storage = \Drupal::entityTypeManager()->getStorage('sand_remote');
+  $sand_remote_ids = $storage->getQuery()
+    ->accessCheck(FALSE)
+    ->condition('uid', $account->id())
+    ->execute();
+  $sand_remotes = $storage->loadMultiple($sand_remote_ids);
+  $storage->delete($sand_remotes);
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function sand_remote_sand_remote_insert(\Drupal\Core\Entity\EntityInterface $entity): void {
+  $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('sand_remote', $entity);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function sand_remote_sand_remote_update(\Drupal\Core\Entity\EntityInterface $entity): void {
+  // Only queue it for extracting text via tika if it's not already being updated
+  // with tika extracted text or text extracted via webdata server.
+  if ($entity->field_skip_text_extract_queuing->value) {
+    $entity->set('field_skip_text_extract_queuing', FALSE);
+    // Now clean up any of the extracted text.
+    $extract_text_service = \Drupal::service('sand.extract_text');
+    $target_field = $extract_text_service->getTargetFromEntity($entity);
+    $previous_extracted_text = $entity->{$target_field}->value;
+    $entity->{$target_field}->value = $extract_text_service->cleanExtractedData($previous_extracted_text);
+  }
+  else {
+    $added_to_queue = \Drupal::service('sand.extract_text')
+      ->queueEntityForTextExtract('sand_remote', $entity);
+  }
+}
+
+
+// DISABLE processing nodes of external_data type. We are now only processing sand_remote entity types.
+///**
+// * Implements hook_node_insert().
+// */
+//function sand_remote_node_insert(\Drupal\node\NodeInterface $node): void {
+//  if ($node->getType() == 'external_data') {
+//    $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('node', $node);
+//  }
+//}
+//
+///**
+// * Implements hook_node_update().
+// */
+//function sand_remote_node_update(\Drupal\node\NodeInterface $node): void {
+//  if ($node->getType() == 'external_data') {
+//    $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('node', $node);
+//  }
+//}
+
+function sand_remote_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
+  $is_external_data_node = ($entity->getEntityTypeId() === 'node' && $entity->bundle() === 'external_data'); 
+  $is_sand_remote_entity = ($entity->getEntityTypeId() === 'sand_remote');
+
+  if ($is_external_data_node || $is_sand_remote_entity) {
+    RemoteETL::setDocType($entity);
+    RemoteETL::setCommittee($entity);
+    RemoteETL::setDocDateYear($entity);
+    RemoteETL::setMuniCodeChapter($entity);
+  }
+}

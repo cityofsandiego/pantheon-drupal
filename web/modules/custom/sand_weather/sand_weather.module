@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_help().
+ */
+function sand_weather_help($route_name): ?string {
+  return sand_help_show_help(__DIR__, $route_name);
+}
+
+/**
+ * Implements hook_cron().
+ */
+function sand_weather_cron():void {
+  $config = \Drupal::config('sand_weather.settings');
+  // Default to a config interval or if not set then default here to 900 secs.
+  $config_interval = $config->get('interval');
+  $interval = !empty($config_interval) ? $config_interval : 900;
+
+  // We usually don't want to act every time cron runs.
+  $next_execution = \Drupal::state()->get('sand_weather.next_execution', 0);
+  $request_time = \Drupal::time()->getRequestTime();
+  $time_since_last_run = $request_time - $next_execution;
+  if ($time_since_last_run > 0) {
+    /** @var \Drupal\Core\Queue\DatabaseQueue $queue */
+    $queue = \Drupal::service('queue')->get('sand_weather_queue');
+    $item = new \stdClass();
+    $item->request_time = $request_time;
+    try {
+      $queue->createItem($item);
+    }
+    catch (Exception $exception) {
+      watchdog_exception('sand_weather', $exception);
+    }
+    $next_execution = $request_time + $interval;
+    \Drupal::state()->set('sand_weather.next_execution', $next_execution);
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sand_weather_theme(): array {
+  return [
+    'sand_weather' => [
+      'variables' => [
+        'text' => NULL,
+        'temp' => NULL,
+        'icon' => NULL,
+      ],
+    ],
+  ];
+}

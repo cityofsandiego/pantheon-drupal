@@ -1,0 +1,119 @@
+uuid: 1acfceb9-10ef-44df-8fe5-c2d9fd3c5814
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_1209487
+title: 'Lot Number Update'
+description: null
+categories: {  }
+elements: |
+  add_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<p><strong>ADD</strong><br>\n	<span class='fine-print'>Provide lot number AND expiration date (MM/DD/YYYY)</span></p>\n\n<p class='fine-print'>For multiple lot numbers, enter each one on a new line. Example:<br>\n	020B21A, 04/28/2021<br>\n	EW0150, 07/31/2021</p>\n"
+    '#title': 'Add Markup' 
+    '#description': ""
+  add:
+    '#type': textarea
+    '#title_display': invisible
+    '#title': 'ADD' 
+    '#description': ""
+  remove_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<p class='l-margin-bn'><strong>REMOVE</strong><br>\n	<span class='fine-print'>Provide lot number. Expiration Date not needed.</span></p>\n"
+    '#title': 'Remove Markup' 
+    '#description': ""
+  remove:
+    '#type': textarea
+    '#title_display': invisible
+    '#title': 'REMOVE' 
+    '#description': ""
+  your_name:
+    '#type': textfield
+    '#title': 'Your Name' 
+    '#description': ""
+    '#required': true
+  your_email_address:
+    '#type': email
+    '#size': 20
+    '#title': 'Your Email Address' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<h2>Thank you. Your request has been received.</h2>\r\n\r\n<p>Ron Vazquez will respond back to you as soon as the vaccinator form is updated.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: 'rvazquez@sandiego.gov,jly@sandiego.gov,tdeboer@sandiego.gov,koneill@sandiego.gov'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:your_email_address:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:your_name:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Lot Number Update'
+      body: |-
+        ADD:
+        [webform_submission:values:add:nolabel]
+
+        REMOVE:
+        [webform_submission:values:remove:nolabel]
+
+        NAME:
+        [webform_submission:values:your_name:nolabel]
+
+        EMAIL ADDRESS:
+        [webform_submission:values:your_email_address:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

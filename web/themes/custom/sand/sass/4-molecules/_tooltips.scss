@@ -1,0 +1,89 @@
+/* ============================================================
+  Styles for tooltips.
+  ============================================================ */
+
+.tooltip__wrap {
+  position: relative;
+
+  &:hover {
+    cursor: auto;
+
+    .tooltip {
+      display: block;
+    }
+  }
+}
+
+.tooltip {
+  z-index: 5;
+  color: white;
+  padding: 0.5em 1em;
+  display: none;
+  font-weight: 600;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 2px;
+  background: $spruce;
+
+  @include rem("font-size", 14px);
+}
+
+.tooltip--wide {
+  width: 200px;
+}
+
+.tooltip--wider {
+  width: 400px;
+}
+
+.tooltip--widest {
+  width: 600px;
+}
+
+.tooltip--bottom {
+  top: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  transform: translateX(-50%);
+  transform: translateX(-50%);
+
+  &::before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-style: solid;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    transform: translateX(-50%);
+    transform: translateX(-50%);
+    border-width: 0 9px 8px;
+    border-color: transparent transparent $spruce transparent;
+  }
+}
+
+.tooltip--right,
+.tooltip--left { //Should be right, not left. Left stays in case it's being referenced somewhere
+  top: 50%;
+  left: 150%;
+  transform: translateY(-50%);
+  transform: translateY(-50%);
+  transform: translateY(-50%);
+
+  &::before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-style: solid;
+    left: -8px;
+    top: 50%;
+    border-width: 9px 8px 9px 0;
+    transform: translateY(-50%);
+    transform: translateY(-50%);
+    transform: translateY(-50%);
+    border-color: transparent $spruce transparent transparent;
+  }
+}

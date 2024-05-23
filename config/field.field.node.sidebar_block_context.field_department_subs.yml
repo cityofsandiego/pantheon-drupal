@@ -1,0 +1,29 @@
+uuid: 2859f3ae-b43d-4e8d-878c-ceae1f7989e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_department_subs
+    - node.type.sidebar_block_context
+    - taxonomy.vocabulary.department
+id: node.sidebar_block_context.field_department_subs
+field_name: field_department_subs
+entity_type: node
+bundle: sidebar_block_context
+label: 'Department Subterms'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      department: department
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

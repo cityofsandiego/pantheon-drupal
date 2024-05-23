@@ -1,0 +1,15 @@
+diff --git a/src/Plugin/views/style/CalendarViewBase.php b/src/Plugin/views/style/CalendarViewBase.php
+index be5bd95..76420af 100644
+--- a/src/Plugin/views/style/CalendarViewBase.php
++++ b/src/Plugin/views/style/CalendarViewBase.php
+@@ -515,8 +515,8 @@ abstract class CalendarViewBase extends DefaultStyle implements CalendarViewInte
+     // Get offset to fix start/end datetime values.
+     $timezone = $this->getTimezone($field);
+     $offset = $this->getTimezoneOffset('now', $timezone);
+-    $values['value'] += $offset;
+-    $values['end_value'] += $offset;
++    // $values['value'] += $offset;  Patch to fix calendar for sandiego.gov.
++    // $values['end_value'] += $offset;  The time may be wrong on our server, rather than a Drupal Calendar bug.
+ 
+     // Get first item value to reorder multiday events in cells.
+     $all_values = $field->getValue($row);

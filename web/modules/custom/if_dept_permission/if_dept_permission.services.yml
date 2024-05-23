@@ -1,0 +1,25 @@
+services:
+  if_dept_permission.preprocess.view:
+    class: Drupal\if_dept_permission\EventSubscriber\AdminContentView
+    arguments:
+      - '@if_dept_permission.user_information'
+    tags:
+      - { name: 'event_subscriber' }
+  if_dept_permission.form_alter.node_edit:
+    class: Drupal\if_dept_permission\EventSubscriber\NodeEditPermissionCheck
+    arguments:
+      - '@if_dept_permission.user_information'
+    tags:
+      - { name: 'event_subscriber' }
+  if_dept_permission.node_edit_tab:
+    class: Drupal\if_dept_permission\EventSubscriber\NodeEditTab
+    arguments:
+      - '@if_dept_permission.user_information'
+      - '@entity_type.manager'
+    tags:
+      - { name: 'event_subscriber' }
+  if_dept_permission.user_information:
+    class: Drupal\if_dept_permission\UserInformation
+    arguments:
+      - '@current_user'
+      - '@entity_type.manager'

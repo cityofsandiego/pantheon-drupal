@@ -1,0 +1,453 @@
+uuid: d573ab43-3245-4434-b810-57cde0b72b02
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.sand_remote.external.feeds_item
+    - field.field.sand_remote.external.field_a_webc_url
+    - field.field.sand_remote.external.field_action
+    - field.field.sand_remote.external.field_back_date
+    - field.field.sand_remote.external.field_body
+    - field.field.sand_remote.external.field_body_status
+    - field.field.sand_remote.external.field_committee
+    - field.field.sand_remote.external.field_d7_nid
+    - field.field.sand_remote.external.field_doc_date
+    - field.field.sand_remote.external.field_doc_date_num
+    - field.field.sand_remote.external.field_doc_date_year
+    - field.field.sand_remote.external.field_doc_num
+    - field.field.sand_remote.external.field_doc_set
+    - field.field.sand_remote.external.field_doc_type
+    - field.field.sand_remote.external.field_document_url
+    - field.field.sand_remote.external.field_flag_color
+    - field.field.sand_remote.external.field_flag_text
+    - field.field.sand_remote.external.field_import_date
+    - field.field.sand_remote.external.field_internal_notes
+    - field.field.sand_remote.external.field_muni_code_chapter
+    - field.field.sand_remote.external.field_object_name
+    - field.field.sand_remote.external.field_path
+    - field.field.sand_remote.external.field_pdf
+    - field.field.sand_remote.external.field_pn_category
+    - field.field.sand_remote.external.field_pn_comm_plan_group
+    - field.field.sand_remote.external.field_pn_council_district
+    - field.field.sand_remote.external.field_pn_end_date
+    - field.field.sand_remote.external.field_pn_end_date_date
+    - field.field.sand_remote.external.field_r_modify_date
+    - field.field.sand_remote.external.field_r_object_id
+    - field.field.sand_remote.external.field_search_keymatch
+    - field.field.sand_remote.external.field_skip_text_extract_queuing
+    - field.field.sand_remote.external.field_sort1
+    - field.field.sand_remote.external.field_source
+    - field.field.sand_remote.external.field_source_name
+    - field.field.sand_remote.external.field_title_long
+    - field.field.sand_remote.external.field_url
+    - field.field.sand_remote.external.field_validated
+    - sand_remote.sand_remote_type.external
+  module:
+    - datetime
+    - field_group
+    - options
+    - text
+    - user
+third_party_settings:
+  field_group:
+    group_text_extract_info:
+      children:
+        - group_general_info
+        - field_body_status
+        - field_internal_notes
+      label: 'Text Extract Info'
+      parent_name: ''
+      region: content
+      weight: 15
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+    group_dates:
+      children:
+        - field_r_modify_date
+        - field_doc_date
+        - field_doc_date_num
+        - field_doc_date_year
+        - field_back_date
+        - created
+        - group_urls
+        - group_source
+        - group_pn_fields
+      label: Dates
+      parent_name: ''
+      region: content
+      weight: 16
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+    group_urls:
+      children:
+        - field_document_url
+        - field_a_webc_url
+      label: URLs
+      parent_name: group_dates
+      region: content
+      weight: 37
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+    group_source:
+      children:
+        - field_source
+        - field_source_name
+      label: Source
+      parent_name: group_dates
+      region: content
+      weight: 38
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+    group_pn_fields:
+      children:
+        - field_pn_category
+        - field_pn_comm_plan_group
+        - field_pn_council_district
+        - field_pn_end_date
+        - field_pn_end_date_date
+      label: 'PN Fields'
+      parent_name: group_dates
+      region: content
+      weight: 39
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+    group_general_info:
+      children:
+        - label
+        - field_title_long
+        - status
+        - field_skip_text_extract_queuing
+        - field_search_keymatch
+        - field_object_name
+        - field_r_object_id
+        - field_doc_set
+        - field_doc_type
+        - field_doc_num
+        - field_path
+        - field_committee
+        - field_muni_code_chapter
+        - field_sort1
+      label: 'General Info'
+      parent_name: group_text_extract_info
+      region: hidden
+      weight: 22
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+_core:
+  default_config_hash: IuBxIs2_vVGpk-AVec_hDLhhrCfZ-JwAclrpLevSAqg
+id: sand_remote.external.default
+targetEntityType: sand_remote
+bundle: external
+mode: default
+content:
+  created:
+    type: timestamp
+    label: inline
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: ''
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+    third_party_settings: {  }
+    weight: 36
+    region: content
+  field_a_webc_url:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 22
+    region: content
+  field_back_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 35
+    region: content
+  field_body:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 18
+    region: content
+  field_body_status:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 23
+    region: content
+  field_committee:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_doc_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 32
+    region: content
+  field_doc_date_num:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 33
+    region: content
+  field_doc_date_year:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 34
+    region: content
+  field_doc_num:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_doc_set:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_doc_type:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_document_url:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 21
+    region: content
+  field_internal_notes:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 24
+    region: content
+  field_muni_code_chapter:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  field_object_name:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_path:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_pn_category:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 21
+    region: content
+  field_pn_comm_plan_group:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 23
+    region: content
+  field_pn_council_district:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 24
+    region: content
+  field_pn_end_date:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 25
+    region: content
+  field_pn_end_date_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 26
+    region: content
+  field_r_modify_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 31
+    region: content
+  field_r_object_id:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_search_keymatch:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_skip_text_extract_queuing:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_sort1:
+    type: number_integer
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  field_source:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 30
+    region: content
+  field_source_name:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 32
+    region: content
+  field_title_long:
+    type: basic_string
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  status:
+    type: boolean
+    label: inline
+    settings:
+      format: enabled-disabled
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  uid:
+    type: author
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 17
+    region: content
+hidden:
+  description: true
+  feeds_item: true
+  field_action: true
+  field_d7_nid: true
+  field_flag_color: true
+  field_flag_text: true
+  field_import_date: true
+  field_pdf: true
+  field_url: true
+  field_validated: true
+  search_api_excerpt: true

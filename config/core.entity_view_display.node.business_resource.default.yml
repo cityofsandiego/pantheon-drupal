@@ -1,0 +1,113 @@
+uuid: 4d277e5d-ba96-4afd-8aa0-3f37cd1d4469
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.business_resource.body
+    - field.field.node.business_resource.field_business_organization
+    - field.field.node.business_resource.field_business_primarily_info
+    - field.field.node.business_resource.field_business_primarily_money
+    - field.field.node.business_resource.field_business_resource_link
+    - field.field.node.business_resource.field_business_short_description
+    - field.field.node.business_resource.field_business_target_business
+    - field.field.node.business_resource.field_business_typeof_assistance
+    - field.field.node.business_resource.field_d7_nid
+    - field.field.node.business_resource.field_search_exclude_entity
+    - field.field.node.business_resource.field_search_keymatch
+    - node.type.business_resource
+  module:
+    - link
+    - text
+    - user
+id: node.business_resource.default
+targetEntityType: node
+bundle: business_resource
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_business_organization:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_business_primarily_info:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_business_primarily_money:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_business_resource_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_business_short_description:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_business_target_business:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_business_typeof_assistance:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_d7_nid: true
+  field_search_exclude_entity: true
+  field_search_keymatch: true
+  langcode: true
+  search_api_excerpt: true

@@ -1,0 +1,62 @@
+{% set linkAttributes = link['attributes'] %}
+{% set colTitle = link.title_translate %}
+{% set itemDesc = link['attributes'].title|render %}
+{% if ( link['url'] is defined and link['url'] is not empty ) %}
+  {% set tag = "a" %}
+{% else  %}
+  {% set tag = 'span' %}
+  {% set linkAttributes = linkAttributes.addClass('tb-megamenu-no-link').setAttribute('tabindex', '0') %}
+  {% if submenu is empty %}
+    {% set linkAttributes = linkAttributes.addClass('tb-megamenu-no-submenu') %}
+  {% endif %}
+{% endif %}
+{% if colTitle starts with "[Title]" %}
+  <li class="cell medium-4 tb-megamenu-block">
+    <h2>{{ link.title_translate|replace({'[Title]':''}) }}</h2>
+    <p>{{link['attributes'].title}}</p>
+  </li>
+{% elseif colTitle == "2nd Column" %}
+    <li {{ attributes.addClass('cell medium-5 submenu-major') }} >
+      {{ submenu }}
+    </li>
+{% elseif colTitle == "3rd Column" %}
+    <li {{ attributes.addClass('cell medium-3 submenu-minor') }} >
+      {{ submenu }}
+    </li>
+{% else %}
+  {% if itemDesc starts with '[Image]' %}
+    <li {{ attributes }} >
+        <a href="{{ link['url'] }}">
+        <div class="grid-x nav__event">
+        <div class="cell small-3"><img alt="" height="74" src="{{ itemDesc|replace({'[Image]':''}) }}" width="74"></div>
+        <div class="cell auto">{{ link.title_translate }}</div>
+        </div></a>
+    </li>
+  {% elseif colTitle starts with "[More]" %}
+    <li {{ attributes }}>
+      <a href="{{ link['url'] }}" style="margin-left: 51%">{{ link.title_translate|replace({'[More]':''}) }}</a>
+    </li>
+  {% else %}
+    <li {{ attributes }} >
+      {% if tag == 'a' %}
+        <{{ tag }} href="{{ link['url'] }}" {{ link['attributes'] }}>
+        {% if item_config['xicon'] %}
+          <i class="{{ item_config['xicon'] }}"></i>
+        {% endif %}
+        {{ link.title_translate }}
+        {% if submenu and block_config['auto-arrow'] %}
+          <span class="caret"></span>
+        {% endif %}
+        {% if item_config['caption'] %}
+          <span class="mega-caption">{{ item_config['caption'] }}</span>
+        {% endif %}
+      </{{ tag }}>
+      {% else %}
+        <div class="mega-group-title tb-megamenu-no-link cell medium-5">
+          <h4 class="heading--snug">{{ link.title_translate }}</h4>
+        </div>
+      {% endif %}
+      {{ submenu }}
+    </li>
+  {% endif %}
+{% endif %}

@@ -1,0 +1,392 @@
+uuid: 40f041fd-84fa-4d01-b605-0b67a9e86298
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_43483
+title: 'Join Green Business Network'
+description: null
+categories: {  }
+elements: |
+  gbn_business_name:
+    '#type': textfield
+    '#title': 'Business name' 
+    '#description': ""
+    '#required': true
+  gbn_business_type:
+    '#type': radios
+    '#options':
+      Accommodations: 'Accommodations'
+      Beauty_Health: 'Beauty & Health'
+      Education: 'Education'
+      Fitness: 'Fitness'
+      Food_Beverage: 'Food & Beverage'
+      Non_Profit: 'Non Profit'
+      Retail: 'Retail'
+      Service: 'Service'
+    '#title': 'Business type' 
+    '#description': ""
+    '#required': true
+  gbn_business_url:
+    '#type': textfield
+    '#title': 'Business website address (URL)' 
+    '#description': ""
+  gbn_business_description:
+    '#type': textarea
+    '#title': 'Describe your business' 
+    '#description': ""
+    '#required': true
+  gbn_space:
+    '#type': radios
+    '#options':
+      Own: 'Own'
+      Lease: 'Lease'
+    '#title': 'Do you own or lease space?' 
+    '#description': ""
+    '#required': true
+  gbn_employee_count:
+    '#type': textfield
+    '#size': 20
+    '#min': 0
+    '#max': 
+    '#step': 
+    '#unique': false
+    '#title': 'Number of employees in your organization' 
+    '#description': ""
+    '#required': true
+  gbn_business_address:
+    '#type': textfield
+    '#title': 'Business address' 
+    '#description': ""
+    '#required': true
+  gbn_business_zip:
+    '#type': textfield
+    '#size': 20
+    '#min': 92037
+    '#max': 92199
+    '#step': 
+    '#unique': false
+    '#title': 'Business zip code' 
+    '#description': ""
+    '#required': true
+  first_name:
+    '#type': textfield
+    '#title': 'First Name' 
+    '#description': ""
+    '#required': true
+  last_name:
+    '#type': textfield
+    '#title': 'Last Name' 
+    '#description': ""
+    '#required': true
+  gbn_contact_role:
+    '#type': textfield
+    '#title': 'Your role within the business' 
+    '#description': ""
+    '#required': true
+  gbn_contact_email:
+    '#type': email
+    '#size': 20
+    '#title': 'Your email' 
+    '#description': ""
+    '#required': true
+  gbn_contact_phone:
+    '#type': textfield
+    '#title': 'Your phone number' 
+    '#description': "Format: 999-999-9999"
+    '#required': true
+  gbn_heard_about:
+    '#type': radios
+    '#options':
+      Yes: 'Yes'
+      No: 'No'
+      Unsure: 'Unsure'
+    '#title': 'Have you heard about the Green Business Network before?' 
+    '#description': ""
+    '#required': true
+  gbn_interested_saving_money:
+    '#type': radios
+    '#options':
+      Yes: 'Yes'
+      No: 'No'
+      Maybe: 'Maybe'
+    '#title': 'Are you interested in saving money on your water, waste, and energy bills?' 
+    '#description': ""
+    '#required': true
+  gbn_energy_meter:
+    '#type': radios
+    '#options':
+      Yes: 'Yes'
+      No: 'No'
+      Do_not_know: 'Don"t Know'
+    '#title': 'Does your business have its own energy meter?' 
+    '#description': ""
+    '#required': true
+  gbn_water_meter:
+    '#type': radios
+    '#options':
+      Yes: 'Yes'
+      No: 'No'
+      Do_not_know: 'Don"t Know'
+    '#title': 'Does your business have its own water meter?' 
+    '#description': ""
+    '#required': true
+  gbn_manage_waste:
+    '#type': radios
+    '#options':
+      Waste_hauler: 'We carry a contract with a waste hauler'
+      Property_scale_billing: 'We are on a property scale billing'
+      Do_not_know: 'I don"t know'
+    '#title': 'Who manages your waste?' 
+    '#description': ""
+    '#required': true
+  gbn_assessments:
+    '#type': radios
+    '#options':
+      Yes: 'Yes'
+      No: 'No'
+      Learn_more: 'I want to learn more'
+    '#title': 'Are you interested in free water, waste, and energy assessments?' 
+    '#description': ""
+    '#required': true
+  gbn_resources:
+    '#type': checkboxes
+    '#options':
+      Printed: 'Printed Resources'
+      Online: 'Online Resources'
+      In_person: 'In person meetings'
+      Events: 'Events'
+      Other: 'Other:'
+    '#multiple': true
+    '#title': 'What resources about sustainability and green building would be helpful to you?' 
+    '#description': "- Check all that apply -"
+    '#required': true
+  gbn_resources_other:
+    '#type': textfield
+    '#title_display': invisible
+    '#title': 'Resources Other' 
+    '#description': ""
+    '#required': true
+    '#states':
+      required:
+        ':input[name="gbn_resources[other]"]':
+          checked: true
+          
+      visible:
+        ':input[name="gbn_resources[other]"]':
+          checked: true
+          
+  gbn_motivation:
+    '#type': checkboxes
+    '#options':
+      Recognition: 'Free social media recognition'
+      Networking: 'Networking opportunities with other green businesses'
+      Right_thing: 'Because it"s the right thing to do'
+      Save_money: 'Save money'
+      Not_motivated: 'I am not motivated to go green'
+      Other: 'Other:'
+    '#multiple': true
+    '#title': 'What is your motivation to join the Green Business Network?' 
+    '#description': "- Check all that apply -"
+    '#required': true
+  gbn_motivation_other:
+    '#type': textfield
+    '#title_display': invisible
+    '#title': 'Motivation Other' 
+    '#description': ""
+    '#required': true
+    '#states':
+      required:
+        ':input[name="gbn_motivation[other]"]':
+          checked: true
+          
+      visible:
+        ':input[name="gbn_motivation[other]"]':
+          checked: true
+          
+  gbn_share_with_us:
+    '#type': textarea
+    '#title': 'Is there anything else you would like to share with us?' 
+    '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /green-business-network/join-submitted
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: sustainability@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:date:long]
+        =========================================
+
+        BUSINESS NAME: 
+        [webform_submission:values:gbn_business_name:nolabel]
+
+        BUSINESS TYPE:
+        [webform_submission:values:gbn_business_type:nolabel]
+
+        BUSINESS WEBSITE:
+        [webform_submission:values:gbn_business_url:nolabel]
+
+        BUSINESS DESCRIPTION:
+        [webform_submission:values:gbn_business_description:nolabel]
+
+        DO YOU OWN OR LEASE SPACE?
+        [webform_submission:values:gbn_space:nolabel]
+
+        NUMBER OF EMPLOYEES IN YOUR ORGANIZATION:
+        [webform_submission:values:gbn_employee_count:nolabel]
+
+        BUSINESS ADDRESS:
+        [webform_submission:values:gbn_business_address:nolabel]
+
+        BUSINESS ZIP CODE:
+        [webform_submission:values:gbn_business_zip:nolabel]
+
+        FIRST NAME:
+        [webform_submission:values:first_name:nolabel]
+
+        LAST NAME:
+        [webform_submission:values:last_name:nolabel]
+
+        YOUR NAME:
+        [webform_submission:values:gbn_contact_name:nolabel]
+
+        YOUR ROLE WITHIN THE BUSINESS:
+        [webform_submission:values:gbn_contact_role:nolabel]
+
+        YOUR EMAIL: 
+        [webform_submission:values:gbn_contact_email:nolabel]
+
+        YOUR PHONE NUMBER:
+        [webform_submission:values:gbn_contact_phone:nolabel]
+
+        HAVE YOU HEARD ABOUT THE GREEN BUSINESS NETWORK BEFORE?
+        [webform_submission:values:gbn_heard_about:nolabel]
+
+        ARE YOU INTERESTED IN SAVING MONEY ON YOUR WATER, WASTE, AND ENERGY BILLS?
+        [webform_submission:values:gbn_interested_saving_money:nolabel]
+
+        DOES YOUR BUSINESS HAVE ITS OWN ENERGY METER?
+        [webform_submission:values:gbn_energy_meter:nolabel]
+
+        DOES YOUR BUSINESS HAVE ITS OWN WATER METER?
+        [webform_submission:values:gbn_water_meter:nolabel]
+
+        WHO MANAGES YOUR WASTE?
+        [webform_submission:values:gbn_manage_waste:nolabel]
+
+        ARE YOU INTERESTED IN FREE WATER, WASTE, AND ENERGY ASSESSMENTS?
+        [webform_submission:values:gbn_assessments:nolabel]
+
+        WHAT RESOURCES ABOUT SUSTAINABILITY AND GREEN BUILDING WOULD BE HELPFUL TO YOU?
+        [webform_submission:values:gbn_resources:nolabel] [webform_submission:values:gbn_resources_other:nolabel]
+
+        WHAT IS YOUR MOTIVATION TO JOIN THE GREEN BUSINESS NETWORK?
+        [webform_submission:values:gbn_motivation:nolabel] [webform_submission:values:gbn_motivation_other:nolabel]
+
+        IS THERE ANYTHING ELSE YOU WOULD LIKE TO SHARE WITH US?
+        [webform_submission:values:gbn_share_with_us:nolabel]
+
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:gbn_contact_email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: sustainability@sandiego.gov
+      from_options: {  }
+      from_name: 'City of San Diego Green Business Network'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Thank you for signing up for the City of San Diego Green Business Network! 
+
+        As a member, you’ll receive access to free energy assessments, marketing support, educational workshops, networking opportunities, automatic enrollment in the San Diego Regional Green Business Network, and awards & recognition within your local community. As an added bonus, you’re protecting our planet through your commitment to reducing your environmental impact.
+
+        A representative from the San Diego Green Building Council will be in touch to finalize your membership and further discuss your new member benefits. 
+
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

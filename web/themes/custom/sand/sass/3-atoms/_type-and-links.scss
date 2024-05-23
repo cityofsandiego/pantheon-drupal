@@ -1,0 +1,97 @@
+/* ============================================================
+  Styles for general typography and links.
+  ============================================================ */
+
+// Override Foundation's base ul styles
+ul,
+ol {
+  margin: 0 0 0.75em;
+  padding-inline-start: 1em;
+  line-height: 1.5;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  li {
+    margin: 0 0 0.5rem 1rem;
+    padding: 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  & ul,
+  ol {
+    margin: 0.5em 0;
+  }
+}
+
+ul {
+  list-style-type: disc;
+
+  ul {
+    list-style-type: circle;
+    margin-left: 0;
+  }
+}
+
+.accordion__drawer {
+  ul,
+  ol {
+    &.department-menu {
+      padding-inline-start: 0;
+
+      li {
+        margin: 0 0 0.5rem;
+
+        @include breakpoint(mobile-landscape down) {
+          margin: 0;
+          padding: 1em 0 1em 0.5rem;
+          border-bottom: 1px solid white;
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+
+  @include breakpoint(mobile-landscape) {
+    padding-inline-start: 1em;
+  }
+}
+
+.sub-navigation-mobile .accordion .accordion__drawer {
+  padding: 0;
+}
+
+p.date,
+.date {
+  font-weight: 600;
+  margin-bottom: 0.75em !important;
+
+  .notification &,
+  .doc-list-compact &,
+  .card--notification & {
+    font-weight: 600;
+    margin-bottom: 0 !important;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    font-family: $font-family;
+  }
+
+  @include breakpoint(mobile-landscape) {
+    margin-bottom: 0 !important;
+  }
+}
+
+.byline {
+  font-weight: 600;
+  margin-bottom: 0 !important;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  font-family: $font-family;
+}

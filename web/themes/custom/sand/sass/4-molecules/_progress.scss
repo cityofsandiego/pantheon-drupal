@@ -1,0 +1,189 @@
+// ==========================================================================
+// Progress
+// ==========================================================================
+
+.progress-bar {
+  width: 100%;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    height: auto;
+    background: transparent;
+  }
+
+  li {
+    margin: 0;
+
+    &:first-child {
+      a,
+      > span {
+        border-radius: 4px 4px 0 0;
+
+        &::before {
+          content: normal;
+          border-style: none;
+        }
+
+        @include breakpoint(mobile-landscape) {
+          border-radius: 4px 0 0 4px;
+        }
+      }
+    }
+
+    &:last-child {
+      a,
+      span {
+        border-radius: 0 0 4px 4px;
+
+        &::after {
+          content: normal;
+          border-style: none;
+        }
+
+        @include breakpoint(mobile-landscape) {
+          border-radius: 0 4px 4px 0;
+        }
+      }
+    }
+
+    &.is-active {
+      & > span {
+        background-color: $cerulean;
+
+        &::after {
+          border-color: transparent transparent transparent $cerulean;
+        }
+
+        .progress__label {
+          color: white;
+        }
+      }
+    }
+
+    a,
+    & > span {
+      position: relative;
+      display: block;
+      background-color: $mercury;
+      text-decoration: none;
+      color: $font-color;
+
+      &:hover {
+        color: $font-color;
+      }
+
+      .progress__num {
+        margin-top: -12px;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 16px;
+        background-color: white;
+        border-radius: 500px;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        color: $cerulean;
+
+        //@include transition( all .15s );
+
+        a:hover & {
+          background-color: $cerulean;
+          box-shadow: none;
+          color: white;
+        }
+
+        .is-active a:hover & {
+          background-color: white;
+          box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+          color: $cerulean;
+        }
+
+        li:first-child & {
+          @include breakpoint(mobile-landscape) {
+            left: 8px;
+          }
+        }
+      }
+
+      .progress__label {
+        .is-active & {
+          color: white;
+        }
+      }
+
+      @include rem("padding", 12px 8px 12px 48px);
+      @include rem("font-size", 14px);
+
+      @include breakpoint(mobile-landscape) {
+        &::before,
+        &::after {
+          content: "";
+          margin-top: -21.5px;
+          width: 0;
+          height: 0;
+          position: absolute;
+          top: 50%;
+          border-style: solid;
+          border-width: 21.5px 0 21.5px 12px;
+        }
+
+        &::before {
+          left: 0;
+          border-color: transparent transparent transparent white;
+        }
+
+        &::after {
+          right: -12px;
+          z-index: 2;
+          border-color: transparent transparent transparent $mercury;
+        }
+
+        li:first-child & {
+          border-radius: 4px 0 0 4px;
+
+          &::before {
+            content: normal;
+          }
+
+          @include breakpoint(mobile-landscape) {
+            @include rem("padding-left", 40px);
+          }
+        }
+
+        li:last-child & {
+          border-radius: 0 4px 4px 0;
+
+          &::after {
+            content: normal;
+          }
+        }
+      }
+    }
+
+    a:hover {
+      .progress__num {
+        background-color: $cerulean;
+        color: white;
+      }
+    }
+
+    .progress__lining {
+      @include breakpoint(mobile-landscape) {
+        @include rem("margin", 1.5px 0 1.5px 0);
+      }
+    }
+
+    @include breakpoint(mobile-landscape) {
+      // width: 25%;
+      min-width: 25%;
+      display: inline-block;
+      padding-right: 3px;
+      margin: 0 -4px 3px 0;
+    }
+  }
+}

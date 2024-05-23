@@ -1,0 +1,805 @@
+uuid: fa6f525c-7057-4518-af3b-369a8b7d2697
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_30465
+title: 'Get It Done - Police'
+description: null
+categories: {  }
+elements: |-
+  get_it_done:
+    '#type': hidden
+    '#default_value': 'TRUE'
+    '#title': get_it_done
+    '#description': ''
+  fieldset_step_1:
+    '#type': fieldset
+    '#title': 'I Need To...'
+    '#open': true
+    '#attributes':
+      class:
+        - step-1
+    i_need_to_2:
+      '#type': select
+      '#options':
+        apply: Apply
+        find: Find
+        pay: Pay
+        report: Report
+        request: Request
+      '#default_value': apply
+      '#title_display': invisible
+      '#title': 'I need to'
+      '#description': ''
+  fieldset_apply_set:
+    '#type': fieldset
+    '#title': Apply...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: apply
+    '#attributes':
+      class:
+        - step-2
+    apply_4:
+      '#type': select
+      '#options':
+        apply_alarm_permit: 'Alarm Permit'
+        apply_job: 'Job with the Police Department'
+        apply_letter_agency: 'Letter of Agency'
+        apply_media_multi: 'Media Identification - Multi-organizational'
+        apply_media_single: 'Media Identification - Single Organization'
+        apply_police_reg_permit: 'Police Regulated Business License or Permit'
+        apply_res_order: 'Restraining Order'
+        apply_event_permit: 'Special Events Traffic Permit'
+      '#default_value': apply_job
+      '#title_display': invisible
+      '#title': Apply
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: apply
+  fieldset_find_set:
+    '#type': fieldset
+    '#title': Find...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: find
+    '#attributes':
+      class:
+        - step-2
+    find_45:
+      '#type': select
+      '#options':
+        find_auto_theft: 'Auto-theft case status'
+        find_crime_stats: 'Crime statistics'
+        find_detective: 'Detective assigned to your case'
+        find: 'Event information'
+        find_res_order: 'How to obtain a restraining order'
+        find_impound: 'Impounded vehicle'
+        find_other_vehicle_topics: 'Other vehicle and parking-related topics'
+        find_jailed: 'Someone in jail'
+        find_tow: 'Towed vehicle'
+        find_collision: 'Traffic collision reports'
+        find_volunteer: 'Volunteer opportunities at the Police Department'
+      '#default_value': find_auto_theft
+      '#title_display': invisible
+      '#title': Find
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: find
+  fieldset_pay_set:
+    '#type': fieldset
+    '#title': Pay...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: pay
+    '#attributes':
+      class:
+        - step-2
+    pay_8:
+      '#type': select
+      '#options':
+        pay_alarm_permit: 'Alarm permit'
+        pay_ticket: 'Parking citation/ticket'
+      '#default_value': pay_alarm_permit
+      '#title_display': invisible
+      '#title': Pay
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: pay
+  fieldset_report_set:
+    '#type': fieldset
+    '#title': Report...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: report
+    '#attributes':
+      class:
+        - step-2
+    report_12:
+      '#type': select
+      '#options':
+        report_animal_issue: 'Animal-related issue'
+        report_auto_theft: 'Auto theft'
+        report_bev_complaint: 'Complaint against beverage establishment'
+        report_graffiti: Graffiti
+        report_narcotics: 'Narcotics-related incident'
+        report_non_emer: 'Non-emergency Crime'
+        report_oversized_vehicle: 'Oversized vehicle'
+        report_parking: 'Parking zone issue'
+        report_street_problem: 'Problem with street lights, potholes or traffic signals'
+        report_abandoned_vehicle: 'Vehicle (72-hour Violation)'
+      '#default_value': report_abandoned_vehicle
+      '#title_display': invisible
+      '#title': Report
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: report
+  fieldset_request_set:
+    '#type': fieldset
+    '#title': Request...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: request
+    '#attributes':
+      class:
+        - step-2
+    request_14:
+      '#type': select
+      '#options':
+        request_patrols: 'Additional neighborhood patrols'
+        request_ride_along: 'Ride along'
+        request_vacation_check: 'Vacation check'
+      '#default_value': request_patrols
+      '#title_display': invisible
+      '#title': Request
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: request
+  fieldset_apply_options:
+    '#type': fieldset
+    '#title': 'Apply Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: apply
+    '#attributes':
+      class:
+        - step-3
+    apply_media_id_multi_18:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for a multi-organization media identification card (for freelancers who provide service to more than one media organization)</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for a media identification card - multi-organization' href='https://www.sandiego.gov/sites/default/files/independent_application.pdf'>Apply Now</a></div>
+        </div>
+      '#title': 'Media ID - Multi'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: apply_media_multi
+    apply_job_18:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for a job with the Police Department</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for a job with the Police Department' href='/police/recruiting'>Apply Now</a></div>
+        </div>
+      '#title': Job
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: apply_job
+    apply_media_id_single_18:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for a single-organization media identification card (for those that work for and provide service to only one media organization)</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for a media identification card - single-organization' href='https://www.sandiego.gov/sites/default/files/media_credential_application_revised_august_14.pdf'>Apply Now</a></div>
+        </div>
+      '#title': 'Media ID - Single'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: apply_media_single
+    apply_regulated_biz_permit_18:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for a permit or license to operate a police regulated business within the City limits</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for a permit or license to operate a police regulated business within the City limits' href='/treasurer/taxesfees/pdpermits/requirements'>Apply Now</a></div>
+        </div>
+      '#title': 'Police regulated business license or permit'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: apply_police_reg_permit
+    apply_alarm_permit_18:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for an alarm permit</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for an alarm permit' href='/police/forms/permits'>Apply Now</a></div>
+        </div>
+      '#title': 'Alarm permit'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: apply_alarm_permit
+    apply_events_permit_18:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for a permit for special events impacting traffic such as parades, running events, street fairs, block parties, stadium events, Sports Arena events or concerts</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for a permit for special events impacting traffic such as parades, running events, street fairs, block parties, stadium events, Sports Arena events or concerts' href='/police/services/units/traffic/sepo'>Apply Now</a></div>
+        </div>
+      '#title': 'Events permit'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: apply_event_permit
+    apply_res_order_18:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for a temporary restraining order</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for a temporary restraining order' href='/police/services/prevention/victimresources/restrainingorder'>Apply Now</a></div>
+        </div>
+      '#title': 'Restraining Order'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: apply_res_order
+    apply_letter_agency_18:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for a Letter of Agency</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for Letter of Agency with Police Department' href='/sites/default/files/legacy/police/pdf/letterofagency.pdf'>Apply Now</a></div>
+        </div>
+      '#title': 'Letter of Agency'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: apply_letter_agency
+  fieldset_find_options:
+    '#type': fieldset
+    '#title': 'Find Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: find
+    '#attributes':
+      class:
+        - step-3
+    find_collision_reports_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Get a copy of a traffic collision report</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Get a copy of a traffic collision report' href='/police/services/faqs/traffic'>Find Now</a></div>
+        </div>
+      '#title': 'Traffic Collision Reports'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_collision
+    find_auto_theft_case_status_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find the status of your auto theft case</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find the status of your auto theft case' href='/police/services/units/autotheft'>Find Now</a></div>
+        </div>
+      '#title': 'Auto-theft case status'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_auto_theft
+    find_towed_car_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find out if or where your car was towed</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find out if or where your car was towed' href='http://www.autoreturn.com/san-diego-ca/'>Find Now</a></div>
+        </div>
+      '#title': 'Towed car'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_tow
+    find_impounded_vehicle_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find information on an impounded vehicle</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find information on an impounded vehicle' href='/parking/enforcement/impound'>Find Now</a></div>
+        </div>
+      '#title': 'Impounded vehicle'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_impound
+    find_other_vehicle_topics_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Learn about pre-paid parking cards, residential permits, enforcement holidays, and other parking topics</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Learn about pre-paid parking cards, residential permits, enforcement holidays, and other parking topics' href='/parking'>Find Now</a></div>
+        </div>
+      '#title': 'Other vehicle and parking-related topics'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_other_vehicle_topics
+    find_crime_stats_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find information on crime statistics and related maps</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find information on crime statistics and related maps' href='/police/services/statistics'>Find Now</a></div>
+        </div>
+      '#title': 'Crime statistics '
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_crime_stats
+    find_volunteer_opps_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find volunteer opportunities at the Police Department</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find volunteer opportunities at the Police Department' href='/police/recruiting/volunteer'>Find Now</a></div>
+        </div>
+      '#title': 'Volunteer opportunities'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_volunteer
+    find_res_order_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find out how to obtain a temporary restraining order</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find out how to obtain a temporary restraining order' href='/police/services/prevention/victimresources/restrainingorder'>Find Now</a></div>
+        </div>
+      '#title': 'Restraining Order'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_res_order
+    find_jailed_person_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find out if someone is in County jail</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find out if someone is in County jail' href='http://www.sdsheriff.net/'>Find Now</a></div>
+        </div>
+      '#title': 'Someone in jail'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_jailed
+    find_detective_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find and contact the detective who is working on your case by calling your community's police station</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find and contact the detective who is working on your case by calling your community's police station' href='/police/contact'>Find Now</a></div>
+        </div>
+      '#title': 'Detective assigned to a case'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find_detective
+    find_event_info_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find information on special events, road closures, evacuations, earthquakes, and other major events</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find information on special events, road closures, evacuations, earthquakes, and other major events' href='http://www.211sandiego.org'>Find Now</a></div>
+        </div>
+      '#title': 'Event information'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_45"]':
+            value: find
+  fieldset_payment_options:
+    '#type': fieldset
+    '#title': 'Pay Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: pay
+    '#attributes':
+      class:
+        - step-3
+    pay_parking_ticket_26:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Pay for your parking ticket/citation</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Pay for your parking ticket/citation' href='/parking/citations/paycitations'>Pay Now</a></div>
+        </div>
+      '#title': 'Parking Citation/Ticket Payments'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="pay_8"]':
+            value: pay_ticket
+    pay_alarm_permit_26:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Pay for your alarm permit</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Pay for your alarm permit' href='https://sdpdalarmpermits.sandiego.gov/'>Pay Now</a></div>
+        </div>
+      '#title': 'Alarm permit'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="pay_8"]':
+            value: pay_alarm_permit
+  fieldset_report_options:
+    '#type': fieldset
+    '#title': 'Report Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: report
+    '#attributes':
+      class:
+        - step-3
+    report_abandoned_vehicle_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Report a vehicle parked in the same place for over 72 hours</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report a vehicle parked in the same place for over 72 hours' href='https://getitdone.force.com/PDNewReport'>Report Now</a></div>
+        </div>
+      '#title': '72-hour Vehicle Violation'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: report_abandoned_vehicle
+    report_auto_theft_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Report a stolen vehicle</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report a stolen vehicle' href='/police/services/units/autotheft'>Report Now</a></div>
+        </div>
+      '#title': 'Auto theft '
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: report_auto_theft
+    report_bev_complaint_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Report a complaint against a beverage establishment</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report a complaint against a beverage establishment' href='/police/forms/alcohol'>Report Now</a></div>
+        </div>
+      '#title': 'Beverage establishment complaint'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: report_bev_complaint
+    report_narcotics_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Report a narcotics-related incident</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report a narcotics-related incident' href='/cityattorney/divisions/communityjustice/ceu/reportingnarcotic'>Report Now</a></div>
+        </div>
+      '#title': 'Narcotics-related incident'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: report_narcotics
+    report_non_emergency_issue_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Report a non-emergency crime through the Citizens' Online Police Reporting System</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report a non-emergency issue through the Citizens' Online Police Reporting System' href='/police/crimereports/startaccess'>Report Now</a></div>
+        </div>
+      '#title': 'Non-emergency Crime'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: report_non_emer
+    report_street_problem_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Report problems with street lights, potholes or traffic signals</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report problems with street lights, potholes or traffic signals' href='https://www.sandiego.gov/getitdone'>Report Now</a></div>
+        </div>
+      '#title': 'Street-related problem'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: report_street_problem
+    report_animal_issue_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='twelve columns'>
+        <p class='l-padding-desktop-ts'>If there is a vicious or dangerous animal running loose or someone is being attacked, call 9-1-1.</p>
+        <p>To report a non-emergency issue with an animal or report non-vicious dogs running loose or off leash, contact Animal Regulations at 858-278-9760 x 2866.</p>
+        </div>
+        </div>
+      '#title': 'Animal-related issue'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: report_animal_issue
+    graffiti_problem_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Report graffiti</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report graffiti' href='https://getitdone.force.com/TSWNewReport?type=Graffiti'>Report Now</a></div>
+        </div>
+      '#title': Graffiti
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: report_graffiti
+    report_oversized_vehicle_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Report an oversized vehicle</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report an oversized vehicle' href='https://getitdone.force.com/PDNewReport'>Report Now</a></div>
+        </div>
+      '#title': 'Oversized Vehicle'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: report_oversized_vehicle
+    report_parking_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Report a parking zone issue (e.g. car parked in a red zone)</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report a parking zone issue' href='https://getitdone.force.com/PDNewReport'>Report Now</a></div>
+        </div>
+      '#title': 'Parking Zone Issue'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: report_parking
+  fieldset_request_options:
+    '#type': fieldset
+    '#title': 'Request Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: request
+    '#attributes':
+      class:
+        - step-3
+    request_patrols_34:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request additional patrols in your neighborhood</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request additional patrols in your neighborhood' href='/police/forms/citizen-request'>Request Now</a></div>
+        </div>
+      '#title': Patrols
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: request_patrols
+    request_vacation_check_34:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request a check of your home while you are on vacation</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request a check of your home while you are on vacation' href='/sites/default/files/legacy/police/pdf/vacationhousecheck.pdf'>Request Now</a></div>
+        </div>
+      '#title': 'Vacation check'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: request_vacation_check
+    request_ride_along_34:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request a ride along with a patrol officer</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request a ride along with a patrol officer' href='/sites/default/files/legacy/police/pdf/RideAlong.pdf'>Request Now</a></div>
+        </div>
+      '#title': 'Ride along'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: request_ride_along
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers: {  }
+variants: {  }

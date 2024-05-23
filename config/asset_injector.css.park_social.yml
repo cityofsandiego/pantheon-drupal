@@ -1,0 +1,83 @@
+uuid: c4f08a91-24fb-4639-835c-25e2aa8ed5bd
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: park_social
+label: 'Park Social'
+code: |
+  @media print, screen and (max-width: 30em) {
+  	.ps-previous {
+  		position:absolute;
+  		top:0;
+  		left: 1rem;
+  		transform: translate(0, 50%);
+  		color: #262526;
+  	}
+  	.ps-next {
+  		position:absolute;
+  		top:0;
+  		right: 1rem;
+  		transform: translate(0, 50%);
+  		color: #262526;
+  	}
+  }
+  @media print, screen and (min-width: 30em) {
+  	.ps-previous {
+  		position:absolute;
+  		top:0;
+  		left: 6rem;
+  		transform: translate(0, 50%);
+  		color: #262526;
+  	}
+  	.ps-next {
+  		position:absolute;
+  		top:0;
+  		right: 6rem;
+  		transform: translate(0, 50%);
+  		color: #262526;
+  	}
+  }
+
+  .ps-title-desktop {
+  	font-size: 3em;
+  	color:#262526 !important;
+  }
+  .ps-title-mobile {
+  	font-size: 1.8em;
+  	color: #262526 !important;
+  }
+  .ps-title-label {
+  	position: absolute;
+  	top: -30px;
+  	left: 50%;
+  	transform: translate(-50%, 0);
+  	color: #262526 !important;
+  }
+  .ps-font-style {
+  	text-decoration: none;
+  	color: #467c32 !important;
+  }
+  .ps-font-style:hover {
+  	color: #467c32 !important;
+  }
+  .ps-border {
+  	position: relative;
+  	border: 5px solid #262526;
+  }
+  .ps-project-text {
+  	font-size: 1.4em;
+  }
+  .ps-event-top-border {
+  	border-top: 5px solid #7ab162 !important;
+  }
+media: all
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/park-social*'
+contexts: {  }
+conditions_require_all: true

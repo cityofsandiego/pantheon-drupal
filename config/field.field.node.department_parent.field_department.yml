@@ -1,0 +1,29 @@
+uuid: 036e2017-a06a-4d37-acb1-324e8faad70e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_department
+    - node.type.department_parent
+    - taxonomy.vocabulary.department
+id: node.department_parent.field_department
+field_name: field_department
+entity_type: node
+bundle: department_parent
+label: Department
+description: '<p>Choose the associated Department.</p>'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      department: department
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

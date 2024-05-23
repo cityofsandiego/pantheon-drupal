@@ -1,0 +1,15 @@
+diff --git a/src/Plugin/views/style/CalendarViewBase.php b/src/Plugin/views/style/CalendarViewBase.php
+index 2c6260199..42b0c92ca 100644
+--- a/src/Plugin/views/style/CalendarViewBase.php
++++ b/src/Plugin/views/style/CalendarViewBase.php
+@@ -495,7 +495,10 @@ public function getRowValues(ResultRow $row, EntityField $field) {
+ 
+     // Get the result we need from the entity.
+     $this->view->row_index = $row->index ?? 0;
++    // @todo Figure out why calendar_view is resulting in $row_index not being set. For other places search for hack1.
++    $GLOBALS['hack1'] = TRUE;
+     $items = $field->getItems($row) ?? [];
++    unset($GLOBALS['hack1']);
+     $item = $items[$delta]['raw'] ?? $items[0]['raw'] ?? NULL;
+     $values = $item instanceof FieldItemInterface ? $item->getValue() : [];
+     unset($this->view->row_index);

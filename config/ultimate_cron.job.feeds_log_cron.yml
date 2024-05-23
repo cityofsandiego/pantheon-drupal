@@ -1,0 +1,29 @@
+uuid: de0f13ae-f3c9-45dc-a3ca-507eebf4659f
+langcode: en
+status: true
+dependencies:
+  module:
+    - feeds_log
+title: 'Default cron handler'
+id: feeds_log_cron
+weight: 0
+module: feeds_log
+callback: feeds_log_cron
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 3600
+    launcher:
+      thread: 0
+logger:
+  id: database
+  configuration:
+    method: '3'
+    expire: 1209600
+    retain: 1000

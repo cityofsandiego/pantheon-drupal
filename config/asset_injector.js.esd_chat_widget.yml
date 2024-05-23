@@ -1,0 +1,32 @@
+uuid: b359c890-96c6-4616-bf2c-cf685c7660c9
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: esd_chat_widget
+label: 'ESD Chat Widget'
+code: |2-
+   (function(w, d, x, id){
+      s=d.createElement('script');
+      s.src='https://d2s9x5slbvr0vu.cloudfront.net/amazon-connect-chat-interface-client.js';
+      s.async=1;
+      s.id=id;
+      d.getElementsByTagName('head')[0].appendChild(s);
+      w[x] =  w[x] || function() { (w[x].ac = w[x].ac || []).push(arguments) };
+    })(window, document, 'amazon_connect', '8df73578-20a4-4b5e-99f2-bdcd6e17ba1e');
+    amazon_connect('styles', { openChat: { color: 'white', backgroundColor: '#00549f'}, closeChat: { color: 'white', backgroundColor: '#00549f'} });
+    amazon_connect('snippetId', 'QVFJREFIajNZWm9TMmtpZVZPZlMwcnFsWVF1ZFc1T1poSjlRM3U2T01NOTdhRGhSRGdGNWNBRzVHYVgwVkxDcHdWOUxLSERwQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNS01sR1YrblkxOCtFNDZ1OEFnRVFnQ3Mwc3NONGtRK0FTaUpWNEhsWUg4ZGJBUit4SW1iZ045MXoySjNwb240ei84c3VCdE01NkNhYjVZVVk6OnlrMGVNMTRjdkRXNWVLOTVGWVlaWXYzaDFGTXlTVVREZmNTdEt3SXEwUnlqS09ob1pPa1UxdU0rM3YwVUhyVlB5aFBocTR1YlpHNklIbThnNlNwNnd6cSsrdVFjZ2RSR0xQSWFYUFRTZkVqdUo1eTZYbm1BMWJ6VS9sRWxXMkJwTnppR1cvbXVXZDFjNElKNDhqQXBNMitiOXJrM2N1WT0=');
+    amazon_connect('supportedMessagingContentTypes', [ 'text/plain', 'text/markdown' ]);
+noscript: ''
+noscriptRegion: {  }
+jquery: false
+header: false
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/environmental-services-x\r\n/environmental-services-x/collection*\r\n/environmental-services-x/miramar*\r\n/environmental-services-x/recycling*\r\n/environmental-services-x/ep*"
+contexts: {  }
+conditions_require_all: true

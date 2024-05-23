@@ -1,0 +1,215 @@
+uuid: 5a714954-7b62-4efc-a90b-a5e54dfa1b12
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_42811
+title: 'Media Identification Card Application'
+description: null
+categories: {  }
+elements: |
+  type_of_request:
+    '#type': radios
+    '#options':
+      new: 'New'
+      renewal: 'Renewal'
+    '#title': 'Type of Request' 
+    '#description': ""
+  fieldset_contact_information:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Information' 
+    '#description': ""
+    first_and_last_name_2:
+      '#type': textfield
+      '#title': 'First and Last Name' 
+      '#description': ""
+    date_of_birth_2:
+      '#type': textfield
+      '#title': 'Date of Birth' 
+      '#description': ""
+    social_security_no_2:
+      '#type': textfield
+      '#title': 'Social Security No.' 
+      '#description': ""
+    home_phone_2:
+      '#type': textfield
+      '#title': 'Home Phone' 
+      '#description': ""
+    business_phone_2:
+      '#type': textfield
+      '#title': 'Business Phone' 
+      '#description': ""
+    email_2:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    fieldset_home_address_2:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Home Address' 
+      '#description': ""
+      street_address_4:
+        '#type': textfield
+        '#title': 'Street Address' 
+        '#description': ""
+      city_4:
+        '#type': textfield
+        '#title': 'City' 
+        '#description': ""
+      zip_4:
+        '#type': textfield
+        '#title': 'Zip' 
+        '#description': ""
+  fieldset_work_information:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Work Information' 
+    '#description': ""
+    employer_10:
+      '#type': textfield
+      '#title': 'Employer' 
+      '#description': ""
+    job_title_10:
+      '#type': textfield
+      '#title': 'Job Title' 
+      '#description': ""
+    date_hired_10:
+      '#type': textfield
+      '#title': 'Date Hired' 
+      '#description': ""
+    fieldset_business_address_10:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Business Address' 
+      '#description': ""
+      street_address_16:
+        '#type': textfield
+        '#title': 'Street Address' 
+        '#description': ""
+      city_16:
+        '#type': textfield
+        '#title': 'City' 
+        '#description': ""
+      zip_16:
+        '#type': textfield
+        '#title': 'Zip' 
+        '#description': ""
+  disclaimer:
+    '#type': radios
+    '#options':
+      I have read and understand the disclaimer: 'I have read and understand the disclaimer'
+    '#title': 'Disclaimer' 
+    '#description': "I understand that possession of a San DiegoPolice Department Media Identification Card is a privilege granted by the Chief of Police to those who have a regular need to cross police and/or fire lines. The Chief of Police reserves the right to deny or revoke a card, according to the guidelines established in San Diego Police Department Procedure 1.31.\n"
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: mediaid@pd.sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |
+        Submitted on [webform_submission:date:long]
+        Submitted by user: [webform_submission:user]
+        Submitted values are:
+        [webform_submission:values]
+
+        When the application has been processed, you will be notified by email. Should additional information be needed by the Media Relations Office, the applicant will be contacted by phone or email. Once the application has been processed and approved, bring the confirmation e-mail and your photo ID to SDPD Headquarters 1401 Broadway St. (8 a.m. to 4 p.m., Monday through Friday) to complete the credentialing process. Do not bring photographs; your photo and signature will be transferred to the media card by computer. The entire process should take no more than ten minutes. There is
+        no cost to you. If you do not complete the credentialing process within 30 days of approval of this application, you will be required to reapply for the credential.
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

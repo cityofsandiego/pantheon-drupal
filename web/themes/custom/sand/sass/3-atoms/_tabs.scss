@@ -1,0 +1,189 @@
+.block-local-tasks-block {
+  position: relative;
+  margin-bottom: 0;
+  background-color: rgba($alto, 0.75);
+  border-bottom: solid 2px $white;
+  z-index: 1;
+
+  .local-tasks {
+    display: flex;
+
+    &-tabs {
+      background-color: transparent;
+      border-bottom: 0;
+      display: flex;
+      justify-content: start;
+      margin: 0.5rem 0 0;
+
+      li {
+        width: auto;
+        margin-right: 5px;
+        border-radius: 4px 4px 0 0;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &.is-active {
+          background-color: $white;
+        }
+      }
+    }
+  }
+
+  .tabs {
+    background-color: transparent;
+    border: none;
+    width: $global-width;
+    margin: 0 auto;
+  }
+
+  @media print {
+    display: none;
+  }
+}
+
+/* Tabs
+   ========================================================================== */
+.tabs-list {
+  z-index: 1;
+  padding: 0;
+  margin: 0 !important;
+  overflow: hidden;
+  background: $off-white;
+  display: block;
+
+  @include breakpoint(mobile-landscape) {
+    display: flex;
+  }
+}
+
+.tabs-list__item {
+  z-index: 3;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  border-top: none;
+  background: white;
+  display: inline-block;
+  border-bottom: 1px solid $alto;
+  border-left: 1px solid $alto;
+
+  &:first-child {
+    border-left: none;
+  }
+
+  &:last-child {
+    border-right: 1px solid $alto;
+  }
+
+  &.is-active {
+    border-bottom: 1px solid white;
+
+    @include breakpoint(mobile-landscape down) {
+      background-color: aliceblue;
+    }
+  }
+
+  @include rem("font-size", 14px);
+
+  @include breakpoint(mobile-landscape down) {
+    width: 100%;
+    float: left;
+    border-bottom: none;
+    border-left: none;
+    border-right: none !important;
+  }
+}
+
+.tabs-list__link {
+  padding: 0.5rem 1rem;
+  display: block;
+
+  //color: $chateau;
+  text-decoration: none;
+  border-top: 3px solid transparent;
+
+  &:hover {
+    border-color: $cerulean;
+    color: $link-color;
+    text-decoration: none;
+  }
+
+  .is-active & {
+    border-color: $cerulean;
+    color: $font-color;
+    text-decoration: none;
+  }
+
+  &.text-accent--desktop {
+    @include breakpoint(mobile-landscape) {
+      font-size: 21px;
+    }
+  }
+}
+
+.tabs-container {
+  padding: 1em;
+  border-top: 1px solid $alto;
+  margin-top: 0;
+
+  @include breakpoint(mobile-landscape) {
+    margin-top: -1px;
+  }
+}
+
+.tabs__bucket {
+  display: none;
+
+  &.is-active {
+    display: block;
+  }
+
+  .cke_editable & {
+    display: block;
+    border-style: double;
+    margin: 20px 0;
+    padding: 10px;
+  }
+
+  .no-js & {
+    display: block;
+  }
+}
+
+.tabs {
+  &.primary {
+    width: 100%;
+    max-width: $site-constraint;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 0 1em 0 0;
+
+    .admin-menu & {
+      //margin-top:169px;
+      margin-top: 20px;
+    }
+
+    li {
+      display: inline-block;
+      height: 40px;
+      float: left;
+      margin: 0;
+
+      a {
+        height: 100%;
+        display: block;
+        padding-top: 0.5rem;
+      }
+    }
+
+    .node-type-application & {
+      margin-top: 0;
+    }
+
+    @media print {
+      display: none;
+    }
+  }
+}

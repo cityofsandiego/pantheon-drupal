@@ -1,0 +1,186 @@
+uuid: 54670cbb-ff86-49b3-875e-fb31bf6e0552
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_31951
+title: 'Subscribe to Updates on the Redistricting Commission Application Process'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_information:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Information' 
+    '#description': ""
+    your_name_5:
+      '#type': textfield
+      '#title': 'Your Name' 
+      '#description': ""
+      '#required': true
+    home_address_5:
+      '#type': textfield
+      '#title': 'Home Address' 
+      '#description': ""
+      '#required': true
+    zip_code_5:
+      '#type': textfield
+      '#title': 'Zip Code' 
+      '#description': ""
+      '#required': true
+    email_5:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    phone_5:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+      '#required': true
+    business_afflilation_5:
+      '#type': textfield
+      '#title': 'Business Affiliation' 
+      '#description': ""
+      '#required': true
+    title_5:
+      '#type': textfield
+      '#title': 'Title' 
+      '#description': ""
+      '#required': true
+    bus_zip_code_5:
+      '#type': textfield
+      '#title': 'Zip Code' 
+      '#description': ""
+      '#required': true
+  fieldset_residence:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Residence' 
+    '#description': ""
+    council_district_18:
+      '#type': select
+      '#options':
+        1: '1'
+        2: '2'
+        3: '3'
+        4: '4'
+        5: '5'
+        6: '6'
+        7: '7'
+        8: '8'
+        9: '9'
+      '#title': 'Council District (select one)' 
+      '#description': ""
+      '#required': true
+    are_you_a_resident_of_san_diego_18:
+      '#type': select
+      '#options':
+        yes: 'Yes'
+        no: 'No'
+      '#title': 'Are you a resident of San Diego?' 
+      '#description': ""
+      '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<h2>Submitted</h2>\r\n\r\n<p>Your Interest Form has been submitted to the Office of the City Clerk. &nbsp;Thank you for your interest in serving on the City of San Diego Redistricting Commission.&nbsp;</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: cityclerk@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

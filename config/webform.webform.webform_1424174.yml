@@ -1,0 +1,372 @@
+uuid: a45f60f7-e102-41ad-a49d-23795218982b
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 51
+template: false
+archive: false
+id: webform_1424174
+title: 'Performance Annex Request Form'
+description: null
+categories: {  }
+elements: |
+  email:
+    '#type': email
+    '#size': 20
+    '#title': 'Email' 
+    '#description': ""
+    '#required': true
+  your_name:
+    '#type': textfield
+    '#title': 'What is your name as the event point of contact?' 
+    '#description': ""
+    '#required': true
+  contact_email:
+    '#type': textfield
+    '#title': 'What is the email address for the event"s point of contact?' 
+    '#description': ""
+    '#required': true
+  phone:
+    '#type': textfield
+    '#title': 'Phone Number' 
+    '#description': ""
+    '#required': true
+  event_name:
+    '#type': textfield
+    '#title': 'What is the name of the event you"re planning?' 
+    '#description': ""
+    '#required': true
+  event_description:
+    '#type': textarea
+    '#title': 'Please provide a description of the event you"re planning.' 
+    '#description': ""
+    '#required': true
+  hosted_by:
+    '#type': textfield
+    '#title': 'What organization, collective, business or entity is the event being hosted by?' 
+    '#description': ""
+    '#required': true
+  audience:
+    '#type': textfield
+    '#title': 'Who is this event for? Who is the intended audience?' 
+    '#description': ""
+    '#required': true
+  dates_and_times:
+    '#type': textarea
+    '#title': 'When are all the dates and times you are requesting time and space to set up, rehearse, present and take down?' 
+    '#description': ""
+    '#required': true
+  library_hours:
+    '#type': radios
+    '#options':
+      libraryhours: 'Within library hours'
+      withingout: 'Within and outside library hours'
+      outsidehours: 'Outside library hours only'
+    '#title': 'Library hours are Mondays/Tuesdays 11:30AM–8PM, Wednesdays through Saturdays 9:30AM–6PM, and closed on Sundays. Is your schedule within library hours, or is there time that will be outside library hours?' 
+    '#description': ""
+    '#required': true
+  flexible:
+    '#type': textfield
+    '#title': 'Are your dates/time flexible? Please list any alternative dates/times.' 
+    '#description': ""
+    '#required': true
+  accommodations:
+    '#type': checkboxes
+    '#options':
+      lilghting: 'Theatrical lighting'
+      lightboard: 'Light board operating'
+      sound: 'Sound equipment (microphone, speakers, etc)'
+      soundeffects: 'Sound effects and cues'
+      soundoperator: 'Sound board operator'
+      projector: 'Projector'
+      screen: 'Projection Screen'
+      piano: 'Piano'
+      electrical: 'Electrical equipment such as extensions cords and power strips'
+      other: 'Other'
+    '#multiple': true
+    '#title': 'What accommodations are required for your event?' 
+    '#description': ""
+    '#required': true
+  black_box:
+    '#type': radios
+    '#options':
+      yes: 'Yes'
+      no: 'No'
+    '#title': 'Do you need the interior of the black box theater?' 
+    '#description': ""
+    '#required': true
+  outdoor:
+    '#type': radios
+    '#options':
+      yes: 'Yes'
+      no: 'No'
+      maybe: 'Maybe'
+    '#title': 'Does your event request include the grassy outdoor space in front of the performance annex?' 
+    '#description': ""
+    '#required': true
+  event_promotion:
+    '#type': textfield
+    '#title': 'How are you promoting this event? What methods of community outreach are you conducting?' 
+    '#description': ""
+    '#required': true
+  social_media:
+    '#type': textfield
+    '#title': 'What is your social media handle? Do you have a hashtag for this event, or a website for your organization?' 
+    '#description': ""
+    '#required': true
+  people_attending:
+    '#type': textfield
+    '#title': 'How many people are you expecting to attend?' 
+    '#description': ""
+    '#required': true
+  people_in_production:
+    '#type': textfield
+    '#title': 'How many people are involved in the production? Please include technical crew, audience supervision, and performers?' 
+    '#description': ""
+    '#required': true
+  cost:
+    '#type': textfield
+    '#title': 'Is there a cost to attend the event? If so, how much?' 
+    '#description': ""
+    '#required': true
+  about_your_organization:
+    '#type': textarea
+    '#title': 'Tell us about your organization and its capacity. What may qualify you for the discounted rental rate and/or a city sponsorship? How is your event going to serve the community?' 
+    '#description': ""
+    '#required': true
+  nonprofit:
+    '#type': radios
+    '#options':
+      yes: 'Yes'
+      no: 'No'
+    '#title': 'If you are a nonprofit, will you be able to furnish us with evidence of your organization"s nonprofit status?' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<p>Your submission will be reviewed within one week before you&nbsp;receive a reply from the Special Events team. Thank you.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: CentralEvents@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |-
+        Submitted on [webform_submission:completed_date:long]
+
+        EMAIL:
+        [webform_submission:values:email:nolabel]
+
+        POINT OF CONTACT:
+        [webform_submission:values:your_name:nolabel]
+
+        POINT OF CONTACT EMAIL:
+        [webform_submission:values:contact_email:nolabel]
+
+        PHONE:
+        [webform_submission:values:phone:nolabel]
+
+        NAME OF EVENT:
+        [webform_submission:values:event_name:nolabel]
+
+        EVENT DESCRIPTION:
+        [webform_submission:values:event_description:nolabel]
+
+        HOSTED BY:
+        [webform_submission:values:hosted_by:nolabel]
+
+        EVENT FOR/INTENDED AUDIENCE:
+        [webform_submission:values:audience:nolabel]
+
+        DATES/TIMES FOR SET UP, REHEARSE, PRESENT, TAKE DOWN:
+        [webform_submission:values:dates_and_times:nolabel]
+
+        SCHEDULE WITHIN/OUTSIDE LIBRARY HOURS:
+        [webform_submission:values:library_hours:nolabel]
+
+        FLEXIBLE DATES TIMES/ALTERNATIVE DATES/TIMES:
+        [webform_submission:values:flexible:nolabel]
+
+        ACCOMMODATIONS:
+        [webform_submission:values:accommodations:nolabel]
+
+        INTERIOR OF BLACK BOX THEATER NEEDED:
+        [webform_submission:values:black_box:nolabel]
+
+        GRASSY OUTDOOR SPACE?:
+        [webform_submission:values:outdoor:nolabel]
+
+        PROMOTION DETAILS:
+        [webform_submission:values:event_promotion:nolabel]
+
+        SOCIAL MEDIA HANDLE/HASHTAG/WEBSITE:
+        [webform_submission:values:social_media:nolabel]
+
+        EXPECTED ATTENDANCE:
+        [webform_submission:values:people_attending:nolabel]
+
+        NUMBER OF PEOPLE INVOLVED IN PRODUCTION:
+        [webform_submission:values:people_in_production:nolabel]
+
+        COST TO ATTEND:
+        [webform_submission:values:cost:nolabel]
+
+        ORGANIZATION DETAILS:
+        [webform_submission:values:about_your_organization:nolabel]
+
+        NONPROFIT?:
+        [webform_submission:values:nonprofit:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |
+        Submitted on [webform_submission:completed_date:long]
+
+        EMAIL:
+        [webform_submission:values:email:nolabel]
+
+        POINT OF CONTACT:
+        [webform_submission:values:your_name:nolabel]
+
+        POINT OF CONTACT EMAIL:
+        [webform_submission:values:contact_email:nolabel]
+
+        PHONE:
+        [webform_submission:values:phone:nolabel]
+
+        NAME OF EVENT:
+        [webform_submission:values:event_name:nolabel]
+
+        EVENT DESCRIPTION:
+        [webform_submission:values:event_description:nolabel]
+
+        HOSTED BY:
+        [webform_submission:values:hosted_by:nolabel]
+
+        EVENT FOR/INTENDED AUDIENCE:
+        [webform_submission:values:audience:nolabel]
+
+        DATES/TIMES FOR SET UP, REHEARSE, PRESENT, TAKE DOWN:
+        [webform_submission:values:dates_and_times:nolabel]
+
+        SCHEDULE WITHIN/OUTSIDE LIBRARY HOURS:
+        [webform_submission:values:library_hours:nolabel]
+
+        FLEXIBLE DATES TIMES/ALTERNATIVE DATES/TIMES:
+        [webform_submission:values:flexible:nolabel]
+
+        ACCOMMODATIONS:
+        [webform_submission:values:accommodations:nolabel]
+
+        INTERIOR OF BLACK BOX THEATER NEEDED:
+        [webform_submission:values:black_box:nolabel]
+
+        GRASSY OUTDOOR SPACE?:
+        [webform_submission:values:outdoor:nolabel]
+
+        PROMOTION DETAILS:
+        [webform_submission:values:event_promotion:nolabel]
+
+        SOCIAL MEDIA HANDLE/HASHTAG/WEBSITE:
+        [webform_submission:values:social_media:nolabel]
+
+        EXPECTED ATTENDANCE:
+        [webform_submission:values:people_attending:nolabel]
+
+        NUMBER OF PEOPLE INVOLVED IN PRODUCTION:
+        [webform_submission:values:people_in_production:nolabel]
+
+        COST TO ATTEND:
+        [webform_submission:values:cost:nolabel]
+
+        ORGANIZATION DETAILS:
+        [webform_submission:values:about_your_organization:nolabel]
+
+        NONPROFIT?:
+        [webform_submission:values:nonprofit:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

@@ -1,0 +1,284 @@
+uuid: 02914321-1e03-40d3-8471-b34e958c9540
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_59312
+title: '2023 Short Story Contest Registration'
+description: null
+categories: {  }
+elements: |
+  rules_understanding:
+    '#type': radios
+    '#options':
+      I have read and understand the rules above: 'I have read and understand the rules above.'
+    '#title': 'Rules Understanding' 
+    '#description': ""
+    '#required': true
+  sd_residence:
+    '#type': radios
+    '#options':
+      yes: 'Yes'
+      no: 'No'
+    '#title': 'Do you live in San Diego County? ' 
+    '#description': ""
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="rules_understanding[i have read and understand the rules above]"]':
+          value: 'I have read and understand the rules above'
+          
+  not_sd_resident:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<p class='l-margin-bx'><strong>Only San Diego County residents are eligible to enter this contest.</strong></p>\n"
+    '#title': 'Not SD resident' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="sd_residence"]':
+          value: 'no'
+          
+  fieldset_contact_information:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Information' 
+    '#description': ""
+    '#states':
+      invisible:
+        ':input[name="sd_residence"]':
+          value: 'no'
+          
+    first_name_1:
+      '#type': textfield
+      '#title': 'First Name' 
+      '#description': ""
+      '#required': true
+    last_name_1:
+      '#type': textfield
+      '#title': 'Last Name' 
+      '#description': ""
+      '#required': true
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    retype_email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Retype Email' 
+      '#description': ""
+      '#required': true
+    phone_number_1:
+      '#type': textfield
+      '#title': 'Phone Number' 
+      '#description': ""
+      '#required': true
+  fieldset_social_media_handle_optional:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Social Media Handle (optional)' 
+    '#description': ""
+    '#states':
+      invisible:
+        ':input[name="sd_residence"]':
+          value: 'no'
+          
+    facebook_15:
+      '#type': textfield
+      '#title': 'Facebook' 
+      '#description': ""
+    instagram_15:
+      '#type': textfield
+      '#title': 'Instagram' 
+      '#description': ""
+    twitter_15:
+      '#type': textfield
+      '#title': 'Twitter' 
+      '#description': ""
+  fieldset_story_details:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Story Details' 
+    '#description': ""
+    '#states':
+      invisible:
+        ':input[name="sd_residence"]':
+          value: 'no'
+          
+    manuscript_title_8:
+      '#type': textfield
+      '#title': 'Manuscript Title' 
+      '#description': ""
+      '#required': true
+    manuscript_word_count_8:
+      '#type': textfield
+      '#title': 'Manuscript Word Count' 
+      '#description': ""
+      '#required': true
+    upload_manuscript_8:
+      '#type': managed_file
+      '#max_filesize': '2'
+      '#file_extensions': 'txt rtf pdf doc docx'
+      '#title': 'Upload Manuscript' 
+      '#description': ""
+      '#required': true
+  submit_button:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<div class='three column l-margin-vd'><input class='btn form-submit width-100' name='op' type='submit' value='Submit Registration'></div>\n"
+    '#title': 'Submit Button' 
+    '#description': ""
+    '#states':
+      invisible:
+        ':input[name="sd_residence"]':
+          value: 'no'
+          
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /public-library/short-story-contest-registration-response
+  confirmation_message: ''
+  limit_total: 75
+  limit_user: null
+  form_submit_label: 'Submit Registration'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: localauthor@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: '2023 SDPL Short Story Contest'
+      body: |-
+        Submitted on [webform_submission:completed_date:long]
+
+        The following information has been submitted.  If you have any further questions, please contact us at localauthor@sandiego.gov
+
+        [webform_submission:values]
+
+         
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

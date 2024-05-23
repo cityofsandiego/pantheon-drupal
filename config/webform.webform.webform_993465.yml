@@ -1,0 +1,242 @@
+uuid: fcb89bee-d219-4116-8a48-bc5435b71973
+langcode: en
+status: closed
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_993465
+title: 'Small Business Relief Fund – Supplemental Questionnaire'
+description: null
+categories: {  }
+elements: |
+  fieldset_applicant:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Applicant' 
+    '#description': ""
+    applicant_name_2:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+      '#required': true
+    email_address_2:
+      '#type': email
+      '#size': 20
+      '#title': 'Email Address' 
+      '#description': ""
+      '#required': true
+    phone_number_2:
+      '#type': textfield
+      '#title': 'Phone Number' 
+      '#description': "Please enter your phone number in this format: XXX-XXX-XXXX"
+      '#required': true
+  application_id:
+    '#default_value': '[current-page:query:id]' 
+    '#title': 'EDD Submission Number' 
+    '#description': "This is the ID number provided in the email (next to your business name) you received from the City of San Diego. It should already be filled in for you below."
+    '#required': true
+  fieldset_business_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Business Info' 
+    '#description': ""
+    business_name_6:
+      '#type': textfield
+      '#title': 'Business Name as Stated in Your Application' 
+      '#description': ""
+      '#required': true
+    business_address_6:
+      '#type': textfield
+      '#title': 'Business Address' 
+      '#description': "Enter full address (street, city, zip code)"
+      '#required': true
+    bankruptcy_or_insolvency_6:
+      '#type': radios
+      '#options':
+        Yes: 'Yes'
+        No: 'No'
+      '#title': 'Is your business now subject to bankruptcy or insolvency or has it been in the past twelve (12) months (05/01/19 or after)?' 
+      '#description': "Bankruptcy or insolvency will not disqualify you unless it was less than twelve (12) months ago."
+      '#required': true
+    criminal_conviction_6:
+      '#type': radios
+      '#options':
+        Yes: 'Yes'
+        No: 'No'
+      '#title': 'Have you or your business ever been subject to criminal conviction or were you in the past six (6) months (11/01/19 or after)?' 
+      '#description': "Criminal conviction will not disqualify you unless it was less than six (6) months ago."
+      '#required': true
+    2019_business_revenue_6:
+      '#title': 'What was your total 2019 business revenue?' 
+      '#description': "Enter numbers only"
+      '#required': true
+  gender:
+    '#type': radios
+    '#options':
+      Male: 'Male'
+      Female: 'Female'
+      Gender non-conforming: 'Gender non-conforming'
+      Transgender umbrella: 'Transgender umbrella'
+      Prefer not to say: 'Prefer not to say'
+      Prefer to self identify: 'Prefer to self identify:'
+    '#title': 'Gender' 
+    '#description': ""
+    '#required': true
+  gender_self_identify:
+    '#type': textfield
+    '#title_display': invisible
+    '#title': 'What gender do you identify with?' 
+    '#description': ""
+    '#required': true
+    '#states':
+      required:
+        ':input[name="gender"]':
+          value: 'Prefer to self identify'
+          
+  race:
+    '#type': radios
+    '#options':
+      White: 'White'
+      Black/African American: 'Black/African American'
+      Asian: 'Asian'
+      Pacific Islander/Native Hawaiian: 'Pacific Islander/Native Hawaiian'
+      American Indian/Alaska Native: 'American Indian/Alaska Native'
+      Prefer not to say: 'Prefer not to say'
+    '#title': 'Race' 
+    '#description': ""
+    '#required': true
+  nationality_ethnicity:
+    '#type': textfield
+    '#title': 'Nationality/Ethnicity' 
+    '#description': ""
+    '#required': true
+  release_of_information_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<hr class='l-margin-vd'>\n<p><strong>Release of information: By submitting this form, I give permission to the City of San Diego to release to San Diego Grantmakers all information and documents submitted in my application to the City of San Diego Small Business Relief Fund. You are not required to give this permission, but if you do not, your application cannot be considered. An answer of ‘yes’ gives permission.</strong> <span style='color:red'>*</span></p>\n"
+    '#title': 'Release of Information Markup' 
+    '#description': ""
+  release_of_information:
+    '#type': radios
+    '#options':
+      Yes: 'Yes'
+      No: 'No'
+    '#title_display': invisible
+    '#title': 'Release of Information' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: businesssd@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Supplemental Questionnaire from [submission:values:business_info:business_name:nolabel] ([submission:values:application_id:nolabel])'
+      body: |-
+        Submitted on [webform_submission:date:long]
+
+        == APPLICANT ==
+
+        NAME:
+        [webform_submission:values:applicant:applicant_name:nolabel]
+
+        EMAIL ADDRESS:
+        [webform_submission:values:applicant:email_address:nolabel]
+
+        PHONE:
+        [webform_submission:values:applicant:phone_number:nolabel]
+
+        =====
+
+        EDD SUBMISSION NUMBER:
+        [webform_submission:values:application_id:nolabel]
+
+        == BUSINESS INFO ==
+
+        BUSINESS NAME:
+        [webform_submission:values:business_info:business_name:nolabel]
+
+        BUSINESS ADDRESS:
+        [webform_submission:values:business_info:business_address:nolabel]
+
+        IS YOUR BUSINESS NOW SUBJECT TO BANKRUPTCY OR INSOLVENCY OR HAS IT BEEN IN THE PAST TWELVE (12) MONTHS (05/01/19 OR AFTER)?
+        [webform_submission:values:business_info:bankruptcy_or_insolvency:nolabel]
+
+        HAVE YOU OR YOUR BUSINESS EVER BEEN SUBJECT TO CRIMINAL CONVICTION OR WERE YOU IN THE PAST SIX (6) MONTHS (11/01/19 OR AFTER)?
+        [webform_submission:values:business_info:criminal_conviction:nolabel]
+
+        WHAT WAS YOUR TOTAL 2019 BUSINESS REVENUE?
+        [webform_submission:values:business_info:2019_business_revenue:nolabel]
+
+        ====
+
+        GENDER:
+        [webform_submission:values:gender:nolabel]
+
+        GENDER SELF IDENTIFY:
+        [webform_submission:values:gender_self_identify:nolabel]
+
+        RACE:
+        [webform_submission:values:race:nolabel]
+
+        NATIONALITY/ETHNICITY:
+        [webform_submission:values:nationality_ethnicity:nolabel]
+
+        RELEASE OF INFORMATION:
+        [webform_submission:values:release_of_information:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

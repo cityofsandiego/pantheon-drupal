@@ -1,0 +1,81 @@
+uuid: b845ff79-a8cc-4741-89f9-b1bbcbf876cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.webform.body
+    - field.field.node.webform.field_d7_nid
+    - field.field.node.webform.field_department
+    - field.field.node.webform.field_exhibit_attachments
+    - field.field.node.webform.field_meta_tags
+    - field.field.node.webform.field_search_exclude_entity
+    - field.field.node.webform.field_search_keymatch
+    - field.field.node.webform.field_sidebar
+    - field.field.node.webform.webform
+    - node.type.webform
+  module:
+    - metatag
+    - text
+    - user
+    - webform
+_core:
+  default_config_hash: 3r1i0UMUbeNHhvmiqHDYznoS4G9XR1jq6lQ49r80lDE
+id: node.webform.default
+targetEntityType: node
+bundle: webform
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_department:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_sidebar:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  webform:
+    type: webform_entity_reference_entity_view
+    label: hidden
+    settings:
+      source_entity: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden:
+  field_d7_nid: true
+  field_exhibit_attachments: true
+  field_search_exclude_entity: true
+  field_search_keymatch: true
+  langcode: true
+  search_api_excerpt: true

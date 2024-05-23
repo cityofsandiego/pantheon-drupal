@@ -1,0 +1,29 @@
+uuid: 24149f30-d05f-47c5-92ac-3c15b55f4397
+langcode: en
+status: false
+dependencies:
+  module:
+    - registration
+title: 'Default cron handler'
+id: registration_cron
+weight: 0
+module: registration
+callback: registration_cron
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '*/30+@ * * * *'
+launcher:
+  id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 3600
+    launcher:
+      thread: 0
+logger:
+  id: database
+  configuration:
+    method: '3'
+    expire: 1209600
+    retain: 1000

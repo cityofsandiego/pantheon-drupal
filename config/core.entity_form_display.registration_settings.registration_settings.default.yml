@@ -1,0 +1,153 @@
+uuid: eaca5b8b-e47f-4234-bd9d-84212cbb9ef1
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - field_group
+    - registration
+    - text
+third_party_settings:
+  field_group:
+    group_scheduling:
+      children:
+        - open
+        - close
+      label: Scheduling
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: false
+    group_reminder:
+      children:
+        - send_reminder
+        - reminder_date
+        - reminder_template
+      label: Reminder
+      region: content
+      parent_name: ''
+      weight: 5
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: false
+    group_additional_settings:
+      children:
+        - maximum_spaces
+        - multiple_registrations
+        - from_address
+        - confirmation
+        - confirmation_redirect
+      label: 'Additional settings'
+      region: content
+      parent_name: ''
+      weight: 6
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: false
+_core:
+  default_config_hash: qa7eapDmi1FZ5zoL7VZyh5M-3JK6bcbJk5WfeIP57XA
+id: registration_settings.registration_settings.default
+targetEntityType: registration_settings
+bundle: registration_settings
+mode: default
+content:
+  capacity:
+    type: number
+    weight: 1
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  close:
+    type: datetime_default
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  confirmation:
+    type: string_textfield
+    weight: 11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  confirmation_redirect:
+    type: string_textfield
+    weight: 12
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  from_address:
+    type: string_textfield
+    weight: 10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  maximum_spaces:
+    type: number
+    weight: 8
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  multiple_registrations:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  open:
+    type: datetime_default
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  reminder_date:
+    type: datetime_default
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  reminder_template:
+    type: text_textarea
+    weight: 7
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  send_reminder:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 0
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden: {  }

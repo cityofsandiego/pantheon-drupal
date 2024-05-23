@@ -1,0 +1,354 @@
+/* ============================================================
+  Alignment and display helpers.
+  ============================================================ */
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.block {
+  display: block;
+}
+
+.padding-top-05 {
+  padding-top: 0.5rem;
+}
+
+.padding-bottom-05 {
+  padding-bottom: 0.5rem;
+}
+
+.padding-1-5 {
+  padding: 1.5rem;
+}
+
+.margin-bottom-025 {
+  margin-bottom: 0.25rem;
+}
+
+.margin-bottom-05 {
+  margin-bottom: 0.5rem;
+}
+
+.margin-bottom-1-5 {
+  margin-bottom: 1.5rem;
+}
+
+.margin-top-1-5 {
+  margin-top: 1.5rem;
+}
+
+.margin-top-075 {
+  margin-top: 0.75rem;
+}
+
+.margin-075 {
+  margin: 0.75rem 0;
+}
+
+/***** Display helpers ****/
+
+.d-inline {
+  display: inline;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-grid {
+  display: grid;
+}
+
+.d-table {
+  display: table;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-inline-flex {
+  display: inline-flex;
+}
+
+.d-none {
+  display: none;
+}
+
+.justify-content-start {
+  justify-content: flex-start;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-around {
+  justify-content: space-around;
+}
+
+.justify-content-evenly {
+  justify-content: space-evenly;
+}
+
+@include breakpoint(large) {
+  .d-m-inline {
+    display: inline;
+  }
+
+  .d-m-inline-block {
+    display: inline-block;
+  }
+
+  .d-m-block {
+    display: block;
+  }
+
+  .d-m-grid {
+    display: grid;
+  }
+
+  .d-m-table {
+    display: table;
+  }
+
+  .d-m-flex {
+    display: flex;
+  }
+
+  .d-m-inline-flex {
+    display: inline-flex;
+  }
+
+  .d-m-none {
+    display: none;
+  }
+}
+
+@include breakpoint(medium) {
+  .d-l-inline {
+    display: inline;
+  }
+
+  .d-l-inline-block {
+    display: inline-block;
+  }
+
+  .d-l-block {
+    display: block;
+  }
+
+  .d-l-grid {
+    display: grid;
+  }
+
+  .d-l-table {
+    display: table;
+  }
+
+  .d-l-flex {
+    display: flex;
+  }
+
+  .d-l-inline-flex {
+    display: inline-flex;
+  }
+
+  .d-l-none {
+    display: none;
+  }
+}
+
+@include breakpoint(xlarge) {
+  .d-xl-inline {
+    display: inline;
+  }
+
+  .d-xl-inline-block {
+    display: inline-block;
+  }
+
+  .d-xl-block {
+    display: block;
+  }
+
+  .d-xl-grid {
+    display: grid;
+  }
+
+  .d-xl-table {
+    display: table;
+  }
+
+  .d-xl-flex {
+    display: flex;
+  }
+
+  .d-xl-inline-flex {
+    display: inline-flex;
+  }
+
+  .d-xl-none {
+    display: none;
+  }
+}
+
+.hide-on-mobile {
+  @include hide-on-mobile;
+}
+
+.hide-on-desktop {
+  @include hide-on-desktop;
+}
+
+/* Alignment
+   ========================================================================== */
+
+.pull-center {
+  margin: 0 auto;
+  display: block;
+
+  &--desktop {
+    @include breakpoint(medium) {
+      margin: 0 auto;
+      display: block;
+    }
+  }
+
+  &--mobile {
+    @include breakpoint(medium down) {
+      margin: 0 auto;
+      display: block;
+    }
+  }
+}
+
+.pull-left {
+  float: left;
+
+  &--desktop {
+    @include breakpoint(medium) {
+      float: left;
+    }
+  }
+
+  &--mobile {
+    @include breakpoint(medium down) {
+      float: left;
+    }
+  }
+}
+
+.pull-right {
+  float: right;
+
+  &--desktop {
+    @include breakpoint(medium) {
+      float: right;
+    }
+  }
+
+  &--mobile {
+    @include breakpoint(medium down) {
+      float: right;
+    }
+  }
+}
+
+.alignleft {
+  @include breakpoint(medium) {
+    margin-right: 1.5em;
+    margin-bottom: 1.5em;
+    display: inline;
+    float: left;
+  }
+}
+
+.alignright {
+  @include breakpoint(medium) {
+    margin-left: 1.5em;
+    margin-bottom: 1.5em;
+    display: inline;
+    float: right;
+  }
+}
+
+.aligncenter {
+  @include breakpoint(medium) {
+    clear: both;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.valign-t {
+  vertical-align: top !important;
+}
+
+.valign-m {
+  vertical-align: middle !important;
+}
+
+.valign-b {
+  vertical-align: bottom !important;
+}
+
+/* Vertical centering inside flexbox
+   ========================================================================== */
+
+.l-flex-center-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 1em !important;
+
+  &--desktop {
+    @include breakpoint(medium) {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      padding: 1em !important;
+    }
+  }
+}
+
+.l-flex-center {
+  display: flex;
+  align-items: center;
+
+  &--desktop {
+    @include breakpoint(medium) {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

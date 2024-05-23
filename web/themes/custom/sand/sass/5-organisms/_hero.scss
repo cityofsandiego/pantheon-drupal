@@ -1,0 +1,506 @@
+.hero__slides {
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  ul,
+  ul li {
+    margin: 0;
+    padding: 0;
+    padding-inline-start: unset;
+  }
+
+  ul li {
+    display: block; //needed to remove extra spacing on webkit-based browsers
+  }
+
+  .theme-citynet & {
+    height: 198px;
+  }
+
+  > .grid-x {
+    padding: 1em 1em 3em;
+  }
+
+  .flex-control-nav,
+  .flex-direction-nav {
+    display: none;
+  }
+
+  .custom-navigation {
+    a {
+      transform: none;
+      transform: none;
+      transform: none;
+    }
+
+    @include breakpoint(mobile-landscape) {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+
+      a {
+        position: relative;
+      }
+    }
+  }
+
+  @include breakpoint(medium) {
+    > .grid-x {
+      padding: 5em 0.9375rem 12em;
+    }
+  }
+}
+
+.slide-container {
+  padding: 170px 0 2.5em;
+
+  @include breakpoint(mobile-landscape) {
+    padding: 5em 0 12em;
+  }
+}
+
+.hero__slides--img {
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100% !important;
+
+  li {
+    &::after {
+      content: "";
+      z-index: 5;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      //background: rgba(0, 0, 0, 0.35);
+    }
+
+    @include breakpoint(medium) {
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  .slides,
+  li,
+  .hero__bg {
+    height: 100%;
+  }
+
+  @include breakpoint(mobile-landscape down) {
+    height: 150px !important;
+  }
+}
+
+.hero--credit {
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+
+  p {
+    margin: 0;
+    color: white;
+    padding: 0.5em 1em;
+    font-style: normal;
+    display: inline-block;
+    background: rgb(0 0 0 / 45%);
+
+    .hero-image-by-prefix,
+    .hero-image-by {
+      @include rem("font-size", 10px);
+    }
+
+    @include rem("font-size", 11px);
+
+    @include breakpoint(medium) {
+      padding: 0.5em 3.5em 0.5em 1em;
+    }
+  }
+
+  .node-type-blog & {
+    display: none !important;
+  }
+
+  @include breakpoint(medium) {
+    right: 0;
+    bottom: 8em;
+    text-align: right;
+  }
+}
+
+.hero__content {
+  z-index: 4;
+  color: white;
+  margin: 0 !important;
+  padding: 1em;
+  position: relative;
+  background: rgb(0 0 0 / 45%);
+
+  h1 {
+    margin: 0;
+    color: white;
+
+    @include rem("font-size", 45px);
+  }
+
+  p {
+    margin: 0;
+    text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black;
+
+    @include rem("font-size", 18px);
+  }
+
+  .btn {
+    font-size: 1rem;
+    margin-top: 1em;
+    font-weight: normal;
+    padding: 0.75em 2em;
+    text-shadow: none;
+  }
+
+  &.multi {
+    padding: 1em 2.8em;
+
+    @include breakpoint(mobile-landscape) {
+      padding: 2em 2em 2.6em;
+    }
+  }
+
+  .view-homepage-slide {
+    //Main homepage only
+    padding: 0;
+
+    .flex-control-nav,
+    .flex-direction-nav {
+      display: block;
+    }
+  }
+
+  @include breakpoint(mobile-landscape) {
+    //padding: 1.75em 2.5em;
+    padding: 2em;
+
+    h1 {
+      @include rem("font-size", 60px);
+    }
+
+    p {
+      @include rem("font-size", 24px);
+    }
+
+    .btn {
+      margin-top: 1.5em;
+      display: inline-block;
+    }
+  }
+
+  @include breakpoint(site) {
+    //margin: 0 0 2em;
+    //padding: 2.75em 3.5em;
+
+    &.no-sides {
+      background: transparent;
+    }
+  }
+
+  @include breakpoint(site down) {
+    width: auto;
+  }
+}
+
+section.homepage {
+  .hero__content {
+    padding: 0;
+
+    .flex-control-nav {
+      position: absolute;
+      bottom: -3rem;
+      display: flex;
+
+      //height: 3em;
+
+      a {
+        background: $cerulean;
+
+        @include breakpoint(mobile-landscape) {
+          background: white;
+        }
+      }
+
+      .flex-active {
+        background: black;
+
+        @include breakpoint(mobile-landscape) {
+          background: $sunshade;
+        }
+      }
+
+      @include breakpoint(mobile-landscape) {
+        display: block;
+
+        //right: 6em;
+        padding-left: 1em;
+        background: rgb(0 0 0 / 45%);
+      }
+    }
+
+    .flex-direction-nav {
+      position: absolute;
+      width: 100%;
+      bottom: -5px;
+
+      a {
+        background: transparent;
+        border: none;
+
+        &:hover {
+          color: $cerulean !important;
+        }
+
+        &.flex-prev {
+          left: 0;
+        }
+
+        &.flex-next {
+          right: 0;
+        }
+
+        &:focus-visible {
+          outline: solid;
+          outline-color: $picton;
+        }
+
+        @include breakpoint(mobile-landscape down) {
+          &::before {
+            color: $cerulean;
+          }
+        }
+      }
+
+      .flex-nav-prev {
+        position: absolute;
+        left: 0;
+
+        @include breakpoint(mobile-landscape) {
+          left: unset;
+          right: 6em;
+        }
+      }
+    }
+  }
+}
+
+.slideshow {
+  padding: 0 0 2rem;
+  background: transparent;
+
+  .flexslider {
+    padding-bottom: 0;
+  }
+
+  .flex-control-nav {
+    position: absolute;
+    bottom: -3rem;
+    display: flex;
+    height: 3em;
+
+    .flex-active {
+      background: black;
+    }
+
+    @include breakpoint(mobile-landscape) {
+      display: block;
+      right: 6em;
+      padding-left: 4em;
+    }
+  }
+
+  .flex-direction-nav {
+    position: absolute;
+    width: 100%;
+    bottom: -1.5rem;
+
+    a {
+      background: transparent;
+      border: none;
+
+      &:hover {
+        color: $cerulean !important;
+      }
+
+      &.flex-prev {
+        left: 0;
+      }
+
+      &.flex-next {
+        right: 0;
+      }
+
+      &::before {
+        color: $cerulean;
+      }
+    }
+
+    .flex-nav-prev {
+      position: absolute;
+      left: 0;
+
+      @include breakpoint(mobile-landscape) {
+        left: unset;
+        right: 6em;
+      }
+    }
+  }
+}
+
+.hero__slides--content {
+  .slides {
+    overflow: hidden;
+  }
+}
+
+.hero__slides--secondary {
+  .hero__content {
+    text-align: center;
+    margin: 1em;
+
+    h1 {
+      @include rem("font-size", 48px);
+    }
+  }
+
+  .flex-control-nav {
+    display: block;
+
+    @include breakpoint(medium) {
+      bottom: 0;
+    }
+  }
+
+  @include breakpoint(medium) {
+    padding: 2em 0;
+    min-height: 100px;
+  }
+}
+
+.hero__wrap {
+  position: relative;
+
+  // If no content is provided, add this class to .hero__wrap
+  &.hero__wrap--empty {
+    min-height: 250px;
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+  }
+}
+
+// Background image element height is equal to that of the hero content
+.hero__bg {
+  background-image: url("/images/home-hero-1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  // Background image element height is not equal to that of the hero content
+  &.hero__bg--secondary {
+    position: absolute;
+    width: 100%;
+    height: 8rem;
+    max-height: 20em;
+    z-index: 0;
+
+    @include breakpoint(medium) {
+      height: auto;
+      min-height: 16rem;
+    }
+  }
+
+  // Solid background color behind hero content
+  &.hero__bg--solid {
+    //background: $cerulean;
+    background: #0098db; /* Old browsers */
+    background:
+      linear-gradient(
+        left,
+        #0098db 0%,
+        #00c7b2 100%
+      ); /* FF3.6-15 */
+
+    background:
+      linear-gradient(
+        left,
+        #0098db 0%,
+        #00c7b2 100%
+      ); /* Chrome10-25,Safari5.1-6 */
+
+    background:
+      linear-gradient(
+        to right,
+        #0098db 0%,
+        #00c7b2 100%
+      ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr="#0098db", endColorstr="#00c7b2", GradientType=1); /* IE6-9 */
+    position: absolute;
+    width: 100%;
+    height: 15em;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+}
+
+.page-with-hero {
+  z-index: 5;
+  position: relative;
+
+  //margin-top: -8rem;
+
+  @include breakpoint(medium) {
+    //margin-top: -16rem;
+  }
+}
+
+.custom-navigation {
+  a {
+    z-index: 10;
+    color: white;
+    padding: 0 0.25em;
+    background: $cerulean;
+    text-decoration: none;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    &.flex-next {
+      left: auto;
+      right: 0;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: darken($cerulean, 10%);
+    }
+
+    @include rem("font-size", 28px);
+  }
+}
+
+.l-padding-home-slide {
+  padding: 1.5em;
+}

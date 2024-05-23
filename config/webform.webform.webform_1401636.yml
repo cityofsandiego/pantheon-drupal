@@ -1,0 +1,358 @@
+uuid: 9fd67eb3-a69a-4a11-a026-020163cf6118
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1401636
+title: 'Request an Event/Public Appearance'
+description: null
+categories: {  }
+elements: |
+  fieldset_event_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Event/Public Appearance Info' 
+    '#description': ""
+    event_name_1:
+      '#type': textfield
+      '#title': 'Event Name' 
+      '#description': ""
+      '#required': true
+    event_description_fundraiser_festival_etc_1:
+      '#type': textfield
+      '#title': 'Event Description (fundraiser, festival, etc)' 
+      '#description': ""
+      '#required': true
+    event_date_1:
+      '#type': date
+      '#title': 'Event Date' 
+      '#description': ""
+      '#required': true
+    flexible_date_1:
+      '#type': radios
+      '#options':
+        yes: 'Yes'
+        no: 'No'
+      '#title': 'Flexible Date?' 
+      '#description': ""
+      '#required': true
+    event_type_1:
+      '#type': radios
+      '#options':
+        person: 'In-person'
+        virtual: 'Virtual'
+      '#title': 'Event Type' 
+      '#description': ""
+      '#required': true
+    event_address_include_room_number_ballroom_etc_1:
+      '#type': textfield
+      '#title': 'Event Address (include room number, ballroom, etc)' 
+      '#description': ""
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="event_type_1"]':
+            value: person
+            
+    virtual_meeting_link_1:
+      '#type': textfield
+      '#title': 'Virtual Meeting Link' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="event_type_1"]':
+            value: virtual
+            
+    will_parking_be_provided_on_site_1:
+      '#type': radios
+      '#options':
+        yes: 'Yes'
+        no: 'No'
+      '#title': 'Will parking be provided on site?' 
+      '#description': ""
+      '#required': true
+    start_time_1:
+      '#type': time
+      '#time_format': 'g:i A'
+      '#title': 'Start Time' 
+      '#description': ""
+      '#required': true
+    end_time_1:
+      '#type': time
+      '#time_format': 'g:i A'
+      '#title': 'End Time' 
+      '#description': ""
+      '#required': true
+    flexible_time_1:
+      '#type': radios
+      '#options':
+        yes: 'Yes'
+        no: 'No'
+      '#title': 'Flexible Time?' 
+      '#description': ""
+      '#required': true
+    sponsoring_organization_business_community_group_1:
+      '#type': textfield
+      '#title': 'Sponsoring Org/Business/Community Group' 
+      '#description': ""
+      '#required': true
+    event_website_social_media_link_if_applicable_1:
+      '#type': textfield
+      '#title': 'Event website/social media link (if applicable)' 
+      '#description': ""
+    about_your_organization_business_community_group_1:
+      '#type': textarea
+      '#title': 'About Your Organization/Business/Community Group' 
+      '#description': ""
+      '#required': true
+    what_will_the_councilmembers_role_be_at_the_event_1:
+      '#type': radios
+      '#options':
+        attendee: 'Attendee'
+        remarks: 'Provide Remarks'
+        award: 'Presenting Award'
+        proclamation: 'Proclamation Presentation Requested'
+        other: 'Other'
+      '#title': 'What will the Councilmember’s role be at the event?' 
+      '#description': ""
+      '#required': true
+    please_specify_1:
+      '#type': textfield
+      '#title': 'If Other is selected, please specify' 
+      '#description': ""
+      '#required': true
+    what_is_the_councilmembers_role_immediately_following_his_remarks_1:
+      '#type': textfield
+      '#title': 'If remarks are requested, what is the Councilmember’s role immediately following his remarks? (Introducing, etc?)' 
+      '#description': ""
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="what_will_the_councilmembers_role_be_at_the_event_1"]':
+            value: remarks
+            
+    what_equipment_will_be_available_for_use_podium_microphone_teleprompter_1:
+      '#type': textfield
+      '#title': 'If remarks are requested, what equipment will be available for use? (podium? Microphone? Teleprompter?)' 
+      '#description': ""
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="what_will_the_councilmembers_role_be_at_the_event_1"]':
+            value: remarks
+            
+    other_speakers_dignitaries_who_will_be_present_1:
+      '#type': textfield
+      '#title': 'Other speakers/dignitaries who will be present' 
+      '#description': ""
+    will_there_be_media_present_1:
+      '#type': radios
+      '#options':
+        yes: 'Yes'
+        no: 'No'
+        unk: 'Unknown'
+      '#title': 'Will there be media present?' 
+      '#description': ""
+      '#required': true
+    expected_number_of_attendees_1:
+      '#type': textfield
+      '#title': 'Expected number of attendees' 
+      '#description': ""
+      '#required': true
+    event_open_to_the_public_1:
+      '#type': radios
+      '#options':
+        yes: 'Yes'
+        no: 'No'
+      '#title': 'Event open to the public? ' 
+      '#description': ""
+      '#required': true
+    event_agenda_1:
+      '#type': managed_file
+      '#max_filesize': '20'
+      '#file_extensions': 'txt rtf pdf doc docx'
+      '#title': 'Event Agenda' 
+      '#description': ""
+      '#required': true
+    seating_arrangements_1:
+      '#type': textfield
+      '#title': 'Seating arrangements' 
+      '#description': ""
+      '#required': true
+    event_attire_casual_black_tie_etc_1:
+      '#type': textfield
+      '#title': 'Event attire (casual, black tie, etc)' 
+      '#description': ""
+      '#required': true
+    attendee_ticket_price_1:
+      '#type': textfield
+      '#title': 'Attendee ticket price' 
+      '#description': ""
+    other_information_1:
+      '#type': textarea
+      '#title': 'Other Information' 
+      '#description': ""
+      '#required': true
+  fieldset_point_of_contact_for_scheduling_purposes:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Point of Contact (for scheduling purposes)' 
+    '#description': ""
+    name_29:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+      '#required': true
+    phone_29:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+      '#required': true
+    cell_29:
+      '#type': textfield
+      '#title': 'Cell' 
+      '#description': ""
+    email_29:
+      '#type': textfield
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<p>Thank you for inviting Councilmember Stephen Whitburn to participate in your event. Due to the high volume of requests we receive, processing time can take up to two weeks, at which point we will reach out to you with additional information at the contact information you provided. If you need immediate assistance, please contact our office at <a href=\"tel:1-619-236-6633\">619-236-6633</a>.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit Request'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: blugo@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: cvierra@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

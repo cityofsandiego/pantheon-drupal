@@ -1,0 +1,12 @@
+services:
+  sand_example.path.matcher:
+    class: Drupal\sand_example\SandExamplePathMatcher
+    public: false
+    decorates: path.matcher
+    arguments: ['@sand_example.path.matcher.inner', '@config.factory', '@current_route_match']
+  sand_example.service1:
+    class: Drupal\sand_example\SandExampleService1
+    arguments: ['@service_container', '@current_user']
+  sand_example.service2:
+    class: Drupal\sand_example\SandExampleService2
+    arguments: ['@service_container']

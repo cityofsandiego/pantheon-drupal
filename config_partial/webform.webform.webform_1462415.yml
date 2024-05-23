@@ -1,0 +1,126 @@
+uuid: 1a5ea8c4-f41e-4ef9-abd6-8fbc034f1260
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 51
+template: false
+archive: false
+id: webform_1462415
+title: 'Request a Meeting'
+description: null
+categories: {  }
+elements: |
+  first_name:
+    '#type': textfield
+    '#title': 'First Name' 
+    '#description': ""
+    '#required': true
+  last_name:
+    '#type': textfield
+    '#title': 'Last Name' 
+    '#description': ""
+    '#required': true
+  e_mail:
+    '#type': textfield
+    '#title': 'E-mail' 
+    '#description': ""
+    '#required': true
+  phone_number:
+    '#type': textfield
+    '#title': 'Phone Number' 
+    '#description': ""
+    '#required': true
+  organization:
+    '#type': textarea
+    '#title': 'Organization' 
+    '#description': ""
+  are_you_currently_a_district_6_resident:
+    '#type': radios
+    '#options':
+      yes: 'Yes'
+      no: 'No'
+    '#title': 'Are you currently a District 6 Resident?' 
+    '#description': ""
+  meeting_type:
+    '#type': textfield
+    '#title': 'Meeting Type (Virtual / In-Person / Off Site / Other' 
+    '#description': ""
+    '#required': true
+  meeting_date:
+    '#type': date
+    '#title': 'Requested Date of the Meeting' 
+    '#description': ""
+    '#required': true
+  please_explain_the_topics_and_issues_you_wish_to_discuss:
+    '#type': textarea
+    '#title': 'Please explain the topics and issues you wish to discuss' 
+    '#description': ""
+    '#required': true
+  names_of_meeting_participants_attendees:
+    '#type': textarea
+    '#title': 'Name(s) of Meeting Participant(s)/Attendee(s)' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<p>Thank you for requesting a meeting with Councilmember Kent Lee. Due to the high volume of requests we receive, processing time can take up to two weeks, at which point we will reach out to you with additional information at the contact information you provided. If you need immediate assistance, please contact our office at <a href=\"tel:1-619-236-6633\">619-236-661</a>6.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: KentLee@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

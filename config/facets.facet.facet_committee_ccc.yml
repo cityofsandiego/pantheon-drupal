@@ -1,0 +1,68 @@
+uuid: 6981c1ab-08f6-4a22-b265-3ea329060f23
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.remote
+    - views.view.search_ocd
+  module:
+    - search_api
+id: facet_committee_ccc
+name: 'Facet Committee CCC'
+weight: 0
+min_count: 1
+missing: false
+missing_label: others
+url_alias: facet_committee_ccc
+facet_source_id: 'search_api:views_page__search_ocd__ccc'
+field_identifier: field_committee
+query_operator: or
+hard_limit: 0
+exclude: false
+use_hierarchy: false
+keep_hierarchy_parents_active: false
+hierarchy:
+  type: taxonomy
+  config: {  }
+expand_hierarchy: false
+enable_parent_when_child_gets_disabled: true
+widget:
+  type: checkbox
+  config:
+    show_numbers: true
+    soft_limit: 0
+    show_reset_link: false
+    reset_text: 'Show all'
+    hide_reset_when_no_selection: false
+    soft_limit_settings:
+      show_less_label: 'Show less'
+      show_more_label: 'Show more'
+empty_behavior:
+  behavior: none
+only_visible_when_facet_source_is_visible: true
+show_only_one_result: false
+show_title: false
+processor_configs:
+  display_value_widget_order:
+    processor_id: display_value_widget_order
+    weights:
+      sort: 40
+    settings:
+      sort: ASC
+  hierarchy_processor:
+    processor_id: hierarchy_processor
+    weights:
+      build: 100
+    settings: {  }
+  replace:
+    processor_id: replace
+    weights:
+      post_query: 50
+    settings:
+      replacements: "ati|Active Transportation and Infrastructure Committee\r\naudit|Audit Committee\r\nbge|Budget and Government Efficiency Committee\r\nbrc|Budget Review Committee\r\nbudgetfinance|Budget and Finance Committee\r\ncharterrev|Charter Review Committee\r\ncovid|COVID-19 Response and Recovery Committee\r\nedir|Economic Development and Intergovernmental Relations Committee\r\neds|Economic Development and Strategies Committee\r\nenviro|Environment Committee\r\nfire|Ad Hoc Fire Prevention and Recovery Committee\r\ngeo|Government Efficiency and Openness Committee\r\nhomeless|Select Committee on Homelessness\r\ninfrastructure|Infrastructure Committee\r\nluh|Land Use and Housing Committee\r\nnrc|Natural Resources and Culture Committee\r\nother|Other\r\npsln|Public Safety and Livable Neighborhoods Committee\r\npsns|Public Safety and Neighborhood Services Committee\r\nrules-ogir|Rules Committee\r\nsglu|Smart Growth and Land Use Committee"
+  url_processor_handler:
+    processor_id: url_processor_handler
+    weights:
+      pre_query: 50
+      build: 15
+    settings: {  }

@@ -1,0 +1,253 @@
+.node--type-department,
+.node--type-webform,
+.node--type-event,
+.node--type-digital-archives-photos {
+  h1 {
+    font-size: 2.25rem;
+    margin: 0.5rem 0 2rem;
+    padding: 0;
+  }
+
+  .sidebar {
+    margin: 0;
+    height: 100%;
+    padding: 0.5em 2em;
+
+    /* & > h2 {
+      margin-top: 0;
+    } */
+
+    ul {
+      padding: 0;
+      list-style-type: none;
+      margin: 0;
+
+      li {
+        margin: 0 0 0.5rem;
+
+        .btn {
+          font-size: 0.9rem !important;
+          padding: 0.75em 1em;
+          width: 100%;
+        }
+      }
+
+      &.list-normal {
+        font-size: 1em;
+        list-style-type: disc;
+        margin: 0 0 1em;
+        padding-inline-start: 1em;
+
+        li {
+          margin: 0 0 0.5rem 1rem;
+        }
+      }
+
+      &.sidebar-menu {
+        list-style: circle;
+        margin: 0 0 2em 1.2rem !important;
+
+        li {
+          padding: 0.2em 0.5em 0 0;
+          margin: 0 0 0.3rem;
+          line-height: 1.2;
+
+          a {
+            font-size: 0.8125rem;
+          }
+
+          ul {
+            list-style: circle;
+            margin-left: 1.1rem;
+          }
+
+          &.collapsed {
+            list-style-image: url("../images/menu-collapsed.png");
+            list-style-type: circle;
+            margin-left: -2px;
+            padding-left: 2px;
+
+            ul {
+              display: none;
+            }
+          }
+
+          &.expanded,
+          &.menu-item--expanded {
+            list-style-image: url("../images/menu-expanded.png");
+            list-style-type: circle;
+            margin-left: -2px;
+            padding-left: 2px;
+
+            a[href=""],
+            a[href="#"] {
+              color: #0a0a0a;
+              text-decoration: none;
+              cursor: default;
+            }
+
+            ul {
+              margin-top: 0.3em;
+            }
+          }
+
+          &.is_active {
+            a {
+              color: $black;
+            }
+          }
+
+          &.is_active.expanded {
+            list-style-image: url("../images/menu-expanded.png");
+
+            &::marker {
+              padding-left: 10px;
+            }
+
+            a {
+              color: $black;
+            }
+
+            ul {
+              margin: 0.4rem 0 0.4rem 1.3rem !important;
+              display: block;
+
+              li {
+                a {
+                  color: $cerulean;
+                }
+              }
+            }
+          }
+
+          &.menu-item--active-trail {
+            & > a {
+              color: #0a0a0a;
+            }
+          }
+        }
+      }
+    }
+
+    @include breakpoint(mobile-landscape) {
+      padding: 2.5rem 1.5rem 2rem;
+      border-left: 1px solid #dde2e5;
+    }
+  }
+
+  .resources {
+    display: block;
+  }
+}
+
+.department-menu {
+  padding-left: 0;
+  list-style: none;
+  margin: 0 !important;
+  font-family: $font-family;
+
+  li {
+    margin: 0 0.5rem 0 0;
+    padding: 0;
+
+    &:last-child {
+      margin: 0;
+    }
+
+    a {
+      background-color: $pine;
+      color: white;
+      font-size: 1rem;
+      padding: 0.2rem 0.75rem;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+
+      &:hover {
+        background-color: $teal;
+      }
+
+      &.is-active {
+        color: $black;
+      }
+
+      @include breakpoint(medium) {
+        font-size: 0.8125rem;
+        padding: 0.5rem 0.75rem;
+        line-height: 1.2;
+        height: 100%;
+      }
+    }
+
+    &.is_active {
+      a {
+        color: $black;
+        background-color: white;
+      }
+    }
+  }
+
+  @include breakpoint(medium) {
+    display: flex;
+  }
+}
+
+.sub-navigation-mobile {
+  background-color: white;
+  padding: 0.5em 2em;
+
+  .accordions {
+    background-color: $teal;
+
+    .accordion__heading {
+      color: white;
+      background: $pine;
+
+      .accordion__link {
+        color: $white;
+        font-family: $font-family;
+        font-weight: bold;
+
+        i {
+          color: $white;
+        }
+
+        .toggle-icon::before,
+        .toggle-icon::after {
+          background: transparent;
+        }
+      }
+    }
+
+    .accordion__drawer {
+      color: white;
+      background: $pine;
+    }
+
+    .is-open {
+      .accordion__heading {
+        color: $font-color;
+        background: $white;
+
+        .accordion__link {
+          color: $font-color;
+
+          i {
+            color: $font-color;
+          }
+
+          .toggle-icon::before,
+          .toggle-icon::after {
+            background: transparent;
+          }
+        }
+      }
+    }
+
+    li.is_active {
+      background-color: white;
+    }
+  }
+}

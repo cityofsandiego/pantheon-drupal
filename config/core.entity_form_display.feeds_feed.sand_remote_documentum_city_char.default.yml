@@ -1,0 +1,60 @@
+uuid: a695eefe-a210-4b2c-b256-faa34490a097
+langcode: en
+status: true
+dependencies:
+  config:
+    - feeds.feed_type.sand_remote_documentum_city_char
+    - field.field.feeds_feed.sand_remote_documentum_city_char.field_sort1
+    - field.field.feeds_feed.sand_remote_documentum_city_char.field_source_name
+id: feeds_feed.sand_remote_documentum_city_char.default
+targetEntityType: feeds_feed
+bundle: sand_remote_documentum_city_char
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  feeds_log:
+    type: boolean_checkbox
+    weight: 13
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_sort1:
+    type: number
+    weight: 12
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_source_name:
+    type: string_textfield
+    weight: 11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

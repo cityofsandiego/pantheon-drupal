@@ -1,0 +1,94 @@
+/* ============================================================
+  Styles for heading typography.
+  ============================================================ */
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5 {
+  color: $font-color;
+  font-family: $headline !important;
+}
+
+h1 {
+  font-size: 2.125rem;
+  color: $font-color;
+
+  &.page-title {
+    color: $white;
+    font-family: $font-family-secondary;
+    padding: 2.5rem 1rem;
+    text-align: center;
+    text-shadow: 0 0 #555, 0 2px 0.3em #000, 2px 0 0.3em #000, 0 0 #000;
+    margin: 0;
+
+    @include rem( "font-size", 32px );
+
+    @include breakpoint(medium) {
+      @include rem( "font-size", 48px );
+    }
+  }
+
+  @include breakpoint(mobile) {
+    font-size: 2.375rem;
+  }
+}
+
+h2 {
+  font-size: 1.875rem;
+  color: $font-color;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  @include breakpoint(mobile) {
+    font-size: 2.125rem;
+  }
+}
+
+h3 {
+  font-size: 1.625rem;
+
+  @include breakpoint(mobile) {
+    font-size: 1.875rem;
+  }
+}
+
+h4 {
+  font-size: 1.375rem;
+
+  @include breakpoint(mobile) {
+    font-size: 1.75rem;
+  }
+}
+
+h5 {
+  font-size: 1.25rem;
+
+  @include breakpoint(mobile) {
+    font-size: 1.5rem;
+  }
+}
+
+.node {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: $font-color;
+  }
+}
+
+.h1,
+.h2,
+.h3,
+.h4 {
+  color: $font-color;
+}

@@ -1,0 +1,35 @@
+uuid: 2426aaf4-e81f-4fe4-a656-2aa923955663
+langcode: en
+status: true
+dependencies: {  }
+id: searchform
+name: 'Insert Solr Search Form'
+cache: false
+description: 'Insert a Solr search form with the ability to include settings facets'
+shorttip: 'Insert a Solr search form.  Usage: [search-block:{path to search page}={search facet1}={search facet2}].  Note that the facets are optional and the {} are not included.'
+longtip: "<p><strong>Insert a Solr search form.  Usage: [search-block:{path to search page}={search facet1}={search facet2}].</strong>  Note that the facets are optional and the {} are not included in the short-code.</p>\r\n\r\n<p>You can include up to 2 facets in the search if they are on the destination page. To get the names for the facets, go to the destination search page and check the facets you want then get copy and inspect the URL. The facets will be of the format -  facet-name:value</p>\r\n\r\n<p>Example: [search:/search/ocd=facet_committee:psns=facet_doc_type:council-committees-actions]</p>"
+rules:
+  search:
+    rid: search
+    prid: ''
+    fid: searchform
+    name: Search
+    description: 'Insert a custom form to do a Solr search including facets for the main search (search field is called: search_api_fulltext)'
+    enabled: true
+    matches: null
+    pattern: '#\[search:(.*?)(=(.*?))?(=(.*?))?\]#'
+    replacement: "$result = sand_search_insert_form($matches[1], $matches[3], $matches[5], 'search_api_fulltext'); \r\n\r\n"
+    code: true
+    weight: 0
+  search_block:
+    rid: search_block
+    prid: ''
+    fid: searchform
+    name: 'Search Block'
+    description: 'Insert a custom form to do a Solr search including facets for content/media or ocd (search field is called: search_text)'
+    enabled: true
+    matches: null
+    pattern: '#\[search-block:(.*?)(=(.*?))?(=(.*?))?\]#'
+    replacement: "$result = sand_search_insert_form($matches[1], $matches[3], $matches[5], 'search_text'); \r\n"
+    code: true
+    weight: 0

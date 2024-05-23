@@ -1,0 +1,149 @@
+uuid: 63bb7617-c4b5-46b4-8361-870f42b9fac4
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.application
+    - node.type.article
+    - node.type.blog
+    - node.type.bucket
+    - node.type.business_resource
+    - node.type.date
+    - node.type.department
+    - node.type.department_document
+    - node.type.department_parent
+    - node.type.digital_archives_photos
+    - node.type.event
+    - node.type.external_data
+    - node.type.hero
+    - node.type.location
+    - node.type.mayoral_artifacts
+    - node.type.notification
+    - node.type.outreach
+    - node.type.outreach2
+    - node.type.outreach_article2
+    - node.type.resources
+    - node.type.sand_gallery
+    - node.type.search_page
+    - node.type.sidebar_block_context
+    - node.type.slide
+    - node.type.webform
+  module:
+    - content_moderation
+_core:
+  default_config_hash: T7gMMyFbTYLalxpIOnzJebvek2OW0b1RgLVE9I2y228
+id: editorial
+label: Editorial
+type: content_moderation
+type_settings:
+  states:
+    archived:
+      label: Unpublished
+      weight: 1
+      published: false
+      default_revision: true
+    draft:
+      label: Draft
+      weight: -2
+      published: false
+      default_revision: false
+    needs_review:
+      label: 'Needs Review'
+      weight: -1
+      published: false
+      default_revision: false
+    published:
+      label: Published
+      weight: 0
+      published: true
+      default_revision: true
+  transitions:
+    archive:
+      label: Archive
+      from:
+        - published
+      to: archived
+      weight: 1
+    archived_draft:
+      label: 'Restore to Draft'
+      from:
+        - archived
+      to: draft
+      weight: 2
+    archived_published:
+      label: Restore
+      from:
+        - archived
+      to: published
+      weight: 3
+    bypass_review:
+      label: 'Publish without Review'
+      from:
+        - draft
+      to: published
+      weight: -3
+    create_new_draft:
+      label: 'Create New Draft'
+      from:
+        - published
+      to: draft
+      weight: -5
+    needs_review:
+      label: 'Needs Review'
+      from:
+        - draft
+        - published
+      to: needs_review
+      weight: -4
+    publish:
+      label: Publish
+      from:
+        - needs_review
+      to: published
+      weight: 0
+    quick_publish:
+      label: 'Quick Publish'
+      from:
+        - published
+      to: published
+      weight: 4
+    reject_draft:
+      label: 'Reject Draft'
+      from:
+        - needs_review
+      to: draft
+      weight: -1
+    save_draft:
+      label: 'Save Draft'
+      from:
+        - draft
+      to: draft
+      weight: -2
+  entity_types:
+    node:
+      - application
+      - article
+      - blog
+      - bucket
+      - business_resource
+      - date
+      - department
+      - department_document
+      - department_parent
+      - digital_archives_photos
+      - event
+      - external_data
+      - hero
+      - location
+      - mayoral_artifacts
+      - notification
+      - outreach
+      - outreach2
+      - outreach_article2
+      - resources
+      - sand_gallery
+      - search_page
+      - sidebar_block_context
+      - slide
+      - webform
+  default_moderation_state: draft

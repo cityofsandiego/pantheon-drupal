@@ -1,0 +1,15 @@
+<div class="office-hours">
+  {% for item in items %}
+    <div class="office-hours__item grid-x">
+      {% if item.label %}
+        <div class="office-hours__item-label cell small-5">{{ item.label }}</div>
+      {% endif %}
+      {% if item.slots['#markup'] is not empty %}
+        <div class="office-hours__item-slots cell small-7">{{ item.slots['#markup']|replace({'-':' - ','am':'a.m.', 'pm':'p.m.'}) }}</div>
+      {% endif %}
+      {% if item.comments['#markup'] is not empty %}
+        <div class="office-hours__item-comments cell small-12"><p class="fine-print">{{ item.comments }}</p></div>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>

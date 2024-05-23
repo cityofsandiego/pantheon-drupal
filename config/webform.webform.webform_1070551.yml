@@ -1,0 +1,352 @@
+uuid: 2dab0b81-e884-4c59-a5b8-c589cab511bd
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1070551
+title: 'Request a Meeting with the Mayor'
+description: null
+categories: {  }
+elements: |-
+  first_page:
+    '#type': webform_wizard_page
+    '#title': Start
+    fieldset_meeting_overview:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Meeting Overview'
+      '#description': ''
+      topic_1:
+        '#type': textfield
+        '#title': Topic
+        '#description': ''
+        '#required': true
+      meeting_date_1:
+        '#type': date
+        '#title': 'Meeting Date'
+        '#description': ''
+        '#required': true
+      flexible_date_1:
+        '#type': radios
+        '#options':
+          'yes': 'Yes'
+          'no': 'No'
+        '#title': 'Flexible Date?'
+        '#description': ''
+        '#required': true
+      location_1:
+        '#type': radios
+        '#options':
+          mayor: 'Mayor"s Office'
+          other: Other
+        '#title': Location
+        '#description': ''
+        '#required': true
+      address_1:
+        '#type': textfield
+        '#title': Address
+        '#description': ''
+        '#states':
+          visible:
+            ':input[name="location_1"]':
+              value: other
+      start_time_1:
+        '#type': time
+        '#time_format': 'g:i A'
+        '#title': 'Start Time'
+        '#description': ''
+        '#required': true
+      end_time_1:
+        '#type': time
+        '#time_format': 'g:i A'
+        '#title': 'End Time'
+        '#description': ''
+        '#required': true
+      start_time:
+        '#type': webform_time
+        '#title': 'Start Time'
+        '#required': true
+        '#timepicker': true
+        '#time_format': 'g:i A'
+        '#step': 900
+      end_time:
+        '#type': webform_time
+        '#title': 'End Time'
+        '#required': true
+        '#timepicker': true
+        '#time_format': 'g:i A'
+        '#step': 900
+      flexible_time_1:
+        '#type': radios
+        '#options':
+          'yes': 'Yes'
+          'no': 'No'
+        '#title': 'Flexible Time?'
+        '#description': ''
+        '#required': true
+  continue:
+    '#type': webform_wizard_page
+    '#title': Organization/Contact
+    fieldset_organization__contact_details:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Organization & Contact Details'
+      '#description': ''
+      organization_business_11:
+        '#type': textfield
+        '#title': Organization/Business
+        '#description': ''
+        '#required': true
+      about_your_organization_11:
+        '#title': 'About Your Organization'
+        '#description': ''
+        '#required': true
+      first_and_last_name_11:
+        '#type': textfield
+        '#title': 'First and Last Name'
+        '#description': ''
+        '#required': true
+      title_11:
+        '#type': textfield
+        '#title': Title
+        '#description': ''
+        '#required': true
+      email2_11:
+        '#type': email
+        '#size': 20
+        '#title': Email
+        '#description': ''
+        '#required': true
+      phone_11:
+        '#type': textfield
+        '#title': Phone
+        '#description': ''
+        '#required': true
+      cell_phone_11:
+        '#type': textfield
+        '#title': 'Cell Phone'
+        '#description': ''
+        '#required': true
+      street_address_11:
+        '#type': textfield
+        '#title': 'Street Address'
+        '#description': ''
+        '#required': true
+      city_11:
+        '#type': textfield
+        '#title': City
+        '#description': ''
+        '#required': true
+      state_11:
+        '#type': textfield
+        '#title': State
+        '#description': ''
+        '#required': true
+      zip_11:
+        '#type': textfield
+        '#title': Zip
+        '#description': ''
+        '#required': true
+  continue2:
+    '#type': webform_wizard_page
+    '#title': Details
+    fieldset_event_details:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Meeting Details'
+      '#description': ''
+      other_speakers_or_invited_guests_will_there_be_any_other_elected_officials_dignitaries_21:
+        '#type': textarea
+        '#title': 'Additional invited guests:'
+        '#description': ''
+        '#required': true
+      number_of_attendees_21:
+        '#type': textfield
+        '#title': 'Number of Attendees'
+        '#description': ''
+        '#required': true
+      tentative_agenda_21:
+        '#type': managed_file
+        '#max_filesize': '2'
+        '#file_extensions': 'txt rtf pdf doc docx'
+        '#title': 'Tentative Agenda'
+        '#description': ''
+      additional_comments_21:
+        '#title': 'Additional comments'
+        '#description': ''
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /mayor/contact/request-response
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: MPorras
+    notes: ''
+    status: false
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: mporras@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nSubmitted values are:\r\n\r\n== MEETING OVERVIEW ==\r\n\r\nTOPIC: [webform_submission:values:topic_1]\r\n\r\nDATE: [webform_submission:values:meeting_date_1]\r\n\r\nFLEXIBLE DATE? [webform_submission:values:flexible_date_1]\r\n\r\nTIME: [webform_submission:values:start_time] - [webform_submission:values:end_time]\r\n\r\nFLEXIBLE TIME? [webform_submission:values:flexible_time_1]\r\n\r\nLOCATION: [webform_submission:values:location_1]\r\n\r\nADDRESS: [webform_submission:values:address_1]\r\n \r\n \r\n== ORGANIZATION/CONTACT ==\r\n\r\nORGANIZATION/BUSINESS: [webform_submission:values:organization_business_11]\r\n\r\nABOUT YOUR ORGANIZATION: [webform_submission:values:about_your_organization_11]\r\n\r\nNAME: [webform_submission:values:first_and_last_name_11]\r\n\r\nTITLE: [webform_submission:values:title_11]\r\n\r\nEMAIL: [webform_submission:values:email2_11]\r\n\r\nPHONE: [webform_submission:values:phone_11]\r\n\r\nCELL PHONE: [webform_submission:values:cell_phone_11]\r\nSTREET ADDRESS:  [webform_submission:values:street_address_11]\r\n CITY:  [webform_submission:values:city_11]\r\nSTATE:  [webform_submission:values:state_11]\r\nZIP:  [webform_submission:values:zip_11]\r\n\r\n\r\n== MEETING DETAILS ==\r\n\r\nADDITIONAL GUESTS: [webform_submission:values:other_speakers_or_invited_guests_will_there_be_any_other_elected_officials_dignitaries_21\t]\r\n\r\n# OF ATTENDEES: [webform_submission:values:number_of_attendees_21]\r\n\r\nAGENDA FILE: [webform_submission:values:tentative_agenda_21]\r\n\r\nADDITIONAL COMMENTS: [webform_submission:values:additional_comments_21]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: Reply
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email2_11:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: mporras@sandiego.gov
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Request a Meeting with the Mayor Todd Gloria'
+      body: "Thank you for your submission to the Mayor's Office.\r\n\r\nYou submitted the following information on [webform_submission:created].\r\n\r\nSubmitted values are:\r\n\r\n== MEETING OVERVIEW ==\r\n\r\nTOPIC: [webform_submission:values:topic_1]\r\n\r\nDATE: [webform_submission:values:meeting_date_1]\r\n\r\nFLEXIBLE DATE? [webform_submission:values:flexible_date_1]\r\n\r\nTIME: [webform_submission:values:start_time] - [webform_submission:values:end_time]\r\n\r\nFLEXIBLE TIME? [webform_submission:values:flexible_time_1]\r\n\r\nLOCATION: [webform_submission:values:location_1]\r\n\r\nADDRESS: [webform_submission:values:address_1]\r\n \r\n \r\n== ORGANIZATION/CONTACT ==\r\n\r\nORGANIZATION/BUSINESS: [webform_submission:values:organization_business_11]\r\n\r\nABOUT YOUR ORGANIZATION: [webform_submission:values:about_your_organization_11]\r\n\r\nNAME: [webform_submission:values:first_and_last_name_11]\r\n\r\nTITLE: [webform_submission:values:title_11]\r\n\r\nEMAIL: [webform_submission:values:email2_11]\r\n\r\nPHONE: [webform_submission:values:phone_11]\r\n\r\nCELL PHONE: [webform_submission:values:cell_phone_11]\r\nSTREET ADDRESS:  [webform_submission:values:street_address_11]\r\n CITY:  [webform_submission:values:city_11]\r\nSTATE:  [webform_submission:values:state_11]\r\nZIP:  [webform_submission:values:zip_11]\r\n\r\n\r\n== MEETING DETAILS ==\r\n\r\nADDITIONAL GUESTS: [webform_submission:values:other_speakers_or_invited_guests_will_there_be_any_other_elected_officials_dignitaries_21\t]\r\n\r\n# OF ATTENDEES: [webform_submission:values:number_of_attendees_21]\r\n\r\nAGENDA FILE: [webform_submission:values:tentative_agenda_21]\r\n\r\nADDITIONAL COMMENTS: [webform_submission:values:additional_comments_21]\r\n\r\n"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_4:
+    id: email
+    handler_id: email_4
+    label: CazaresL
+    notes: ''
+    status: false
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: CazaresL@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nSubmitted values are:\r\n\r\n== MEETING OVERVIEW ==\r\n\r\nTOPIC: [webform_submission:values:topic_1]\r\n\r\nDATE: [webform_submission:values:meeting_date_1]\r\n\r\nFLEXIBLE DATE? [webform_submission:values:flexible_date_1]\r\n\r\nTIME: [webform_submission:values:start_time] - [webform_submission:values:end_time]\r\n\r\nFLEXIBLE TIME? [webform_submission:values:flexible_time_1]\r\n\r\nLOCATION: [webform_submission:values:location_1]\r\n\r\nADDRESS: [webform_submission:values:address_1]\r\n \r\n \r\n== ORGANIZATION/CONTACT ==\r\n\r\nORGANIZATION/BUSINESS: [webform_submission:values:organization_business_11]\r\n\r\nABOUT YOUR ORGANIZATION: [webform_submission:values:about_your_organization_11]\r\n\r\nNAME: [webform_submission:values:first_and_last_name_11]\r\n\r\nTITLE: [webform_submission:values:title_11]\r\n\r\nEMAIL: [webform_submission:values:email2_11]\r\n\r\nPHONE: [webform_submission:values:phone_11]\r\n\r\nCELL PHONE: [webform_submission:values:cell_phone_11]\r\nSTREET ADDRESS:  [webform_submission:values:street_address_11]\r\n CITY:  [webform_submission:values:city_11]\r\nSTATE:  [webform_submission:values:state_11]\r\nZIP:  [webform_submission:values:zip_11]\r\n\r\n\r\n== MEETING DETAILS ==\r\n\r\nADDITIONAL GUESTS: [webform_submission:values:other_speakers_or_invited_guests_will_there_be_any_other_elected_officials_dignitaries_21\t]\r\n\r\n# OF ATTENDEES: [webform_submission:values:number_of_attendees_21]\r\n\r\nAGENDA FILE: [webform_submission:values:tentative_agenda_21]\r\n\r\nADDITIONAL COMMENTS: [webform_submission:values:additional_comments_21]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_5:
+    id: email
+    handler_id: email_5
+    label: MayorScheduling
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 5
+    settings:
+      states:
+        - completed
+      to_mail: MayorScheduling@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nSubmitted values are:\r\n\r\n== MEETING OVERVIEW ==\r\n\r\nTOPIC: [webform_submission:values:topic_1]\r\n\r\nDATE: [webform_submission:values:meeting_date_1]\r\n\r\nFLEXIBLE DATE? [webform_submission:values:flexible_date_1]\r\n\r\nTIME: [webform_submission:values:start_time] - [webform_submission:values:end_time]\r\n\r\nFLEXIBLE TIME? [webform_submission:values:flexible_time_1]\r\n\r\nLOCATION: [webform_submission:values:location_1]\r\n\r\nADDRESS: [webform_submission:values:address_1]\r\n \r\n \r\n== ORGANIZATION/CONTACT ==\r\n\r\nORGANIZATION/BUSINESS: [webform_submission:values:organization_business_11]\r\n\r\nABOUT YOUR ORGANIZATION: [webform_submission:values:about_your_organization_11]\r\n\r\nNAME: [webform_submission:values:first_and_last_name_11]\r\n\r\nTITLE: [webform_submission:values:title_11]\r\n\r\nEMAIL: [webform_submission:values:email2_11]\r\n\r\nPHONE: [webform_submission:values:phone_11]\r\n\r\nCELL PHONE: [webform_submission:values:cell_phone_11]\r\nSTREET ADDRESS:  [webform_submission:values:street_address_11]\r\n CITY:  [webform_submission:values:city_11]\r\nSTATE:  [webform_submission:values:state_11]\r\nZIP:  [webform_submission:values:zip_11]\r\n\r\n\r\n== MEETING DETAILS ==\r\n\r\nADDITIONAL GUESTS: [webform_submission:values:other_speakers_or_invited_guests_will_there_be_any_other_elected_officials_dignitaries_21]\r\n\r\n# OF ATTENDEES: [webform_submission:values:number_of_attendees_21]\r\n\r\nAGENDA FILE: Attached if any.\r\n\r\nADDITIONAL COMMENTS: [webform_submission:values:additional_comments_21]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: true
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

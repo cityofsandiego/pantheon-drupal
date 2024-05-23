@@ -1,0 +1,97 @@
+uuid: d0c162ac-22b9-4c64-91ef-fd167a8d5a3d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.mayoral_artifacts.body
+    - field.field.node.mayoral_artifacts.field_category
+    - field.field.node.mayoral_artifacts.field_d7_nid
+    - field.field.node.mayoral_artifacts.field_department
+    - field.field.node.mayoral_artifacts.field_image
+    - field.field.node.mayoral_artifacts.field_keywords
+    - field.field.node.mayoral_artifacts.field_location
+    - field.field.node.mayoral_artifacts.field_mayor
+    - field.field.node.mayoral_artifacts.field_photo_date
+    - field.field.node.mayoral_artifacts.field_record_id
+    - field.field.node.mayoral_artifacts.field_search_exclude_entity
+    - field.field.node.mayoral_artifacts.field_search_keymatch
+    - image.style.large
+    - node.type.mayoral_artifacts
+  module:
+    - media
+    - options
+    - text
+    - user
+id: node.mayoral_artifacts.default
+targetEntityType: node
+bundle: mayoral_artifacts
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_department:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: large
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_location:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_mayor:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_photo_date:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_category: true
+  field_d7_nid: true
+  field_keywords: true
+  field_record_id: true
+  field_search_exclude_entity: true
+  field_search_keymatch: true
+  langcode: true
+  search_api_excerpt: true

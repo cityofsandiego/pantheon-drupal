@@ -1,0 +1,95 @@
+uuid: dc910119-9851-474b-b87a-ae672bc8b777
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.digital_archives_photos.body
+    - field.field.node.digital_archives_photos.field_category
+    - field.field.node.digital_archives_photos.field_d7_nid
+    - field.field.node.digital_archives_photos.field_da_featured
+    - field.field.node.digital_archives_photos.field_da_high_quality_url
+    - field.field.node.digital_archives_photos.field_da_location
+    - field.field.node.digital_archives_photos.field_da_photo_date
+    - field.field.node.digital_archives_photos.field_da_photographer
+    - field.field.node.digital_archives_photos.field_department
+    - field.field.node.digital_archives_photos.field_image
+    - field.field.node.digital_archives_photos.field_record_id
+    - field.field.node.digital_archives_photos.field_search_exclude_entity
+    - field.field.node.digital_archives_photos.field_search_keymatch
+    - node.type.digital_archives_photos
+  module:
+    - text
+    - user
+id: node.digital_archives_photos.default
+targetEntityType: node
+bundle: digital_archives_photos
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_da_high_quality_url:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_da_location:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_da_photo_date:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_da_photographer:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_category: true
+  field_d7_nid: true
+  field_da_featured: true
+  field_department: true
+  field_record_id: true
+  field_search_exclude_entity: true
+  field_search_keymatch: true
+  langcode: true
+  search_api_excerpt: true

@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+use Drupal\Component\Utility\Html;
+
+/**
+ * Implements hook_help().
+ */
+function sand_help_help($route_name): ?string {
+  return sand_help_show_help(__DIR__, $route_name);
+}
+
+/**
+ * Show the README.md help file.
+ *
+ * @param string $directory
+ *   The directory the help file is in.
+ * @param string $route_name
+ *   The route name, so we can use it in a case statement.
+ *
+ * @return string|null
+ *   Return the HTML or NULL if file does not exist.
+ */
+function sand_help_show_help(string $directory, string $route_name):?string {
+  
+  $filename = 'README.md';
+  $fullname = '
+---
+This file: '. $directory . '/' . $filename; 
+  
+  switch ($route_name) {
+    case 'help.page.cofsd':
+    case (bool) preg_match('/help.page.sand_.*/', $route_name) :
+      /** @var string $text */
+      $text = file_get_contents($directory . '/' . $filename);
+      if (!\Drupal::moduleHandler()->moduleExists('markdown')) {
+        // Markdown module is not installed so just render the text file.
+        $output = '<pre>' . Html::escape($text . $fullname) . '</pre>';
+      }
+      else {
+        // Markdown module is enabled.
+        /** @var \Drupal\markdown\PluginManager\ParserManagerInterface $parser_manager */
+        $parser_manager = \Drupal::service('plugin.manager.markdown.parser');
+        $parser = $parser_manager->getDefaultParser([
+          'render_strategy' => ['type' => 'none'],
+        ]);
+        $output = (string) $parser->parse($text . $fullname);
+      }
+      return $output;
+  }
+  return NULL;
+}

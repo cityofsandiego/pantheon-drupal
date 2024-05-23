@@ -1,0 +1,20 @@
+uuid: bed8866c-4a76-4761-9a18-e6dbe28475b7
+langcode: en
+status: true
+dependencies:
+  module:
+    - sand_feeds
+title: 'Queue: Sand Feed Refresh ID:71 - Doc scs_agency_reso_ordinance'
+id: ultimate_cron_queue_sand_feeds_feed_refresh_id__71
+weight: 10
+module: sand_feeds
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database

@@ -1,0 +1,24 @@
+uuid: 42919c1b-a92c-409a-9ad6-ef8a31639bb6
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: your_save_place_go_button
+label: 'Your Save Place - Go Button'
+code: |-
+  .gobutton {
+  	position: fixed;
+  	right: 2rem;
+  	bottom: 2rem;
+  	z-index: 1000;
+  }
+media: all
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/yoursafeplace\r\n/yoursafeplace/*\r\n/police/services/domestic-violence"
+contexts: {  }
+conditions_require_all: true

@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Alters views to allow passing in lines per page.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_help().
+ */
+function sand_views_help($route_name): ?string {
+  return sand_help_show_help(__DIR__, $route_name);
+}
+
+/**
+ * Implements hook_views_pre_build().
+ *
+ * @todo Switch all the below occurrences to the generic one.
+ */
+function sand_views_views_pre_build($view): void {
+  $view_name = $view->id();
+  $view_display = $view->current_display;
+
+  // Allow any view to pass an argument of list=99 to set page size.
+  $matches = [];
+  foreach ($view->args as $arg) {
+    if (preg_match('/(^list=)(.*)/', $arg, $matches)) {
+      if (!is_numeric($matches[2])) {
+        \Drupal::messenger()->addMessage('Invalid view argument for list');
+      }
+      else {
+        $view->setItemsPerPage($matches[2]);
+      }
+    }
+  }
+
+  // Legacy D7 implementation good for only two views.
+  if ($view_name == "department_notifications" && $view_display === "block_2") {
+    if (isset($view->args[3]) && is_numeric($view->args[3])) {
+      $view->setItemsPerPage($view->args[3]);
+    }
+  }
+  if ($view_name == "attractions_list" && $view_display == "location_type") {
+    if (isset($view->args[2]) && is_numeric($view->args[2])) {
+      $view->setOffset($view->args[2]);
+    }
+    if (isset($view->args[3]) && is_numeric($view->args[3])) {
+      $view->setItemsPerPage($view->args[3]);
+    }
+  }
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function sand_views_views_data() {
+    $data['views']['header_link'] = [
+        'title' => t('Header Link'),
+        'help' => t('Provides header link'),
+        'area' => [
+            'id' => 'header_link',
+        ],
+    ];
+    return $data;
+}

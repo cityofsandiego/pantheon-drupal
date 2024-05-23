@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * This module directory contains code examples that we've done.
+ */
+
+declare(strict_types=1);
+
+
+
+/**
+ * Implements hook_help().
+ */
+function sand_example_help($route_name): ?string {
+  return sand_help_show_help(__DIR__, $route_name);
+}
+
+/**
+ * Implements hook_entity_bundle_info_alter().
+ */
+
+
+function sand_example_theme(): array {
+  /*
+   * Desc:
+   *  This tells Drupal there is a template called "sand-weather.html.twig".
+   * Notes: 
+   *  You don't have to do this for a block and can just name the template for
+   * the block following Drupal naming convensions.
+   */
+  return [
+    'sand_example' => [
+      'variables' => [
+        'text' => NULL,
+      ],
+    ],
+  ];
+}

@@ -1,0 +1,38 @@
+uuid: 83877e8a-d4cd-4843-9f46-9d51d35a2a82
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: your_safe_place_go_button
+label: 'Your Safe Place GO Button'
+code: |-
+  function noImages() {
+  	window.onload = function () {
+  		var temp = document.getElementsByTagName("span");
+  		var i = 0;
+  		while (i < temp.length) {
+  			if	(temp[i].className == "hidetext") {
+  				temp[i].style.position="static";
+  			}
+  			i++;
+  		}
+  	}
+  }
+  function esc() {
+  	jQuery(".off-canvas-wrapper").hide();
+  	window.open("https://www.google.com/search?q=weather",'newwindow','toolbar=1,location=1,directories=1,status=1,menubar=1,scrollbars=1,resizable=1'); 
+  	window.location="http://www.weather.com/";
+  }
+noscript: ''
+noscriptRegion: {  }
+jquery: false
+header: false
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/yoursafeplace\r\n/yoursafeplace/*\r\n/police/services/domestic-violence"
+contexts: {  }
+conditions_require_all: true

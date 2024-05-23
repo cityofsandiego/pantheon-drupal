@@ -1,0 +1,29 @@
+uuid: 8819ba81-fc03-417c-a326-f3a560f94e06
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_business_organization
+    - node.type.business_resource
+    - taxonomy.vocabulary.business_resources_organization
+id: node.business_resource.field_business_organization
+field_name: field_business_organization
+entity_type: node
+bundle: business_resource
+label: Organization
+description: '<p>The organization the provides the resource (e.g. The San Diego Center for International Development). Since organizations can have many programs, a resource should be a point-of-contact or specific program within the organization that is relevant to business owners (not a contact for the entire organization).</p>'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      business_resources_organization: business_resources_organization
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

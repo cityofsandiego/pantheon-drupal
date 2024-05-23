@@ -1,0 +1,186 @@
+.node-type-event {
+  h1.main__heading {
+    font-size: 2rem;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    @include breakpoint(medium-large) {
+      font-size: 3rem;
+    }
+  }
+
+  .event-title {
+    text-align: center;
+    padding: 2em;
+  }
+
+  .date-wrapper {
+    font-size: 1.5em;
+    font-weight: 600;
+  }
+
+  .content-body {
+    border-top: 10px solid $alto;
+    padding-top: 2rem;
+  }
+
+  .flex-caption {
+    margin: 0;
+    padding: 0.5em;
+    padding-right: 2em;
+    color: $shuttle;
+    font-style: italic;
+    background-color: $mercury;
+    display: block;
+
+    @include breakpoint(mobile-landscape) {
+      padding-right: 0.5em;
+    }
+  }
+
+  .field--name-field-description {
+    max-width: 480px;
+
+    p {
+      margin-bottom: 0 !important;
+    }
+
+    @extend .flex-caption;
+  }
+
+  .field--name-body {
+    min-width: 100%;
+  }
+
+  .address {
+    .country {
+      display: none;
+    }
+  }
+
+  .body-content {
+    border-top: 10px solid #dde2e5;
+  }
+
+  .fine-print {
+    font-size: 0.75rem;
+  }
+
+  main > .nine:first-child::after {
+    content: "";
+    background: #eaeeef;
+    position: absolute;
+    top: 0;
+    right: -34.1%;
+    height: 100%;
+    width: 34.1%;
+  }
+}
+
+.event-listing-large {
+  margin-bottom: 2.5em;
+
+  span {
+    width: 100%;
+    display: block;
+  }
+
+  span.edit-link {
+    width: auto;
+    display: inline;
+    margin-left: 2rem;
+  }
+
+  .event--month {
+    font-size: 0.8em;
+
+    @include breakpoint(mobile-landscape) {
+      font-size: 1em;
+    }
+  }
+
+  .event--day {
+    font-size: 2em;
+    line-height: 1;
+
+    @include breakpoint(mobile-landscape) {
+      font-size: 2.5em;
+    }
+  }
+
+  .event--dow {
+    font-size: 0.7em;
+    padding-top: 0.2em;
+
+    @include breakpoint(mobile-landscape) {
+      font-size: 0.8em;
+    }
+  }
+}
+
+.event-listing-small {
+  margin-bottom: 1.5em;
+
+  .event-date {
+    font-size: 0.8em;
+  }
+}
+
+.event-listing-large,
+.event-listing-small {
+  .event-date {
+    width: 100%;
+    border: 1px solid #d1d4d3;
+    border-top: 5px solid $cerulean;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.5em;
+
+    &.event--sunshade {
+      border-top: 5px solid $sunshade;
+    }
+
+    &.event--robin {
+      border-top: 5px solid $robin;
+    }
+
+    &.event--spruce {
+      border-top: 5px solid $spruce;
+    }
+
+    &.event--science {
+      border-top: 5px solid $science;
+    }
+
+    &.event--teal {
+      border-top: 5px solid $teal;
+    }
+
+    &.event--pine {
+      border-top: 5px solid $pine;
+    }
+
+    &.event--picton {
+      border-top: 5px solid $picton;
+    }
+
+    &.event--texasrose {
+      border-top: 5px solid $texasrose;
+    }
+
+    &.event--shuttle {
+      border-top: 5px solid $shuttle;
+    }
+
+    &.event--purple {
+      border-top: 5px solid $purple;
+    }
+  }
+
+  .event-info {
+    width: 100%;
+    padding-top: 0.5em;
+  }
+}

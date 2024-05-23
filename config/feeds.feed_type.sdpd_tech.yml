@@ -1,0 +1,154 @@
+uuid: 58a33302-5db0-47fe-ab2d-3b95d44708be
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.department_document.field_category
+    - field.field.node.department_document.field_department
+    - field.field.node.department_document.field_dept_doc_id
+    - field.field.node.department_document.field_misc_field_1
+    - node.type.department_document
+  module:
+    - feeds_log
+    - feeds_tamper
+    - node
+third_party_settings:
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      failed: failed
+    source: true
+  feeds_tamper:
+    tampers:
+      4a129bc9-e8c5-494a-b953-6cd7773fede2:
+        default_value: published
+        only_if_empty: false
+        uuid: 4a129bc9-e8c5-494a-b953-6cd7773fede2
+        plugin: default_value
+        source: moderation_state
+        weight: 0
+        label: 'Set value or default value'
+label: 'SDPD Tech'
+id: sdpd_tech
+description: ''
+help: ''
+import_period: 43200
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  always_download: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: department_document
+  langcode: en
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _delete
+  skip_hash_check: false
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 0
+custom_sources:
+  filename:
+    value: FileName
+    label: FileName
+    machine_name: filename
+    type: csv
+  tech:
+    value: Tech
+    label: Tech
+    machine_name: tech
+    type: csv
+  link:
+    value: Link
+    label: Link
+    machine_name: link
+    type: csv
+  department:
+    value: Department
+    label: Department
+    machine_name: department
+    type: csv
+  term:
+    value: Term
+    label: Term
+    machine_name: term
+    type: csv
+  '':
+    value: ''
+    label: ''
+    machine_name: ''
+    type: blank
+  moderation_state:
+    value: 'Moderation State'
+    label: 'Moderation State'
+    machine_name: moderation_state
+    type: blank
+mappings:
+  -
+    target: title
+    map:
+      value: filename
+    settings:
+      language: null
+    unique:
+      value: 1
+  -
+    target: field_dept_doc_id
+    map:
+      value: tech
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_department
+    map:
+      target_id: department
+    settings:
+      language: null
+      reference_by: name
+      autocreate: false
+      autocreate_bundle: department
+  -
+    target: field_category
+    map:
+      target_id: term
+    settings:
+      language: null
+      reference_by: name
+      autocreate: false
+      autocreate_bundle: categories
+  -
+    target: moderation_state
+    map:
+      value: moderation_state
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_misc_field_1
+    map:
+      value: link
+    settings:
+      language: null
+    unique: {  }

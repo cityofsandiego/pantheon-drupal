@@ -1,0 +1,35 @@
+uuid: 17147b33-0444-4968-8075-98a729ab15c5
+langcode: en
+status: true
+dependencies: {  }
+id: library_xml_feed
+name: 'Insert Library XML Feed'
+cache: false
+description: 'This inserts XML from urls like http://sandiego.librarymarket.com/events/feed/xml?branch=84?age_group=2. The formatting is not generic but very specific.'
+shorttip: 'You may use <a href="/filter/tips/full_html#filter-library_xml_feed">[libxml=url, #to_show]</a> to insert XML from sandiego.librarymarket.com'
+longtip: 'You may use [libxml=url] or [libxml=url, #to_show] to insert XML from sandiego.librarymarket.com. The #to_show define the number of events to display. If you do not enter the #to_show it will show the current system default of 5 events. The url should be something like http://sandiego.librarymarket.com/events/feed/xml?branch=84?age_group=2. Note that this is not generically formatted XML but very specific to the library branches.'
+rules:
+  embed_libxml:
+    rid: embed_libxml
+    prid: ''
+    fid: library_xml_feed
+    name: embed_libxml
+    description: '/\[libxml=(.*?)\]/i'
+    enabled: true
+    matches: null
+    pattern: '/\[libxml=([^,]*?)\]/i'
+    replacement: '$result = \Drupal\sand_type\Entity\Bundle\Location::formatLibraryXML($matches[1]);'
+    code: true
+    weight: 0
+  embed_libxml_with_limit:
+    rid: embed_libxml_with_limit
+    prid: ''
+    fid: library_xml_feed
+    name: embed_libxml_with_limit
+    description: 'Same as embed_libxml but with an additional argument'
+    enabled: true
+    matches: null
+    pattern: '/\[libxml=(.*?),(\d+?)\]/i'
+    replacement: '$result = \Drupal\sand_type\Entity\Bundle\Location::formatLibraryXML($matches[1], $matches[2]);'
+    code: true
+    weight: 0

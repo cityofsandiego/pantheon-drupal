@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Theme override to display a single views grouping.
+ *
+ * Available variables:
+ * - view: The view object.
+ * - grouping: The grouping instruction.
+ * - grouping_level: A number indicating the hierarchical level of the grouping.
+ * - title: The group heading.
+ * - content: The content to be grouped.
+ * - rows: The rows returned from the view.
+ *
+ * @see template_preprocess_views_view_grouping()
+ */
+#}
+
+<div class="accordion">
+  <p class="accordion__heading h4"><a class="accordion__link" href="#">{{ title }}<i class="toggle-icon"></i></a></p>
+  <div class="accordion__drawer">
+    <ul>
+      {{ content }}
+    </ul>
+  </div>
+</div>

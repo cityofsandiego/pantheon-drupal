@@ -1,0 +1,103 @@
+uuid: 6a7d01c9-7f18-4a47-b37a-0f0d8bedbbdd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.department_document.body
+    - field.field.node.department_document.feeds_item
+    - field.field.node.department_document.field_attachment
+    - field.field.node.department_document.field_category
+    - field.field.node.department_document.field_d7_nid
+    - field.field.node.department_document.field_department
+    - field.field.node.department_document.field_dept_doc_id
+    - field.field.node.department_document.field_display_body
+    - field.field.node.department_document.field_edit_notes
+    - field.field.node.department_document.field_icon
+    - field.field.node.department_document.field_keywords
+    - field.field.node.department_document.field_misc_field_1
+    - field.field.node.department_document.field_misc_field_2
+    - field.field.node.department_document.field_promote_to_city_home
+    - field.field.node.department_document.field_replace_body_text_with_att
+    - field.field.node.department_document.field_search_exclude_entity
+    - field.field.node.department_document.field_search_keymatch
+    - field.field.node.department_document.field_url
+    - node.type.department_document
+  module:
+    - link
+    - text
+    - user
+id: node.department_document.default
+targetEntityType: node
+bundle: department_document
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_attachment:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_misc_field_1:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_misc_field_2:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 255
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  feeds_item: true
+  field_category: true
+  field_d7_nid: true
+  field_department: true
+  field_dept_doc_id: true
+  field_display_body: true
+  field_edit_notes: true
+  field_icon: true
+  field_keywords: true
+  field_promote_to_city_home: true
+  field_replace_body_text_with_att: true
+  field_search_exclude_entity: true
+  field_search_keymatch: true
+  langcode: true
+  search_api_excerpt: true

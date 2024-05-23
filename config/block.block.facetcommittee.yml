@@ -1,0 +1,29 @@
+uuid: dd7590a5-47ee-4a83-a7c5-cc7b94e34dba
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.facet_committee
+  module:
+    - facets
+    - system
+  theme:
+    - sand
+id: facetcommittee
+theme: sand
+region: sidebar_first
+weight: -24
+provider: null
+plugin: 'facet_block:facet_committee'
+settings:
+  id: 'facet_block:facet_committee'
+  label: Committee
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: facetcommittee
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/search/ocd*'

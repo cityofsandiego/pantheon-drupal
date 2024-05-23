@@ -1,0 +1,89 @@
+uuid: 76b5c67e-a9b9-4e6d-bf3f-340d1d8a74d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.hero.field_d7_nid
+    - field.field.node.hero.field_department
+    - field.field.node.hero.field_hero_caption
+    - field.field.node.hero.field_hero_frontpage
+    - field.field.node.hero.field_hero_image_by
+    - field.field.node.hero.field_hero_prefix_image_by
+    - field.field.node.hero.field_hero_sitewide
+    - field.field.node.hero.field_hero_time_of_day
+    - field.field.node.hero.field_image
+    - field.field.node.hero.field_vimeo_url
+    - node.type.hero
+  module:
+    - options
+    - user
+id: node.hero.default
+targetEntityType: node
+bundle: hero
+mode: default
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_hero_caption:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_hero_image_by:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_hero_prefix_image_by:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_hero_time_of_day:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_vimeo_url:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_d7_nid: true
+  field_department: true
+  field_hero_frontpage: true
+  field_hero_sitewide: true
+  langcode: true
+  search_api_excerpt: true

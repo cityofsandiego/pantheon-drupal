@@ -1,0 +1,299 @@
+uuid: d82491fd-d796-4722-83f5-0a69016a214f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sections_outreach2.field_adjustment_width
+    - field.field.paragraph.sections_outreach2.field_background_size
+    - field.field.paragraph.sections_outreach2.field_bg_color
+    - field.field.paragraph.sections_outreach2.field_body
+    - field.field.paragraph.sections_outreach2.field_bottom_border
+    - field.field.paragraph.sections_outreach2.field_centered
+    - field.field.paragraph.sections_outreach2.field_direction
+    - field.field.paragraph.sections_outreach2.field_full_width_mobile
+    - field.field.paragraph.sections_outreach2.field_hide_on_desktop
+    - field.field.paragraph.sections_outreach2.field_hide_on_mobile
+    - field.field.paragraph.sections_outreach2.field_horizontal
+    - field.field.paragraph.sections_outreach2.field_image
+    - field.field.paragraph.sections_outreach2.field_image_height
+    - field.field.paragraph.sections_outreach2.field_image_scroll_ratio
+    - field.field.paragraph.sections_outreach2.field_minimum_height
+    - field.field.paragraph.sections_outreach2.field_mobile_size
+    - field.field.paragraph.sections_outreach2.field_no_drop_shadow
+    - field.field.paragraph.sections_outreach2.field_no_styling
+    - field.field.paragraph.sections_outreach2.field_opacity
+    - field.field.paragraph.sections_outreach2.field_outreach_adjustment_height
+    - field.field.paragraph.sections_outreach2.field_rate
+    - field.field.paragraph.sections_outreach2.field_repeat
+    - field.field.paragraph.sections_outreach2.field_vertical
+    - field.field.paragraph.sections_outreach2.field_vertical_offset
+    - paragraphs.paragraphs_type.sections_outreach2
+  module:
+    - field_group
+    - media_library
+    - text
+third_party_settings:
+  field_group:
+    group_background_image:
+      children:
+        - field_image
+        - field_image_scroll_ratio
+        - field_vertical_offset
+        - field_vertical
+        - field_horizontal
+        - field_minimum_height
+        - field_bottom_border
+        - field_repeat
+        - field_full_width_mobile
+        - group_advance_background_image
+      label: 'Background image'
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: true
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+        required_fields: true
+    group_advance_background_image:
+      children:
+        - field_adjustment_width
+        - field_background_size
+        - field_outreach_adjustment_height
+        - field_mobile_size
+      label: 'Advance Background image'
+      region: content
+      parent_name: group_background_image
+      weight: 10
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+        formatter: closed
+    group_text:
+      children:
+        - field_centered
+        - field_no_styling
+        - field_body
+      label: Text
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: true
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+        required_fields: true
+    group_entire_section:
+      children:
+        - field_bg_color
+        - field_hide_on_mobile
+        - field_hide_on_desktop
+      label: 'Entire Section'
+      region: content
+      parent_name: ''
+      weight: 3
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+        formatter: closed
+id: paragraph.sections_outreach2.default
+targetEntityType: paragraph
+bundle: sections_outreach2
+mode: default
+content:
+  field_adjustment_width:
+    type: number
+    weight: 10
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_background_size:
+    type: string_textfield
+    weight: 11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_bg_color:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_body:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_bottom_border:
+    type: options_select
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_centered:
+    type: boolean_checkbox
+    weight: 2
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_direction:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_full_width_mobile:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_hide_on_desktop:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_hide_on_mobile:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_horizontal:
+    type: number
+    weight: 5
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_image:
+    type: media_library_widget
+    weight: 1
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_image_height:
+    type: options_select
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_image_scroll_ratio:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_minimum_height:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_mobile_size:
+    type: string_textfield
+    weight: 13
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_no_drop_shadow:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_no_styling:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_opacity:
+    type: number
+    weight: 8
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_outreach_adjustment_height:
+    type: number
+    weight: 12
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_rate:
+    type: options_select
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_repeat:
+    type: boolean_checkbox
+    weight: 8
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_vertical:
+    type: number
+    weight: 4
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_vertical_offset:
+    type: number
+    weight: 3
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

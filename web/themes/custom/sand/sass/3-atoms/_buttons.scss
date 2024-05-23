@@ -1,0 +1,347 @@
+/* ============================================================
+  Styles for buttons.
+  ============================================================ */
+
+// ==========================================================================
+// Buttons
+// ==========================================================================
+
+%btn {
+  background-color: $deepcerulean;
+  border: none;
+  border-radius: 4px;
+  color: $white;
+  cursor: pointer;
+  display: inline-block;
+  line-height: normal;
+  padding: 0.75em 2em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Main
+ ========================================================================== */
+
+.btn {
+  &:hover,
+  &:focus {
+    background-color: lighten($deepcerulean, 10%);
+    color: $white;
+    text-decoration: none;
+  }
+
+  i {
+    background: $white;
+    border-radius: 50%;
+    color: $deepcerulean;
+    display: inline-block;
+    font-weight: 600;
+    margin-right: 0.5em;
+    padding: 0.4em;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .icon-chevron-right,
+  .icon-chevron-left {
+    background: transparent;
+    border-radius: 0;
+    color: $white;
+    font-size: 150%;
+    line-height: 0.4;
+    padding: 0;
+    vertical-align: sub;
+  }
+
+  @extend %btn;
+}
+
+.btn--outline {
+  background-color: $white;
+  border: 1px solid $deepcerulean;
+  color: $deepcerulean;
+
+  &:hover,
+  &:focus {
+    background-color: lighten($deepcerulean, 10%);
+    color: $white;
+    border: 1px solid lighten($deepcerulean, 10%);
+
+    i {
+      background-color: $deepcerulean;
+      color: $white;
+
+      &.icon--heavy {
+        background-color: $white;
+        color: $deepcerulean;
+      }
+    }
+  }
+
+  i {
+    padding: 0;
+  }
+
+  i.icon--heavy {
+    background-color: $deepcerulean;
+    color: $white;
+    padding: 0.4em;
+  }
+
+  i.icon-chevron-left,
+  i.icon-chevron-right {
+    color: $deepcerulean;
+  }
+
+  &:hover,
+  &:focus {
+    i.icon-chevron-left,
+    i.icon-chevron-right {
+      color: $white;
+    }
+  }
+}
+
+.btn--primary {
+  background-color: $deepcerulean;
+  color: $white;
+
+  &:hover,
+  &:focus {
+    background-color: lighten($deepcerulean, 10%);
+  }
+}
+
+.btn--secondary {
+  background-color: $texasrose;
+  color: $font-color;
+
+  &:hover,
+  &:focus {
+    background-color: lighten($texasrose, 10%);
+    color: $font-color;
+  }
+
+  i {
+    color: $font-color;
+  }
+}
+
+.btn--tertiary {
+  background-color: $spruce;
+
+  &:hover,
+  &:focus {
+    background-color: lighten($spruce, 10%);
+  }
+
+  i {
+    color: $font-color;
+  }
+}
+
+.btn--quaternary {
+  background-color: $alto;
+  color: $font-color;
+
+  &:hover,
+  &:focus {
+    background-color: lighten($alto, 4%);
+    color: $font-color;
+  }
+}
+
+.btn--icon {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  text-align: left;
+
+  .icon-chevron-right,
+  .icon-chevron-left {
+    color: $white;
+  }
+
+  .icon-chevron-right {
+    background: transparent;
+    border-radius: 0;
+    color: $white;
+    line-height: 1;
+    padding: 0;
+  }
+}
+
+/* Icons
+ ========================================================================== */
+
+.btn--icon-left,
+.btn--icon-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .icon-chevron-left,
+  .icon-chevron-right {
+    position: absolute;
+  }
+}
+
+.btn--icon-left {
+  padding-left: 3.5em;
+
+  i {
+    margin: 0 0 0 0.5em;
+  }
+
+  .icon-chevron-left {
+    left: 0.75em;
+    margin: 0;
+  }
+}
+
+.btn--icon-right {
+  padding-right: 3.5em;
+
+  .icon-chevron-right {
+    margin-right: 0;
+    right: 0.75em;
+  }
+}
+
+/* Sizes
+ ========================================================================== */
+
+.btn--xs {
+  font-size: 55%;
+}
+
+.btn--sm {
+  font-size: 70%;
+}
+
+.btn--md {
+  font-size: 85%;
+}
+
+.btn--lg {
+  font-size: 115%;
+}
+
+.btn--xl {
+  font-size: 130%;
+}
+
+/* Shapes
+ ========================================================================== */
+
+.btn--round {
+  border-radius: 3px;
+}
+
+.btn--oval,
+.btn--pill {
+  border-radius: 500px;
+}
+
+.btn--pill-right {
+  border-radius: 500px 0 0 500px;
+}
+
+.btn--pill-left {
+  border-radius: 0 500px 500px 0;
+}
+
+/* Width
+ ========================================================================== */
+
+.btn--wide {
+  width: 100%;
+}
+
+.btn--half {
+  width: 50%;
+}
+
+.btn--third {
+  width: 33.3333%;
+}
+
+/* Colors
+ ========================================================================== */
+
+.btn--success {
+  background-color: $success;
+  color: $white;
+
+  &:hover,
+  &:focus {
+    background-color: darken($success, 10%);
+    color: $white;
+  }
+}
+
+.btn--warning {
+  background-color: $warning;
+  color: $white;
+
+  &:hover,
+  &:focus {
+    background-color: darken($warning, 10%);
+    color: $white;
+  }
+}
+
+.btn--error {
+  background-color: $error;
+  color: $white;
+
+  &:hover,
+  &:focus {
+    background-color: darken($error, 10%);
+    color: $white;
+  }
+}
+
+/* Disabled
+ ========================================================================== */
+
+.btn[disabled],
+.btn--disabled,
+.btn--disabled:hover,
+.btn--disabled:focus,
+.btn--disabled:active {
+  background-color: $alto;
+  background-image: none;
+  border: 0;
+  box-shadow: none;
+  color: $gray;
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.button {
+  text-transform: capitalize;
+  padding: 0.75em 1em;
+  transition-property: none;
+  transition-property: none;
+  transition-property: none;
+  transition-property: none;
+
+  &:hover,
+  &:focus {
+    background-color: lighten($deepcerulean, 10%);
+    color: $white;
+    text-decoration: none;
+  }
+
+  @extend %btn;
+}
+
+.button.cancel {
+  margin: 0 0 0 1rem;
+  background-color: $white;
+  border: 1px solid $deepcerulean;
+  color: $deepcerulean;
+  font-weight: normal;
+}

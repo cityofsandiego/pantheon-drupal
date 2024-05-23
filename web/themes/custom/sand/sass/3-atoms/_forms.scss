@@ -1,0 +1,791 @@
+// ==========================================================================
+// Forms
+// ==========================================================================
+
+/* Webforms
+   ========================================================================== */
+
+// Hide the file Upload button on all webforms.
+.webform-component-file .form-managed-file input[value="Upload"] {
+  display: none;
+}
+
+/* General
+   ========================================================================== */
+::input-placeholder {
+  color: $shuttle;
+}
+
+:placeholder {
+  /* Firefox 18- */
+  color: $shuttle;
+}
+
+::placeholder {
+  /* Firefox 19+ */
+  color: $shuttle;
+}
+
+:input-placeholder {
+  color: $shuttle;
+}
+
+.form-item {
+  margin-bottom: 1.2em;
+}
+
+%select {
+  display: block;
+  appearance: none;
+  appearance: none;
+  appearance: none;
+  border-radius: 0;
+  border: none;
+  background: $mercury;
+  outline: none;
+  padding: 0.5em;
+  width: 100%;
+  height: 40px;
+
+  @include rem("font-size", 14px);
+
+  /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+  @media screen and (min-device-pixel-ratio: 0) {
+    select {
+      padding-right: 18px;
+    }
+  }
+}
+
+input,
+textarea {
+  /* color: $shuttle; */
+  color: $font-color;
+  margin: 0 0 1em;
+  padding: 0.75em;
+  width: 100%;
+  font-weight: 400;
+  border-radius: 4px;
+  display: inline-block;
+  border: 1px solid $chateau;
+  box-shadow: none !important;
+
+  @include rem("font-size", 13px);
+
+  // @include transition( border .15s, box-shadow .15s, background .15s );
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  background-color: white;
+  border-width: inherit;
+  border: 1px solid #a7abad;
+
+  //border-radius: 4px;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: solid;
+  outline-color: $science;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  width: auto;
+}
+
+input[type="submit"],
+button[type="submit"] {
+  margin: 0;
+  height: auto;
+  width: auto;
+  border: none;
+
+  //outline: solid;
+  appearance: none;
+  appearance: none;
+
+  &[value="None"] {
+    display: none;
+  }
+}
+
+select,
+select.form-select {
+  min-width: auto;
+  display: block;
+  background-color: white;
+  padding: 0 2em 0 0.5em;
+  color: $font-color;
+  border: 1px solid $chateau;
+  box-shadow: 0 0 0 0 transparent inset;
+  transition: color 0.1s ease, border-color 0.1s ease;
+  transition: color 0.1s ease, border-color 0.1s ease;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+fieldset {
+  &:not(.radios--wrapper),
+  &:not(.fieldgroup) {
+    display: block;
+    background-color: white;
+    border: 1px solid $chateau;
+    margin: 2em 0 1.5em;
+    padding: 1.5em 1.3em 1.3em;
+    position: relative;
+
+    > legend {
+      font-family: $font-family;
+      color: $font-color;
+      position: absolute;
+      top: -12px;
+      left: 8px;
+      padding: 0 0.8rem;
+      font-size: 1.2rem;
+      text-transform: none;
+    }
+
+    fieldset:not(.fieldgroup) {
+      padding: 1.5em 1.3em 1.3em;
+    }
+  }
+
+  .webform-composite-hidden-title {
+    margin: 0;
+  }
+}
+
+fieldset.radios--wrapper {
+  padding: 0;
+  border: none;
+  margin-bottom: 1.2em;
+
+  > legend {
+    font-family: $font-family;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: none;
+  }
+
+  .form-item {
+    margin: 0 0 0.2em;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+
+    input {
+      width: 14px;
+      height: 14px;
+      margin: 0;
+      top: 1px;
+    }
+
+    label {
+      font-size: 1em;
+      text-transform: none;
+      font-weight: normal;
+      display: inline-block;
+      margin: 0 0.8em;
+      color: $font-color;
+    }
+  }
+}
+
+/**
+ * Normalize sets as 'content-box'
+ */
+input.search-type,
+input[type="search"] {
+  margin: 0;
+
+  @include box-sizing(border-box); /* 1 */
+}
+
+input[type="radio"] {
+  width: auto;
+  margin-right: 0.5em;
+}
+
+.form-type-radio,
+.form-type-checkbox {
+  display: flex;
+  padding-left: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  .labelgroup {
+    margin-left: 5px;
+    break-inside: avoid-column;
+  }
+
+  input.form-radio {
+    width: 13px;
+    height: 13px;
+    margin-left: 0;
+    top: 8px;
+  }
+
+  input.form-checkbox {
+    display: inline-block;
+    border-radius: 4px;
+    width: 13px;
+    height: 13px;
+    margin-left: 0;
+    margin-right: 0.5rem;
+    top: 8px;
+  }
+
+  label.option {
+    display: table-cell;
+    font-size: 1em;
+  }
+
+  .description {
+    margin-bottom: 0;
+  }
+}
+
+.form-radios > .form-item {
+  margin: 0 0 0.2em;
+}
+
+/* .form-radios, .form-checkboxes {
+     margin-top: .5em;
+ } */
+label {
+  color: $font-color;
+  font-size: 1rem;
+  font-weight: 600;
+
+  .form-type-processed-text & {
+    display: none;
+  }
+}
+
+label.element-invisible + div.form-radios,
+label.element-invisible + div.form-checkboxes {
+  margin-top: 0;
+}
+
+.form-textarea {
+  background-color: white;
+  border: 1px solid #a7abad;
+
+  //border-radius: 4px;
+  font-size: 1em;
+  line-height: 1.5;
+  color: $font-color;
+}
+
+legend {
+  font-weight: 600;
+  padding: 0 0.5em;
+  font-family: $font-family-secondary;
+
+  @include rem("font-size", 13px);
+
+  @include breakpoint(medium) {
+    @include rem("font-size", 14px);
+  }
+
+  @include breakpoint(large) {
+    @include rem("font-size", 16px);
+  }
+}
+
+.form-file {
+  background-color: $off-white;
+  border: 1px solid #a7abad;
+
+  //border-radius: 4px;
+}
+
+.form-error {
+  color: $error;
+
+  @include rem("font-size", 11px);
+}
+
+.form--general {
+  .form-actions {
+    .form-submit {
+      @include breakpoint(medium down) {
+        width: 100%;
+        padding: 1.25em 0;
+      }
+    }
+  }
+}
+
+.form {
+  overflow: hidden;
+
+  input[type="email"],
+  input.search-type,
+  input[type="search"] {
+    width: auto;
+    color: $gray;
+    border: none;
+    margin-bottom: 0;
+    padding: 0.25em 0.5em;
+    background: $off-white;
+
+    @include rem("font-size", 16px);
+
+    @include breakpoint(medium) {
+      float: left;
+      width: 80%;
+      min-height: 40px;
+      margin-right: 0.5em;
+    }
+  }
+
+  button[type="submit"] {
+    color: white;
+    background-color: $sunshade;
+
+    i {
+      @include rem("font-size", 24px);
+    }
+
+    &:hover {
+      background: lighten($sunshade, 10%);
+    }
+
+    @include breakpoint(medium) {
+      min-height: 40px;
+      padding: 0.25em 0.5em;
+    }
+  }
+
+  label {
+    font-weight: 600;
+
+    @include rem("font-size", 12px);
+  }
+
+  select {
+    @extend %select;
+  }
+
+  .select-wrap {
+    position: relative;
+  }
+
+  .select-wrap::after {
+    content: "";
+    color: $sunshade;
+    background: url(../img/select-arrow.png) no-repeat;
+    display: block;
+    width: 8px;
+    height: 18px;
+
+    // -webkit-transform:rotate(90deg) translateX(-50%);
+    // -moz-transform:rotate(90deg) translateX(-50%);
+    // -ms-transform:rotate(90deg) translateX(-50%);
+    // transform:rotate(90deg) translateX(-50%);
+    right: 10%;
+    top: 30%;
+    line-height: 0.6;
+    padding: 0 0 2px;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .select-wrap::before {
+    content: "";
+    right: 6px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    pointer-events: none;
+    display: block;
+  }
+}
+
+.form--homesearch {
+  button[type="submit"] {
+    width: 100%;
+    margin-top: 1.25em;
+  }
+}
+
+.form--signup {
+  input[type="email"] {
+    margin: 0;
+    width: auto;
+    color: white;
+    background: darken($sunshade, 10%);
+
+    @include breakpoint(medium) {
+      min-height: 48px;
+    }
+  }
+
+  button[type="submit"] {
+    color: $sunshade;
+
+    &:hover {
+      background: white;
+    }
+
+    @include breakpoint(medium) {
+      min-height: 48px;
+      padding: 0.25em 1.5em;
+    }
+  }
+}
+
+fieldset.form-wrapper fieldset.radios--wrapper:last-child {
+  margin-bottom: 0;
+}
+
+.form-wrapper .description,
+.form-item .description {
+  margin-bottom: 0.5em;
+  color: $font-color;
+  padding: 0;
+  line-height: 1.3;
+}
+
+.form--comments {
+  .form-actions {
+    input[type="submit"] {
+      @include rem("font-size", 13px);
+    }
+
+    @include breakpoint(medium) {
+      text-align: right;
+    }
+  }
+}
+
+.form--newsletter {
+  .form-item,
+  .form-actions {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  input {
+    margin: 0;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+
+    @include rem("font-size", 13px);
+  }
+
+  @extend %clearfix;
+}
+
+.views-submit-button {
+  input[type="submit"] {
+    background-color: $cerulean;
+    color: white;
+  }
+
+  @include breakpoint(medium down) {
+    clear: left;
+  }
+}
+
+.form--search,
+.form-coll-search {
+  background-color: white;
+  border-radius: 4px;
+
+  // So drop shadow aligns for views-exposed search filter
+  .views-exposed-widgets {
+    margin-bottom: 0;
+  }
+
+  .input-group {
+    background-color: white;
+    border-radius: 4px;
+  }
+
+  input.search-type,
+  input[type="text"] {
+    //border-right: none;
+    border-radius: 4px 0 0 4px;
+    margin-bottom: 0;
+    margin-right: 2px;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    color: $cerulean;
+    display: block;
+    padding: 0.75em;
+    text-indent: -9999px;
+    border-radius: 0 4px 4px 0;
+
+    //border: 1px solid $mercury;
+    background-image: url(/images/blue-search-icon.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: $mercury;
+
+    &:hover {
+      background-color: lighten($cerulean, 10%);
+
+      //border-color: lighten( $cerulean, 10% );
+    }
+
+    @include rem("font-size", 13px);
+  }
+
+  .form-item {
+    width: 85%;
+  }
+
+  .views-submit-button,
+  .form-actions {
+    width: 15%;
+  }
+
+  .views-submit-button,
+  .form-item,
+  .form-actions {
+    float: left;
+  }
+
+  &.form--directory {
+    margin-bottom: 1em;
+  }
+
+  input {
+    //border-color: white;
+    border: none;
+    outline: none;
+
+    &:focus,
+    &:active {
+      border: none !important;
+      outline: solid;
+      outline-color: $science;
+      outline-width: 2px;
+    }
+
+    &.apachesolr-autocomplete {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  input[type="submit"] {
+    border-left: none;
+
+    //border-color: $mercury;
+    background-color: $mercury;
+    background-image: url(../images/blue-search-icon.svg);
+    background-size: 1rem;
+    background-position: center;
+
+    &:hover {
+      //border-color: darken( $mercury, 5% );
+      border-bottom-color: $chateau;
+      background-color: darken($mercury, 5%);
+    }
+  }
+
+  #edit-submit-search-site {
+    min-width: unset;
+    display: block;
+    width: 100% !important;
+    margin-left: 0;
+    height: 100%;
+
+    @include breakpoint(mobile-landscape) {
+      margin-left: 2px;
+    }
+  }
+}
+
+.form--search .views-exposed-form .form-actions {
+  margin-top: 0 !important;
+  align-items: inherit;
+
+  .button {
+    min-width: unset;
+    width: 100% !important;
+  }
+}
+
+.form-coll-search {
+  .form-item {
+    margin-bottom: 0.5em;
+  }
+
+  .input-group {
+    border: 1px solid $shuttle;
+    border-radius: 4px;
+
+    //overflow: hidden;
+
+    input.form-submit {
+      width: 12%;
+    }
+  }
+}
+
+.form-actions {
+  padding: 0;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  border-top: 0;
+  width: auto;
+  z-index: 0;
+  background-color: transparent;
+}
+
+.form-actions {
+  margin-bottom: 1.5em;
+
+  input {
+    width: auto !important;
+  }
+
+  .button--primary {
+    font-weight: normal;
+
+    @include breakpoint(mobile-landscape down) {
+      font-size: 1.2em;
+    }
+  }
+
+  @include breakpoint(mobile-landscape down) {
+    text-align: center;
+  }
+}
+
+.webform-submission-form {
+  .form-actions {
+    margin: 0;
+  }
+}
+
+#edit-reset {
+  padding: 0.75em 1em !important;
+
+  @extend .btn;
+  @extend .btn--success;
+}
+
+[type="text"]:last-child,
+.form-item:last-child {
+  margin-bottom: 0.5em;
+
+  @include breakpoint(mobile-landscape down) {
+    margin-bottom: 1em;
+  }
+}
+
+[type="file"],
+.form-file:last-child {
+  margin-bottom: 0;
+}
+
+.form-required::after {
+  content: "*";
+  color: #e32700;
+  margin-left: 4px;
+}
+
+.form-text:focus,
+.form-tel:focus,
+.form-email:focus,
+.form-url:focus,
+.form-number:focus,
+.form-color:focus,
+.form-file:focus,
+.form-textarea:focus,
+.form-date:focus,
+.form-time:focus,
+.form-select:focus {
+  border: 1px solid #a7abad;
+}
+
+.form-text:focus-visible,
+.form-tel:focus-visible,
+.form-email:focus-visible,
+.form-url:focus-visible,
+.form-number:focus-visible,
+.form-color:focus-visible,
+.form-file:focus-visible,
+.form-textarea:focus-visible,
+.form-date:focus-visible,
+.form-time:focus-visible,
+.form-select:focus-visible {
+  outline: solid;
+  outline-color: $science;
+  outline-width: thin;
+}
+
+.node-type-webform {
+  #edit-actions {
+    width: 100%;
+    display: block;
+
+    input#edit-submit {
+      float: right;
+
+      @include breakpoint(mobile-landscape down) {
+        width: 100% !important;
+        margin-bottom: 1em;
+      }
+    }
+
+    a.button.cancel {
+      margin: 0;
+      margin-bottom: 0;
+      background-color: $white;
+      border: 1px solid $deepcerulean;
+      color: $deepcerulean;
+      font-weight: normal;
+      float: left;
+
+      &:hover,
+      &:focus {
+        background-color: lighten($deepcerulean, 10%);
+        color: $white;
+        border: 1px solid lighten($deepcerulean, 10%);
+      }
+    }
+  }
+}
+
+.hide-form-actions-input #edit-actions {
+  display: none;
+}
+
+span.text-count {
+  color: $font-color !important;
+}
+
+.sand-search-search {
+  .form-actions {
+    margin-top: 0;
+  }
+}
+
+.webform-confirmation {
+  background-color: white;
+  padding: 2em;
+
+  .webform-confirmation__back {
+    margin-bottom: 0;
+  }
+}
+
+.progress-tracker {
+  margin: 0 auto;
+}

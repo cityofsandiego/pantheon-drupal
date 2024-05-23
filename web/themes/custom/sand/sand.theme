@@ -1,0 +1,229 @@
+<?php
+
+/**
+ * @file
+ * Contains the theme's functions to manipulate Drupal's default markup.
+ *
+ * Complete documentation for this file is available online.
+ * @see https://drupal.org/node/1728096
+ */
+
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements preprocess_block.
+ */
+function sand_preprocess_block(array &$variables) {
+  // Get the node object if there is one.
+  $node = \Drupal::routeMatch()->getParameter('node');
+  // Make sure we've got a real node object before setting the ID.
+  if ($node instanceof NodeInterface) {
+    // Now we have a node object and can get the ID.
+    $nid = $node->id();
+  }
+  // Only do things for the sidebar nav.
+  $ids = [
+    'block-sidebar-nav'
+  ];
+
+  if (!empty($variables['attributes']['id']) && array_search($variables['attributes']['id'], $ids) !== FALSE) {
+    // Time for the menu links. Get them all and load them based on $nid.
+    $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+    $links = $menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $nid]);
+    $title = $node->getTitle();
+    $variables['page_title'] = $title;
+    // Do we have links? OK then. Do things, like get the parent.
+    if ($link = reset($links)) {
+      if ($parent = $link->getParent()) {
+        // Now we create an instance of the menu parent, bc it's never easy.
+        $parent = $menu_link_manager->createInstance($parent);
+        // OK, now we can finally get the parent title for the menu block.
+        $parent_title = $parent->getTitle();
+        $parent_link = $parent->getUrlObject()->toString();
+        $variables['menu_title'] = $parent_title;
+        $variables['menu_link'] = $parent_link;
+      }
+    }
+  } else {
+    if (isset($variables['content']['#menu_block_configuration']['label'])) {
+      $variables['menu_title'] = $variables['content']['#menu_block_configuration']['label'];
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function sand_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
+  //dump($variables);
+  if ($variables['menu_name'] == 'main' && $variables['theme_hook_original'] == 'menu') {
+    $suggestions[] = 'menu__sidebar';
+  }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_page_alter().
+ */
+function sand_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+	  $suggestions[] = 'page__' . $node->bundle();
+  }
+
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  switch ($route_name) {
+    case 'system.401':
+      // Unauthorized Access.
+      $error = 401;
+      break;
+
+    case 'system.403':
+      // Access Denied.
+      $error = 403;
+      break;
+
+    case 'system.404':
+      // Page Not Found.
+      $error = 404;
+      break;
+  }
+  if (isset($error)) {
+    $suggestions[] = 'page__' . $error;
+  }
+}
+
+/**
+ * Implements hook_preprocess_media().
+ */
+function sand_preprocess_media(&$variables) {
+  $media = $variables['elements']['#media'];
+  // Only do this to the image.
+  if ($media->bundle() === 'image') {
+    // Get the file ID.
+    $fid = $media->field_media_image->target_id;
+    // Load it.
+    $file = File::load($fid);
+    // Get image URL.
+    $file_uri = $file->getFileUri();
+    // Create URL for image.
+    $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+    // Create variable for image URL.
+    $variables['img_url'] = $file_uri;
+    $variables['img_url_string'] = $file_url;
+    // Get alt text.
+    $variables['img_alt'] = $media->field_media_image->alt;
+    // Get width and height.
+    $variables['img_width'] = $media->field_media_image->width;
+    $variables['img_height'] = $media->field_media_image->height;
+  }
+
+  // Handle remote video media fields too.
+  if ($media->bundle() === 'remote_video') {
+    // Get video URL.
+    $video_url = $media->get('field_media_oembed_video')->getString();
+    // Get video URL.
+    $video_title = $media->name->getString();
+    // Get thumbnail.
+    $thumbnail = $media->thumbnail->entity;
+    // Get thumbnail image URL.
+    $file_uri = $thumbnail->getFileUri();
+    // Create URL for image.
+    $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+    // Create variable for video URL.
+    $variables['video_url'] = $video_url;
+    // Create variable for video URL.
+    $variables['video_title'] = $video_title;
+    // Create variable for image URL.
+    $variables['video_thumbnail'] = $file_url;
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function sand_preprocess_paragraph(array &$variables) {
+  // Load the paragraph.
+  $paragraph = $variables['elements']['#paragraph'];
+
+  // Only do this to the image.
+  if ($paragraph->hasField('field_image') && $paragraph->get('field_image')->getValue()) {
+    // Get the media entity id.
+    $image = $paragraph->get('field_image')->first()->getValue();
+    $image = $image['target_id'];
+
+    // Load the media. TODO: Leverage Cobb LoadMedia() service.
+    $media = Media::load($image);
+
+    if (!empty($media) && $media->hasField('field_media_image')) {
+      // Get the file ID.
+      $fid = $media->field_media_image->target_id;
+      // Load it.
+      $file = File::load($fid);
+      // Get image URL.
+      $file_uri = $file->getFileUri();
+      // Create URL for image.
+      $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+
+      if (!empty($file) && method_exists($file, 'getFileUri')) {
+        // Get the image URL + alt txt.
+        $variables['img_url'] = $file->getFileUri();
+        $variables['img_url_string'] = $file_url;
+        $variables['img_alt'] = $media->field_media_image->alt;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph__hook().
+ */
+function sand_preprocess_paragraph__embed(array &$variables, $entity) {
+  // Load the paragraph.
+  $paragraph = $variables['elements']['#paragraph'];
+  // Get the Link and Height (both required so will be populated).
+  $variables['url'] = $paragraph->field_embed_link->value;
+  $variables['title'] = $paragraph->field_embed_title->value;
+  $variables['height'] = $paragraph->field_embed_height->value;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function views_theme_suggestions_views_view(array $variables) {
+  $suggestions = [];
+  $view = $variables['view'];
+
+  $suggestions[] = 'views_view__' . $view->id();
+  $suggestions[] = 'views_view__' . $view->current_display;
+  $suggestions[] = 'views_view__' . $view->id() . '__' . $view->current_display;
+
+  return $suggestions;
+}
+
+/**
+ * Implements Grid layout paragraph hook_theme_suggestions_HOOK_alter().
+ */
+function sand_theme_suggestions_paragraph_alter(array &$suggestions, array $variables) {
+  // TO-DO we need to call this by ID. This is a quick solution for a time sentitive training work
+  if (!empty($variables['elements']['regions'])) {
+    $suggestions[] = 'paragraph__grid_layout__default';
+    return $suggestions;
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node templates.
+ */
+function sand_preprocess_node(&$variables) {
+  $node = &$variables['node'];
+  // put query parameters in url_params variable
+  $variables['url_params'] = \Drupal::request()->query->all();
+  
+  // If it's a blog content type get the URL;
+  if ($node instanceof \Drupal\sand_type\Entity\Bundle\Blog) {
+    $variables['website_url'] = $node->getWebSiteURL();
+  }
+}

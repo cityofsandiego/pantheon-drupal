@@ -1,0 +1,153 @@
+/* ============================================================
+  Styles for social links.
+  ============================================================ */
+.socials {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin: 0 0.1em;
+    display: inline-block;
+    vertical-align: bottom;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  a {
+    color: $font-color;
+    display: block;
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    background: $off-white;
+
+    i {
+      height: 1.5em;
+      line-height: 1.5em;
+      display: block;
+    }
+
+    @include rem("font-size", 16px);
+  }
+}
+
+.social-share__wrap {
+  .department-socials {
+    list-style-type: none;
+
+    .socials-item {
+      display: inline-block;
+      background-size: cover;
+    }
+
+    .socials-link {
+      font-size: 1.2rem;
+      background: rgb(246 246 246 / 80%);
+    }
+  }
+
+  span[class^="st"] {
+    background-size: cover;
+  }
+
+  .stButton {
+    margin: 0;
+
+    .stLarge {
+      width: 27px;
+      height: 27px;
+
+      &:hover {
+        background-position: top left;
+      }
+    }
+  }
+
+  @media print {
+    display: none;
+  }
+}
+
+.social-links, .social-links-medium, .social-links-large, .social-links-xlarge {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+
+  li {
+    list-style: none;
+    margin: 0 0.25rem;
+    padding: 0;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    a {
+      background: $off-white;
+      border-radius: 4px;
+      color: $charcoal;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      text-align: center;
+      text-decoration: none;
+
+      &:hover {
+        color: $link-color;
+      }
+    }
+  }
+}
+
+li a {
+  .social-links & {
+    font-size: 1.2rem;
+    padding: .5rem;
+  }
+  
+  .social-links-medium & {
+    font-size: 1.8rem;
+    padding: .8rem;
+  }
+  
+  .social-links-large & {
+    font-size: 2.5rem;
+    padding: 1rem;
+  }
+  
+  .social-links-xlarge & {
+    font-size: 3.5rem;
+    padding: 1.2rem;
+  }
+}
+
+a {
+  /* Change background-color to matching social media platform color */
+  &.icon--twitter:hover { color: white !important; background-color: $twitter; }
+  &.icon--facebook:hover { color: white !important; background-color: $facebook; }
+  &.icon--google:hover { color: white !important; background-color: $googleplus; }
+
+  &.icon--instagram:hover {
+    color: white !important;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+  }
+  &.icon--youtube:hover { color: white !important; background-color: $youtube; }
+  &.icon--pinterest:hover { color: white !important; background-color: $pinterest; }
+  &.icon--nextdoor:hover { color: white !important; background-color: $nextdoor; }
+  &.icon--linkedin:hover { color: white !important; background-color: $linkedin; }
+  &.icon--reddit:hover { color: white !important; background-color: $reddit; }
+  &.icon--tiktok:hover { color: white !important; background-color: $tiktok; }
+  &.icon--threads:hover { color: white !important; background-color: $threads; }
+}

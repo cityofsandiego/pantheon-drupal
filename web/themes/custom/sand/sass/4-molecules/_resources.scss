@@ -1,0 +1,54 @@
+.field--name-field-resources {
+  justify-content: center;
+
+  > .field__item {
+    display: flex;
+    margin: 0 0 1.125rem;
+    justify-content: center;
+    flex-direction: column;
+
+    @include xy-cell(12);
+
+    @include breakpoint(medium) {
+      @include xy-cell(3);
+    }
+  }
+
+  @include xy-grid;
+}
+
+.resources {
+  .field__label {
+    color: $font-color;
+    font-family: $font-family-secondary;
+    font-size: 1.6875rem;
+    margin-bottom: 0.875rem;
+    margin-top: 1.7rem;
+  }
+
+  .paragraph--type--resources {
+    display: flex;
+    width: 100%;
+
+    .btn {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+
+      .with-icon {
+        align-items: center;
+        display: flex;
+      }
+
+      .no-icon {
+        text-align: center;
+        width: 100%;
+      }
+
+      .icon {
+        width: 2rem;
+        padding-left: 0.5rem;
+      }
+    }
+  }
+}

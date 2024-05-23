@@ -1,0 +1,90 @@
+.homepage {
+  .hero__slides {
+    background-color: white;
+    z-index: 1;
+    min-height: 150px;
+
+    @include breakpoint(medium) {
+      background-color: $shuttle;
+      min-height: 400px;
+    }
+  }
+
+  &-content {
+    margin-top: 0;
+    z-index: 5;
+    position: relative;
+
+    @include breakpoint(medium) {
+      margin-top: -100px;
+    }
+  }
+
+  .view-display-id-meetings {
+    h3 {
+      padding: 0;
+    }
+
+    .field-content {
+      display: flex;
+
+      .event__date {
+        border-top: 5px solid #0098db;
+      }
+    }
+  }
+
+  .view-id-events {
+    h3 {
+      padding: 0;
+    }
+
+    .field-content {
+      display: flex;
+    }
+  }
+
+  .get-it-done-app {
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .featured-item {
+    margin: 2rem 0 1rem;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  h2 {
+    margin: 1em 0 0.5em;
+    padding: 0;
+  }
+
+  .view-blog-cards {
+    .slides {
+      .card__wrap {
+        width: 100%;
+
+        @include breakpoint(mobile) {
+          width: 100%;
+        }
+
+        @include breakpoint(medium) {
+          width: 33%;
+        }
+      }
+
+      @include breakpoint(mobile) {
+        flex-wrap: wrap;
+        display: flex;
+      }
+    }
+
+    @include breakpoint(mobile-landscape) {
+      padding-right: 0.2rem;
+    }
+  }
+}

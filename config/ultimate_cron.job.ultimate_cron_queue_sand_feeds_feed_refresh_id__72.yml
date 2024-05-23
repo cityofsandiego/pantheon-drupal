@@ -1,0 +1,20 @@
+uuid: 90a2da9d-638b-4143-bb5d-39fc5f07317f
+langcode: en
+status: true
+dependencies:
+  module:
+    - sand_feeds
+title: 'Queue: Sand Feed Refresh ID:72 - Doc scs_councilcommagendas_att'
+id: ultimate_cron_queue_sand_feeds_feed_refresh_id__72
+weight: 10
+module: sand_feeds
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database

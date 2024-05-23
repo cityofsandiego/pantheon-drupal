@@ -1,0 +1,18 @@
+exdiff --git a/src/Plugin/Filter/InsertBlockFilter.php b/src/Plugin/Filter/InsertBlockFilter.php
+index 42b4708..1453256 100644
+--- a/src/Plugin/Filter/InsertBlockFilter.php
++++ b/src/Plugin/Filter/InsertBlockFilter.php
+@@ -112,7 +112,12 @@ class InsertBlockFilter extends FilterBase implements ContainerFactoryPluginInte
+           continue;
+         }
+ 
+-        $block_view = $this->entityTypeManager->getViewBuilder($type)->view($block);
++        if (NULL !== $block) {
++          $block_view = $this->entityTypeManager->getViewBuilder($type)->view($block);
++        }
++        else {
++          $block_view = NULL;
++        }
+ 
+         if (!empty($block_view)) {
+           $repl[] = $this->renderer->render($block_view);

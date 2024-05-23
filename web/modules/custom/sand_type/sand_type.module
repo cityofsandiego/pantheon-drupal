@@ -1,0 +1,122 @@
+<?php
+
+// Bundle Classes.
+use Drupal\sand_type\Entity\Bundle\Article;
+use Drupal\sand_type\Entity\Bundle\Blog;
+use Drupal\sand_type\Entity\Bundle\Bucket;
+use Drupal\sand_type\Entity\Bundle\BusinessResource;
+use Drupal\sand_type\Entity\Bundle\Date;
+use Drupal\sand_type\Entity\Bundle\Department;
+use Drupal\sand_type\Entity\Bundle\DepartmentDocument;
+use Drupal\sand_type\Entity\Bundle\DepartmentParent;
+use Drupal\sand_type\Entity\Bundle\DigitalArchivesPhotos;
+use Drupal\sand_type\Entity\Bundle\Event;
+use Drupal\sand_type\Entity\Bundle\ExternalData;
+use Drupal\sand_type\Entity\Bundle\GallerySanDiego;
+use Drupal\sand_type\Entity\Bundle\Hero;
+use Drupal\sand_type\Entity\Bundle\Location;
+use Drupal\sand_type\Entity\Bundle\MayoralArtifacts;
+use Drupal\sand_type\Entity\Bundle\Notification;
+use Drupal\sand_type\Entity\Bundle\Outreach;
+use Drupal\sand_type\Entity\Bundle\Outreach2;
+use Drupal\sand_type\Entity\Bundle\OutreachArticle2;
+use Drupal\sand_type\Entity\Bundle\Registration;
+use Drupal\sand_type\Entity\Bundle\Resources;
+use Drupal\sand_type\Entity\Bundle\SidebarBlockContext;
+use Drupal\sand_type\Entity\Bundle\Slide;
+
+/**
+ * Implements hook_bundl_info_alter().
+ * 
+ * @param array $bundles
+ *
+ * @return void
+ */
+function sand_type_entity_bundle_info_alter(array &$bundles): void {
+  //$implemented_bundles = ['article','hero'];
+
+  if (isset($bundles['node']['article'])) {
+    $bundles['node']['article']['class'] = Article::class;
+  }
+  if (isset($bundles['node']['blog'])) {
+    $bundles['node']['blog']['class'] = Blog::class;
+  }
+  if (isset($bundles['node']['bucket'])) {
+    $bundles['node']['bucket']['class'] = Bucket::class;
+  }
+  if (isset($bundles['node']['business_resource'])) {
+    $bundles['node']['business_resource']['class'] = BusinessResource::class;
+  }
+  if (isset($bundles['node']['date'])) {
+    $bundles['node']['date']['class'] = Date::class;
+  }
+  if (isset($bundles['node']['department'])) {
+    $bundles['node']['department']['class'] = Department::class;
+  }
+  if (isset($bundles['node']['department_document'])) {
+    $bundles['node']['department_document']['class'] = DepartmentDocument::class;
+  }
+  if (isset($bundles['node']['department_parent'])) {
+    $bundles['node']['department_parent']['class'] = DepartmentParent::class;
+  }
+  if (isset($bundles['node']['digital_archives_photos'])) {
+    $bundles['node']['digital_archives_photos']['class'] = DigitalArchivesPhotos::class;
+  }
+  if (isset($bundles['node']['event'])) {
+    $bundles['node']['event']['class'] = Event::class;
+  }
+  if (isset($bundles['node']['external_data'])) {
+    $bundles['node']['external_data']['class'] = ExternalData::class;
+  }
+  if (isset($bundles['node']['gallery_san_diego'])) {
+    $bundles['node']['gallery_san_diego']['class'] = GallerySanDiego::class;
+  }
+  if (isset($bundles['node']['hero'])) {
+    $bundles['node']['hero']['class'] = Hero::class;
+  }
+  if (isset($bundles['node']['location'])) {
+    $bundles['node']['location']['class'] = Location::class;
+  }
+  if (isset($bundles['node']['mayoral_artifacts'])) {
+    $bundles['node']['mayoral_artifacts']['class'] = MayoralArtifacts::class;
+  }
+  if (isset($bundles['node']['notification'])) {
+    $bundles['node']['notification']['class'] = Notification::class;
+  }
+  if (isset($bundles['node']['outreach'])) {
+    $bundles['node']['outreach']['class'] = Outreach::class;
+  }
+  if (isset($bundles['node']['outreach2'])) {
+    $bundles['node']['outreach2']['class'] = Outreach2::class;
+  }
+  if (isset($bundles['node']['outreach_article2'])) {
+    $bundles['node']['outreach_article2']['class'] = OutreachArticle2::class;
+  }
+  if (isset($bundles['node']['registration'])) {
+    $bundles['node']['registration']['class'] = Registration::class;
+  }
+  if (isset($bundles['node']['resources'])) {
+    $bundles['node']['resources']['class'] = Resources::class;
+  }
+  if (isset($bundles['node']['sidebar_block_context'])) {
+    $bundles['node']['sidebar_block_context']['class'] = SidebarBlockContext::class;
+  }
+  if (isset($bundles['node']['slide'])) {
+    $bundles['node']['slide']['class'] = Slide::class;
+  }
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function sand_type_theme(): array {
+  // sand_location_library_xml is used in the location content type for libraries.
+  return [
+    'sand_location_library_xml' => [
+      'variables' => [
+        'rows' => NULL,
+      ],
+    ],
+  ];
+}

@@ -1,0 +1,141 @@
+<?php
+/**
+ * @file
+ * This is all the code that affect the contrib module datalayer.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_help().
+ */
+function sand_datalayer_help($route_name): ?string {
+  return sand_help_show_help(__DIR__, $route_name);
+}
+
+/**
+ * Get the upmost parent term of a taxonomy term or the term id if no parent.
+ *
+ * @param int $tid
+ *   Taxonomy Term ID.
+ * @param string $term_name
+ *   Taxonomy Term Name to use if this is a top term.
+ *
+ * @return array
+ *   Return the TID and Term Name.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ */
+function sand_datalayer_get_top_parent(int $tid, string $term_name): array {
+
+  /** @var array $parents */
+  $parents = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadAllParents($tid);
+
+  if (!empty($parents)) {
+    $parents = array_reverse($parents, TRUE);
+    $parents = reset($parents);
+    $parent_tid = $parents->id();
+    $parent_name = $parents->getName();
+  }
+  else {
+    // The $tid has no parent, so it must be a parent.
+    $parent_tid = $tid;
+    $parent_name = $term_name;
+  }
+  return [$parent_tid, $parent_name];
+}
+
+/**
+ * Implements hook_datalayer_alter().
+ *
+ * Alter the Data Layer data before it is output to the screen.
+ * Adding in deptId for Medallia feedback form.
+ *
+ *   GTM data layer data for the current page.
+ */
+function sand_datalayer_datalayer_alter(&$data_layer): void {
+  
+  // Not needed for admin pages.
+  if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+    return;
+  }
+
+  // If there is a department in the datalayer,
+  // then find all selected Parent Departments on node.
+  $departments = [];
+  if (!empty($data_layer["entityTaxonomy"]["department"])) {
+    foreach ($data_layer["entityTaxonomy"]["department"] as $dept_tid => $dept_name) {
+      [$parent_tid, $parent_name] = sand_datalayer_get_top_parent($dept_tid, $dept_name);
+      if (!array_key_exists($parent_tid, $departments)) {
+        $departments[$parent_tid] = $parent_name;
+      }
+    }
+  }
+  else {
+    // No departments on this page.
+    sand_datalayer_set_webteam_term($departments);
+  }
+
+  // If more than 1 parent Department on node, then force Webteam Department.
+  if (count($departments) > 1) {
+    sand_datalayer_set_webteam_term($departments);
+  }
+
+  // Add Department Parent ID and Name to datalayer.
+  if (!empty($departments)) {
+    reset($departments);
+    $data_layer['deptId'] = key($departments);
+    $data_layer['deptName'] = current($departments);
+  }
+}
+
+/**
+ * Get the "Web Team" department TID and Name to use as a default.
+ * 
+ * @param array $departments
+ *
+ * @return void
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ */
+function sand_datalayer_set_webteam_term(array &$departments): void {
+  $default_department = sand_datalayer_get_default_term();
+  $departments = [];
+
+  $term_webteam = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->load($default_department);
+
+  // If term not found, this will return an empty department array.
+  if (!empty($term_webteam)) {
+    $departments[$term_webteam->id()] = $term_webteam->getName();
+  }
+}
+
+/**
+ * Get the default term to be used if no or multiple department terms are on this page.
+ */
+function sand_datalayer_get_default_term(): int {
+  return \Drupal::config('sand_datalayer.settings')->get('default_department');
+}
+
+/**
+ * Implements hook_entity_predelete().
+ *
+ * @throws \Exception
+ */
+function sand_datalayer_entity_predelete(\Drupal\Core\Entity\EntityInterface $entity): void {
+  if (is_a($entity, 'Drupal\taxonomy\Entity\Term')) {
+    $default_department = sand_datalayer_get_default_term();
+    $tid = $entity->id();
+    if ($default_department == $tid) {
+      $message = 'Tried to delete the Taxonomy Term associated with custom module sand_datalayer'; 
+      \Drupal::messenger()->addMessage($message);
+      \Drupal::logger('sand_datalayer')->error($message);
+      throw new Exception();
+    }
+  }
+}

@@ -1,0 +1,20 @@
+uuid: 3370e51e-023b-4949-8705-767f45255347
+langcode: en
+status: true
+dependencies:
+  module:
+    - sand_feeds
+title: 'Queue: Sand Feed Refresh ID:14 - Doc scs_ccaction_geo'
+id: ultimate_cron_queue_sand_feeds_feed_refresh_id__14
+weight: 10
+module: sand_feeds
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database

@@ -1,0 +1,159 @@
+uuid: f81eab45-3178-49e3-889f-d495d8da5f8f
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 58
+template: false
+archive: false
+id: webform_298
+title: 'Complaint Form'
+description: null
+categories: {  }
+elements: |
+  fieldset_complainant:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Complainant' 
+    '#description': ""
+    name_of_company_6:
+      '#type': textfield
+      '#title': 'Name of Company:' 
+      '#description': ""
+    name_6:
+      '#type': textfield
+      '#title': 'Name:' 
+      '#description': ""
+    address_6:
+      '#type': textfield
+      '#title': 'Address:' 
+      '#description': ""
+    phone_6:
+      '#type': textfield
+      '#title': 'Phone: (999-999-9999)' 
+      '#description': ""
+    email_6:
+      '#type': textfield
+      '#title': 'Email: (you@yourdomain.com)' 
+      '#description': ""
+  fieldset_project_information:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Project Information' 
+    '#description': ""
+    project_name_7:
+      '#type': textfield
+      '#title': 'Project Name:' 
+      '#description': ""
+    name_of_prime_contractor_7:
+      '#type': textfield
+      '#title': 'Name of Prime Contractor:' 
+      '#description': ""
+    project_number_7:
+      '#type': textfield
+      '#title': 'Project Number:' 
+      '#description': ""
+  fieldset_complaint_details:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Complaint Details' 
+    '#description': ""
+    type_of_complaint_11:
+      '#type': select
+      '#options':
+        1: 'Illegal Substitution'
+        2: 'Non-Payment'
+        3: 'Slow-Payment'
+        4: 'Non-utilization of Listed Sub-contractor'
+        5: 'Prevailing Wage Issue'
+        6: 'Discrimination (Based on race, gender, nation origin, religion, disability, age, etc.)'
+        7: 'Living Wage Issue'
+      '#title': 'Type of Complaint:' 
+      '#description': ""
+    complaintlimited_to_2000_characters_11:
+      '#type': textarea
+      '#title': 'Complaint: (Limited to 2000 characters)' 
+      '#description': "Please state the nature of your complaint. Be specific. This information is necessary in order to fully investigate, and conclude your complaint."
+    remedy_requested_limited_to_2000_characters_11:
+      '#type': textarea
+      '#title': 'Remedy Requested: (Limited to 2000 characters)' 
+      '#description': ""
+  fieldset_previous_filings:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Previous Filings' 
+    '#description': ""
+    name_of_agency_15:
+      '#type': textfield
+      '#title': 'Name of Agency:' 
+      '#description': ""
+    date_mm_dd_yyyy_15:
+      '#type': textfield
+      '#title': 'Date: (mm/dd/yyyy)' 
+      '#description': ""
+    status_of_previous_complaint_limited_to_2000_characters_15:
+      '#type': textarea
+      '#title': 'Status of Previous Complaint: (Limited to 2000 characters)' 
+      '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: ContactEOC@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: ContactEOC@sandiego.gov
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

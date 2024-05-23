@@ -1,0 +1,217 @@
+uuid: 7801286e-a438-45d3-a1ba-855975e2e401
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1421289
+title: 'Meeting/Event Request'
+description: null
+categories: {  }
+elements: |-
+  fieldset_contact_info_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Information'
+    '#description': ''
+    contact_name_1:
+      '#type': textfield
+      '#title_display': inline
+      '#title': Name
+      '#description': ''
+      '#required': true
+    contact_phone_1:
+      '#type': textfield
+      '#title_display': inline
+      '#title': 'Phone Number'
+      '#description': ''
+      '#required': true
+    contact_email_1:
+      '#type': email
+      '#size': 20
+      '#title_display': inline
+      '#title': Email
+      '#description': ''
+      '#required': true
+  fieldset_event_info_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Event Information'
+    '#description': ''
+    event_name_5:
+      '#type': textfield
+      '#title': 'Name/Topic of Event/Meeting'
+      '#description': ''
+      '#required': true
+    event_organization_5:
+      '#type': textfield
+      '#title': 'Organization Name'
+      '#description': ''
+      '#required': true
+    event_speak_date_5:
+      '#type': date
+      '#title': 'Elected Speaking Date'
+      '#description': ''
+      '#required': true
+    elected_speaking_time:
+      '#type': webform_time
+      '#title': 'Elected Speaking Time'
+      '#required': true
+      '#timepicker': true
+      '#time_format': 'g:i A'
+    event_meeting_description_5:
+      '#type': textarea
+      '#title': 'Event/Meeting Date, Time, and Description'
+      '#description': ''
+      '#required': true
+    additional_dignitaries_participating_5:
+      '#type': textfield
+      '#title': 'Additional Dignitaries Participating'
+      '#description': ''
+  fieldset_additional_comments_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Additional Comments'
+    '#description': ''
+    comments_27:
+      '#type': textarea
+      '#title': Comments
+      '#description': ''
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<p>Thank you for requesting a meeting or event&nbsp;with Councilmember Stephen Whitburn. Due to the high volume of requests we receive, processing time can take up to two weeks, at which point we will reach out to you with additional information at the contact information you provided. If you need immediate assistance, please contact our office at <a href=\"tel:1-619-236-6633\">619-236-6633</a>.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: false
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: rvazquez@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: '[webform_submission:values:contact_email_1:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Event/Meeting Request from [webform_submission:values:contact_name_1]'
+      body: "Submitted on [webform_submission:created]\r\n\r\n== CONTACT INFORMATION ==\r\n\r\nNAME:\r\n[webform_submission:values:contact_name_1]\r\n\r\nPHONE:\r\n[webform_submission:values:contact_phone_1]\r\n\r\nEMAIL:\r\n[webform_submission:values:contact_email_1]\r\n\r\n== EVENT INFORMATION ==\r\n\r\nNAME/TOPIC OF EVENT/MEETING:\r\n[webform_submission:values:event_name_5]\r\n\r\nORGANIZATION NAME:\r\n[webform_submission:values:event_organization_5]\r\n\r\nELECTED SPEAKING DATE/TIME:\r\n[webform_submission:values:event_speak_date_5]\r\n[webform_submission:values:elected_speaking_time]\r\n\r\nEVENT/MEETING DESCRIPTION:\r\n[webform_submission:values:event_meeting_description_5]\r\n\r\nADDITIONAL DIGNITARIES PARTICIPATING:\r\n[webform_submission:values:additional_dignitaries_participating_5]\r\n\r\n\r\n== ADDITIONAL COMMENTS ==\r\n\r\n[webform_submission:values:comments_27]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: false
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: blugo@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\n== CONTACT INFORMATION ==\r\n\r\nNAME:\r\n[webform_submission:values:contact_name_1]\r\n\r\nPHONE:\r\n[webform_submission:values:contact_phone_1]\r\n\r\nEMAIL:\r\n[webform_submission:values:contact_email_1]\r\n\r\n== EVENT INFORMATION ==\r\n\r\nNAME/TOPIC OF EVENT/MEETING:\r\n[webform_submission:values:event_name_5]\r\n\r\nORGANIZATION NAME:\r\n[webform_submission:values:event_organization_5]\r\n\r\nELECTED SPEAKING DATE/TIME:\r\n[webform_submission:values:event_speak_date_5]\r\n[webform_submission:values:elected_speaking_time]\r\n\r\nEVENT/MEETING DESCRIPTION:\r\n[webform_submission:values:event_meeting_description_5]\r\n\r\nADDITIONAL DIGNITARIES PARTICIPATING:\r\n[webform_submission:values:additional_dignitaries_participating_5]\r\n\r\n\r\n== ADDITIONAL COMMENTS ==\r\n\r\n[webform_submission:values:comments_27]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_4:
+    id: email
+    handler_id: email_4
+    label: 'Email 4'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: hudsonn@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: '[webform_submission:values:contact_email_1:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Event/Meeting Request from [webform_submission:values:contact_name_1]'
+      body: "Submitted on [webform_submission:created]\r\n\r\n== CONTACT INFORMATION ==\r\n\r\nNAME:\r\n[webform_submission:values:contact_name_1]\r\n\r\nPHONE:\r\n[webform_submission:values:contact_phone_1]\r\n\r\nEMAIL:\r\n[webform_submission:values:contact_email_1]\r\n\r\n== EVENT INFORMATION ==\r\n\r\nNAME/TOPIC OF EVENT/MEETING:\r\n[webform_submission:values:event_name_5]\r\n\r\nORGANIZATION NAME:\r\n[webform_submission:values:event_organization_5]\r\n\r\nELECTED SPEAKING DATE/TIME:\r\n[webform_submission:values:event_speak_date_5]\r\n[webform_submission:values:elected_speaking_time]\r\n\r\nEVENT/MEETING DESCRIPTION:\r\n[webform_submission:values:event_meeting_description_5]\r\n\r\nADDITIONAL DIGNITARIES PARTICIPATING:\r\n[webform_submission:values:additional_dignitaries_participating_5]\r\n\r\n\r\n== ADDITIONAL COMMENTS ==\r\n\r\n[webform_submission:values:comments_27]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

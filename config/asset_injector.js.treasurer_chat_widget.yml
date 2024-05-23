@@ -1,0 +1,32 @@
+uuid: cc644033-02cd-493a-9cbb-fa4a1850c9ed
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: treasurer_chat_widget
+label: 'Treasurer Chat Widget'
+code: |-
+  (function(w, d, x, id){
+  s=d.createElement('script');
+  s.src='https://d2s9x5slbvr0vu.cloudfront.net/amazon-connect-chat-interface-client.js';
+  s.async=1;
+  s.id=id;
+  d.getElementsByTagName('head')[0].appendChild(s);
+  w[x] = w[x] || function() { (w[x].ac = w[x].ac || []).push(arguments) };
+  })(window, document, 'amazon_connect', '270bb38d-c496-4027-bff7-fab14234a8e7');
+  amazon_connect('styles', { iconType: 'CHAT', openChat: { color: '#ffffff', backgroundColor: '#00549f' }, closeChat: { color: '#ffffff', backgroundColor: '#00549f'} });
+  amazon_connect('snippetId', 'QVFJREFIajNZWm9TMmtpZVZPZlMwcnFsWVF1ZFc1T1poSjlRM3U2T01NOTdhRGhSRGdFQ0wybUtwYkR6Rk8zNUwvdXEwOTRuQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNY0dZdjd5MDZmRWM1NjlUaEFnRVFnQ3ZRWVcvNmhVeGVudWE5NGxmKzFtNnBCZFo5S1liUEFtc1cyMVBKWHh3STRFK1RNczJuV3pTWTBqaHU6OkNRV3dJRWxUZ0tHdEEyd1dYc09BVlZKRGZ6MVVQNlVsdC9ON0NlZDdCdzA3bWdHSUZydklZUXEvcEYwZEtuNnM4NkxGdXdrMmYyak0yRHplQnFKUFpkY1dwTWQrajhBOEVrREpiSmx3YjkycHlkNlhQVENPaitwNXVLZXh1M3hqVm1FNDk2a2l6NkpDN0xPVUtKNjE4YzVIb1dUTUlSdz0=');
+  amazon_connect('supportedMessagingContentTypes', [ 'text/plain', 'text/markdown' ]);
+noscript: ''
+noscriptRegion: {  }
+jquery: false
+header: false
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/treasurer/taxesfees/btax\r\n/treasurer/taxesfees/btax/btaxcontact\r\n/treasurer/taxesfees/btax/rtaxcontact\r\n/treasurer/taxesfees/btax/btaxcompprog\r\n/parking\r\n/parking/contact/parkingadmin"
+contexts: {  }
+conditions_require_all: true

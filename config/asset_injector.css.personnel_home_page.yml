@@ -1,0 +1,31 @@
+uuid: b4e40bd6-c8b5-4a47-a9a6-fafd93b6cfbf
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: personnel_home_page
+label: 'Personnel Home Page'
+code: |-
+  .node-type-department-parent .slides {
+  	justify-content: center;
+  }
+  @media print, screen and (min-width: 30em) {
+  .node-type-department-parent .hero__slides--secondary {
+      padding: 9em 0 6em;
+  }
+  }
+  @media print, screen and (max-width: 30em) {
+  .node-type-department-parent .hero__slides--secondary {
+      padding: 11em 0 0;
+  }
+  }
+media: all
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /empopp
+contexts: {  }
+conditions_require_all: true

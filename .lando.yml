@@ -1,0 +1,34 @@
+name: san-diego-custom-code
+recipe: pantheon
+config:
+  framework: drupal8
+  site: san-diego-custom-code
+  id: 558ccf9c-33c1-459f-a727-08540af54518
+services:
+  node:
+    type: node:16
+    port: 6006
+    build_as_root:
+      - apt update -y && apt install -y apt-transport-https build-essential unzip
+    build:
+      - echo "Installing NPM CLI..."
+      - npm install -g npm
+      - echo "Installing Gulp CLI..."
+      - npm install -g gulp
+      # Install theme dependencies
+      - echo "Installing theme dependencies..."
+      - cd /app/web/themes/custom/sand && npm install
+      # Build the theme
+      - echo "Building theme..."
+      - cd /app/web/themes/custom/sand && gulp styles
+tooling:
+  node:
+    service: node
+  npm:
+    service: node
+    cmd: npm
+    dir: /app/web/themes/custom/sand
+  gulp:
+    service: node
+    cmd: gulp
+    dir: /app/web/themes/custom/sand

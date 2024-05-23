@@ -1,0 +1,55 @@
+uuid: cf534d1c-c3fb-46f5-bf53-c38850823c41
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_cards.field_cards
+    - field.field.paragraph.featured_cards.field_link
+    - field.field.paragraph.featured_cards.field_section_title
+    - paragraphs.paragraphs_type.featured_cards
+  module:
+    - link
+    - paragraphs
+id: paragraph.featured_cards.default
+targetEntityType: paragraph
+bundle: featured_cards
+mode: default
+content:
+  field_cards:
+    type: paragraphs
+    weight: 2
+    region: content
+    settings:
+      title: 'Card item'
+      title_plural: 'Card items'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_link:
+    type: link_default
+    weight: 1
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_section_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

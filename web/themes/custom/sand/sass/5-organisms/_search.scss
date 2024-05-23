@@ -1,0 +1,106 @@
+/* ============================================================
+  Styles for cards and featured cards.
+  ============================================================ */
+
+/* Cards Styles from D7 */
+%facet {
+  &.border {
+    margin-bottom: 2em;
+    padding-bottom: 2em;
+  }
+
+  @include breakpoint(medium) {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+}
+
+body.path-search {
+  aside.layout-sidebar-first,
+  aside.layout-sidebar-second {
+    .block {
+      h3 {
+        margin-top: 0;
+      }
+
+      ul {
+        padding: 0 1em 0 0 !important;
+      }
+
+      li.facet-item {
+        list-style-type: none;
+        display: flex;
+
+        label {
+          display: block;
+          width: 85%;
+          padding-right: 5px;
+        }
+      }
+
+      .facets-checkbox {
+        width: 1em;
+      }
+
+      @extend %facet;
+    }
+  }
+}
+
+// This will change all <mark> from looking like a highlighter to just a bold.
+.view-content mark {
+  background-color: transparent;
+  font-weight: bold;
+  color: black;
+}
+
+// Make search box bigger on desktop.
+main form[action="/search/site"] .form-type-textfield,
+main .search.view .views-exposed-form .form-type-textfield {
+  @include breakpoint(medium) {
+    width: 75%;
+  }
+}
+
+// Don't display the label for the search in the header or any select field.
+header form[action="/search/site"] {
+  .form-type-select,
+  .form-type-textfield label {
+    display: none;
+  }
+}
+
+// Put some spacing on the top of the facets block.
+div.block.block-facets {
+  margin-top: 1em;
+  margin-right: 1em;
+
+  h3 {
+    margin-top: 0;
+  }
+
+  ul {
+    padding-left: 0;
+  }
+
+  li {
+    margin-left: 0;
+    list-style-type: none;
+
+    label {
+      font-size: 0.7em;
+    }
+  }
+
+  input[type="checkbox"] {
+    width: 0.8em;
+    height: 0.8em;
+  }
+}
+
+// Allow the titles linking to the nodes/pdfs to break on underscores (needed in OCD)
+.search.view {
+  a {
+    word-break: break-all;
+  }
+}

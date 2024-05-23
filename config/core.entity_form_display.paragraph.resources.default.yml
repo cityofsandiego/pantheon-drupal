@@ -1,0 +1,43 @@
+uuid: 7a0d96f3-bc15-480b-8d17-cfe5af64dd65
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.resources.field_icon
+    - field.field.paragraph.resources.field_label
+    - field.field.paragraph.resources.field_link
+    - paragraphs.paragraphs_type.resources
+  module:
+    - link
+id: paragraph.resources.default
+targetEntityType: paragraph
+bundle: resources
+mode: default
+content:
+  field_icon:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_label:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_link:
+    type: link_default
+    weight: 0
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

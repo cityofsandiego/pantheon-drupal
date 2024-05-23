@@ -1,0 +1,400 @@
+uuid: 86d0ba48-81b6-44fb-ba4d-ae1bd4a4a2d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.sand_remote.external.feeds_item
+    - field.field.sand_remote.external.field_a_webc_url
+    - field.field.sand_remote.external.field_action
+    - field.field.sand_remote.external.field_back_date
+    - field.field.sand_remote.external.field_body
+    - field.field.sand_remote.external.field_body_status
+    - field.field.sand_remote.external.field_committee
+    - field.field.sand_remote.external.field_d7_nid
+    - field.field.sand_remote.external.field_doc_date
+    - field.field.sand_remote.external.field_doc_date_num
+    - field.field.sand_remote.external.field_doc_date_year
+    - field.field.sand_remote.external.field_doc_num
+    - field.field.sand_remote.external.field_doc_set
+    - field.field.sand_remote.external.field_doc_type
+    - field.field.sand_remote.external.field_document_url
+    - field.field.sand_remote.external.field_flag_color
+    - field.field.sand_remote.external.field_flag_text
+    - field.field.sand_remote.external.field_import_date
+    - field.field.sand_remote.external.field_internal_notes
+    - field.field.sand_remote.external.field_muni_code_chapter
+    - field.field.sand_remote.external.field_object_name
+    - field.field.sand_remote.external.field_path
+    - field.field.sand_remote.external.field_pdf
+    - field.field.sand_remote.external.field_pn_category
+    - field.field.sand_remote.external.field_pn_comm_plan_group
+    - field.field.sand_remote.external.field_pn_council_district
+    - field.field.sand_remote.external.field_pn_end_date
+    - field.field.sand_remote.external.field_pn_end_date_date
+    - field.field.sand_remote.external.field_r_modify_date
+    - field.field.sand_remote.external.field_r_object_id
+    - field.field.sand_remote.external.field_search_keymatch
+    - field.field.sand_remote.external.field_skip_text_extract_queuing
+    - field.field.sand_remote.external.field_sort1
+    - field.field.sand_remote.external.field_source
+    - field.field.sand_remote.external.field_source_name
+    - field.field.sand_remote.external.field_title_long
+    - field.field.sand_remote.external.field_url
+    - field.field.sand_remote.external.field_validated
+    - sand_remote.sand_remote_type.external
+  module:
+    - datetime
+    - field_group
+    - text
+third_party_settings:
+  field_group:
+    group_urls:
+      children:
+        - field_document_url
+        - field_a_webc_url
+      label: URLs
+      region: content
+      parent_name: ''
+      weight: 16
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_source:
+      children:
+        - field_source
+        - field_source_name
+      label: Source
+      region: content
+      parent_name: ''
+      weight: 17
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_text_extract_info:
+      children:
+        - field_body_status
+        - field_internal_notes
+      label: 'Text Extract Info'
+      region: content
+      parent_name: ''
+      weight: 14
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_dates:
+      children:
+        - field_r_modify_date
+        - field_doc_date
+        - field_doc_date_num
+        - field_doc_date_year
+        - field_back_date
+        - created
+      label: Dates
+      region: content
+      parent_name: ''
+      weight: 15
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_pn_fields:
+      children:
+        - field_pn_category
+        - field_pn_comm_plan_group
+        - field_pn_council_district
+        - field_pn_end_date
+        - field_pn_end_date_date
+      label: 'PN Fields'
+      region: content
+      parent_name: ''
+      weight: 18
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+_core:
+  default_config_hash: Q8Vt9QOrZ-O4x8_ex-Hhzsmke0sv_WylxoM-Bi7QT64
+id: sand_remote.external.default
+targetEntityType: sand_remote
+bundle: external
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_a_webc_url:
+    type: string_textfield
+    weight: 26
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_back_date:
+    type: datetime_default
+    weight: 18
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_body:
+    type: text_textarea_with_summary
+    weight: 20
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_body_status:
+    type: string_textfield
+    weight: 18
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_committee:
+    type: options_select
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_doc_date:
+    type: datetime_default
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_doc_date_num:
+    type: string_textfield
+    weight: 16
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_doc_date_year:
+    type: string_textfield
+    weight: 17
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_doc_num:
+    type: string_textfield
+    weight: 9
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_doc_set:
+    type: string_textfield
+    weight: 7
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_doc_type:
+    type: options_select
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_document_url:
+    type: string_textfield
+    weight: 24
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_internal_notes:
+    type: string_textfield
+    weight: 20
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_muni_code_chapter:
+    type: options_select
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_object_name:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_path:
+    type: string_textfield
+    weight: 10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pn_category:
+    type: string_textfield
+    weight: 28
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pn_comm_plan_group:
+    type: string_textfield
+    weight: 29
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pn_council_district:
+    type: string_textfield
+    weight: 30
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pn_end_date:
+    type: string_textfield
+    weight: 31
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pn_end_date_date:
+    type: datetime_default
+    weight: 32
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_r_modify_date:
+    type: datetime_default
+    weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_r_object_id:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_search_keymatch:
+    type: entity_reference_autocomplete
+    weight: 4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_skip_text_extract_queuing:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_sort1:
+    type: number
+    weight: 13
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_source:
+    type: string_textfield
+    weight: 28
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_source_name:
+    type: string_textfield
+    weight: 29
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_title_long:
+    type: string_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  label:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 2
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 19
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  description: true
+  feeds_item: true
+  field_action: true
+  field_d7_nid: true
+  field_flag_color: true
+  field_flag_text: true
+  field_import_date: true
+  field_pdf: true
+  field_url: true
+  field_validated: true

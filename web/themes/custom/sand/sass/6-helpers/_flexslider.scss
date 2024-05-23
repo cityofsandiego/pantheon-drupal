@@ -1,0 +1,568 @@
+/*
+* jQuery FlexSlider v2.4.0
+* http://www.woothemes.com/flexslider/
+*
+* Copyright 2012 WooThemes
+* Free to use under the GPLv2 and later license.
+* http://www.gnu.org/licenses/gpl-2.0.html
+*
+* Contributing author: Tyler Smith (@mbmufffin)
+*
+*/
+
+/* ====================================================================================================================
+* RESETS
+* ==================================================================================================================== */
+
+/* .flex-container a:hover,
+.flex-slider a:hover,
+.flex-container a:focus,
+.flex-slider a:focus {
+  outline: none;
+} */
+
+.flex-control-nav,
+.flex-direction-nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ====================================================================================================================
+* BASE STYLES
+* ==================================================================================================================== */
+.flexslider {
+  background: #fff;
+  position: relative;
+  zoom: 1;
+  border-radius: 4px;
+  border-radius: 4px;
+  border-radius: 4px;
+  margin-bottom: 1em;
+  padding: 0 0 3em;
+  border: none;
+
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin: 0;
+      padding: 0;
+    }
+
+    &.flex-control-nav {
+      li {
+        margin: 1em;
+        padding: 0;
+
+        a:focus-visible {
+          outline: solid;
+          outline-color: $picton;
+        }
+
+        @include breakpoint(mobile-landscape) {
+          margin: 1.2rem 0.5rem;
+        }
+      }
+    }
+  }
+
+  .slides {
+    zoom: 1;
+    width: 100%;
+
+    img {
+      width: auto;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      max-height: 600px;
+    }
+
+    &::after {
+      content: "\0020";
+      display: block;
+      clear: both;
+      visibility: hidden;
+      line-height: 0;
+      height: 0;
+    }
+  }
+
+  .flex-prev,
+  .flex-next {
+    display: block !important;
+    transition: none !important;
+    opacity: 1 !important;
+  }
+}
+
+.flexslider:hover .flex-direction-nav .flex-prev {
+  opacity: 1;
+  left: 0;
+}
+
+.flexslider:hover .flex-direction-nav .flex-next {
+  opacity: 1;
+  right: 0;
+}
+
+html[xmlns] .flexslider .slides {
+  display: block;
+}
+
+* html .flexslider .slides {
+  height: 1%;
+}
+
+.no-js .flexslider .slides > li:first-child {
+  display: block;
+}
+
+/* ====================================================================================================================
+* DEFAULT THEME
+* ==================================================================================================================== */
+
+.flex-viewport {
+  min-height: 100%;
+  max-height: 2000px;
+  transition: all 1s ease;
+  transition: all 1s ease;
+  transition: all 1s ease;
+  transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.loading .flex-viewport {
+  max-height: 300px;
+}
+
+.carousel li {
+  margin-right: 5px;
+}
+
+.flex-direction-nav {
+  a {
+    z-index: 10;
+    color: white;
+    font-family: icomoon;
+    background: rgb(0 0 0 / 30%);
+    text-decoration: none;
+    display: inline-block;
+    position: absolute;
+    top: 40%;
+    left: 0;
+    border: 1px solid white;
+    border-radius: 50%;
+
+    &.flex-next {
+      left: auto;
+      right: -0;
+
+      &::before {
+        font-family: icomoon;
+        content: "\3e";
+        padding: 0 0.25em;
+
+        @include rem("font-size", 30px);
+      }
+    }
+
+    &.flex-prev {
+      &::before {
+        font-family: icomoon;
+        content: "\3c";
+        padding: 0 0.25em;
+
+        @include rem("font-size", 30px);
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: $cerulean;
+    }
+
+    &::before {
+      color: white;
+      text-shadow: none;
+    }
+
+    //-ms-transform: translateY(-50%);
+    //-webkit-transform: translateY(-50%);
+    //transform: translateY(-50%);
+    @include rem("font-size", 0);
+  }
+
+  .flex-disabled {
+    opacity: 0 !important;
+    filter: alpha(opacity=0);
+    cursor: default;
+  }
+}
+
+.flex-pauseplay {
+  a {
+    display: block;
+    width: 32px;
+    height: 40px;
+    padding-left: 1px;
+    position: absolute;
+    bottom: -42px;
+    left: 10px;
+    opacity: 0.8;
+    z-index: 10;
+    overflow: hidden;
+    cursor: pointer;
+    color: #000;
+
+    &::before {
+      font-family: icomoon;
+      font-size: 30px;
+      display: inline-block;
+
+      //content: '\f004';
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.flex-play::before {
+      content: "\e96a";
+    }
+
+    &.flex-pause::before {
+      content: "\e96b";
+    }
+  }
+
+  @include breakpoint(mobile-landscape down) {
+    display: none;
+  }
+}
+
+.flex-control-nav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  float: left;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  li {
+    margin: 1em;
+
+    //padding-top: 0.5em;
+    display: inline;
+    float: left;
+    zoom: 1;
+
+    &.flex-counter {
+      font-weight: 600;
+      line-height: 1.75;
+      display: inline-block;
+
+      @include rem("font-size", 14px);
+    }
+  }
+
+  a {
+    width: 11px;
+    height: 11px;
+    display: block;
+    border: 2px solid transparent;
+    background: $cerulean;
+
+    //background: rgba(0, 152, 219, 0.5);
+    cursor: pointer;
+    text-indent: -9999px;
+    border-radius: 20px;
+    border-radius: 20px;
+    border-radius: 20px;
+
+    &:hover {
+      background: $cerulean;
+    }
+
+    &.flex-active {
+      cursor: default;
+      background: $spruce;
+
+      //border: 2px solid white;
+    }
+  }
+
+  #slider-basic & {
+    position: relative;
+    bottom: 0;
+    margin: 1em 0;
+  }
+
+  @include breakpoint(mobile-landscape) {
+    bottom: 0;
+  }
+}
+
+.flex-control-paging li a {
+  background: $cerulean;
+  box-shadow: none;
+  border: none;
+}
+
+.flex-control-thumbs {
+  padding: 0;
+  margin: 5px 0 0;
+  position: static;
+  overflow: hidden;
+
+  li {
+    float: left;
+    margin: 0.25em;
+    display: block;
+    background: $alto;
+    border-radius: 4px;
+    width: span(1 of 5);
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    @include breakpoint(mobile-wide) {
+      width: span(1 of 8);
+    }
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all 1s ease;
+    transition: all 1s ease;
+    transition: all 1s ease;
+    transition: all 1s ease;
+    transition: all 1s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .flex-active {
+    opacity: 1;
+    cursor: default;
+  }
+}
+
+.flex-caption {
+  margin: 0;
+  padding: 0.5em;
+  padding-right: 2em;
+  color: $shuttle;
+  font-style: italic;
+  background-color: $mercury;
+  display: block;
+
+  @include breakpoint(mobile-landscape) {
+    padding-right: 0.5em;
+  }
+}
+
+.field-name-media-description {
+  p {
+    margin-bottom: 0 !important;
+  }
+
+  @extend .flex-caption;
+}
+
+// nav slideshow
+.slider-nav {
+  margin: 0.5em 0;
+
+  li {
+    margin: 0.2em;
+    border: 2px solid white;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  .flex-active-slide {
+    border: 2px solid $sunshade;
+  }
+}
+
+#slider-basic,
+#gallery-pop {
+  .flex-direction-nav {
+    top: 50%;
+
+    li {
+      width: 40px;
+      height: 40px;
+    }
+
+    .flex-nav-prev {
+      left: 0;
+    }
+
+    .flex-nav-next {
+      right: 0;
+    }
+
+    a {
+      opacity: 1;
+      width: 40px;
+      height: 40px;
+      color: white;
+      border: none;
+      border-radius: 0;
+      background: $sunshade;
+      text-shadow: none;
+
+      &::before {
+        color: white;
+        width: 100%;
+        font-size: 30px;
+        line-height: 40px;
+      }
+    }
+  }
+}
+
+#gallery-pop-nav {
+  .flex-direction-nav {
+    display: inline;
+    position: static;
+
+    li {
+      top: 30%;
+      border: none;
+      width: 24px;
+      height: 24px;
+    }
+
+    .flex-nav-prev {
+      left: 0;
+    }
+
+    .flex-nav-next {
+      right: 0;
+      margin-right: 0;
+    }
+
+    a {
+      opacity: 1;
+      color: white;
+      border: none;
+      border-radius: 0;
+      background: $sunshade;
+      text-shadow: none;
+      width: 100%;
+      height: 100%;
+
+      &::before {
+        opacity: 1;
+        color: white;
+        line-height: 24px;
+      }
+    }
+
+    a.flex-prev {
+      left: 0;
+    }
+
+    a.flex-next {
+      right: 0;
+    }
+  }
+}
+
+#slider-nav-basic {
+  .slides {
+    @include breakpoint(medium down) {
+      width: 100% !important;
+      transform: none !important;
+      transform: none !important;
+    }
+  }
+}
+
+.flexslider--thumbnails {
+  margin-bottom: 0 !important;
+}
+
+.flexslider--thumbnails-nav {
+  li {
+    max-height: 110px;
+    padding-bottom: 5px;
+
+    img {
+      opacity: 0.7;
+      padding: 5px 5px 0;
+      transition: opacity 0.25s ease;
+      transition: opacity 0.25s ease;
+      transition: opacity 0.25s ease;
+      transition: opacity 0.25s ease;
+      transition: opacity 0.25s ease;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      img {
+        opacity: 1;
+      }
+    }
+
+    &.flex-active-slide {
+      img {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+/* ====================================================================================================================
+* MOBILE FLEXSLIDER
+* ==================================================================================================================== */
+
+.flexslider--mobile {
+  .slides {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .flex-control-nav {
+    bottom: 0;
+    position: relative;
+    margin-top: 1em;
+    width: 100%;
+  }
+}
+
+/* ====================================================================================================================
+* HOMEPAGE SLIDES
+* ==================================================================================================================== */
+
+.view-homepage-slide {
+  .flexslider {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+
+    ul.slides li:not(:first-child) {
+      display: none;
+    }
+  }
+}

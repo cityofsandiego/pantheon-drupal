@@ -1,0 +1,29 @@
+uuid: 47033776-3d9d-4b19-b715-d90d65265e17
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image
+    - media.type.image
+    - node.type.department_parent
+id: node.department_parent.field_image
+field_name: field_image
+entity_type: node
+bundle: department_parent
+label: 'Department Logo'
+description: '<p>Choose an image to be used for SEO, social media sharing, and content preview purposes.</p>'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

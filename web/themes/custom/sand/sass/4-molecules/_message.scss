@@ -1,0 +1,98 @@
+/* Messaging
+   ========================================================================== */
+.main__message {
+  z-index: 2;
+  padding: 1.5em;
+  text-align: center;
+  position: relative;
+  background-color: rgb(0 0 0 / 35%);
+
+  .main__heading {
+    margin: 0;
+    color: white;
+
+    // @include rem("font-size", 48px);
+    font-size: 3rem;
+
+    @include breakpoint(medium down) {
+      font-size: 2rem;
+    }
+
+    @media print {
+      font-size: 2em;
+    }
+  }
+
+  .main__tagline {
+    margin: 0;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+    margin-top: 10px;
+    line-height: 1rem;
+    background-color: transparent;
+    text-shadow: 0 0 #555, 0 2px 0.5em black, 2px 0 0.5em black, 0 0 black;
+
+    @include rem("font-size", 16px);
+
+    @include breakpoint(medium down) {
+      text-align: center;
+      font-weight: normal;
+    }
+
+    @media print {
+      font-size: 2em;
+    }
+  }
+
+  .main__content {
+    margin: 0;
+    color: white;
+
+    @media print {
+      font-size: 1em;
+    }
+  }
+
+  a,
+  a:hover {
+    color: $gold;
+  }
+
+  &.main__message--white {
+    background-color: white;
+
+    a {
+      color: $off-black;
+    }
+
+    .main__heading {
+      color: $off-black;
+    }
+
+    .main__content {
+      color: $teal;
+    }
+  }
+
+  &.main__message--transparent {
+    background: transparent;
+
+    .main__heading {
+      color: white;
+      text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black;
+    }
+  }
+
+  @include breakpoint(medium) {
+    padding: 2.5em 1em;
+
+    .node-type-article & {
+      padding: 3em 0;
+    }
+  }
+
+  @include breakpoint(medium down) {
+    padding: 1.5em 1em;
+  }
+}

@@ -1,0 +1,162 @@
+uuid: 3c2aa89a-96cc-41dd-80e8-999ef12f09c2
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 51
+template: false
+archive: false
+id: webform_29117
+title: 'Ticket Request Form'
+description: null
+categories: {  }
+elements: |
+  first_name:
+    '#type': textfield
+    '#title': 'First Name' 
+    '#description': ""
+    '#required': true
+  last_name:
+    '#type': textfield
+    '#title': 'Last Name' 
+    '#description': ""
+    '#required': true
+  e_mail:
+    '#type': email
+    '#size': 20
+    '#title': 'E-mail' 
+    '#description': ""
+    '#required': true
+  name_of_your_organization:
+    '#type': select
+    '#options':
+      ymca: 'YMCA'
+      boy_scouts: 'Boy Scouts'
+      girl_scouts: 'Girl Scouts'
+    '#title': 'Name of Your Organization' 
+    '#description': ""
+    '#required': true
+  fieldset_event:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Event' 
+    '#description': ""
+    event_location_14:
+      '#type': select
+      '#options':
+        qualcomm_stadium: 'Qualcomm Stadium'
+        petco_park: 'Petco Park'
+      '#title': 'Event Location' 
+      '#description': ""
+      '#required': true
+    qualcomm_stadium_events_14:
+      '#type': select
+      '#options':
+        chargers_vs_jaguars_091816: 'Chargers vs Jaguars, Sunday, Sept 18, 2016'
+        chargers_vs_saints_100216: 'Chargers vs Saints, Sunday, Oct 2, 2016'
+        chargers_vs_broncos_101316: 'Chargers vs Broncos, Thursday, Oct 13, 2016'
+        chargers_vs_titans_110616: 'Chargers vs Titans, Sunday, Nov 6, 2016'
+        chargers_vs_dolphins_111316: 'Chargers vs Dolphins, Sunday, Nov 13, 2016'
+        chargers_vs_buccaneers_120416: 'Chargers vs Buccaneers, Sun, Dec 4, 2016'
+        chargers_vs_raiders_121816: 'Chargers vs Raiders, Sun, Dec 18, 2016'
+        chargers_vs_chiefs_010117: 'Chargers vs Chiefs, Sun, Jan 1, 2017'
+      '#title': 'Qualcomm Stadium Events' 
+      '#description': ""
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="event_location_14"]':
+            value: qualcomm_stadium
+            
+    petco_park_events_14:
+      '#type': select
+      '#options':
+        padres_vs_dodgers_may20: 'Padres vs Dodgers, Friday May 20, 2016'
+        padres_vs_dodgers_may21: 'Padres vs Dodgers, Saturday May 21, 2016'
+        padres_vs_dodgers_may22: 'Padres vs Dodgers, Sunday May 22, 2016'
+        padres_vs_mariners_june1: 'Padres vs Mariners, Wednesday June 1, 2016'
+        padres_vs_mariners_june2: 'Padres vs Mariners, Thursday June 2, 2016'
+        padres_vs_rockies_june3: 'Padres vs Rockies, Friday June 3, 2016'
+        padres_vs_rockies_june4: 'Padres vs Rockies, Saturday June 4, 2016'
+        padres_vs_rockies_june5: 'Padres vs Rockies, Sunday June 5, 2016'
+        padres_vs_braves_june6: 'Padres vs Braves, Monday June 6, 2016'
+      '#default_value': 'padres_vs_dodgers_may20' 
+      '#title': 'Petco Park Events' 
+      '#description': ""
+      '#states':
+        visible:
+          ':input[name="event_location_14"]':
+            value: petco_park
+            
+  number_of_tickets:
+    '#type': textfield
+    '#size': 20
+    '#min': 
+    '#max': 
+    '#step': 
+    '#unique': false
+    '#title': 'Number of Tickets' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: rcamerino@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

@@ -1,0 +1,252 @@
+/* ============================================================
+Styles for calendars.
+============================================================ */
+
+table.calendar-view-table {
+  border: 1px solid $alto;
+
+  caption {
+    font-family: $font-family-secondary;
+    font-size: 2em;
+    font-weight: normal;
+    line-height: 3;
+    width: 100%;
+
+    @include breakpoint(mobile-landscape down) {
+      float: left;
+    }
+  }
+
+  thead,
+  tbody,
+  tfoot {
+    border: none;
+  }
+
+  tbody {
+    tr:nth-child(even),
+    tr:hover {
+      background-color: white;
+    }
+
+    @include breakpoint(mobile-landscape) {
+      tr:first-child {
+        border-top: none;
+      }
+    }
+  }
+
+  tr {
+    border-bottom: 1px solid $alto;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    tr:nth-child(even) {
+      background-color: white;
+    }
+
+    @include breakpoint (mobile-landscape down) {
+      border-bottom: 5px solid $alto;
+    }
+  }
+
+  th {
+    background-color: $sunshade;
+    padding: 0.5em;
+    font-size: 1em;
+    color: white;
+  }
+
+  td {
+    padding: 0;
+    border: none;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    .calendar-view-day__row {
+      position: relative;
+
+      > * {
+        margin: 0;
+        color: black;
+      }
+
+      a {
+        color: $science;
+        font-size: 1rem;
+        line-height: 1.3;
+
+        &:hover {
+          color: lighten($link-color, 10%);
+        }
+
+        &.edit {
+          position: absolute;
+          right: 0.3125rem;
+          bottom: 0.3125rem;
+          font-size: 1em;
+        }
+
+        @include breakpoint(mobile-landscape) {
+          font-size: 1em;
+        }
+      }
+
+      &.is-multi--first,
+      &.is-multi--middle,
+      &.is-multi--last {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0.5rem;
+        border: 1px solid $chateau;
+        border-radius: 4px;
+      }
+
+      &.is-multi:not(.is-multi--first) > * {
+        opacity: 1;
+      }
+    }
+
+    @include breakpoint(mobile-landscape) {
+      border-right: 1px solid $alto;
+    }
+
+    @include breakpoint(mobile-landscape down) {
+      border-bottom: 1px solid $alto;
+    }
+  }
+
+  .calendar-view-day__number {
+    background-color: white;
+    color: $font-color;
+    font-size: 1em;
+    cursor: auto;
+    width: 100%;
+    text-align: left;
+
+    span.dow {
+      float: right;
+
+      @include breakpoint(mobile-landscape up) {
+        display: none;
+      }
+    }
+
+    @include breakpoint(mobile-landscape) {
+      width: auto;
+    }
+  }
+
+  .sunday,
+  .saturday {
+    background-color: $off-white;
+
+    .calendar-view-day__number {
+      background-color: $off-white;
+    }
+  }
+
+  .previous-month,
+  .next-month {
+    background-color: $alto;
+    border-right: 1px solid #d1d4d3;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    .calendar-view-day__number {
+      background-color: $alto;
+    }
+  }
+
+  .calendar-view-table td:hover {
+    background-color: transparent;
+  }
+
+  .today {
+    background-color: $warning-lt;
+
+    .calendar-view-day__number {
+      background-color: $warning-lt;
+    }
+  }
+
+  .sunday { z-index: 100; }
+  .monday { z-index: 90; }
+  .tuesday { z-index: 80; }
+  .wednesday { z-index: 70; }
+  .thursday { z-index: 60; }
+  .friday { z-index: 50; }
+  .saturday { z-index: 40; }
+
+  @include breakpoint (mobile-landscape) {
+    margin-top: -104px;
+  }
+}
+
+.calendar-view-pager {
+  flex-direction: row;
+
+  .pager__item {
+    margin: 0 !important;
+
+    &.pager__current {
+      display: none;
+    }
+
+    &.pager__previous a::before {
+      font-family: icomoon;
+      content: "\3c";
+      font-size: 0.8em;
+    }
+
+    &.pager__next a::after {
+      font-family: icomoon;
+      content: "\3e";
+      font-size: 0.8em;
+    }
+
+    a {
+      background-color: white;
+      border: none;
+    }
+
+    @include breakpoint(mobile-landscape) {
+      margin: 0 0 10px !important;
+    }
+  }
+}
+
+.calendar-view-pager__reset {
+  display: none;
+}
+
+.calendar .views-exposed-form label { //visually hidden
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+
+  /*
+    * Extends the .visuallyhidden class to allow the element to be focusable
+    * when navigated to via the keyboard: h5bp.com/p
+    */
+  &.focusable:active,
+  &.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+}

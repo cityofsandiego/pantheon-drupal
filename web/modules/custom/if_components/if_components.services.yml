@@ -1,0 +1,27 @@
+services:
+  if_components.preprocess.node:
+    class: \Drupal\if_components\EventSubscriber\Preprocess\Node
+    arguments:
+      - '@current_route_match'
+      - '@menu.active_trail'
+      - '@entity_type.manager'
+    tags:
+      - { name: event_subscriber }
+  if_components.preprocess.paragraph.sections_outreach_2:
+    class: \Drupal\if_components\EventSubscriber\Preprocess\Paragraph\SectionsOutreach2
+    arguments:
+      - '@entity_type.manager'
+    tags:
+      - { name: event_subscriber }
+  if_components.preprocess.paragraph.sections:
+    class: \Drupal\if_components\EventSubscriber\Preprocess\Paragraph\Sections
+    arguments:
+      - '@entity_type.manager'
+    tags:
+      - { name: event_subscriber }
+  if_components.preprocess.paragraph.amenities_restrictions:
+    class: \Drupal\if_components\EventSubscriber\Preprocess\Paragraph\AmenitiesRestrictions
+    arguments:
+      - '@entity_type.manager'
+    tags:
+      - { name: event_subscriber }

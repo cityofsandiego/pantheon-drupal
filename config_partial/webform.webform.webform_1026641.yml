@@ -1,0 +1,265 @@
+uuid: bed745f9-5322-4b02-a4ab-e95880329a53
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_1026641
+title: 'Project Status Request'
+description: null
+categories: {  }
+elements: |
+  fieldset_requestor_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Requestor Information' 
+    '#description': ""
+    requestor_name_1:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+      '#required': true
+    requestor_email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    requestor_phone_1:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': "Format: XXX-XXX-XXXX"
+      '#required': true
+  fieldset_project_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Project Information' 
+    '#description': ""
+    project_number_5:
+      '#type': textfield
+      '#title': 'Project Number' 
+      '#description': ""
+    project_address_5:
+      '#type': textfield
+      '#title': 'Project Address' 
+      '#description': "Include street address, city, and zip code"
+      '#required': true
+    applicant_name_5:
+      '#type': textfield
+      '#title': 'Applicant Name' 
+      '#description': ""
+      '#required': true
+  submittal_type:
+    '#type': radios
+    '#options':
+      Paper: 'Paper'
+      Electronic: 'Electronic'
+    '#title': 'Submittal Type' 
+    '#description': ""
+    '#required': true
+  doc_dropoff_date:
+    '#type': date
+    '#title': 'Document Drop-off Date' 
+    '#description': ""
+    '#required': true
+    '#states':
+      visible:
+        ':input[name="submittal_type"]':
+          value: Paper
+          
+  regarding:
+    '#type': radios
+    '#options':
+      New Project Set-up: 'New Project Set-up'
+      Issuance: 'Issuance'
+      Resubmittal: 'Resubmittal'
+      Stamp Transfer: 'Stamp Transfer'
+      Other: 'Other'
+    '#title': 'This is regarding:' 
+    '#description': ""
+    '#required': true
+  question:
+    '#title': 'Question' 
+    '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<h2>Thank you for submission!</h2>\r\n\r\n<p class=\"l-margin-bl\">You will receive an email response shortly.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: DSDProjectInfo@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:requestor_email:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Project Status Request from [submission:values:requestor_info:requestor_name:nolabel]'
+      body: |
+        Submitted on [webform_submission:date:long]
+
+        == REQUESTOR INFORMATION ==
+
+        NAME:
+        [webform_submission:values:requestor_info:requestor_name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:requestor_info:requestor_email:nolabel]
+
+        PHONE:
+        [webform_submission:values:requestor_info:requestor_phone:nolabel]
+
+        == PROJECT INFORMATION ==
+
+        PROJECT NUMBER:
+        [webform_submission:values:project_info:project_number:nolabel]
+
+        PROJECT ADDRESS:
+        [webform_submission:values:project_info:project_address:nolabel]
+
+        APPLICANT NAME:
+        [webform_submission:values:project_info:applicant_name:nolabel]
+
+        ========================
+
+        SUBMITTAL TYPE:
+        [webform_submission:values:submittal_type:nolabel]
+
+        DOCUMENT DROP-OFF DATE:
+        [webform_submission:values:doc_dropoff_date:nolabel]
+
+        THE QUESTION IS REGARDING:
+        [webform_submission:values:doc_dropoff_date:nolabel]
+
+        QUESTION:
+        [webform_submission:values:question:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:requestor_email:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: DSDProjectInfo@sandiego.gov
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Project Status Request Received'
+      body: |
+        Thank you for contacting the City of San Diego Development Services Department (DSD). We will review and process your request as soon as possible, based on available resources. As the global effect of the COVID-19 pandemic continues to evolve, we are modifying operations to ensure the health and safety of our customers and employees. Keep up-to-date with the latest operational changes at https://www.sandiego.gov/development-services/covid-19-public-notice.
+
+        DSD EMAIL UPDATES
+        Visit https://sandiego.gov/dsd-email to receive the latest updates from DSD directly into your email inbox.
+
+        **NOTE: Please do not reply to this auto-generated message. Replies to this message will not be received.**
+
+        Here is the information that you submitted:
+
+        == REQUESTOR INFORMATION ==
+
+        NAME:
+        [webform_submission:values:requestor_info:requestor_name:nolabel]
+
+        EMAIL:
+        [webform_submission:values:requestor_info:requestor_email:nolabel]
+
+        PHONE:
+        [webform_submission:values:requestor_info:requestor_phone:nolabel]
+
+        == PROJECT INFORMATION ==
+
+        PROJECT NUMBER:
+        [webform_submission:values:project_info:project_number:nolabel]
+
+        PROJECT ADDRESS:
+        [webform_submission:values:project_info:project_address:nolabel]
+
+        APPLICANT NAME:
+        [webform_submission:values:project_info:applicant_name:nolabel]
+
+        ========================
+
+        SUBMITTAL TYPE:
+        [webform_submission:values:submittal_type:nolabel]
+
+        DOCUMENT DROP-OFF DATE:
+        [webform_submission:values:doc_dropoff_date:nolabel]
+
+        THE QUESTION IS REGARDING:
+        [webform_submission:values:doc_dropoff_date:nolabel]
+
+        QUESTION:
+        [webform_submission:values:question:nolabel]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

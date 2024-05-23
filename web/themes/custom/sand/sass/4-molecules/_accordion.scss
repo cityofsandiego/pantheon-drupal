@@ -1,0 +1,262 @@
+/* ============================================================
+  Styles for accordions.
+  ============================================================ */
+
+.accordion {
+  margin: 0 0 1em;
+  transition: border 0.25s;
+  transition: border 0.25s;
+  transition: border 0.25s;
+
+  .accordion:last-child {
+    margin-bottom: 0;
+  }
+
+  .accordion-title {
+    background-color: $mercury;
+    font-size: 1.6875rem;
+    color: $font-color;
+    text-decoration: none;
+
+    &:hover {
+      color: $cerulean;
+    }
+
+    &::before {
+      margin-top: -0.8rem;
+    }
+  }
+
+  .accordion__drawer {
+    padding: 0 1em 1em;
+    display: none;
+  }
+}
+
+/* Accordion D7
+   ========================================================================== */
+.accordions {
+  margin: 0 0 1em;
+
+  #list-container & {
+    margin: 0;
+  }
+}
+
+.accordion {
+  margin: 0 0 1em;
+  transition: border 0.25s;
+
+  #list-container & {
+    margin: 0;
+  }
+}
+
+.accordion__heading {
+  margin: 0;
+  padding: 1rem 3.5rem 1rem 1rem;
+  color: $font-color;
+  background: $mercury;
+  position: relative;
+  border: 1px solid white;
+  transition: all 0.5s;
+  transition: all 0.5s;
+  transition: all 0.5s;
+
+  #list-container & {
+    padding: 0.2em 1em;
+  }
+}
+
+.accordion__link {
+  display: block;
+  color: $font-color;
+  text-decoration: none;
+  font-weight: unset;
+
+  #list-container & i {
+    font-size: 0.75em;
+  }
+
+  &:focus {
+    color: $font-color;
+    text-decoration: none;
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: lighten($link-color, 10%);
+  }
+}
+
+.accordion__drawer {
+  padding: 1em;
+  display: none;
+
+  .no-js & {
+    display: block;
+  }
+
+  .accordion__link {
+    font-size: 1rem;
+  }
+}
+
+.toggle-icon {
+  margin-top: -8px;
+  width: 24px;
+  height: 16px;
+  line-height: 20px;
+  display: inline-block;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  overflow: hidden;
+  transform: rotate(0deg);
+  transform: rotate(0deg);
+  transform-origin: center;
+  transform-origin: center;
+  transition: transform 0.25s;
+  transition: transform 0.25s;
+
+  &::before {
+    font-family: icomoon;
+    content: "\7c";
+    font-size: 1.5rem;
+
+    .csstransforms3d & {
+      margin-top: auto;
+    }
+  }
+}
+
+.current.is-open {
+  &.accordion {
+    border: 1px solid $chateau;
+
+    > .accordion__heading {
+      font-weight: 700;
+      background: white;
+    }
+
+    .toggle-icon.open {
+      transition: -webkit-transform 0.25s;
+      transition: -moz-transform 0.25s;
+      transition: transform 0.25s;
+      transform: rotate(180deg);
+      transform: rotate(180deg);
+      transform: rotate(180deg);
+      transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.table__accordion {
+  margin: 0;
+  padding: 0;
+
+  .accordion {
+    margin: 0;
+  }
+
+  .accordion__drawer {
+    padding: 0;
+    border: none;
+    display: block;
+
+    @include breakpoint(medium down) {
+      display: none;
+    }
+  }
+
+  .accordion__link {
+    display: block;
+    font-size: 0.875rem;
+
+    i {
+      line-height: 1.5;
+    }
+
+    @include breakpoint(mobile-landscape up) {
+      @include rem("font-size", 18px);
+    }
+  }
+
+  .accordion__heading {
+    border: none;
+    padding: 0.25em 0;
+    line-height: 2.5;
+    background: transparent;
+  }
+
+  .toggle-icon {
+    position: static;
+    margin: 0;
+    line-height: 1;
+    width: auto;
+    height: 1em;
+    vertical-align: middle;
+    font-size: 2rem;
+    transform: rotate(0deg);
+    transform: all 25s;
+
+    &::after,
+    &::before {
+      display: none;
+    }
+
+    i {
+      line-height: 1;
+    }
+  }
+
+  .is-open {
+    .accordion__heading {
+      border-bottom: none;
+    }
+
+    .toggle-icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  @include breakpoint(medium) {
+    td,
+    th {
+      &:first-child {
+        width: 40%;
+      }
+    }
+  }
+
+  @include breakpoint(medium down) {
+    td,
+    th {
+      border: none;
+
+      // @include span(4);
+
+      &:nth-child(2),
+      &:nth-child(3) {
+        text-align: right;
+      }
+    }
+
+    table {
+      width: 100%;
+    }
+
+    .accordion__heading {
+      padding: 0.75em 0.5em;
+
+      @include rem("font-size", 18px);
+    }
+  }
+
+  @include breakpoint(mobile-landscape) {
+    table {
+      width: 100%;
+    }
+  }
+}

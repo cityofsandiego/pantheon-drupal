@@ -1,0 +1,63 @@
+uuid: 78906921-8645-46f2-a15f-29feccc41e05
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card
+    - field.field.node.mayoral_artifacts.body
+    - field.field.node.mayoral_artifacts.field_category
+    - field.field.node.mayoral_artifacts.field_d7_nid
+    - field.field.node.mayoral_artifacts.field_department
+    - field.field.node.mayoral_artifacts.field_image
+    - field.field.node.mayoral_artifacts.field_keywords
+    - field.field.node.mayoral_artifacts.field_location
+    - field.field.node.mayoral_artifacts.field_mayor
+    - field.field.node.mayoral_artifacts.field_photo_date
+    - field.field.node.mayoral_artifacts.field_record_id
+    - field.field.node.mayoral_artifacts.field_search_exclude_entity
+    - field.field.node.mayoral_artifacts.field_search_keymatch
+    - image.style.large
+    - node.type.mayoral_artifacts
+  module:
+    - media
+    - user
+id: node.mayoral_artifacts.card
+targetEntityType: node
+bundle: mayoral_artifacts
+mode: card
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: large
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  field_category: true
+  field_d7_nid: true
+  field_department: true
+  field_keywords: true
+  field_location: true
+  field_mayor: true
+  field_photo_date: true
+  field_record_id: true
+  field_search_exclude_entity: true
+  field_search_keymatch: true
+  langcode: true
+  search_api_excerpt: true

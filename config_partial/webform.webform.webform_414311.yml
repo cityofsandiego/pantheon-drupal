@@ -1,0 +1,146 @@
+uuid: 3b251600-a03a-477c-8e78-b4534f387b89
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_414311
+title: 'Building Records Request Form'
+description: null
+categories: {  }
+elements: |
+  fieldset_your_information_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Your Information' 
+    '#description': ""
+    name_2:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+      '#required': true
+    telephone_2:
+      '#type': textfield
+      '#title': 'Telephone' 
+      '#description': ""
+      '#required': true
+    email_2:
+      '#type': textfield
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+  fieldset_property_address_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Property Address in City of San Diego' 
+    '#description': ""
+    street_address_6:
+      '#type': textfield
+      '#title': 'Street Address' 
+      '#description': ""
+      '#required': true
+    zip_code_6:
+      '#type': textfield
+      '#size': 
+      '#title': 'Zip Code' 
+      '#description': ""
+      '#required': true
+  fieldset_what_information_set:
+    '#type': fieldset
+    '#open': true
+    '#title': 'What information would you like?' 
+    '#description': ""
+    information_category_descriptions_17:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<p><a class='btn' href='/development-services/records/request-form-categories' target='_blank'>Information Category Descriptions</a></p>\n"
+      '#title': 'Information Category Descriptions' 
+      '#description': ""
+    information_type_17:
+      '#type': radios
+      '#options':
+        0: 'As-Builts'
+        8: 'Blueprints/Building Plans'
+        1: 'Building Permits'
+        9: 'Historic Permits (Prior to 1990)'
+        2: 'Plumbing Permits'
+        3: 'Mechanical Permits'
+        4: 'Electrical Permits'
+        5: 'Fire Permits'
+        6: 'Certificates of Occupancy'
+        7: 'Other'
+      '#title_display': invisible
+      '#title': 'Information Type' 
+      '#description': ""
+      '#required': true
+  additional_information_about_your_request:
+    '#title': 'Additional information about your request ' 
+    '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<p>Thank you for contacting the City of San Diego Development Services Department (DSD). We will review and process your request as soon as possible, based on available resources. As the global effect of the COVID-19 pandemic continues to evolve, we are modifying operations to ensure the health and safety of our customers and employees. Keep up-to-date with the latest operational changes here <a href=\"/development-services/covid-19-public-notice\">https://www.sandiego.gov/development-services/covid-19-public-notice</a>.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: dsdrcd@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: dsdrcd@sandiego.gov
+      from_options: {  }
+      from_name: 'DSD RCD'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |-
+        Submitted on [webform_submission:date:long]
+
+        Submitted values are:
+        [webform_submission:values]
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

@@ -1,0 +1,102 @@
+<div id="form-response"></div>
+
+<p>Instructions: Provide the information requested below, then press 'Calculate'. Your Meter Size and Water Usage can be found on your <a href="/public-utilities/customer-service/billing/how-to-read-your-bill">water bill</a>. Some accounts have more than one meter. For those accounts with multiple meters, you will need to run the calculator for each meter.</p>
+
+<form id="wbc">
+    <table border="0" cellpadding="10" cellspacing="0" width="100%">
+        <tbody>
+        <tr>
+            <td><label for="customertype">Customer Type</label>:</td>
+            <td colspan="2"><select id="customertype" name="customertype">
+                    <option value="">--select one--</option>
+                    <option value="1">Single Family Dwelling</option>
+                    <option value="2">Multi-family Dwelling</option>
+                    <option value="3">Non-Residential</option>
+                    <option value="4">Irrigation</option></option>
+                    <option value="5">Temporary Construction</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="watermetersize" class="l-padding-lm">Water Meter Size</label>:</td>
+            <td colspan="2"><select id="watermetersize" name="watermetersize">
+                    <option value="">--select one--</option>
+                    <option value="1">5/8 inch</option>
+                    <option value="2">3/4 inch</option>
+                    <option value="3">1 inch</option>
+                    <option value="4">1 1/2 inch</option>
+                    <option value="5">2 inch</option>
+                    <option value="6">3 inch</option>
+                    <option value="7">4 inch</option>
+                    <option value="8">6 inch</option>
+                    <option value="9">8 inch</option>
+                    <option value="10">10 inch</option>
+                    <option value="11">12 inch</option>
+                    <option value="12">16 inch</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="waterusage" class="l-padding-lm">Monthly Water Usage (HCF)</label>:</td>
+            <td><input id="waterusage" maxlength="9" name="waterusage" size="6" type="Text"><input id="hiddenfield" style="width:0; border:none;" type="hidden"></td>
+        </tr>
+        <tr>
+            <td><label for="sewerservicecharge" class="l-padding-lm">Sewer Service Charge</label>:</td>
+            <td><input id="sewerservicecharge" maxlength="9" name="sewerservicecharge" size="6" type="Text" class="sewerservicechargeinput" style="display: none;"> <span class="sewerservicechargeinput" style="display: none;">(Use Bi-Monthly amount from bill)</span> <span class="sewerservicechargeinputdisabled">(Only for residential estimates)</span><input id="hiddenfield" style="width:0; border:none;" type="hidden"></td>
+        </tr>
+        <tr>
+            <td><label for="recycledwatermetersize">Recycled Water Meter Size</label>:</td>
+            <td colspan="2"><select id="recycledwatermetersize" name="recycledwatermetersize">
+                    <option value="">--NA--</option>
+                    <option value="1">5/8 inch</option>
+                    <option value="2">3/4 inch</option>
+                    <option value="3">1 inch</option>
+                    <option value="4">1 1/2 inch</option>
+                    <option value="5">2 inch</option>
+                    <option value="6">3 inch</option>
+                    <option value="7">4 inch</option>
+                    <option value="8">6 inch</option>
+                    <option value="9">8 inch</option>
+                    <option value="10">10 inch</option>
+                    <option value="11">12 inch</option>
+                    <option value="12">16 inch</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="recycledwaterusage" class="l-padding-lm">Recycled Water Usage (HCF)</label>:</td>
+            <td><input id="recycledwaterusage" maxlength="9" name="recycledwaterusage" size="6" type="Text"><input id="hiddenfield" style="width:0; border:none;" type="hidden"></td>
+        </tr>
+
+        <tr>
+            <td><label for="firelinesize">Fireline Size</label>:</td>
+            <td colspan="2"><select id="firelinesize" name="firelinesize">
+                    <option value="">--NA--</option>
+                    <option class="metersize" value="1">1 inch</option>
+                    <option class="metersize" value="2">1 1/2 inch</option>
+                    <option class="metersize" value="3">2 inch</option>
+                    <option class="metersize" value="4">3 inch</option>
+                    <option class="metersize" value="5">4 inch</option>
+                    <option class="metersize" value="6">6 inch</option>
+                    <option class="metersize" value="7">8 inch</option>
+                    <option class="metersize" value="8">10 inch</option>
+                    <option class="metersize" value="9">12 inch</option>
+                    <option class="metersize" value="10">16 inch</option>
+                    <option class="metersize" value="11">20 inch</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>&nbsp;</td>
+            <td><input name="submit" type="Submit" value="Calculate" class="btn btn--tertiary"></td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+<p><strong>This calculator provides monthly estimates. Most single-family customers receive a bill every other month so these customers should double the estimate provided by the calculator to reflect an actual bill.</strong></p>
+<p><strong>Notes:</strong> This calculator only provides estimates. Your actual bill will vary depending on the length of the billing cycle and whether there are rate changes during the billing cycle. Rate changes are pro-rated depending on when they fall in the billing cycle. Monthly estimates by the calculator are based on a 30-day month. Actual billing cycles may slightly vary.</p>
+<p>This calculator is only for a portion of your City of San Diego utility bill. It does not include storm water portions.</p>
+<p>If you have any questions or comments, please contact the Public Utilities Department at 619-515-3516 or <a href="mailto:customercare@sandiego.gov">customercare@sandiego.gov</a>.</p>
+
+{{ attach_library('if_sand_customphp/customer-bill-calculator') }}

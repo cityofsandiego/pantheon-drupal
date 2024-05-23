@@ -1,0 +1,240 @@
+uuid: 0f54d4e1-560e-4967-baa0-d6fe6677296d
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 23
+template: false
+archive: false
+id: webform_26860
+title: "Citizens' Online Police Reporting System"
+description: null
+categories: {  }
+elements: |
+  emergency:
+    '#type': radios
+    '#options':
+      1: 'Yes'
+      0: 'No'
+    '#title': 'Is this an emergency? (If yes, please call 911 immediately)' 
+    '#description': ""
+    '#required': true
+  emergency_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<div class='message message--error'>\n	<p><strong>Your answer indicates that this is an emergency.</strong>&nbsp;Emergencies should be reported immediately by dialing&nbsp;<strong>9-1-1&nbsp;</strong>on your telephone instead of submitting a police report online.</p>\n</div>\n"
+    '#title': 'emergency_markup' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="emergency"]':
+          value: '1'
+          
+  committedby:
+    '#type': radios
+    '#options':
+      1: 'Yes'
+      0: 'No'
+    '#title': 'Do you know who committed this crime or is there evidence to suggest who committed this crime?' 
+    '#description': ""
+    '#required': true
+  committedby_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<div class='message message--error'>\n	<p><strong>Your answer indicates that you know who committed the crime you are reporting.</strong> If you know who committed the crime, you should call us at (619) 531-2000 to file a report instead of submitting a police report online.</p>\n</div>\n"
+    '#title': 'committedby_markup' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="committedby"]':
+          value: '1'
+          
+  evidence:
+    '#type': radios
+    '#options':
+      1: 'Yes'
+      0: 'No'
+    '#title': 'Do you have physical evidence in your possession? For example, video (clear footage in which the suspect can be immediately identified by someone at the location), digital evidence, ID, blood, clothing, or tool used to commit crime.' 
+    '#description': ""
+    '#required': true
+  evidence_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<div class='message message--error'>\n	<p><strong>Your answer indicates you have possession of evidence.</strong> You must call us at (619) 531-2000 to file a report instead of submitting a police report online.</p>\n</div>\n<p>&nbsp;</p>\n"
+    '#title': 'evidence_markup' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="evidence"]':
+          value: '1'
+          
+  hatecrime:
+    '#type': radios
+    '#options':
+      1: 'Yes'
+      0: 'No'
+    '#title': 'Do you believe you are the victim of a crime because of your race, religion, sexual orientation, handicap, ethnicity or national origin?' 
+    '#description': ""
+    '#required': true
+  hatecrime_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<div class='message message--error'>\n	<p><strong>Your answer indicates that you may be the victim of a Hate Crime.</strong>&nbsp;You must call us at (619) 531-2000 to file a report instead of submitting a police report online.</p>\n</div>\n"
+    '#title': 'hatecrime_markup' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="hatecrime"]':
+          value: '1'
+          
+  freeway:
+    '#type': radios
+    '#options':
+      1: 'Yes'
+      0: 'No'
+    '#title': 'Did the incident occur on a State highway or freeway?' 
+    '#description': ""
+    '#required': true
+  freeway_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<div class='message message--error'>\n	<p><strong>Your answer indicates that the incident occurred on a State highway or freeway.</strong>&nbsp;If the incident occurred on a State highway or freeway, you should contact the&nbsp;<a href='http://www.chp.ca.gov/'>California Highway Patrol Office</a>nearest you, instead of submitting a police report online.&nbsp;<a href='http://www.chp.ca.gov/'>http://www.chp.ca.gov</a></p>\n</div>\n<p>&nbsp;</p>\n"
+    '#title': 'freeway_markup' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="freeway"]':
+          value: '1'
+          
+  middle_content:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<p class='l-margin-td'>If you have answered NO to the above questions, please continue.</p>\n\n<div class='l-section message--warning l-margin-vm'>\n	<p class='text-accent'><strong>Filing a false police report is a crime!</strong></p>\n\n	<p><strong>Every person who knowingly makes a false report that a felony or misdemeanor has been committed is guilty of a misdemeanor per 148.5 (a) of the California Penal Code.</strong></p>\n</div>\n"
+    '#title': 'middle_content' 
+    '#description': ""
+  falsereport:
+    '#type': radios
+    '#options':
+      1: 'Yes'
+      0: 'No'
+    '#title': 'Do you understand that filing a false police report is a crime?' 
+    '#description': ""
+    '#required': true
+  falsereport_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<div class='message message--error'>\n	<p><strong>Your answer indicates that you do not understand that filing a false police report is a crime.</strong>&nbsp;It is required that you understand that filing a false police report is a crime if you would like to submit a police report online.</p>\n</div>\n"
+    '#title': 'falsereport_markup' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="falsereport"]':
+          value: '0'
+          
+  citylimits:
+    '#type': radios
+    '#options':
+      1: 'Yes'
+      0: 'No'
+    '#title': 'Did the incident occur within the San Diego city limits?' 
+    '#description': ""
+    '#required': true
+  citylimits_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<div class='message message--error'><p><strong>Your answer indicates that the incident did not occur within the San Diego city limits.</strong>&nbsp;If the incident did not occur within the San Diego city limits, you should contact the city or county where the incident occurred instead of submitting a police report online with the City of San Diego.</p></div>\n"
+    '#title': 'citylimits_markup' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="citylimits"]':
+          value: '0'
+          
+  damage5k:
+    '#type': radios
+    '#options':
+      1: 'Yes'
+      0: 'No'
+    '#title': 'Is the value / damage less than $10,000?' 
+    '#description': ""
+    '#required': true
+  damage10k_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<div class='message message--error'>\n	<p><strong>Your answer indicates that the value / damage is $10,000 or more.</strong>&nbsp;You must call (619) 531-2000 to report lost property involving firearms or valued $10,000 or more.</p>\n</div>\n"
+    '#title': 'damage10k_markup' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="damage5k"]':
+          value: '0'
+          
+  eighteen:
+    '#type': radios
+    '#options':
+      1: 'Yes'
+      0: 'No'
+    '#title': 'Are you eighteen (18) years of age or older?' 
+    '#description': ""
+    '#required': true
+  eighteen_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<div class='message message--error'><p><strong>Your answer indicates that you are not eighteen (18) years of age or older.</strong>&nbsp;If you are under the age of eighteen (18) years of age, you cannot submit a police report online. Please have a parent or guardian submit the police report for you.</p></div>\n"
+    '#title': 'eighteen_markup' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="eighteen"]':
+          value: '0'
+          
+  validemail:
+    '#type': radios
+    '#options':
+      1: 'Yes'
+      0: 'No'
+    '#title': 'Do you have an email address? (A valid return email address is required in order to file an online report.)' 
+    '#description': ""
+    '#required': true
+  validemail_markup:
+    '#type': processed_text
+    '#format': full_html
+    '#text': "<div class='message message--error l-margin-bd'>\n	<p><strong>Your answer indicates that you do not have an email address.</strong>&nbsp;A valid return email address is required in order to submit a police report online so that we can email you your temporary police report number and a copy of the police report to keep for your records.</p>\n</div>\n"
+    '#title': 'validemail_markup' 
+    '#description': ""
+    '#states':
+      visible:
+        ':input[name="validemail"]':
+          value: '0'
+          
+  submit_validation:
+    '#type': processed_text
+    '#format': full_html
+    '#text': ""
+    '#title': 'Submit Validation - JS injector - coprs_submit' 
+    '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: police/services/file-police-report/report
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers: {  }
+variants: {  }

@@ -1,0 +1,1794 @@
+uuid: 1aa556e5-67af-4778-a8dc-5333bfc91ff0
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 1
+template: false
+archive: false
+id: webform_13163
+title: 'Get It Done - Resident'
+description: null
+categories: {  }
+elements: |-
+  get_it_done:
+    '#type': hidden
+    '#default_value': 'TRUE'
+    '#title': get_it_done
+    '#description': ''
+  fieldset_step_1:
+    '#type': fieldset
+    '#title': 'I Need To...'
+    '#open': true
+    '#attributes':
+      class:
+        - step-1
+    i_need_to_2:
+      '#type': select
+      '#options':
+        apply: Apply
+        check: 'Check Status'
+        contact: Contact
+        find: Find
+        pay: Pay
+        register: Register
+        report: Report
+        request: Request
+        view: View
+      '#default_value': apply
+      '#title_display': invisible
+      '#title': 'I need to'
+      '#description': ''
+      '#required': true
+  fieldset_apply_set:
+    '#type': fieldset
+    '#title': 'Apply for...'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: apply
+    '#attributes':
+      class:
+        - step-2
+    apply_4:
+      '#type': select
+      '#options':
+        jobs: 'City Job Opportunities'
+        library_card: 'Library Card'
+        minor_permit: 'Minor Residential Building Permit'
+        park_permit: 'Park Permits'
+        residential_parking: 'Parking Permit (Residential)'
+        temp_parking: 'Parking Permit (Temporary Overnight RV)'
+        passport: Passport
+        stro: 'Short-Term Residential Occupancy License'
+      '#default_value': jobs
+      '#title_display': invisible
+      '#title': Apply
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: apply
+      '#required': true
+  fieldset_find_set:
+    '#type': fieldset
+    '#title': Find...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: find
+    '#attributes':
+      class:
+        - step-2
+    find_6:
+      '#type': select
+      '#options':
+        jobs: 'City Job Opportunities'
+        const_permits: 'Construction Permit Information'
+        const_projects: 'Construction Projects and Events'
+        wifi: 'Free Wi-Fi'
+        handwash: 'Handwash Station'
+        notices: 'Public Notices'
+        rec_programs: 'Recreational Programs'
+        recycled_water: 'Recycled Water Availability'
+        restroom: Restroom
+        trash: 'Trash Collection Schedule'
+      '#default_value': jobs
+      '#title_display': invisible
+      '#title': Find
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: find
+      '#required': true
+  fieldset_check_set:
+    '#type': fieldset
+    '#title': 'Check Status of...'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: check
+    '#attributes':
+      class:
+        - step-2
+    check_70:
+      '#type': select
+      '#options':
+        get_it_done_status: 'Get It Done Report'
+        parking_ticket: 'Parking Ticket'
+        trash: 'Trash Service Request'
+      '#default_value': get_it_done_status
+      '#title_display': invisible
+      '#title': 'Check Status'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: check
+      '#required': true
+  fieldset_contact_set:
+    '#type': fieldset
+    '#title': Contact...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: contact
+    '#attributes':
+      class:
+        - step-2
+    contact_76:
+      '#type': select
+      '#title': Contact
+      '#title_display': invisible
+      '#options':
+        mayor: 'Mayor Todd Gloria'
+        cd1: 'Councilmember Joe LaCava (District 1)'
+        cd2: 'Councilmember Jennifer Campbell (District 2)'
+        cd3: 'Councilmember Stephen Whitburn (District 3)'
+        cd4: 'Council President Pro Tem Monica Montgomery Steppe (District 4)'
+        cd5: 'Councilmember Marni von Wilpert (District 5)'
+        cd6: 'Councilmember Kent Lee (District 6)'
+        cd7: 'Councilmember Raul Campillo (District 7)'
+        cd8: 'Councilmember Vivian Moreno (District 8)'
+        cd9: 'Council President Sean Elo-Rivera (District 9)'
+        attorney: 'Office of the City Attorney'
+        dept: Departments
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: contact
+      '#default_value': mayor
+      '#required': true
+  fieldset_pay_set:
+    '#type': fieldset
+    '#title': Pay...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: pay
+    '#attributes':
+      class:
+        - step-2
+    pay_8:
+      '#type': select
+      '#options':
+        library: 'Library Fees'
+        parking_ticket: 'Parking Citation/Ticket'
+        water: 'Water Bill'
+      '#default_value': library
+      '#title_display': invisible
+      '#title': Pay
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: pay
+      '#required': true
+  fieldset_register_set:
+    '#type': fieldset
+    '#title': Register...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: register
+    '#attributes':
+      class:
+        - step-2
+    register_10:
+      '#type': select
+      '#options':
+        alarm: 'Alarm Permit'
+        emergency: 'Emergency Notification System'
+        park: 'Park and Recreation Activities'
+      '#default_value': alarm
+      '#title_display': invisible
+      '#title': Register
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: register
+      '#required': true
+  fieldset_report_set:
+    '#type': fieldset
+    '#title': Report...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: report
+    '#attributes':
+      class:
+        - step-2
+    report_12:
+      '#type': select
+      '#options':
+        cable: 'Cable Television Complaint'
+        police: 'Complaint on Police Practices'
+        dead_animal: 'Dead Animal'
+        disability: 'Disability-Related Concern'
+        graffiti: Graffiti
+        drug: 'Illegal drug activity'
+        litter_dumping: Litter/Dumping
+        noise: 'Noise Complaint'
+        nonemer: 'Non-emergency Crime'
+        oversized_vehicle: 'Oversized vehicle'
+        parking: 'Parking zone issue'
+        pothole: Pothole
+        street: 'Problem on Street or Sidewalk'
+        sidewalk_maintenance: 'Sidewalk Maintenance'
+        drain: 'Storm Drain Issue'
+        street_flooding: 'Street Flooding'
+        street_light: 'Street Light Issue'
+        traffic_sign: 'Traffic Sign Problem'
+        traffic_signal: 'Traffic Signal Problem'
+        tree_hazard: 'Tree Hazard'
+        vehicle_abandoned: 'Vehicle (72-hour Violation)'
+      '#default_value': noise
+      '#title_display': invisible
+      '#title': Report
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: report
+      '#required': true
+  fieldset_request_set:
+    '#type': fieldset
+    '#title': Request...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: request
+    '#attributes':
+      class:
+        - step-2
+    request_14:
+      '#type': select
+      '#options':
+        appeal: 'Appeal for Parking Ticket'
+        fire_pres: 'Fire Safety Presentation'
+        fire_tour: 'Fire Station Tour'
+        graffiti: 'Graffiti Removal'
+        signal: 'New Traffic Signal or Sign'
+        park_avail: 'Park Facility Availability'
+        ride_along: 'Police Ride Along'
+        social_call: 'Social Call'
+        street: 'Street Sweeping'
+        water_service: 'To Start or Stop Water Service'
+        trash: 'Trash and Recycling Service'
+        tree_maintenance: 'Tree Maintenance'
+        water_tour: 'Water Purification Facility Tour'
+      '#default_value': appeal
+      '#title_display': invisible
+      '#title': Request
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: request
+      '#required': true
+  fieldset_view_set:
+    '#type': fieldset
+    '#title': View...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: view
+    '#attributes':
+      class:
+        - step-2
+    view_18:
+      '#type': select
+      '#options':
+        library: 'Library Account'
+        map: 'Map Gallery'
+        park: 'Park Facilities Map'
+        problems_reported: 'Problems Reported'
+        strategic_plan: 'Strategic Plan'
+        undergrounding: 'Utilities Undergrounding Maps'
+        water_bill: 'Water Bill'
+      '#default_value': library
+      '#title_display': invisible
+      '#title': View
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: view
+      '#required': true
+  fieldset_apply_options_set:
+    '#type': fieldset
+    '#title': 'Apply Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: apply
+    '#attributes':
+      class:
+        - step-3
+    apply_2_20:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for a City library card</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for a library card' href='/public-library/services/lending/librarycard'>Apply Now</a></div>
+        </div>
+      '#title': 'Library Card'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: library_card
+    stro_20:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for Short-Term Residential Occupancy License</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for Short-Term Residential Occupancy License' href='/stro'>Apply Now</a></div>
+        </div>
+      '#title': STRO
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: stro
+    apply_4_20:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for a permit to hold an event at a City park</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for a park permit' href='/park-and-recreation/parks/permits'>Apply Now</a></div>
+        </div>
+      '#title': 'Park Permits'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: park_permit
+    apply_5_20:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Residents may obtain a temporary permit that allows overnight parking of recreational vehicles on the resident's block.</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for a temporary overnight RV parking permit' href='/parking/permits/torvp/index'>Apply Now</a></div>
+        </div>
+      '#title': 'Temporary Overnight RV Parking Permit'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: temp_parking
+    apply_residential_parking_permit_20:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for a residential parking permit</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for a residential parking permit' href='/parking/permits/respermit'>Apply Now</a></div>
+        </div>
+      '#title': 'Residential Parking Permit'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: residential_parking
+    apply_6_20:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Make an appointment to apply for a U.S. passport</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for a passport' href='/city-clerk/inforecords/passport'>Apply Now</a></div>
+        </div>
+      '#title': Passport
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: passport
+    apply_7_20:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for permits to obtain simple no-plan electrical, plumbing and mechanical permits for minor residential installations</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Apply for a minor residential building permit' href='/development-services/industry/simplepermits/index'>Apply Now</a></div>
+        </div>
+      '#title': 'Minor Residential Building Permit'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: minor_permit
+    apply_1_20:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find a job with the City</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide btn--primary' title='Find City job opportunities' href='/empopp/current'>Find Now</a></div>
+        </div>
+      '#title': 'City Job Opportunities'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="apply_4"]':
+            value: jobs
+  fieldset_find_options:
+    '#type': fieldset
+    '#title': 'Find Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: find
+    '#attributes':
+      class:
+        - step-3
+    find_1_27:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find information about recreational activities and programs at City parks</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find recreation programs' href='/park-and-recreation/activities'>Find Now</a></div>
+        </div>
+      '#title': 'Recreational Programs'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_6"]':
+            value: rec_programs
+    find_wifi_27:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find free Wi-Fi in San Diego</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find free wi-fi in San Diego' href='/sdaccess'>Find Now</a></div>
+        </div>
+      '#title': 'Free Wi-Fi'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_6"]':
+            value: wifi
+    find_handwash_27:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find a handwash station</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find a handwash station' href='/handwash'>Find Now</a></div>
+        </div>
+      '#title': 'Handwash Station'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_6"]':
+            value: handwash
+    find_restroom_27:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find a restroom</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find a restroom' href='/handwash'>Find Now</a></div>
+        </div>
+      '#title': Restroom
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_6"]':
+            value: restroom
+    find_2_27:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Find the trash and recycling schedule for your home</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/CollectionMapLookup'>Find Now</a></div>
+        </div>
+      '#title': 'Trash Collection Schedule'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_6"]':
+            value: trash
+    find_7_27:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Use OpenDSD for online access to data about construction permits</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find construction permit information' href='/development-services/opendsd'>Find Now</a></div>
+        </div>
+      '#title': 'Construction Permit Information'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_6"]':
+            value: const_permits
+    find_const_projects_27:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Find construction projects and events near you</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find construction projects and events near you' href='https://sandiego.maps.arcgis.com/apps/webappviewer/index.html?id=a1c45c92fb6d46efa4b1209941f58c8a'>Find Now</a></div>
+        </div>
+      '#title': 'Construction Projects and Events'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_6"]':
+            value: const_projects
+    find_8_27:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Search the City's official advertising and notices with information about public hearings, bid and contract opportunities, City ordinances and resolutions, and many other official notices</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find public notices' href='/city-clerk/officialdocs/notices'>Find Now</a></div>
+        </div>
+      '#title': 'Public Notices'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_6"]':
+            value: notices
+    find_3_27:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>See areas where recycled water is available</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Find recycled water availability' href='/public-utilities/sustainability/recycled-water/switching'>Find Now</a></div>
+        </div>
+      '#title': 'Recycled Water Availability'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_6"]':
+            value: recycled_water
+    find_9_27:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Apply for a job with the City</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' href='/empopp/current/'>Find Now</a></div>
+        </div>
+      '#title': 'City Job Opportunities'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="find_6"]':
+            value: jobs
+  fieldset_check_options:
+    '#type': fieldset
+    '#title': 'Check Status Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: check
+    '#attributes':
+      class:
+        - step-3
+    check_1_73:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Check the status of a parking citation/ticket</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Check status of parking ticket' href='http://duncan.imageenforcement.com/ImageOnlySites/SanDiegoImages'>Check Status Now</a></div>
+        </div>
+      '#title': 'Parking Ticket'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="check_70"]':
+            value: parking_ticket
+    check_3_73:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Check the status of a Get It Done report</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWViewReportByList' title='Check status of a Get It Done report'>Check Status Now</a></div>
+        </div>
+      '#title': 'Get It Done Report'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="check_70"]':
+            value: get_it_done_status
+    check_2_73:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Track status of trash, litter or recycling service request</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWViewReportByList' title='Check status of trash service request'>Check Status Now</a></div>
+        </div>
+      '#title': 'Trash Service Request'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="check_70"]':
+            value: trash
+  fieldset_contact_options:
+    '#type': fieldset
+    '#title': 'Contact Info'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: contact
+    '#attributes':
+      class:
+        - step-3
+    contact_1_78:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Mayor Todd Gloria<br>City Administration Building<br>202 C Street, 11th Floor<br>San Diego, CA 92101<br>Phone: (619) 236-6330<br><a href='mailto:mayortoddgloria@sandiego.gov'>MayorToddGloria@sandiego.gov</a></p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Visit the Mayor's Office website' href='/mayor'>Visit Website</a></div>
+        </div>
+      '#title': 'Mayor Todd Gloria'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="contact_76"]':
+            value: mayor
+    contact_2_78:
+      '#type': processed_text
+      '#title': 'Councilmember Joe LaCava (District 1)'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="contact_76"]':
+            value: cd1
+      '#text': |
+        <div class="row">
+        <div class="eight columns">
+        <p class="l-padding-desktop-ts">Councilmember Joe LaCava (District&nbsp;1)<br />
+        City Administration Building<br />
+        202 C Street, MS #10A<br />
+        San Diego, CA 92101<br />
+        (619) 236-6611<br />
+        <a href="mailto:JoeLaCava@sandiego.gov">JoeLaCava@sandiego.gov</a></p>
+        </div>
+
+        <div class="four columns"><a class="btn btn--wide" href="/cd1" title="Visit Council President Joe LaCava (District 1) website">Visit Website</a></div>
+        </div>
+      '#format': full_html
+    contact_3_78:
+      '#type': processed_text
+      '#title': 'Councilmember Jennifer Campbell (District 2)'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="contact_76"]':
+            value: cd2
+      '#text': |
+        <div class="row">
+        <div class="eight columns">
+        <p class="l-padding-desktop-ts">Councilmember Jennifer Campbell (District 2)<br />
+        City Administration Building<br />
+        202 'C' Street, 10th Floor<br />
+        San Diego, CA 92101<br />
+        (619) 236-6622<br />
+        Fax: (619) 236-7329<br />
+        <a href="mailto:JenniferCampbell@sandiego.gov">JenniferCampbell@sandiego.gov</a></p>
+        </div>
+
+        <div class="four columns"><a class="btn btn--wide" href="/cd2" title="Visit Council President Jennifer Campbell (District 2) website">Visit Website</a></div>
+        </div>
+      '#format': full_html
+    contact_4_78:
+      '#type': processed_text
+      '#title': 'Councilmember Stephen Whitburn (District 3)'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="contact_76"]':
+            value: cd3
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Councilmember Stephen Whitburn (District 3)<br>City Administration Bldg.<br>202 'C' Street, MS #10A<br>San Diego, CA 92101<br>(619) 236-6633<br><a href='mailto:StephenWhitburn@sandiego.gov'>StephenWhitburn@sandiego.gov</a></p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Visit Councilmember Stephen Whitburn (District 3) website' href='/cd3'>Visit Website</a></div>
+        </div>
+      '#format': full_html
+    contact_5_78:
+      '#type': processed_text
+      '#title': 'Council President Pro Tem Monica Montgomery Steppe (District 4)'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="contact_76"]':
+            value: cd4
+      '#text': |
+        <div class="row">
+        <div class="eight columns">
+        <p class="l-padding-desktop-ts">Council President Pro Tem Monica Montgomery Steppe (District 4)<br />
+        City Administration Building<br />
+        202 C Street, MS #10A<br />
+        San Diego, CA 92101<br />
+        (619) 236-6644<br />
+        <a href="mailto:monicamontgomery@sandiego.gov">MonicaMontgomery@sandiego.gov</a></p>
+        </div>
+
+        <div class="four columns"><a class="btn btn--wide" href="/cd4" title="Visit Councilmember Monica Montgomery Steppe (District 4) website">Visit Website</a></div>
+        </div>
+      '#format': full_html
+    contact_7_78:
+      '#type': processed_text
+      '#title': 'Councilmember Kent Lee (District 6)'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="contact_76"]':
+            value: cd6
+      '#text': |
+        <div class="row">
+        <div class="eight columns">
+        <p class="l-padding-desktop-ts">Councilmember Kent Lee (District&nbsp;6)<br />
+        City Administration Building<br />
+        202 C Street, 10th Floor<br />
+        San Diego, CA 92101<br />
+        (619) 236-6616<br />
+        <a href="mailto:KentLee@sandiego.gov">KentLee@sandiego.gov</a></p>
+        </div>
+
+        <div class="four columns"><a class="btn btn--wide" href="/cd6" title="Visit Councilmember Chris Cate (District 6) website">Visit Website</a></div>
+        </div>
+      '#format': full_html
+    contact_8_78:
+      '#type': processed_text
+      '#title': 'Councilmember Raul Campillo (District 7)'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="contact_76"]':
+            value: cd7
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Councilmember Raul Campillo (District 7)<br>City Administration Building<br>202 C Street, MS #10A<br>San Diego, CA 92101<br>(619) 236-6677<br>Fax: (619) 238-1360<br><a href='mailto:RaulCampillo@sandiego.gov'>RaulCampillo@sandiego.gov</a></p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Visit Councilmember Raul Campillo (District 7) website' href='/cd7'>Visit Website</a></div>
+        </div>
+      '#format': full_html
+    contact_6_78:
+      '#type': processed_text
+      '#title': 'Councilmember Marni von Wilpert (District 5)'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="contact_76"]':
+            value: cd5
+      '#text': |
+        <div class="row">
+        <div class="eight columns">
+        <p class="l-padding-desktop-ts">Councilmember Marni von&nbsp;Wilpert (District&nbsp;5)<br />
+        City Administration Building<br />
+        202 C Street, MS #10A<br />
+        San Diego, CA 92101<br />
+        (619) 236-6655<br />
+        <a href="mailto:MarnivonWilpert@sandiego.gov">MarnivonWilpert@sandiego.gov</a></p>
+        </div>
+
+        <div class="four columns"><a class="btn btn--wide" href="/cd5" title="Visit Councilmember Marni von Wilpert (District 5) website">Visit Website</a></div>
+        </div>
+      '#format': full_html
+    contact_9_78:
+      '#type': processed_text
+      '#title': 'Councilmember Vivian Moreno (District 8)'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="contact_76"]':
+            value: cd8
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Councilmember Vivian Moreno (District 8)<br>City Administration Building<br>202 C Street, 10th Floor<br>San Diego, CA 92101<br>(619) 236-6688<br>Fax: (619) 231-7918<br><a href='mailto:vivianmoreno@sandiego.gov'>VivianMoreno@sandiego.gov</a></p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Visit Councilmember Vivian Moreno (District 8) website' href='/cd8'>Visit Website</a></div>
+        </div>
+      '#format': full_html
+    contact_10_78:
+      '#type': processed_text
+      '#title': 'Council President Sean Elo-Rivera (District 9)'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="contact_76"]':
+            value: cd9
+      '#text': |
+        <div class="row">
+        <div class="eight columns">
+        <p class="l-padding-desktop-ts">Council President Sean Elo-Rivera (District 9)<br />
+        City Administration Building<br />
+        202 'C' Street, MS #10A<br />
+        San Diego, CA 92101<br />
+        (619) 236-6699<br />
+        <a href="mailto:SeanEloRivera@sandiego.gov">SeanEloRivera@sandiego.gov</a></p>
+        </div>
+
+        <div class="four columns"><a class="btn btn--wide" href="/cd9" title="Visit Councilmember Sean Elo-Rivera (District 9) website">Visit Website</a></div>
+        </div>
+      '#format': full_html
+    contact_11_78:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>View contact information for City departments</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='View contact information for City departments' href='/city-hall/departments'>View Contact Info</a></div>
+        </div>
+      '#title': Departments
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="contact_76"]':
+            value: dept
+    contact_12_78:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Office of the City Attorney<br>1200 Third Ave., Suite 1620<br>San Diego, CA 92101<br>(619) 236-6220<br>Fax: (619) 236-7215<br><a href='mailto:cityattorney@sandiego.gov'>cityattorney@sandiego.gov</a></p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Visit Office of the City Attorney website' href='/cityattorney'>Visit Website</a></div>
+        </div>
+      '#title': 'Office of the City Attorney'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="contact_76"]':
+            value: attorney
+  fieldset_payment_options:
+    '#type': fieldset
+    '#title': 'Pay Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: pay
+    '#attributes':
+      class:
+        - step-3
+    pay_1_33:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Pay your water and sewer bill</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Pay water bill' href='/customercare/'>Pay Now</a></div>
+        </div>
+      '#title': 'Water Bill'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="pay_8"]':
+            value: water
+    pay_2_33:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Pay a parking citation/ticket</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Pay parking ticket' href='https://www.dspayments.com/SanDiego'>Pay Now</a></div>
+        </div>
+      '#title': 'Parking Ticket'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="pay_8"]':
+            value: parking_ticket
+    pay_3_33:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>View a library bill and pay your library fines</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Pay library fees' href='/public-library/services/lending/onlinebills'>Pay Now</a></div>
+        </div>
+      '#title': 'Library Fees'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="pay_8"]':
+            value: library
+  fieldset_register_options:
+    '#type': fieldset
+    '#title': 'Register Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: register
+    '#attributes':
+      class:
+        - step-3
+    register_1_39:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Register recreational activities at City parks and recreation centers</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Register for Park and Recreation Activities' href='https://apm.activecommunities.com/sdparkandrec/Activity_Search'>Register Now</a></div>
+        </div>
+      '#title': 'Park and Recreation Activities'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="register_10"]':
+            value: park
+    register_2_39:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Pay or apply for permits for systems with fire/harmful gas and burglary/robbery alarm sensors</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Register for an Alarm Permit' href='https://sdpdalarmpermits.sandiego.gov/'>Register Now</a></div>
+        </div>
+      '#title': 'Alarm Permit'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="register_10"]':
+            value: alarm
+    register_3_39:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Register for Alert San Diego emergency notification system</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Register for Emergency Notification System' href='/ohs/emergencynotification'>Register Now</a></div>
+        </div>
+      '#title': 'Emergency Notification System'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="register_10"]':
+            value: emergency
+  fieldset_report_options:
+    '#type': fieldset
+    '#title': 'Report Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: report
+    '#attributes':
+      class:
+        - step-3
+    report_1_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Report a non-emergency crime to police</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report a non-emergency crime' href='/police/services/file-police-report'>Report Now</a></div>
+        </div>
+      '#title': 'Non-emergency Crime'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: nonemer
+    report_10_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>File a noise complaint</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='File a noise complaint' href='/ced/report/investigation'>Report Now</a></div>
+        </div>
+      '#title': 'Noise Complaint'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: noise
+    report_cable_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Report a cable television service problem that has not been resolved through direct contact with your cable company.</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report a Cable Television Complaint' href='https://www.sandiego.gov/citytv/regulation/complaint'>Report Now</a></div>
+        </div>
+      '#title': 'Cable Television Complaint'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: cable
+    report_23_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>If you are denied access to a City program, service or activity due to a disability, the City's Office of ADA Compliance and Accessibility wants to know.</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report a Disability-Related Concern' href='https://www.sandiego.gov/adacompliance/complaint/complaintform'>Report Now</a></div>
+        </div>
+      '#title': 'Disability-Related Concern'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: disability
+    report_2_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report a pothole or other street-related problem</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Sidewalk'>Report Now</a></div>
+        </div>
+      '#title': 'Problem on Street or Sidewalk'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: street
+    report_3_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report a problem with a storm drain in your neighborhood</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Storm%20Drain' title='Report a storm drain issue'>Report Now</a></div>
+        </div>
+      '#title': 'Storm Drain Issue'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: drain
+    report_5_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>File a complaint about police practices</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='File a complaint on police practices' href='/citizensreviewboard/filing/complaint-form'>Report Now</a></div>
+        </div>
+      '#title': 'Complaint on Police Practices'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: police
+    report_8_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>File a report about illegal drug and narcotics activities in your neighborhood</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report illegal drug activity' href='https://www.sandiego.gov/police/services/drug-related-activity-tip'>Report Now</a></div>
+        </div>
+      '#title': 'Illegal Drug activity'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: drug
+    report_11_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report a vehicle parked in the same place for over 72 hours</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/PDNewReport' title='Report a vehicle parked in the same place for over 72 hours'>Report Now</a></div>
+        </div>
+      '#title': '72-hour Vehicle Violation'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: vehicle_abandoned
+    report_12_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report a street light issue</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Street%20Light' title='Report street light issue'>Report Now</a></div>
+        </div>
+      '#title': 'Street Light Issue'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: street_light
+    report_13_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report a traffic signal problem</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Traffic%20Signal' title='Report traffic signal problem'>Report Now</a></div>
+        </div>
+      '#title': 'Traffic Signal Problem'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: traffic_signal
+    report_15_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report a pothole</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Pothole' title='Report a pothole'>Report Now</a></div>
+        </div>
+      '#title': Pothole
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: pothole
+    report_16_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report sidewalk maintenance</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Sidewalk' title='Report sidewalk maintenance'>Report Now</a></div>
+        </div>
+      '#title': 'Sidewalk Maintenance'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: sidewalk_maintenance
+    report_18_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report a dead animal</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Dead%20Animal' title='Report a dead animal'>Report Now</a></div>
+        </div>
+      '#title': 'Dead Animal'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: dead_animal
+    report_19_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report graffiti</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Graffiti' title='Report an abandoned vehicle'>Report Now</a></div>
+        </div>
+      '#title': 'Abandoned Vehicle'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: graffiti
+    report_17_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report traffic sign problem</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Traffic%20Sign' title='Report traffic sign problem'>Report Now</a></div>
+        </div>
+      '#title': 'Traffic Sign Problem'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: traffic_sign
+    report_20_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report litter/dumping</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Litter/Dumping' title='Report litter/dumping'>Report Now</a></div>
+        </div>
+
+        <p>&nbsp;</p>
+      '#title': Litter/Dumping
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: litter_dumping
+    report_21_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Request tree maintenance</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Tree%20Maintenance' title='Request tree maintenance'>Request Now</a></div>
+        </div>
+      '#title': 'Tree maintenance'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: tree_hazard
+    report_22_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report street flooding</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Street%20Flooded' title='Report street flooding'>Report Now</a></div>
+        </div>
+      '#title': 'Street Flooding'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: street_flooding
+    report_oversized_vehicle_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report an oversized vehicle</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/PDNewReport' title='Report an oversized vehicle'>Report Now</a></div>
+        </div>
+      '#title': 'Oversized Vehicle'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: oversized_vehicle
+    report_parking_38:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report a parking zone issue (e.g. car parked in a red zone)</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/PDNewReport' title='Report a parking zone issue'>Report Now</a></div>
+        </div>
+      '#title': 'Parking Zone Issue'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: parking
+  fieldset_request_options:
+    '#type': fieldset
+    '#title': 'Request Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: request
+    '#attributes':
+      class:
+        - step-3
+    request_0_50:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request an administrative review of your parking citation</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request an appeal for a parking ticket' href='http://duncan.imageenforcement.com/AdminReviewSites/SanDiegoReview'>Request Now</a></div>
+        </div>
+      '#title': 'Appeal for Parking Ticket'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: appeal
+    request_1_50:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request information about the availability of City park facilities</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request Park Facility Availability' href='https://apm.activecommunities.com/sdparkandrec/Facility_Search'>Request Now</a></div>
+        </div>
+      '#title': 'Park Facility Availability'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: park_avail
+    request_2_50:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Request street sweeping service for your street</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Street%20Sweeping' title='Request street sweeping'>Request Now</a></div>
+        </div>
+      '#title': 'Street Sweeping'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: street
+    request_3_50:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request a tour of the City's Water Purification Facility</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request a Water Purification Facility Tour' href='/public-utilities/sustainability/pure-water-sd/request-presentation'>Request Now</a></div>
+        </div>
+      '#title': 'Water Purification Facility Tour'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: water_tour
+    request_5_50:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request a ride along with a police officer</p>
+        </div>
+        <div class='four columns'><a title='Request a police ride along' href='https://www.sandiego.gov/police/community/ride-along-request'>Request Now</a></div>
+        </div>
+      '#title': 'A Police Ride Along'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: ride_along
+    request_9_50:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Submit a service request regarding a traffic sign, street striping or curb color painting, stop sign, traffic signal or other traffic safety measure</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request a A New Traffic Signal or Sign' href='/tsw/servicerequests/trafficrequest'>Request Now</a></div>
+        </div>
+      '#title': 'A New Traffic Signal or Sign'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: signal
+    request_social_call_50:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>The City will call you and say 'hello' as well as connect you to other life-enhancing resources.</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request a Social Call' href='/social-calls'>Request Now</a></div>
+        </div>
+      '#title': 'Social Call'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: social_call
+    request_10_50:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Access self-serve options in managing your water and sewer account</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='/public-utilities/customer-service/billing/service' title='Request to To Start or Stop Water Service'>Request Now</a></div>
+        </div>
+      '#title': 'To Start or Stop Water Service'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: water_service
+    request_tree_maintenance_50:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Request tree maintenance</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Tree%20Maintenance' title='Request tree maintenance'>Request Now</a></div>
+        </div>
+      '#title': 'Tree Maintenance'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: tree_maintenance
+    request_6_50:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request a tour of a City fire station</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request a Fire Station Tour' href='/fire/safety/speakers/tours'>Request Now</a></div>
+        </div>
+      '#title': 'Fire Station Tour'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: fire_tour
+    request_7_50:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request a presentation on fire safety</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request a Fire Safety Presentation' href='/fire/safety/speakers/presentations'>Request Now</a></div>
+        </div>
+      '#title': 'Fire Safety Presentation'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: fire_pres
+    request_8_50:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request graffiti be removed on City streets and other property</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request Graffiti Removal' href='/streetdiv'>Request Now</a></div>
+        </div>
+      '#title': 'Graffiti Removal'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: graffiti
+    request_12_50:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Request trash, recycling or yard waste service at your property</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWNewReport?type=Missed%20Trash' title='Request Trash and Recycling Service'>Request Now</a></div>
+        </div>
+      '#title': 'Trash and Recycling Service'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: trash
+  fieldset_view_options:
+    '#type': fieldset
+    '#title': 'View Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: view
+    '#attributes':
+      class:
+        - step-3
+    view_4_64:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>View maps and data regarding undergrounding of utilities</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='View Utilities Undergrounding Maps' href='https://webmaps.sandiego.gov/portal/apps/Cascade/index.html?appid=929e10afa0b64837a21e49e3df343149'>View Now</a></div>
+        </div>
+      '#title': 'Utilities Undergrounding Maps'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="view_18"]':
+            value: undergrounding
+    view_1_64:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>View and manage your library account</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='View Library Account' href='https://sandiego.bibliocommons.com/user/login'>View Now</a></div>
+        </div>
+      '#title': 'Library Account'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="view_18"]':
+            value: library
+    view_2_64:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>View various City maps</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='View various City maps' href='http://sandiego.maps.arcgis.com/apps/PublicGallery/index.html?appid=99ca3e0f7a9a42e3a0667c4682bd78dc'>View Now</a></div>
+        </div>
+      '#title': 'Map Gallery'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="view_18"]':
+            value: map
+    view_5_64:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>View a map of City park facilities</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='View Park Facilities Map' href='/park-and-recreation/centers/map'>View Now</a></div>
+        </div>
+      '#title': 'Park Facilities Map'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="view_18"]':
+            value: park
+    view_6_64:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>View problems reported</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/TSWViewReportByMap' title='View problems reported'>View Now</a></div>
+        </div>
+      '#title': 'Problems Reported'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="view_18"]':
+            value: problems_reported
+    view_water_bill_64:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>View your water and sewer bill</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='View your water and sewer bill' href='/customercare'>View Now</a></div>
+        </div>
+      '#title': 'Water Bill'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="view_18"]':
+            value: water_bill
+    view_strategic_plan_64:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>View the City's Strategic Plan</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='View the City's Strategic Plan' href='https://performance.sandiego.gov/'>View Now</a></div>
+        </div>
+      '#title': 'Strategic Plan'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="view_18"]':
+            value: strategic_plan
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers: {  }
+variants: {  }

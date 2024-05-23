@@ -1,0 +1,26 @@
+{% for row in rows %}
+<div class="grid-x event-listing-small">
+    <div class="cell small-4 medium-3">
+        <div class="event-date event--sunshade">
+            {% if row.date is not empty %}
+                {{ row.date }}<br>{{ row.time }}
+            {% endif %}
+        </div>
+    </div>
+    <div class="cell auto medium-auto l-padding-ls">
+        <div class="event-info">
+            {% if row.link is empty %}
+                <p class="h4 heading--snug l-margin-bn">{{ row.title }}</p>
+            {% else %}
+                <p class="h4 heading--snug l-margin-bn">{{ link(row.title, row.link) }}</p>
+            {% endif %}
+            {% if row.closing is not empty %}
+                <p class="fine-print">{{ row.closing }}</p>
+            {% endif %}
+            {% if row.age_groups is not empty %}
+                <p class="fine-print l-margin-bn">{{ row.age_groups }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endfor %}

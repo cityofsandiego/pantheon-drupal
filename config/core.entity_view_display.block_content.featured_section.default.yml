@@ -1,0 +1,26 @@
+uuid: 8fc83c98-c947-40d7-8a67-db98f09f6bd4
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.featured_section
+    - field.field.block_content.featured_section.field_featured_items
+  module:
+    - entity_reference_revisions
+id: block_content.featured_section.default
+targetEntityType: block_content
+bundle: featured_section
+mode: default
+content:
+  field_featured_items:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

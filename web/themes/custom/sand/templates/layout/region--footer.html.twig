@@ -1,0 +1,92 @@
+{#
+/**
+ * @file
+ * Olivero's theme override to display the footer top region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region <div>.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+
+{%
+  set classes = [
+    'region',
+    'region--' ~ region|clean_class,
+    'grid-full',
+    'layout--pass--content-medium',
+    'ie11-autorow',
+    'grid-container',
+    'alto-bg',
+  ]
+%}
+
+{% if content %}
+  <div{{ attributes.addClass(classes) }}>
+    <div class="region--{{ region }}__inner">
+      <div class="footer--left l-padding-ad">
+        <div class="grid-x">
+
+          <div class="cell medium-12 l-margin-bd">
+            <p class="text-center"><img class="footer--logo" src="/{{ directory }}/images/cosd-logo/cosd-logo-initials-white.svg" alt="The City of San Diego - logo" width="50" height="auto"></p>
+            <ul class="socials l-margin-desktop-hn text-center">                        
+              <li><a class="icon--facebook" href="https://www.facebook.com/CityofSanDiego" title="Facebook" data-extlink="" target="_blank" rel="noopener noreferrer" class="extlink"><i class="icon-facebook"></i></a></li>
+              <li><a class="icon--twitter" href="https://twitter.com/CityofSanDiego" title="Twitter" data-extlink="" target="_blank" rel="noopener noreferrer" class="extlink"><i class="icon-twitter"></i></a></li>
+              <li><a class="icon--youtube" href="http://www.youtube.com/user/TheCityofSanDiego" title="YouTube" data-extlink="" target="_blank" rel="noopener noreferrer" class="extlink"><i class="icon-youtube"></i></a></li>
+              <li><a class="icon--instagram" href="https://www.instagram.com/cityofsandiego/" title="Instagram" data-extlink="" target="_blank" rel="noopener noreferrer" class="extlink"><i class="icon-instagram"></i></a></li>
+              <li><a class="icon--nextdoor" href="https://nextdoor.com/city/feed/748155/?i=wkjkutqnzmjazcaegxre" title="Nextdoor" data-extlink="" target="_blank" rel="noopener noreferrer" class="extlink"><i class="icon-nextdoor"></i></a></li>
+              <li><a class="icon--linkedin" href="https://www.linkedin.com/company/cityofsandiego" title="LinkedIn" data-extlink="" target="_blank" rel="noopener noreferrer" class="extlink"><i class="icon-linkedin"></i></a></li>
+            </ul>
+          </div>
+
+          <div class="cell medium-12">
+            <p class="text-center"><img src="/sites/default/files/mayor-todd-gloria-logo-white.png?v=1" alt="Mayor Todd Gloria logo" width="100" height="auto"></p>
+            <ul class="socials l-margin-desktop-hn  text-center" style="display: block">                        
+              <li><a class="icon--facebook" href="https://www.facebook.com/MayorToddGloria" title="Facebook" data-extlink="" target="_blank" rel="noopener noreferrer" class="extlink"><i class="icon-facebook"></i></a></li>
+              <li><a class="icon--twitter" href="https://twitter.com/MayorToddGloria" title="Twitter" data-extlink="" target="_blank" rel="noopener noreferrer" class="extlink"><i class="icon-twitter"></i></a></li>
+              <li><a class="icon--instagram" href="https://www.instagram.com/mayortoddgloria" title="Instagram" data-extlink="" target="_blank" rel="noopener noreferrer" class="extlink"><i class="icon-instagram"></i></a></li>
+              <li><a class="icon--linkedin" href="https://www.linkedin.com/in/toddgloria/" title="LinkedIn" data-extlink="" target="_blank" rel="noopener noreferrer" class="extlink"><i class="icon-linkedin"></i></a></li>
+              <li><a class="icon--nextdoor" href="https://nextdoor.com/agency/city-of-san-diego-office-of-the-mayor/?i=nmuhzmmgkbzqqvhqabbn" title="Nextdoor" data-extlink="" target="_blank" rel="noopener noreferrer" class="extlink"><i class="icon-nextdoor"></i></a></li>
+            </ul>
+          </div>
+          <div class="hidden">
+            <img class="footer--logo l-margin-mobile-bd" src="/{{ directory }}/images/cosd-logo/cosd-logo-initials-white-color-sails.svg" alt="The City of San Diego - logo" width="50" height="auto">
+
+            <ul class="social-links">                        
+              <li><a class="icon--facebook" href="https://www.facebook.com/CityofSanDiego" title="Facebook"><i class="icon-facebook"></i></a></li>
+              <li><a class="icon--twitter" href="https://twitter.com/CityofSanDiego" title="Twitter"><i class="icon-twitter"></i></a></li>
+              <li><a class="icon--youtube" href="http://www.youtube.com/user/TheCityofSanDiego" title="YouTube"><i class="icon-youtube"></i></a></li>
+              <li><a class="icon--instagram" href="https://www.instagram.com/cityofsandiego/" title="Instagram"><i class="icon-instagram"></i></a></li>
+              <li><a class="icon--nextdoor" href="https://nextdoor.com/city/feed/748155/?i=wkjkutqnzmjazcaegxre" title="Nextdoor"><i class="icon-nextdoor"></i></a></li>
+              <li><a class="icon--linkedin" href="https://www.linkedin.com/company/cityofsandiego" title="LinkedIn"><i class="icon-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>     
+        <p class="copyright text-center l-margin-tm">
+          Copyrighted © 2002-{{ "now"|date("Y") }}<br>
+          City of San Diego. All rights reserved.
+        </p>
+      </div>
+
+      {{ content }}
+    </div>
+    <div class="region--{{ region }}__bottom">
+      {{ drupal_entity('block', 'awardbadgesinfooter')}}
+    </div>
+
+    <div class="region--{{ region }}__privacy">
+      <ul>
+        <li><a href="/disclaimers">Disclaimers</a></li>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
+        <li><a href="/accessibility">Accessibility</a></li>
+        <li><a href="/translation">Language Translation</a></li>
+        <li><a href="/contact">Contact the City</a></li>
+      </ul>
+    </div>
+  </div>
+{% endif %}
+

@@ -1,0 +1,363 @@
+uuid: e528434b-2513-4694-b912-ec60965f272c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.base_field_override.node.event.status
+    - field.field.node.event.body
+    - field.field.node.event.feeds_item
+    - field.field.node.event.field_department
+    - field.field.node.event.field_event_activity_desc
+    - field.field.node.event.field_event_activity_type_cd
+    - field.field.node.event.field_event_date
+    - field.field.node.event.field_event_expected_attendance
+    - field.field.node.event.field_event_host_nm
+    - field.field.node.event.field_event_location
+    - field.field.node.event.field_event_location_txt
+    - field.field.node.event.field_event_seq_num
+    - field.field.node.event.field_subtitle
+    - field.field.node.event.field_website
+    - node.type.event
+  module:
+    - address
+    - feeds_log
+    - feeds_tamper
+    - node
+    - smart_date
+third_party_settings:
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+    source: true
+  feeds_tamper:
+    tampers:
+      e1f50e5c-dfa5-48f6-a45a-df6de8fd3827:
+        default_value: 'Special Events & Filming'
+        only_if_empty: true
+        uuid: e1f50e5c-dfa5-48f6-a45a-df6de8fd3827
+        plugin: default_value
+        source: department_name
+        weight: 0
+        label: 'Set value or default value'
+      3221bd32-ba5f-4ac7-a38b-21223696fa51:
+        default_value: 'San Diego'
+        only_if_empty: true
+        uuid: 3221bd32-ba5f-4ac7-a38b-21223696fa51
+        plugin: default_value
+        source: city
+        weight: 0
+        label: 'Set value or default value'
+      289fdd97-d100-4a7b-960a-9bad181aac7d:
+        default_value: CA
+        only_if_empty: true
+        uuid: 289fdd97-d100-4a7b-960a-9bad181aac7d
+        plugin: default_value
+        source: state
+        weight: 0
+        label: 'Set value or default value'
+      811ce8aa-f094-48df-861b-ce72379665a1:
+        default_value: published
+        only_if_empty: false
+        uuid: 811ce8aa-f094-48df-861b-ce72379665a1
+        plugin: default_value
+        source: moderation
+        weight: 0
+        label: 'Set value or default value'
+      4af2dfd9-8dee-4cf4-9afb-2c4a2f0875eb:
+        uuid: 4af2dfd9-8dee-4cf4-9afb-2c4a2f0875eb
+        plugin: strtotime
+        source: event_date_start_time
+        weight: 0
+        label: 'String to Unix Timestamp'
+      6e9fb0bf-8a2e-404b-9e93-f0269b7e3ff4:
+        uuid: 6e9fb0bf-8a2e-404b-9e93-f0269b7e3ff4
+        plugin: strtotime
+        source: event_date_end_time
+        weight: 0
+        label: 'String to Unix Timestamp'
+      65f8165f-2684-49d2-8837-daeb2bd85cb5:
+        default_value: US
+        only_if_empty: false
+        uuid: 65f8165f-2684-49d2-8837-daeb2bd85cb5
+        plugin: default_value
+        source: country
+        weight: 0
+        label: 'Set value or default value'
+label: 'Events from eProval'
+id: events_from_eproval
+description: ''
+help: ''
+import_period: -1
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: 'txt csv tsv xml opml'
+  directory: 'private://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: event
+  langcode: en
+  insert_new: 1
+  update_existing: 0
+  update_non_existent: _delete
+  skip_hash_check: false
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: true
+  owner_id: 0
+custom_sources:
+  department_name:
+    value: Department_Name
+    label: Department_Name
+    machine_name: department_name
+    type: csv
+  city:
+    value: City
+    label: City
+    machine_name: city
+    type: csv
+  public_map_address:
+    value: 'Public Map Address'
+    label: 'Public Map Address'
+    machine_name: public_map_address
+    type: csv
+  event_location_description:
+    value: 'Event Location Description'
+    label: 'Event Location Description'
+    machine_name: event_location_description
+    type: csv
+  state:
+    value: State
+    label: State
+    machine_name: state
+    type: csv
+  event_subtitle:
+    value: event_subtitle
+    label: event_subtitle
+    machine_name: event_subtitle
+    type: csv
+  event_title:
+    value: 'Event Title'
+    label: 'Event Title'
+    machine_name: event_title
+    type: csv
+  id:
+    value: ID
+    label: ID
+    machine_name: id
+    type: csv
+  event_website:
+    value: 'Event Website'
+    label: 'Event Website'
+    machine_name: event_website
+    type: csv
+  activity_description:
+    value: activity_description
+    label: activity_description
+    machine_name: activity_description
+    type: csv
+  special_event_calendar_listing:
+    value: 'Special Event Calendar Listing'
+    label: 'Special Event Calendar Listing'
+    machine_name: special_event_calendar_listing
+    type: csv
+  published:
+    value: published
+    label: published
+    machine_name: published
+    type: csv
+  anticipated_highest_daily_total_attendance:
+    value: 'Anticipated Highest Daily Total Attendance'
+    label: 'Anticipated Highest Daily Total Attendance'
+    machine_name: anticipated_highest_daily_total_attendance
+    type: csv
+  organization_name:
+    value: 'Organization Name'
+    label: 'Organization Name'
+    machine_name: organization_name
+    type: csv
+  event_type:
+    value: 'Event Type'
+    label: 'Event Type'
+    machine_name: event_type
+    type: csv
+  '':
+    value: ''
+    label: ''
+    machine_name: ''
+    type: csv
+  special_event_calendar_listing_text:
+    value: 'Special Event Calendar Listing'
+    label: 'Special Event Calendar Listing'
+    machine_name: special_event_calendar_listing_text
+    type: csv
+  hash:
+    value: Hash
+    label: Hash
+    machine_name: hash
+    type: csv
+  moderation:
+    value: MODERATION
+    label: MODERATION
+    machine_name: moderation
+    type: blank
+  event_date_start_time:
+    value: 'Event Date Start Time'
+    label: 'Event Date Start Time'
+    machine_name: event_date_start_time
+    type: csv
+  event_date_end_time:
+    value: 'Event Date End Time'
+    label: 'Event Date End Time'
+    machine_name: event_date_end_time
+    type: csv
+  country:
+    value: Country
+    label: Country
+    machine_name: country
+    type: blank
+mappings:
+  -
+    target: field_department
+    map:
+      target_id: department_name
+    settings:
+      language: null
+      reference_by: name
+      autocreate: false
+      autocreate_bundle: department
+  -
+    target: field_event_location
+    map:
+      langcode: ''
+      country_code: country
+      administrative_area: state
+      locality: city
+      dependent_locality: ''
+      postal_code: ''
+      sorting_code: ''
+      address_line1: public_map_address
+      address_line2: ''
+      organization: ''
+      given_name: ''
+      additional_name: ''
+      family_name: ''
+    settings:
+      language: null
+  -
+    target: field_event_location_txt
+    map:
+      value: event_location_description
+    settings:
+      language: null
+  -
+    target: field_subtitle
+    map:
+      value: event_subtitle
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: title
+    map:
+      value: event_title
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_event_seq_num
+    map:
+      value: id
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_website
+    map:
+      uri: ''
+      title: event_website
+    settings:
+      language: null
+  -
+    target: field_event_activity_desc
+    map:
+      value: activity_description
+    settings:
+      language: null
+  -
+    target: status
+    map:
+      value: published
+    settings:
+      language: null
+  -
+    target: field_event_expected_attendance
+    map:
+      value: anticipated_highest_daily_total_attendance
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_event_host_nm
+    map:
+      value: organization_name
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_event_activity_type_cd
+    map:
+      target_id: event_type
+    settings:
+      language: null
+      reference_by: name
+      autocreate: false
+      autocreate_bundle: location
+  -
+    target: body
+    map:
+      value: special_event_calendar_listing_text
+      summary: ''
+    settings:
+      language: ''
+      format: full_html
+  -
+    target: feeds_item
+    map:
+      url: ''
+      guid: hash
+    settings: {  }
+    unique:
+      guid: 1
+  -
+    target: moderation_state
+    map:
+      value: moderation
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_event_date
+    map:
+      value: event_date_start_time
+      end_value: event_date_end_time
+    settings:
+      language: null

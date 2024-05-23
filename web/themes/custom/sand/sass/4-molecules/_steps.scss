@@ -1,0 +1,155 @@
+/* Steps
+   ========================================================================== */
+.step__single {
+  margin: 0 0 1rem;
+  background: white;
+  position: relative;
+  padding: 0.5em 0.75em;
+  text-align: left;
+  border: 1px solid $chateau;
+
+  .medium-1 {
+    text-align: center;
+  }
+
+  .icon--circle {
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    margin-bottom: 0;
+    line-height: 2em;
+    padding: 0;
+    vertical-align: middle;
+    font-family: $font-family;
+    font-weight: 600;
+
+    @include rem("font-size", 22px);
+  }
+
+  &.accordion__heading {
+    padding: 1rem 3.5rem 1rem 1rem;
+    margin-bottom: 0;
+  }
+
+  .medium-11 p:last-child {
+    margin-bottom: 0.75em;
+  }
+
+  @include breakpoint(mobile-landscape down) {
+    margin: 0 0 0.75em;
+    text-align: left;
+
+    &::before {
+      right: 1em;
+      top: -0.85em;
+      transform: none;
+    }
+  }
+
+  @include breakpoint(mobile-landscape up) {
+    .medium-11 {
+      padding-left: 0.5rem;
+    }
+  }
+
+  @include breakpoint(medium-large) {
+    .columns {
+      display: block;
+    }
+  }
+}
+
+.step__header {
+  line-height: 1.5;
+  padding: 0;
+  margin: 0.7em 0;
+  font-weight: 600;
+
+  .step__desc {
+    font-family: $font-family;
+  }
+
+  @include rem("font-size", 16px); // 1.25em
+}
+
+.step__num {
+  float: right;
+  font-family: $font-family-secondary;
+
+  @include breakpoint(medium down) {
+    margin-left: 1em;
+  }
+}
+
+.step-tiles {
+  display: flex;
+  flex-flow: row wrap;
+  margin-top: 2em;
+  margin-left: -1em;
+  margin-right: -1em;
+  justify-content: center;
+
+  .step {
+    border: 1px solid #a7abad;
+    border-radius: 4px;
+    text-align: center;
+    padding: 2em 1em 1.5em;
+    position: relative;
+    margin: 0 1em 2em;
+    width: calc(50% - 2em);
+
+    .step-number {
+      background-color: #0098db;
+      position: absolute;
+      font-size: 1.3em;
+      font-weight: 600;
+      color: white;
+      top: 0;
+      left: 50%;
+      width: 2em;
+      height: 2em;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-family: $font-family;
+    }
+
+    &.small-6 {
+      width: calc(50% - 2em);
+    }
+
+    &.small-12 {
+      width: 100%;
+    }
+
+    @include breakpoint(mobile-landscape) {
+      &.medium-3 {
+        width: calc(25% - 2em);
+      }
+
+      &.medium-4 {
+        width: calc(33% - 2em);
+      }
+
+      &.medium-6 {
+        width: calc(50% - 2em);
+      }
+
+      &.medium-8 {
+        width: calc(67% - 2em);
+      }
+
+      &.medium-9 {
+        width: calc(75% - 2em);
+      }
+    }
+
+    @include breakpoint(mobile-landscape down) {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,218 @@
+uuid: 655f66fb-0e97-4d15-8f84-ada147d2bb42
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 52
+template: false
+archive: false
+id: webform_1040888
+title: 'Sign up for email updates - CD3'
+description: null
+categories: {  }
+elements: |
+  outer_fieldset:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Receive Email Updates:' 
+    '#description': ""
+    required_first_8:
+      '#type': textfield
+      '#title_display': invisible
+      '#title': 'First Name' 
+      '#description': ""
+      '#required': true
+    required_last_8:
+      '#type': textfield
+      '#title_display': invisible
+      '#title': 'Last Name' 
+      '#description': ""
+      '#required': true
+    required_valid_email_8:
+      '#type': email
+      '#size': 20
+      '#title_display': invisible
+      '#title': 'Email Address' 
+      '#description': ""
+      '#required': true
+    submit_button_8:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<div class='three column'><input class='btn form-submit width-100' name='op' type='submit' value='Subscribe'></div>\n"
+      '#title': 'Submit Button' 
+      '#description': ""
+  opt:
+    '#type': radios
+    '#options':
+      EMAIL.OPTIN: 'Subscribe'
+      EMAIL.OPTOUT: 'Unsubscribe'
+    '#default_value': 'EMAIL.OPTIN' 
+    '#title': 'Subscription' 
+    '#description': ""
+  opt_first:
+    '#type': textfield
+    '#default_value': 'EMAIL.OPTIN' 
+    '#title': 'OPT_FIRST' 
+    '#description': ""
+  opt_second:
+    '#type': textfield
+    '#default_value': 'EMAIL.OPTOUT' 
+    '#title': 'OPT_SECOND' 
+    '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: citycouncil/cd3/response
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: dbrabon@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter Subscribe CD3'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: BLSismey@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter Subscribe CD3'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_4:
+    id: email
+    handler_id: email_4
+    label: 'Email 4'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: CouncilDistrict3@cityofsandiego.lmhostediq.com
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Newsletter Subscribe'
+      body: |
+        &#60;APP&#62;CUSTOM
+        &#60;FIRST&#62;[webform_submission:values:outer_fieldset:required_first]&#60;/FIRST&#62;
+        &#60;LAST&#62;[webform_submission:values:outer_fieldset:required_last]&#60;/LAST&#62;
+        &#60;EMAIL&#62;[webform_submission:values:outer_fieldset:required_valid_email]&#60;/EMAIL>
+        [webform_submission:values:opt_first]
+        [webform_submission:values:opt_second]
+        &#60;/APP&#62;
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

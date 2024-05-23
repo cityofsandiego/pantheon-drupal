@@ -1,0 +1,20 @@
+uuid: 7c6db9e0-4c71-489e-b602-17edca93aeb2
+langcode: en
+status: true
+dependencies:
+  module:
+    - sand_feeds
+title: 'Queue: Sand Feed Refresh ID:39 - Doc scs_citybulletin_publicnot'
+id: ultimate_cron_queue_sand_feeds_feed_refresh_id__39
+weight: 10
+module: sand_feeds
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database

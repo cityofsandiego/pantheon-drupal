@@ -1,0 +1,29 @@
+uuid: 2f835611-d01b-4954-83f1-ecdcb0993ab9
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.facet_doc_type
+  module:
+    - facets
+    - system
+  theme:
+    - sand
+id: facetdoctype
+theme: sand
+region: sidebar_first
+weight: -25
+provider: null
+plugin: 'facet_block:facet_doc_type'
+settings:
+  id: 'facet_block:facet_doc_type'
+  label: 'Document Type'
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: facetdoctype
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/search/ocd*'

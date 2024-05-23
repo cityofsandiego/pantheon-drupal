@@ -1,0 +1,29 @@
+uuid: e8e590ec-6b5b-4da4-a5b8-e732848f9769
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_business_target_business
+    - node.type.business_resource
+    - taxonomy.vocabulary.business_resources_target_bus
+id: node.business_resource.field_business_target_business
+field_name: field_business_target_business
+entity_type: node
+bundle: business_resource
+label: 'Target Business'
+description: '<p>Add tags to indicate what types of business this resource is meant for. Examples include "small business", "international", and "woman-owned".</p>'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      business_resources_target_bus: business_resources_target_bus
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

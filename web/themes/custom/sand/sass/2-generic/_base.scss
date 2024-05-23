@@ -1,0 +1,66 @@
+// ==========================================================================
+// Base
+// ==========================================================================
+html {
+  //scroll-behavior:smooth;
+}
+
+html,
+body {
+  background: white;
+  font-family: $font-family;
+  color: $font-color !important;
+}
+
+/**
+ * 1. Remove subpixel-antialiased default.
+ * 2. Keep for retina resolutions.
+ *
+ * @link: http://www.intridea.com/blog/2014/5/8/better-font-smoothing-in-chrome-on-mac-os-x
+ */
+*,
+*::after,
+*::before {
+  -webkit-font-smoothing: antialiased; /* 1 */
+
+  @include box-sizing( border-box );
+
+  // @media /* 2 */
+  //     only screen and (-webkit-min-device-pixel-ratio: 1.25),
+  //     only screen and ( min-device-pixel-ratio: 1.25),
+  //     only screen and ( min-resolution: 200dpi),
+  //     only screen and ( min-resolution: 1.25dppx) {
+  //         -webkit-font-smoothing: subpixel-antialiased;
+  // }
+}
+
+embed,
+iframe,
+object {
+  max-width: 100%;
+}
+
+iframe {
+  @include breakpoint(medium down) {
+    padding: 0 2em;
+  }
+}
+
+img {
+  height: auto; /* Make sure images are scaled correctly. */
+  max-width: 100%; /* Adhere to container width. */
+}
+
+// .off-canvas-content {
+//   background-color:#dde2e5 ;
+// }
+
+.node__content {
+  .flex-container {
+    display: block; // Foundation uses flex-container class for Flexbox
+  }
+}
+
+i {
+  font-style: normal;
+}

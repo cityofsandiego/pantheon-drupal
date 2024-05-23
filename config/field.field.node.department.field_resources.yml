@@ -1,0 +1,31 @@
+uuid: e7a3f1ab-429a-43f9-84dc-49e3b2133446
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_resources
+    - node.type.department
+    - paragraphs.paragraphs_type.resources
+  module:
+    - entity_reference_revisions
+id: node.department.field_resources
+field_name: field_resources
+entity_type: node
+bundle: department
+label: Resources
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      resources: resources
+    negate: 0
+    target_bundles_drag_drop:
+      resources:
+        weight: 2
+        enabled: true
+field_type: entity_reference_revisions

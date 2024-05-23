@@ -1,0 +1,130 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set body_attributes = create_attribute() %}
+{% set no_img_attributes = create_attribute() %}
+{% set img_attributes = create_attribute() %}
+
+{%
+  set classes = [
+    'section-outreach',
+    hide_on_desktop,
+    hide_on_mobile,
+    border_bottom,
+  ]
+%}
+
+{%
+  set img_classes = [
+    'stellar-window',
+    repeat
+  ]
+%}
+{%
+  set body_classes = [
+    text_center,
+    no_shadow,
+    'l-padding-vd',
+    'text-white'
+  ]
+%}
+
+{%
+  set no_img_classes = [
+    'l-constrained',
+    'l-padding-mobile-hm',
+    'l-padding-vd',
+    text_center,
+  ]
+%}
+
+{% block paragraph %}
+  {% block content %}
+    <div {{ attributes.addClass(classes)}}>
+    <!-- This section HAS an image -->
+    {% if content.field_image.0 %}
+      {% if scroll_ratio == "1.0" %}
+      <div style="background-image: url('{{ image_url }}'); background-size: cover; background-position: center center; min-height: {{ min_height }};">
+        <div class="grid-container">
+          <div {{ body_attributes.addClass(body_classes)}}>
+            {{ content.field_body }}   
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div {{ img_attributes.addClass(img_classes)
+        .setAttribute('id', 'img-' ~ paragraph.id())
+        .setAttribute('style', 
+          'background-size: ' ~ background_size ~ '; ' ~ 
+          'background-position-x: ' ~ percent_horizontal ~ '%; ' ~
+          'background-position-y: ' ~ percent_vertical ~ '%; ' ~
+          'background-image: url(' ~ image_url ~ '); ' ~
+          'background-color: ' ~ bg_color ~ ';' ~
+          full_width_mobile
+        )
+        .setAttribute('data-stellar-vertical-offset', vertical_offset)
+        .setAttribute('data-stellar-background-ratio', scroll_ratio)
+        .setAttribute('data-sand-min-height', min_height) 
+        .setAttribute('data-sand-adjustment-width', adjustment_width) 
+        .setAttribute('data-sand-adjustment-height', adjustment_height)
+        .setAttribute('data-sand-background-size', background_size)
+        .setAttribute('data-sand-full-width-on-mobile', full_width_mobile)
+        }}  
+      >
+        <div class="grid-container">
+          <div {{ body_attributes.addClass(body_classes)}}>
+            {{ content.field_body }}   
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    {% else %}
+    <!-- This section does NOT have an image -->
+      <div {{ img_attributes.addClass('no-image').setAttribute('style', 'background-color:' ~ bg_color ~ ';') }}>
+        <div class="grid-container l-padding-an">
+          <div {{ body_attributes.addClass(no_img_classes)}}>
+            {{ content.field_body }}   
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    </div>
+  {% endblock %}
+{% endblock paragraph %}

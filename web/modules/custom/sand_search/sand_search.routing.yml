@@ -1,0 +1,19 @@
+sand_search.search_api_index.canonical:
+  path: '/admin/config/search/search-api/searchindex/{search_api_index}'
+  defaults:
+    _controller: '\Drupal\search_api\Controller\IndexController::page'
+    _title_callback: '\Drupal\search_api\Controller\IndexController::pageTitle'
+  requirements:
+    _entity_access: 'search_api_index.view'
+  options:
+    parameters:
+      search_api_index:
+        with_config_overrides: TRUE
+
+sand_search.settings:
+  path: '/admin/config/webteam/settings/search'
+  defaults:
+    _title: 'Sand Search Settings'
+    _form: 'Drupal\sand_search\Form\SandSearchSettings'
+  requirements:
+    _permission: 'administer search_api'

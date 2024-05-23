@@ -1,0 +1,289 @@
+uuid: 6f787e52-663c-4534-bd92-9ba06e90105c
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1450754
+title: 'Request a Letter'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info' 
+    '#description': ""
+    first_name_1:
+      '#type': textfield
+      '#title': 'First Name' 
+      '#description': ""
+      '#required': true
+    last_name_1:
+      '#type': textfield
+      '#title': 'Last Name' 
+      '#description': ""
+      '#required': true
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    mailing_address_1:
+      '#type': textfield
+      '#title': 'Mailing Address' 
+      '#description': ""
+      '#required': true
+    city_1:
+      '#type': textfield
+      '#title': 'City' 
+      '#description': ""
+      '#required': true
+    state_1:
+      '#type': textfield
+      '#title': 'State' 
+      '#description': ""
+      '#required': true
+    zip_1:
+      '#type': textfield
+      '#title': 'Zip' 
+      '#description': ""
+      '#required': true
+    organization_1:
+      '#type': textfield
+      '#title': 'Organization' 
+      '#description': ""
+      '#required': true
+    requestors_title_role_1:
+      '#type': textfield
+      '#title': 'Requestor’s Title/Role' 
+      '#description': ""
+      '#required': true
+  fieldset_request:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Letter Info' 
+    '#description': ""
+    letter_purpose_10:
+      '#type': textfield
+      '#title': 'What is the purpose of the letter?' 
+      '#description': ""
+      '#required': true
+    published_on_social_media_10:
+      '#type': radios
+      '#options':
+        yes: 'Yes'
+        no: 'No'
+      '#title': 'Will this be published on social media?' 
+      '#description': ""
+      '#required': true
+    program_book_10:
+      '#type': radios
+      '#options':
+        yes: 'Yes'
+        no: 'No'
+      '#title': 'Will this be included in a program book?' 
+      '#description': ""
+      '#required': true
+    type_of_request_10:
+      '#type': radios
+      '#options':
+        anniversary: 'Anniversary Letter'
+        birthdayletter: 'Birthday Letter'
+        condolence: 'Condolence Letter'
+        congratulatory: 'Congratulatory Letter'
+        greetings: 'Greetings/Welcome Letter'
+        support: 'Letter of Support (grant)'
+        programbook: 'Program Book'
+      '#title': 'Type of Request' 
+      '#description': ""
+      '#required': true
+    fieldset_content_of_letter_10:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Content of Letter' 
+      '#description': ""
+      date_letter_should_be_addressed_29:
+        '#type': date
+        '#title': 'Date letter should be addressed' 
+        '#description': ""
+        '#required': true
+      name_address_line_29:
+        '#type': textfield
+        '#title': 'Name of Individual or Organization to list on the address line of the letter' 
+        '#description': ""
+        '#required': true
+      letter_address_29:
+        '#type': textfield
+        '#title': 'Address to include on the letter' 
+        '#description': ""
+        '#required': true
+      sample_language_29:
+        '#type': textarea
+        '#title': 'Sample language' 
+        '#description': ""
+        '#required': true
+      sample_language_file_29:
+        '#type': managed_file
+        '#max_filesize': '2'
+        '#file_extensions': 'pdf'
+        '#title': 'Sample language in uploaded file' 
+        '#description': ""
+    delivery_method_10:
+      '#type': radios
+      '#options':
+        city_hall: 'Obtain at City Hall (202 C Street San Diego, CA 92101)'
+        email: 'Email as a PDF'
+        mail: 'Mail to address'
+      '#title': 'Delivery Method' 
+      '#description': ""
+      '#required': true
+  date_of_event:
+    '#type': date
+    '#title': 'Date of Event' 
+    '#description': ""
+    '#required': true
+  date_letter_needed_by:
+    '#type': date
+    '#title': 'Date letter needed by' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /mayor/request-a-letter-response
+  confirmation_message: "<p>Hi,</p>\r\n\r\n<p>Thank you for your submission request to Mayor Todd Gloria’s Office. This email confirms we’ve received your request and will begin processing it as soon as possible.&nbsp; Please be aware that all requests are subject to the office’s multi-layered approval process. Not all requests are guaranteed to be completed.</p>\r\n\r\n<p>Additionally, office policy requires a minimum of 10 business days’ notice&nbsp;to ensure there is enough time to process and follow up with any questions or issues. Please submit draft language with all requests as this will help us complete the requested documents sooner.</p>\r\n\r\n<p><b>If you have questions or would like to check on the status of your&nbsp;request, please reach out to me directly. I am available via call, text, and email&nbsp;at:</b></p>\r\n\r\n<ul>\r\n\t<li>Cell: 619-753-4586</li>\r\n\t<li>Email:&nbsp;<a href=\"mailto:acsilva@sandiego.gov\">acsilva@sandiego.gov</a></li>\r\n</ul>\r\n\r\n<p>Due to the volume of email our office receives please do not contact other staff regarding the status of your request. I’ll do my best to respond in a timely manner,&nbsp;however,&nbsp;please understand we have a significant number of requests, and I am not always available for immediate response.</p>\r\n\r\n<p>Thank you in advance for your patience, and again thank you for your request. The&nbsp;Mayor&nbsp;loves to support the San Diego community in as many ways as possible!</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit Request'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email to Requester'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email_1:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Letter Request Received'
+      body: "<p>Hello,</p>\r\n\r\n<p>Thank you for your submission request to Mayor Todd Gloria’s Office. This email confirms we’ve received your request and will begin processing it as soon as possible. Please be aware that all requests are subject to the office’s multi-layered approval process. Not all requests are guaranteed to be completed.</p>\r\n\r\n<p>Additionally, office policy requires a minimum of 10 business days’ notice&nbsp;to ensure there is enough time to process and follow up with any questions or issues. Please submit draft language with all requests as this will help us complete the requested documents sooner.</p>\r\n\r\n<p><strong>If you have questions or would like to check on the status of your request, please reach out to me directly. I am available via call, text, and email at:</strong></p>\r\n\r\n<ul>\r\n\t<li>Cell: 619-753-4586</li>\r\n\t<li>Email: <a href=\"mailto:acsilva@sandiego.gov\">acsilva@sandiego.gov</a></li>\r\n</ul>\r\n\r\n<p>Due to the volume of email our office receives please do not contact other staff regarding the status of your request. I’ll do my best to respond in a timely manner, however, please understand we have a significant number of requests, and I am not always available for immediate response.</p>\r\n\r\n<p>Thank you in advance for your patience, and again thank you for your request. The Mayor loves to support the San Diego community in as many ways as possible!</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_4:
+    id: email
+    handler_id: email_4
+    label: 'Test Email'
+    notes: ''
+    status: false
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: rvazquez@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: '[webform_submission:values:email_1:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\n== CONTACT INFO ==\r\n\r\nFIRST NAME: \r\n[webform_submission:values:first_name_1]\r\n\r\nLAST NAME: \r\n[webform_submission:values:last_name_1]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_1]\r\n\r\nMAILING ADDRESS:\r\n[webform_submission:values:mailing_address_1]\r\n\r\nCITY: \r\n[webform_submission:values:city_1]\r\n\r\nSTATE: \r\n[webform_submission:values:state_1]\r\n\r\nZIP: \r\n[webform_submission:values:zip_1]\r\n\r\nORGANIZATION: \r\n[webform_submission:values:organization_1]\r\n\r\nREQUESTOR’S TITLE/ROLE: \r\n[webform_submission:values:requestors_title_role_1]\r\n\r\n== LETTER INFO ==\r\n\r\nPURPOSE OF THE LETTER: \r\n[webform_submission:values:letter_purpose_10]\r\n\r\nPUBLISHING ON SOCIAL MEDIA? \r\n[webform_submission:values:published_on_social_media_10]\r\n\r\nINCLUDED IN PROGRAM BOOK? \r\n[webform_submission:values:program_book_10]\r\n\r\nTYPE OF REQUEST: \r\n[webform_submission:values:type_of_request_10]\r\n\r\n== CONTENT OF LETTER ==\r\n\r\nDATE LETTER SHOULD BE ADDRESSED\r\n[webform_submission:values:date_letter_should_be_addressed_29]\r\n\r\nNAME OF INDIVIDUAL OR ORGANIZATION IN ADDRESS LINE:\r\n[webform_submission:values:name_address_line_29]\r\n\r\nADDRESS ON LETTER:\r\n[webform_submission:values:letter_address_29]\r\n\r\nSAMPLE LANGUAGE:\r\n[webform_submission:values:sample_language_29]\r\n\r\nSAMPLE LANGUAGE FILE:\r\n[webform_submission:values:sample_language_file_29]\r\n\r\nDELIVERY METHOD:\r\n[webform_submission:values:delivery_method_10]\r\n\r\nDATE OF EVENT\r\n[webform_submission:values:date_of_event]\r\n\r\nDATE LETTER NEEDED BY\r\n[webform_submission:values:date_letter_needed_by]\r\n\r\n"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: true
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_8:
+    id: email
+    handler_id: email_8
+    label: 'Email to Staff'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 8
+    settings:
+      states:
+        - completed
+      to_mail: acsilva@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: 'javierg@sandiego.gov, callio@sandiego.gov, abrizuela@sandiego.gov, jcortes@sandiego.gov'
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: '[webform_submission:values:email_1:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\n== CONTACT INFO ==\r\n\r\nFIRST NAME: \r\n[webform_submission:values:first_name_1]\r\n\r\nLAST NAME: \r\n[webform_submission:values:last_name_1]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_1]\r\n\r\nMAILING ADDRESS:\r\n[webform_submission:values:mailing_address_1]\r\n\r\nCITY: \r\n[webform_submission:values:city_1]\r\n\r\nSTATE: \r\n[webform_submission:values:state_1]\r\n\r\nZIP: \r\n[webform_submission:values:zip_1]\r\n\r\nORGANIZATION: \r\n[webform_submission:values:organization_1]\r\n\r\nREQUESTOR’S TITLE/ROLE: \r\n[webform_submission:values:requestors_title_role_1]\r\n\r\n== LETTER INFO ==\r\n\r\nPURPOSE OF THE LETTER: \r\n[webform_submission:values:letter_purpose_10]\r\n\r\nPUBLISHING ON SOCIAL MEDIA? \r\n[webform_submission:values:published_on_social_media_10]\r\n\r\nINCLUDED IN PROGRAM BOOK? \r\n[webform_submission:values:program_book_10]\r\n\r\nTYPE OF REQUEST: \r\n[webform_submission:values:type_of_request_10]\r\n\r\n== CONTENT OF LETTER ==\r\n\r\nDATE LETTER SHOULD BE ADDRESSED\r\n[webform_submission:values:date_letter_should_be_addressed_29]\r\n\r\nNAME OF INDIVIDUAL OR ORGANIZATION IN ADDRESS LINE:\r\n[webform_submission:values:name_address_line_29]\r\n\r\nADDRESS ON LETTER:\r\n[webform_submission:values:letter_address_29]\r\n\r\nSAMPLE LANGUAGE:\r\n[webform_submission:values:sample_language_29]\r\n\r\nSAMPLE LANGUAGE FILE:\r\n[webform_submission:values:sample_language_file_29]\r\n\r\nDELIVERY METHOD:\r\n[webform_submission:values:delivery_method_10]\r\n\r\nDATE OF EVENT\r\n[webform_submission:values:date_of_event]\r\n\r\nDATE LETTER NEEDED BY\r\n[webform_submission:values:date_letter_needed_by]\r\n\r\n"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: true
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

@@ -1,0 +1,204 @@
+uuid: 6792f82c-c094-4d3d-8c46-37d794c610e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.department_document.body
+    - field.field.node.department_document.field_category
+    - field.field.node.department_document.field_department
+    - field.field.node.department_document.field_dept_doc_id
+    - field.field.node.department_document.field_icon
+    - field.field.node.department_document.field_keywords
+    - field.field.node.department_document.field_misc_field_1
+    - node.type.department_document
+  module:
+    - feeds_log
+    - feeds_tamper
+    - node
+third_party_settings:
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      failed: failed
+    source: true
+  feeds_tamper:
+    tampers:
+      15a1e163-e044-46f9-912b-6f56dda6b6c1:
+        default_value: published
+        only_if_empty: false
+        uuid: 15a1e163-e044-46f9-912b-6f56dda6b6c1
+        plugin: default_value
+        source: moderation_state
+        weight: 0
+        label: 'Set value or default value'
+label: SB1421
+id: sb1421
+description: ''
+help: ''
+import_period: 10800
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  always_download: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: department_document
+  langcode: en
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _delete
+  skip_hash_check: false
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 0
+custom_sources:
+  filename:
+    value: FileName
+    label: FileName
+    machine_name: filename
+    type: csv
+  year:
+    value: Year
+    label: Year
+    machine_name: year
+    type: csv
+  case:
+    value: Case
+    label: Case
+    machine_name: case
+    type: csv
+  filetype:
+    value: FileType
+    label: FileType
+    machine_name: filetype
+    type: csv
+  category:
+    value: Category
+    label: Category
+    machine_name: category
+    type: csv
+  term:
+    value: Term
+    label: Term
+    machine_name: term
+    type: csv
+  department:
+    value: Department
+    label: Department
+    machine_name: department
+    type: csv
+  link:
+    value: Link
+    label: Link
+    machine_name: link
+    type: csv
+  publish:
+    value: Publish
+    label: Publish
+    machine_name: publish
+    type: csv
+  '':
+    value: ''
+    label: ''
+    machine_name: ''
+    type: blank
+  mod:
+    value: MOD
+    label: MOD
+    machine_name: mod
+    type: blank
+  moderation_state:
+    value: 'Moderation State'
+    label: 'Moderation State'
+    machine_name: moderation_state
+    type: blank
+mappings:
+  -
+    target: title
+    map:
+      value: filename
+    settings:
+      language: null
+    unique:
+      value: 1
+  -
+    target: field_department
+    map:
+      target_id: department
+    settings:
+      language: null
+      reference_by: name
+      autocreate: false
+      autocreate_bundle: department
+  -
+    target: field_dept_doc_id
+    map:
+      value: year
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: body
+    map:
+      value: case
+      summary: ''
+    settings:
+      language: null
+      format: plain_text
+  -
+    target: field_icon
+    map:
+      value: filetype
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_keywords
+    map:
+      value: category
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_misc_field_1
+    map:
+      value: link
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: moderation_state
+    map:
+      value: moderation_state
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_category
+    map:
+      target_id: term
+    settings:
+      language: null
+      reference_by: name
+      autocreate: false
+      autocreate_bundle: categories

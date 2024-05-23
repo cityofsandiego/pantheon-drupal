@@ -1,0 +1,69 @@
+uuid: 5b178916-c9ef-41a9-b510-56a311dddfca
+langcode: en
+status: true
+dependencies:
+  module:
+    - registration
+_core:
+  default_config_hash: WNuQy_gxWbmUZ-yFHIYIjMNI6UqPs2sVgzILhzMD05g
+id: registration
+label: Registration
+type: registration
+type_settings:
+  states:
+    canceled:
+      label: Canceled
+      weight: 3
+      active: false
+      canceled: true
+      held: false
+      show_on_form: false
+      description: 'Registration has been canceled.'
+    complete:
+      label: Complete
+      weight: 2
+      active: true
+      canceled: false
+      held: false
+      show_on_form: false
+      description: 'Registration has been completed.'
+    held:
+      label: Held
+      weight: 1
+      active: false
+      canceled: false
+      held: true
+      show_on_form: false
+      description: 'Registration is held.'
+    pending:
+      label: Pending
+      weight: 0
+      active: true
+      canceled: false
+      held: false
+      show_on_form: false
+      description: 'Registration is pending.'
+  transitions:
+    cancel:
+      label: Cancel
+      from:
+        - complete
+        - pending
+        - held
+      to: canceled
+      weight: 2
+    complete:
+      label: Complete
+      from:
+        - pending
+        - held
+      to: complete
+      weight: 0
+    hold:
+      label: Hold
+      from:
+        - pending
+      to: held
+      weight: 1
+  default_registration_state: pending
+  complete_registration_state: complete

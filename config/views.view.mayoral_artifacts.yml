@@ -1,0 +1,4462 @@
+uuid: d8febc5d-5d29-4d8f-aba1-400395633049
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card
+    - field.storage.node.body
+    - field.storage.node.field_image
+    - field.storage.node.field_keywords
+    - field.storage.node.field_mayor
+    - image.style.card
+    - image.style.card_teaser_image
+    - node.type.mayoral_artifacts
+  module:
+    - media
+    - node
+    - options
+    - text
+    - user
+id: mayoral_artifacts
+label: 'Mayoral Artifacts'
+module: views
+description: ''
+tag: ''
+base_table: node_field_data
+base_field: nid
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: 'Mayoral Artifacts'
+      fields:
+        rendered_entity:
+          id: rendered_entity
+          table: node
+          field: rendered_entity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: rendered_entity
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          view_mode: card
+        field_image:
+          id: field_image
+          table: node__field_image
+          field: field_image
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: media_thumbnail
+          settings:
+            image_link: ''
+            image_style: card
+            image_loading:
+              attribute: lazy
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        body:
+          id: body
+          table: node__body
+          field: body
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_keywords:
+          id: field_keywords
+          table: node__field_keywords
+          field: field_keywords
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_mayor:
+          id: field_mayor
+          table: node__field_mayor
+          field: field_mayor
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "\r\n                                    <div class=\"card background-off-white\">\r\n                                        <div class=\"card__image\">\r\n                                            {{ field_image }}\r\n                                        </div>\r\n                                        <div class=\"card__content\">\r\n                                            <p class=\"card__headline\">{{ title }}</p>\r\n                                        </div>\r\n                                    </div>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 15
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: tag
+        options: {  }
+      empty: {  }
+      sorts:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+      arguments: {  }
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_mayor_value:
+          id: field_mayor_value
+          table: node__field_mayor
+          field: field_mayor_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            all: all
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_mayor_value_op
+            label: 'Mayor (field_mayor)'
+            description: ''
+            use_operator: false
+            operator: field_mayor_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_mayor_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: false
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
+      relationships: {  }
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Displaying @start - @end of @total'
+      footer: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.application.default'
+        - 'config:core.entity_view_display.node.application.teaser'
+        - 'config:core.entity_view_display.node.article.default'
+        - 'config:core.entity_view_display.node.article.teaser'
+        - 'config:core.entity_view_display.node.blog.default'
+        - 'config:core.entity_view_display.node.blog.teaser'
+        - 'config:core.entity_view_display.node.bucket.default'
+        - 'config:core.entity_view_display.node.bucket.teaser'
+        - 'config:core.entity_view_display.node.business_resource.default'
+        - 'config:core.entity_view_display.node.business_resource.teaser'
+        - 'config:core.entity_view_display.node.date.default'
+        - 'config:core.entity_view_display.node.date.teaser'
+        - 'config:core.entity_view_display.node.department.default'
+        - 'config:core.entity_view_display.node.department.teaser'
+        - 'config:core.entity_view_display.node.department_document.default'
+        - 'config:core.entity_view_display.node.department_document.teaser'
+        - 'config:core.entity_view_display.node.department_parent.default'
+        - 'config:core.entity_view_display.node.department_parent.teaser'
+        - 'config:core.entity_view_display.node.digital_archives_photos.default'
+        - 'config:core.entity_view_display.node.digital_archives_photos.teaser'
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.external_data.default'
+        - 'config:core.entity_view_display.node.external_data.teaser'
+        - 'config:core.entity_view_display.node.hero.default'
+        - 'config:core.entity_view_display.node.hero.teaser'
+        - 'config:core.entity_view_display.node.location.default'
+        - 'config:core.entity_view_display.node.location.teaser'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.card'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.default'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.teaser'
+        - 'config:core.entity_view_display.node.outreach.default'
+        - 'config:core.entity_view_display.node.outreach.teaser'
+        - 'config:core.entity_view_display.node.outreach2.default'
+        - 'config:core.entity_view_display.node.outreach2.teaser'
+        - 'config:core.entity_view_display.node.outreach_article2.default'
+        - 'config:core.entity_view_display.node.outreach_article2.teaser'
+        - 'config:core.entity_view_display.node.registration.default'
+        - 'config:core.entity_view_display.node.registration.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.reusable_component.default'
+        - 'config:core.entity_view_display.node.reusable_component.teaser'
+        - 'config:core.entity_view_display.node.sand_gallery.default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_album'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_event'
+        - 'config:core.entity_view_display.node.sand_gallery.teaser'
+        - 'config:core.entity_view_display.node.sidebar_block_context.default'
+        - 'config:core.entity_view_display.node.sidebar_block_context.teaser'
+        - 'config:core.entity_view_display.node.slide.card'
+        - 'config:core.entity_view_display.node.slide.default'
+        - 'config:core.entity_view_display.node.slide.full'
+        - 'config:core.entity_view_display.node.slide.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'
+  block_1:
+    id: block_1
+    display_title: 'Card Gallery'
+    display_plugin: block
+    position: 12
+    display_options:
+      title: 'Card Gallery'
+      fields:
+        rendered_entity:
+          id: rendered_entity
+          table: node
+          field: rendered_entity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: rendered_entity
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          view_mode: card
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        body:
+          id: body
+          table: node__body
+          field: body
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_keywords:
+          id: field_keywords
+          table: node__field_keywords
+          field: field_keywords
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_mayor:
+          id: field_mayor
+          table: node__field_mayor
+          field: field_mayor
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        fields: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.application.default'
+        - 'config:core.entity_view_display.node.application.teaser'
+        - 'config:core.entity_view_display.node.article.default'
+        - 'config:core.entity_view_display.node.article.teaser'
+        - 'config:core.entity_view_display.node.blog.default'
+        - 'config:core.entity_view_display.node.blog.teaser'
+        - 'config:core.entity_view_display.node.bucket.default'
+        - 'config:core.entity_view_display.node.bucket.teaser'
+        - 'config:core.entity_view_display.node.business_resource.default'
+        - 'config:core.entity_view_display.node.business_resource.teaser'
+        - 'config:core.entity_view_display.node.date.default'
+        - 'config:core.entity_view_display.node.date.teaser'
+        - 'config:core.entity_view_display.node.department.default'
+        - 'config:core.entity_view_display.node.department.teaser'
+        - 'config:core.entity_view_display.node.department_document.default'
+        - 'config:core.entity_view_display.node.department_document.teaser'
+        - 'config:core.entity_view_display.node.department_parent.default'
+        - 'config:core.entity_view_display.node.department_parent.teaser'
+        - 'config:core.entity_view_display.node.digital_archives_photos.default'
+        - 'config:core.entity_view_display.node.digital_archives_photos.teaser'
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.external_data.default'
+        - 'config:core.entity_view_display.node.external_data.teaser'
+        - 'config:core.entity_view_display.node.hero.default'
+        - 'config:core.entity_view_display.node.hero.teaser'
+        - 'config:core.entity_view_display.node.location.default'
+        - 'config:core.entity_view_display.node.location.teaser'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.card'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.default'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.teaser'
+        - 'config:core.entity_view_display.node.outreach.default'
+        - 'config:core.entity_view_display.node.outreach.teaser'
+        - 'config:core.entity_view_display.node.outreach2.default'
+        - 'config:core.entity_view_display.node.outreach2.teaser'
+        - 'config:core.entity_view_display.node.outreach_article2.default'
+        - 'config:core.entity_view_display.node.outreach_article2.teaser'
+        - 'config:core.entity_view_display.node.registration.default'
+        - 'config:core.entity_view_display.node.registration.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.reusable_component.default'
+        - 'config:core.entity_view_display.node.reusable_component.teaser'
+        - 'config:core.entity_view_display.node.sand_gallery.default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_album'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_event'
+        - 'config:core.entity_view_display.node.sand_gallery.teaser'
+        - 'config:core.entity_view_display.node.sidebar_block_context.default'
+        - 'config:core.entity_view_display.node.sidebar_block_context.teaser'
+        - 'config:core.entity_view_display.node.slide.card'
+        - 'config:core.entity_view_display.node.slide.default'
+        - 'config:core.entity_view_display.node.slide.full'
+        - 'config:core.entity_view_display.node.slide.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'
+  mayoral_artifacts_gallery:
+    id: mayoral_artifacts_gallery
+    display_title: 'ARCHIVED (old gallery page)'
+    display_plugin: page
+    position: 1
+    display_options:
+      enabled: false
+      title: 'Mayoral Artifacts Gallery'
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Search
+          reset_button: true
+          reset_button_label: 'Clear Search'
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: 'No mayoral artifacts were found for your search criteria.'
+            format: basic_html
+          tokenize: false
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          group: 1
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+              locations: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+        field_mayor_value:
+          id: field_mayor_value
+          table: node__field_mayor
+          field: field_mayor_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            all: all
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_mayor_value_op
+            label: Mayor
+            description: ''
+            use_operator: false
+            operator: field_mayor_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_mayor_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+              locations: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: card__wrap
+          default_row_class: false
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        empty: false
+        title: false
+        exposed_form: false
+        style: false
+        row: false
+        fields: true
+        filters: false
+        filter_groups: false
+        header: false
+      display_description: ''
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Displaying @start - @end of @total'
+      display_extenders: {  }
+      path: city-clerk/inforecords/mayoral-artifacts/gallery2
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.application.default'
+        - 'config:core.entity_view_display.node.application.teaser'
+        - 'config:core.entity_view_display.node.article.default'
+        - 'config:core.entity_view_display.node.article.teaser'
+        - 'config:core.entity_view_display.node.blog.default'
+        - 'config:core.entity_view_display.node.blog.teaser'
+        - 'config:core.entity_view_display.node.bucket.default'
+        - 'config:core.entity_view_display.node.bucket.teaser'
+        - 'config:core.entity_view_display.node.business_resource.default'
+        - 'config:core.entity_view_display.node.business_resource.teaser'
+        - 'config:core.entity_view_display.node.date.default'
+        - 'config:core.entity_view_display.node.date.teaser'
+        - 'config:core.entity_view_display.node.department.default'
+        - 'config:core.entity_view_display.node.department.teaser'
+        - 'config:core.entity_view_display.node.department_document.default'
+        - 'config:core.entity_view_display.node.department_document.teaser'
+        - 'config:core.entity_view_display.node.department_parent.default'
+        - 'config:core.entity_view_display.node.department_parent.teaser'
+        - 'config:core.entity_view_display.node.digital_archives_photos.default'
+        - 'config:core.entity_view_display.node.digital_archives_photos.teaser'
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.external_data.default'
+        - 'config:core.entity_view_display.node.external_data.teaser'
+        - 'config:core.entity_view_display.node.hero.default'
+        - 'config:core.entity_view_display.node.hero.teaser'
+        - 'config:core.entity_view_display.node.location.default'
+        - 'config:core.entity_view_display.node.location.teaser'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.card'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.default'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.teaser'
+        - 'config:core.entity_view_display.node.outreach.default'
+        - 'config:core.entity_view_display.node.outreach.teaser'
+        - 'config:core.entity_view_display.node.outreach2.default'
+        - 'config:core.entity_view_display.node.outreach2.teaser'
+        - 'config:core.entity_view_display.node.outreach_article2.default'
+        - 'config:core.entity_view_display.node.outreach_article2.teaser'
+        - 'config:core.entity_view_display.node.registration.default'
+        - 'config:core.entity_view_display.node.registration.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.reusable_component.default'
+        - 'config:core.entity_view_display.node.reusable_component.teaser'
+        - 'config:core.entity_view_display.node.sand_gallery.default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_album'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_event'
+        - 'config:core.entity_view_display.node.sand_gallery.teaser'
+        - 'config:core.entity_view_display.node.sidebar_block_context.default'
+        - 'config:core.entity_view_display.node.sidebar_block_context.teaser'
+        - 'config:core.entity_view_display.node.slide.card'
+        - 'config:core.entity_view_display.node.slide.default'
+        - 'config:core.entity_view_display.node.slide.full'
+        - 'config:core.entity_view_display.node.slide.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'
+  mayoral_artifacts_gallery_block:
+    id: mayoral_artifacts_gallery_block
+    display_title: 'Gallery Block'
+    display_plugin: block
+    position: 1
+    display_options:
+      title: 'Mayoral Artifacts Gallery'
+      fields:
+        field_image:
+          id: field_image
+          table: node__field_image
+          field: field_image
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: media_thumbnail
+          settings:
+            image_link: ''
+            image_style: card_teaser_image
+            image_loading:
+              attribute: lazy
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        body:
+          id: body
+          table: node__body
+          field: body
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_keywords:
+          id: field_keywords
+          table: node__field_keywords
+          field: field_keywords
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_mayor:
+          id: field_mayor
+          table: node__field_mayor
+          field: field_mayor
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"card__wrap\">                                    \r\n  <div class=\"card background-off-white\">\r\n    <div class=\"card__image\">\r\n      <a href=\"{{ view_node }}\">{{ field_image }}</a>\r\n    </div>\r\n    <div class=\"card__content\">\r\n      <p class=\"card__headline\"><a href=\"{{ view_node }}\">{{ title }}</a></p>\r\n    </div>\r\n  </div>\r\n</div>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Search
+          reset_button: true
+          reset_button_label: 'Clear Search'
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: 'No mayoral artifacts were found for your search criteria.'
+            format: basic_html
+          tokenize: false
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          group: 1
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: search
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              administrator: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              locations: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+        field_mayor_value:
+          id: field_mayor_value
+          table: node__field_mayor
+          field: field_mayor_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            all: all
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_mayor_value_op
+            label: Mayor
+            description: ''
+            use_operator: false
+            operator: field_mayor_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: mayor
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              locations: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: card__wrap
+          default_row_class: false
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        empty: false
+        title: false
+        exposed_form: false
+        style: false
+        row: false
+        fields: false
+        filters: false
+        filter_groups: false
+        header: false
+      display_description: ''
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Displaying @start - @end of @total'
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'
+  page_1:
+    id: page_1
+    display_title: Curran
+    display_plugin: page
+    position: 2
+    display_options:
+      title: 'Mayoral Artifacts for Frank Curran'
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_mayor_value:
+          id: field_mayor_value
+          table: node__field_mayor
+          field: field_mayor_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            'Frank Curran': 'Frank Curran'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: field_mayor_value_op
+            label: 'Mayor (field_mayor)'
+            description: ''
+            use_operator: false
+            operator: field_mayor_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_mayor_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: city-clerk/inforecords/mayoral-artifacts/frank-curran
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.application.default'
+        - 'config:core.entity_view_display.node.application.teaser'
+        - 'config:core.entity_view_display.node.article.default'
+        - 'config:core.entity_view_display.node.article.teaser'
+        - 'config:core.entity_view_display.node.blog.default'
+        - 'config:core.entity_view_display.node.blog.teaser'
+        - 'config:core.entity_view_display.node.bucket.default'
+        - 'config:core.entity_view_display.node.bucket.teaser'
+        - 'config:core.entity_view_display.node.business_resource.default'
+        - 'config:core.entity_view_display.node.business_resource.teaser'
+        - 'config:core.entity_view_display.node.date.default'
+        - 'config:core.entity_view_display.node.date.teaser'
+        - 'config:core.entity_view_display.node.department.default'
+        - 'config:core.entity_view_display.node.department.teaser'
+        - 'config:core.entity_view_display.node.department_document.default'
+        - 'config:core.entity_view_display.node.department_document.teaser'
+        - 'config:core.entity_view_display.node.department_parent.default'
+        - 'config:core.entity_view_display.node.department_parent.teaser'
+        - 'config:core.entity_view_display.node.digital_archives_photos.default'
+        - 'config:core.entity_view_display.node.digital_archives_photos.teaser'
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.external_data.default'
+        - 'config:core.entity_view_display.node.external_data.teaser'
+        - 'config:core.entity_view_display.node.hero.default'
+        - 'config:core.entity_view_display.node.hero.teaser'
+        - 'config:core.entity_view_display.node.location.default'
+        - 'config:core.entity_view_display.node.location.teaser'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.card'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.default'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.teaser'
+        - 'config:core.entity_view_display.node.outreach.default'
+        - 'config:core.entity_view_display.node.outreach.teaser'
+        - 'config:core.entity_view_display.node.outreach2.default'
+        - 'config:core.entity_view_display.node.outreach2.teaser'
+        - 'config:core.entity_view_display.node.outreach_article2.default'
+        - 'config:core.entity_view_display.node.outreach_article2.teaser'
+        - 'config:core.entity_view_display.node.registration.default'
+        - 'config:core.entity_view_display.node.registration.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.reusable_component.default'
+        - 'config:core.entity_view_display.node.reusable_component.teaser'
+        - 'config:core.entity_view_display.node.sand_gallery.default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_album'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_event'
+        - 'config:core.entity_view_display.node.sand_gallery.teaser'
+        - 'config:core.entity_view_display.node.sidebar_block_context.default'
+        - 'config:core.entity_view_display.node.sidebar_block_context.teaser'
+        - 'config:core.entity_view_display.node.slide.card'
+        - 'config:core.entity_view_display.node.slide.default'
+        - 'config:core.entity_view_display.node.slide.full'
+        - 'config:core.entity_view_display.node.slide.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'
+  page_10:
+    id: page_10
+    display_title: Faulconer
+    display_plugin: page
+    position: 2
+    display_options:
+      title: 'Mayoral Artifacts for Kevin Faulconer'
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_mayor_value:
+          id: field_mayor_value
+          table: node__field_mayor
+          field: field_mayor_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            'Kevin Faulconer': 'Kevin Faulconer'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: field_mayor_value_op
+            label: 'Mayor (field_mayor)'
+            description: ''
+            use_operator: false
+            operator: field_mayor_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_mayor_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: city-clerk/inforecords/mayoral-artifacts/kevin-faulconer
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.application.default'
+        - 'config:core.entity_view_display.node.application.teaser'
+        - 'config:core.entity_view_display.node.article.default'
+        - 'config:core.entity_view_display.node.article.teaser'
+        - 'config:core.entity_view_display.node.blog.default'
+        - 'config:core.entity_view_display.node.blog.teaser'
+        - 'config:core.entity_view_display.node.bucket.default'
+        - 'config:core.entity_view_display.node.bucket.teaser'
+        - 'config:core.entity_view_display.node.business_resource.default'
+        - 'config:core.entity_view_display.node.business_resource.teaser'
+        - 'config:core.entity_view_display.node.date.default'
+        - 'config:core.entity_view_display.node.date.teaser'
+        - 'config:core.entity_view_display.node.department.default'
+        - 'config:core.entity_view_display.node.department.teaser'
+        - 'config:core.entity_view_display.node.department_document.default'
+        - 'config:core.entity_view_display.node.department_document.teaser'
+        - 'config:core.entity_view_display.node.department_parent.default'
+        - 'config:core.entity_view_display.node.department_parent.teaser'
+        - 'config:core.entity_view_display.node.digital_archives_photos.default'
+        - 'config:core.entity_view_display.node.digital_archives_photos.teaser'
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.external_data.default'
+        - 'config:core.entity_view_display.node.external_data.teaser'
+        - 'config:core.entity_view_display.node.hero.default'
+        - 'config:core.entity_view_display.node.hero.teaser'
+        - 'config:core.entity_view_display.node.location.default'
+        - 'config:core.entity_view_display.node.location.teaser'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.card'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.default'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.teaser'
+        - 'config:core.entity_view_display.node.outreach.default'
+        - 'config:core.entity_view_display.node.outreach.teaser'
+        - 'config:core.entity_view_display.node.outreach2.default'
+        - 'config:core.entity_view_display.node.outreach2.teaser'
+        - 'config:core.entity_view_display.node.outreach_article2.default'
+        - 'config:core.entity_view_display.node.outreach_article2.teaser'
+        - 'config:core.entity_view_display.node.registration.default'
+        - 'config:core.entity_view_display.node.registration.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.reusable_component.default'
+        - 'config:core.entity_view_display.node.reusable_component.teaser'
+        - 'config:core.entity_view_display.node.sand_gallery.default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_album'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_event'
+        - 'config:core.entity_view_display.node.sand_gallery.teaser'
+        - 'config:core.entity_view_display.node.sidebar_block_context.default'
+        - 'config:core.entity_view_display.node.sidebar_block_context.teaser'
+        - 'config:core.entity_view_display.node.slide.card'
+        - 'config:core.entity_view_display.node.slide.default'
+        - 'config:core.entity_view_display.node.slide.full'
+        - 'config:core.entity_view_display.node.slide.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'
+  page_2:
+    id: page_2
+    display_title: Dail
+    display_plugin: page
+    position: 2
+    display_options:
+      title: 'Mayoral Artifacts for Charles Dail'
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_mayor_value:
+          id: field_mayor_value
+          table: node__field_mayor
+          field: field_mayor_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            'Charles Dail': 'Charles Dail'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: field_mayor_value_op
+            label: 'Mayor (field_mayor)'
+            description: ''
+            use_operator: false
+            operator: field_mayor_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_mayor_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: city-clerk/inforecords/mayoral-artifacts/charles-dail
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.application.default'
+        - 'config:core.entity_view_display.node.application.teaser'
+        - 'config:core.entity_view_display.node.article.default'
+        - 'config:core.entity_view_display.node.article.teaser'
+        - 'config:core.entity_view_display.node.blog.default'
+        - 'config:core.entity_view_display.node.blog.teaser'
+        - 'config:core.entity_view_display.node.bucket.default'
+        - 'config:core.entity_view_display.node.bucket.teaser'
+        - 'config:core.entity_view_display.node.business_resource.default'
+        - 'config:core.entity_view_display.node.business_resource.teaser'
+        - 'config:core.entity_view_display.node.date.default'
+        - 'config:core.entity_view_display.node.date.teaser'
+        - 'config:core.entity_view_display.node.department.default'
+        - 'config:core.entity_view_display.node.department.teaser'
+        - 'config:core.entity_view_display.node.department_document.default'
+        - 'config:core.entity_view_display.node.department_document.teaser'
+        - 'config:core.entity_view_display.node.department_parent.default'
+        - 'config:core.entity_view_display.node.department_parent.teaser'
+        - 'config:core.entity_view_display.node.digital_archives_photos.default'
+        - 'config:core.entity_view_display.node.digital_archives_photos.teaser'
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.external_data.default'
+        - 'config:core.entity_view_display.node.external_data.teaser'
+        - 'config:core.entity_view_display.node.hero.default'
+        - 'config:core.entity_view_display.node.hero.teaser'
+        - 'config:core.entity_view_display.node.location.default'
+        - 'config:core.entity_view_display.node.location.teaser'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.card'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.default'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.teaser'
+        - 'config:core.entity_view_display.node.outreach.default'
+        - 'config:core.entity_view_display.node.outreach.teaser'
+        - 'config:core.entity_view_display.node.outreach2.default'
+        - 'config:core.entity_view_display.node.outreach2.teaser'
+        - 'config:core.entity_view_display.node.outreach_article2.default'
+        - 'config:core.entity_view_display.node.outreach_article2.teaser'
+        - 'config:core.entity_view_display.node.registration.default'
+        - 'config:core.entity_view_display.node.registration.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.reusable_component.default'
+        - 'config:core.entity_view_display.node.reusable_component.teaser'
+        - 'config:core.entity_view_display.node.sand_gallery.default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_album'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_event'
+        - 'config:core.entity_view_display.node.sand_gallery.teaser'
+        - 'config:core.entity_view_display.node.sidebar_block_context.default'
+        - 'config:core.entity_view_display.node.sidebar_block_context.teaser'
+        - 'config:core.entity_view_display.node.slide.card'
+        - 'config:core.entity_view_display.node.slide.default'
+        - 'config:core.entity_view_display.node.slide.full'
+        - 'config:core.entity_view_display.node.slide.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'
+  page_3:
+    id: page_3
+    display_title: Wilson
+    display_plugin: page
+    position: 2
+    display_options:
+      title: 'Mayoral Artifacts for Pete Wilson'
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_mayor_value:
+          id: field_mayor_value
+          table: node__field_mayor
+          field: field_mayor_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            'Pete Wilson': 'Pete Wilson'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: field_mayor_value_op
+            label: 'Mayor (field_mayor)'
+            description: ''
+            use_operator: false
+            operator: field_mayor_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_mayor_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: city-clerk/inforecords/mayoral-artifacts/pete-wilson
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.application.default'
+        - 'config:core.entity_view_display.node.application.teaser'
+        - 'config:core.entity_view_display.node.article.default'
+        - 'config:core.entity_view_display.node.article.teaser'
+        - 'config:core.entity_view_display.node.blog.default'
+        - 'config:core.entity_view_display.node.blog.teaser'
+        - 'config:core.entity_view_display.node.bucket.default'
+        - 'config:core.entity_view_display.node.bucket.teaser'
+        - 'config:core.entity_view_display.node.business_resource.default'
+        - 'config:core.entity_view_display.node.business_resource.teaser'
+        - 'config:core.entity_view_display.node.date.default'
+        - 'config:core.entity_view_display.node.date.teaser'
+        - 'config:core.entity_view_display.node.department.default'
+        - 'config:core.entity_view_display.node.department.teaser'
+        - 'config:core.entity_view_display.node.department_document.default'
+        - 'config:core.entity_view_display.node.department_document.teaser'
+        - 'config:core.entity_view_display.node.department_parent.default'
+        - 'config:core.entity_view_display.node.department_parent.teaser'
+        - 'config:core.entity_view_display.node.digital_archives_photos.default'
+        - 'config:core.entity_view_display.node.digital_archives_photos.teaser'
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.external_data.default'
+        - 'config:core.entity_view_display.node.external_data.teaser'
+        - 'config:core.entity_view_display.node.hero.default'
+        - 'config:core.entity_view_display.node.hero.teaser'
+        - 'config:core.entity_view_display.node.location.default'
+        - 'config:core.entity_view_display.node.location.teaser'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.card'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.default'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.teaser'
+        - 'config:core.entity_view_display.node.outreach.default'
+        - 'config:core.entity_view_display.node.outreach.teaser'
+        - 'config:core.entity_view_display.node.outreach2.default'
+        - 'config:core.entity_view_display.node.outreach2.teaser'
+        - 'config:core.entity_view_display.node.outreach_article2.default'
+        - 'config:core.entity_view_display.node.outreach_article2.teaser'
+        - 'config:core.entity_view_display.node.registration.default'
+        - 'config:core.entity_view_display.node.registration.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.reusable_component.default'
+        - 'config:core.entity_view_display.node.reusable_component.teaser'
+        - 'config:core.entity_view_display.node.sand_gallery.default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_album'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_event'
+        - 'config:core.entity_view_display.node.sand_gallery.teaser'
+        - 'config:core.entity_view_display.node.sidebar_block_context.default'
+        - 'config:core.entity_view_display.node.sidebar_block_context.teaser'
+        - 'config:core.entity_view_display.node.slide.card'
+        - 'config:core.entity_view_display.node.slide.default'
+        - 'config:core.entity_view_display.node.slide.full'
+        - 'config:core.entity_view_display.node.slide.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'
+  page_4:
+    id: page_4
+    display_title: Hedgecock
+    display_plugin: page
+    position: 2
+    display_options:
+      title: 'Mayoral Artifacts for Roger Hedgecock'
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_mayor_value:
+          id: field_mayor_value
+          table: node__field_mayor
+          field: field_mayor_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            'Roger Hedgecock': 'Roger Hedgecock'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: field_mayor_value_op
+            label: 'Mayor (field_mayor)'
+            description: ''
+            use_operator: false
+            operator: field_mayor_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_mayor_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: city-clerk/inforecords/mayoral-artifacts/roger-hedgecock
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.application.default'
+        - 'config:core.entity_view_display.node.application.teaser'
+        - 'config:core.entity_view_display.node.article.default'
+        - 'config:core.entity_view_display.node.article.teaser'
+        - 'config:core.entity_view_display.node.blog.default'
+        - 'config:core.entity_view_display.node.blog.teaser'
+        - 'config:core.entity_view_display.node.bucket.default'
+        - 'config:core.entity_view_display.node.bucket.teaser'
+        - 'config:core.entity_view_display.node.business_resource.default'
+        - 'config:core.entity_view_display.node.business_resource.teaser'
+        - 'config:core.entity_view_display.node.date.default'
+        - 'config:core.entity_view_display.node.date.teaser'
+        - 'config:core.entity_view_display.node.department.default'
+        - 'config:core.entity_view_display.node.department.teaser'
+        - 'config:core.entity_view_display.node.department_document.default'
+        - 'config:core.entity_view_display.node.department_document.teaser'
+        - 'config:core.entity_view_display.node.department_parent.default'
+        - 'config:core.entity_view_display.node.department_parent.teaser'
+        - 'config:core.entity_view_display.node.digital_archives_photos.default'
+        - 'config:core.entity_view_display.node.digital_archives_photos.teaser'
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.external_data.default'
+        - 'config:core.entity_view_display.node.external_data.teaser'
+        - 'config:core.entity_view_display.node.hero.default'
+        - 'config:core.entity_view_display.node.hero.teaser'
+        - 'config:core.entity_view_display.node.location.default'
+        - 'config:core.entity_view_display.node.location.teaser'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.card'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.default'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.teaser'
+        - 'config:core.entity_view_display.node.outreach.default'
+        - 'config:core.entity_view_display.node.outreach.teaser'
+        - 'config:core.entity_view_display.node.outreach2.default'
+        - 'config:core.entity_view_display.node.outreach2.teaser'
+        - 'config:core.entity_view_display.node.outreach_article2.default'
+        - 'config:core.entity_view_display.node.outreach_article2.teaser'
+        - 'config:core.entity_view_display.node.registration.default'
+        - 'config:core.entity_view_display.node.registration.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.reusable_component.default'
+        - 'config:core.entity_view_display.node.reusable_component.teaser'
+        - 'config:core.entity_view_display.node.sand_gallery.default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_album'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_event'
+        - 'config:core.entity_view_display.node.sand_gallery.teaser'
+        - 'config:core.entity_view_display.node.sidebar_block_context.default'
+        - 'config:core.entity_view_display.node.sidebar_block_context.teaser'
+        - 'config:core.entity_view_display.node.slide.card'
+        - 'config:core.entity_view_display.node.slide.default'
+        - 'config:core.entity_view_display.node.slide.full'
+        - 'config:core.entity_view_display.node.slide.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'
+  page_5:
+    id: page_5
+    display_title: OConnor
+    display_plugin: page
+    position: 2
+    display_options:
+      title: "Mayoral Artifacts for Maureen O'Connor"
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_mayor_value:
+          id: field_mayor_value
+          table: node__field_mayor
+          field: field_mayor_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            "Maureen O'Connor": "Maureen O'Connor"
+          group: 1
+          exposed: false
+          expose:
+            operator_id: field_mayor_value_op
+            label: 'Mayor (field_mayor)'
+            description: ''
+            use_operator: false
+            operator: field_mayor_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_mayor_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: city-clerk/inforecords/mayoral-artifacts/maureen-oconnor
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.application.default'
+        - 'config:core.entity_view_display.node.application.teaser'
+        - 'config:core.entity_view_display.node.article.default'
+        - 'config:core.entity_view_display.node.article.teaser'
+        - 'config:core.entity_view_display.node.blog.default'
+        - 'config:core.entity_view_display.node.blog.teaser'
+        - 'config:core.entity_view_display.node.bucket.default'
+        - 'config:core.entity_view_display.node.bucket.teaser'
+        - 'config:core.entity_view_display.node.business_resource.default'
+        - 'config:core.entity_view_display.node.business_resource.teaser'
+        - 'config:core.entity_view_display.node.date.default'
+        - 'config:core.entity_view_display.node.date.teaser'
+        - 'config:core.entity_view_display.node.department.default'
+        - 'config:core.entity_view_display.node.department.teaser'
+        - 'config:core.entity_view_display.node.department_document.default'
+        - 'config:core.entity_view_display.node.department_document.teaser'
+        - 'config:core.entity_view_display.node.department_parent.default'
+        - 'config:core.entity_view_display.node.department_parent.teaser'
+        - 'config:core.entity_view_display.node.digital_archives_photos.default'
+        - 'config:core.entity_view_display.node.digital_archives_photos.teaser'
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.external_data.default'
+        - 'config:core.entity_view_display.node.external_data.teaser'
+        - 'config:core.entity_view_display.node.hero.default'
+        - 'config:core.entity_view_display.node.hero.teaser'
+        - 'config:core.entity_view_display.node.location.default'
+        - 'config:core.entity_view_display.node.location.teaser'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.card'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.default'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.teaser'
+        - 'config:core.entity_view_display.node.outreach.default'
+        - 'config:core.entity_view_display.node.outreach.teaser'
+        - 'config:core.entity_view_display.node.outreach2.default'
+        - 'config:core.entity_view_display.node.outreach2.teaser'
+        - 'config:core.entity_view_display.node.outreach_article2.default'
+        - 'config:core.entity_view_display.node.outreach_article2.teaser'
+        - 'config:core.entity_view_display.node.registration.default'
+        - 'config:core.entity_view_display.node.registration.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.reusable_component.default'
+        - 'config:core.entity_view_display.node.reusable_component.teaser'
+        - 'config:core.entity_view_display.node.sand_gallery.default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_album'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_event'
+        - 'config:core.entity_view_display.node.sand_gallery.teaser'
+        - 'config:core.entity_view_display.node.sidebar_block_context.default'
+        - 'config:core.entity_view_display.node.sidebar_block_context.teaser'
+        - 'config:core.entity_view_display.node.slide.card'
+        - 'config:core.entity_view_display.node.slide.default'
+        - 'config:core.entity_view_display.node.slide.full'
+        - 'config:core.entity_view_display.node.slide.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'
+  page_6:
+    id: page_6
+    display_title: Golding
+    display_plugin: page
+    position: 2
+    display_options:
+      title: 'Mayoral Artifacts for Susan Golding'
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_mayor_value:
+          id: field_mayor_value
+          table: node__field_mayor
+          field: field_mayor_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            'Susan Golding': 'Susan Golding'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: field_mayor_value_op
+            label: 'Mayor (field_mayor)'
+            description: ''
+            use_operator: false
+            operator: field_mayor_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_mayor_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: city-clerk/inforecords/mayoral-artifacts/susan-golding
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.application.default'
+        - 'config:core.entity_view_display.node.application.teaser'
+        - 'config:core.entity_view_display.node.article.default'
+        - 'config:core.entity_view_display.node.article.teaser'
+        - 'config:core.entity_view_display.node.blog.default'
+        - 'config:core.entity_view_display.node.blog.teaser'
+        - 'config:core.entity_view_display.node.bucket.default'
+        - 'config:core.entity_view_display.node.bucket.teaser'
+        - 'config:core.entity_view_display.node.business_resource.default'
+        - 'config:core.entity_view_display.node.business_resource.teaser'
+        - 'config:core.entity_view_display.node.date.default'
+        - 'config:core.entity_view_display.node.date.teaser'
+        - 'config:core.entity_view_display.node.department.default'
+        - 'config:core.entity_view_display.node.department.teaser'
+        - 'config:core.entity_view_display.node.department_document.default'
+        - 'config:core.entity_view_display.node.department_document.teaser'
+        - 'config:core.entity_view_display.node.department_parent.default'
+        - 'config:core.entity_view_display.node.department_parent.teaser'
+        - 'config:core.entity_view_display.node.digital_archives_photos.default'
+        - 'config:core.entity_view_display.node.digital_archives_photos.teaser'
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.external_data.default'
+        - 'config:core.entity_view_display.node.external_data.teaser'
+        - 'config:core.entity_view_display.node.hero.default'
+        - 'config:core.entity_view_display.node.hero.teaser'
+        - 'config:core.entity_view_display.node.location.default'
+        - 'config:core.entity_view_display.node.location.teaser'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.card'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.default'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.teaser'
+        - 'config:core.entity_view_display.node.outreach.default'
+        - 'config:core.entity_view_display.node.outreach.teaser'
+        - 'config:core.entity_view_display.node.outreach2.default'
+        - 'config:core.entity_view_display.node.outreach2.teaser'
+        - 'config:core.entity_view_display.node.outreach_article2.default'
+        - 'config:core.entity_view_display.node.outreach_article2.teaser'
+        - 'config:core.entity_view_display.node.registration.default'
+        - 'config:core.entity_view_display.node.registration.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.reusable_component.default'
+        - 'config:core.entity_view_display.node.reusable_component.teaser'
+        - 'config:core.entity_view_display.node.sand_gallery.default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_album'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_event'
+        - 'config:core.entity_view_display.node.sand_gallery.teaser'
+        - 'config:core.entity_view_display.node.sidebar_block_context.default'
+        - 'config:core.entity_view_display.node.sidebar_block_context.teaser'
+        - 'config:core.entity_view_display.node.slide.card'
+        - 'config:core.entity_view_display.node.slide.default'
+        - 'config:core.entity_view_display.node.slide.full'
+        - 'config:core.entity_view_display.node.slide.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'
+  page_7:
+    id: page_7
+    display_title: Murphy
+    display_plugin: page
+    position: 2
+    display_options:
+      title: 'Mayoral Artifacts for Dick Murphy'
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_mayor_value:
+          id: field_mayor_value
+          table: node__field_mayor
+          field: field_mayor_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            'Dick Murphy': 'Dick Murphy'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: field_mayor_value_op
+            label: 'Mayor (field_mayor)'
+            description: ''
+            use_operator: false
+            operator: field_mayor_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_mayor_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: city-clerk/inforecords/mayoral-artifacts/dick-murphy
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.application.default'
+        - 'config:core.entity_view_display.node.application.teaser'
+        - 'config:core.entity_view_display.node.article.default'
+        - 'config:core.entity_view_display.node.article.teaser'
+        - 'config:core.entity_view_display.node.blog.default'
+        - 'config:core.entity_view_display.node.blog.teaser'
+        - 'config:core.entity_view_display.node.bucket.default'
+        - 'config:core.entity_view_display.node.bucket.teaser'
+        - 'config:core.entity_view_display.node.business_resource.default'
+        - 'config:core.entity_view_display.node.business_resource.teaser'
+        - 'config:core.entity_view_display.node.date.default'
+        - 'config:core.entity_view_display.node.date.teaser'
+        - 'config:core.entity_view_display.node.department.default'
+        - 'config:core.entity_view_display.node.department.teaser'
+        - 'config:core.entity_view_display.node.department_document.default'
+        - 'config:core.entity_view_display.node.department_document.teaser'
+        - 'config:core.entity_view_display.node.department_parent.default'
+        - 'config:core.entity_view_display.node.department_parent.teaser'
+        - 'config:core.entity_view_display.node.digital_archives_photos.default'
+        - 'config:core.entity_view_display.node.digital_archives_photos.teaser'
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.external_data.default'
+        - 'config:core.entity_view_display.node.external_data.teaser'
+        - 'config:core.entity_view_display.node.hero.default'
+        - 'config:core.entity_view_display.node.hero.teaser'
+        - 'config:core.entity_view_display.node.location.default'
+        - 'config:core.entity_view_display.node.location.teaser'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.card'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.default'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.teaser'
+        - 'config:core.entity_view_display.node.outreach.default'
+        - 'config:core.entity_view_display.node.outreach.teaser'
+        - 'config:core.entity_view_display.node.outreach2.default'
+        - 'config:core.entity_view_display.node.outreach2.teaser'
+        - 'config:core.entity_view_display.node.outreach_article2.default'
+        - 'config:core.entity_view_display.node.outreach_article2.teaser'
+        - 'config:core.entity_view_display.node.registration.default'
+        - 'config:core.entity_view_display.node.registration.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.reusable_component.default'
+        - 'config:core.entity_view_display.node.reusable_component.teaser'
+        - 'config:core.entity_view_display.node.sand_gallery.default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_album'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_event'
+        - 'config:core.entity_view_display.node.sand_gallery.teaser'
+        - 'config:core.entity_view_display.node.sidebar_block_context.default'
+        - 'config:core.entity_view_display.node.sidebar_block_context.teaser'
+        - 'config:core.entity_view_display.node.slide.card'
+        - 'config:core.entity_view_display.node.slide.default'
+        - 'config:core.entity_view_display.node.slide.full'
+        - 'config:core.entity_view_display.node.slide.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'
+  page_8:
+    id: page_8
+    display_title: Sanders
+    display_plugin: page
+    position: 2
+    display_options:
+      title: 'Mayoral Artifacts for Jerry Sanders'
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_mayor_value:
+          id: field_mayor_value
+          table: node__field_mayor
+          field: field_mayor_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            'Jerry Sanders': 'Jerry Sanders'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: field_mayor_value_op
+            label: 'Mayor (field_mayor)'
+            description: ''
+            use_operator: false
+            operator: field_mayor_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_mayor_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: city-clerk/inforecords/mayoral-artifacts/jerry-sanders
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.application.default'
+        - 'config:core.entity_view_display.node.application.teaser'
+        - 'config:core.entity_view_display.node.article.default'
+        - 'config:core.entity_view_display.node.article.teaser'
+        - 'config:core.entity_view_display.node.blog.default'
+        - 'config:core.entity_view_display.node.blog.teaser'
+        - 'config:core.entity_view_display.node.bucket.default'
+        - 'config:core.entity_view_display.node.bucket.teaser'
+        - 'config:core.entity_view_display.node.business_resource.default'
+        - 'config:core.entity_view_display.node.business_resource.teaser'
+        - 'config:core.entity_view_display.node.date.default'
+        - 'config:core.entity_view_display.node.date.teaser'
+        - 'config:core.entity_view_display.node.department.default'
+        - 'config:core.entity_view_display.node.department.teaser'
+        - 'config:core.entity_view_display.node.department_document.default'
+        - 'config:core.entity_view_display.node.department_document.teaser'
+        - 'config:core.entity_view_display.node.department_parent.default'
+        - 'config:core.entity_view_display.node.department_parent.teaser'
+        - 'config:core.entity_view_display.node.digital_archives_photos.default'
+        - 'config:core.entity_view_display.node.digital_archives_photos.teaser'
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.external_data.default'
+        - 'config:core.entity_view_display.node.external_data.teaser'
+        - 'config:core.entity_view_display.node.hero.default'
+        - 'config:core.entity_view_display.node.hero.teaser'
+        - 'config:core.entity_view_display.node.location.default'
+        - 'config:core.entity_view_display.node.location.teaser'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.card'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.default'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.teaser'
+        - 'config:core.entity_view_display.node.outreach.default'
+        - 'config:core.entity_view_display.node.outreach.teaser'
+        - 'config:core.entity_view_display.node.outreach2.default'
+        - 'config:core.entity_view_display.node.outreach2.teaser'
+        - 'config:core.entity_view_display.node.outreach_article2.default'
+        - 'config:core.entity_view_display.node.outreach_article2.teaser'
+        - 'config:core.entity_view_display.node.registration.default'
+        - 'config:core.entity_view_display.node.registration.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.reusable_component.default'
+        - 'config:core.entity_view_display.node.reusable_component.teaser'
+        - 'config:core.entity_view_display.node.sand_gallery.default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_album'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_event'
+        - 'config:core.entity_view_display.node.sand_gallery.teaser'
+        - 'config:core.entity_view_display.node.sidebar_block_context.default'
+        - 'config:core.entity_view_display.node.sidebar_block_context.teaser'
+        - 'config:core.entity_view_display.node.slide.card'
+        - 'config:core.entity_view_display.node.slide.default'
+        - 'config:core.entity_view_display.node.slide.full'
+        - 'config:core.entity_view_display.node.slide.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'
+  page_9:
+    id: page_9
+    display_title: Filner
+    display_plugin: page
+    position: 2
+    display_options:
+      title: 'Mayoral Artifacts for Bob Filner'
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            mayoral_artifacts: mayoral_artifacts
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_mayor_value:
+          id: field_mayor_value
+          table: node__field_mayor
+          field: field_mayor_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value:
+            'Bob Filner': 'Bob Filner'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: field_mayor_value_op
+            label: 'Mayor (field_mayor)'
+            description: ''
+            use_operator: false
+            operator: field_mayor_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_mayor_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Keyword(s) Search'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: true
+            multiple: false
+            remember_roles:
+              anonymous: anonymous
+              authenticated: authenticated
+              content_editor: '0'
+              content_owner: '0'
+              sand_admin_email: '0'
+              sand_admin_email_solr: '0'
+              event: '0'
+              digital_archives_photos: '0'
+              webform_results: '0'
+              webform_results_photos_only: '0'
+              outreach2_article: '0'
+              department_: '0'
+              program_: '0'
+              sand_admin: '0'
+              if_administrator: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            body: body
+            field_keywords: field_keywords
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: city-clerk/inforecords/mayoral-artifacts/bob-filner
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.application.default'
+        - 'config:core.entity_view_display.node.application.teaser'
+        - 'config:core.entity_view_display.node.article.default'
+        - 'config:core.entity_view_display.node.article.teaser'
+        - 'config:core.entity_view_display.node.blog.default'
+        - 'config:core.entity_view_display.node.blog.teaser'
+        - 'config:core.entity_view_display.node.bucket.default'
+        - 'config:core.entity_view_display.node.bucket.teaser'
+        - 'config:core.entity_view_display.node.business_resource.default'
+        - 'config:core.entity_view_display.node.business_resource.teaser'
+        - 'config:core.entity_view_display.node.date.default'
+        - 'config:core.entity_view_display.node.date.teaser'
+        - 'config:core.entity_view_display.node.department.default'
+        - 'config:core.entity_view_display.node.department.teaser'
+        - 'config:core.entity_view_display.node.department_document.default'
+        - 'config:core.entity_view_display.node.department_document.teaser'
+        - 'config:core.entity_view_display.node.department_parent.default'
+        - 'config:core.entity_view_display.node.department_parent.teaser'
+        - 'config:core.entity_view_display.node.digital_archives_photos.default'
+        - 'config:core.entity_view_display.node.digital_archives_photos.teaser'
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.external_data.default'
+        - 'config:core.entity_view_display.node.external_data.teaser'
+        - 'config:core.entity_view_display.node.hero.default'
+        - 'config:core.entity_view_display.node.hero.teaser'
+        - 'config:core.entity_view_display.node.location.default'
+        - 'config:core.entity_view_display.node.location.teaser'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.card'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.default'
+        - 'config:core.entity_view_display.node.mayoral_artifacts.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.teaser'
+        - 'config:core.entity_view_display.node.outreach.default'
+        - 'config:core.entity_view_display.node.outreach.teaser'
+        - 'config:core.entity_view_display.node.outreach2.default'
+        - 'config:core.entity_view_display.node.outreach2.teaser'
+        - 'config:core.entity_view_display.node.outreach_article2.default'
+        - 'config:core.entity_view_display.node.outreach_article2.teaser'
+        - 'config:core.entity_view_display.node.registration.default'
+        - 'config:core.entity_view_display.node.registration.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.reusable_component.default'
+        - 'config:core.entity_view_display.node.reusable_component.teaser'
+        - 'config:core.entity_view_display.node.sand_gallery.default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_album'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_default'
+        - 'config:core.entity_view_display.node.sand_gallery.sand_gallery_event'
+        - 'config:core.entity_view_display.node.sand_gallery.teaser'
+        - 'config:core.entity_view_display.node.sidebar_block_context.default'
+        - 'config:core.entity_view_display.node.sidebar_block_context.teaser'
+        - 'config:core.entity_view_display.node.slide.card'
+        - 'config:core.entity_view_display.node.slide.default'
+        - 'config:core.entity_view_display.node.slide.full'
+        - 'config:core.entity_view_display.node.slide.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_image'
+        - 'config:field.storage.node.field_keywords'
+        - 'config:field.storage.node.field_mayor'

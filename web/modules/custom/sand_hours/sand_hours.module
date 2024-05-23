@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * Implements hook_field_formatter_settings_summary_alter().
+ */
+function sand_hours_field_formatter_settings_summary_alter(&$summary, $context) {
+    // Append a message to the summary when foo_formatter has
+    // my_setting set to TRUE for the current view mode.
+    if ($context['formatter']->getPluginId() == 'foo_formatter') {
+        if ($context['formatter']->getThirdPartySetting('my_module', 'my_setting')) {
+            $summary[] = t('My setting enabled.');
+        }
+    }
+}

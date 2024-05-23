@@ -1,0 +1,43 @@
+uuid: 6e0124ee-40d8-40db-9a68-947ba8f25f79
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.sidebar_block_context.field_block
+    - field.field.node.sidebar_block_context.field_department
+    - field.field.node.sidebar_block_context.field_department_subs
+    - field.field.node.sidebar_block_context.field_path
+    - field.field.node.sidebar_block_context.field_sidebar_menu_id
+    - field.field.node.sidebar_block_context.field_top_menu_id
+    - node.type.sidebar_block_context
+  module:
+    - entity_reference_revisions
+    - user
+id: node.sidebar_block_context.default
+targetEntityType: node
+bundle: sidebar_block_context
+mode: default
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_block:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_department: true
+  field_department_subs: true
+  field_path: true
+  field_sidebar_menu_id: true
+  field_top_menu_id: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

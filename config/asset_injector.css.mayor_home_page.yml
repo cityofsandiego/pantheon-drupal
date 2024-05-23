@@ -1,0 +1,21 @@
+uuid: 99cbf0ba-3436-4ca7-947f-42645221b179
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: mayor_home_page
+label: 'Mayor Home Page'
+code: |-
+  #flexslider-1 .flex-control-nav {
+  	display: none;
+  }
+media: all
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /mayor
+contexts: {  }
+conditions_require_all: true

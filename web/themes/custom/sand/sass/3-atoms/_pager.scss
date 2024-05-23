@@ -1,0 +1,60 @@
+/* Pagination
+   ========================================================================== */
+
+.item-list ul.pager,
+nav.pager,
+.pager {
+  border: 0;
+  margin: 5rem 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+
+  .pager__items {
+    text-align: center;
+  }
+
+  li,
+  .pager-item .pager__item {
+    background: none;
+    border: 0;
+    display: inline-block;
+    font-weight: bold;
+    list-style: none;
+    margin: 0 1em 1em;
+
+    a {
+      background: none;
+      border: 0;
+      color: $cerulean;
+      font-weight: bold;
+      text-decoration: none;
+      text-transform: lowercase;
+
+      &:hover {
+        color: darken($cerulean, 15%);
+      }
+    }
+
+    &.is-active {
+      background: none;
+      border: 0;
+
+      a {
+        background: none;
+        border: 0;
+        color: $font-color;
+      }
+    }
+
+    @include breakpoint(mobile-landscape) {
+      margin: 0;
+
+      @include rem("font-size", 13px);
+    }
+  }
+}
+
+.view nav.pager {
+  margin: 2em 0;
+}

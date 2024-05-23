@@ -1,0 +1,642 @@
+uuid: ca8a66a5-9701-468b-bdcc-2ef4d3fe7d23
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 1
+template: false
+archive: false
+id: webform_13166
+title: 'Get It Done - Safety'
+description: null
+categories: {  }
+elements: |-
+  get_it_done:
+    '#type': hidden
+    '#default_value': 'TRUE'
+    '#title': get_it_done
+    '#description': ''
+  fieldset_step_1:
+    '#type': fieldset
+    '#title': 'I Need To...'
+    '#open': true
+    '#attributes':
+      class:
+        - step-1
+    i_need_to_2:
+      '#type': select
+      '#title': 'I need to'
+      '#title_display': invisible
+      '#options':
+        status: 'Check Status of'
+        pay: Pay
+        register: 'Register for'
+        report: Report
+        request: Request
+        view: View
+      '#required': true
+      '#default_value': status
+  fieldset_check_status_set:
+    '#type': fieldset
+    '#title': 'Check Status of...'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: status
+    '#attributes':
+      class:
+        - step-2
+    status_4:
+      '#type': select
+      '#title': 'Check Status of'
+      '#title_display': invisible
+      '#options':
+        get_it_done_status: 'Get It Done Report'
+        parking_citation_status: 'Parking Ticket'
+      '#required': true
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: status
+      '#default_value': get_it_done_status
+  fieldset_register_set:
+    '#type': fieldset
+    '#title': 'Register for...'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: register
+    '#attributes':
+      class:
+        - step-2
+    register_45:
+      '#type': select
+      '#options':
+        permits_alarm: 'Alarm Permit'
+        alertsandiego: 'Emergency Notification System'
+      '#default_value': permits_alarm
+      '#title_display': invisible
+      '#title': 'Register for'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: register
+      '#required': true
+  fieldset_pay_set:
+    '#type': fieldset
+    '#title': Pay...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: pay
+    '#attributes':
+      class:
+        - step-2
+    pay_8:
+      '#type': select
+      '#title': Pay
+      '#title_display': invisible
+      '#options':
+        pay_parking_ticket: 'Parking Citation/Ticket'
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: pay
+      '#default_value': pay_parking_ticket
+      '#required': true
+  fieldset_report_set:
+    '#type': fieldset
+    '#title': Report...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: report
+    '#attributes':
+      class:
+        - step-2
+    report_12:
+      '#type': select
+      '#title': Report
+      '#title_display': invisible
+      '#options':
+        police_practices: 'Complaint on Police Practices'
+        discrimination: 'Discrimination Complaint'
+        drug_activity: 'Illegal Drug Activity'
+        noise: 'Noise Complaint'
+        nonemergency: 'Non-emergency Crime'
+        oversized_vehicle: 'Oversized vehicle'
+        parking: 'Parking zone issue'
+        street: 'Problem on Street or Sidewalk'
+        abandoned_vehicle: 'Vehicle (72-hour Violation)'
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: report
+      '#default_value': police_practices
+      '#required': true
+  fieldset_request_set:
+    '#type': fieldset
+    '#title': Request...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: request
+    '#attributes':
+      class:
+        - step-2
+    request_14:
+      '#type': select
+      '#options':
+        traffic_signal: 'A New Traffic Signal or Sign'
+        parking_appeal: 'Appeal for Parking Ticket'
+        fire_presentation: 'Fire Safety Presentation'
+        fire_tour: 'Fire Station Tour'
+        graffiti: 'Graffiti Removal'
+      '#default_value': traffic_signal
+      '#title_display': invisible
+      '#title': Request
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: request
+      '#required': true
+  fieldset_view_set:
+    '#type': fieldset
+    '#title': View...
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: view
+    '#attributes':
+      class:
+        - step-2
+    view_16:
+      '#type': select
+      '#options':
+        crime_map: 'Crime Map'
+        fire_dispatch: 'Fire Dispatch Log'
+        map_gallery: 'Map Gallery'
+      '#default_value': crime_map
+      '#title_display': invisible
+      '#title': View
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="i_need_to_2"]':
+            value: view
+      '#required': true
+  fieldset_check_status_options_set:
+    '#type': fieldset
+    '#title': 'Check Status Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: status
+    '#attributes':
+      class:
+        - step-3
+    status_1_18:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Check the status of a parking citation/ticket</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Check Parking Ticket Status Now' href='http://duncan.imageenforcement.com/ImageOnlySites/SanDiegoImages'>Check Status Now</a></div>
+        </div>
+      '#title': 'Parking Ticket'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="status_4"]':
+            value: parking_citation_status
+    status_2_18:
+      '#type': processed_text
+      '#title': 'Get It Done Report'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="status_4"]':
+            value: get_it_done_status
+      '#text': |
+        <div class="row">
+        <div class="eight columns">
+        <p class="l-padding-desktop-ts">Check the status of a Get It Done report</p>
+        </div>
+
+        <div class="four columns"><a class="btn btn--wide" href="https://getitdone.sandiego.gov/TSWViewReportByList" title="Check the status of a Get It Done report">Check Status Now</a></div>
+        </div>
+      '#format': full_html
+  fieldset_register_options:
+    '#type': fieldset
+    '#title': 'Register Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: register
+    '#attributes':
+      class:
+        - step-3
+    register_1_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Register for Alert San Diego emergency notification system</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Register for the emergency notification system' href='/ohs/emergencynotification'>Register Now</a></div>
+        </div>
+      '#title': 'Emergency Notification System'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="register_45"]':
+            value: alertsandiego
+    register_2_22:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Pay or apply for permits for systems with fire/harmful gas and burglary/robbery alarm sensors</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Register for an alarm permit' href='https://sdpdalarmpermits.sandiego.gov/'>Register Now</a></div>
+        </div>
+      '#title': 'Alarm Permit'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="register_45"]':
+            value: permits_alarm
+  fieldset_payment_options:
+    '#type': fieldset
+    '#title': 'Pay Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: pay
+    '#attributes':
+      class:
+        - step-3
+    pay_3_26:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Pay a parking citation/ticket</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Pay parking ticket' href='https://www.dspayments.com/SanDiego'>Pay Now</a></div>
+        </div>
+      '#title': 'Parking Citation/Ticket Payments'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="pay_8"]':
+            value: pay_parking_ticket
+  fieldset_report_options:
+    '#type': fieldset
+    '#title': 'Report Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: report
+    '#attributes':
+      class:
+        - step-3
+    report_12_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report a vehicle parked in the same place for over 72 hours</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/PDNewReport' title='Report a vehicle parked in the same place for over 72 hours'>Report Now</a></div>
+        </div>
+      '#title': '72-hour Vehicle Violation'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: abandoned_vehicle
+    report_2_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>File a report about illegal drug and narcotics activities in your neighborhood</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report illegal drug activity' href='https://www.sandiego.gov/police/services/drug-related-activity-tip'>Report Now</a></div>
+        </div>
+      '#title': 'Illegal Drug Activity'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: drug_activity
+    report_3_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>File a discrimination complaint</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report a discrimination complaint' href='/human-relations/discrim/discrimination-complaint'>Report Now</a></div>
+        </div>
+      '#title': 'A Discrimination Complaint'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: discrimination
+    report_4_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>File a noise complaint</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='File a noise complaint' href='/ced/report/investigation'>Report Now</a></div>
+        </div>
+      '#title': 'A Noise Complaint'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: noise
+    report_5_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>File a complaint about police practices</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='File a complaint about police practices' href='/citizensreviewboard/filing/complaint-form'>Report Now</a></div>
+        </div>
+      '#title': 'Complaint on Police Practices'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: police_practices
+    report_6_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Report a non-emergency crime to police</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report a non-emergency crime to police' href='https://www.sandiego.gov/police/services/file-police-report'>Report Now</a></div>
+        </div>
+      '#title': 'Non-emergency Crime'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: nonemergency
+    report_7_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Report a pothole or other street-related problem</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Report a problem on a street or sidewalk' href='http://apps.sandiego.gov/streetdiv/'>Report Now</a></div>
+        </div>
+      '#title': 'Problem on Street or Sidewalk'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: street
+    report_oversized_vehicle_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report an oversized vehicle</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/PDNewReport' title='Report an oversized vehicle'>Report Now</a></div>
+        </div>
+      '#title': 'Oversized Vehicle'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: oversized_vehicle
+    report_parking_31:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <div class='row'>
+        	<div class='eight columns'>
+        		<p class='l-padding-desktop-ts'>Report a parking zone issue (e.g. car parked in a red zone)</p>
+        	</div>
+
+        	<div class='four columns'><a class='btn btn--wide' href='https://getitdone.sandiego.gov/PDNewReport' title='Report a parking zone issue'>Report Now</a></div>
+        </div>
+      '#title': 'Parking Zone Issue'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="report_12"]':
+            value: parking
+  fieldset_request_options:
+    '#type': fieldset
+    '#title': 'Request Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: request
+    '#attributes':
+      class:
+        - step-3
+    request_0_34:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request an administrative review of your parking citation</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Appeal a parking ticket' href='http://duncan.imageenforcement.com/AdminReviewSites/SanDiegoReview'>Request Now</a></div>
+        </div>
+      '#title': 'Appeal a Parking Ticket'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: parking_appeal
+    request_1_34:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request a tour of a City fire station</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request a fire station tour' href='/fire/safety/speakers/tours'>Request Now</a></div>
+        </div>
+      '#title': 'Fire Station Tour'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: fire_tour
+    request_2_34:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Submit a service request regarding a traffic sign, street striping or curb color painting, stop sign, traffic signal or other traffic safety measure</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request a new traffic signal or sign' href='/tsw/servicerequests/trafficrequest'>Request Now</a></div>
+        </div>
+      '#title': 'A New Traffic Signal or Sign'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: traffic_signal
+    request_10_34:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request graffiti be removed on City streets and other property</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request graffiti removal' href='http://apps.sandiego.gov/streetdiv/'>Report Now</a></div>
+        </div>
+      '#title': 'Graffiti Removal'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: graffiti
+    request_7_34:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>Request a presentation on fire safety</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='Request a fire safety presentation' href='/fire/safety/speakers/presentations'>Request Now</a></div>
+        </div>
+      '#title': 'Fire Safety Presentation'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="request_14"]':
+            value: fire_presentation
+  fieldset_view_options:
+    '#type': fieldset
+    '#title': 'View Now'
+    '#open': true
+    '#states':
+      visible:
+        ':input[name="i_need_to_2"]':
+          value: view
+    '#attributes':
+      class:
+        - step-3
+    view_1_42:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>View maps showing crimes and alerts of criminal activity</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='View crime maps' href='https://www.crimemapping.com/'>View Now</a></div>
+        </div>
+      '#title': 'Crime Map'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="view_16"]':
+            value: crime_map
+    view_2_42:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>View various City maps</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='View various city maps' href='http://sandiego.maps.arcgis.com/apps/PublicGallery/index.html?appid=99ca3e0f7a9a42e3a0667c4682bd78dc'>View Now</a></div>
+        </div>
+      '#title': 'Map Gallery'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="view_16"]':
+            value: map_gallery
+    view_3_42:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |-
+        <div class='row'>
+        <div class='eight columns'>
+        <p class='l-padding-desktop-ts'>View the City's fire dispatch log that contains information about active Fire and EMS calls</p>
+        </div>
+        <div class='four columns'><a class='btn btn--wide' title='View Fire Dispatch Log Now' href='http://apps.sandiego.gov/sdfiredispatch/'>View Now</a></div>
+        </div>
+      '#title': 'Fire Dispatch Log'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="view_16"]':
+            value: fire_dispatch
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers: {  }
+variants: {  }

@@ -1,0 +1,711 @@
+// ==========================================================================
+// Helpers
+// ==========================================================================
+
+%hidden {
+  /*
+     * Hide visually and from screen readers:
+     * http://juicystudio.com/article/screen-readers-display-none.php
+     */
+  display: none !important;
+  visibility: hidden;
+}
+
+%visuallyhidden {
+  /*
+     * Hide only visually, but have it available for screen readers:
+     * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+     */
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+
+  /*
+     * Extends the .visuallyhidden class to allow the element to be focusable
+     * when navigated to via the keyboard: h5bp.com/p
+     */
+  &.focusable:active,
+  &.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+}
+
+%invisible {
+  /*
+    * Hide visually and from screenreaders, but maintain layout
+    */
+  visibility: hidden;
+}
+
+%clearfix {
+  /*
+     * For IE 6/7 only
+     * Include this rule to trigger hasLayout and contain floats.
+     */
+  *zoom: 1;
+
+  /*
+     * Clearfix: contain floats
+     *
+     * For modern browsers
+     * 1. The space content is one way to avoid an Opera bug when the
+     *    `contenteditable` attribute is included anywhere else in the document.
+     *    Otherwise it causes space to appear at the top and bottom of elements
+     *    that receive the `clearfix` class.
+     * 2. The use of `table` rather than `block` is only necessary if using
+     *    `:before` to contain the top-margins of child elements.
+     */
+  &::before,
+  &::after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+  }
+
+  &::after {
+    clear: both;
+  }
+}
+
+/**
+ * Cross browser support for word wrapping
+ * Reference: http://kenneth.io/blog/2012/03/04/word-wrapping-hypernation-using-css/
+ */
+%word-wrap {
+  -ms-word-break: break-all;
+  word-break: break-all;
+
+  /* Non standard for webkit */
+  word-break: break-word;
+  hyphens: auto;
+  hyphens: auto;
+  hyphens: auto;
+  hyphens: auto;
+}
+
+/* Visibility
+   ========================================================================== */
+
+.visuallyhidden,
+.visually-hidden {
+  @extend %visuallyhidden;
+}
+
+.hidden {
+  @extend %hidden;
+}
+
+.element-invisible {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+}
+
+/* Hidden
+   ========================================================================== */
+
+.hide-on-mobile {
+  @include breakpoint(mobile-landscape down) {
+    display: none !important;
+  }
+}
+
+.hide-on-desktop {
+  @include breakpoint(mobile-landscape up) {
+    display: none !important;
+  }
+}
+
+/* Corners
+   ========================================================================== */
+
+.rounded-corner,
+.rounded-corners {
+  border-radius: 4px;
+}
+
+.rounded-corners-large {
+  border-radius: 30px !important;
+}
+
+/* Borders
+   ========================================================================== */
+
+.border {
+  //margin-bottom: 1em;
+  //padding-bottom: 1em;
+  border: 1px solid $alto !important;
+
+  &.border--dark {
+    border-color: $chateau !important;
+  }
+}
+
+.border--top {
+  border-top: 1px solid $alto !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+}
+
+.border--bottom {
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: 1px solid $alto !important;
+  border-left: none !important;
+}
+
+.border--left {
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-left: 1px solid $alto !important;
+}
+
+.border--right {
+  border-top: none !important;
+  border-right: 1px solid $alto !important;
+  border-bottom: none !important;
+  border-left: none !important;
+}
+
+.border--right--desktop {
+  @include breakpoint(medium up) {
+    border-top: none !important;
+    border-right: 1px solid $alto !important;
+    border-bottom: none !important;
+    border-left: none !important;
+  }
+}
+
+.no-border {
+  border: none !important;
+}
+
+.no-border-on-desktop {
+  @include breakpoint(medium up) {
+    border: none !important;
+  }
+}
+
+.no-border-on-mobile {
+  @include breakpoint(medium down) {
+    border: none !important;
+  }
+}
+
+.border-radius {
+  border-radius: 4px;
+}
+
+.border-mayor {
+  border: 1px solid #551a8b !important;
+}
+
+/* Text Formatting
+   ========================================================================== */
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+/* Indent
+   ========================================================================== */
+.indent-s {
+  text-indent: 1em;
+}
+
+.indent-d {
+  text-indent: 2em;
+}
+
+/* Alignment
+   ========================================================================== */
+
+.pull-center {
+  margin: 0 auto;
+  display: block;
+
+  &--desktop {
+    @include breakpoint(medium up) {
+      margin: 0 auto;
+      display: block;
+    }
+  }
+
+  &--mobile {
+    @include breakpoint(medium down) {
+      margin: 0 auto;
+      display: block;
+    }
+  }
+}
+
+.pull-left {
+  float: left;
+
+  &--desktop {
+    @include breakpoint(medium up) {
+      float: left;
+    }
+  }
+
+  &--mobile {
+    @include breakpoint(medium down) {
+      float: left;
+    }
+  }
+}
+
+.pull-right {
+  float: right;
+
+  &--desktop {
+    @include breakpoint(medium up) {
+      float: right;
+    }
+  }
+
+  &--mobile {
+    @include breakpoint(medium down) {
+      float: right;
+    }
+  }
+}
+
+.alignleft {
+  @include breakpoint(medium up) {
+    margin-right: 1.5em;
+    margin-bottom: 1.5em;
+    display: inline;
+    float: left;
+  }
+}
+
+.alignright {
+  @include breakpoint(medium up) {
+    margin-left: 1.5em;
+    margin-bottom: 1.5em;
+    display: inline;
+    float: right;
+  }
+}
+
+.aligncenter {
+  @include breakpoint(medium up) {
+    clear: both;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.valign-t {
+  vertical-align: top !important;
+}
+
+.valign-m {
+  vertical-align: middle !important;
+}
+
+.valign-b {
+  vertical-align: bottom !important;
+}
+
+/* Horizontal Rules
+   ========================================================================== */
+
+.hr--dashed {
+  border-top: 1px dashed $alto;
+}
+
+/* Backgrounds
+   ========================================================================== */
+
+// For zebra striping
+.background--odd {
+  //background-color: lighten( $mercury, 2% ) !important;
+  background-color: #f6f6f6;
+}
+
+.background--even {
+  //background-color: darken( $mercury, 4% );
+  background-color: #e4e9eb;
+}
+
+.message--dark,
+.background--dark {
+  background-color: $spruce !important;
+
+  &.text-white {
+    > * {
+      color: white;
+    }
+  }
+}
+
+.message-off-white,
+.background-off-white {
+  background-color: lighten($mercury, 2%) !important;
+}
+
+.message-off-white-darker,
+.background-off-white-darer {
+  background-color: darken($mercury, 4%);
+}
+
+.message-white,
+.background-white {
+  background-color: white !important;
+}
+
+.message--cerulean,
+.background--cerulean {
+  background-color: $cerulean !important;
+}
+
+.message--science,
+.background--science {
+  background-color: $science !important;
+}
+
+.message--sunshade,
+.background--sunshade {
+  background: $sunshade !important;
+}
+
+.message--robin,
+.background--robin {
+  background: $robin !important;
+}
+
+.message--westar,
+.background--westar {
+  background: $westar !important;
+}
+
+.message--off-white,
+.background--off-white {
+  background: $off-white !important;
+}
+
+.message--riptide,
+.background--riptide {
+  background: $riptide !important;
+}
+
+.message--texasrose,
+.background--texasrose {
+  background: $texasrose !important;
+}
+
+.message--manz,
+.background--manz {
+  background: $manz !important;
+}
+
+// Overlays
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(55 66 74 / 50%);
+}
+
+/* Gradient
+   ========================================================================== */
+%black-gradient {
+  background: linear-gradient(top, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(0 0 0 / 0%)), color-stop(75%, rgb(0 0 0 / 45%)), color-stop(100%, rgb(0 0 0 / 60%))); /* Chrome,Safari4+ */
+  background: linear-gradient(top, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* Chrome10+,Safari5.1+ */
+  background: linear-gradient(top, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* Opera 11.10+ */
+  background: linear-gradient(top, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 45%) 75%, rgb(0 0 0 / 60%) 100%); /* W3C */
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr="#00000000", endColorstr="#99000000", GradientType=0); /* IE6-9 */
+}
+
+%white-gradient {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&amp;0.9+0,1+100 */
+  background: linear-gradient(top, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(255 255 255 / 90%)), color-stop(100%, rgb(255 255 255 / 100%))); /* Chrome,Safari4+ */
+  background: linear-gradient(top, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* Chrome10+,Safari5.1+ */
+  background: linear-gradient(top, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* Opera 11.10+ */
+  background: linear-gradient(top, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgb(255 255 255 / 90%) 0%, rgb(255 255 255 / 100%) 100%); /* W3C */
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr="#e6ffffff", endColorstr="#ffffff", GradientType=0); /* IE6-9 */
+}
+
+@mixin gray-gradient {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,d4d4d4+100 */
+  background: #fff; /* Old browsers */
+  background: linear-gradient(top, #fff 0%, #d4d4d4 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #d4d4d4)); /* Chrome,Safari4+ */
+  background: linear-gradient(top, #fff 0%, #d4d4d4 100%); /* Chrome10+,Safari5.1+ */
+  background: linear-gradient(top, #fff 0%, #d4d4d4 100%); /* Opera 11.10+ */
+  background: linear-gradient(top, #fff 0%, #d4d4d4 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #fff 0%, #d4d4d4 100%); /* W3C */
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr="#ffffff", endColorstr="#d4d4d4", GradientType=0); /* IE6-9 */
+}
+
+/* Images
+   ========================================================================== */
+
+.img-left, .align-left {
+  &.width-50--mobile {
+    float: left;
+    margin-right: 1.5rem;
+    padding-top: 5px;
+  }
+
+  /* apply to element containing img, typically a <div> or <p> */
+  @include breakpoint(medium down) {
+    width: 100% !important;
+    text-align: center;
+    margin-right: 1em;
+    margin-bottom: 1em;
+  }
+
+  @include breakpoint(medium up) {
+    float: left;
+    margin: 0 1.5rem 1.2rem 0;
+    padding-top: 5px;
+  }
+}
+
+.img-right, .align-right {
+  &.width-50--mobile {
+    float: right;
+    margin-left: 1.5rem;
+    padding-top: 5px;
+  }
+
+  /* apply to element containing img, typically a <div> or <p> */
+  @include breakpoint(medium down) {
+    width: 100% !important;
+    text-align: center;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+
+  @include breakpoint(medium up) {
+    float: right;
+    margin: 0 0 1.2rem 1.5rem;
+    padding-top: 5px;
+  }
+}
+
+.img-center {
+  clear: both;
+  float: none;
+  margin: 1.2rem auto;
+}
+
+.photo-credit {
+  text-align: right;
+  line-height: 1.5;
+  font-size: 0.6rem;
+  padding: 0.5em;
+  margin: 0;
+}
+
+.img-circle { border-radius: 50% !important; }
+
+/* Widths by Percentage
+   ========================================================================== */
+.width-25 {
+  width: 25% !important;
+}
+
+.width-33 {
+  width: 33% !important;
+}
+
+.width-34 {
+  width: 34% !important;
+}
+
+.width-50 {
+  width: 50% !important;
+
+  &--mobile {
+    @include breakpoint(medium down) {
+      width: 50% !important;
+    }
+  }
+}
+
+.width-66 {
+  width: 66.6666666666% !important;
+}
+
+.width-75 {
+  width: 75% !important;
+}
+
+.width-100 {
+  width: 100% !important;
+  text-align: center;
+
+  &--mobile {
+    @include breakpoint(medium down) {
+      width: 100% !important;
+    }
+  }
+}
+
+.img-center { //second .img-center placed here so its width takes precedence over widths above
+  width: auto !important;
+}
+
+/* Vertical centering inside flexbox
+   ========================================================================== */
+
+.l-flex {
+  display: flex !important;
+}
+
+.l-flex-center {
+  display: flex;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+
+  &--desktop {
+    @include breakpoint(medium up) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.l-flex-center-h {
+  display: flex;
+  justify-content: center !important;
+  text-align: center !important;
+
+  &--desktop {
+    @include breakpoint(medium up) {
+      display: flex;
+      justify-content: center !important;
+      text-align: center !important;
+    }
+  }
+}
+
+.l-flex-center-v {
+  display: flex;
+  align-items: center !important;
+
+  &--desktop {
+    @include breakpoint(medium up) {
+      display: flex;
+      align-items: center !important;
+    }
+  }
+}
+
+.l-flex-space-between {
+  display: flex;
+  flex-direction: row;
+  align-items: center !important;
+}
+
+.pos-r {
+  position: relative;
+}
+
+.pin-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.pin-top-center {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.pin-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.text-shadow-dark {
+  text-shadow: 0 0 #555, 0 2px 0.3em black, 2px 0 0.3em black, 0 0 black;
+}
+
+.text-shadow-light {
+  text-shadow: 0 0 #37424a, 0 2px 0.3em white, 2px 0 0.3em white, 0 0 #37424a;
+}
+
+.bg-opacity-3 {
+  &-3 {
+    background: rgb(0 0 0 / 30%);
+  }
+
+  &-5 {
+    background: rgb(0 0 0 / 50%);
+  }
+
+  &-8 {
+    background: rgb(0 0 0 / 80%);
+  }
+}
+
+.bg-cover {
+  background-size: cover;
+  background-position: center center;
+}
+
+div.focal-point-derxxxivative-preview {
+  background-image: url("/web/themes/custom/sand/images/hero-inside-sd.jpg");
+}
+
+a[href$=".pdf"]::after {
+  //font-family: "icomoon";
+  //content: "\e6d9";
+  content: url("/themes/custom/sand/images/pdf-icon.svg");
+  -webkit-alt: "PDF icon";
+  padding-left: 5px;
+  display: inline-block;
+  width: 1.5rem;
+}
+
+a[href$=".pdf"].no-pdf-icon::after {
+  content: none;
+}
+
+.overflow-h {
+  overflow: hidden;
+
+  &-d {
+    @include breakpoint(mobile-landscape up) {
+      overflow: hidden;
+    }
+  }
+
+  &-m {
+    @include breakpoint(mobile-landscape down) {
+      overflow: hidden;
+    }
+  }
+}
+
+.lh1 {
+  line-height: 1 !important;
+}

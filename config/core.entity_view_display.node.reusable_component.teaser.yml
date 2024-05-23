@@ -1,0 +1,44 @@
+uuid: d0ae9219-108f-4f5e-9e04-9f39ae61647f
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.reusable_component.body
+    - field.field.node.reusable_component.field_action_url
+    - field.field.node.reusable_component.field_block_delta
+    - field.field.node.reusable_component.field_block_type
+    - field.field.node.reusable_component.field_d7_nid
+    - field.field.node.reusable_component.field_graphic_cta_title
+    - field.field.node.reusable_component.field_image
+    - node.type.reusable_component
+  module:
+    - text
+    - user
+id: node.reusable_component.teaser
+targetEntityType: node
+bundle: reusable_component
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_action_url: true
+  field_block_delta: true
+  field_block_type: true
+  field_d7_nid: true
+  field_graphic_cta_title: true
+  field_image: true
+  langcode: true
+  search_api_excerpt: true

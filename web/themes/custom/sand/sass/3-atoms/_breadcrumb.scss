@@ -1,0 +1,46 @@
+/* ============================================================
+  Styles for the breadcrumb.
+  ============================================================ */
+
+.breadcrumb {
+  margin-bottom: 0;
+  padding: 0.25rem 0;
+
+  li {
+    margin: 0 0 0.35rem;
+    padding: 0 0.25rem 0 0;
+
+    &::before {
+      content: "";
+    }
+
+    a {
+      color: $font-color;
+      text-decoration: none;
+
+      &:hover {
+        color: darken($spruce, 20%);
+      }
+    }
+
+    .angle {
+      position: relative;
+      top: 1px;
+    }
+
+    &:last-child {
+      font-weight: 700;
+    }
+
+    .breadcrumbs__current {
+      font-weight: bold;
+    }
+  }
+
+  // color: $primary-2;
+  @include rem("font-size", 11px);
+
+  @include breakpoint(large) {
+    margin: 0 0 0.5rem;
+  }
+}

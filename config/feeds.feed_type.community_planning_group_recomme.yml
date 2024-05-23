@@ -1,0 +1,303 @@
+uuid: 7d69ea66-e54a-47e1-b64d-682196fe2299
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.event.feeds_item
+    - field.field.node.event.field_department
+    - field.field.node.event.field_event_activity_desc
+    - field.field.node.event.field_event_activity_seq_num
+    - field.field.node.event.field_event_date
+    - field.field.node.event.field_event_expected_attendance
+    - field.field.node.event.field_event_host_nm
+    - field.field.node.event.field_event_location_txt
+    - field.field.node.event.field_event_management_cd
+    - field.field.node.event.field_event_organizer_nm
+    - field.field.node.event.field_event_seq_num
+    - field.field.node.event.field_subtitle
+    - node.type.event
+  module:
+    - feeds_log
+    - feeds_tamper
+    - node
+    - smart_date
+third_party_settings:
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+    source: true
+  feeds_tamper:
+    tampers:
+      e7730a48-c73c-4d0e-bc9e-77364df5c81d:
+        num_char: 250
+        ellipses: true
+        wordsafe: true
+        uuid: e7730a48-c73c-4d0e-bc9e-77364df5c81d
+        plugin: truncate_text
+        source: project_name
+        weight: 0
+        label: Truncate
+      53590754-4d94-4923-9b3b-db044da911fd:
+        default_value: published
+        only_if_empty: false
+        uuid: 53590754-4d94-4923-9b3b-db044da911fd
+        plugin: default_value
+        source: moderation_state
+        weight: 0
+        label: 'Set value or default value'
+      2d8862c6-f12f-43e8-a9da-20ec9c0a2151:
+        uuid: 2d8862c6-f12f-43e8-a9da-20ec9c0a2151
+        plugin: strtotime
+        source: date
+        weight: 0
+        label: 'String to Unix Timestamp'
+      50a2555f-3c7e-4a59-b128-56abaa327eed:
+        default_value: 'Community Planners Committee'
+        only_if_empty: false
+        uuid: 50a2555f-3c7e-4a59-b128-56abaa327eed
+        plugin: default_value
+        source: department
+        weight: 0
+        label: 'Set value or default value'
+      8b953c8a-d581-4f3f-968c-1a777e003e4a:
+        default_value: IB620
+        only_if_empty: false
+        uuid: 8b953c8a-d581-4f3f-968c-1a777e003e4a
+        plugin: default_value
+        source: category
+        weight: 0
+        label: 'Set value or default value'
+label: 'Community Planning Group Recommendations'
+id: community_planning_group_recomme
+description: 'Community Planning Group Recommendations'
+help: ''
+import_period: -1
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  always_download: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: event
+  langcode: en
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _delete
+  skip_hash_check: false
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: true
+  owner_id: 1
+custom_sources:
+  project_name:
+    value: 'Project Name'
+    label: 'Project Name'
+    machine_name: project_name
+    type: csv
+  reference_id:
+    value: 'Reference ID'
+    label: 'Reference ID'
+    machine_name: reference_id
+    type: csv
+  vote:
+    value: Vote
+    label: Vote
+    machine_name: vote
+    type: csv
+  conditions_or_recommendations:
+    value: 'Conditions or Recommendations'
+    label: 'Conditions or Recommendations'
+    machine_name: conditions_or_recommendations
+    type: csv
+  no_action_reason:
+    value: 'No Action Reason'
+    label: 'No Action Reason'
+    machine_name: no_action_reason
+    type: csv
+  project_number:
+    value: 'Project Number'
+    label: 'Project Number'
+    machine_name: project_number
+    type: csv
+  community:
+    value: Community
+    label: Community
+    machine_name: community
+    type: csv
+  department:
+    value: Department
+    label: Department
+    machine_name: department
+    type: csv
+  moderation_state:
+    value: MODERATION_STATE
+    label: MODERATION_STATE
+    machine_name: moderation_state
+    type: blank
+  date:
+    value: Date
+    label: Date
+    machine_name: date
+    type: csv
+  attachment_1_optional_:
+    value: 'Attachment 1 (optional)'
+    label: 'Attachment 1 (optional)'
+    machine_name: attachment_1_optional_
+    type: csv
+  attachment_2_optional_:
+    value: 'Attachment 2 (optional)'
+    label: 'Attachment 2 (optional)'
+    machine_name: attachment_2_optional_
+    type: csv
+  attachment_3_optional_:
+    value: 'Attachment 3 (optional)'
+    label: 'Attachment 3 (optional)'
+    machine_name: attachment_3_optional_
+    type: csv
+  category:
+    value: Category
+    label: Category
+    machine_name: category
+    type: csv
+  members_yes:
+    value: 'Members Yes'
+    label: 'Members Yes'
+    machine_name: members_yes
+    type: csv
+  members_no:
+    value: 'Members No'
+    label: 'Members No'
+    machine_name: members_no
+    type: csv
+  members_abstain:
+    value: 'Members Abstain'
+    label: 'Members Abstain'
+    machine_name: members_abstain
+    type: csv
+  date_of_vote:
+    value: 'Date of Vote'
+    label: 'Date of Vote'
+    machine_name: date_of_vote
+    type: csv
+mappings:
+  -
+    target: title
+    map:
+      value: project_name
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_subtitle
+    map:
+      value: project_number
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_event_management_cd
+    map:
+      value: vote
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_event_location_txt
+    map:
+      value: conditions_or_recommendations
+    settings:
+      language: null
+  -
+    target: field_event_activity_desc
+    map:
+      value: no_action_reason
+    settings:
+      language: null
+  -
+    target: field_event_host_nm
+    map:
+      value: community
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_department
+    map:
+      target_id: department
+    settings:
+      language: null
+      reference_by: name
+      autocreate: false
+      autocreate_bundle: department
+  -
+    target: moderation_state
+    map:
+      value: moderation_state
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_event_date
+    map:
+      value: date
+      end_value: ''
+    settings:
+      language: null
+  -
+    target: field_event_organizer_nm
+    map:
+      value: category
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_event_seq_num
+    map:
+      value: members_yes
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_event_activity_seq_num
+    map:
+      value: members_no
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_event_expected_attendance
+    map:
+      value: members_abstain
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: feeds_item
+    map:
+      url: ''
+      guid: reference_id
+    settings: {  }
+    unique:
+      guid: 1

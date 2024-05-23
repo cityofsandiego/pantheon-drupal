@@ -1,0 +1,158 @@
+uuid: b621feca-e4f7-4b3d-927b-bab623d8d218
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 58
+template: false
+archive: false
+id: webform_312
+title: 'Recycling Programs'
+description: null
+categories: {  }
+elements: |
+  fieldset_t_is_the_policy_:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Disclaimer' 
+    '#description': "All reports will remain confidential. However, in an event there is a judicial proceeding, this information could be revealed. Complaints can be made anonymously. If you would like to receive an update on the outcome of the investigation, please leave your contact information below. "
+  fieldset_report_details:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Report Details' 
+    '#description': ""
+    nature_of_complaint_2:
+      '#type': radios
+      '#options':
+        recycling: 'No Recycling'
+        organic: 'No Organic Waste Recycling'
+        recovery: 'No Edible Food Recovery / Donation'
+        other: 'Other'
+      '#title': 'Nature of Complaint' 
+      '#description': ""
+      '#required': true
+    additional_details_2:
+      '#type': textarea
+      '#title': 'Additional Details:' 
+      '#description': ""
+      '#required': true
+    address_of_property_2:
+      '#type': textfield
+      '#title': 'Address of Property' 
+      '#description': ""
+      '#required': true
+    name_of_property_2:
+      '#type': textfield
+      '#title': 'Name of Property ' 
+      '#description': ""
+    identity_of_any_witnesses_2:
+      '#type': textfield
+      '#title': 'Identity of Any Witnesses' 
+      '#description': ""
+  fieldset_alleged_violator_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Alleged Violator Info' 
+    '#description': ""
+    name_14:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+    phone_14:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+    email_14:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+  fieldset_complainant_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Complainant Info' 
+    '#description': ""
+    name_18:
+      '#type': textfield
+      '#title': 'Name' 
+      '#description': ""
+    address_18:
+      '#type': textfield
+      '#title': 'Address' 
+      '#description': ""
+    phone_18:
+      '#type': textfield
+      '#title': 'Phone' 
+      '#description': ""
+    email_18:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<p>Your complaint has been submitted.&nbsp; For additional information, contact us at&nbsp;<a href=\"mailto:SDRecyclingWorks@sandiego.gov ?subject=Properties%20Without%20Recycling%20and%20Organic%20Services\">SDRecyclingWorks@sandiego.gov</a> or&nbsp;<a href=\"tel:1-858-694-7000\">858-694-7000</a>.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: SDRecyclingWorks@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: sdrecyclingworks@sandiego.gov
+      from_options: {  }
+      from_name: '[webform_submission:values:nature_of_complaint:raw]'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |+
+        Submitted on [webform_submission:completed_date:long]
+
+        Submitted values are:
+        [webform_submission:values]
+
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

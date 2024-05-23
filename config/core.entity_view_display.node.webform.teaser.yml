@@ -1,0 +1,51 @@
+uuid: 349d52e8-da1c-4fdf-bad8-224c63f0dfec
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.webform.body
+    - field.field.node.webform.field_d7_nid
+    - field.field.node.webform.field_department
+    - field.field.node.webform.field_exhibit_attachments
+    - field.field.node.webform.field_meta_tags
+    - field.field.node.webform.field_search_exclude_entity
+    - field.field.node.webform.field_search_keymatch
+    - field.field.node.webform.field_sidebar
+    - field.field.node.webform.webform
+    - node.type.webform
+  module:
+    - text
+    - user
+_core:
+  default_config_hash: Ls5l3Xs7-YstJnurxFLKj38Exqr2JMZs1j9YeX1Kh2o
+id: node.webform.teaser
+targetEntityType: node
+bundle: webform
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_d7_nid: true
+  field_department: true
+  field_exhibit_attachments: true
+  field_meta_tags: true
+  field_search_exclude_entity: true
+  field_search_keymatch: true
+  field_sidebar: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  webform: true

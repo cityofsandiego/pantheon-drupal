@@ -1,0 +1,29 @@
+uuid: 76d5e4b3-ca22-4243-8a4b-64380aeaf5c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_bucket
+    - node.type.bucket
+    - taxonomy.vocabulary.bucket
+id: node.bucket.field_bucket
+field_name: field_bucket
+entity_type: node
+bundle: bucket
+label: Bucket
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      bucket: bucket
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

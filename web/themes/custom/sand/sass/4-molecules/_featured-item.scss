@@ -1,0 +1,36 @@
+.field--name-field-featured-items {
+  text-align: center;
+  justify-content: center;
+  row-gap: 1rem;
+
+  > .field__item {
+    @include xy-cell(6);
+
+    @include breakpoint(medium) {
+      @include xy-cell(2);
+    }
+  }
+
+  @include xy-grid;
+
+  @include breakpoint(medium) {
+    justify-content: center;
+  }
+}
+
+.featured-items {
+  a,
+  a:hover {
+    color: $font-color;
+    text-decoration: none;
+  }
+
+  .featured-item-label {
+    display: block;
+    margin: 1em 0 0.5em;
+  }
+
+  .field--name-field-license {
+    display: none;
+  }
+}

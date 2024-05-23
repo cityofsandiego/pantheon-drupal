@@ -1,0 +1,215 @@
+uuid: 429ae197-5d65-42da-973c-adcb3cc8b189
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 50
+template: false
+archive: false
+id: webform_903343
+title: 'San Diego Photo Submission'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Information' 
+    '#description': "Photo submitter contact information."
+    first_name_1:
+      '#type': textfield
+      '#title': 'First Name' 
+      '#description': ""
+      '#required': true
+    last_name_1:
+      '#type': textfield
+      '#title': 'Last Name' 
+      '#description': ""
+      '#required': true
+    e_mail_address_1:
+      '#type': email
+      '#size': 20
+      '#title': 'E-mail address' 
+      '#description': ""
+      '#required': true
+  fieldset_social_media_handles:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Social Media Handles' 
+    '#description': ""
+    instagram_handle_37:
+      '#type': textfield
+      '#title': 'Instagram Handle' 
+      '#description': ""
+    twitter_handle_37:
+      '#type': textfield
+      '#title': 'Twitter Handle' 
+      '#description': ""
+    facebook_handle_37:
+      '#type': textfield
+      '#title': 'Facebook Handle' 
+      '#description': ""
+  fieldset_photo:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Photo' 
+    '#description': ""
+    photo_caption_14:
+      '#type': textfield
+      '#title': 'Photo Caption' 
+      '#description': ""
+      '#required': true
+    photo_description_14:
+      '#title': 'Photo Description' 
+      '#description': "Tell us what, when, and where this photo is taken in San Diego."
+      '#required': true
+    photograph_14:
+      '#type': managed_file
+      '#max_filesize': '100'
+      '#file_extensions': 'gif jpg jpeg png'
+      '#title': 'Photograph' 
+      '#description': "Upload the photo file you would like to submit to the City of San Diego."
+      '#required': true
+  fieldset_disclaimer2:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Disclaimer' 
+    '#description': ""
+    disclaimer1_28:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<p><strong>Terms and Conditions:</strong></p>\n"
+      '#title': 'Disclaimer' 
+      '#description': ""
+    disclaimer_understanding_28:
+      '#type': radios
+      '#options':
+        I have read and understand the disclaimer: 'I have read and understand the disclaimer'
+      '#title': '<strong>Disclaimer Understanding</strong>' 
+      '#description': ""
+      '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit Photo'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: '10'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: localauthor@sandiego.gov
+      from_options: {  }
+      from_name: 'San Diego Public Library'
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: |
+        Dear Author:
+
+        Thank you! Your entry has been successfully submitted. If you submitted an ebook, your registration is complete and you don't need to do anything else.
+
+        If your book is in print format, we must receive your book by the November 26 deadline or your registration will not be accepted. 
+
+        You may either mail or deliver your book to the following address:
+
+        SAN DIEGO PUBLIC LIBRARY
+        ATTN: LOCAL AUTHOR PROGRAM
+        330 PARK BLVD. MS-17
+        SAN DIEGO, CA 92101-7416
+
+        You may also deliver your book for to any branch of the San Diego Public Library. Be sure to hand it directly to library staff and specify that it is for the "Local Author Showcase." Your final confirmation may not be sent until after the registration deadline, November 26. Thank you for your patience.
+
+        For questions or comments please contact localauthor@sandiego.gov by email.
+
+        Thank you for registering for the 53rd Annual Local Author Showcase. 
+
+        Sincerely,
+
+        San Diego Public Library
+        Local Author Exhibit 
+         
+        **Please do not reply to this message. Replies to this message are routed to an unmonitored mailbox.
+        For questions of comments please contact us at localauthor@sandiego.gov**
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: localauthor@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '10'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: default
+      body: default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

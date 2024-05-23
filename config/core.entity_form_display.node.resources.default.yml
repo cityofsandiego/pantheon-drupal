@@ -1,0 +1,698 @@
+uuid: 8f41368a-b9ad-4a3d-b975-07e8091d69ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.resources.field_address
+    - field.field.node.resources.field_category
+    - field.field.node.resources.field_company
+    - field.field.node.resources.field_contact
+    - field.field.node.resources.field_d7_nid
+    - field.field.node.resources.field_department
+    - field.field.node.resources.field_edit_notes
+    - field.field.node.resources.field_email
+    - field.field.node.resources.field_image
+    - field.field.node.resources.field_import_id
+    - field.field.node.resources.field_internet
+    - field.field.node.resources.field_laptop
+    - field.field.node.resources.field_meta_tags
+    - field.field.node.resources.field_number_of_computers
+    - field.field.node.resources.field_phone
+    - field.field.node.resources.field_phone_in_room
+    - field.field.node.resources.field_position
+    - field.field.node.resources.field_projector_big_screen
+    - field.field.node.resources.field_resource_description
+    - field.field.node.resources.field_resource_first_name
+    - field.field.node.resources.field_resource_group
+    - field.field.node.resources.field_resource_type
+    - field.field.node.resources.field_room_capacity
+    - field.field.node.resources.field_search_exclude_entity
+    - field.field.node.resources.field_url
+    - node.type.resources
+    - workflows.workflow.editorial
+  module:
+    - address
+    - allowed_formats
+    - conditional_fields
+    - content_moderation
+    - field_group
+    - link
+    - metatag
+    - path
+    - scheduler
+    - scheduler_content_moderation_integration
+    - search_api_exclude_entity
+    - telephone
+    - term_reference_tree
+    - text
+third_party_settings:
+  field_group:
+    group_main_tabs:
+      children:
+        - group_content
+        - group_type
+        - group_vocabularies
+        - group_additional_fields
+      label: 'Main Tabs'
+      region: content
+      parent_name: ''
+      weight: 16
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: horizontal
+        width_breakpoint: 640
+    group_content:
+      children:
+        - field_resource_first_name
+        - field_resource_description
+        - field_phone
+        - field_email
+        - field_url
+        - field_address
+        - field_image
+        - field_position
+        - field_contact
+        - field_company
+        - field_resource_group
+      label: 'Main Content'
+      region: content
+      parent_name: group_main_tabs
+      weight: 15
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_type:
+      children:
+        - field_internet
+        - field_laptop
+        - field_projector_big_screen
+        - field_room_capacity
+        - field_phone_in_room
+        - field_number_of_computers
+      label: 'Room Info'
+      region: content
+      parent_name: group_main_tabs
+      weight: 16
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_vocabularies:
+      children:
+        - field_department
+        - field_category
+      label: 'Taxonomy Terms'
+      region: content
+      parent_name: group_main_tabs
+      weight: 17
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_update_notes:
+      children:
+        - field_edit_notes
+      label: 'Update Notes'
+      region: content
+      parent_name: ''
+      weight: 17
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+        weight: 100
+    group_moderation_state:
+      children:
+        - moderation_state
+      label: 'Moderation State'
+      region: content
+      parent_name: ''
+      weight: 20
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+        weight: -100
+    group_additional_fields:
+      children:
+        - field_import_id
+      label: 'Additional Fields'
+      region: hidden
+      parent_name: group_main_tabs
+      weight: 18
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+id: node.resources.default
+targetEntityType: node
+bundle: resources
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_address:
+    type: address_default
+    weight: 22
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_category:
+    type: entity_reference_autocomplete
+    weight: 24
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_company:
+    type: string_textfield
+    weight: 26
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        51ba86ac-9aee-427a-9c33-23c8790d4748:
+          entity_type: node
+          bundle: resources
+          dependee: field_resource_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: service
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_contact:
+    type: string_textfield
+    weight: 25
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        69fc7307-eef8-4637-8512-cd13be444de5:
+          entity_type: node
+          bundle: resources
+          dependee: field_resource_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: service
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_department:
+    type: term_reference_tree
+    weight: 23
+    region: content
+    settings:
+      start_minimized: true
+      leaves_only: false
+      select_parents: true
+      cascading_selection: 0
+      max_depth: 0
+    third_party_settings: {  }
+  field_edit_notes:
+    type: string_textarea
+    weight: 21
+    region: content
+    settings:
+      rows: 10
+      placeholder: ''
+    third_party_settings: {  }
+  field_email:
+    type: email_default
+    weight: 20
+    region: content
+    settings:
+      placeholder: ''
+      size: 60
+    third_party_settings: {  }
+  field_image:
+    type: entity_reference_autocomplete
+    weight: 23
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        84217e8c-36c4-4aea-bc05-45ada5039afd:
+          entity_type: node
+          bundle: resources
+          dependee: field_resource_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: contact
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_import_id:
+    type: number
+    weight: 25
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_internet:
+    type: options_buttons
+    weight: 32
+    region: content
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        2609fce9-bd7f-45d9-88ea-7775a75c7356:
+          entity_type: node
+          bundle: resources
+          dependee: field_resource_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: meeting
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_laptop:
+    type: options_buttons
+    weight: 33
+    region: content
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        6d5511cb-f2d9-4054-8fdf-8bddd96281d2:
+          entity_type: node
+          bundle: resources
+          dependee: field_resource_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: meeting
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 38
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
+  field_number_of_computers:
+    type: number
+    weight: 37
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        0738d1df-14cd-47ce-bcc1-1d6bfc8ca9fe:
+          entity_type: node
+          bundle: resources
+          dependee: field_resource_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: meeting
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_phone:
+    type: telephone_default
+    weight: 19
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_phone_in_room:
+    type: options_buttons
+    weight: 36
+    region: content
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        f71eeabe-1710-46b5-ab61-ecd5f0ce5966:
+          entity_type: node
+          bundle: resources
+          dependee: field_resource_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: meeting
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_position:
+    type: string_textfield
+    weight: 24
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        b1c42839-4c09-4a0b-b26c-1c30f82bf3d1:
+          entity_type: node
+          bundle: resources
+          dependee: field_resource_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: contact
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_projector_big_screen:
+    type: options_buttons
+    weight: 34
+    region: content
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        8f7b9acb-293b-426e-b581-582438501ea7:
+          entity_type: node
+          bundle: resources
+          dependee: field_resource_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: meeting
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_resource_description:
+    type: text_textarea_with_summary
+    weight: 18
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings:
+      allowed_formats:
+        hide_help: '1'
+        hide_guidelines: '0'
+  field_resource_first_name:
+    type: string_textfield
+    weight: 17
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        70b4f8e4-8736-4f75-81ac-9acbf231331f:
+          entity_type: node
+          bundle: resources
+          dependee: field_resource_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: contact
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_resource_group:
+    type: options_select
+    weight: 27
+    region: content
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        f0ded75c-0368-428c-a27e-26d79d8663d2:
+          entity_type: node
+          bundle: resources
+          dependee: field_resource_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: contact
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_resource_type:
+    type: options_select
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_room_capacity:
+    type: number
+    weight: 35
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        4111ce48-73c7-4f92-9f3c-0ba34bd8cc5a:
+          entity_type: node
+          bundle: resources
+          dependee: field_resource_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: meeting
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_search_exclude_entity:
+    type: search_api_exclude_entity_widget
+    weight: 39
+    region: content
+    settings:
+      field_label: 'Yes, exclude this entity from the search indexes.'
+    third_party_settings: {  }
+  field_url:
+    type: link_default
+    weight: 21
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings:
+      conditional_fields:
+        16dcf480-38ca-4b34-8c63-8b308fc4205f:
+          entity_type: node
+          bundle: resources
+          dependee: field_resource_type
+          settings:
+            state: visible
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                value: service
+            effect: show
+            effect_options: {  }
+            selector: ''
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 18
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 13
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_d7_nid: true

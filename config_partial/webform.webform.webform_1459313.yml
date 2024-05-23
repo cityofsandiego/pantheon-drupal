@@ -1,0 +1,155 @@
+uuid: beb950e0-4e2d-47e3-ab89-a50356b40ee7
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1459313
+title: 'Ocean Beach Pier Renewal Questions'
+description: null
+categories: {  }
+elements: |
+  fieldset_questions:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Submit Your Questions and Comments' 
+    '#description': ""
+    required_field_1:
+      '#type': processed_text
+      '#format': full_html
+      '#text': "<p><em>Items marked with an asterisk (<span style='color:red;'>*</span>) are required.</em></p>\n"
+      '#title': 'Required Field' 
+      '#description': ""
+    name_1:
+      '#type': textfield
+      '#title': 'Name:' 
+      '#description': ""
+    email_address_1:
+      '#type': email
+      '#size': 20
+      '#title': 'Email Address:' 
+      '#description': ""
+      '#required': true
+    zip_1:
+      '#type': textfield
+      '#title': 'Zip Code:' 
+      '#description': ""
+      '#required': true
+    comment_or_question_1:
+      '#type': textarea
+      '#title': 'Comment or Question:' 
+      '#description': ""
+      '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /cip/ocean-beach-pier-renewal-questions-submittal
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: obpierrenewal@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email_address:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Ocean Beach Pier Renewal '
+      body: |-
+        Submitted on [webform_submission:completed_date:long]
+         
+        Submitted values are:
+        [webform_submission:values]
+
+         
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: '[webform_submission:values:email_address:raw]'
+      from_options: {  }
+      from_name: default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Ocean Beach Pier Renewal '
+      body: |-
+        Submitted on [webform_submission:completed_date:long]
+         
+        Submitted values are:
+        [webform_submission:values]
+
+         
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

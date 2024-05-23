@@ -1,0 +1,135 @@
+uuid: 00ee4b20-4b11-4c8c-929b-9e05b425c62b
+langcode: en
+status: true
+dependencies:
+  config:
+    - feeds.feed_type.sand_remote
+    - field.field.feeds_feed.sand_remote.feeds_item
+    - field.field.feeds_feed.sand_remote.field_sort1
+    - field.field.feeds_feed.sand_remote.field_source
+    - field.field.feeds_feed.sand_remote.field_source_name
+  module:
+    - feeds_log
+    - feeds_tamper
+third_party_settings:
+  feeds_log:
+    status: true
+    operations:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+      cleaned: cleaned
+    items:
+      created: created
+      updated: updated
+      deleted: deleted
+      skipped: skipped
+      failed: failed
+    source: true
+  feeds_tamper:
+    tampers: {  }
+label: 'Feed for Feeds'
+id: feed_for_feeds
+description: 'Import feeds feed content'
+help: ''
+import_period: -1
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: csv
+  directory: 'private://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:feeds_feed'
+processor_configuration:
+  values:
+    type: sand_remote
+  insert_new: 1
+  update_existing: 0
+  update_non_existent: _delete
+  skip_hash_check: false
+  authorize: false
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 311
+custom_sources:
+  title:
+    value: TITLE
+    label: TITLE
+    machine_name: title
+    type: csv
+  url:
+    value: URL
+    label: URL
+    machine_name: url
+    type: csv
+  '':
+    value: ''
+    label: ''
+    machine_name: ''
+    type: csv
+  source_name:
+    value: SOURCE_NAME
+    label: SOURCE_NAME
+    machine_name: source_name
+    type: csv
+  sort:
+    value: SORT
+    label: SORT
+    machine_name: sort
+    type: csv
+  source:
+    value: SOURCE
+    label: SOURCE
+    machine_name: source
+    type: csv
+mappings:
+  -
+    target: title
+    map:
+      value: title
+    settings: {  }
+    unique:
+      value: '1'
+  -
+    target: feeds_item
+    map:
+      url: url
+      guid: source_name
+    settings: {  }
+    unique:
+      url: '1'
+      guid: '1'
+  -
+    target: field_source_name
+    map:
+      value: source_name
+    settings:
+      language: null
+    unique:
+      value: '1'
+  -
+    target: field_sort1
+    map:
+      value: sort
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: source
+    map:
+      value: url
+    settings: {  }
+    unique: {  }
+  -
+    target: field_source
+    map:
+      value: source
+    settings:
+      language: null
+    unique: {  }

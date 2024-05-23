@@ -1,0 +1,60 @@
+.grid-container {
+  padding: 0;
+  transition: 0.15s all ease;
+
+  @include breakpoint(mobile-landscape) {
+    padding: 0 1rem;
+  }
+
+  @include breakpoint(site-constraint) {
+    padding: 0;
+  }
+}
+
+.main-grid-container {
+  max-width: $global-width;
+  padding: 0;
+}
+
+/* request by Ron */
+div.l-section {
+  margin-left: -2em;
+  margin-right: -2em;
+  padding: 2em;
+}
+
+// ==========================================================================
+// Layout
+// ==========================================================================
+
+/* Containers
+   ========================================================================== */
+.l-constrained {
+  @extend %l-constrained;
+}
+
+.l-constrained--main {
+  position: relative;
+}
+
+.l-constrained--site {
+  max-width: $site;
+
+  @extend %l-constrained;
+}
+
+.l-constrained--wide {
+  max-width: $site-constraint;
+
+  @extend %l-constrained;
+}
+
+.l-constrained--desktop {
+  max-width: $desktop-wide;
+
+  @extend %l-constrained;
+}
+
+.l-container {
+  @extend %clearfix;
+}

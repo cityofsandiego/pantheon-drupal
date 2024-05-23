@@ -1,0 +1,46 @@
+uuid: b72e672e-e515-4b66-b68c-87c9e2d5282c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: exposed_filter_reset_button_fix
+label: 'Exposed Filter Reset Button Fix'
+code: |-
+  (function (jQuery) {
+  	jQuery(document).ready(function () {
+  		//
+  		// code to fix reset button issue on views filters jumping to wrong display  https://www.drupal.org/project/drupal/issues/1109980
+  		jQuery(document).delegate(
+  			".views-exposed-form input[data-drupal-selector='edit-reset']",
+  			"click",
+  			function (event) {
+  				event.preventDefault();
+  				window.location.replace(
+  					"//" + window.location.hostname + window.location.pathname
+  				);
+  				return false;
+  			}
+  		);
+  		//
+  	}); //end document ready
+  })(jQuery);
+noscript: ''
+noscriptRegion: {  }
+jquery: false
+header: false
+preprocess: true
+conditions:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      article: article
+      department: department
+      department_parent: department_parent
+      outreach: outreach
+      outreach2: outreach2
+contexts: {  }
+conditions_require_all: true

@@ -1,0 +1,46 @@
+uuid: 57b79441-05ea-419e-99ba-4559850cfea2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_resources
+    - node.type.location
+    - paragraphs.paragraphs_type.resources
+  module:
+    - entity_reference_revisions
+id: node.location.field_resources
+field_name: field_resources
+entity_type: node
+bundle: location
+label: Resources
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      resources: resources
+    negate: 0
+    target_bundles_drag_drop:
+      amenities_restrictions:
+        weight: -12
+        enabled: false
+      card:
+        weight: -11
+        enabled: false
+      featured_cards:
+        weight: -10
+        enabled: false
+      featured_item:
+        weight: -9
+        enabled: false
+      resources:
+        weight: -13
+        enabled: true
+      social_links:
+        weight: -8
+        enabled: false
+field_type: entity_reference_revisions

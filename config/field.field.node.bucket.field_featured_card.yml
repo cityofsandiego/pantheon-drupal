@@ -1,0 +1,43 @@
+uuid: 8cdfc865-7816-41ec-a8ab-41b3e923fcbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured_card
+    - node.type.bucket
+    - paragraphs.paragraphs_type.featured_cards
+  module:
+    - entity_reference_revisions
+id: node.bucket.field_featured_card
+field_name: field_featured_card
+entity_type: node
+bundle: bucket
+label: 'Featured Card'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      featured_cards: featured_cards
+    negate: 0
+    target_bundles_drag_drop:
+      card:
+        weight: 6
+        enabled: false
+      featured_cards:
+        weight: 7
+        enabled: true
+      featured_item:
+        weight: 8
+        enabled: false
+      resources:
+        weight: 9
+        enabled: false
+      social_links:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions
