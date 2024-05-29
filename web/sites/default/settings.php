@@ -109,6 +109,9 @@ if (defined('PANTHEON_ENVIRONMENT') && isset($_ENV['PANTHEON_SITE_NAME'])) {
     exit(1);
   }
   switch (LOCALSITE) {
+    case 'pantheon_drupal':
+      // Activate pantheon_drupal split
+      break;
     case 'sandgov':
       // Activate sandgov split
       break;
