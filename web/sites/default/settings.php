@@ -95,9 +95,11 @@ if (defined('PANTHEON_ENVIRONMENT') && isset($_ENV['PANTHEON_SITE_NAME'])) {
   switch ($_ENV['PANTHEON_SITE_NAME']) {
     case 'sandgov':
       // Activate sandgov split
+      $config["config_split.config_split.config_sandgov"]["status"] = TRUE;
       break;
     case 'insidesd':
       // Activate insidesd split
+      $config["config_split.config_split.config_insidesd"]["status"] = TRUE;
       break;
     case 'citynet':
       // Activate citynet split
@@ -111,12 +113,15 @@ if (defined('PANTHEON_ENVIRONMENT') && isset($_ENV['PANTHEON_SITE_NAME'])) {
   switch (LOCALSITE) {
     case 'pantheon_drupal':
       // Activate pantheon_drupal split
+      //$config["config_split.config_split.config_sandgov"]["status"] = TRUE;
       break;
     case 'sandgov':
       // Activate sandgov split
+      $config["config_split.config_split.config_sandgov"]["status"] = TRUE;
       break;
     case 'insidesd':
       // Activate insidesd split
+      $config["config_split.config_split.config_insidesd"]["status"] = TRUE;
       break;
     case 'citynet':
       // Activate citynet split
