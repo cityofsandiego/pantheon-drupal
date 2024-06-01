@@ -98,11 +98,15 @@ elements: |-
           value: 'yes'
   attachments_multiple_file:
     '#type': managed_file
+    '#title': 'Attachments:'
+    '#multiple': true
+    '#description': 'You can upload up to 5 files with a maximum of 10MB for each file.'
+    '#format': custom
+    '#format_html': '{{ item.link }}'
+    '#format_text': '{{ item.url }}?access={{ item.id }}&id={{ uuid }}'
+    '#format_items': semicolon
     '#max_filesize': '10'
     '#file_extensions': 'gif jpg jpeg png txt pdf doc docx ppt pptx xls xlsx'
-    '#multiple': true
-    '#title': 'Attachments:'
-    '#description': 'You can upload up to 5 files with a maximum of 10MB for each file.'
 css: ''
 javascript: ''
 settings:
