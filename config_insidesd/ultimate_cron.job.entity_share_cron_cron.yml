@@ -1,0 +1,29 @@
+uuid: a4e5eb1e-ef5e-4385-b07d-6122b69e2a76
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_share_cron
+title: 'Default cron handler'
+id: entity_share_cron_cron
+weight: 0
+module: entity_share_cron
+callback: entity_share_cron_cron
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 3600
+    launcher:
+      thread: 0
+logger:
+  id: database
+  configuration:
+    method: '3'
+    expire: 1209600
+    retain: 1000

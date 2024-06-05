@@ -1,0 +1,35 @@
+uuid: 06cecd58-9c6b-4b72-8466-580f473f061c
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - user
+  theme:
+    - sand
+id: logout
+theme: sand
+region: content
+weight: -7
+provider: null
+plugin: 'block_content:4fa406d6-8c92-4312-9101-44a978f8645d'
+settings:
+  id: 'block_content:4fa406d6-8c92-4312-9101-44a978f8645d'
+  label: Logout
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /login
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated

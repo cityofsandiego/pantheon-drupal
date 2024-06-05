@@ -1,0 +1,20 @@
+uuid: b69217b4-429a-446f-89b0-ade54455d312
+langcode: en
+status: false
+dependencies:
+  module:
+    - registration
+title: 'Queue: Expire held registrations'
+id: ultimate_cron_queue_registration.expire_held_registrations
+weight: 10
+module: registration
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database

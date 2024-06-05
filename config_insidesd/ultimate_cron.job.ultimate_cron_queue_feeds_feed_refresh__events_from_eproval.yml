@@ -1,0 +1,20 @@
+uuid: 5f500fd4-e065-44b2-bebc-30c8c61cd0d8
+langcode: en
+status: false
+dependencies:
+  module:
+    - feeds
+title: 'Queue: Feed refresh: Events from eProval'
+id: ultimate_cron_queue_feeds_feed_refresh__events_from_eproval
+weight: 10
+module: feeds
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database
