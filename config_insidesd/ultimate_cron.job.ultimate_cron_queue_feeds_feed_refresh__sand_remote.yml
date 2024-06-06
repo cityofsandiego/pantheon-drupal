@@ -1,0 +1,29 @@
+uuid: 743d3104-6e67-4ecb-b82e-3b621ad02925
+langcode: en
+status: false
+dependencies:
+  module:
+    - feeds
+title: 'Queue: Feed refresh: Sand Remote Feed Type'
+id: ultimate_cron_queue_feeds_feed_refresh__sand_remote
+weight: 10
+module: feeds
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 7200
+    launcher:
+      thread: 0
+logger:
+  id: database
+  configuration:
+    method: '3'
+    expire: 1209600
+    retain: 1000

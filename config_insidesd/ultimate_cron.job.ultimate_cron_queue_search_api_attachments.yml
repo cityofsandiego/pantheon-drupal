@@ -1,0 +1,20 @@
+uuid: f2579c1a-dbab-4b45-8776-772bd16bd658
+langcode: en
+status: false
+dependencies:
+  module:
+    - search_api_attachments
+title: 'Queue: Extractor Queue'
+id: ultimate_cron_queue_search_api_attachments
+weight: 10
+module: search_api_attachments
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database

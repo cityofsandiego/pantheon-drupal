@@ -1,0 +1,20 @@
+uuid: 848fe910-fba6-471e-8596-924296b2d874
+langcode: en
+status: true
+dependencies:
+  module:
+    - smart_date_recur
+title: 'Queue: Smart Date Recur rules refresh'
+id: ultimate_cron_queue_smart_date_recur_rules
+weight: 10
+module: smart_date_recur
+callback: 'ultimate_cron.queue_worker:queueCallback'
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '* * * * *'
+launcher:
+  id: serial
+logger:
+  id: database

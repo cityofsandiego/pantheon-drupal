@@ -1,0 +1,35 @@
+uuid: babcfe8b-b55a-45b8-b41f-18022275c76f
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - user
+  theme:
+    - insidesd
+id: insidesd_login
+theme: insidesd
+region: content
+weight: -8
+provider: null
+plugin: 'block_content:8cf4ecf7-1cb0-419a-928e-c4d1e5659211'
+settings:
+  id: 'block_content:8cf4ecf7-1cb0-419a-928e-c4d1e5659211'
+  label: Login
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /login
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      anonymous: anonymous
