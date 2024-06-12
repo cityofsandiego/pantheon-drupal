@@ -192,6 +192,7 @@ const ICON_CLOUD_SUN = [
   'Partly Cloudy',
   'Partly Cloudy with Haze',
   'Partly Cloudy and Breezy',
+  'Mostly Clear',
 ];
 
 const ICON_CLOUD = [
@@ -311,17 +312,21 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
       // @todo Fix dependency with Dependency Injection Container.
       $client = \Drupal::httpClient();
       $response = $client->get($url);
-      
+
       if ($response->getStatusCode() == 200) {
         $body = (string) $response->getBody();
-        $xml = simplexml_load_string($body);
-        if (isset($xml->temp_f)) {
-          // Do not show .0 in the temperature in the header.
-          $weather_temp = str_replace('.0', '', (string) $xml->temp_f);
+        $data = json_decode($body, true);
+
+        if (isset($data['properties']['temperature']['value'])) {
+          // Convert temperature from Celsius to Fahrenheit and remove .0 if present.
+          $temp_celsius = $data['properties']['temperature']['value'];
+          $temp_fahrenheit = round($temp_celsius * 9 / 5 + 32);
+          $weather_temp = str_replace('.0', '', (string) $temp_fahrenheit);
           \Drupal::state()->set('sand_weather.temp', $weather_temp);
         }
-        if (isset($xml->weather)) {
-          $weather_text = (string) $xml->weather;
+
+        if (isset($data['properties']['textDescription'])) {
+          $weather_text = $data['properties']['textDescription'];
           $weather_icon = $this->getWeatherIcon($weather_text);
           \Drupal::state()->set('sand_weather.text', $weather_text);
           \Drupal::state()->set('sand_weather.icon', $weather_icon);
