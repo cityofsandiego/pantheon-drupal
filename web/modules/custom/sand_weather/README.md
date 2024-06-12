@@ -3,6 +3,7 @@
 ### INTRODUCTION
 Originally done in D7 from what I assume is IF. This gets the weather from 
 http://w1.weather.gov/xml/current_obs/KSAN.xml and formats it for use in our header
+now using: https://api.weather.gov/stations/KSAN/observations/latest
 
 ### INSTALLATION
 Enable module.
