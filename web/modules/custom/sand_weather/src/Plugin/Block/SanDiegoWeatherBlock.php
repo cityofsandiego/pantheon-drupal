@@ -24,6 +24,7 @@ class SanDiegoWeatherBlock extends BlockBase {
     $weather_text = \Drupal::state()->get('sand_weather.text');
     $weather_icon = \Drupal::state()->get('sand_weather.icon');
     $weather_temp = \Drupal::state()->get('sand_weather.temp');
+    $weather_wurl = \Drupal::state()->get('sand_weather.wurl');
 
     if (empty($weather_text) || empty($weather_icon) || empty($weather_temp)) {
       return [
@@ -31,6 +32,7 @@ class SanDiegoWeatherBlock extends BlockBase {
         '#text' => "",
         '#icon' => "",
         '#temp' => "",
+        '#wurl' => $weather_wurl,
       ];
     } else {
       return [
@@ -38,6 +40,7 @@ class SanDiegoWeatherBlock extends BlockBase {
         '#text' => $weather_text,
         '#icon' => $weather_icon,
         '#temp' => $weather_temp,
+        '#wurl' => $weather_wurl,
       ];
     }
 
