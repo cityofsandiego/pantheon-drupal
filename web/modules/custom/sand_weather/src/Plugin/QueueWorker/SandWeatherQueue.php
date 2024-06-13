@@ -10,6 +10,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DomCrawler\Crawler;
 
 const ICON_SNOW2 = [
   'Freezing Rain Snow',
@@ -315,18 +316,22 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
 
       if ($response->getStatusCode() == 200) {
         $body = (string) $response->getBody();
-        $data = json_decode($body, true);
+        $crawler = new Crawler($body);
 
-        if (isset($data['properties']['temperature']['value'])) {
-          // Convert temperature from Celsius to Fahrenheit and remove .0 if present.
-          $temp_celsius = $data['properties']['temperature']['value'];
-          $temp_fahrenheit = round($temp_celsius * 9 / 5 + 32);
-          $weather_temp = str_replace('.0', '', (string) $temp_fahrenheit);
+        // Extract the temperature.
+        $temp_node = $crawler->filter('#current_conditions-summary .myforecast-current-lrg');
+        if ($temp_node->count()) {
+          $weather_temp = $temp_node->text();
+          // Remove °F from the temperature.
+          $weather_temp = str_replace('°F', '', $weather_temp);
           \Drupal::state()->set('sand_weather.temp', $weather_temp);
+          \Drupal::state()->set('sand_weather.wurl', (string) $url);
         }
 
-        if (isset($data['properties']['textDescription'])) {
-          $weather_text = $data['properties']['textDescription'];
+        // Extract the weather description.
+        $weather_node = $crawler->filter('#current_conditions-summary .myforecast-current');
+        if ($weather_node->count()) {
+          $weather_text = $weather_node->text();
           $weather_icon = $this->getWeatherIcon($weather_text);
           \Drupal::state()->set('sand_weather.text', $weather_text);
           \Drupal::state()->set('sand_weather.icon', $weather_icon);
