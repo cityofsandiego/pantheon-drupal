@@ -95,6 +95,8 @@ const ICON_RAIN = [
 const ICON_SUN = [
   'Fair',
   'Clear',
+  'Haze',
+  'haze',
   'Fair with Haze',
   'Clear with Haze',
   'Fair and Breezy',
@@ -352,32 +354,77 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
    *   The name of the icon to display.
    */
   protected function getWeatherIcon(string $val): string {
+    // Define all icon mappings.
+    $icon_mappings = [
+      'icon-sun' => ICON_SUN,
+      'icon-cloud-sun' => ICON_CLOUD_SUN,
+      'icon-cloud' => ICON_CLOUD,
+      'icon-rain' => ICON_RAIN,
+      'icon-cloud-lightning' => ICON_CLOUD_LIGHTNING,
+      'icon-snow2' => ICON_SNOW2,
+      'icon-cloud-hailstones' => ICON_CLOUD_HAILSTONES,
+    ];
 
-    if (in_array($val, ICON_SUN)) {
-      return 'icon-sun';
-    }
-    if (in_array($val, ICON_CLOUD_SUN)) {
-      return 'icon-cloud-sun';
-    }
-    if (in_array($val, ICON_CLOUD)) {
-      return 'icon-cloud';
-    }
-    if (in_array($val, ICON_RAIN)) {
-      return 'icon-rain';
-    }
-    if (in_array($val, ICON_CLOUD_LIGHTNING)) {
-      return 'icon-cloud-lightning';
-    }
-    if (in_array($val, ICON_SNOW2)) {
-      return 'icon-snow2';
+    // First, check for an exact match.
+    foreach ($icon_mappings as $icon => $descriptions) {
+      if (in_array($val, $descriptions)) {
+        return $icon;
+      }
     }
 
-    if (in_array($val, ICON_CLOUD_HAILSTONES)) {
-      return 'icon-cloud-hailstones';
+    // If no exact match found, proceed with case-insensitive substring search.
+    $val_lower = strtolower($val);
+    $matches = [];
+
+    foreach ($icon_mappings as $icon => $descriptions) {
+      $count = 0;
+      foreach ($descriptions as $description) {
+        if (strpos(strtolower($description), $val_lower) !== false) {
+          $count++;
+        }
+      }
+      $matches[$icon] = $count;
     }
 
+    // Find the icon with the highest match count.
+    arsort($matches);
+    $best_match = key($matches);
+    $best_match_count = reset($matches);
+
+    if ($best_match_count > 0) {
+      return $best_match;
+    }
+
+    // If no matches are found, try searching with the last word in the string.
+    $words = explode(' ', $val_lower);
+    if (count($words) > 1) {
+      $last_word = end($words);
+      $matches = [];
+
+      foreach ($icon_mappings as $icon => $descriptions) {
+        $count = 0;
+        foreach ($descriptions as $description) {
+          if (strpos(strtolower($description), $last_word) !== false) {
+            $count++;
+          }
+        }
+        $matches[$icon] = $count;
+      }
+
+      // Find the icon with the highest match count.
+      arsort($matches);
+      $best_match = key($matches);
+      $best_match_count = reset($matches);
+
+      if ($best_match_count > 0) {
+        return $best_match;
+      }
+    }
+
+    // Log an error if no match found.
     \Drupal::logger('sand_weather')
       ->error('Weather type: %val not found from weather.gov', ['%val' => $val]);
+
     return '';
   }
 
