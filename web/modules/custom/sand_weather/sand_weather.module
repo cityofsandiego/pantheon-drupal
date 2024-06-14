@@ -17,37 +17,17 @@ function sand_weather_help($route_name): ?string {
  * Implements hook_cron().
  */
 function sand_weather_cron() {
-  $config = \Drupal::config('sand_weather.settings');
-  // Default to a config interval or if not set then default here to 900 secs.
-  $config_interval = $config->get('interval');
-  $interval = !empty($config_interval) ? $config_interval : 900;
+  /** @var \Drupal\Core\Queue\DatabaseQueue $queue */
+  $queue = \Drupal::service('queue')->get('sand_weather_queue');
+  $item = new \stdClass();
+  $item->request_time = \Drupal::time()->getRequestTime();
 
-  // We usually don't want to act every time cron runs.
-  $next_execution = \Drupal::state()->get('sand_weather.next_execution', 0);
-  $request_time = \Drupal::time()->getRequestTime();
-
-  // Check if it's time to run the update.
-  if ($request_time >= $next_execution) {
-    /** @var \Drupal\Core\Queue\DatabaseQueue $queue */
-    $queue = \Drupal::service('queue')->get('sand_weather_queue');
-    $item = new \stdClass();
-    $item->request_time = $request_time;
-    try {
-      $queue->createItem($item);
-    }
-    catch (Exception $exception) {
-      watchdog_exception('sand_weather', $exception);
-    }
-    // Set the next execution time.
-    $next_execution = $request_time + $interval;
-    \Drupal::state()->set('sand_weather.next_execution', $next_execution);
+  try {
+    $queue->createItem($item);
+  } catch (Exception $exception) {
+    \Drupal::logger('sand_weather')->error($exception->getMessage(), ['exception' => $exception]);
   }
-//  else {
-//    \Drupal::logger('sand_weather')->info('Next execution in: @seconds seconds', ['@seconds' => $next_execution - $request_time]);
-//  }
 }
-
-
 
 /**
  * Implements hook_theme().

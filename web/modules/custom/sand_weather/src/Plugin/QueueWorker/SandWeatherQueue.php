@@ -12,6 +12,7 @@ use Drupal\Core\Queue\QueueWorkerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
+
 const ICON_SNOW2 = [
   'Freezing Rain Snow',
   'Light Freezing Rain Snow',
@@ -288,7 +289,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
       $plugin_id,
       $plugin_definition,
       $container->get('entity_type.manager'),
-      $container->get('database'),
+      $container->get('database')
     );
   }
 
@@ -340,7 +341,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
         }
       }
     } catch (\Exception $exception) {
-      watchdog_exception('sand_weather', $exception);
+      \Drupal::logger('sand_weather')->error($exception->getMessage(), ['exception' => $exception]);
     }
   }
 
