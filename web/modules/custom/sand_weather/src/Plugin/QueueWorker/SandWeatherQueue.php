@@ -313,28 +313,24 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
     $url = \Drupal::config('sand_weather.settings')->get('weather_url');
 
     try {
-      // @todo Fix dependency with Dependency Injection Container.
       $client = \Drupal::httpClient();
-      $response = $client->get($url);
+      $response = $client->get('https://api.weather.gov/stations/KSAN/observations/latest');
 
       if ($response->getStatusCode() == 200) {
         $body = (string) $response->getBody();
-        $crawler = new Crawler($body);
+        $data = json_decode($body, true);
 
-        // Extract the temperature.
-        $temp_node = $crawler->filter('#current_conditions-summary .myforecast-current-lrg');
-        if ($temp_node->count()) {
-          $weather_temp = $temp_node->text();
-          // Remove °F from the temperature.
-          $weather_temp = str_replace('°F', '', $weather_temp);
+        if (isset($data['properties']['temperature']['value'])) {
+          // Convert temperature from Celsius to Fahrenheit and remove .0 if present.
+          $temp_celsius = $data['properties']['temperature']['value'];
+          $temp_fahrenheit = round($temp_celsius * 9 / 5 + 32);
+          $weather_temp = str_replace('.0', '', (string) $temp_fahrenheit);
           \Drupal::state()->set('sand_weather.temp', $weather_temp);
           \Drupal::state()->set('sand_weather.wurl', (string) $url);
         }
 
-        // Extract the weather description.
-        $weather_node = $crawler->filter('#current_conditions-summary .myforecast-current');
-        if ($weather_node->count()) {
-          $weather_text = $weather_node->text();
+        if (isset($data['properties']['textDescription'])) {
+          $weather_text = $data['properties']['textDescription'];
           $weather_icon = $this->getWeatherIcon($weather_text);
           \Drupal::state()->set('sand_weather.text', $weather_text);
           \Drupal::state()->set('sand_weather.icon', $weather_icon);
