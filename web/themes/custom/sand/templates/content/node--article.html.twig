@@ -86,12 +86,12 @@
 <div class="hide-on-mobile article-menu">
     <nav style="display: flex;justify-content: end;">
       <ul id="department-top-menu" class="department-menu">
-                          <li class="is_active"><a href="/insidesd">Inside San Diego Home</a></li>
-                                  <li><a href="/insidesd/mayors-desk">From the Mayor's Desk</a></li>
-                                  <li><a href="/insidesd/articles">City News</a></li>
-                                  <li><a href="/insidesd/category?tid=2346">Videos</a></li>
-                                  <li><a href="/insidesd/about">About</a></li>
-                      </ul>
+          <li><a href="/insidesd">Inside San Diego Home</a></li>
+          <li><a href="/insidesd/mayors-desk">From the Mayor's Desk</a></li>
+          <li><a href="/insidesd/articles">City News</a></li>
+          <li><a href="/insidesd/category?tid=2346">Videos</a></li>
+          <li><a href="/insidesd/about">About</a></li>
+      </ul>
     </nav>
   </div>
   <div class="hide-on-desktop sub-navigation-mobile">
@@ -100,12 +100,12 @@
         <p class="accordion__heading"><a class="accordion__link" href="#"><i class="icon-menu l-margin-rs"></i> Site Menu  <span class="toggle-icon"> </span></a></p>
         <div class="accordion__drawer" style="display: none;">
           <ul id="article-top-menu" class="department-menu article-menu">
-                          <li class="is_active"><a href="/insidesd">Inside San Diego Home</a></li>
-                                  <li><a href="/insidesd/mayors-desk">From the Mayor's Desk</a></li>
-                                  <li><a href="/insidesd/articles">City News</a></li>
-                                  <li><a href="/insidesd/category?tid=2346">Videos</a></li>
-                                  <li><a href="/insidesd/about">About</a></li>
-                      </ul>
+            <li><a href="/insidesd">Inside San Diego Home</a></li>
+            <li><a href="/insidesd/mayors-desk">From the Mayor's Desk</a></li>
+            <li><a href="/insidesd/articles">City News</a></li>
+            <li><a href="/insidesd/category?tid=2346">Videos</a></li>
+            <li><a href="/insidesd/about">About</a></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -172,7 +172,11 @@
               {{ content.field_sidebar }}
 
               {{ drupal_entity('block', 'viewsexposedfilterblock', check_access=false) }}
-
+              {% for item in sidebar %}
+              <div class="l-margin-bm">
+                {{ item.value }}
+              </div>
+              {% endfor %}
               <h5>Filter by Category</h5>
               <div>
                     {{ drupal_view('article_category_list', 'categories') }}
