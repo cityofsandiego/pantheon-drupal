@@ -1,5 +1,8 @@
 <a href="{{ wurl }}" title="{{ text }}" rel="noopener">
     <i class="{{ icon }}" title="{{ text }}" aria-hidden="true"></i>
     <span class="visuallyhidden">{{ text }}</span>
-    {{ temp }}&deg;
+    {% if temp is not empty %}
+        {{ temp }}&deg;
+    {% endif %}
 </a>
+
