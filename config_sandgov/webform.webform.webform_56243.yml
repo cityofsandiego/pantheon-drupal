@@ -1,0 +1,287 @@
+uuid: cbab0656-ec88-4f0f-86df-c030ccab298e
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 50
+template: false
+archive: false
+id: webform_56243
+title: 'Request a Golf Tournament '
+description: null
+categories: {  }
+elements: |-
+  fieldset_contact_information:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Information'
+    '#description': ''
+    first_name_11:
+      '#type': textfield
+      '#title': 'First Name'
+      '#description': ''
+      '#required': true
+    last_name_11:
+      '#type': textfield
+      '#title': 'Last Name'
+      '#description': ''
+      '#required': true
+    email_address_11:
+      '#type': email
+      '#size': 20
+      '#title': 'Email Address'
+      '#description': ''
+      '#required': true
+    contact_phone_number_11:
+      '#type': textfield
+      '#title': 'Phone Number (format 999-999-9999)'
+      '#description': ''
+      '#required': true
+    group_name_11:
+      '#type': textfield
+      '#title': 'Group Name'
+      '#description': ''
+      '#required': true
+  fieldset_tournament_preferences:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Tournament Preferences'
+    '#description': ''
+    preferred_date_requested_12:
+      '#type': date
+      '#default_value': '+2 weeks'
+      '#title': 'Preferred Date'
+      '#description': ''
+      '#required': true
+    preferred_start_time:
+      '#type': webform_time
+      '#title': 'Preferred Start Time'
+      '#required': true
+      '#timepicker': true
+      '#time_format': 'g:i A'
+    golf_course_location_12:
+      '#type': select
+      '#options':
+        balboa9_course: 'Balboa 9-hole'
+        balboa18_course: 'Balboa 18-hole'
+        mission_bay_course: 'Mission Bay'
+        torrey_north_course: 'Torrey Pines North'
+        torrey_south_course: 'Torrey Pines South'
+      '#title': 'Golf Course Location'
+      '#description': ''
+      '#required': true
+    tournament_format_12:
+      '#type': select
+      '#options':
+        consecutive_format: 'Consecutive Tee Times'
+        shotgun_format: 'Shotgun Start'
+      '#title': 'Tournament Format'
+      '#description': ''
+      '#required': true
+    number_of_participants:
+      '#type': select
+      '#title': 'Number of Participants'
+      '#options':
+        16: '16'
+        20-40: 20-40
+        40-60: 40-60
+        60-80: 60-80
+        80+: 80+
+      '#required': true
+    number_of_participants_12:
+      '#type': hidden
+      '#title': 'Number of Participants'
+      '#description': 'Minimum 16, Maximum 144'
+      '#size': '20'
+      '#wrapper_attributes':
+        class:
+          - hidden
+      '#access_create_roles': {  }
+      '#min': 16
+      '#max': 144
+      '#step': 1
+  comments:
+    '#type': textarea
+    '#title': Comments
+    '#description': ''
+  disc_golf:
+    '#type': radios
+    '#title': 'Disc Golf?'
+    '#title_display': inline
+    '#options':
+      'no': 'No'
+      'yes': 'Yes'
+    '#wrapper_attributes':
+      class:
+        - hidden
+  foot_golf:
+    '#type': radios
+    '#title': 'Foot Golf?'
+    '#title_display': inline
+    '#options':
+      'no': 'No'
+      'yes': 'Yes'
+    '#wrapper_attributes':
+      class:
+        - hidden
+    '#access_create_roles': {  }
+  food_beverage:
+    '#type': radios
+    '#options':
+      'no': 'No'
+      'yes': 'Yes'
+    '#title_display': inline
+    '#title': 'Food and Beverage'
+    '#description': ''
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: 'https://www.sandiego.gov/department/request-golf-tournament-response'
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Request Tournament'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: false
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: rvazquez@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: '[webform_submission:values:email_address_11:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\n== CONTACT INFO ==\r\n\r\nNAME:\r\n[webform_submission:values:first_name_11] [webform_submission:values:last_name_11]\r\n\r\nEMAIL ADDRESS:\r\n[webform_submission:values:email_address_11]\r\n\r\nPHONE NUMBER:\r\n[webform_submission:values:contact_phone_number_11]\r\n\r\nGROUP NAME:\r\n[webform_submission:values:group_name_11]\r\n\r\n== TOURNAMENT PREFERENCES ==\r\n\r\nPREFERRED DATE/TIME:\r\n[webform_submission:values:preferred_date_requested_12]\r\n[webform_submission:values:preferred_start_time]\r\n\r\nGOLF COURSE LOCATION:\r\n[webform_submission:values:golf_course_location_12]\r\n\r\nTOURNAMENT FORMAT:\r\n[webform_submission:values:tournament_format_12]\r\n\r\nNUMBER OF PARTICIPANTS:\r\n[webform_submission:values:number_of_participants_12]\r\n\r\nCOMMENTS:\r\n[webform_submission:values:comments]\r\n\r\nDISC GOLF?\r\n[webform_submission:values:disc_golf]\r\n\r\nFOOT GOLF?\r\n[webform_submission:values:foot_golf]\r\n\r\nFOOD AND BEVERAGE:\r\n[webform_submission:values:food_beverage]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: 'sdcitygolf@sandiego.gov, CCarranza@sandiego.gov'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: '[webform_submission:values:email_address_11:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'New Tournament Request'
+      body: "Submitted on [webform_submission:created]\r\n\r\n== CONTACT INFO ==\r\n\r\nNAME:\r\n[webform_submission:values:first_name_11] [webform_submission:values:last_name_11]\r\n\r\nEMAIL ADDRESS:\r\n[webform_submission:values:email_address_11]\r\n\r\nPHONE NUMBER:\r\n[webform_submission:values:contact_phone_number_11]\r\n\r\nGROUP NAME:\r\n[webform_submission:values:group_name_11]\r\n\r\n== TOURNAMENT PREFERENCES ==\r\n\r\nPREFERRED DATE/TIME:\r\n[webform_submission:values:preferred_date_requested_12]\r\n[webform_submission:values:preferred_start_time]\r\n\r\nGOLF COURSE LOCATION:\r\n[webform_submission:values:golf_course_location_12]\r\n\r\nTOURNAMENT FORMAT:\r\n[webform_submission:values:tournament_format_12]\r\n\r\nNUMBER OF PARTICIPANTS:\r\n[webform_submission:values:number_of_participants]\r\n\r\nCOMMENTS:\r\n[webform_submission:values:comments]\r\n\r\nDISC GOLF?\r\n[webform_submission:values:disc_golf]\r\n\r\nFOOD AND BEVERAGE:\r\n[webform_submission:values:food_beverage]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:golf_course_location_12:raw]'
+      to_options:
+        -
+          value: balboa9_course
+          text: PDrazba@sandiego.gov
+        -
+          value: balboa18_course
+          text: PDrazba@sandiego.gov
+        -
+          value: mission_bay_course
+          text: 'Dmielke@sandiego.gov, Millertp@sandiego.gov'
+        -
+          value: torrey_north_course
+          text: 'ggagliardi@sandiego.gov, CCurzon@sandiego.gov'
+        -
+          value: torrey_south_course
+          text: 'ggagliardi@sandiego.gov, CCurzon@sandiego.gov'
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: '[webform_submission:values:email_address_11:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'New Tournament Request'
+      body: "Submitted on [webform_submission:created]\r\n\r\n== CONTACT INFO ==\r\n\r\nNAME:\r\n[webform_submission:values:first_name_11] [webform_submission:values:last_name_11]\r\n\r\nEMAIL ADDRESS:\r\n[webform_submission:values:email_address_11]\r\n\r\nPHONE NUMBER:\r\n[webform_submission:values:contact_phone_number_11]\r\n\r\nGROUP NAME:\r\n[webform_submission:values:group_name_11]\r\n\r\n== TOURNAMENT PREFERENCES ==\r\n\r\nPREFERRED DATE/TIME:\r\n[webform_submission:values:preferred_date_requested_12]\r\n[webform_submission:values:preferred_start_time]\r\n\r\nGOLF COURSE LOCATION:\r\n[webform_submission:values:golf_course_location_12]\r\n\r\nTOURNAMENT FORMAT:\r\n[webform_submission:values:tournament_format_12]\r\n\r\nNUMBER OF PARTICIPANTS:\r\n[webform_submission:values:number_of_participants]\r\n\r\nCOMMENTS:\r\n[webform_submission:values:comments]\r\n\r\nDISC GOLF?\r\n[webform_submission:values:disc_golf]\r\n\r\nFOOD AND BEVERAGE:\r\n[webform_submission:values:food_beverage]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

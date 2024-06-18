@@ -1,0 +1,329 @@
+uuid: 5e204002-9778-47d4-9366-5d3318ca51aa
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1382137
+title: 'Request a Proclamation or Certificate of Recognition'
+description: null
+categories: {  }
+elements: |-
+  fieldset_contact:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info'
+    '#description': ''
+    first_name_1:
+      '#type': textfield
+      '#title': 'First Name'
+      '#description': ''
+      '#required': true
+    last_name_1:
+      '#type': textfield
+      '#title': 'Last Name'
+      '#description': ''
+      '#required': true
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': Email
+      '#description': ''
+      '#required': true
+    mailing_address_1:
+      '#type': textfield
+      '#title': 'Mailing Address'
+      '#description': ''
+      '#required': true
+    city_1:
+      '#type': textfield
+      '#title': City
+      '#description': ''
+      '#required': true
+    state_1:
+      '#type': textfield
+      '#title': State
+      '#description': ''
+      '#required': true
+    zip_code_1:
+      '#type': textfield
+      '#title': 'Zip Code'
+      '#description': ''
+      '#required': true
+    organization_1:
+      '#type': textfield
+      '#title': Organization
+      '#description': ''
+      '#required': true
+    requestors_title_role_1:
+      '#type': textfield
+      '#title': 'Requestor’s Title/Role'
+      '#description': ''
+      '#required': true
+  fieldset_request:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Request Info'
+    '#description': ''
+    type_of_request_10:
+      '#type': radios
+      '#title': 'Type of Request'
+      '#options':
+        proclamation: Proclamation
+      '#required': true
+    for_what_purpose_will_you_be_using_this_recognition_10:
+      '#type': textfield
+      '#title': 'For what purpose will you be using this recognition?'
+      '#description': ''
+      '#required': true
+    will_this_recognition_be_published_on_social_media_10:
+      '#type': radios
+      '#options':
+        'yes': 'Yes'
+        'no': 'No'
+      '#title': 'Will this recognition be published on social media?'
+      '#description': ''
+      '#required': true
+    fieldset_certificate_of_recognition_info_10:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Certificate of Recognition Info'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="type_of_request_10"]':
+            value: recognition
+      name_of_recipient_16:
+        '#type': textfield
+        '#title': 'Name of Recipient'
+        '#description': ''
+        '#required': true
+      date_certificate_16:
+        '#type': date
+        '#title': 'Certificate of Recognition Date'
+        '#description': ''
+        '#required': true
+      recognition_text:
+        '#type': textarea
+        '#title': 'Recognition Text'
+        '#description': 'Please include up to 50 words of text.'
+        '#description_display': before
+        '#required': true
+        '#counter_type': word
+        '#counter_maximum': 50
+    fieldset_proclaimed_day_info_10:
+      '#type': fieldset
+      '#title': 'Proclaimed Day Info'
+      '#open': true
+      '#states':
+        visible:
+          ':input[name="type_of_request_10"]':
+            value: proclamation
+      name_of_proclaimed_day_20:
+        '#type': textfield
+        '#title': 'Name of Proclaimed Day'
+        '#description': ''
+        '#required': true
+      date_proclamation_20:
+        '#type': date
+        '#title': 'Proclamation Date'
+        '#description': ''
+        '#required': true
+      proclamation_text:
+        '#type': textarea
+        '#title': 'Proclamation Text'
+        '#description': 'Please include 5-8 &ldquo;Whereas&rdquo; statements no longer than 250 words in total.'
+        '#description_display': before
+        '#required': true
+        '#counter_type': word
+        '#counter_maximum': 250
+    delivery_method_10:
+      '#type': radios
+      '#title': 'Delivery Method'
+      '#options':
+        office: 'Obtain at Mayor’s Office'
+        event: 'Present at an Event/Meeting'
+      '#required': true
+    event_meeting_links_10:
+      '#type': processed_text
+      '#format': full_html
+      '#text': |
+        <ul>
+        	<li>If you've not already done so, please either submit the <a href='/mayor/contact/request-appearance'>Request an Event/Public Appearance form</a>&nbsp;or the <a href='/mayor/contact/request-meeting'>Request a Meeting with the Mayor form</a>.</li>
+        </ul>
+      '#title': 'Event Meeting Links'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="delivery_method_10"]':
+            value: event
+    preferred_date_of_event_10:
+      '#type': date
+      '#title': 'Date of Event'
+      '#required': true
+      '#datepicker': true
+      '#datepicker_button': true
+      '#date_date_format': m/d/Y
+    preferred_date_needed_10:
+      '#type': date
+      '#title': 'Date needed document by'
+      '#required': true
+      '#datepicker': true
+      '#datepicker_button': true
+      '#date_date_format': m/d/Y
+    proclamation_documents:
+      '#type': webform_document_file
+      '#title': 'Proclamation Documents'
+      '#multiple': 2
+      '#max_filesize': '50'
+      '#file_extensions': 'pdf doc docx'
+  note:
+    '#type': processed_text
+    '#format': full_html
+    '#text': |
+      <p><strong>PLEASE NOTE:</strong>&nbsp;Requests should be submitted&nbsp;a minimum of&nbsp;10 business&nbsp;days&nbsp;in advance of proclaimed date.</p>
+    '#title': Note
+    '#description': ''
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /mayor/contact/proclamation-response
+  confirmation_message: "<p>Hi,</p>\r\n\r\n<p>Thank you for your submission request to Mayor Todd Gloria’s Office. This email confirms we’ve received your request and will begin processing it as soon as possible.&nbsp; Please be aware that all requests are subject to the office’s multi-layered approval process. Not all requests are guaranteed to be completed.</p>\r\n\r\n<p>Additionally, office policy requires a minimum of 10 business days’ notice&nbsp;to ensure there is enough time to process and follow up with any questions or issues. Please submit draft language with all requests as this will help us complete the requested documents sooner.</p>\r\n\r\n<p><b>If you have questions or would like to check on the status of your&nbsp;request, please reach out to me directly. I am available via call, text, and email&nbsp;at:</b></p>\r\n\r\n<ul>\r\n\t<li>Cell: 619-753-4586</li>\r\n\t<li>Email:&nbsp;<a href=\"mailto:acsilva@sandiego.gov\">acsilva@sandiego.gov</a></li>\r\n</ul>\r\n\r\n<p>Due to the volume of email our office receives please do not contact other staff regarding the status of your request. I’ll do my best to respond in a timely manner,&nbsp;however,&nbsp;please understand we have a significant number of requests, and I am not always available for immediate response.</p>\r\n\r\n<p>Thank you in advance for your patience, and again thank you for your request. The&nbsp;Mayor&nbsp;loves to support the San Diego community in as many ways as possible!</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: false
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: lkosta@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\n**** CONTACT INFO ****\r\n\r\nFIRST NAME:\r\n[webform_submission:values:first_name_1]\r\n\r\nLAST NAME:\r\n[webform_submission:values:last_name_1]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_1]\r\n\r\nMAILING ADDRESS:\r\n[webform_submission:values:mailing_address_1]\r\n\r\nMAILING ADDRESS:\r\n[webform_submission:values:mailing_address_1]\r\n[webform_submission:values:city_1], [webform_submission:values:state_1] [webform_submission:values:zip_code_1]\r\n\r\nORGANIZATION:\r\n[webform_submission:values:organization_1]\r\n\r\nREQUESTOR'S TITLE/ROLE:\r\n[webform_submission:values:requestors_title_role_1]\r\n\r\n**** REQUEST INFO ****\r\n\r\nTYPE OF REQUEST:\r\n[webform_submission:values:type_of_request_10]\r\n\r\nFOR WHAT PURPOSE WILL YOU BE USING THIS RECOGNITION?\r\n[webform_submission:values:for_what_purpose_will_you_be_using_this_recognition_10]\r\n\r\nWILL THIS RECOGNITION BE PUBLISHED ON SOCIAL MEDIA?\r\n[webform_submission:values:will_this_recognition_be_published_on_social_media_10]\r\n\r\n**** CERTIFICATE OF RECOGNITION INFO ****\r\n\r\nNAME OF RECIPIENT:\r\n[webform_submission:values:name_of_recipient_16]\r\n\r\nCERTIFICATE OF RECOGNITION DATE:\r\n[webform_submission:values:date_certificate_16]\r\n\r\nRECOGNITION TEXT:\r\n[webform_submission:values:recognition_text]\r\n\r\n**** PROCLAIMED DAY INFO ****\r\n\r\nNAME OF PROCLAIMED DAY:\r\n[webform_submission:values:name_of_proclaimed_day_20]\r\n\r\nPROCLAMATION DATE:\r\n[webform_submission:values:date_proclamation_20]\r\n\r\nPROCLAMATION TEXT:\r\n[webform_submission:values:proclamation_text]\r\n\r\n********\r\n\r\nDELIVERY METHOD:\r\n[webform_submission:values:delivery_method_10]\r\n\r\nDATE OF EVENT:\r\n[webform_submission:values:preferred_date_of_event_10]\r\n\r\nDATE NEEDED DOCUMENT BY:\r\n[webform_submission:values:preferred_date_needed_10]\r\n"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_2:
+    id: email
+    handler_id: email_2
+    label: Reply
+    notes: ''
+    status: false
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: 'rricafort@sandiego.gov, lkosta@sandiego.gov'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\n**** CONTACT INFO ****\r\n\r\nFIRST NAME:\r\n[webform_submission:values:first_name_1]\r\n\r\nLAST NAME:\r\n[webform_submission:values:last_name_1]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_1]\r\n\r\nMAILING ADDRESS:\r\n[webform_submission:values:mailing_address_1]\r\n\r\nMAILING ADDRESS:\r\n[webform_submission:values:mailing_address_1]\r\n[webform_submission:values:city_1], [webform_submission:values:state_1] [webform_submission:values:zip_code_1]\r\n\r\nORGANIZATION:\r\n[webform_submission:values:organization_1]\r\n\r\nREQUESTOR'S TITLE/ROLE:\r\n[webform_submission:values:requestors_title_role_1]\r\n\r\n**** REQUEST INFO ****\r\n\r\nTYPE OF REQUEST:\r\n[webform_submission:values:type_of_request_10]\r\n\r\nFOR WHAT PURPOSE WILL YOU BE USING THIS RECOGNITION?\r\n[webform_submission:values:for_what_purpose_will_you_be_using_this_recognition_10]\r\n\r\nWILL THIS RECOGNITION BE PUBLISHED ON SOCIAL MEDIA?\r\n[webform_submission:values:will_this_recognition_be_published_on_social_media_10]\r\n\r\n**** CERTIFICATE OF RECOGNITION INFO ****\r\n\r\nNAME OF RECIPIENT:\r\n[webform_submission:values:name_of_recipient_16]\r\n\r\nCERTIFICATE OF RECOGNITION DATE:\r\n[webform_submission:values:date_certificate_16]\r\n\r\nRECOGNITION TEXT:\r\n[webform_submission:values:recognition_text]\r\n\r\n**** PROCLAIMED DAY INFO ****\r\n\r\nNAME OF PROCLAIMED DAY:\r\n[webform_submission:values:name_of_proclaimed_day_20]\r\n\r\nPROCLAMATION DATE:\r\n[webform_submission:values:date_proclamation_20]\r\n\r\nPROCLAMATION TEXT:\r\n[webform_submission:values:proclamation_text]\r\n\r\n********\r\n\r\nDELIVERY METHOD:\r\n[webform_submission:values:delivery_method_10]\r\n\r\nDATE OF EVENT:\r\n[webform_submission:values:preferred_date_of_event_10]\r\n\r\nDATE NEEDED DOCUMENT BY:\r\n[webform_submission:values:preferred_date_needed_10]\r\n\r\nPROCLAMATION DOCUMENTS:\r\n[webform_submission:values:proclamation_documents]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: sand
+      parameters: {  }
+      debug: false
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email 3'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:type_of_request_10:raw]'
+      to_options:
+        -
+          value: proclamation
+          text: javierg@sandiego.gov
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: '[webform_submission:values:email_1:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\n**** CONTACT INFO ****\r\n\r\nFIRST NAME:\r\n[webform_submission:values:first_name_1]\r\n\r\nLAST NAME:\r\n[webform_submission:values:last_name_1]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_1]\r\n\r\nMAILING ADDRESS:\r\n[webform_submission:values:mailing_address_1]\r\n\r\nMAILING ADDRESS:\r\n[webform_submission:values:mailing_address_1]\r\n[webform_submission:values:city_1], [webform_submission:values:state_1] [webform_submission:values:zip_code_1]\r\n\r\nORGANIZATION:\r\n[webform_submission:values:organization_1]\r\n\r\nREQUESTOR'S TITLE/ROLE:\r\n[webform_submission:values:requestors_title_role_1]\r\n\r\n**** REQUEST INFO ****\r\n\r\nTYPE OF REQUEST:\r\n[webform_submission:values:type_of_request_10]\r\n\r\nFOR WHAT PURPOSE WILL YOU BE USING THIS RECOGNITION?\r\n[webform_submission:values:for_what_purpose_will_you_be_using_this_recognition_10]\r\n\r\nWILL THIS RECOGNITION BE PUBLISHED ON SOCIAL MEDIA?\r\n[webform_submission:values:will_this_recognition_be_published_on_social_media_10]\r\n\r\n**** CERTIFICATE OF RECOGNITION INFO ****\r\n\r\nNAME OF RECIPIENT:\r\n[webform_submission:values:name_of_recipient_16]\r\n\r\nCERTIFICATE OF RECOGNITION DATE:\r\n[webform_submission:values:date_certificate_16]\r\n\r\nRECOGNITION TEXT:\r\n[webform_submission:values:recognition_text]\r\n\r\n**** PROCLAIMED DAY INFO ****\r\n\r\nNAME OF PROCLAIMED DAY:\r\n[webform_submission:values:name_of_proclaimed_day_20]\r\n\r\nPROCLAMATION DATE:\r\n[webform_submission:values:date_proclamation_20]\r\n\r\nPROCLAMATION TEXT:\r\n[webform_submission:values:proclamation_text]\r\n\r\n********\r\n\r\nDELIVERY METHOD:\r\n[webform_submission:values:delivery_method_10]\r\n\r\nDATE OF EVENT:\r\n[webform_submission:values:preferred_date_of_event_10]\r\n\r\nDATE NEEDED DOCUMENT BY:\r\n[webform_submission:values:preferred_date_needed_10]\r\n\r\nPROCLAMATION DOCUMENTS:\r\n[webform_submission:values:proclamation_documents]\r\n"
+      excluded_elements:
+        recognition_text: recognition_text
+        proclamation_text: proclamation_text
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }
