@@ -1,0 +1,203 @@
+uuid: e4e7d380-cabd-4f33-b87f-a131ba9bdba5
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 51
+template: false
+archive: false
+id: webform_1034934
+title: 'Economic Development and Intergovernmental Relations Committee Public Comment Form'
+description: null
+categories: {  }
+elements: |-
+  your_name:
+    '#type': textfield
+    '#title': 'Name:'
+    '#description': ''
+    '#required': true
+  e_mail_address:
+    '#type': textfield
+    '#title': 'Email:'
+    '#description': ''
+  city:
+    '#type': textfield
+    '#title': 'City:'
+    '#description': ''
+    '#required': true
+  state:
+    '#type': textfield
+    '#title': 'State:'
+    '#description': ''
+    '#required': true
+  meeting_date:
+    '#type': date
+    '#title': 'Meeting Date:'
+    '#description': ''
+    '#required': true
+  comment_type:
+    '#type': radios
+    '#options':
+      agenda_key: 'Agenda Comment / Closed Session Comment'
+      nonagenda_key: 'Non-Agenda Comment'
+    '#title': 'Comment Type'
+    '#description': ''
+    '#required': true
+  agenda_item_number:
+    '#type': textfield
+    '#title': 'Agenda Item Number'
+    '#description': ''
+    '#states':
+      visible:
+        ':input[name="comment_type"]':
+          value: agenda_key
+      required:
+        ':input[name="comment_type"]':
+          value: agenda_key
+  comments:
+    '#type': textarea
+    '#title': Comments
+    '#required': true
+  file_upload:
+    '#type': webform_document_file
+    '#title': 'File Upload'
+    '#multiple': 5
+    '#max_filesize': '10'
+    '#file_extensions': 'txt rtf pdf doc docx ppt pptx xls xlsx'
+    '#sanitize': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_5:
+    id: email
+    handler_id: email_5
+    label: 'Email 5'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 5
+    settings:
+      states:
+        - completed
+      to_mail: burcht@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Economic Development and Intergovernmental Relations Committee Public Comment Form'
+      body: "Submitted on [webform_submission:created]\r\n\r\nSubmitted values are:\r\n[webform_submission:values]\r\n\r\nThe results of this submission may be viewed at:\r\n[webform_submission:url]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_6:
+    id: email
+    handler_id: email_6
+    label: 'Email 6'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 6
+    settings:
+      states:
+        - completed
+      to_mail: sarahj@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Economic Development and Intergovernmental Relations Committee Public Comment Form'
+      body: "Submitted on [webform_submission:created]\r\n\r\nSubmitted values are:\r\n[webform_submission:values]\r\n\r\nThe results of this submission may be viewed at:\r\n[webform_submission:url]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_7:
+    id: email
+    handler_id: email_7
+    label: 'Email 7'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 7
+    settings:
+      states:
+        - completed
+      to_mail: nkessler@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Economic Development and Intergovernmental Relations Committee Public Comment Form'
+      body: "Submitted on [webform_submission:created]\r\n\r\nSubmitted values are:\r\n[webform_submission:values]\r\n\r\nThe results of this submission may be viewed at:\r\n[webform_submission:url]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }
