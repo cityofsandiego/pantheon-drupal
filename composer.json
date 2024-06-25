@@ -259,15 +259,17 @@
             "drupal/core": "-p2"
         },
         "patches": {
+            "drupal/remote_stream_wrapper": {
+                "Drupal 10.3 ImageStyleDownloadController::deliver signature change": "https://www.drupal.org/files/issues/2024-06-21/drupal_10_3_deliver_signature_change-3437974-2_0_0-18.patch"
+            },
             "drupal/facets": {
-                "Fix ajax pagination on views when facets enabled": "https://www.drupal.org/files/issues/2023-11-14/3379445-25.patch"
+                "Fix ajax pagination on views when facets enabled": "https://www.drupal.org/files/issues/2023-11-14/3379445-25.patch",
+                "PHP 8.2 - Deprecated function: Drupal\\facets\\Result\\Result::$transliterateDisplayValue": "https://www.drupal.org/files/issues/2024-02-21/facets-php82-3406085-18.patch"
             },
             "drupal/linkit_media_library": {
                 "Fix for media button in linkit": "https://www.drupal.org/files/issues/2024-01-12/issue-3329877-not-compatible-with-ckeditor5-34.patch"
             },
             "drupal/core": {
-                "Ckeditor5 numbered list types": "https://www.drupal.org/files/issues/2024-03-20/ckeditor5_custom_patch_file.patch",
-                "Upgrade to D10 updb hack": "patches/d10-system.post_update.php.patch",
                 "Add date granularity option back to contextual views filters.": "https://www.drupal.org/files/issues/2023-02-27/2868014-134.patch",
                 "Undefined offset": "https://www.drupal.org/files/issues/2022-03-19/3196247-13_0.patch",
                 "Hack for calendar_view and smart date": "patches/core_hack1.patch",
@@ -322,7 +324,7 @@
         "preferred-install": "dist",
         "sort-packages": false,
         "platform": {
-            "php": "8.2.0"
+            "php": "8.1.13"
         },
         "allow-plugins": {
             "composer/installers": true,
