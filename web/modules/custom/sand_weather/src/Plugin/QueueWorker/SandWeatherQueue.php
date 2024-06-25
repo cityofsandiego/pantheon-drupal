@@ -314,32 +314,34 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
 
     try {
       $client = \Drupal::httpClient();
-      $response = $client->get('https://api.weather.gov/stations/KSAN/observations/latest');
+      $response = $client->get($url);
 
       if ($response->getStatusCode() == 200) {
         $body = (string) $response->getBody();
-        $data = json_decode($body, true);
+        $crawler = new Crawler($body);
 
-        if (isset($data['properties']['temperature']['value'])) {
-          // Convert temperature from Celsius to Fahrenheit and remove .0 if present.
-          $temp_celsius = $data['properties']['temperature']['value'];
-          $temp_fahrenheit = round($temp_celsius * 9 / 5 + 32);
-          $weather_temp = str_replace('.0', '', (string) $temp_fahrenheit);
-          \Drupal::state()->set('sand_weather.temp', $weather_temp);
-          \Drupal::state()->set('sand_weather.wurl', (string) $url);
-        }
+        // Extract the weather data using DomCrawler
+        $temp_element = $crawler->filter('#current_conditions-summary .myforecast-current-lrg');
+        $temp_fahrenheit = $temp_element->text();
+        $weather_temp = rtrim($temp_fahrenheit, '°F');
 
-        if (isset($data['properties']['textDescription'])) {
-          $weather_text = $data['properties']['textDescription'];
-          $weather_icon = $this->getWeatherIcon($weather_text);
-          \Drupal::state()->set('sand_weather.text', $weather_text);
-          \Drupal::state()->set('sand_weather.icon', $weather_icon);
-        }
+        $text_element = $crawler->filter('#current_conditions-summary .myforecast-current');
+        $weather_text = $text_element->text();
+
+        // Get the correct weather icon based on the text
+        $weather_icon = $this->getWeatherIcon($weather_text);
+
+        // Set the state variables
+        \Drupal::state()->set('sand_weather.temp', $weather_temp);
+        \Drupal::state()->set('sand_weather.icon', $weather_icon);
+        \Drupal::state()->set('sand_weather.text', $weather_text);
+        \Drupal::state()->set('sand_weather.wurl', (string) $url);
       }
     } catch (\Exception $exception) {
       \Drupal::logger('sand_weather')->error($exception->getMessage(), ['exception' => $exception]);
     }
   }
+
 
   /**
    * Set a weather icon name based on the text of the weather retrieved.
