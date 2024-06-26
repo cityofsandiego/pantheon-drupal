@@ -32,15 +32,14 @@ class SettingsForm extends ConfigFormBase {
       '#type' => 'url',
       '#required' => true,
       '#title' => $this->t('URL'),
-      '#description' => $this->t('URL for getting weather, returns XML that is parsed'),
+      '#description' => $this->t('URL for getting weather, returns HTML that is parsed'),
       '#default_value' => $this->config('sand_weather.settings')->get('weather_url'),
     ];
-    $form['interval'] = [
-      '#type' => 'number',
-      '#required' => true,
-      '#title' => $this->t('Interval'),
-      '#description' => $this->t('The interval at which the weather is refreshed. This is in seconds.'),
-      '#default_value' => $this->config('sand_weather.settings')->get('interval'),
+    $form['enable_logging'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable Logging'),
+      '#description' => $this->t('Check this box to enable detailed logging for sand_weather.'),
+      '#default_value' => $this->config('sand_weather.settings')->get('enable_logging'),
     ];
 
     return parent::buildForm($form, $form_state);
@@ -49,21 +48,12 @@ class SettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    if ($form_state->getValue('interval') < 100) {
-      $form_state->setErrorByName('interval', $this->t('Must be at least 100 seconds.'));
-    }
-    parent::validateForm($form, $form_state);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->config('sand_weather.settings')
       ->set('weather_url', $form_state->getValue('weather_url'))
-      ->set('interval', $form_state->getValue('interval'))
+      ->set('enable_logging', $form_state->getValue('enable_logging'))
       ->save();
     parent::submitForm($form, $form_state);
   }
+
 }

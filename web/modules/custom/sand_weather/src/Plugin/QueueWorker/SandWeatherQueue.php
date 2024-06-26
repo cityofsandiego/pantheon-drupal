@@ -310,7 +310,9 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
    * Refresh the Weather information config for use in the header.
    */
   protected function refreshWeather(): void {
-    $url = \Drupal::config('sand_weather.settings')->get('weather_url');
+    $config = \Drupal::config('sand_weather.settings');
+    $url = $config->get('weather_url');
+    $enable_logging = $config->get('enable_logging');
 
     try {
       $client = \Drupal::httpClient();
@@ -331,18 +333,40 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
         // Get the correct weather icon based on the text
         $weather_icon = $this->getWeatherIcon($weather_text);
 
+        // Log the fetched values if logging is enabled
+        if ($enable_logging) {
+          \Drupal::logger('sand_weather')->info('Fetched weather data: temp={temp}, text={text}, icon={icon}', [
+            'temp' => $weather_temp,
+            'text' => $weather_text,
+            'icon' => $weather_icon,
+          ]);
+        }
+
         // Set the state variables
         \Drupal::state()->set('sand_weather.temp', $weather_temp);
         \Drupal::state()->set('sand_weather.icon', $weather_icon);
         \Drupal::state()->set('sand_weather.text', $weather_text);
         \Drupal::state()->set('sand_weather.wurl', (string) $url);
+
+        // Log the updated state if logging is enabled
+        if ($enable_logging) {
+          \Drupal::logger('sand_weather')->info('Updated state variables.');
+        }
+
+        // Clear the cache tags
+        \Drupal::cache('render')->invalidateTags(['sand_weather']);
+      } else {
+        if ($enable_logging) {
+          \Drupal::logger('sand_weather')->error('Failed to fetch weather data. Status code: {status}', ['status' => $response->getStatusCode()]);
+        }
       }
     } catch (\Exception $exception) {
-      \Drupal::logger('sand_weather')->error($exception->getMessage(), ['exception' => $exception]);
+      if ($enable_logging) {
+        \Drupal::logger('sand_weather')->error('Exception during weather update: {message}', ['message' => $exception->getMessage()]);
+      }
     }
   }
-
-
+  
   /**
    * Set a weather icon name based on the text of the weather retrieved.
    *
