@@ -2,8 +2,9 @@
 
 namespace Drupal\sand_weather\Plugin\Block;
 
-use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Cache\Cache;
+
 
 /**
  * Provides a san diego weather block.
@@ -20,29 +21,28 @@ class SanDiegoWeatherBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build(): array {
-    
+
     $weather_text = \Drupal::state()->get('sand_weather.text');
     $weather_icon = \Drupal::state()->get('sand_weather.icon');
     $weather_temp = \Drupal::state()->get('sand_weather.temp');
     $weather_wurl = \Drupal::state()->get('sand_weather.wurl');
 
-    if (empty($weather_text) || empty($weather_icon) || empty($weather_temp)) {
-      return [
-        '#theme' => 'sand_weather',
-        '#text' => "",
-        '#icon' => "",
-        '#temp' => "",
-        '#wurl' => $weather_wurl,
-      ];
-    } else {
-      return [
-        '#theme' => 'sand_weather',
-        '#text' => $weather_text,
-        '#icon' => $weather_icon,
-        '#temp' => $weather_temp,
-        '#wurl' => $weather_wurl,
-      ];
-    }
+    return [
+      '#theme' => 'sand_weather',
+      '#text' => $weather_text,
+      '#icon' => $weather_icon,
+      '#temp' => $weather_temp,
+      '#wurl' => $weather_wurl,
+      '#cache' => [
+        'tags' => ['sand_weather'],
+      ],
+    ];
+  }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags() {
+    return Cache::mergeTags(parent::getCacheTags(), ['sand_weather']);
   }
 }
