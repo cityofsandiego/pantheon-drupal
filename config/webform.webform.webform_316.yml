@@ -1,0 +1,114 @@
+uuid: fa2cf193-bbd2-41ac-857d-e868583a9751
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 58
+template: false
+archive: false
+id: webform_316
+title: 'Complaint Form'
+description: null
+categories: {  }
+elements: |
+  fieldset_contact_information___please_provide_at_least_one_way_to_contact_you:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Information - Please provide at least one way to contact you.' 
+    '#description': ""
+    name_4:
+      '#type': textfield
+      '#title': 'Name:' 
+      '#description': ""
+      '#required': true
+    email2_4:
+      '#type': email
+      '#size': 20
+      '#title': 'Email' 
+      '#description': ""
+      '#required': true
+    phone_home999_999_9999_4:
+      '#type': textfield
+      '#title': 'Phone (Home): (999-999-9999)' 
+      '#description': ""
+    phone_work_999_999_9999_4:
+      '#type': textfield
+      '#title': 'Phone (Work): (999-999-9999)' 
+      '#description': ""
+  fieldset_disability_related_complaint_or_request:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Disability Related Complaint or Request' 
+    '#description': ""
+    complaint_or_requestlimited_to_2000_characters_2:
+      '#type': textarea
+      '#title': 'Complaint or Request:(Limited to 2000 characters)' 
+      '#description': ""
+      '#required': true
+    location_of_complaint_or_request_if_not_specified_above_2:
+      '#type': textfield
+      '#title': 'Location of Complaint or Request (if not specified above):' 
+      '#description': ""
+      '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /adacompliance/complaint/thankyou
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit Complaint'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_3:
+    id: email
+    handler_id: email_3
+    label: Email
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: adacompliance@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: '[webform_submission:values:email2_4:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nNAME:\r\n[webform_submission:values:name_4]\r\n\r\nEMAIL ADDRESS:\r\n[webform_submission:values:email2_4]\r\n\r\nHOME PHONE:\r\n[webform_submission:values:phone_home999_999_9999_4]\r\n\r\nWORK PHONE:\r\n[webform_submission:values:phone_work_999_999_9999_4]\r\n\r\nCOMPLAINT OR REQUEST:\r\n[webform_submission:values:complaint_or_requestlimited_to_2000_characters_2]\r\n\r\nLOCATION OF COMPLAINT OR REQUEST:\r\n[webform_submission:values:location_of_complaint_or_request_if_not_specified_above_2]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

@@ -1,0 +1,522 @@
+uuid: 742c8b64-e19d-45dd-a2e7-f9a27a6cfbf1
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 52
+template: false
+archive: false
+id: webform_43567
+title: 'Drug-Related Activity Tip'
+description: null
+categories: {  }
+elements: |-
+  fieldset_complaint:
+    '#type': fieldset
+    '#open': true
+    '#title': Complaint
+    '#description': ''
+    complaint_address_1:
+      '#type': textfield
+      '#title': 'Complaint Address'
+      '#description': ''
+      '#required': true
+    complaint_zip_code_1:
+      '#type': select
+      '#options':
+        92014: '92014'
+        92025: '92025'
+        92037: '92037'
+        92101: '92101'
+        92102: '92102'
+        92103: '92103'
+        92104: '92104'
+        92105: '92105'
+        92106: '92106'
+        92107: '92107'
+        92108: '92108'
+        92109: '92109'
+        92110: '92110'
+        92111: '92111'
+        92113: '92113'
+        92114: '92114'
+        92115: '92115'
+        92116: '92116'
+        92117: '92117'
+        92119: '92119'
+        92120: '92120'
+        92121: '92121'
+        92122: '92122'
+        92123: '92123'
+        92124: '92124'
+        92126: '92126'
+        92127: '92127'
+        92128: '92128'
+        92129: '92129'
+        92130: '92130'
+        92131: '92131'
+        92139: '92139'
+        92140: '92140'
+        92145: '92145'
+        92154: '92154'
+        92173: '92173'
+      '#title': 'Complaint Zip Code'
+      '#description': ''
+      '#required': true
+    complaint_cross_street_1:
+      '#type': textfield
+      '#title': 'Complaint Cross Street'
+      '#description': ''
+    time_of_activity_1:
+      '#type': radios
+      '#options':
+        6AM-2PM: 6AM-2PM
+        2PM-10PM: 2PM-10PM
+        10PM-6AM: 10PM-6AM
+      '#title': 'Time of Activity'
+      '#description': ''
+    type_of_complaint_type_of_drug_1:
+      '#type': textfield
+      '#title': 'Type of Complaint/Type of Drug'
+      '#description': ''
+    lookouts_where_and_how_many_1:
+      '#type': textfield
+      '#title': 'Lookouts/Where and How Many'
+      '#description': ''
+    type_of_weapons_location_1:
+      '#type': textfield
+      '#title': 'Type of Weapons/Location'
+      '#description': ''
+    suspect_sells_to_1:
+      '#type': select
+      '#options':
+        Anyone: Anyone
+        Specific: Specific
+        Friends: Friends
+      '#title': 'Suspect Sells To'
+      '#description': ''
+    drug_stash_location_used_1:
+      '#type': select
+      '#options':
+        'No': 'No'
+        'Yes': 'Yes'
+      '#title': 'Drug Stash Location Used'
+      '#description': ''
+    where_is_the_drug_stash_1:
+      '#type': textfield
+      '#title': 'Where is the Drug Stash'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="drug_stash_location_used_1"]':
+            value: 'Yes'
+    police_scanner_being_used_1:
+      '#type': select
+      '#options':
+        'Yes': 'Yes'
+        'No': 'No'
+        Unknown: Unknown
+      '#title': 'Police Scanner Being Used?'
+      '#description': ''
+  fieldset_structure:
+    '#type': fieldset
+    '#open': true
+    '#title': Structure
+    '#description': ''
+    description_of_structure_13:
+      '#type': textfield
+      '#title': 'Description of Structure (Color,Condition,Etc.)'
+      '#description': ''
+    bars_on_doors_windows_13:
+      '#type': textfield
+      '#title': 'Bars on Doors/Windows'
+      '#description': ''
+    dog_type_13:
+      '#type': textfield
+      '#title': Dog/Type
+      '#description': ''
+    location_of_activity_13:
+      '#type': textfield
+      '#title': 'Location of Activity'
+      '#description': ''
+    have_police_been_at_this_location_recently_13:
+      '#type': select
+      '#options':
+        'Yes': 'Yes'
+        'No': 'No'
+      '#title': 'Have Police Been at This Location Recently?'
+      '#description': ''
+    if_so_when_13:
+      '#type': date
+      '#title': 'If so, When'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="have_police_been_at_this_location_recently_13"]':
+            value: 'Yes'
+    no_of_children_age_sex_13:
+      '#type': textfield
+      '#title': 'No. of Children/Age, Sex'
+      '#description': ''
+    neglect_or_abuse_13:
+      '#type': select
+      '#options':
+        'Yes': 'Yes'
+        'No': 'No'
+        Unknown: Unknown
+      '#title': 'Neglect or Abuse?'
+      '#description': ''
+    type_of_fence_and_height_13:
+      '#type': textfield
+      '#title': 'Type of Fence and Height'
+      '#description': ''
+    canyon_near_by_13:
+      '#type': select
+      '#options':
+        'Yes': 'Yes'
+        'No': 'No'
+      '#title': 'Canyon Near By?'
+      '#description': ''
+  fieldset_suspect:
+    '#type': fieldset
+    '#open': true
+    '#title': Suspect
+    '#description': ''
+    primary_suspect_24:
+      '#type': textfield
+      '#title': 'Primary Suspect (Last Name First)'
+      '#description': ''
+    nickname_aka_24:
+      '#type': textfield
+      '#title': 'Nickname, AKA'
+      '#description': ''
+    beeper_24:
+      '#type': select
+      '#options':
+        'Yes': 'Yes'
+        'No': 'No'
+      '#title': Beeper
+      '#description': ''
+    race_24:
+      '#type': select
+      '#options':
+        White: White
+        Black: Black
+        Hispanic: Hispanic
+        Asian: Asian
+        Other: Other
+        Unknown: Unknown
+      '#title': Race
+      '#description': ''
+    sex_24:
+      '#type': select
+      '#options':
+        Male: Male
+        Female: Female
+        Unknown: Unknown
+      '#title': Sex
+      '#description': ''
+    hair_24:
+      '#type': select
+      '#options':
+        Bald: Bald
+        Black: Black
+        Blond: Blond
+        Brown: Brown
+        Grey: Grey
+        White: White
+        Red: Red
+        Other: Other
+        Unknown: Unknown
+      '#title': Hair
+      '#description': ''
+    age_24:
+      '#type': textfield
+      '#title': Age
+      '#description': ''
+    height_24:
+      '#type': textfield
+      '#title': Height
+      '#description': ''
+    weight_24:
+      '#type': textfield
+      '#title': Weight
+      '#description': ''
+    facial_hair_24:
+      '#type': textfield
+      '#title': 'Facial Hair'
+      '#description': ''
+    build_24:
+      '#type': select
+      '#options':
+        Fat: Fat
+        Muscular: Muscular
+        Average: Average
+        Thin: Thin
+        Wiry: Wiry
+      '#title': Build
+      '#description': ''
+    other_suspects_24:
+      '#type': select
+      '#options':
+        'Yes': 'Yes'
+        'No': 'No'
+      '#title': 'Other Suspect(s) (See Comments)'
+      '#description': ''
+    other_descriptions_24:
+      '#type': textfield
+      '#title': 'Other Descriptions (Tattoo, Scar, Hat, Etc.,)'
+      '#description': ''
+    phone_numbers_24:
+      '#type': textfield
+      '#title': 'Phone Number(s)'
+      '#description': ''
+  fieldset_vehicles:
+    '#type': fieldset
+    '#open': true
+    '#title': Vehicles
+    '#description': ''
+    year_39:
+      '#type': textfield
+      '#title': Year
+      '#description': ''
+    make_39:
+      '#type': textfield
+      '#title': Make
+      '#description': ''
+    model_39:
+      '#type': textfield
+      '#title': Model
+      '#description': ''
+    color_39:
+      '#type': select
+      '#options':
+        Black: Black
+        Blue: Blue
+        Brown/Bronze: Brown/Bronze
+        Burgundy/Maroon: Burgundy/Maroon
+        Green/Olive: Green/Olive
+        Gray/Silver: Gray/Silver
+        Orange: Orange
+        Primer: Primer
+        Purple: Purple
+        Red/Rust: Red/Rust
+        Tan/Beige: Tan/Beige
+        Teal: Teal
+        White/Cream: White/Cream
+        Yellow/Gold: Yellow/Gold
+        Other: Other
+        Unknown: Unknown
+      '#title': Color
+      '#description': ''
+    body_type_39:
+      '#type': select
+      '#options':
+        2dr: 2dr
+        4dr: 4dr
+        '4wd/Off Road': '4wd/Off Road'
+        Bicycle: Bicycle
+        Camper/Motorhome: Camper/Motorhome
+        Convertible: Convertible
+        Hatchback: Hatchback
+        Motorcycle: Motorcycle
+        Pickup: Pickup
+        'Sport Utility': 'Sport Utility'
+        'Station Wagon': 'Station Wagon'
+        Trailer: Trailer
+        Truck: Truck
+        Van: Van
+        Other: Other
+        Unknown: Unknown
+      '#title': 'Body Type'
+      '#description': ''
+    license_no_39:
+      '#type': textfield
+      '#title': 'License No.'
+      '#description': ''
+    state_39:
+      '#type': textfield
+      '#title': State
+      '#description': ''
+    is_there_a_second_vehicle_39:
+      '#type': select
+      '#options':
+        'No': 'No'
+        'Yes': 'Yes'
+      '#default_value': 'No'
+      '#title': 'Is there a second vehicle?'
+      '#description': ''
+    fieldset_second_vehicle_39:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Second Vehicle'
+      '#description': ''
+      '#states':
+        visible:
+          ':input[name="is_there_a_second_vehicle_39"]':
+            value: 'Yes'
+      second_vehicle_year_48:
+        '#type': textfield
+        '#title': 'Second Vehicle Year'
+        '#description': ''
+      second_vehicle_make_48:
+        '#type': textfield
+        '#title': 'Second Vehicle Make'
+        '#description': ''
+      second_vehicle_model_48:
+        '#type': textfield
+        '#title': 'Second Vehicle Model'
+        '#description': ''
+      second_vehicle_color_48:
+        '#type': select
+        '#options':
+          Black: Black
+          Blue: Blue
+          Brown/Bronze: Brown/Bronze
+          Burgundy/Maroon: Burgundy/Maroon
+          Green/Olive: Green/Olive
+          Gray/Silver: Gray/Silver
+          Orange: Orange
+          Primer: Primer
+          Purple: Purple
+          Red/Rust: Red/Rust
+          Tan/Beige: Tan/Beige
+          Teal: Teal
+          White/Cream: White/Cream
+          Yellow/Gold: Yellow/Gold
+          Other: Other
+          Unknown: Unknown
+        '#title': 'Second Vehicle Color'
+        '#description': ''
+      second_vehicle_body_type_48:
+        '#type': select
+        '#options':
+          2dr: 2dr
+          4dr: 4dr
+          '4wd/Off Road': '4wd/Off Road'
+          Bicycle: Bicycle
+          Camper/Motorhome: Camper/Motorhome
+          Convertible: Convertible
+          Hatchback: Hatchback
+          Motorcycle: Motorcycle
+          Pickup: Pickup
+          'Sport Utility': 'Sport Utility'
+          'Station Wagon': 'Station Wagon'
+          Trailer: Trailer
+          Truck: Truck
+          Van: Van
+          Other: Other
+          Unknown: Unknown
+        '#title': 'Second Vehicle Body Type'
+        '#description': ''
+      second_vehicle_license_no_48:
+        '#type': textfield
+        '#title': 'Second Vehicle License No.'
+        '#description': ''
+      second_vehicle_state_48:
+        '#type': textfield
+        '#title': 'Second Vehicle State'
+        '#description': ''
+  fieldset_citizen:
+    '#type': fieldset
+    '#open': true
+    '#title': Citizen
+    '#description': ''
+    would_it_be_ok_if_an_officer_called_you_56:
+      '#type': select
+      '#options':
+        'Yes': 'Yes'
+        'No': 'No'
+      '#title': 'Would It Be OK if an Officer Called You?'
+      '#description': ''
+    complainant_56:
+      '#type': textfield
+      '#title': 'Complainant (Last, First, Middle)'
+      '#description': ''
+    complainant_phone_number_56:
+      '#type': textfield
+      '#title': 'Complainant Phone Number'
+      '#description': ''
+    complainant_address_56:
+      '#type': textfield
+      '#title': 'Complainant Address'
+      '#description': ''
+    complainant_other_info_56:
+      '#type': textfield
+      '#title': 'Complainant Other Info'
+      '#description': ''
+    complainant_e_mail_address_56:
+      '#type': textfield
+      '#title': 'Complainant E-mail Address'
+      '#description': ''
+  fieldset_narrative:
+    '#type': fieldset
+    '#open': true
+    '#title': Narrative
+    '#description': ''
+    comments_associates_etc_63:
+      '#type': textarea
+      '#title': 'Comments, Associates, Etc.'
+      '#description': ''
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /police/forms/citizen-request/submitted
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: 'Email 1'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: sdpdnarcotics@pd.sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: '[webform_submission:values:complainant_e_mail_address_56:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\n== COMPLAINT ==\r\n\r\nCOMPLAINT ADDRESS:\r\n[webform_submission:values:complaint_address_1]\r\n\r\nCOMPLAINT ZIP CODE:\r\n[webform_submission:values:complaint_zip_code_1]\r\n\r\nCOMPLAINT CROSS STREET:\r\n[webform_submission:values:complaint_cross_street_1]\r\n\r\nTIME OF ACTIVITY:\r\n[webform_submission:values:time_of_activity_1]\r\n\r\nTYPE OF COMPLAINT/TYPE OF DRUG:\r\n[webform_submission:values:type_of_complaint_type_of_drug_1]\r\n\r\nLOOKOUTS/WHERE AND HOW MANY:\r\n[webform_submission:values:lookouts_where_and_how_many_1]\r\n\r\nTYPE OF WEAPONS/LOCATION:\r\n[webform_submission:values:type_of_weapons_location_1]\r\n\r\nSUSPECT SELLS TO:\r\n[webform_submission:values:suspect_sells_to_1]\r\n\r\nDRUG STASH LOCATION USED:\r\n[webform_submission:values:drug_stash_location_used_1]\r\n\r\nWHERE IS THE DRUG STASH:\r\n[webform_submission:values:where_is_the_drug_stash_1]\r\n\r\nPOLICE SCANNER BEING USED:\r\n[webform_submission:values:police_scanner_being_used_1]\r\n\r\n== STRUCTURE ==\r\n\r\nDESCRIPTION OF STRUCTURE:\r\n[webform_submission:values:description_of_structure_13]\r\n\r\nBARS ON DOORS/WINDOWS:\r\n[webform_submission:values:bars_on_doors_windows_13]\r\n\r\nDOG/TYPE:\r\n[webform_submission:values:dog_type_13]\r\n\r\nLOCATION OF ACTIVITY:\r\n[webform_submission:values:location_of_activity_13]\r\n\r\nHAVE POLICE BEEN AT THIS LOCATION RECENTLY:\r\n[webform_submission:values:have_police_been_at_this_location_recently_13]\r\n\r\nIF SO, WHEN:\r\n[webform_submission:values:if_so_when_13]\r\n\r\nNUMBER OF CHILDREN/AGE, SEX:\r\n[webform_submission:values:no_of_children_age_sex_13]\r\n\r\nNEGLECT OR ABUSE:\r\n[webform_submission:values:neglect_or_abuse_13]\r\n\r\nTYPE OF FENCE AND HEIGHT:\r\n[webform_submission:values:type_of_fence_and_height_13]\r\n\r\nCANYON NEAR BY:\r\n[webform_submission:values:canyon_near_by_13]\r\n\r\n== SUSPECT ==\r\n\r\nPRIMARY SUSPECT NAME:\r\n[webform_submission:values:primary_suspect_24]\r\n\r\nNICKNAME, AKA:\r\n[webform_submission:values:nickname_aka_24]\r\n\r\nBEEPER:\r\n[webform_submission:values:beeper_24]\r\n\r\nRACE:\r\n[webform_submission:values:race_24]\r\n\r\nSEX:\r\n[webform_submission:values:sex_24]\r\n\r\nHAIR:\r\n[webform_submission:values:hair_24]\r\n\r\nAGE:\r\n[webform_submission:values:age_24]\r\n\r\nHEIGHT:\r\n[webform_submission:values:height_24]\r\n\r\nWEIGHT:\r\n[webform_submission:values:weight_24]\r\n\r\nFACIAL HAIR:\r\n[webform_submission:values:facial_hair_24]\r\n\r\nBUILD:\r\n[webform_submission:values:build_24]\r\n\r\nOTHER SUSPECT(S):\r\n[webform_submission:values:other_suspects_24]\r\n\r\nOTHER DESCRIPTIONS:\r\n[webform_submission:values:other_descriptions_24]\r\n\r\nPHONE NUMBERS:\r\n[webform_submission:values:phone_numbers_24]\r\n\r\n== FIRST VEHICLE ==\r\n\r\nYEAR:\r\n[webform_submission:values:year_39]\r\n\r\nMAKE:\r\n[webform_submission:values:make_39]\r\n\r\nMODEL:\r\n[webform_submission:values:model_39]\r\n\r\nCOLOR:\r\n[webform_submission:values:color_39]\r\n\r\nBODY TYPE:\r\n[webform_submission:values:body_type_39]\r\n\r\nLICENSE NUMBER:\r\n[webform_submission:values:license_no_39]\r\n\r\nSTATE:\r\n[webform_submission:values:state_39]\r\n\r\n== SECOND VEHICLE ==\r\n\r\nYEAR:\r\n[webform_submission:values:second_vehicle_year_48]\r\n\r\nMAKE:\r\n[webform_submission:values:second_vehicle_make_48]\r\n\r\nMODEL:\r\n[webform_submission:values:second_vehicle_model_48]\r\n\r\nCOLOR:\r\n[webform_submission:values:second_vehicle_color_48]\r\n\r\nBODY TYPE:\r\n[webform_submission:values:second_vehicle_body_type_48]\r\n\r\nLICENSE NUMBER:\r\n[webform_submission:values:second_vehicle_license_no_48]\r\n\r\nSTATE:\r\n[webform_submission:values:second_vehicle_state_48]\r\n\r\n== CITIZEN ==\r\n\r\nOK TO CALL:\r\n[webform_submission:values:would_it_be_ok_if_an_officer_called_you_56]\r\n\r\nCOMPLAINANT NAME:\r\n[webform_submission:values:complainant_56]\r\n\r\nCOMPLAINANT PHONE NUMBER:\r\n[webform_submission:values:complainant_phone_number_56]\r\n\r\nCOMPLAINANT ADDRESS:\r\n[webform_submission:values:complainant_address_56]\r\n\r\nCOMPLAINANT OTHER INFO:\r\n[webform_submission:values:complainant_other_info_56]\r\n\r\nCOMPLAINANT E-MAIL ADDRESS:\r\n[webform_submission:values:complainant_e_mail_address_56]\r\n\r\n== ADDITIONAL COMMENTS ==\r\n\r\n[webform_submission:values:comments_associates_etc_63]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: false
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

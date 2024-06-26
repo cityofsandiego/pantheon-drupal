@@ -1,0 +1,123 @@
+uuid: 3e528739-6323-429c-9a02-a73cb679e823
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1023376
+title: 'Benefits Appointment Request'
+description: null
+categories: {  }
+elements: |-
+  fieldset_contact_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Info'
+    '#description': ''
+    name_1:
+      '#type': textfield
+      '#title': Name
+      '#description': ''
+      '#required': true
+    pernr_1:
+      '#type': textfield
+      '#size': 20
+      '#min': null
+      '#max': null
+      '#step': null
+      '#unique': false
+      '#title': PERNR
+      '#description': ''
+    emailaddress_1:
+      '#type': textfield
+      '#title': Email
+      '#description': ''
+      '#required': true
+    phonenumber_1:
+      '#type': textfield
+      '#title': Phone
+      '#description': ''
+      '#required': true
+  fieldset_appointment_info:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Appointment Info'
+    '#description': ''
+    preferred_time_of_day_for_appointment_7:
+      '#type': radios
+      '#options':
+        morning: Morning
+        afternoon: Afternoon
+      '#title': 'Preferred Time of Day for Appointment'
+      '#description': ''
+  reason_for_appointment_request_:
+    '#type': textarea
+    '#title': 'Reason for Appointment Request '
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': 'Submit Appointment Request'
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: url
+  confirmation_url: /risk-management/open-enrollment-fy-2021/appointment-request-response
+  confirmation_message: ''
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit Appointment Request'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: benefits@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: benefits@sandiego.gov
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nSubmitted values are:\r\n[webform_submission:values]\r\n\r\n"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

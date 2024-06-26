@@ -1,0 +1,117 @@
+uuid: cea42fac-8f7e-40cd-abb3-924af06f7fa4
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_40595
+title: 'Art Tours @ the Central Library'
+description: null
+categories: {  }
+elements: |-
+  fieldset_contact_information:
+    '#type': fieldset
+    '#open': true
+    '#title': 'Contact Information'
+    '#description': ''
+    first_name_1:
+      '#type': textfield
+      '#title': 'First Name'
+      '#description': ''
+      '#required': true
+    last_name_1:
+      '#type': textfield
+      '#title': 'Last Name'
+      '#description': ''
+      '#required': true
+    email_1:
+      '#type': email
+      '#size': 20
+      '#title': Email
+      '#description': ''
+      '#required': true
+  fieldset_tour:
+    '#type': fieldset
+    '#open': true
+    '#title': Tour
+    '#description': ''
+    date_preference_5:
+      '#type': date
+      '#title': 'Date Preference'
+      '#description': ''
+      '#required': true
+    time_preference:
+      '#type': webform_time
+      '#title': 'Time Preference'
+      '#required': true
+      '#timepicker': true
+      '#time_format': 'g:i A'
+      '#step': 900
+    total_number_of_people_in_group:
+      '#type': number
+      '#title': 'Total Number of People in Group'
+      '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_message: "<p>Thank you for your request!</p>\r\n<p>Your Art Tour request will be reviewed shortly and a response made to the email address given. If you have further questions contact us at <a href=\"mailto:OnView@sandiego.gov\">OnView@sandiego.gov</a>.</p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: 'Submit Tour Request'
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_1:
+    id: email
+    handler_id: email_1
+    label: Email
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: OnView@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: '[webform_submission:values:email_1:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nNAME:\r\n[webform_submission:values:first_name_1] [webform_submission:values:last_name_1]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_1]\r\n\r\nDATE PREFERENCE:\r\n[webform_submission:values:date_preference_5]\r\n\r\nTIME PREFERENCE:\r\n[webform_submission:values:time_preference]\r\n\r\nNUMBER OF PEOPLE IN GROUP:\r\n[webform_submission:values:total_number_of_people_in_group]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

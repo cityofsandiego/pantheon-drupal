@@ -1,0 +1,473 @@
+uuid: 8b164b0b-c991-4186-8fb2-e34d650147e2
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_1070173
+title: 'Event/Public Appearance Request'
+description: null
+categories: {  }
+elements: |-
+  first_page:
+    '#type': webform_wizard_page
+    '#title': Start
+    fieldset_event_overview:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Event Overview'
+      '#description': ''
+      event_name_1:
+        '#type': textfield
+        '#title': 'Event Name'
+        '#description': ''
+        '#required': true
+      event_description_fundraiser_referred_by_1:
+        '#type': textfield
+        '#title': 'Event Description (fundraiser; referred by)'
+        '#description': ''
+        '#required': true
+      event_date_1:
+        '#type': date
+        '#title': 'Event Date'
+        '#description': ''
+        '#required': true
+      flexible_date_1:
+        '#type': radios
+        '#options':
+          'yes': 'Yes'
+          'no': 'No'
+        '#title': 'Flexible Date?'
+        '#description': ''
+        '#required': true
+      physical_address_room_ballroom_etc_1:
+        '#type': textfield
+        '#title': 'Physical Address (Room/Ballroom, etc.)'
+        '#description': ''
+        '#required': true
+      start_time:
+        '#type': webform_time
+        '#title': 'Start Time'
+        '#required': true
+        '#timepicker': true
+        '#time_format': 'g:i A'
+        '#step': 900
+      end_time:
+        '#type': webform_time
+        '#title': 'End Time'
+        '#required': true
+        '#timepicker': true
+        '#time_format': 'g:i A'
+        '#step': 900
+      flexible_time_1:
+        '#type': radios
+        '#options':
+          'yes': 'Yes'
+          'no': 'No'
+        '#title': 'Flexible Time?'
+        '#description': ''
+        '#required': true
+  continue:
+    '#type': webform_wizard_page
+    '#title': Organization/Contact
+    fieldset_organization__contact_details:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Organization & Contact Details'
+      '#description': ''
+      organization_business_11:
+        '#type': textfield
+        '#title': Organization/Business
+        '#description': ''
+        '#required': true
+      about_your_organization:
+        '#type': textarea
+        '#title': 'About Your Organization'
+        '#required': true
+        '#counter_type': character
+        '#counter_maximum': 500
+      first_and_last_name_11:
+        '#type': textfield
+        '#title': 'First and Last Name'
+        '#description': ''
+        '#required': true
+      title_11:
+        '#type': textfield
+        '#title': Title
+        '#description': ''
+        '#required': true
+      email2_11:
+        '#type': email
+        '#size': 20
+        '#title': Email
+        '#description': ''
+        '#required': true
+      phone_11:
+        '#type': textfield
+        '#title': Phone
+        '#input_mask': 999-999-9999
+        '#required': true
+      cell_phone_11:
+        '#type': textfield
+        '#title': 'Cell Phone'
+        '#input_mask': 999-999-9999
+        '#required': true
+  continue2:
+    '#type': webform_wizard_page
+    '#title': 'Event Details'
+    fieldset_event_details:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Event Details'
+      '#description': ''
+      event_website_21:
+        '#type': textfield
+        '#title': 'Event Website'
+        '#description': ''
+      other_speakers_or_invited_guests_will_there_be_any_other_elected_officials_dignitaries_21:
+        '#type': textarea
+        '#title': 'Other speakers or invited guests (Will there be any other elected officials/dignitaries?):'
+        '#description': ''
+        '#required': true
+      is_event_open_to_media__if_so_who_will_be_attending_21:
+        '#type': textarea
+        '#title': 'Is event open to media?  If so, who will be attending?'
+        '#description': ''
+        '#required': true
+      number_of_attendees_21:
+        '#type': textfield
+        '#title': 'Number of Attendees'
+        '#description': ''
+        '#required': true
+      audience_21:
+        '#type': textfield
+        '#title': Audience
+        '#description': ''
+      agenda_21:
+        '#type': textarea
+        '#title': Agenda
+        '#description': ''
+      tentative_agenda_21:
+        '#type': managed_file
+        '#max_filesize': '2'
+        '#file_extensions': 'txt rtf pdf doc docx'
+        '#title': 'Tentative Agenda'
+        '#description': ''
+      fieldset_role_21:
+        '#type': fieldset
+        '#open': true
+        '#title': Role
+        '#description': ''
+        mayors_role_46:
+          '#type': radios
+          '#options':
+            attend: Attend
+            providing_remarks: 'Providing remarks'
+            presenting_award: 'Presenting award'
+            mayor_receiving_award: 'Is the Mayor receiving an award? (If yes, please describe)'
+          '#title': 'Mayor’s Role'
+          '#description': ''
+          '#required': true
+        award_description_46:
+          '#type': textfield
+          '#title': 'Award Description'
+          '#description': ''
+          '#states':
+            visible:
+              ':input[name="mayors_role_46"]':
+                value: mayor_receiving_award
+        fieldset_speaking_role_46:
+          '#type': fieldset
+          '#open': true
+          '#title': 'Speaking Role'
+          '#description': ''
+          if_speaking_role_proposed_speaking_role_33:
+            '#type': select
+            '#options':
+              brief_remarks: 'Brief Remarks (3-7 minutes)'
+              welcoming_closing: 'Welcoming/Closing Remarks (2-3 minutes)'
+              news: 'News/Press Conference (2-3 minutes)'
+              panel_discussion: 'Panel Discussion'
+              qa: 'Q & A Session'
+              none: None
+              other: Other
+            '#title': 'If speaking role, proposed speaking role'
+            '#description': ''
+          if_other_please_describe:
+            '#type': textarea
+            '#title': 'If other, please describe'
+            '#counter_type': character
+            '#counter_maximum': 500
+      will_there_be_a_podium_microphone_teleprompter_21:
+        '#type': textfield
+        '#title': 'Will there be a podium? Microphone? Teleprompter?'
+        '#description': ''
+        '#required': true
+      what_is_the_mayors_role_immediately_following_his_remarks_introducing_21:
+        '#type': textfield
+        '#title': 'What is the Mayor’s Role immediately following his remarks? (Introducing?) '
+        '#description': ''
+        '#required': true
+      should_any_individuals_be_thanked_recognized_or_acknowledged_:
+        '#type': textarea
+        '#title': 'Should any individuals be thanked, recognized or acknowledged?'
+        '#counter_type': character
+        '#counter_maximum': 500
+      parking_instructions:
+        '#type': textarea
+        '#title': 'Parking Instructions'
+        '#counter_type': character
+        '#counter_maximum': 500
+  continue3:
+    '#type': webform_wizard_page
+    '#title': 'Additional Info'
+    fieldset_additional_information:
+      '#type': fieldset
+      '#open': true
+      '#title': 'Additional Information'
+      '#description': ''
+      seating_arrangements_39:
+        '#type': textfield
+        '#title': 'Seating arrangements'
+        '#description': ''
+        '#required': true
+      attire_eg_casual_black_tie_39:
+        '#type': textfield
+        '#title': 'Attire (e.g. Casual, Black Tie)'
+        '#description': ''
+        '#required': true
+      ticket_price_for_attendees_39:
+        '#type': textfield
+        '#title': 'Ticket price for attendees'
+        '#description': ''
+        '#required': true
+      additional_comments:
+        '#type': textarea
+        '#title': 'Additional comments'
+        '#autocomplete': 'off'
+        '#counter_type': character
+        '#counter_maximum': 500
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: '0'
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: url
+  confirmation_url: /mayor/contact/request-response
+  confirmation_title: ''
+  confirmation_message: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+  form_submit_label: ''
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_3:
+    id: email
+    handler_id: email_3
+    label: 'Email to Requester'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email2_11:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Thank you for your submission to the Mayor's Office.\r\n\r\nYou submitted the following information on [webform_submission:created].\r\n\r\n== EVENT OVERVIEW ==\r\n\r\nNAME:\r\n[webform_submission:values:event_name_1]\r\n\r\nDESCRIPTION:\r\n[webform_submission:values:event_description_fundraiser_referred_by_1]\r\n\r\nDATE:\r\n[webform_submission:values:event_date_1]\r\n\r\nFLEXIBLE DATE?\r\n[webform_submission:values:flexible_date_1]\r\n\r\nTIME:\r\n[webform_submission:values:start_time] - [webform_submission:values:end_time]\r\n\r\nFLEXIBLE TIME? [webform_submission:values:flexible_time_1]\r\n\r\nADDRESS:\r\n[webform_submission:values:physical_address_room_ballroom_etc_1]\r\n\r\n== ORGANIZATION/CONTACT ==\r\n\r\nORGANIZATION/BUSINESS:\r\n[webform_submission:values:organization_business_11]\r\n\r\nABOUT YOUR ORGANIZATION:\r\n[webform_submission:values:about_your_organization]\r\n\r\nNAME:\r\n[webform_submission:values:first_and_last_name_11]\r\n\r\nTITLE:\r\n[webform_submission:values:title_11]\r\n\r\nEMAIL:\r\n[webform_submission:values:email2_11]\r\n\r\nPHONE:\r\n[webform_submission:values:phone_11]\r\n\r\nCELL PHONE:\r\n[webform_submission:values:cell_phone_11]\r\n\r\n== EVENT DETAILS ==\r\n\r\nWEBSITE:\r\n[webform_submission:values:event_website_21]\r\n\r\nOTHER SPEAKERS:\r\n[webform_submission:values:other_speakers_or_invited_guests_will_there_be_any_other_elected_officials_dignitaries_21]\r\n\r\nMEDIA?:\r\n[webform_submission:values:is_event_open_to_media__if_so_who_will_be_attending_21]\r\n\r\n# OF ATTENDEES:\r\n[webform_submission:values:number_of_attendees_21]\r\n\r\nAUDIENCE:\r\n[webform_submission:values:audience_21]\r\n\r\nAGENDA:\r\n[webform_submission:values:agenda_21]\r\n\r\nAGENDA FILE:\r\nAttached, if any\r\n\r\nMAYOR'S ROLE:\r\n[webform_submission:values:mayors_role_46]\r\n\r\nAWARD DESCRIPTION:\r\n[webform_submission:values:award_description_46]\r\n\r\nSPEAKING ROLE:\r\n[webform_submission:values:if_speaking_role_proposed_speaking_role_33]\r\n\r\nSPEAKING ROLE (IF OTHER):\r\n[webform_submission:values:if_other_please_describe]\r\n\r\nSPEAKER SETUP:\r\n[webform_submission:values:will_there_be_a_podium_microphone_teleprompter_21]\r\n\r\nROLE AFTER REMARKS:\r\n[webform_submission:values:what_is_the_mayors_role_immediately_following_his_remarks_introducing_21]\r\n\r\nACKNOWLEDGEMENTS:\r\n[webform_submission:values:should_any_individuals_be_thanked_recognized_or_acknowledged_]\r\n\r\nPARKING INSTRUCTIONS:\r\n[webform_submission:values:parking_instructions]\r\n\r\n== ADDITIONAL INFO ==\r\n\r\nSEATING ARRANGEMENTS:\r\n[webform_submission:values:seating_arrangements_39]\r\n\r\nATTIRE:\r\n[webform_submission:values:attire_eg_casual_black_tie_39]\r\n\r\nTICKET PRICE FOR ATTENDEES:\r\n[webform_submission:values:ticket_price_for_attendees_39]\r\n\r\nADDITIONAL COMMENTS:\r\n[webform_submission:values:additional_comments]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: true
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_5:
+    id: email
+    handler_id: email_5
+    label: 'Email to MayorScheduling'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 5
+    settings:
+      states:
+        - completed
+      to_mail: MayorScheduling@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: '[webform_submission:values:email2_11:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\n== EVENT OVERVIEW ==\r\n\r\nNAME:\r\n[webform_submission:values:event_name_1]\r\n\r\nDESCRIPTION:\r\n[webform_submission:values:event_description_fundraiser_referred_by_1]\r\n\r\nDATE:\r\n[webform_submission:values:event_date_1]\r\n\r\nFLEXIBLE DATE?\r\n[webform_submission:values:flexible_date_1]\r\n\r\nTIME:\r\n[webform_submission:values:start_time] - [webform_submission:values:end_time]\r\n\r\nFLEXIBLE TIME? [webform_submission:values:flexible_time_1]\r\n\r\nADDRESS:\r\n[webform_submission:values:physical_address_room_ballroom_etc_1]\r\n\r\n== ORGANIZATION/CONTACT ==\r\n\r\nORGANIZATION/BUSINESS:\r\n[webform_submission:values:organization_business_11]\r\n\r\nABOUT YOUR ORGANIZATION:\r\n[webform_submission:values:about_your_organization]\r\n\r\nNAME:\r\n[webform_submission:values:first_and_last_name_11]\r\n\r\nTITLE:\r\n[webform_submission:values:title_11]\r\n\r\nEMAIL:\r\n[webform_submission:values:email2_11]\r\n\r\nPHONE:\r\n[webform_submission:values:phone_11]\r\n\r\nCELL PHONE:\r\n[webform_submission:values:cell_phone_11]\r\n\r\n== EVENT DETAILS ==\r\n\r\nWEBSITE:\r\n[webform_submission:values:event_website_21]\r\n\r\nOTHER SPEAKERS:\r\n[webform_submission:values:other_speakers_or_invited_guests_will_there_be_any_other_elected_officials_dignitaries_21]\r\n\r\nMEDIA?:\r\n[webform_submission:values:is_event_open_to_media__if_so_who_will_be_attending_21]\r\n\r\n# OF ATTENDEES:\r\n[webform_submission:values:number_of_attendees_21]\r\n\r\nAUDIENCE:\r\n[webform_submission:values:audience_21]\r\n\r\nAGENDA:\r\n[webform_submission:values:agenda_21]\r\n\r\nAGENDA FILE:\r\nAttached, if any\r\n\r\nMAYOR'S ROLE:\r\n[webform_submission:values:mayors_role_46]\r\n\r\nAWARD DESCRIPTION:\r\n[webform_submission:values:award_description_46]\r\n\r\nSPEAKING ROLE:\r\n[webform_submission:values:if_speaking_role_proposed_speaking_role_33]\r\n\r\nSPEAKING ROLE (IF OTHER):\r\n[webform_submission:values:if_other_please_describe]\r\n\r\nSPEAKER SETUP:\r\n[webform_submission:values:will_there_be_a_podium_microphone_teleprompter_21]\r\n\r\nROLE AFTER REMARKS:\r\n[webform_submission:values:what_is_the_mayors_role_immediately_following_his_remarks_introducing_21]\r\n\r\nACKNOWLEDGEMENTS:\r\n[webform_submission:values:should_any_individuals_be_thanked_recognized_or_acknowledged_]\r\n\r\nPARKING INSTRUCTIONS:\r\n[webform_submission:values:parking_instructions]\r\n\r\n== ADDITIONAL INFO ==\r\n\r\nSEATING ARRANGEMENTS:\r\n[webform_submission:values:seating_arrangements_39]\r\n\r\nATTIRE:\r\n[webform_submission:values:attire_eg_casual_black_tie_39]\r\n\r\nTICKET PRICE FOR ATTENDEES:\r\n[webform_submission:values:ticket_price_for_attendees_39]\r\n\r\nADDITIONAL COMMENTS:\r\n[webform_submission:values:additional_comments]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: true
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }
