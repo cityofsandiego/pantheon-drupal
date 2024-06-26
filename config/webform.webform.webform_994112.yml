@@ -120,11 +120,15 @@ elements: |-
       '#counter_maximum_message': '%d word(s) remaining'
     supporting_documents_multiple_file_10:
       '#type': managed_file
+      '#title': 'Supporting Documents (Limit: 5)'
+      '#multiple': true
+      '#description': 'Files must be less than 10MB each. Allowed file types:  Microsoft Office files, gif, jpeg, jpg, png, pdf.'
+      '#format': custom
+      '#format_html': '{{ item.link }}'
+      '#format_text': '{{ item.url }}?access={{ item.id }}&id={{ uuid }}'
+      '#format_items': semicolon
       '#max_filesize': '10'
       '#file_extensions': 'gif jpg jpeg png pdf'
-      '#multiple': true
-      '#title': 'Supporting Documents (Limit: 5)'
-      '#description': 'Files must be less than 10MB each. Allowed file types:  Microsoft Office files, gif, jpeg, jpg, png, pdf.'
     upload_disclaimer_10:
       '#type': processed_text
       '#title': 'Upload Disclaimer'

@@ -130,20 +130,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: sdrecyclingworks@sandiego.gov
+      from_mail: _default
       from_options: {  }
-      from_name: '[webform_submission:values:nature_of_complaint:raw]'
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: |+
-        Submitted on [webform_submission:completed_date:long]
-
-        Submitted values are:
-        [webform_submission:values]
-
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\n== REPORT DETAILS ==\r\n\r\nNATURE OF COMPLAINT:\r\n[webform_submission:values:nature_of_complaint_2]\r\n\r\nADDITIONAL DETAILS:\r\n[webform_submission:values:additional_details_2]\r\n\r\nADDRESS OF PROPERTY:\r\n[webform_submission:values:address_of_property_2]\r\n\r\nNAME OF PROPERTY:\r\n[webform_submission:values:name_of_property_2]\r\n\r\nIDENTITY OF ANY WITNESSES:\r\n[webform_submission:values:identity_of_any_witnesses_2]\r\n\r\n== ALLEGED VIOLATOR INFO ==\r\n\r\nNAME:\r\n[webform_submission:values:name_14]\r\n\r\nPHONE:\r\n[webform_submission:values:phone_14]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_14]\r\n\r\n== COMPLAINANT INFO ==\r\n\r\nNAME:\r\n[webform_submission:values:name_18]\r\n\r\nADDRESS:\r\n[webform_submission:values:address_18]\r\n\r\nPHONE:\r\n[webform_submission:values:phone_18]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_18]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

@@ -64,7 +64,9 @@ elements: |-
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'
-    '#submit_hide': true
+    '#attributes':
+      class:
+        - visuallyhidden
 css: ''
 javascript: ''
 settings:
@@ -172,7 +174,7 @@ settings:
   confirmation_type: page
   confirmation_url: /city-council/luh-response
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: '<p>Your request has been forwarded to the list administrator.</p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -274,7 +276,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: _default
+      subject: 'Land Use and Housing Committee Sign-up'
       body: "Submitted values are:\r\n[webform_submission:values]\r\n\r\n"
       excluded_elements: {  }
       ignore_access: false

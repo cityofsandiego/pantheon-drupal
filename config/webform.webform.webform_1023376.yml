@@ -12,52 +12,55 @@ id: webform_1023376
 title: 'Benefits Appointment Request'
 description: null
 categories: {  }
-elements: |
+elements: |-
   fieldset_contact_info:
     '#type': fieldset
     '#open': true
-    '#title': 'Contact Info' 
-    '#description': ""
+    '#title': 'Contact Info'
+    '#description': ''
     name_1:
       '#type': textfield
-      '#title': 'Name' 
-      '#description': ""
+      '#title': Name
+      '#description': ''
       '#required': true
     pernr_1:
       '#type': textfield
       '#size': 20
-      '#min': 
-      '#max': 
-      '#step': 
+      '#min': null
+      '#max': null
+      '#step': null
       '#unique': false
-      '#title': 'PERNR' 
-      '#description': ""
+      '#title': PERNR
+      '#description': ''
     emailaddress_1:
       '#type': textfield
-      '#title': 'Email' 
-      '#description': ""
+      '#title': Email
+      '#description': ''
       '#required': true
     phonenumber_1:
       '#type': textfield
-      '#title': 'Phone' 
-      '#description': ""
+      '#title': Phone
+      '#description': ''
       '#required': true
   fieldset_appointment_info:
     '#type': fieldset
     '#open': true
-    '#title': 'Appointment Info' 
-    '#description': ""
+    '#title': 'Appointment Info'
+    '#description': ''
     preferred_time_of_day_for_appointment_7:
       '#type': radios
       '#options':
-        morning: 'Morning'
-        afternoon: 'Afternoon'
-      '#title': 'Preferred Time of Day for Appointment' 
-      '#description': ""
-    reason_for_appointment_request_7:
-      '#title': 'Reason for Appointment Request' 
-      '#description': ""
-      '#required': true
+        morning: Morning
+        afternoon: Afternoon
+      '#title': 'Preferred Time of Day for Appointment'
+      '#description': ''
+  reason_for_appointment_request_:
+    '#type': textarea
+    '#title': 'Reason for Appointment Request '
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': 'Submit Appointment Request'
 css: ''
 javascript: ''
 settings:
@@ -80,48 +83,6 @@ access:
       - authenticated
     users: {  }
 handlers:
-  email_1:
-    id: email
-    handler_id: email_1
-    label: 'Email 1'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 1
-    settings:
-      states:
-        - completed
-      to_mail: lkosta@sandiego.gov
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: benefits@sandiego.gov
-      from_options: {  }
-      from_name: 'Flexible Benefits'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: default
-      body: |+
-        Submitted on [webform_submission:date:long]
-        Submitted by user: [webform_submission:user]
-        Submitted values are:
-        [webform_submission:values]
-
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: false
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
   email_2:
     id: email
     handler_id: email_2
@@ -141,18 +102,13 @@ handlers:
       cc_options: {  }
       from_mail: benefits@sandiego.gov
       from_options: {  }
-      from_name: 'Flexible Benefits'
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: |+
-        Submitted on [webform_submission:date:long]
-        Submitted by user: [webform_submission:user]
-        Submitted values are:
-        [webform_submission:values]
-
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nSubmitted values are:\r\n[webform_submission:values]\r\n\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

@@ -368,60 +368,13 @@ handlers:
       cc_options: {  }
       from_mail: '[webform_submission:values:email2:raw]'
       from_options: {  }
-      from_name: default
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: |+
-        Submitted on [webform_submission:date:long]
-        Submitted by user: [webform_submission:user]
-        Submitted values are:
-        [webform_submission:values]
-
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: false
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_5:
-    id: email
-    handler_id: email_5
-    label: 'Email 5'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 5
-    settings:
-      states:
-        - completed
-      to_mail: lkosta@sandiego.gov
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:email2:raw]'
-      from_options: {  }
-      from_name: default
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: default
-      body: |+
-        Submitted on [webform_submission:date:long]
-        Submitted by user: [webform_submission:user]
-        Submitted values are:
-        [webform_submission:values]
-
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n \r\nSubmitted values are:\r\n[webform_submission:values]\r\n\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

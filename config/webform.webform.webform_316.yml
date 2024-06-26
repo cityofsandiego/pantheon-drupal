@@ -77,7 +77,7 @@ handlers:
   email_3:
     id: email
     handler_id: email_3
-    label: 'Email 3'
+    label: Email
     notes: ''
     status: true
     conditions: {  }
@@ -91,15 +91,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:email2:raw]'
+      from_mail: _default
       from_options: {  }
-      from_name: '[webform_submission:values:name:raw]'
-      reply_to: ''
+      from_name: _default
+      reply_to: '[webform_submission:values:email2_4:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: default
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nNAME:\r\n[webform_submission:values:name_4]\r\n\r\nEMAIL ADDRESS:\r\n[webform_submission:values:email2_4]\r\n\r\nHOME PHONE:\r\n[webform_submission:values:phone_home999_999_9999_4]\r\n\r\nWORK PHONE:\r\n[webform_submission:values:phone_work_999_999_9999_4]\r\n\r\nCOMPLAINT OR REQUEST:\r\n[webform_submission:values:complaint_or_requestlimited_to_2000_characters_2]\r\n\r\nLOCATION OF COMPLAINT OR REQUEST:\r\n[webform_submission:values:location_of_complaint_or_request_if_not_specified_above_2]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

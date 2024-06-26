@@ -89,55 +89,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: default
-      body: |-
-        Submitted on [webform_submission:completed_date:long]
-        FIRST NAME:  [webform_submission:values:first_name:nolabel]
-        LAST NAME:  [webform_submission:values:last_name:nolabel]
-        EMAIL:  [webform_submission:values:email:nolabel]
-
-        The results of this submission may be viewed at:
-        [webform_submission:url]
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: false
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_2:
-    id: email
-    handler_id: email_2
-    label: 'Email 2'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 2
-    settings:
-      states:
-        - completed
-      to_mail: lkosta@sandiego.gov
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: '[webform_submission:values:email:raw]'
-      from_options: {  }
-      from_name: '[webform_submission:values:name:raw]'
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: default
-      body: |
-        Submitted on [webform_submission:completed_date:long]
-        FIRST NAME:  [webform_submission:values:first_name:nolabel]
-        LAST NAME:  [webform_submission:values:last_name:nolabel]
-        EMAIL:  [webform_submission:values:email:nolabel]
+      body: "Submitted on [webform_submission:created]\r\nFIRST NAME:  [webform_submission:values:first_name:nolabel]\r\nLAST NAME:  [webform_submission:values:last_name:nolabel]\r\nEMAIL:  [webform_submission:values:email:nolabel]\r\n\r\nThe results of this submission may be viewed at:\r\n[webform_submission:url]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

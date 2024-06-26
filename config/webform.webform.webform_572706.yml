@@ -69,56 +69,10 @@ access:
       - authenticated
     users: {  }
 handlers:
-  email_1:
-    id: email
-    handler_id: email_1
-    label: 'Email 1'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 1
-    settings:
-      states:
-        - completed
-      to_mail: lindakosta@hotmail.com
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: default
-      from_options: {  }
-      from_name: default
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: 'Online Bike Rack Request'
-      body: |-
-        <p>Submitted on [webform_submission:date:long]</p>
-
-        <p>Name of business: [webform_submission:values:name_of_business]</p>
-        <p>Contact name: [webform_submission:values:contact_name]</p>
-        <p>Phone: [webform_submission:values:phone]</p>
-        <p>Email: [webform_submission:values:email]</p>
-        <p>Rack location: [webform_submission:values:street_address_rack_location]</p>
-        <p>Number of racks: [webform_submission:values:number_of_racks]</p>
-        <p>Additional information: [webform_submission:values:additional_information]</p>
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: false
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
   email_2:
     id: email
     handler_id: email_2
-    label: 'Email 2'
+    label: Email
     notes: ''
     status: true
     conditions: {  }
@@ -132,24 +86,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
-      reply_to: ''
+      from_name: _default
+      reply_to: '[webform_submission:values:email:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
       subject: 'Online Bike Rack Request'
-      body: |-
-        <p>Submitted on [webform_submission:date:long]</p>
-
-        <p>Name of business: [webform_submission:values:name_of_business]</p>
-        <p>Contact name: [webform_submission:values:contact_name]</p>
-        <p>Phone: [webform_submission:values:phone]</p>
-        <p>Email: [webform_submission:values:email]</p>
-        <p>Rack location: [webform_submission:values:street_address_rack_location]</p>
-        <p>Number of racks: [webform_submission:values:number_of_racks]</p>
-        <p>Additional information: [webform_submission:values:additional_information]</p>
+      body: "Submitted on [webform_submission:created]\r\n\r\nName of business:\r\n[webform_submission:values:name_of_business]\r\n\r\nContact name:\r\n[webform_submission:values:contact_name]\r\n\r\nPhone:\r\n[webform_submission:values:phone]\r\n\r\nEmail:\r\n[webform_submission:values:email]\r\n\r\nRack location:\r\n[webform_submission:values:street_address_rack_location]\r\n\r\nNumber of racks:\r\n[webform_submission:values:number_of_racks]\r\n\r\nAdditional information:\r\n[webform_submission:values:additional_information]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

@@ -12,130 +12,138 @@ id: webform_991151
 title: 'Hearing Officer Public Comment Form'
 description: null
 categories: {  }
-elements: |
+elements: |-
   fieldset_contact_info:
     '#type': fieldset
     '#open': true
-    '#title': 'Contact Info' 
-    '#description': ""
+    '#title': 'Contact Info'
+    '#description': ''
     first_name_1:
       '#type': textfield
-      '#title': 'First Name' 
-      '#description': ""
+      '#title': 'First Name'
+      '#description': ''
       '#required': true
     last_name_1:
       '#type': textfield
-      '#title': 'Last Name' 
-      '#description': ""
+      '#title': 'Last Name'
+      '#description': ''
       '#required': true
     email_1:
       '#type': email
       '#size': 20
-      '#title': 'Email' 
-      '#description': ""
+      '#title': Email
+      '#description': ''
       '#required': true
     full_name_1:
       '#type': hidden
-      '#title': 'Full Name' 
-      '#description': ""
+      '#title': 'Full Name'
+      '#description': ''
     phone_1:
       '#type': textfield
-      '#title': 'Phone' 
-      '#description': ""
+      '#title': Phone
+      '#description': ''
       '#required': true
     address_1:
       '#type': textfield
-      '#title': 'Address' 
-      '#description': ""
+      '#title': Address
+      '#description': ''
       '#required': true
     city_1:
       '#type': textfield
-      '#title': 'City' 
-      '#description': ""
+      '#title': City
+      '#description': ''
       '#required': true
     state_1:
       '#type': textfield
-      '#title': 'State' 
-      '#description': ""
+      '#title': State
+      '#description': ''
       '#required': true
     zip_1:
       '#type': textfield
-      '#title': 'Zip' 
-      '#description': ""
+      '#title': Zip
+      '#description': ''
       '#required': true
   fieldset_meeting_info:
     '#type': fieldset
     '#open': true
-    '#title': 'Meeting Info' 
-    '#description': ""
+    '#title': 'Meeting Info'
+    '#description': ''
     meeting_date_10:
       '#type': date
-      '#title': 'Meeting Date' 
-      '#description': ""
+      '#title': 'Meeting Date'
+      '#description': ''
     comment_type_10:
       '#type': radios
       '#options':
         agenda_key: 'Agenda Comment'
         nonagenda_key: 'Non-Agenda Comment'
-      '#title': 'Comment Type' 
-      '#description': ""
+      '#title': 'Comment Type'
+      '#description': ''
       '#required': true
     agenda_item_number_10:
       '#type': textfield
-      '#title': 'Agenda Item Number' 
-      '#description': ""
+      '#title': 'Agenda Item Number'
+      '#description': ''
       '#required': true
       '#states':
         visible:
           ':input[name="comment_type_10"]':
             value: agenda_key
-            
     position_10:
       '#type': radios
       '#options':
         oppose: 'In Opposition to Item'
         support: 'In Support of Item'
-      '#title': 'Position' 
-      '#description': ""
+      '#title': Position
+      '#description': ''
       '#required': true
       '#states':
         visible:
           ':input[name="comment_type_10"]':
             value: agenda_key
-            
     i_would_like_to_speak_on_the_item_during_public_testimony_10:
-      '#description': "I would like to speak on the item during public testimony."
+      '#description': ''
       '#type': checkbox
       '#options':
         speak: 'I would like to speak on the item during public testimony.'
       '#multiple': true
       '#title_display': invisible
-      '#title': 'I would like to speak on the item during public testimony' 
-      '#description': ""
+      '#title': 'I would like to speak on the item during public testimony'
       '#states':
         visible:
           ':input[name="comment_type_10"]':
             value: agenda_key
-            
     comment_10:
-      '#title': 'Comments' 
-      '#description': ""
+      '#title': Comments
+      '#description': ''
     supporting_documents_10:
-      '#title': 'Old Method - Not Used Anymore' 
-      '#description': "Files must be less than 10MB each. Allowed file types:  Microsoft Office files, gif, jpeg, jpg, png, pdf."
+      '#title': 'Old Method - Not Used Anymore'
+      '#description': 'Files must be less than 10MB each. Allowed file types:  Microsoft Office files, gif, jpeg, jpg, png, pdf.'
     supporting_documents_multiple_file_10:
       '#type': managed_file
+      '#title': 'Supporting Documents (Limit: 5)'
+      '#multiple': true
+      '#description': 'Files must be less than 10MB each. Allowed file types:  Microsoft Office files, gif, jpeg, jpg, png, pdf.'
+      '#format': custom
+      '#format_html': '{{ item.link }}'
+      '#format_text': '{{ item.url }}?access={{ item.id }}&id={{ uuid }}'
       '#max_filesize': '10'
       '#file_extensions': 'gif jpg jpeg png'
-      '#multiple': true
-      '#title': 'Supporting Documents (Limit: 5)' 
-      '#description': "Files must be less than 10MB each. Allowed file types:  Microsoft Office files, gif, jpeg, jpg, png, pdf."
     upload_disclaimer_10:
       '#type': processed_text
       '#format': full_html
-      '#text': "<h4><strong>Upload Disclaimer</strong></h4>\n\n<p>The following file types are <em><strong>not</strong></em> accepted:</p>\n\n<ul type='disc'>\n	<li>Any video or audio files, including but not limited to, .mpeg, .avi, .mp4, .mp3 or .wav files. You may include a hyperlink within your comment above to a one-minute video hosted on&nbsp;<a href='https://www.youtube.com/' title='https://www.youtube.com/'>YouTube</a>. If your video comment is longer than one minute, only the first minute will be heard;&nbsp;</li>\n	<li>Files protected by intellectual property laws (or by rights of privacy or publicity), unless you are the owner, control their rights or have received all necessary consents; or</li>\n	<li>Files that have viruses, are corrupted or contain malicious software or programs.</li>\n</ul>\n"
-      '#title': 'Upload Disclaimer' 
-      '#description': ""
+      '#text': |
+        <h4><strong>Upload Disclaimer</strong></h4>
+
+        <p>The following file types are <em><strong>not</strong></em> accepted:</p>
+
+        <ul type='disc'>
+        	<li>Any video or audio files, including but not limited to, .mpeg, .avi, .mp4, .mp3 or .wav files. You may include a hyperlink within your comment above to a one-minute video hosted on&nbsp;<a href='https://www.youtube.com/' title='https://www.youtube.com/'>YouTube</a>. If your video comment is longer than one minute, only the first minute will be heard;&nbsp;</li>
+        	<li>Files protected by intellectual property laws (or by rights of privacy or publicity), unless you are the owner, control their rights or have received all necessary consents; or</li>
+        	<li>Files that have viruses, are corrupted or contain malicious software or programs.</li>
+        </ul>
+      '#title': 'Upload Disclaimer'
+      '#description': ''
 css: ''
 javascript: ''
 settings:

@@ -64,7 +64,9 @@ elements: |-
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'
-    '#submit_hide': true
+    '#attributes':
+      class:
+        - visuallyhidden
 css: ''
 javascript: ''
 settings:
@@ -172,7 +174,7 @@ settings:
   confirmation_type: page
   confirmation_url: /council-committees/hcor
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: '<p>Your request has been forwarded to the list administrator.</p>'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -261,7 +263,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: 'burcht@sandiego.gov, NKessler@sandiego.gov, SarahJ@sandiego.gov'
+      to_mail: 'burcht@sandiego.gov, NKessler@sandiego.gov, SarahJ@sandiego.gov, lkosta@sandiego.gov'
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
@@ -274,7 +276,7 @@ handlers:
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: _default
+      subject: 'Select Committee on San Diego Housing Commission Oversight and Reform Committee Sign-up'
       body: "Submitted values are:\r\n[webform_submission:values]\r\n\r\n"
       excluded_elements: {  }
       ignore_access: false

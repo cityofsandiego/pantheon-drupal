@@ -156,22 +156,22 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
-      reply_to: ''
+      from_name: _default
+      reply_to: '[webform_submission:values:email_1:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: default
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\n== NAME OF NOMINEE ==\r\n\r\nTITLE:\r\n[webform_submission:values:title_1]\r\n\r\nFIRST NAME:\r\n[webform_submission:values:first_name_1]\r\n\r\nLAST NAME:\r\n[webform_submission:values:last_name_1]\r\n\r\nORGANIZATION:\r\n[webform_submission:values:organization_1]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_1]\r\n\r\nPHONE NUMBER:\r\n[webform_submission:values:phone_number_1]\r\n\r\n== NAME OF NOMINATOR ==\r\n\r\nTITLE:\r\n[webform_submission:values:title_nominator_8]\r\n\r\nFIRST NAME:\r\n[webform_submission:values:first_name_nominator_8]\r\n\r\nLAST NAME:\r\n[webform_submission:values:last_name_nominator_8]\r\n\r\nEMAIL:\r\n[webform_submission:values:e_mail_nominator_8]\r\n\r\nPHONE NUMBER:\r\n[webform_submission:values:phone_number_nominator_8]\r\n\r\n== REASON OF NOMINATION ==\r\n\r\nREASON:\r\n[webform_submission:values:please_provide_a_short_response_on_the_reason_for_your_nomination_14]\r\n\r\nSEAT:\r\n[webform_submission:values:please_select_the_seat_you_are_nominating_the_candidate_to_fill_14]\r\n\r\n== SUPPORTING DOCUMENTS ==\r\n\r\n[webform_submission:values:please_upload_documents_pertinent_to_the_nomination_16]\r\n\r\n== QUESTIONS ==\r\n\r\n[webform_submission:values:questions]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
       exclude_attachments: false
       html: false
-      attachments: false
+      attachments: true
       twig: false
       theme_name: ''
       parameters: {  }

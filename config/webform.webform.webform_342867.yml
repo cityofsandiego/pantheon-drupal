@@ -86,16 +86,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: default
-      body: |+
-        Thank you for your interest in our program.  The following information has been submitted to our list administrator.
-
-        Submitted on [webform_submission:date:long]
-        Submitted by user: [webform_submission:user]
-        Submitted values are:
-        [webform_submission:values]
-
-
-
+      body: "Thank you for your interest in our program.  The following information has been submitted to our list administrator.\r\n\r\nSubmitted on [webform_submission:created]\r\nSubmitted by user: [webform_submission:user]\r\nSubmitted values are:\r\n[webform_submission:values]\r\n\r\n\r\n\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
@@ -124,20 +115,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:email:raw]'
+      from_mail: _default
       from_options: {  }
-      from_name: default
+      from_name: _default
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: |+
-        Submitted on [webform_submission:date:long]
-        Submitted by user: [webform_submission:user]
-        Submitted values are:
-        [webform_submission:values]
-
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nSubmitted values are:\r\n[webform_submission:values]\r\n\r\n"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
