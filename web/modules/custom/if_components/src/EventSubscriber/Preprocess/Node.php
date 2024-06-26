@@ -559,6 +559,7 @@ final class Node implements EventSubscriberInterface {
                     'value' => $this->entityTypeManager->getViewBuilder('paragraph')->view($paragraph, 'full'),
                   ];
                   break;
+                  
                 case 'sidebar_bottom':
                   $sidebar_bottom[] = [
                     'weight' => $paragraph->field_weight->getValue()[0]['value'],
