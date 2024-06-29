@@ -6,19 +6,25 @@ dependencies:
     - system
 id: construction_contract_total
 label: 'Construction Contract Total'
-code: |-
+code: |
   (function ($) {
-  var awardtotal=0;
-  var awardcount=0;
+      var awardtotal = 0;
+      var awardcount = 0;
 
-  $(".AwardAmount").each(function(){
-  var number = Number($(this).text().replace(/[^0-9\.]+/g,""));
-  awardtotal += number*100;
-  awardcount += 1;
-  });
-  var totalcurrencyformat = "$" + (awardtotal/100).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,")
-  $(".AwardCount").html(awardcount);
-  $(".AwardAmountTotal").html(totalcurrencyformat);
+      // Iterate over each element with the class .AwardAmount
+      $(".AwardAmount").each(function () {
+          var awardAmountText = $(this).text().trim();
+          var number = parseFloat(awardAmountText.replace(/[^0-9\.]+/g, ""));
+          if (!isNaN(number)) {
+              awardtotal += number;
+              awardcount += 1;
+          }
+      });
+
+      var totalcurrencyformat = "$" + awardtotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      
+      $(".AwardCount").html(awardcount);
+      $(".AwardAmountTotal").html(totalcurrencyformat);
   })(jQuery);
 noscript: ''
 noscriptRegion: {  }
