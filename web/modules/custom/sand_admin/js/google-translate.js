@@ -22,7 +22,7 @@
 
         // Check if body has specific classes
         let bodyClasses = document.body.className.split(' ');
-        let changeColor = !['node-type-outreach', 'node-type-outreach2', 'node-type-application'].some(cls => bodyClasses.includes(cls));
+        let changeColor = !['node-type-outreach', 'node-type-outreach2', 'node-type-application', 'theme-insidesd'].some(cls => bodyClasses.includes(cls));
 
         // Create and style new link element
         let newLink = document.createElement('a');
