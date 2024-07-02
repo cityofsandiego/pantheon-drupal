@@ -607,7 +607,7 @@ final class Node implements EventSubscriberInterface {
     if ($node->hasField('field_attachment')) {
       $field_attachment = $node->field_attachment->getValue();
 
-      if (!empty($field_attachment)) {
+      if (!empty($field_attachment) && isset($field_attachment[0]['target_id'])) {
         $attachment = $this->entityTypeManager->getStorage('media')
           ->load( $node->get('field_attachment')->getValue()[0]['target_id']);
         $field_id = $attachment->getSource()->getSourceFieldValue( $attachment);
