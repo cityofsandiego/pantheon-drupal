@@ -1,14 +1,16 @@
 {{ title_prefix }}
+<div class="header">
+  <div class="l-padding-vm">
 {% if department_title is defined %}
     {% if department_title == 'Inside San Diego' %}
       <div class="grid-container l-padding-ts">
-        <div class="grid-x l-margin-tm l-margin-bs l-padding-mobile-hm l-flex-center-v">
+        <div class="grid-x l-padding-mobile-hm l-flex-center-v">
           <div class="cell medium-4 text-center--mobile">
             <h1 class="visuallyhidden">{{ department_title }}</h1>
             <p><a href="/insidesd"><img src="/themes/custom/sand/images/inside-sd-logo.svg" alt="Inside San Diego logo" width="200" height="auto"></a></p>
           </div>
           <div class="cell medium-auto">
-            <p class="main__tagline">News &amp; information from the City&nbsp;of&nbsp;San&nbsp;Diego</p>
+            <p class="main__tagline l-margin-bn">News &amp; information from the City&nbsp;of&nbsp;San&nbsp;Diego</p>
           </div>
         </div>
         {{ drupal_menu('inside-san-diego') }}
@@ -21,43 +23,73 @@
 {% elseif title %}
     <h1{{ title_attributes.addClass('page-title') }}>{{ title }}</h1>
 {% endif %}
-
-{{ title_suffix }}
-
-{% if (topmenu is defined) %}
-  {% if topmenu.items %}
-  <div class="hide-on-mobile top-menu grid-container {{ sliderclass }}">
-    <nav>
-      <ul id="department-top-menu" class="article-menu department-menu">
-        {% set pageurl = path('<current>') %}
-        {% if (topmenu.items.0.url == pageurl|render|render) %}
-          <li class="is_active"><a href="{{ topmenu.items.0.url }}">{{ topmenu.items.0.title }}</a></li>
-        {% else %}
-          <li><a href="{{ topmenu.items.0.url }}">{{ topmenu.items.0.title }}</a></li>
-        {% endif %}
-        {% for item in topmenu.items[1:] %}
-        {% if (item.url in pageurl|render|render) %}
-          <li class="is_active"><a href="{{ item.url }}">{{ item.title }}</a></li>
-        {% else %}
-          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-    </nav>
   </div>
-  <div class="hide-on-desktop sub-navigation-mobile">
-	  <div class="accordions js-toggle-accordion">
-      <div class="accordion">
-        <p class="accordion__heading"><a class="accordion__link" href="#"><i class="icon-menu l-margin-rs"></i> Site Menu  <span class="toggle-icon"> </span></a></p>
-        <div class="accordion__drawer" style="display: none;">
-          <ul id="department-top-menu" class="department-menu">
-            {% for item in topmenu.items %}
-                <li class={{ item.classes[0]}}><a href="{{ item.url }}">{{ item.title }}</a></li>
-            {% endfor %}
-          </ul>
+{{ title_suffix }}
+  <div class="header-second">
+    <div class="tb-megamenu-main">
+    {% if (topmenu is defined) %}
+      {% if topmenu.items %}
+      <div class="top-menu grid-container {{ sliderclass }}">
+        <div class="grid-x white-bg">
+          <div class="cell medium-9">
+            <nav>
+              <ul id="department-top-menu" class="tb-megamenu-nav">
+                <li class="tb-megamenu-item"><a class="dropdown-toggle text-center home-link hide-on-mobile" href="/"><i class="icon-home icon--md"></i></a></li>
+                {% for item in topmenu.items %}
+                  <li class="tb-megamenu-item"><a class="dropdown-toggle text-center hide-on-mobile" href="{{ item.url }}">{{ item.title }}</a></li>
+                {% endfor %}
+                <li class="tb-megamenu-item"><a class="dropdown-toggle text-center hide-on-mobile" href="//sandiego.gov">SanDiego.gov</a></li>
+                <li class="tb-megamenu-item white-bg width-100--mobile"><div id="google_translate_element" class="translate text-center"></div></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="cell medium-3 light-gray-bg hide-on-mobile">
+            <form action="/" method="post" id="sand-search-form" class="form-coll-search l-margin-as">
+              <div class="input-group l-margin-bn">
+                <input type="text" id="search-input" name="keys" value="" size="40" maxlength="128" class="form-text form-required" placeholder="Search this site">
+                <input class="btn form-submit" type="submit" id="edit-submit" name="op" value="Search">
+              </div>
+            </form>
+          </div>
         </div>
       </div>
+      <div class="hidden top-menu grid-container {{ sliderclass }}">
+        <nav>
+          <ul id="department-top-menu" class="article-menu department-menu">
+            {% for item in topmenu.items %}
+            <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </div>
+      <div class="hide-on-desktop sub-navigation-mobile">
+        <div class="l-margin-bd">
+            <form action="/" method="post" id="sand-search-form" class="form-coll-search l-margin-vs">
+              <div class="input-group l-margin-bn">
+                <input type="text" id="search-input" name="keys" value="" size="25" maxlength="128" class="form-text form-required" placeholder="Search this site">
+                <input class="btn form-submit" type="submit" id="edit-submit" name="op" value="Search">
+              </div>
+            </form>
+        </div>
+
+        <div id="google_translate_element" class="translate text-center"></div>
+        <div class="accordions js-toggle-accordion">
+          <div class="accordion">
+            <p class="accordion__heading"><a class="accordion__link" href="#"><i class="icon-menu l-margin-rs"></i> Site Menu  <span class="toggle-icon"> </span></a></p>
+            <div class="accordion__drawer" style="display: none;">
+              <ul id="department-top-menu" class="department-menu">
+                <li class={{ item.classes[0]}}><a href="/">Home</a></li>
+                {% for item in topmenu.items %}
+                    <li class={{ item.classes[0]}}><a href="{{ item.url }}">{{ item.title }}</a></li>
+                {% endfor %}
+                <li class={{ item.classes[0]}}><a href="//sandiego.gov">SanDiego.gov</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    {% endif %}
     </div>
   </div>
-  {% endif %}
-{% endif %}
+</div>

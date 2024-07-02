@@ -1,0 +1,86 @@
+.theme-insidesd {
+  .header {
+    position: relative;
+    z-index: 1;
+  
+    .header-second {
+      background-color: transparent;
+      box-shadow: none;
+
+      @include breakpoint(mobile-landscape down) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    
+      .tb-megamenu-main {
+        background-color: transparent;
+
+        .tb-megamenu-nav {
+          padding: 0;
+        }
+
+        .tb-megamenu-item {
+
+          > a, .translate {
+            &.dropdown-toggle {
+              padding-top: 15px;
+              padding-bottom: 14px;
+            }
+            
+            &:not(.home-link) {
+              padding-top: 18px;
+            }
+          }
+
+          > a:hover, > a:focus {
+            background-color: $riptide;
+          }
+
+          &:first-child::before {
+            width: 0;
+          }
+        }
+
+        .top-menu {
+          box-shadow: 0 4px 3px -3px rgba(0,0,0,.3);
+        }
+      }
+    }
+  }
+
+  #search-input {
+    min-width: 200px;
+    min-height: 30px;
+  }
+
+  article {
+    z-index: 0;
+  }
+
+  .sub-navigation-mobile {
+    padding: 0.5em 2em;
+
+    .accordions {
+      .accordion__heading {
+        background-color: white;
+        color: $spruce;
+        border: 1px solid $spruce;
+  
+        .accordion__link, .accordion__link i {
+          color: $spruce;
+        }
+      }
+
+      .accordion__drawer {
+        background-color: $riptide;
+    
+        .department-menu li a {
+          background-color: $riptide;
+          color: $spruce;
+        }
+      }
+    }
+  }
+}
+
+
