@@ -36,10 +36,15 @@
           <li><a href="{{ topmenu.items.0.url }}">{{ topmenu.items.0.title }}</a></li>
         {% endif %}
         {% for item in topmenu.items[1:] %}
-        {% if (item.url in pageurl|render|render) %}
-          <li class="is_active"><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% if (item.url|raw|slice(0, 4) == "http") %}
+          {% set target = "_blank" %}
         {% else %}
-          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+          {% set target = "_self" %}
+        {% endif %}
+        {% if (item.url in pageurl|render|render) %}
+          <li class="is_active"><a href="{{ item.url|raw }}" target="{{ target }}">{{ item.title }}</a></li>
+        {% else %}
+          <li><a href="{{ item.url|raw }}" target="{{ target }}">{{ item.title }}</a></li>
         {% endif %}
         {% endfor %}
       </ul>
