@@ -1,0 +1,27 @@
+uuid: b869388c-ec1c-4d2a-b663-58fbe3cda0b7
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: vision_zero
+label: 'Vision Zero'
+code: |-
+  jQuery("p#vznav a").each(function () {
+  	if (jQuery(this).attr('href') == location.pathname) {
+  		jQuery(this).css("color","#fed100");
+  		jQuery("a.vz-home").attr('style', 'color: white !important');
+  	}
+  });
+noscript: ''
+noscriptRegion: {  }
+jquery: true
+header: false
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/staging/vision-zero\r\n/staging/vision-zero/*"
+contexts: {  }
+conditions_require_all: true

@@ -2,10 +2,15 @@
     {{ content }}
 {% else %}
     {# This is custom logic for Graphic CTA beans. #}
+    {% if (node.field_action_url.0.uri|raw|slice(0, 4) == "http") %}
+        {% set ctatarget = "_blank" %}
+    {% else %}
+        {% set ctatarget = "_self" %}
+    {% endif %}
     <div class="card card__cta card__cta--graphic entity entity-bean bean-bean-graphic-cta" style="background-image:url({{ file_url(node.field_image.entity.field_media_image.entity.fileuri) }});background-repeat:no-repeat;background-size: cover;">
-        <a href="{{ node.field_action_url.0.uri }}">
+        <a href="{{ node.field_action_url.0.uri }}" target="{{ ctatarget }}">
             <p>{{ node.field_graphic_cta_title.0.value }}</p>
-            <span href="" class="btn btn--secondary">{{ node.field_action_url.0.title }}</span>
+            <span class="btn btn--secondary">{{ node.field_action_url.0.title }}</span>
         </a>
     </div>
 {% endif %}
