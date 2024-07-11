@@ -60,6 +60,16 @@ elements: |-
     '#type': textarea
     '#title': 'Comments:'
     '#required': true
+  file_upload:
+    '#type': webform_document_file
+    '#title': 'File Upload'
+    '#multiple': 5
+    '#format': custom
+    '#format_html': '{{ item.link }}'
+    '#format_text': '{{ item.url }}?access={{ item.id }}&id={{ uuid }}'
+    '#max_filesize': '10'
+    '#file_extensions': 'txt rtf pdf doc docx ppt pptx xls xlsx'
+    '#sanitize': true
 css: ''
 javascript: ''
 settings:

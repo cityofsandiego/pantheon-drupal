@@ -21,7 +21,7 @@ elements: |-
   e_mail_address:
     '#type': textfield
     '#title': 'Email:'
-    '#input_mask': '''alias'': ''email'''
+    '#input_mask': "'alias': 'email'"
   city:
     '#type': textfield
     '#title': 'City:'
@@ -67,6 +67,9 @@ elements: |-
     '#type': webform_document_file
     '#title': 'File Upload'
     '#multiple': 5
+    '#format': custom
+    '#format_html': '{{ item.link }}'
+    '#format_text': '{{ item.url }}?access={{ item.id }}&id={{ uuid }}'
     '#max_filesize': '10'
     '#file_extensions': 'txt rtf pdf doc docx ppt pptx xls xlsx'
     '#sanitize': true
