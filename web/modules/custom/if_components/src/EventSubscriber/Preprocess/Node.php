@@ -550,7 +550,7 @@ final class Node implements EventSubscriberInterface {
           }
           foreach ($context_node->field_block->getValue() as $paragraph_id) {
             $paragraph = Paragraph::load($paragraph_id['target_id']);
-            if (!empty($paragraph->field_region->getValue())) {
+            if (!empty($paragraph->field_region->getValue()) && !empty($paragraph->field_region->getValue()[0]['value'])) {
               switch ($paragraph->field_region->getValue()[0]['value']) {
                 case 'sidebar':
                   $weight_value = isset($paragraph->field_weight->getValue()[0]['value']) ? $paragraph->field_weight->getValue()[0]['value'] : 0;
