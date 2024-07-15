@@ -7,7 +7,7 @@ label: 'Config InsideSD'
 description: 'Config split for insidesd'
 weight: 0
 stackable: false
-no_patching: true
+no_patching: false
 storage: folder
 folder: ../config_insidesd
 module:
@@ -16,22 +16,23 @@ module:
   jsonapi_extras: 0
 theme: {  }
 complete_list:
-  - 'block.block.*'
-  - 'facets.*'
-  - facets.facet_doc_type
-  - 'system.menu.*'
-  - 'ultimate_cron.job.*'
-  - 'views.view.*'
   - core.extension
+  - facets.facet_doc_type
   - jsonapi.settings
   - pathauto.pattern.article
   - search_api.index.content
+  - search_api.index.pantheon_content
   - search_api.index.remote
+  - search_api.server.pantheon_solr8
   - search_api_solr.solr_field_type.text_en_6_0_0
   - search_api_solr.solr_field_type.text_en_7_0_0
   - search_api_solr.solr_field_type.text_phonetic_en_7_0_0
-  - search_api.index.pantheon_content
-  - search_api.server.pantheon_solr8
+  - 'block.block.*'
+  - 'facets.*'
+  - 'system.menu.*'
+  - 'ultimate_cron.job.*'
+  - 'views.view.*'
 partial_list:
   - system.site
   - system.theme
+  - user.role.administrator
