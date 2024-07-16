@@ -106,6 +106,9 @@ elements: |-
       additional_recipients:
         '#type': webform_document_file
         '#title': 'Additional Recipients'
+        '#format': custom
+        '#format_html': '{{ item.link }}'
+        '#format_text': '{{ item.url }}?access={{ item.id }}&id={{ uuid }}'
         '#max_filesize': '20'
         '#file_extensions': 'txt rtf pdf doc docx'
       date_certificate_16:
