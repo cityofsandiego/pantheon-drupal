@@ -85,13 +85,8 @@
 {{ content.content_moderation_control }}
 </div>
 <article {{ attributes.addClass(classes) }}>
-  {% if node.title.value == "Inside San Diego Home" %}
-  <div class="white-bg">
-    <div {{ content_attributes.addClass('node__content grid-container main-grid-container') }}>
-  {% else %}
   <div class="grid-container main-grid-container white-bg l-padding-hn">
     <div {{ content_attributes.addClass('node__content') }}>
-  {% endif %}
       <div class="grid-x">
         <div class="cell small-12 medium-auto content l-padding-mobile-tn">
           {% if node.title.value != "Inside San Diego Home"%}
@@ -139,30 +134,28 @@
           {% endif %}
         </div>
         {% if node.title.value != "Inside San Diego Home" %}
-        <div class="cell medium-3 sidebar light-gray-bg l-padding-vm l-padding-desktop-hm l-padding-mobile-hm">
+        <div class="cell medium-3 sidebar light-gray-bg l-padding-am">
             <div class="l-padding-bm">
               {{ content.field_sidebar }}
 
               {{ drupal_entity('block', 'viewsexposedfilterblock', check_access=false) }}
-
-              <h5>Filter by Category</h5>
-              <div>
-                    {{ drupal_view('article_category_list', 'categories') }}
+              {% for item in sidebar %}
+              <div class="l-margin-bd">
+                {{ item.value }}
               </div>
-              <div class="accordions js-toggle-accordion hidden">
-                <div class="accordion">
-                  <p class="accordion__heading h4"><a class="accordion__link" href="#"><strong>Categories</strong><i class="toggle-icon"></i></a></p>
+              {% endfor %}
+              <div class="accordions js-toggle-accordion">
+                <div class="accordion rounded-corners overflow-h">
+                  <p class="accordion__heading h5 white-bg"><a class="accordion__link" href="#">Filter by Category<i class="toggle-icon"></i></a></p>
                   <div class="accordion__drawer" style="display: none;">
                     {{ drupal_view('article_category_list', 'categories') }}
                   </div>
                 </div>
-                <div class="accordion">
-                  <p class="accordion__heading h4"><a class="accordion__link" href="#"><strong>Archives</strong><i class="toggle-icon"></i></a></p>
-                  <div class="accordion__drawer" style="display: none;">
-                    {{ drupal_view('article_archives_list', 'block') }}
-                  </div>
-                </div>
-              </div>    
+              </div>
+              <div class="l-margin-td background-white rounded-corners l-padding-ad">
+                <h2 class="heading--center heading--snug" style="font-size: 1rem !important">Share this Article</h2>
+                <div class="sharethis-inline-share-buttons"></div>
+              </div>
             </div>
         </div>
         {% endif %}
