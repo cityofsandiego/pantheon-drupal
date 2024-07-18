@@ -3170,6 +3170,19 @@ screen and (min-width:30em) {
   background: linear,to bottom,#fff 0,#d4d4d4 100%;
   z-index: 1
 }
+@media print,
+screen and (max-width:37.49875em) {
+  .header .header-second .tb-megamenu-main .tb-megamenu-nav .tb-megamenu-item:before,
+  .header .header-second .tb-megamenu-main .tb-megamenu-nav .tbm-item:before,
+  .header .header-second .tb-megamenu-main .tbm-nav .tb-megamenu-item:before,
+  .header .header-second .tb-megamenu-main .tbm-nav .tbm-item:before,
+  .header .header-second .tbm-main .tb-megamenu-nav .tb-megamenu-item:before,
+  .header .header-second .tbm-main .tb-megamenu-nav .tbm-item:before,
+  .header .header-second .tbm-main .tbm-nav .tb-megamenu-item:before,
+  .header .header-second .tbm-main .tbm-nav .tbm-item:before {
+    width: 0
+  }
+}
 .header .header-second .tbm ul.mega-nav > li {
   margin: 5px 0!important;
   background-color: transparent
@@ -4318,13 +4331,31 @@ screen and (max-width:37.49875em) {
 }
 .theme-insidesd .header .header-second .tb-megamenu-main .tb-megamenu-item > a:focus,
 .theme-insidesd .header .header-second .tb-megamenu-main .tb-megamenu-item > a:hover {
-  background-color: #80e0d3
+  background-color: #ffb762
 }
 .theme-insidesd .header .header-second .tb-megamenu-main .tb-megamenu-item:first-child::before {
   width: 0
 }
 .theme-insidesd .header .header-second .tb-megamenu-main .top-menu {
-  box-shadow: 0 4px 3px -3px rgba(0,0,0,.3)
+  box-shadow: 0 4px 3px -3px rgba(0,0,0,.3);
+  border-radius: 30px;
+  overflow: hidden
+}
+@media print,
+screen and (max-width:37.49875em) {
+  .theme-insidesd .header .header-second .tb-megamenu-main .top-menu {
+    border-radius: 0
+  }
+}
+.theme-insidesd .form-coll-search {
+  border-radius: 4px 30px 30px 4px
+}
+.theme-insidesd .form-coll-search .input-group {
+  border-radius: 4px 30px 30px 4px
+}
+.theme-insidesd .form-coll-search .input-group input.form-submit {
+  border-radius: 0 30px 30px 0;
+  width: 15%
 }
 .theme-insidesd #search-input {
   min-width: 200px;
@@ -4990,7 +5021,8 @@ screen and (min-width:30em) {
 .view-id-articles.view-display-id-block_1 .view-content,
 .view-id-articles.view-display-id-block_2 .view-content,
 .view-id-articles.view-display-id-block_3 .view-content,
-.view-id-articles.view-display-id-mayors_desk .view-content {
+.view-id-articles.view-display-id-mayors_desk .view-content,
+.view-id-articles.view-display-id-videos .view-content {
   display: flex;
   flex-direction: column;
   margin-left: -2rem;
@@ -4999,34 +5031,39 @@ screen and (min-width:30em) {
 .view-id-articles.view-display-id-block_1 .view-content .field-content,
 .view-id-articles.view-display-id-block_2 .view-content .field-content,
 .view-id-articles.view-display-id-block_3 .view-content .field-content,
-.view-id-articles.view-display-id-mayors_desk .view-content .field-content {
+.view-id-articles.view-display-id-mayors_desk .view-content .field-content,
+.view-id-articles.view-display-id-videos .view-content .field-content {
   padding: 0 24px;
   display: block
 }
 .view-id-articles.view-display-id-block_1 .view-content .field-content h3 a,
 .view-id-articles.view-display-id-block_2 .view-content .field-content h3 a,
 .view-id-articles.view-display-id-block_3 .view-content .field-content h3 a,
-.view-id-articles.view-display-id-mayors_desk .view-content .field-content h3 a {
+.view-id-articles.view-display-id-mayors_desk .view-content .field-content h3 a,
+.view-id-articles.view-display-id-videos .view-content .field-content h3 a {
   color: #37424a;
   text-decoration: none
 }
 .view-id-articles.view-display-id-block_1 .odd,
 .view-id-articles.view-display-id-block_2 .odd,
 .view-id-articles.view-display-id-block_3 .odd,
-.view-id-articles.view-display-id-mayors_desk .odd {
+.view-id-articles.view-display-id-mayors_desk .odd,
+.view-id-articles.view-display-id-videos .odd {
   background-color: #f6f6f6
 }
 .view-id-articles.view-display-id-block_1 h3 a,
 .view-id-articles.view-display-id-block_2 h3 a,
 .view-id-articles.view-display-id-block_3 h3 a,
-.view-id-articles.view-display-id-mayors_desk h3 a {
+.view-id-articles.view-display-id-mayors_desk h3 a,
+.view-id-articles.view-display-id-videos h3 a {
   color: #37424a;
   text-decoration: none
 }
 .view-id-articles.view-display-id-block_1 .pager,
 .view-id-articles.view-display-id-block_2 .pager,
 .view-id-articles.view-display-id-block_3 .pager,
-.view-id-articles.view-display-id-mayors_desk .pager {
+.view-id-articles.view-display-id-mayors_desk .pager,
+.view-id-articles.view-display-id-videos .pager {
   margin: 0
 }
 .view-id-boards_and_commissions .row.hide-on-desktop {
