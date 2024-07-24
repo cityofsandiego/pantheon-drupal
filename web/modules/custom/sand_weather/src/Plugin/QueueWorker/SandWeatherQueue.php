@@ -284,14 +284,26 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
    * @return static
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $entity_type_manager = $container->get('entity_type.manager');
+    $database = $container->get('database');
+
+    if (!$entity_type_manager) {
+      \Drupal::logger('sand_weather')->error('EntityTypeManager service not found');
+    }
+    if (!$database) {
+      \Drupal::logger('sand_weather')->error('Database service not found');
+    }
+
     return new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('entity_type.manager'),
-      $container->get('database')
+      $entity_type_manager,
+      $database
     );
   }
+
+
 
   /**
    * Processes an item in the queue.
@@ -303,6 +315,8 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
    */
   public function processItem($data) {
     // Processing of queue items.
+    \Drupal::logger('sand_weather')->error('Just entered processItem method.');
+
     $this->refreshWeather();
   }
 
@@ -313,6 +327,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
     $config = \Drupal::config('sand_weather.settings');
     $url = $config->get('weather_url');
     $enable_logging = $config->get('enable_logging');
+    \Drupal::logger('sand_weather')->error('Just entered refreshWeather method. Logging enabled: {message}', ['message' => $enable_logging]);
 
     try {
       $client = \Drupal::httpClient();
@@ -366,7 +381,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
       }
     }
   }
-  
+
   /**
    * Set a weather icon name based on the text of the weather retrieved.
    *
