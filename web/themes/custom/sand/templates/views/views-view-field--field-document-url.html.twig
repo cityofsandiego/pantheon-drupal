@@ -19,4 +19,4 @@
  */
 #}
 
-<cite>{{ output| preg_replace('#^.*//(.*?)/(.*)/(.*)#', '$1/.../$3') }}</cite>
+<cite>{{ output | striptags | preg_replace('#^.*//(.*?)/(.*)/(.*)#', '$1/.../$3') }}</cite>
