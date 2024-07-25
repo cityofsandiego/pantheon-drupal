@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\sand_weather\Plugin\QueueWorker;
 
 use Drupal\Core\Annotation\QueueWorker;
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -284,7 +285,9 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
    * @return static
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
     $entity_type_manager = $container->get('entity_type.manager');
+    /** @var \Drupal\Core\Database\Connection $database */
     $database = $container->get('database');
 
     if (!$entity_type_manager) {
@@ -316,8 +319,8 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
   public function processItem($data) {
     // Processing of queue items.
     \Drupal::logger('sand_weather')->error('Just entered processItem method.');
-
     $this->refreshWeather();
+    \Drupal::logger('sand_weather')->error('Just ending processItem method.');
   }
 
   /**
@@ -328,6 +331,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
     $url = $config->get('weather_url');
     $enable_logging = $config->get('enable_logging');
     \Drupal::logger('sand_weather')->error('Just entered refreshWeather method. Logging enabled: {message}', ['message' => $enable_logging]);
+    $weather_temp_old = \Drupal::state()->get('sand_weather.temp');
 
     try {
       $client = \Drupal::httpClient();
@@ -368,8 +372,10 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
           \Drupal::logger('sand_weather')->info('Updated state variables.');
         }
 
-        // Clear the cache tags
-        \Drupal::cache('render')->invalidateTags(['sand_weather']);
+        // Clear the cache tags if the temp has changed. This tag is used in the block render array.
+        if ($weather_temp !== $weather_temp_old) {
+          Cache::invalidateTags(['sand_weather']);
+        }
       } else {
         if ($enable_logging) {
           \Drupal::logger('sand_weather')->error('Failed to fetch weather data. Status code: {status}', ['status' => $response->getStatusCode()]);
