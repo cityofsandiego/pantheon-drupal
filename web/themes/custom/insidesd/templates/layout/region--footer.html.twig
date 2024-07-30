@@ -24,14 +24,13 @@
     'alto-bg',
   ]
 %}
-
+{% set cryears = "now"|date("Y") == "2024" ? "2024" : "2024-"~"now"|date("Y") %}
 {% if content %}
   <div{{ attributes.addClass(classes) }}>
     <div class="region--{{ region }}__inner">
       {{ content }}
       <p class="copyright text-center l-margin-tm">
-        Copyrighted © 2002-{{ "now"|date("Y") }}<br>
-        City of San Diego. All rights reserved.
+        Copyrighted © {{ cryears }}. City of San Diego. All rights reserved.
       </p>
     </div>
 
