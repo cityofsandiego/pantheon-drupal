@@ -7,21 +7,19 @@ label: 'Config Sandgov'
 description: 'Split for Sandgov'
 weight: 0
 stackable: false
-no_patching: true
+no_patching: false
 storage: folder
 folder: ../config_sandgov
 module:
-  entity_share: 0
-  entity_share_server: 0
-  jsonapi_extras: 0
+  basic_auth: 0
+  if_sand_customphp: 0
   protected_pages: 0
+  sand_feeds: 0
 theme: {  }
 complete_list:
   - asset_injector.js.monsido
-  - core.extension
   - facets.facet_doc_type
   - pathauto.pattern.article
-  - protected_pages.settings
   - rest.resource.entity.node
   - search_api.index.content
   - search_api.index.remote
@@ -35,5 +33,4 @@ complete_list:
   - 'system.menu.*'
   - 'ultimate_cron.job.*'
   - 'views.view.*'
-partial_list:
-  - user.role.administrator
+partial_list: {  }
