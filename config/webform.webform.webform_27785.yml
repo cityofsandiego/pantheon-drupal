@@ -29,11 +29,13 @@ elements: |-
   email:
     '#type': textfield
     '#title': Email
-    '#input_mask': '''alias'': ''email'''
+    '#input_mask': "'alias': 'email'"
     '#required': true
   subject:
     '#type': select
+    '#title': Subject
     '#options':
+      permits: Permits
       balboa_park: 'Balboa Park'
       mission_bay_park: 'Mission Bay Park'
       beaches: Beaches
@@ -41,13 +43,10 @@ elements: |-
       park_maintenance: 'Park Maintenance'
       park_project: 'Park Project'
       pools: Pools
-      permits: Permits
       golf_courses: 'Golf Courses'
       volunteer_internships: Volunteer/Internships
       general: General
       brush_management: 'Brush Management'
-    '#title': Subject
-    '#description': ''
     '#required': true
   message:
     '#type': textarea
@@ -211,7 +210,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: askparks@sandiego.gov
+      to_mail: prpermitcenter@sandiego.gov
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
@@ -251,8 +250,11 @@ handlers:
       to_mail: '[webform_submission:values:subject:raw]'
       to_options:
         -
+          value: permits
+          text: MFedalizo@sandiego.gov
+        -
           value: balboa_park
-          text: vnava@sandiego.gov
+          text: tcanales@sandiego.gov
         -
           value: mission_bay_park
           text: mrodrigues@sandiego.gov
@@ -262,9 +264,6 @@ handlers:
         -
           value: pools
           text: nmcneil@sandiego.gov
-        -
-          value: permits
-          text: MFedalizo@sandiego.gov
         -
           value: golf_courses
           text: JBHoward@sandiego.gov
