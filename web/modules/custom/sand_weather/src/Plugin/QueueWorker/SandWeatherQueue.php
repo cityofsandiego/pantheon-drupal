@@ -345,7 +345,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
                 $data = json_decode($body, true);
 
                 // Extract the weather data from the JSON response
-                $weather_temp = $data['main']['temp'];
+                $weather_temp = round($data['main']['temp']);
                 $weather_text = $data['weather'][0]['description'];
 
                 // Get the correct weather icon based on the text
