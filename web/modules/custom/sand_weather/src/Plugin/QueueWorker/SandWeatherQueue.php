@@ -335,7 +335,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
         $config = \Drupal::config('sand_weather.settings');
         $url = $config->get('weather_url');
         $api_key = $config->get('weather_api_key');
-        $api_url = "https://api.openweathermap.org/data/2.5/weather?lat=32.7157&lon=-117.1611&appid={$api_key}&units=imperial";
+        $api_url = "https://api.openweathermap.org/data/2.5/weather?lat=32.73361&lon=-117.18306&appid={$api_key}&units=imperial";
         $enable_logging = $config->get('enable_logging');
         \Drupal::logger('sand_weather')->info('Just entered refreshWeather method. Logging enabled: {message}', ['message' => $enable_logging]);
         $weather_temp_old = \Drupal::state()->get('sand_weather.temp');
