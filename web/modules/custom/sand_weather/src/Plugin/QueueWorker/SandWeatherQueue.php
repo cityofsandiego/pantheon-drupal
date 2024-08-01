@@ -285,7 +285,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
      *
      * @return static
      */
-    public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition)
+    public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static
     {
         /** @var EntityTypeManagerInterface $entity_type_manager */
         $entity_type_manager = $container->get('entity_type.manager');
@@ -317,7 +317,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
      *
      * @throws \Exception
      */
-    public function processItem($data)
+    public function processItem($data): void
     {
         $this->refreshWeather();
     }
@@ -449,7 +449,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
         $words = explode(' ', $val_lower);
         if (count($words) > 1) {
             $last_word = end($words);
-            $matches = [];
+            $matches = [];  // Existing array emptied on purpose.
 
             foreach ($icon_mappings as $icon => $descriptions) {
                 $count = 0;
