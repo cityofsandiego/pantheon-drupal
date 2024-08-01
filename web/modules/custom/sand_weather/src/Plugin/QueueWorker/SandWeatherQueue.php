@@ -331,17 +331,37 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
         $url = $config->get('weather_url');
         $api_key = $config->get('weather_api_key');
         $enable_logging = $config->get('enable_logging');
+
         if ($enable_logging) {
             \Drupal::logger('sand_weather')->info('Just entered refreshWeather method.');
         }
-        $weather_temp_old = \Drupal::state()->get('sand_weather.temp');
 
+        // Check if the API key is empty
         if (empty($api_key)) {
             if ($enable_logging) {
                 \Drupal::logger('sand_weather')->error('Weather API key is missing.');
             }
             return;
         }
+
+        // Get the current time and the last run time
+        $current_time = \Drupal::time()->getCurrentTime();
+        $last_run_time = \Drupal::state()->get('sand_weather.last_run_time', 0);
+
+        // Check if the function was run less than 4 minutes ago
+        if (($current_time - $last_run_time) < 240) {
+            if ($enable_logging) {
+                \Drupal::logger('sand_weather')->info('refreshWeather() was called but skipped because it was run less than 4 minutes ago.');
+            }
+            return;
+        }
+
+        // Update the last run time
+        \Drupal::state()->set('sand_weather.last_run_time', $current_time);
+
+        // Store the old temperature for comparison
+        $weather_temp_old = \Drupal::state()->get('sand_weather.temp');
+
         $api_url = "https://api.openweathermap.org/data/2.5/weather?lat=32.73361&lon=-117.18306&appid={$api_key}&units=imperial";
 
         try {
