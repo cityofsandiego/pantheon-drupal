@@ -12,8 +12,6 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DomCrawler\Crawler;
-
 
 const ICON_SNOW2 = [
     'Freezing Rain Snow',
@@ -241,14 +239,14 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
     /**
      * The entity type manager.
      *
-     * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+     * @var EntityTypeManagerInterface
      */
     protected EntityTypeManagerInterface $entityTypeManager;
 
     /**
      * The database connection.
      *
-     * @var \Drupal\Core\Database\Connection
+     * @var Connection
      */
     protected Connection $database;
 
@@ -261,9 +259,9 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
      *   The plugin id.
      * @param mixed $plugin_definition
      *   The plugin definition.
-     * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+     * @param EntityTypeManagerInterface $entity_type_manager
      *   The entity type manager.
-     * @param \Drupal\Core\Database\Connection $database
+     * @param Connection $database
      *   The connection to the database.
      */
     public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, Connection $database)
@@ -276,7 +274,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
     /**
      * Used to grab functionality from the container.
      *
-     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+     * @param ContainerInterface $container
      *   The container.
      * @param array $configuration
      *   Configuration array.
@@ -289,9 +287,9 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
      */
     public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition)
     {
-        /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
+        /** @var EntityTypeManagerInterface $entity_type_manager */
         $entity_type_manager = $container->get('entity_type.manager');
-        /** @var \Drupal\Core\Database\Connection $database */
+        /** @var Connection $database */
         $database = $container->get('database');
 
         if (!$entity_type_manager) {
@@ -321,10 +319,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
      */
     public function processItem($data)
     {
-        // Processing of queue items.
-        \Drupal::logger('sand_weather')->error('Just entered processItem method.');
         $this->refreshWeather();
-        \Drupal::logger('sand_weather')->error('Just ending processItem method.');
     }
 
     /**
@@ -335,10 +330,19 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
         $config = \Drupal::config('sand_weather.settings');
         $url = $config->get('weather_url');
         $api_key = $config->get('weather_api_key');
-        $api_url = "https://api.openweathermap.org/data/2.5/weather?lat=32.73361&lon=-117.18306&appid={$api_key}&units=imperial";
         $enable_logging = $config->get('enable_logging');
-        \Drupal::logger('sand_weather')->info('Just entered refreshWeather method. Logging enabled: {message}', ['message' => $enable_logging]);
+        if ($enable_logging) {
+            \Drupal::logger('sand_weather')->info('Just entered refreshWeather method.');
+        }
         $weather_temp_old = \Drupal::state()->get('sand_weather.temp');
+
+        if (empty($api_key)) {
+            if ($enable_logging) {
+                \Drupal::logger('sand_weather')->error('Weather API key is missing.');
+            }
+            return;
+        }
+        $api_url = "https://api.openweathermap.org/data/2.5/weather?lat=32.73361&lon=-117.18306&appid={$api_key}&units=imperial";
 
         try {
             $client = \Drupal::httpClient();
@@ -370,14 +374,12 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
                 \Drupal::state()->set('sand_weather.text', $weather_text);
                 \Drupal::state()->set('sand_weather.wurl', (string)$url);
 
-                // Log the updated state if logging is enabled
-                if ($enable_logging) {
-                    \Drupal::logger('sand_weather')->info('Updated state variables.');
-                }
-
                 // Clear the cache tags if the temp has changed. This tag is used in the block render array.
                 if ($weather_temp !== $weather_temp_old) {
                     Cache::invalidateTags(['sand_weather']);
+                    if ($enable_logging) {
+                        \Drupal::logger('sand_weather')->info('Clear sand_weather block cache because temp changed.');
+                    }
                 }
             } else {
                 if ($enable_logging) {
@@ -385,13 +387,9 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
                 }
             }
         } catch (\Exception $exception) {
-            if ($enable_logging) {
-                \Drupal::logger('sand_weather')->error('Exception during weather update: {message}', ['message' => $exception->getMessage()]);
-            }
-        } catch (GuzzleException $e) {
-            if ($enable_logging) {
-                \Drupal::logger('sand_weather')->error('GuzzleException during weather update: {message}', ['message' => $e->getMessage()]);
-            }
+            \Drupal::logger('sand_weather')->error('Exception during weather update: {message}', ['message' => $exception->getMessage()]);
+        } catch (GuzzleException $exception) {
+            \Drupal::logger('sand_weather')->error('GuzzleException during weather update: {message}', ['message' => $exception->getMessage()]);
         }
     }
 
@@ -475,7 +473,7 @@ class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPlugin
 
         // Log an error if no match found.
         \Drupal::logger('sand_weather')
-            ->error('Weather type: %val not found from weather.gov', ['%val' => $val]);
+            ->error('Weather type: %val not found.', ['%val' => $val]);
 
         return '';
     }

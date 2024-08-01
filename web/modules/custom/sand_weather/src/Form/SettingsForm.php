@@ -59,7 +59,7 @@ class SettingsForm extends ConfigFormBase
     /**
      * {@inheritdoc}
      */
-    public function submitForm(array &$form, FormStateInterface $form_state)
+    public function submitForm(array &$form, FormStateInterface $form_state): void
     {
         $this->config('sand_weather.settings')
             ->set('weather_url', $form_state->getValue('weather_url'))
