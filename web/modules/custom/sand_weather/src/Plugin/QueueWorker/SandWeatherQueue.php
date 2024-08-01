@@ -232,7 +232,7 @@ const ICON_CLOUD = [
  * @QueueWorker(
  *   id = "sand_weather_queue",
  *   title = @Translation("Sand Weather Queue"),
- *   cron = {"time" = 60}
+ *   cron = {"time" = 300}
  * )
  */
 class SandWeatherQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface
