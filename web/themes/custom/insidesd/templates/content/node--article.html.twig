@@ -80,6 +80,7 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class
   ]
 %}
+
 <div class="grid-container">
 {{ content.content_moderation_control }}
 </div>
@@ -143,6 +144,7 @@
                 {{ item.value }}
               </div>
               {% endfor %}
+              {% if content.field_article_type.0["#markup"] == "Article List" %}
               <div class="accordions js-toggle-accordion">
                 <div class="accordion rounded-corners overflow-h">
                   <p class="accordion__heading h5 white-bg"><a class="accordion__link" href="#">Filter by Category<i class="toggle-icon"></i></a></p>
@@ -151,6 +153,7 @@
                   </div>
                 </div>
               </div>
+              {% endif %}
               <div class="l-margin-td background-white rounded-corners l-padding-ad">
                 <h2 class="heading--center heading--snug" style="font-size: 1rem !important">Share this Page</h2>
                 <div class="sharethis-inline-share-buttons"></div>
