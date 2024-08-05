@@ -1,0 +1,24 @@
+uuid: f524daf9-9a64-40c9-a2b0-b9f2c683d7cc
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: insidesd_home_page
+label: 'InsideSD Home Page'
+code: |-
+  jQuery(function() {
+  	jQuery("#views-exposed-form-inside-san-diego-home-by-category select.form-select").val('11').change();
+  });
+noscript: ''
+noscriptRegion: {  }
+jquery: false
+header: false
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
+contexts: {  }
+conditions_require_all: true
