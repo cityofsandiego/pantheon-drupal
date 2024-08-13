@@ -3607,6 +3607,7 @@ screen and (min-width:30em) {
   left: 0;
   border-radius: 2px;
   background: #37424a;
+  max-width: none;
   font-size: 14px;
   font-size: .875rem
 }
@@ -3619,14 +3620,14 @@ screen and (min-width:30em) {
 .tooltip--widest {
   width: 600px
 }
-.tooltip--bottom {
+.tooltip--bottom,
+.tooltip-bottom {
   top: 150%;
   left: 50%;
-  transform: translateX(-50%);
-  transform: translateX(-50%);
   transform: translateX(-50%)
 }
-.tooltip--bottom::before {
+.tooltip--bottom::before,
+.tooltip-bottom::before {
   content: "";
   width: 0;
   height: 0;
@@ -3635,21 +3636,19 @@ screen and (min-width:30em) {
   top: -8px;
   left: 50%;
   transform: translateX(-50%);
-  transform: translateX(-50%);
-  transform: translateX(-50%);
   border-width: 0 9px 8px;
   border-color: transparent transparent #37424a transparent
 }
 .tooltip--left,
-.tooltip--right {
+.tooltip--right,
+.tooltip-right {
   top: 50%;
   left: 150%;
-  transform: translateY(-50%);
-  transform: translateY(-50%);
   transform: translateY(-50%)
 }
 .tooltip--left::before,
-.tooltip--right::before {
+.tooltip--right::before,
+.tooltip-right::before {
   content: "";
   width: 0;
   height: 0;
@@ -3659,9 +3658,23 @@ screen and (min-width:30em) {
   top: 50%;
   border-width: 9px 8px 9px 0;
   transform: translateY(-50%);
-  transform: translateY(-50%);
-  transform: translateY(-50%);
   border-color: transparent #37424a transparent transparent
+}
+.tooltip-left {
+  top: 50%;
+  transform: translateY(-50%)
+}
+.tooltip-left::before {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-style: solid;
+  right: -8px;
+  top: 50%;
+  border-width: 9px 0 9px 8px;
+  transform: translateY(-50%);
+  border-color: transparent transparent transparent #37424a
 }
 ol.Indent1,
 p.Indent1,

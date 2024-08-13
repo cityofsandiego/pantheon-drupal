@@ -25,6 +25,7 @@
   left: 0;
   border-radius: 2px;
   background: $spruce;
+  max-width: none;
 
   @include rem("font-size", 14px);
 }
@@ -41,11 +42,9 @@
   width: 600px;
 }
 
-.tooltip--bottom {
+.tooltip-bottom, .tooltip--bottom {
   top: 150%;
   left: 50%;
-  transform: translateX(-50%);
-  transform: translateX(-50%);
   transform: translateX(-50%);
 
   &::before {
@@ -57,19 +56,16 @@
     top: -8px;
     left: 50%;
     transform: translateX(-50%);
-    transform: translateX(-50%);
-    transform: translateX(-50%);
     border-width: 0 9px 8px;
     border-color: transparent transparent $spruce transparent;
   }
 }
 
+.tooltip-right,
 .tooltip--right,
-.tooltip--left { //Should be right, not left. Left stays in case it's being referenced somewhere
+.tooltip--left { // From old pattern library. Should be right, not left. Left stays in case it's being referenced somewhere
   top: 50%;
   left: 150%;
-  transform: translateY(-50%);
-  transform: translateY(-50%);
   transform: translateY(-50%);
 
   &::before {
@@ -82,8 +78,24 @@
     top: 50%;
     border-width: 9px 8px 9px 0;
     transform: translateY(-50%);
-    transform: translateY(-50%);
-    transform: translateY(-50%);
     border-color: transparent $spruce transparent transparent;
+  }
+}
+
+.tooltip-left {
+  top: 50%;
+  transform: translateY(-50%);
+
+  &::before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-style: solid;
+    right: -8px;
+    top: 50%;
+    border-width: 9px 0 9px 8px;
+    transform: translateY(-50%);
+    border-color: transparent transparent transparent #37424a;
   }
 }
