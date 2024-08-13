@@ -1,0 +1,49 @@
+uuid: f41e5a52-9df7-4899-a33d-d368b3fe97fb
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: transportation_assets
+label: 'Transportation Assets'
+code: |-
+  .tooltip__wrap strong {
+  	display: block;
+  	width: 32px;
+  	height: 32px;
+  	background-color: #37424a;
+  	color: white;
+  	border-radius: 50%;
+  	text-align: center;
+  }
+
+  .tooltip {
+  	max-width:none;
+  }
+
+  .tooltip-left {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .tooltip-left:before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-style: solid;
+    right: -8px;
+    top: 50%;
+    border-width: 9px 0 9px 8px;
+    transform: translateY(-50%);
+    border-color: transparent transparent transparent #37424a;
+  }
+media: all
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/node/302493/latest\r\n/staging/transportation/about\r\n/transportation/about..t"
+contexts: {  }
+conditions_require_all: true
