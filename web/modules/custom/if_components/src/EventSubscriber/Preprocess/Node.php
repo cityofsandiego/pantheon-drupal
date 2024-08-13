@@ -551,9 +551,9 @@ final class Node implements EventSubscriberInterface {
           foreach ($context_node->field_block->getValue() as $paragraph_id) {
             $paragraph = Paragraph::load($paragraph_id['target_id']);
             if (!empty($paragraph->field_region->getValue()) && !empty($paragraph->field_region->getValue()[0]['value'])) {
+              $weight_value = isset($paragraph->field_weight->getValue()[0]['value']) ? $paragraph->field_weight->getValue()[0]['value'] : 0;
               switch ($paragraph->field_region->getValue()[0]['value']) {
                 case 'sidebar':
-                  $weight_value = isset($paragraph->field_weight->getValue()[0]['value']) ? $paragraph->field_weight->getValue()[0]['value'] : 0;
                   $sidebar[] = [
                     'weight' => $weight_value,
                     'value' => $this->entityTypeManager->getViewBuilder('paragraph')->view($paragraph, 'full'),
@@ -562,7 +562,7 @@ final class Node implements EventSubscriberInterface {
                   
                 case 'sidebar_bottom':
                   $sidebar_bottom[] = [
-                    'weight' => $paragraph->field_weight->getValue()[0]['value'],
+                    'weight' => $weight_value,
                     'value' => $this->entityTypeManager->getViewBuilder('paragraph')
                       ->view($paragraph, 'full'),
                   ];
