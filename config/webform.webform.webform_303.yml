@@ -28,6 +28,65 @@ elements: |-
       '#title': 'Closest Cross Street:'
       '#description': ''
       '#required': true
+    request_for:
+      '#type': select
+      '#title': 'Request for:'
+      '#options':
+        'Curb paint': 'Curb paint'
+        'Traffic signal': 'Traffic signal'
+        Signage: Signage
+        'Pavement markings and striping': 'Pavement markings and striping'
+        Sidewalk: Sidewalk
+        'Bicycle facilities': 'Bicycle facilities'
+        Guardrails: Guardrails
+        'Traffic calming': 'Traffic calming'
+        Streetlights: Streetlights
+        Other: Other
+      '#required': true
+    curb_paint_type:
+      '#type': select
+      '#title': 'Curb paint type:'
+      '#description_display': after
+      '#options':
+        Red: Red
+        'Red - Driveway Clearance': 'Red - Driveway Clearance (requires a fee if approved)'
+        Yellow: 'Yellow (requires a fee if approved)'
+        White: 'White (requires a fee if approved)'
+        Green: 'Green (requires a fee if approved)'
+        Blue: 'Blue (requires a fee if approved)'
+      '#states':
+        visible:
+          ':input[name="request_for"]':
+            value: 'Curb paint'
+        required:
+          ':input[name="request_for"]':
+            value: 'Curb paint'
+    bicycle_facilities_type:
+      '#type': select
+      '#title': 'Bicycle facilities type:'
+      '#options':
+        'Bicycle lane(s)': 'Bicycle lane(s)'
+        'Bicycle rack(s)': 'Bicycle rack(s)'
+      '#states':
+        visible:
+          ':input[name="request_for"]':
+            value: 'Bicycle facilities'
+        required:
+          ':input[name="request_for"]':
+            value: 'Bicycle facilities'
+    streetlights_type:
+      '#type': select
+      '#title': 'Streetlights type:'
+      '#options':
+        'New streetlight(s)': 'New streetlight(s)'
+        'Streetlight shield': 'Streetlight shield'
+      '#states':
+        visible:
+          ':input[name="request_for"]':
+            value: Streetlights
+        required:
+          ':input[name="request_for"]':
+            value: Streetlights
     request_limited_to_2000_characters_3:
       '#type': textarea
       '#title': 'Request: (Limited to 2000 characters)'
@@ -135,7 +194,7 @@ elements: |-
     email_youyourdomaincom_7:
       '#type': textfield
       '#title': 'Email: (you@yourdomain.com)'
-      '#input_mask': '''alias'': ''email'''
+      '#input_mask': "'alias': 'email'"
   upload_photo:
     '#type': managed_file
     '#max_filesize': '5'
@@ -316,7 +375,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       subject: _default
-      body: "Submitted on [webform_submission:created]\r\n\r\n== LOCATION INFO ==\r\n\r\nSTREET:\r\n[webform_submission:values:street_3]\r\n\r\nCLOSEST CROSS STREET:\r\n[webform_submission:values:closest_cross_street_3]\r\n\r\nREQUEST:\r\n[webform_submission:values:request_limited_to_2000_characters_3]\r\n\r\n== YOUR INFORMATION ==\r\n\r\nFULL NAME:\r\n[webform_submission:values:full_name_7]\r\n\r\nBUSINESS:\r\n[webform_submission:values:business_7]\r\n\r\nSTREET ADDRESS:\r\n[webform_submission:values:street_address_7]\r\n\r\nAPT/SUITE/OTHER:\r\n[webform_submission:values:apt_suite_other_7]\r\n\r\nCITY:\r\n[webform_submission:values:city_7]\r\n\r\nSTATE:\r\n[webform_submission:values:state_7]\r\n\r\nZIP/POSTAL CODE:\r\n[webform_submission:values:zip_postal_code_99999_or_99999_9999_7]\r\n\r\nPHONE NUMBER:\r\n[webform_submission:values:phone_number_999_999_9999_7]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_youyourdomaincom_7]\r\n\r\nUPLOAD PHOTO:\r\n[webform_submission:values:upload_photo]"
+      body: "Submitted on [webform_submission:created]\r\n\r\n== LOCATION INFO ==\r\n\r\nSTREET:\r\n[webform_submission:values:street_3]\r\n\r\nCLOSEST CROSS STREET:\r\n[webform_submission:values:closest_cross_street_3]\r\n\r\nREQUEST FOR:\r\n[webform_submission:values:request_for]\r\n\r\nCURB PAINT TYPE:\r\n[webform_submission:values:curb_paint_type]\r\n\r\nBICYCLE FACILITIES TYPE:\r\n[webform_submission:values:bicycle_facilities_type]\r\n\r\nSTREETLIGHTS TYPE:\r\n[webform_submission:values:streetlights_type]\r\n\r\nREQUEST:\r\n[webform_submission:values:request_limited_to_2000_characters_3]\r\n\r\n== YOUR INFORMATION ==\r\n\r\nFULL NAME:\r\n[webform_submission:values:full_name_7]\r\n\r\nBUSINESS:\r\n[webform_submission:values:business_7]\r\n\r\nSTREET ADDRESS:\r\n[webform_submission:values:street_address_7]\r\n\r\nAPT/SUITE/OTHER:\r\n[webform_submission:values:apt_suite_other_7]\r\n\r\nCITY:\r\n[webform_submission:values:city_7]\r\n\r\nSTATE:\r\n[webform_submission:values:state_7]\r\n\r\nZIP/POSTAL CODE:\r\n[webform_submission:values:zip_postal_code_99999_or_99999_9999_7]\r\n\r\nPHONE NUMBER:\r\n[webform_submission:values:phone_number_999_999_9999_7]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_youyourdomaincom_7]\r\n\r\nUPLOAD PHOTO:\r\n[webform_submission:values:upload_photo]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

@@ -16,11 +16,10 @@ elements: |-
   markup:
     '#type': webform_markup
     '#markup': |-
-      <h2>Schedule an Appointment</h2>
-      <p class="fine-print">* ASTERISKS INDICATE REQUIRED FIELDS</p>
+      <h3>Schedule an Appointment</h3>
       <p>In order to best suit your needs, please fill out this form to schedule a 30-minute appointment with a Patent and Trademark Resource Center Librarian. Once submitted, San Diego Public Library staff will reply via email to schedule an appointment and to discuss next steps.</p>
   contact:
-    '#type': webform_section
+    '#type': fieldset
     '#title': Contact
     '#title_tag': h3
     first_name:
@@ -38,26 +37,87 @@ elements: |-
     phone_number:
       '#type': tel
       '#title': 'Phone Number'
-      '#required': true
     library_card_number:
       '#type': textfield
       '#title': 'Library Card Number'
   appointment_information:
-    '#type': webform_section
+    '#type': fieldset
     '#title': 'Appointment Information'
-    '#title_tag': h3
     '#attributes':
       class:
         - l-padding-ts
+    '#title_tag': h3
     what_kind_of_intellectual_property_protection_are_you_seeking_ch:
       '#type': checkboxes
-      '#title': 'What kind of Intellectual Property protection are you seeking? (Check all that apply)'
+      '#title': 'What kind of Intellectual Property protection are you seeking?'
+      '#description': '(Check all that apply)'
       '#options':
-        'Trademarks:': 'Trademarks: -- I need help protecting a logo or a word that represents my business.'
-        'Patents:': 'Patents: -- I need help protecting a new product or invention.'
-        'Copyright:': 'Copyright: -- I need help protecting an original work of authorship.'
-        "I'm not sure:": "I'm not sure: -- I need help choosing which forms of intellectual property protection are right for me."
+        Trademarks: 'Trademarks -- I need help protecting a logo or a word that represents my business.'
+        Patents: 'Patents -- I need help protecting a new product or invention.'
+        Copyright: 'Copyright -- I need help protecting an original work of authorship.'
+        "I'm not sure": "I'm not sure -- I need help choosing which forms of intellectual property protection are right for me."
       '#required': true
+      '#wrapper_type': form_element
+      '#wrapper_attributes':
+        class:
+          - l-padding-td
+    how_would_you_like_to_meet:
+      '#type': radios
+      '#title': 'How would you like to meet?'
+      '#options':
+        'Virtual appointment': 'Virtual appointment'
+        'In-person appointment (Central Library ONLY)': 'In-person appointment (Central Library ONLY)'
+      '#required': true
+      '#wrapper_type': form_element
+    please_list_your_preferences_for_the_day_and_time_you_wish_to_sc:
+      '#type': label
+      '#title': 'Please list your preferences for the day and time you wish to schedule the appointment. We will do our best to accommodate these preferences.'
+    flexbox:
+      '#type': webform_flexbox
+      day_of_the_week:
+        '#type': checkboxes
+        '#title': 'Day of the week'
+        '#options':
+          Monday: Monday
+          Tuesday: Tuesday
+          Wednesday: Wednesday
+          Thursday: Thursday
+          Friday: Friday
+          Saturday: Saturday
+        '#required': true
+        '#wrapper_type': form_element
+      time:
+        '#type': checkboxes
+        '#title': Time
+        '#options':
+          'Morning (10:00-12:00)': 'Morning (10:00-12:00)'
+          'Afternoon (1:00-3:00)': 'Afternoon (1:00-3:00)'
+          'Evening (3:00-5:00)': 'Evening (3:00-5:00)'
+        '#required': true
+        '#wrapper_type': form_element
+    during_the_meeting_i_would_like_to_discuss_check_all_that_apply:
+      '#type': webform_checkboxes_other
+      '#title': 'During the meeting I would like to discuss'
+      '#description': '(Check all that apply)'
+      '#options':
+        'Legal assistance': 'Legal assistance'
+        'Financial support': 'Financial support'
+        'Application help': 'Application help'
+        'Historical Research': 'Historical Research'
+        'Other types of intellectual property': 'Other types of intellectual property'
+      '#required': true
+      '#wrapper_type': form_element
+    if_you_have_a_specific_question_you_would_like_to_discuss_please:
+      '#type': textarea
+      '#title': 'If you have a specific question you would like to discuss, please describe it here'
+  markup_disclaimer:
+    '#type': webform_markup
+    '#markup': |-
+      <h4>Disclaimer</h4>
+      <p>The San Diego Public Library provides consultations related to patents and trademarks solely for informational purposes. We do not provide legal advice.</p>
+      <p>Clients should be aware that our consultations do not establish an attorney-client relationship. For specific legal advice regarding patents, trademarks, or any related matters, we recommend consulting with a qualified attorney licensed to practice law in your jurisdiction.</p>
+      <p>Additionally, clients are not required to disclose any trade secrets or undisclosed ideas during our consultations. We respect the confidentiality of your proprietary information and encourage you to only share what you are comfortable discussing.</p>
+      <p>By scheduling a consultation with the San Diego Public Library, you acknowledge and agree to these terms.</p>
 css: ''
 javascript: ''
 settings:
@@ -165,7 +225,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "<p>Thank you for submitting your request to book a Patent and Trademark Librarian. We have received your form and our team is currently reviewing it. A staff member will follow up with you via email to discuss the next steps.</p>\r\n<p>If you have any immediate questions or need further assistance, call 619-236-5800.</p>\r\n\r\n<p>Thank you,</p>\r\n\r\n<p>San Diego Public Library Staff</p>"
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -241,5 +301,42 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: Email
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: shendyjackso@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\nSubmitted by: [webform_submission:user]\r\n\r\n---------- CONTACT ----------\r\nFirst Name: [webform_submission:values:first_name:raw]\r\nLast Name: [webform_submission:values:last_name:raw]\r\nEmail Address: [webform_submission:values:email_address:raw]\r\nPhone Number: [webform_submission:values:phone_number:raw]\r\nLibrary Card Number: [webform_submission:values:library_card_number:raw]\r\n\r\n---------- APPOINTMENT ----------\r\nWhat kind of Intellectual Property protection are you seeking?\r\n[webform_submission:values:what_kind_of_intellectual_property_protection_are_you_seeking_ch:raw]\r\n\r\nHow would you like to meet?\r\n[webform_submission:values:how_would_you_like_to_meet:raw]\r\n\r\nPreferred day of the week:\r\n[webform_submission:values:day_of_the_week:raw]\r\n\r\nPreferred time:\r\n[webform_submission:values:time:raw]\r\n\r\nDuring the meeting I would like to discuss:\r\n[webform_submission:values:during_the_meeting_i_would_like_to_discuss_check_all_that_apply:raw]\r\n\r\nIf you have a specific question you would like to discuss, please describe it here:\r\n[webform_submission:values:if_you_have_a_specific_question_you_would_like_to_discuss_please:raw]"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
 variants: {  }
