@@ -5,7 +5,7 @@ dependencies:
   module:
     - editor
     - insert_block
-    - insert_view
+    - insert_view_adv
 _core:
   default_config_hash: P8ddpAIKtawJDi5SzOwCzVnnNYqONewSTJ6Xn0dW_aQ
 name: 'Basic HTML'
@@ -36,7 +36,7 @@ filters:
     status: true
     weight: -10
     settings:
-      allowed_html: '<br> <p> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <cite> <dl> <dt> <dd> <span> <a hreflang href> <blockquote cite> <ul type> <ol type start> <strong> <em> <li> <img src alt height width data-entity-uuid data-entity-type data-caption data-align>'
+      allowed_html: '<br> <p> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <cite> <dl> <dt> <dd> <span> <a hreflang href> <blockquote cite> <strong> <em> <ul type> <ol type start> <li> <img src alt height width data-entity-uuid data-entity-type data-caption data-align>'
       filter_html_help: false
       filter_html_nofollow: false
   filter_html_image_secure:
@@ -57,10 +57,13 @@ filters:
     status: true
     weight: 0
     settings:
-      check_roles: '1'
-  insert_view:
-    id: insert_view
-    provider: insert_view
+      check_roles: true
+  insert_view_adv:
+    id: insert_view_adv
+    provider: insert_view_adv
     status: true
     weight: 0
-    settings: {  }
+    settings:
+      allowed_views: {  }
+      render_as_empty: 0
+      hide_argument_input: false
