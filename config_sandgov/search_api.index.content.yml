@@ -3,31 +3,31 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.body
+    - field.storage.media.field_department
     - field.storage.media.field_media_document
     - field.storage.node.field_attachment
+    - field.storage.node.body
     - field.storage.node.field_body_bottom
     - field.storage.node.field_category
     - field.storage.node.field_department
     - field.storage.node.field_dept_doc_id
     - field.storage.node.field_keywords
     - field.storage.node.field_mayor
+    - field.storage.node.field_other_description
     - field.storage.node.field_other_keywords
-    - field.storage.node.field_sidebar
-    - field.storage.node.field_top_content
-    - field.storage.media.field_department
     - field.storage.node.field_search_keymatch
     - field.storage.node.field_sections_outreach2
     - field.storage.paragraph.field_body
-    - field.storage.node.field_other_description
+    - field.storage.node.field_sidebar
+    - field.storage.node.field_top_content
     - search_api.server.production
   module:
     - search_api_solr
-    - node
     - media
     - taxonomy
-    - paragraphs
     - file
+    - node
+    - paragraphs
     - search_api
     - sand_search
     - search_api_attachments
@@ -168,7 +168,7 @@ field_settings:
       config:
         - field.storage.node.field_department
   field_dept_doc_id:
-    label: ID
+    label: 'ID (Dept Doc ID)'
     datasource_id: 'entity:node'
     property_path: field_dept_doc_id
     type: text
@@ -230,7 +230,7 @@ field_settings:
       config:
         - field.storage.node.field_top_content
   mid:
-    label: ID
+    label: 'ID (Mid)'
     datasource_id: 'entity:media'
     property_path: mid
     type: integer
@@ -288,7 +288,7 @@ field_settings:
       module:
         - taxonomy
   nid:
-    label: ID
+    label: 'ID (Nid)'
     datasource_id: 'entity:node'
     property_path: nid
     type: integer
