@@ -242,7 +242,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: 'field_department:entity:name'
     type: text
-    boost: 2.0
+    boost: 13.0
     dependencies:
       config:
         - field.storage.node.field_department
@@ -253,6 +253,7 @@ field_settings:
     datasource_id: 'entity:media'
     property_path: 'field_department:entity:name'
     type: text
+    boost: 3.0
     dependencies:
       config:
         - field.storage.media.field_department
@@ -263,7 +264,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: 'field_search_keymatch:entity:name'
     type: text
-    boost: 2.0
+    boost: 21.0
     dependencies:
       config:
         - field.storage.node.field_search_keymatch
@@ -568,6 +569,9 @@ processor_settings:
     all_fields: false
     fields:
       - body
+      - field_other_keywords
+      - field_top_content
+      - processed_4
     regexes:
       - '/([A-Z]+)-([0-9]+)-([0-9]+)/'
       - '/([0-9]+)-([0-9]+)/'
@@ -584,6 +588,7 @@ processor_settings:
       'entity:node':
         datasource_boost: 1.0
         bundle_boosts:
+          bucket: 8.0
           department: 2.0
           department_parent: 21.0
           mayoral_artifacts: 1.1
