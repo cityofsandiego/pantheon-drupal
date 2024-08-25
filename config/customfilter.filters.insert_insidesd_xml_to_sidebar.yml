@@ -1,0 +1,23 @@
+uuid: fe99fcdb-3721-400d-83c6-60c14a566632
+langcode: en
+status: true
+dependencies: {  }
+id: insert_insidesd_xml_to_sidebar
+name: 'Insert InsideSD XML to Sidebar'
+cache: false
+description: 'This inserts the latest 3 articles from the InsideSD XML into the sidebar. The formatting is template-specific.'
+shorttip: 'You may use [isdxmlsidebar=url]'
+longtip: ''
+rules:
+  embed_isdxml_sidebar:
+    rid: embed_isdxml_sidebar
+    prid: ''
+    fid: insert_insidesd_xml_to_sidebar
+    name: embed_isdxml_sidebar
+    description: '/\[isdxmlsidebar=(.*?)\]/i'
+    enabled: true
+    matches: null
+    pattern: '/\[isdxmlsidebar=([^,]*?)\]/i'
+    replacement: '$result = \Drupal\sand_type\Entity\Bundle\Location::formatInsideSDArticlesXML($matches[1]);'
+    code: true
+    weight: 0

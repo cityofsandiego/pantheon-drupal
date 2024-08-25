@@ -1,0 +1,23 @@
+uuid: c35b8ad6-aee7-498d-ad22-07aebe44fd82
+langcode: en
+status: true
+dependencies: {  }
+id: insert_insidesd_xml_to_homepage
+name: 'Insert InsideSD XML to Homepage'
+cache: false
+description: 'This inserts the latest article from the InsideSD XML into the homepage. The formatting is template-specific.'
+shorttip: 'You may use [isdxmlhome=url]'
+longtip: ''
+rules:
+  embed_isdxml_home:
+    rid: embed_isdxml_home
+    prid: ''
+    fid: insert_insidesd_xml_to_homepage
+    name: embed_isdxml_home
+    description: '/\[isdxmlhome=(.*?)\]/i'
+    enabled: true
+    matches: null
+    pattern: '/\[isdxmlhome=([^,]*?)\]/i'
+    replacement: '$result = \Drupal\sand_type\Entity\Bundle\Location::formatInsideSDHomeXML($matches[1]);'
+    code: true
+    weight: 0

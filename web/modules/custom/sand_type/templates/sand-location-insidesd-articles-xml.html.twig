@@ -1,0 +1,14 @@
+{% for row in rows %}
+{% if row.row_count != 1 %}
+<hr class="hr--dashed">
+{% endif %}
+<p class="h5 heading--snug heading--subcolor" style="font-size:.8rem;">
+  {{ row.categories|replace({"&#039;": "'"}) }}
+</p>
+<p class="h5 heading--snug">
+  <a class="no-underline" href="{{ row.link }}">{{ row.title }}</a>
+</p>
+<p class="fine-print text-upper">
+  {{ row.created }}
+</p>
+{% endfor %}

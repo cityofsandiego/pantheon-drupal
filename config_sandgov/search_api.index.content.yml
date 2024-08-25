@@ -3,33 +3,33 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.media.field_department
+    - field.storage.node.body
     - field.storage.media.field_media_document
     - field.storage.node.field_attachment
-    - field.storage.node.body
     - field.storage.node.field_body_bottom
     - field.storage.node.field_category
     - field.storage.node.field_department
     - field.storage.node.field_dept_doc_id
     - field.storage.node.field_keywords
     - field.storage.node.field_mayor
-    - field.storage.node.field_other_description
     - field.storage.node.field_other_keywords
+    - field.storage.node.field_sidebar
+    - field.storage.node.field_top_content
+    - field.storage.media.field_department
     - field.storage.node.field_search_keymatch
     - field.storage.node.field_sections_outreach2
     - field.storage.paragraph.field_body
-    - field.storage.node.field_sidebar
-    - field.storage.node.field_top_content
+    - field.storage.node.field_other_description
     - search_api.server.production
   module:
     - search_api_solr
+    - node
     - media
     - taxonomy
-    - file
-    - node
     - paragraphs
-    - search_api
+    - file
     - sand_search
+    - search_api
     - search_api_attachments
     - search_api_exclude_entity
 third_party_settings:
@@ -67,6 +67,7 @@ third_party_settings:
     term_modifiers:
       slop: 3
       fuzzy: 1
+      fuzzy_analyzer: true
     advanced:
       index_prefix: ''
       collection: ''
@@ -593,7 +594,7 @@ processor_settings:
           department_parent: 21.0
           mayoral_artifacts: 1.1
 tracker_settings:
-  default:
+  index_parallel:
     indexing_order: lifo
 options:
   cron_limit: 10

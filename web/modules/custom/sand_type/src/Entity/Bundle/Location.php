@@ -126,4 +126,73 @@ class Location extends Node implements DepartmentInterface {
     return $date_text;
   }
 
+  public static function formatInsideSDHomeXML(string $url, int $max_items = 1): string {
+
+    // Get XML from url.
+    $url = str_replace("&amp;", "&", $url);
+    $xml_string = @file_get_contents($url);
+    if (empty($xml_string)) {
+      return '';
+    }
+
+    // Turn it into a SimpleXML object.
+    $xml_object = simplexml_load_string($xml_string);
+
+    // Loop through each event.
+    $kount = 0;
+    $rows = [];
+    foreach ($xml_object->item as $item) {
+      if (++$kount > $max_items) {
+        break;
+      }
+
+      // Add Title and link to item.
+      $rows[$kount]['title'] = $item->title;
+      $rows[$kount]['link'] = Url::fromUri($item->view_node);
+    }
+
+    // Render the output using twig.
+    $render_array = [
+      '#theme' => 'sand_location_insidesd_home_xml',
+      '#rows' => $rows,
+    ];
+    return \Drupal::service('renderer')->renderPlain($render_array);
+  }
+
+  public static function formatInsideSDArticlesXML(string $url, int $max_items = 3): string {
+
+    // Get XML from url.
+    $url = str_replace("&amp;", "&", $url);
+    $xml_string = @file_get_contents($url);
+    if (empty($xml_string)) {
+      return '';
+    }
+
+    // Turn it into a SimpleXML object.
+    $xml_object = simplexml_load_string($xml_string);
+
+    // Loop through each event.
+    $kount = 0;
+    $rows = [];
+    foreach ($xml_object->item as $item) {
+      if (++$kount > $max_items) {
+        break;
+      }
+
+      // Add Title and link to item.
+      $rows[$kount]['title'] = $item->title;
+      $rows[$kount]['link'] = Url::fromUri($item->view_node);
+      $rows[$kount]['created'] = $item->created;
+      $rows[$kount]['categories'] = $item->field_category;
+      $rows[$kount]['row_count'] = $kount;
+    }
+
+    // Render the output using twig.
+    $render_array = [
+      '#theme' => 'sand_location_insidesd_articles_xml',
+      '#rows' => $rows,
+    ];
+    return \Drupal::service('renderer')->renderPlain($render_array);
+  }
+
 }
