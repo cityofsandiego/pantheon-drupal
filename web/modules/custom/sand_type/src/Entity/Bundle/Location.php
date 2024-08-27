@@ -149,6 +149,7 @@ class Location extends Node implements DepartmentInterface {
       // Add Title and link to item.
       $rows[$kount]['title'] = $item->title;
       $rows[$kount]['link'] = Url::fromUri($item->view_node);
+      $rows[$kount]['created'] = $item->created;
     }
 
     // Render the output using twig.
