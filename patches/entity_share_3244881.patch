@@ -1,0 +1,17 @@
+diff --git a/modules/entity_share_client/src/ImportBatchHelper.php b/modules/entity_share_client/src/ImportBatchHelper.php
+index 9cb572d..e153089 100644
+--- a/modules/entity_share_client/src/ImportBatchHelper.php
++++ b/modules/entity_share_client/src/ImportBatchHelper.php
+@@ -39,6 +39,11 @@ class ImportBatchHelper {
+ 
+     if (empty($context['sandbox'])) {
+       $response = $import_service->jsonApiRequest('GET', $url);
++      if (is_null($response)) {
++        \Drupal::logger('sand_entity_share')->error('An error occurred while requesting the UUID on URL :url', [':url' => $url]);
++        \Drupal::messenger()->addError('An error occurred while requesting the UUID on URL :url', [':url' => $url]);
++        return;
++      }
+       $json = Json::decode((string) $response->getBody());
+       $entity_list_data = EntityShareUtility::prepareData($json['data']);
+       $context['sandbox']['entity_list_data'] = $entity_list_data;
+
