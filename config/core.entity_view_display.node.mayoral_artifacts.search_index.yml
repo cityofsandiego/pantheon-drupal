@@ -1,0 +1,99 @@
+uuid: 0683c47f-0b0d-4359-aaa2-d38e9c71e42b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.mayoral_artifacts.body
+    - field.field.node.mayoral_artifacts.field_category
+    - field.field.node.mayoral_artifacts.field_d7_nid
+    - field.field.node.mayoral_artifacts.field_department
+    - field.field.node.mayoral_artifacts.field_image
+    - field.field.node.mayoral_artifacts.field_keywords
+    - field.field.node.mayoral_artifacts.field_location
+    - field.field.node.mayoral_artifacts.field_mayor
+    - field.field.node.mayoral_artifacts.field_photo_date
+    - field.field.node.mayoral_artifacts.field_record_id
+    - field.field.node.mayoral_artifacts.field_search_exclude_entity
+    - field.field.node.mayoral_artifacts.field_search_keymatch
+    - node.type.mayoral_artifacts
+  module:
+    - options
+    - text
+    - user
+id: node.mayoral_artifacts.search_index
+targetEntityType: node
+bundle: mayoral_artifacts
+mode: search_index
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_category:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_department:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_image:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_keywords:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_location:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_mayor:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_search_keymatch:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  field_d7_nid: true
+  field_photo_date: true
+  field_record_id: true
+  field_search_exclude_entity: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

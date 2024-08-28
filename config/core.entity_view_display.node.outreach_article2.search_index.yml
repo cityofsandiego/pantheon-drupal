@@ -1,0 +1,89 @@
+uuid: dbeac4b2-9b16-4f2f-aba1-77ae13c0e6f5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.outreach_article2.body
+    - field.field.node.outreach_article2.field_category
+    - field.field.node.outreach_article2.field_d7_nid
+    - field.field.node.outreach_article2.field_department
+    - field.field.node.outreach_article2.field_image
+    - field.field.node.outreach_article2.field_outreach_body
+    - field.field.node.outreach_article2.field_outreach_header_type
+    - field.field.node.outreach_article2.field_outreach_minimum_height
+    - field.field.node.outreach_article2.field_search_keymatch
+    - field.field.node.outreach_article2.field_subtitle
+    - field.field.node.outreach_article2.field_vertical_alignment
+    - node.type.outreach_article2
+  module:
+    - text
+    - user
+id: node.outreach_article2.search_index
+targetEntityType: node
+bundle: outreach_article2
+mode: search_index
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_category:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_department:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_image:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_outreach_body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_search_keymatch:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_subtitle:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  content_moderation_control: true
+  field_d7_nid: true
+  field_outreach_header_type: true
+  field_outreach_minimum_height: true
+  field_vertical_alignment: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

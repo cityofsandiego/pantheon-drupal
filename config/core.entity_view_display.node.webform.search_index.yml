@@ -1,8 +1,9 @@
-uuid: b845ff79-a8cc-4741-89f9-b1bbcbf876cc
+uuid: e1fe4c08-933f-4308-9303-2ce6a1e08585
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.search_index
     - field.field.node.webform.body
     - field.field.node.webform.field_d7_nid
     - field.field.node.webform.field_department
@@ -14,52 +15,42 @@ dependencies:
     - field.field.node.webform.webform
     - node.type.webform
   module:
-    - metatag
     - text
     - user
     - webform
 _core:
   default_config_hash: 3r1i0UMUbeNHhvmiqHDYznoS4G9XR1jq6lQ49r80lDE
-id: node.webform.default
+id: node.webform.search_index
 targetEntityType: node
 bundle: webform
-mode: default
+mode: search_index
 content:
   body:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 4
-    region: content
-  content_moderation_control:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 0
+    weight: 3
     region: content
   field_department:
     type: entity_reference_label
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
     weight: 1
     region: content
-  field_meta_tags:
-    type: metatag_empty_formatter
-    label: above
-    settings: {  }
+  field_search_keymatch:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
     third_party_settings: {  }
-    weight: 6
+    weight: 0
     region: content
   field_sidebar:
     type: text_default
     label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 3
-    region: content
-  links:
     settings: {  }
     third_party_settings: {  }
     weight: 2
@@ -71,12 +62,14 @@ content:
       source_entity: true
       lazy: false
     third_party_settings: {  }
-    weight: 5
+    weight: 4
     region: content
 hidden:
+  content_moderation_control: true
   field_d7_nid: true
   field_exhibit_attachments: true
+  field_meta_tags: true
   field_search_exclude_entity: true
-  field_search_keymatch: true
   langcode: true
+  links: true
   search_api_excerpt: true

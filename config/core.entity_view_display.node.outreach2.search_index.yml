@@ -1,0 +1,62 @@
+uuid: 11a86ca6-346a-4181-8b64-2e679228a80e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_index
+    - field.field.node.outreach2.field_d7_nid
+    - field.field.node.outreach2.field_department
+    - field.field.node.outreach2.field_edit_notes
+    - field.field.node.outreach2.field_meta_tags
+    - field.field.node.outreach2.field_outreach_footer_type
+    - field.field.node.outreach2.field_outreach_header_type
+    - field.field.node.outreach2.field_outreach_version
+    - field.field.node.outreach2.field_search_exclude_entity
+    - field.field.node.outreach2.field_search_keymatch
+    - field.field.node.outreach2.field_sections_outreach2
+    - node.type.outreach2
+  module:
+    - entity_reference_revisions
+    - user
+id: node.outreach2.search_index
+targetEntityType: node
+bundle: outreach2
+mode: search_index
+content:
+  field_department:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_search_keymatch:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_sections_outreach2:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  content_moderation_control: true
+  field_d7_nid: true
+  field_edit_notes: true
+  field_meta_tags: true
+  field_outreach_footer_type: true
+  field_outreach_header_type: true
+  field_outreach_version: true
+  field_search_exclude_entity: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

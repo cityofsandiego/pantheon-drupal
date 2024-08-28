@@ -1,8 +1,9 @@
-uuid: d4b79ab3-2e0b-4cbd-8b91-080311ace5de
+uuid: 34607290-6786-4329-9381-d08bad6a4713
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.search_index
     - field.field.node.event.body
     - field.field.node.event.feeds_item
     - field.field.node.event.field_d7_nid
@@ -50,26 +51,19 @@ dependencies:
     - node.type.event
   module:
     - address
-    - datetime
     - link
-    - metatag
     - options
     - smart_date
     - text
     - user
-id: node.event.default
+id: node.event.search_index
 targetEntityType: node
 bundle: event
-mode: default
+mode: search_index
 content:
   body:
     type: text_default
     label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  content_moderation_control:
     settings: {  }
     third_party_settings: {  }
     weight: 0
@@ -80,14 +74,14 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 16
+    weight: 8
     region: content
   field_event_activity_desc:
     type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 29
+    weight: 14
     region: content
   field_event_activity_seq_num:
     type: number_decimal
@@ -98,7 +92,7 @@ content:
       scale: 2
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 23
+    weight: 11
     region: content
   field_event_activity_type_cd:
     type: entity_reference_label
@@ -106,14 +100,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 24
-    region: content
-  field_event_color:
-    type: list_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 6
+    weight: 12
     region: content
   field_event_cost_txt:
     type: string
@@ -121,7 +108,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 28
+    weight: 13
     region: content
   field_event_date:
     type: smartdate_default
@@ -143,49 +130,7 @@ content:
         decimals: 2
         suffix: h
     third_party_settings: {  }
-    weight: 3
-    region: content
-  field_event_do_not_show_map:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 9
-    region: content
-  field_event_end_time_valid_ind:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 18
-    region: content
-  field_event_expected_attendance:
-    type: number_decimal
-    label: above
-    settings:
-      thousand_separator: ''
-      decimal_separator: .
-      scale: 2
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 30
-    region: content
-  field_event_expected_participant:
-    type: number_decimal
-    label: above
-    settings:
-      thousand_separator: ''
-      decimal_separator: .
-      scale: 2
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 31
+    weight: 1
     region: content
   field_event_host_nm:
     type: string
@@ -193,75 +138,21 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 32
+    weight: 15
     region: content
   field_event_location:
     type: address_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 5
+    weight: 3
     region: content
   field_event_location_txt:
     type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 39
-    region: content
-  field_event_management_cd:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 25
-    region: content
-  field_event_media_contact_txt:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 35
-    region: content
-  field_event_no_show_add_to_cal:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 12
-    region: content
-  field_event_no_show_social_media:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 11
-    region: content
-  field_event_no_show_time:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 10
-    region: content
-  field_event_non_public_contact:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 36
+    weight: 18
     region: content
   field_event_organizer_nm:
     type: string
@@ -269,7 +160,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 33
+    weight: 16
     region: content
   field_event_pin_address:
     type: string
@@ -277,7 +168,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 42
+    weight: 19
     region: content
   field_event_public_contact_txt:
     type: string
@@ -285,17 +176,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 34
-    region: content
-  field_event_public_visibility:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 38
+    weight: 17
     region: content
   field_event_seq_num:
     type: number_decimal
@@ -306,87 +187,23 @@ content:
       scale: 2
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 22
-    region: content
-  field_event_setup_dt:
-    type: datetime_default
-    label: above
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 40
-    region: content
-  field_event_setup_end_time_ind:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 20
-    region: content
-  field_event_setup_start_time_ind:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 21
-    region: content
-  field_event_start_time_valid_ind:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 19
-    region: content
-  field_event_type:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: false
-    third_party_settings: {  }
-    weight: 13
-    region: content
-  field_event_vendor_contact_txt:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 37
+    weight: 10
     region: content
   field_image:
-    type: entity_reference_entity_view
+    type: entity_reference_label
     label: hidden
     settings:
-      view_mode: default
       link: true
     third_party_settings: {  }
-    weight: 14
+    weight: 6
     region: content
   field_images:
-    type: entity_reference_entity_view
+    type: entity_reference_label
     label: hidden
     settings:
-      view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 15
-    region: content
-  field_meta_tags:
-    type: metatag_empty_formatter
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 41
+    weight: 7
     region: content
   field_search_keymatch:
     type: entity_reference_label
@@ -394,7 +211,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 17
+    weight: 9
     region: content
   field_subtitle:
     type: string
@@ -402,14 +219,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 4
+    weight: 2
     region: content
   field_type_of_event:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 7
+    weight: 4
     region: content
   field_website:
     type: link
@@ -421,18 +238,34 @@ content:
       rel: '0'
       target: '0'
     third_party_settings: {  }
-    weight: 8
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 1
+    weight: 5
     region: content
 hidden:
+  content_moderation_control: true
   feeds_item: true
   field_d7_nid: true
   field_edit_notes: true
+  field_event_color: true
+  field_event_do_not_show_map: true
+  field_event_end_time_valid_ind: true
+  field_event_expected_attendance: true
+  field_event_expected_participant: true
+  field_event_management_cd: true
+  field_event_media_contact_txt: true
+  field_event_no_show_add_to_cal: true
+  field_event_no_show_social_media: true
+  field_event_no_show_time: true
+  field_event_non_public_contact: true
+  field_event_public_visibility: true
+  field_event_setup_dt: true
+  field_event_setup_end_time_ind: true
+  field_event_setup_start_time_ind: true
+  field_event_start_time_valid_ind: true
+  field_event_type: true
+  field_event_vendor_contact_txt: true
   field_evet_pin_address: true
+  field_meta_tags: true
   field_search_exclude_entity: true
   langcode: true
+  links: true
   search_api_excerpt: true

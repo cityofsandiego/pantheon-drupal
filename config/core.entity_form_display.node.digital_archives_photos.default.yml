@@ -17,14 +17,11 @@ dependencies:
     - field.field.node.digital_archives_photos.field_search_exclude_entity
     - field.field.node.digital_archives_photos.field_search_keymatch
     - node.type.digital_archives_photos
-    - workflows.workflow.editorial
   module:
     - content_moderation
     - field_group
     - media_library
     - path
-    - scheduler
-    - scheduler_content_moderation_integration
     - search_api_exclude_entity
     - term_reference_tree
     - text
@@ -237,18 +234,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  publish_on:
-    type: datetime_timestamp_no_default
-    weight: 8
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  publish_state:
-    type: scheduler_moderation
-    weight: 10
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   simple_sitemap:
     weight: 3
     region: content
@@ -286,18 +271,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  unpublish_on:
-    type: datetime_timestamp_no_default
-    weight: 9
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  unpublish_state:
-    type: scheduler_moderation
-    weight: 11
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   url_redirects:
     weight: 12
     region: content
@@ -305,3 +278,7 @@ content:
     third_party_settings: {  }
 hidden:
   field_d7_nid: true
+  publish_on: true
+  publish_state: true
+  unpublish_on: true
+  unpublish_state: true
