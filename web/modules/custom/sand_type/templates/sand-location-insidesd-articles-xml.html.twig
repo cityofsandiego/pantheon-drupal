@@ -9,6 +9,6 @@
   <a class="no-underline" href="{{ row.link }}">{{ row.title }}</a>
 </p>
 <p class="fine-print text-upper">
-  {{ row.created }}
+  {{ row.created }}{% if row.sticky == "On" %} <i class="icon-pushpin"></i>{% endif %}
 </p>
 {% endfor %}

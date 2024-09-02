@@ -4,7 +4,7 @@
 <p><a  href="{{ row.link }}"><img src="{{ row.image_url }}" width="360" height="auto" alt=""></a></p>
 </div>
 <div class="insidesd-title cell medium-auto l-padding-mobile-ad">
-<p class="fine-print text-upper">Latest article, posted {{ row.created }}:</p>
+<p class="fine-print text-upper">{% if row.sticky == "On" %}Pinned{% else %}Latest{% endif %} article, posted {{ row.created }}:</p>
 <p><a class="h3 heading--trim no-underline" href="{{ row.link }}">{{ row.title }}</a></p>
 </div>
 </div>
