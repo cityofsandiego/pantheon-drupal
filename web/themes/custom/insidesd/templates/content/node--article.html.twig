@@ -109,7 +109,7 @@
             {% endif %}
           </div>
           {% endif %}
-          {% if content.field_image.0 %}
+          {% if content.field_image.0 and (content.field_dept_card_only.0['#markup'] == "No" or content.field_dept_card_only.0 is null) %}
           <div class="l-padding-hm l-padding-td l-padding-bm">
           {{ content.field_image }}
           </div>

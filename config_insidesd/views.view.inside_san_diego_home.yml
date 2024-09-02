@@ -626,6 +626,73 @@ display:
           multi_type: separator
           separator: ' '
           field_api_classes: false
+        sticky:
+          id: sticky
+          table: node_field_data
+          field: sticky
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: sticky
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: "{% if sticky == \"On\" %}\r\n<span class=\"tooltip__wrap\">        \r\n<i class=\"icon-pushpin\"></i>\r\n<span class=\"tooltip tooltip--right\">Pinned to top</span>\r\n</span>\r\n{% endif %}"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: default
+            format_custom_false: ''
+            format_custom_true: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         created:
           id: created
           table: node_field_data
@@ -640,7 +707,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '<p class="fine-print text-upper"><strong>{{ created }}</strong></p>'
+            text: '<p class="fine-print"><span class="text-upper">{{ created }}</span> {{ sticky }}</p>'
             make_link: false
             path: ''
             absolute: false
@@ -717,7 +784,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"l-padding-ad off-white-bg rounded-corners l-margin-bd overflow-h\">\r\n<div class=\"grid-x grid-margin-x\">\r\n\t<div class=\"cell medium-2\">\r\n\t\t<p class=\"date\">{{ created }}</p>\r\n\t</div>\r\n\t<div class=\"cell medium-auto\">\r\n\t\t<p class=\"h5 heading--snug\"><a href=\"{{ view_node }}\" class=\"no-underline\">{{ title }}</a></p>\r\n\t</div>\r\n</div>\r\n</div>"
+            text: "<div class=\"l-padding-ad off-white-bg rounded-corners l-margin-bd overflow-h\">\r\n<div class=\"grid-x grid-margin-x\">\r\n\t<div class=\"cell medium-2\">\r\n\t\t<p class=\"date\">{{ created }} {{ sticky }}</p>\r\n\t</div>\r\n\t<div class=\"cell medium-auto\">\r\n\t\t<p class=\"h5 heading--snug\"><a href=\"{{ view_node }}\" class=\"no-underline\">{{ title }}</a></p>\r\n\t</div>\r\n</div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -888,6 +955,38 @@ display:
             value: 'No news found for this category.'
             format: basic_html
           tokenize: true
+      sorts:
+        sticky:
+          id: sticky
+          table: node_field_data
+          field: sticky
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: sticky
+          plugin_id: standard
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
       filters:
         status:
           id: status
@@ -1058,6 +1157,7 @@ display:
         row: false
         relationships: false
         fields: false
+        sorts: false
         filters: false
         filter_groups: false
         header: false
@@ -1361,6 +1461,73 @@ display:
           multi_type: separator
           separator: ' '
           field_api_classes: false
+        sticky:
+          id: sticky
+          table: node_field_data
+          field: sticky
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: sticky
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: "{% if sticky == \"On\" %}\r\n<span class=\"tooltip__wrap\">        \r\n<i class=\"icon-pushpin\"></i>\r\n<span class=\"tooltip tooltip--right\">Pinned to top</span>\r\n</span>\r\n{% endif %}"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: default
+            format_custom_false: ''
+            format_custom_true: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         created:
           id: created
           table: node_field_data
@@ -1375,7 +1542,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '<p class="fine-print text-upper l-margin-vd">{{ created }}</p>'
+            text: '<p class="fine-print l-margin-vd"><span class="text-upper text-spruce">{{ created }}</span> {{ sticky }}</p>'
             make_link: false
             path: ''
             absolute: false
@@ -1493,6 +1660,38 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+      sorts:
+        sticky:
+          id: sticky
+          table: node_field_data
+          field: sticky
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: sticky
+          plugin_id: standard
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
       style:
         type: default
         options:
@@ -1510,6 +1709,7 @@ display:
         style: false
         row: false
         fields: false
+        sorts: false
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -1836,6 +2036,73 @@ display:
           multi_type: separator
           separator: ' '
           field_api_classes: false
+        sticky:
+          id: sticky
+          table: node_field_data
+          field: sticky
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: sticky
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: "{% if sticky == \"On\" %}\r\n<span class=\"tooltip__wrap\">        \r\n<i class=\"icon-pushpin\"></i>\r\n<span class=\"tooltip tooltip--right\">Pinned to top</span>\r\n</span>\r\n{% endif %}"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: default
+            format_custom_false: ''
+            format_custom_true: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         created:
           id: created
           table: node_field_data
@@ -1850,7 +2117,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '<p class="fine-print text-upper">{{ created }}</p>'
+            text: '<p class="fine-print text-upper">{{ created }} {{ sticky }}</p>'
             make_link: false
             path: ''
             absolute: false
@@ -1973,10 +2240,43 @@ display:
         options:
           offset: 1
           items_per_page: 6
+      sorts:
+        sticky:
+          id: sticky
+          table: node_field_data
+          field: sticky
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: sticky
+          plugin_id: standard
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
       defaults:
         pager: false
         relationships: false
         fields: false
+        sorts: false
       relationships:
         field_image:
           id: field_image
