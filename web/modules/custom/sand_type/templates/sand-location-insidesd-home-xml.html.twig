@@ -1,4 +1,11 @@
 {% for row in rows %}
-<h3 class="heading--trim"><a class="no-underline" href="{{ row.link }}">{{ row.title }}</a></h3>
-<p class="fine-print text-upper l-margin-ts">{{ row.created }}</p>
+<div class="grid-x">
+<div class="cell medium-3 l-padding-desktop-rd">
+<p><a  href="{{ row.link }}"><img src="{{ row.image_url }}" width="360" height="auto" alt=""></a></p>
+</div>
+<div class="insidesd-title cell medium-auto l-padding-mobile-ad">
+<p class="fine-print text-upper">Latest article, posted {{ row.created }}:</p>
+<p><a class="h3 heading--trim no-underline" href="{{ row.link }}">{{ row.title }}</a></p>
+</div>
+</div>
 {% endfor %}

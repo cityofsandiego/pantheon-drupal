@@ -150,6 +150,7 @@ class Location extends Node implements DepartmentInterface {
       $rows[$kount]['title'] = $item->title;
       $rows[$kount]['link'] = Url::fromUri($item->view_node);
       $rows[$kount]['created'] = $item->created;
+      $rows[$kount]['image_url'] = $item->field_media_image;
     }
 
     // Render the output using twig.
@@ -186,6 +187,7 @@ class Location extends Node implements DepartmentInterface {
       $rows[$kount]['created'] = $item->created;
       $rows[$kount]['categories'] = $item->field_category;
       $rows[$kount]['row_count'] = $kount;
+      $rows[$kount]['image_url'] = $item->field_media_image;
     }
 
     // Render the output using twig.
