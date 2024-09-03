@@ -12,6 +12,7 @@ dependencies:
     - field.storage.node.field_feature_video_img
     - field.storage.node.field_other_description
     - field.storage.node.field_subtitle
+    - field.storage.node.field_top_content
     - field.storage.node.field_url
     - field.storage.node.field_website
     - image.style.50_16x9
@@ -8315,6 +8316,68 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_top_content:
+          id: field_top_content
+          table: node__field_top_content
+          field: field_top_content
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         nothing:
           id: nothing
           table: views
@@ -8327,7 +8390,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"card background--off-white border pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>{{ edit_node }}\r\n  </div>\r\n</div>"
+            text: "<div class=\"card background--off-white border pos-r\">\r\n  <p class=\"text-center background-white\"><a href=\"{{ field_website }}\"><img src=\"{{ field_media_image }}\" alt=\"{{ title }}\"></a></p>\r\n\r\n  <div class=\"l-padding-vs l-padding-hd text-center\">\r\n    <p class=\"l-margin-bs\"><strong><a class=\"no-underline\" href=\"{{ field_website }}\">{{ title }}</a></strong></p>\r\n{{ field_top_content }} \r\n{{ edit_node }}\r\n  </div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -8621,4 +8684,5 @@ display:
         - 'config:field.storage.media.field_media_image'
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_feature_video_img'
+        - 'config:field.storage.node.field_top_content'
         - 'config:field.storage.node.field_website'
