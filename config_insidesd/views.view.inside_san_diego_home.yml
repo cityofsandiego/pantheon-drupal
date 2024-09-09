@@ -7,7 +7,7 @@ dependencies:
     - field.storage.node.body
     - field.storage.node.field_category
     - field.storage.node.field_image
-    - image.style.1000px_width_16_10
+    - image.style.1000px_width
     - image.style.50_16x9
     - node.type.article
     - taxonomy.vocabulary.categories
@@ -1269,7 +1269,7 @@ display:
           type: media_thumbnail
           settings:
             image_link: ''
-            image_style: 1000px_width_16_10
+            image_style: 1000px_width
             image_loading:
               attribute: lazy
           group_column: target_id
@@ -1692,6 +1692,78 @@ display:
             field_identifier: ''
           exposed: false
           granularity: second
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            article: article
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_article_exclude_value:
+          id: field_article_exclude_value
+          table: node__field_article_exclude
+          field: field_article_exclude_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: not
+          value:
+            'All Views': 'All Views'
+            home_page_view: home_page_view
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       style:
         type: default
         options:
@@ -1710,6 +1782,8 @@ display:
         row: false
         fields: false
         sorts: false
+        filters: false
+        filter_groups: false
       display_description: ''
       display_extenders: {  }
     cache_metadata:
@@ -2272,11 +2346,85 @@ display:
             field_identifier: ''
           exposed: false
           granularity: second
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            article: article
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_article_exclude_value:
+          id: field_article_exclude_value
+          table: node__field_article_exclude
+          field: field_article_exclude_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: not
+          value:
+            'All Views': 'All Views'
+            home_page_view: home_page_view
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       defaults:
         pager: false
         relationships: false
         fields: false
         sorts: false
+        filters: false
+        filter_groups: false
       relationships:
         field_image:
           id: field_image
