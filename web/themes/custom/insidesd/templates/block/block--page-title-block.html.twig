@@ -44,12 +44,9 @@
             </nav>
           </div>
           <div class="cell medium-3 light-gray-bg hide-on-mobile">
-            <form action="/" method="post" id="sand-search-form" class="form-coll-search l-margin-as">
-              <div class="input-group l-margin-bn">
-                <input type="text" id="search-input" name="keys" value="" size="40" maxlength="128" class="form-text form-required" placeholder="Search this site">
-                <input class="btn form-submit" type="submit" id="edit-submit" name="op" value="Search">
-              </div>
-            </form>
+            <div class="form-coll-search l-margin-vs">
+                {{ drupal_block('views_exposed_filter_block:search_site-all', wrapper=false) }}
+            </div>
           </div>
         </div>
       </div>
