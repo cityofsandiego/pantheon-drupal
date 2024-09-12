@@ -1,0 +1,81 @@
+uuid: 5de656e9-0cc8-42b9-926c-3b596402d0f3
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 53
+template: false
+archive: false
+id: webform_29980
+title: '  Receive Email Updates'
+description: null
+categories: {  }
+elements: |
+  email_address:
+    '#type': email
+    '#size': 20
+    '#title': 'Email' 
+    '#description': ""
+    '#required': true
+css: ''
+javascript: ''
+settings:
+  page: true
+  wizard_progress_bar: true
+  preview: 0
+  draft: '0'
+  draft_auto_save: false
+  confirmation_type: inline
+  confirmation_url: ''
+  confirmation_message: "<p><span style=\"color: rgb(55, 66, 74); box-sizing: border-box; -webkit-font-smoothing: antialiased; line-height: 1.5; font-family: &quot;Open Sans&quot;, sans-serif; font-size: 16px;\">Thank you for your submission. &nbsp;&nbsp;</span><span style=\"color: rgb(55, 66, 74); line-height: 1.5; font-family: &quot;Open Sans&quot;, sans-serif; font-size: 16px;\">Your request will be processed by the </span>Minimum Wage Program<span style=\"color: rgb(55, 66, 74); line-height: 1.5; font-family: &quot;Open Sans&quot;, sans-serif; font-size: 16px;\">&nbsp;email list administrator.</span></p>\r\n"
+  limit_total: null
+  limit_user: null
+  form_submit_label: Submit
+  wizard_complete: 1
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+handlers:
+  email_2:
+    id: email
+    handler_id: email_2
+    label: 'Email 2'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 2
+    settings:
+      states:
+        - completed
+      to_mail: SDMinWage@sandiego.gov
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Minimum Wage Program Email Updates'
+      body: '[webform_submission:values:email_address:raw] has requested to receive email updates.'
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }
