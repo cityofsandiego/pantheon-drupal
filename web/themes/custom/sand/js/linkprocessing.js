@@ -9,8 +9,13 @@
 (function ($, Drupal) {
   Drupal.behaviors.optimizeLinkProcessing = {
     attach: function (context, settings) {
-      var sandiegoDomainRegex = /^(https?:\/\/|\/\/)?www\.sandiego\.gov/;
-      var sdgov2DomainRegex = /^(https?:\/\/|\/\/)sdgov2\.lndo\.site/;
+      // Get the current hostname
+      var currentHostname = window.location.hostname;
+
+      // Define regex patterns for sandiego.gov-related hostnames, including sandgov.build
+      var sandiegoDomains = /^(https?:\/\/|\/\/)?(www\.)?(sandiego\.gov|sandgov\.build)/;
+      var insidesdDomains = /^(https?:\/\/|\/\/)?(www\.)?(insidesdstaging\.org|insidesandiego\.org|insidesd\.build)/;
+      var sdgov2DomainRegex = /^(https?:\/\/|\/\/)?sdgov2\.lndo\.site/;
 
       $('a', context).each(function () {
         var $link = $(this);
@@ -20,6 +25,7 @@
         if (href) {
           // Strip off the sdgov2.lndo.site domain
           href = href.replace(sdgov2DomainRegex, '');
+
           // Add aria-label for PDF links and modify "(PDF)" text after the link
           if (href.endsWith('.pdf')) {
             var currentText = $link.text();
@@ -29,7 +35,6 @@
             var $nextSibling = $link[0].nextSibling;
             if ($nextSibling && $nextSibling.nodeType === Node.TEXT_NODE) {
               var textContent = $nextSibling.nodeValue;
-              // Replace only the (PDF) part, keeping the rest of the text
               $nextSibling.nodeValue = textContent.replace(/\s*\([^\)]*PDF[^\)]*\)\s*/, ' ');
             }
           }
@@ -40,8 +45,18 @@
             $pdfIcon.remove();
           }
 
-          // Cleanup URL: Strip off the hostname part for sandiego.gov links and remove /index, /index.shtml, /index/index.shtml (with or without anchors)
-          var cleanedHref = href.replace(sandiegoDomainRegex, '').replace(/\/index(\.shtml)?(\/index(\.shtml)?)?(#[^\/]*)?$/, '');
+          // Cleanup URL: If current hostname is www.sandiego.gov or sandgov.build, strip sandiego.gov-related links
+          if (currentHostname.match(sandiegoDomains)) {
+            href = href.replace(sandiegoDomains, '');
+          }
+
+          // If current hostname is insidesd.build or similar, strip insidesd-related links
+          if (currentHostname.match(insidesdDomains)) {
+            href = href.replace(insidesdDomains, '');
+          }
+
+          // Cleanup URL: remove /index, /index.shtml, /index/index.shtml (with or without anchors)
+          var cleanedHref = href.replace(/\/index(\.shtml)?(\/index(\.shtml)?)?(#[^\/]*)?$/, '');
 
           // Update the href attribute with the cleaned URL
           $link.attr('href', cleanedHref);
