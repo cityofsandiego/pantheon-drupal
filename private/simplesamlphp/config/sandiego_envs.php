@@ -17,4 +17,12 @@ $envs = [
     'endpoint' => 'http://www.okta.com/exklntkxa6QSUBls00x7',
     'location' => 'https://cityofsandiego.okta.com/app/cityofsandiegoprod_sandiegogov_1/exklntkxa6QSUBls00x7/sso/saml',
   ],
+  'www.insidesdstaging.org' => [
+    'endpoint' => 'http://www.okta.com/exklntkxa6QSUBls00x7',
+    'location' => 'https://cityofsandiego.okta.com/app/cityofsandiegoprod_insidesdstaging_1/exklntkxa6QSUBls00x7/sso/saml',
+  ],
+  'www.insidesandiego.org' => [
+    'endpoint' => 'http://www.okta.com/exklntkxa6QSUBls00x7',
+    'location' => 'https://cityofsandiego.okta.com/app/cityofsandiegoprod_insidesandiego_1/exklntkxa6QSUBls00x7/sso/saml',
+  ],
 ];
