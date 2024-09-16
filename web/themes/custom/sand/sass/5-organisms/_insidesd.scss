@@ -116,31 +116,41 @@
 
   .form-coll-search {
     border-radius: 4px 30px 30px 4px;
+    border: 1px solid $shuttle;
+    overflow: hidden;
 
     @include breakpoint(mobile-landscape down) {
       border-radius: 4px;
     }
 
-    .views-exposed-form {
-      margin: 0;
+    .js-form-item {
+      max-width: 85%;
+      margin: 0 !important;
+
+      input {
+        border: 0;
+        border-radius: 0;
+      }
     }
 
-    .form--inline,
-    .input-group {
-      border-radius: 4px 30px 30px 4px;
-
-      @include breakpoint(mobile-landscape down) {
-        border-radius: 4px;
-      }
-
+    #edit-actions {
+      width: 15%;
+      margin: 0;
+       
       input.form-submit {
-        border-radius: 0 30px 30px 0;
-        width: 15%;
 
         @include breakpoint(mobile-landscape down) {
           border-radius: 0 4px 4px 0;
         }
       }
+    }
+
+    .input-group {
+      border: 0;
+    }
+
+    .views-exposed-form {
+      margin: 0;
     }
   }
 
