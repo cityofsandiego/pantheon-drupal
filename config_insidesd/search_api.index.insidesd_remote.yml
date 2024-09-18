@@ -3,8 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.media.field_department
-    - field.storage.media.field_media_document
     - field.storage.node.body
     - field.storage.node.field_body_bottom
     - field.storage.node.field_body_no_margin
@@ -45,16 +43,18 @@ dependencies:
     - field.storage.sand_remote.field_source
     - field.storage.sand_remote.field_source_name
     - field.storage.sand_remote.field_title_long
+    - field.storage.media.field_department
+    - field.storage.media.field_media_document
     - search_api.server.pantheon_solr8
     - core.entity_view_mode.node.search_index
   module:
     - search_api_solr
-    - media
+    - sand_remote
     - taxonomy
-    - file
     - node
     - scheduler
-    - sand_remote
+    - media
+    - file
     - sand_search
     - search_api
     - search_api_attachments
@@ -753,11 +753,11 @@ processor_settings:
     prefix: '<mark>'
     suffix: '</mark>'
     excerpt: true
-    excerpt_always: false
+    excerpt_always: true
     excerpt_length: 256
     exclude_fields: {  }
     highlight: always
-    highlight_partial: false
+    highlight_partial: true
   html_filter:
     weights:
       preprocess_index: -15
@@ -815,12 +815,10 @@ processor_settings:
     alt: true
     tags:
       b: 2
-      em: 1
       h1: 5
       h2: 3
       h3: 2
       strong: 2
-      u: 1
   language_with_fallback: {  }
   rendered_item: {  }
   sand_search_processor:
