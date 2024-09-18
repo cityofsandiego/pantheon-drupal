@@ -2271,6 +2271,72 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_department
+          group_type: group
+          admin_label: ''
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: term_name
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          convert_spaces: false
       filters:
         status:
           id: status
@@ -2386,33 +2452,35 @@ display:
           fields:
             title: title
             body: body
-        tid:
-          id: tid
-          table: taxonomy_index
-          field: tid
-          relationship: none
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_department
           group_type: group
           admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: tid_op
-            label: 'Has taxonomy term'
+            operator_id: name_op
+            label: Name
             description: null
             use_operator: false
-            operator: tid_op
+            operator: name_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: tid
+            identifier: name
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-            reduce: false
+            placeholder: null
           is_grouped: true
           group_info:
             label: 'Filter by Department'
@@ -2427,29 +2495,45 @@ display:
             group_items:
               1:
                 title: 'City Planning'
-                operator: or
-                value:
-                  3519: '3519'
+                operator: '='
+                value: 'CEQA Planning'
               2:
                 title: 'Development Services'
-                operator: or
-                value:
-                  3517: '3517'
-          reduce_duplicates: false
-          vid: department
-          type: select
-          hierarchy: true
-          limit: true
-          error_message: true
+                operator: '='
+                value: 'CEQA DSD'
+              3:
+                title: 'Engineering & Capital Projects'
+                operator: '='
+                value: 'CEQA E&CP'
       filter_groups:
         operator: AND
         groups:
           1: AND
       defaults:
         use_ajax: false
+        relationships: false
         fields: false
         filters: false
         filter_groups: false
+      relationships:
+        field_attachment:
+          id: field_attachment
+          table: node__field_attachment
+          field: field_attachment
+          relationship: none
+          group_type: group
+          admin_label: 'field_attachment: Media'
+          plugin_id: standard
+          required: false
+        field_department:
+          id: field_department
+          table: node__field_department
+          field: field_department
+          relationship: none
+          group_type: group
+          admin_label: 'field_department: Taxonomy term'
+          plugin_id: standard
+          required: false
       use_ajax: false
       display_description: ''
       display_extenders: {  }
