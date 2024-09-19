@@ -53,7 +53,21 @@
   }
 }
 
+// Theme
 .theme-insidesd {
+  &.path-search {
+    #views-exposed-form-search-site-all {
+      @include breakpoint(mobile-landscape down) {
+        border-width: 0;
+      }
+      .form-item {
+        @include breakpoint(mobile-landscape down) {
+          border-width: 0;
+        }
+      }
+    }
+  }
+
   .header {
     position: relative;
     z-index: 1;
@@ -110,6 +124,18 @@
             border-radius: 0;
           }
         }
+      }
+    }
+  }
+
+
+  // Format the search bar in mobile.
+  .mobile-form-coll-search {
+    #views-exposed-form-search-site-all {
+      border-width: 0;
+      .form-item {
+        margin-right: auto;
+        margin-left: auto;
       }
     }
   }

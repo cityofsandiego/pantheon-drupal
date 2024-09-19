@@ -60,10 +60,13 @@
               {% endif %}
         </div>
       </div>
-      <div class="hide-on-desktop sub-navigation-mobile">
-        <div class="l-margin-bd">
+
+        <div class="hide-on-desktop sub-navigation-mobile">
+      {% if not searchpage %}
+        <div class="mobile-form-coll-search l-margin-bd">
           {{ drupal_block('views_exposed_filter_block:search_site-all', wrapper=false) }}
         </div>
+      {% endif %}
 
         <div id="google_translate_element" class="translate text-center"></div>
         <div class="accordions js-toggle-accordion">
