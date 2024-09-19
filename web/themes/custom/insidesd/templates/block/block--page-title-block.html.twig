@@ -1,8 +1,13 @@
 {{ title_prefix }}
+{% set url = url('<current>') %}
+{% if '/search/site' in url|render|render %}
+  {% set searchpage = 1 %}
+{% endif %}
+
 <div class="header">
   <div class="l-padding-vm">
 {% if department_title is defined %}
-    {% if department_title == 'Inside San Diego' %}
+    {% if department_title == 'Inside San Diego' or searchpage %}
       <div class="grid-container l-padding-ts">
         <div class="grid-x l-padding-mobile-hm l-flex-center-v">
           <div class="cell medium-4 text-center--mobile">
@@ -22,19 +27,6 @@
     {% endif %}
 {% elseif title %}
     <h1{{ title_attributes.addClass('page-title') }}>{{ title }}</h1>
-{% else %}
-  <div class="grid-container l-padding-ts">
-    <div class="grid-x l-padding-mobile-hm l-flex-center-v">
-      <div class="cell medium-4 text-center--mobile">
-        <h1 class="visuallyhidden">{{ department_title }}</h1>
-        <p><a href="/"><img src="/themes/custom/sand/images/inside-sd-logo.svg" alt="Inside San Diego logo" width="200" height="auto"></a></p>
-      </div>
-      <div class="cell medium-auto">
-        <p class="main__tagline l-margin-bn"><strong>News &amp; updates from the <a class="text-white" href="https://sandiego.gov">City&nbsp;of&nbsp;San&nbsp;Diego</a></strong></p>
-      </div>
-    </div>
-    {{ drupal_menu('inside-san-diego') }}
-  </div>
 {% endif %}
   </div>
 {{ title_suffix }}
@@ -56,8 +48,7 @@
               </ul>
             </nav>
           </div>
-        {% set url = url('<current>') %}
-        {% if 'search/site' in url|render|render %}
+        {% if searchpage %}
           <div class="cell medium-3 white-bg hide-on-mobile">
           </div>
           {%  else %}

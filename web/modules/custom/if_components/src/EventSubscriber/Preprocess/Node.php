@@ -158,10 +158,6 @@ final class Node implements EventSubscriberInterface {
       }
     }
 
-    $path = \Drupal::request()->getPathInfo();
-    if ($path == '/search/site') {
-      $variables->set('search_page', 'true');
-    }
 
     $variables->set('hero_image', $defaultBGImageURL);
     if (!empty($nids)) {
