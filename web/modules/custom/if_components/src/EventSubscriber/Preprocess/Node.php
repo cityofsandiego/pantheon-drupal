@@ -687,7 +687,7 @@ final class Node implements EventSubscriberInterface {
         ->condition('field_path', $path . "%", 'LIKE');
       $nids = $query->execute();
       foreach ($nids as $nid) {
-        if (!in_array($nid, $this->context_ids)) {
+        if (!in_array($nid, $this->context_ids_for_path)) {
           $this->context_ids_for_path[] = $nid;
         }
       }
