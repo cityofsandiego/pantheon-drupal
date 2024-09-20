@@ -55,7 +55,22 @@
 
 // Theme
 .theme-insidesd {
+
+  .main__tagline {
+    @include breakpoint(mobile-landscape down) {
+      font-size: 1rem !important;
+      line-height: 1.3rem !important;
+      margin: 0 !important;
+      text-align: right !important;
+    }
+  }
+
   &.path-search {
+
+    h1 {
+      margin: 0;
+    }
+
     #views-exposed-form-search-site-all {
       @include breakpoint(mobile-landscape down) {
         border-width: 0;
@@ -141,12 +156,16 @@
   }
 
   .form-coll-search {
-    border-radius: 4px 30px 30px 4px;
+    border-radius: 0 30px 30px 0;
     border: 1px solid $shuttle;
     overflow: hidden;
 
     @include breakpoint(mobile-landscape down) {
       border-radius: 4px;
+
+      #views-exposed-form-search-site-all {
+        border: 0;
+      }
     }
 
     .js-form-item {
@@ -168,6 +187,7 @@
 
         @include breakpoint(mobile-landscape down) {
           border-radius: 0 4px 4px 0;
+          margin-top: 0 !important;
         }
       }
     }
