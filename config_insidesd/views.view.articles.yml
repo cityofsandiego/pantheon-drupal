@@ -3329,6 +3329,72 @@ display:
     display_options:
       title: 'Browse Stories in Category'
       fields:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         field_image:
           id: field_image
           table: node__field_image
@@ -3474,7 +3540,7 @@ display:
             external: false
             replace_spaces: false
             path_case: none
-            trim_whitespace: false
+            trim_whitespace: true
             alt: ''
             rel: ''
             link_class: ''
@@ -3488,7 +3554,7 @@ display:
             more_link: false
             more_link_text: ''
             more_link_path: ''
-            strip_tags: false
+            strip_tags: true
             trim: true
             preserve_tags: ''
             html: false
@@ -3854,10 +3920,10 @@ display:
           entity_field: title
           plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
-            alter_text: true
-            text: "<div class=\"grid-x grid-padding-x l-padding-am l-padding-desktop-hd article--teaser\">\r\n<div class=\"cell medium-12\"><h3 class=\"heading--snug l-margin-mobile-bd\"><a href=\"{{ view_node }}\">{{ title }}</a></h3></div>\r\n<div class=\"cell medium-4 l-margin-mobile-bd\">\r\n  <div class=\"video-wrapper\">\r\n            <iframe width=\"560\" height=\"315\" src=\"{{ field_media_oembed_video|replace({\"/watch?v=\":\"/embed/\"}) }}?rel=0&wmode=transparent\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\r\n          </div>                              \r\n </div>\r\n<div class=\"cell medium-8\">\r\n<p class=\"fine-print l-margin-bs\"><span class=\"text-upper text-spruce\">{{ created }}</span> {{ sticky }}</p>\r\n  {{ body }} \r\n <p><a href=\"{{ view_node }}\">Read more<span class=\"visuallyhidden\"> about {{ title }}</span></a></p>\r\n</div>\r\n</div>"
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -3908,6 +3974,55 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"grid-x grid-padding-x l-padding-am l-padding-desktop-hd article--teaser\">\r\n<div class=\"cell medium-12\"><h3 class=\"heading--snug l-margin-mobile-bd\"><a href=\"{{ view_node }}\">{{ title }}</a></h3></div>\r\n<div class=\"cell medium-4 l-margin-mobile-bd\">   \r\n<p><a href=\"#{{ nid }}-video\" class=\"popup-modal youtube-icon-overlay pos-r\"><img src=\"https://i.ytimg.com/vi/{{ field_media_oembed_video|replace({\"https://www.youtube.com/watch?v=\":\"\"}) }}/mqdefault.jpg\" alt=\"Play video\"><span class=\"pin-center yt-bg\">&nbsp;</span><i class=\"icon-youtube icon--xl pin-center\"></i></a></p>                       \r\n </div>\r\n<div class=\"cell medium-8\">\r\n<p class=\"fine-print l-margin-bs\"><span class=\"text-upper text-spruce\">{{ created }}</span> {{ sticky }}</p>\r\n<p>{{ body }} <a href=\"{{ view_node }}\">Read more<span class=\"visuallyhidden\"> about {{ title }}</span></a></p>\r\n</div>\r\n<div id=\"{{ nid }}-video\" class=\"video-popup mfp-hide\"> <!-- unique ID is necessary; class sets default magnific styling -->\r\n\t<iframe width=\"853\" height=\"480\" src=\"{{ field_media_oembed_video|replace({\"/watch?v=\":\"/embed/\"}) }}?rel=0&autoplay=0\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\r\n</div>\r\n</div>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
       arguments: {  }
       filters:
         status:
