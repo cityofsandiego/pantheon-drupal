@@ -592,6 +592,190 @@ display:
     position: 1
     display_options:
       fields:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: false
+            ellipsis: false
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: 'Read More'
+          output_url_as_text: true
+          absolute: false
         field_image:
           id: field_image
           table: node__field_image
@@ -603,8 +787,8 @@ display:
           label: ''
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<p><a href="{{ view_node }}" alt="{{ title }}>{{ field_image }}</a></p>'
             make_link: false
             path: ''
             absolute: false
@@ -649,6 +833,69 @@ display:
             image_loading:
               attribute: lazy
           group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_media_oembed_video:
+          id: field_media_oembed_video
+          table: media__field_media_oembed_video
+          field: field_media_oembed_video
+          relationship: field_image
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: "<p><a href=\"#{{ nid }}-video\" class=\"popup-modal youtube-icon-overlay pos-r\"><img src=\"https://i.ytimg.com/vi/{{ field_media_oembed_video|replace({\"https://www.youtube.com/watch?v=\":\"\"}) }}/mqdefault.jpg\" alt=\"Play video\"><span class=\"pin-center yt-bg\">&nbsp;</span><i class=\"icon-youtube icon--xl pin-center\"></i></a></p>\r\n<div id=\"{{ nid }}-video\" class=\"video-popup mfp-hide\"> <!-- unique ID is necessary; class sets default magnific styling -->\r\n\t<iframe width=\"853\" height=\"480\" src=\"{{ field_media_oembed_video|replace({\"/watch?v=\":\"/embed/\"}) }}?rel=0&autoplay=0\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\r\n</div>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: '{{ field_image }}'
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -721,59 +968,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        view_node:
-          id: view_node
-          table: node
-          field: view_node
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          plugin_id: entity_link
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: false
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: 'Read More'
-          output_url_as_text: true
-          absolute: false
         created:
           id: created
           table: node_field_data
@@ -895,71 +1089,6 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: false
-            ellipsis: false
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -1120,7 +1249,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"grid-x grid-padding-x l-padding-am l-padding-desktop-hd article--teaser\">\r\n<div class=\"cell medium-12\"><h3 class=\"heading--snug l-margin-mobile-bd\"><a href=\"{{ view_node }}\">{{ title }}</a></h3></div>\r\n<div class=\"cell medium-4 l-margin-mobile-bd\">\r\n  <a href=\"{{ view_node }}\" alt=\"{{ title }}>{{ field_image }}</a>\r\n </div>\r\n<div class=\"cell medium-8\">\r\n<p class=\"fine-print l-margin-bs\"><span class=\"text-upper text-spruce\">{{ created }}</span> {{ sticky }}</p>\r\n <p>{{ body }} <a href=\"{{ view_node }}\">Read more<span class=\"visuallyhidden\"> about {{ title }}</span></a></p>\r\n<p class=\"categories\">\r\n{{ field_category }}\r\n</p>\r\n</div>\r\n</div>"
+            text: "<div class=\"grid-x grid-padding-x l-padding-am l-padding-desktop-hd article--teaser\">\r\n<div class=\"cell medium-12\"><h3 class=\"heading--snug l-margin-mobile-bd\"><a href=\"{{ view_node }}\">{{ title }}</a></h3></div>\r\n<div class=\"cell medium-4 l-margin-mobile-bd\">\r\n  <p>{{ field_media_oembed_video }}</p>\r\n </div>\r\n<div class=\"cell medium-8\">\r\n<p class=\"fine-print l-margin-bs\"><span class=\"text-upper text-spruce\">{{ created }}</span> {{ sticky }}</p>\r\n <p>{{ body }} <a href=\"{{ view_node }}\">Read more<span class=\"visuallyhidden\"> about {{ title }}</span></a></p>\r\n<p class=\"categories\">\r\n{{ field_category }}\r\n</p>\r\n</div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -1298,13 +1427,26 @@ display:
           separator: ''
           hide_empty: false
       defaults:
+        use_ajax: false
         link_display: false
         link_url: false
         style: false
         row: false
+        relationships: false
         fields: false
         filters: false
         filter_groups: false
+      relationships:
+        field_image:
+          id: field_image
+          table: node__field_image
+          field: field_image
+          relationship: none
+          group_type: group
+          admin_label: 'field_image: Media'
+          plugin_id: standard
+          required: false
+      use_ajax: false
       display_description: ''
       link_display: custom_url
       link_url: /insidesd/articles
@@ -1320,6 +1462,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_media_oembed_video'
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_byline'
         - 'config:field.storage.node.field_category'
@@ -1332,6 +1475,72 @@ display:
     display_options:
       title: 'Browse Stories in Category'
       fields:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         title:
           id: title
           table: node_field_data
@@ -1524,71 +1733,8 @@ display:
           label: ''
           exclude: true
           alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_entity_view
-          settings:
-            view_mode: article_home_small
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_media_oembed_video:
-          id: field_media_oembed_video
-          table: media__field_media_oembed_video
-          field: field_media_oembed_video
-          relationship: field_image
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: true
-          alter:
             alter_text: true
-            text: "<div class=\"video-wrapper\">\r\n    <iframe width=\"560\" height=\"315\" src=\"{{ field_media_oembed_video|replace({\"/watch?v=\":\"/embed/\"}) }}?rel=0&wmode=transparent\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\r\n</div>                              \r\n"
+            text: '<p><a href="{{ view_node }}" alt="{{ title }}>{{ field_image }}</a></p>'
             make_link: false
             path: ''
             absolute: false
@@ -1621,7 +1767,73 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: false
-          empty: '{{ field_media_image }}'
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: media_thumbnail
+          settings:
+            image_link: ''
+            image_style: article_100
+            image_loading:
+              attribute: lazy
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_media_oembed_video:
+          id: field_media_oembed_video
+          table: media__field_media_oembed_video
+          field: field_media_oembed_video
+          relationship: field_image
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: "<p><a href=\"#{{ nid }}-video\" class=\"popup-modal youtube-icon-overlay pos-r\"><img src=\"https://i.ytimg.com/vi/{{ field_media_oembed_video|replace({\"https://www.youtube.com/watch?v=\":\"\"}) }}/mqdefault.jpg\" alt=\"Play video\"><span class=\"pin-center yt-bg\">&nbsp;</span><i class=\"icon-youtube icon--xl pin-center\"></i></a></p>\r\n<div id=\"{{ nid }}-video\" class=\"video-popup mfp-hide\"> <!-- unique ID is necessary; class sets default magnific styling -->\r\n\t<iframe width=\"853\" height=\"480\" src=\"{{ field_media_oembed_video|replace({\"/watch?v=\":\"/embed/\"}) }}?rel=0&autoplay=0\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\r\n</div>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: '{{ field_image }}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
@@ -2208,6 +2420,7 @@ display:
           hide_empty: false
       defaults:
         title: false
+        use_ajax: false
         style: false
         row: false
         relationships: false
@@ -2235,6 +2448,7 @@ display:
           admin_label: 'field_image: Media'
           plugin_id: standard
           required: false
+      use_ajax: false
       display_description: ''
       header:
         area_text_custom:
@@ -2541,6 +2755,72 @@ display:
     position: 1
     display_options:
       fields:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         title:
           id: title
           table: node_field_data
@@ -2606,72 +2886,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_image:
-          id: field_image
-          table: node__field_image
-          field: field_image
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: false
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: media_thumbnail
-          settings:
-            image_link: ''
-            image_style: article_100
-            image_loading:
-              attribute: lazy
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         view_node:
           id: view_node
           table: node
@@ -2725,6 +2939,135 @@ display:
           text: 'Read More'
           output_url_as_text: true
           absolute: false
+        field_image:
+          id: field_image
+          table: node__field_image
+          field: field_image
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '<p><a href="{{ view_node }}" alt="{{ title }}>{{ field_image }}</a></p>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: media_thumbnail
+          settings:
+            image_link: ''
+            image_style: article_100
+            image_loading:
+              attribute: lazy
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_media_oembed_video:
+          id: field_media_oembed_video
+          table: media__field_media_oembed_video
+          field: field_media_oembed_video
+          relationship: field_image
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: "<p><a href=\"#{{ nid }}-video\" class=\"popup-modal youtube-icon-overlay pos-r\"><img src=\"https://i.ytimg.com/vi/{{ field_media_oembed_video|replace({\"https://www.youtube.com/watch?v=\":\"\"}) }}/mqdefault.jpg\" alt=\"Play video\"><span class=\"pin-center yt-bg\">&nbsp;</span><i class=\"icon-youtube icon--xl pin-center\"></i></a></p>\r\n<div id=\"{{ nid }}-video\" class=\"video-popup mfp-hide\"> <!-- unique ID is necessary; class sets default magnific styling -->\r\n\t<iframe width=\"853\" height=\"480\" src=\"{{ field_media_oembed_video|replace({\"/watch?v=\":\"/embed/\"}) }}?rel=0&autoplay=0\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\r\n</div>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: '{{ field_image }}'
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         body:
           id: body
           table: node__body
@@ -3069,7 +3412,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"grid-x grid-padding-x l-padding-am l-padding-desktop-hd article--teaser\">\r\n<div class=\"cell medium-12\"><h3 class=\"heading--snug l-margin-mobile-bd\"><a href=\"{{ view_node }}\">{{ title }}</a></h3></div>\r\n<div class=\"cell medium-4 l-margin-mobile-bd\">\r\n  <a href=\"{{ view_node }}\" alt=\"{{ title }}>{{ field_image }}</a>                             \r\n </div>\r\n<div class=\"cell medium-8\">\r\n<p class=\"fine-print l-margin-bs\"><span class=\"text-upper text-spruce\">{{ created }}</span> {{ sticky }}</p>\r\n<p>{{ body }} <a href=\"{{ view_node }}\">Read more<span class=\"visuallyhidden\"> about {{ title }}</span></a></p>\r\n</div>\r\n</div>"
+            text: "<div class=\"grid-x grid-padding-x l-padding-am l-padding-desktop-hd article--teaser\">\r\n<div class=\"cell medium-12\"><h3 class=\"heading--snug l-margin-mobile-bd\"><a href=\"{{ view_node }}\">{{ title }}</a></h3></div>\r\n<div class=\"cell medium-4 l-margin-mobile-bd\">\r\n  {{ field_media_oembed_video }}\r\n</div>\r\n<div class=\"cell medium-8\">\r\n<p class=\"fine-print l-margin-bs\"><span class=\"text-upper text-spruce\">{{ created }}</span> {{ sticky }}</p>\r\n<p>{{ body }} <a href=\"{{ view_node }}\">Read more<span class=\"visuallyhidden\"> about {{ title }}</span></a></p>\r\n</div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -3294,14 +3637,27 @@ display:
           separator: ''
           hide_empty: false
       defaults:
+        use_ajax: false
         link_display: false
         link_url: false
         style: false
         row: false
+        relationships: false
         fields: false
         arguments: false
         filters: false
         filter_groups: false
+      relationships:
+        field_image:
+          id: field_image
+          table: node__field_image
+          field: field_image
+          relationship: none
+          group_type: group
+          admin_label: 'field_image: Media'
+          plugin_id: standard
+          required: false
+      use_ajax: false
       display_description: ''
       link_display: custom_url
       link_url: /insidesd/articles
@@ -3317,6 +3673,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_media_oembed_video'
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_byline'
         - 'config:field.storage.node.field_category'
@@ -4212,6 +4569,7 @@ display:
           hide_empty: false
       defaults:
         title: false
+        use_ajax: false
         style: false
         row: false
         relationships: false
@@ -4239,6 +4597,7 @@ display:
           admin_label: 'field_image: Media'
           plugin_id: standard
           required: false
+      use_ajax: false
       display_description: ''
       header: {  }
       exposed_block: true
