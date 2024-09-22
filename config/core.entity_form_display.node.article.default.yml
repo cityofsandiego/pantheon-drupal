@@ -19,7 +19,6 @@ dependencies:
     - field.field.node.article.field_sidebar
     - field.field.node.article.field_subtitle
     - node.type.article
-    - workflows.workflow.editorial
   module:
     - allowed_formats
     - content_moderation
@@ -27,6 +26,8 @@ dependencies:
     - media_library
     - metatag
     - path
+    - scheduler
+    - scheduler_content_moderation_integration
     - search_api_exclude_entity
     - term_reference_tree
     - text
@@ -291,6 +292,23 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 52
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 53
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   simple_sitemap:
     weight: 3
     region: content
@@ -328,6 +346,18 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 54
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 55
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   url_redirects:
     weight: 12
     region: content
@@ -335,7 +365,3 @@ content:
     third_party_settings: {  }
 hidden:
   field_d7_nid: true
-  publish_on: true
-  publish_state: true
-  unpublish_on: true
-  unpublish_state: true
