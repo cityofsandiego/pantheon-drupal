@@ -6,6 +6,8 @@ dependencies:
     - field.storage.node.field_department
     - node.type.article
     - taxonomy.vocabulary.department
+  content:
+    - 'taxonomy_term:department:f4fa6302-fc7a-4429-b281-7ffa3f92919e'
 id: node.article.field_department
 field_name: field_department
 entity_type: node
@@ -14,10 +16,12 @@ label: Department
 description: '<p>Select a department.</p>'
 required: true
 translatable: true
-default_value: {  }
+default_value:
+  -
+    target_uuid: f4fa6302-fc7a-4429-b281-7ffa3f92919e
 default_value_callback: ''
 settings:
-  handler: 'default:taxonomy_term'
+  handler: 'default:filter_existing_terms'
   handler_settings:
     target_bundles:
       department: department
