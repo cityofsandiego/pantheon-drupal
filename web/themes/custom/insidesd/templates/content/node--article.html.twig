@@ -88,9 +88,9 @@
   <div class="grid-container main-grid-container l-padding-hn l-margin-ts white-bg">
     <div {{ content_attributes.addClass('node__content') }}>
       <div class="grid-x">
-        <div class="cell small-12 medium-auto content l-padding-mobile-tn">
+        <div class="cell small-12 medium-auto content l-padding-mobile-tn pos-r">
           {% if node.title.value != "Inside San Diego Home"%}
-          <div class="l-padding-hm l-padding-desktop-vd l-padding-mobile-vd">
+          <div class="l-padding-hm l-padding-desktop-vd l-padding-mobile-vd pos-r">
             {% if content.field_category.0 %}
               {{ content.field_category }}
             {% endif %}
@@ -115,8 +115,8 @@
           </div>
           {% endif %}
           {% if content.field_body_no_margin.0 %}
-          {% if node.title.value != "Inside San Diego Home"%}
-          <div class="l-padding-hm l-padding-bm">
+          {% if content.field_article_type.0["#markup"] == "Article List"  %}
+          <div class="l-padding-hm">
           {% else %}
           <div class="l-padding-am">
           {% endif %}
@@ -124,10 +124,10 @@
           </div>
           {% endif %}
           {% if content.body.0 %}
-          {% if node.title.value != "Inside San Diego Home"%}
-          <div class="l-padding-hm l-padding-bm">
+          {% if content.field_article_type.0["#markup"] == "Article List"  %}
+          <div class="l-padding-hm">
           {% else %}
-          <div class="l-padding-am">
+          <div class="l-padding-hm l-padding-bl">
           {% endif %}
             {{ content.body }}
           </div>
@@ -144,16 +144,6 @@
                 {{ item.value }}
               </div>
               {% endfor %}
-              {% if content.field_article_type.0["#markup"] == "Article List" %}
-              <div class="accordions js-toggle-accordion hide-on-mobile">
-                <div class="accordion rounded-corners overflow-h">
-                  <p class="accordion__heading h5 white-bg"><a class="accordion__link" href="#">Filter by Category<i class="toggle-icon"></i></a></p>
-                  <div class="accordion__drawer white-bg" style="display: none;">
-                    {{ drupal_view('article_category_list', 'categories') }}
-                  </div>
-                </div>
-              </div>
-              {% endif %}
               <div class="l-margin-td background-white rounded-corners l-padding-ad">
                 <h2 class="heading--center heading--snug" style="font-size: 1rem !important">Share this Page</h2>
                 <div class="sharethis-inline-share-buttons"></div>
