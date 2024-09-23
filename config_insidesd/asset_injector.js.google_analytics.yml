@@ -7,147 +7,17 @@ dependencies:
 id: google_analytics
 label: 'Google Analytics'
 code: |
-  // Google Analytics initialization
-  (function(i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function() {
-      (i[r].q = i[r].q || []).push(arguments);
-    }, i[r].l = 1 * new Date();
-    a = s.createElement(o);
-    m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m);
-  })(window, document, 'script', '//www.googletagmanager.com/gtag/js?id=G-LV7FC3GM85', 'ga4');
+  (function() {
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-F57QY06E4C';
+    document.head.appendChild(script);
 
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    window.dataLayer.push(arguments);
-  }
-  gtag('js', new Date());
-  gtag('config', 'G-LV7FC3GM85');
-  gtag('config', 'G-F57QY06E4C');
-
-  // Google Tag Manager for different directories
-  try {
-    var pathname = window.location.pathname;
-
-    // Define a function to set gtag config
-    function setGtagConfig(id) {
-      gtag('config', id);
-    }
-
-    // Map of pathnames to their respective gtag configurations
-  var gtagConfigMap = {
-    "/citycouncil": 'G-7V7NJQF9M4',
-    "/citycouncil/cd1": 'G-WF1BNGZM4G',
-    "/citycouncil/cd2": 'G-NTGLHR2BVW',
-    "/citycouncil/cd3": 'G-9E1ENWFE73',
-    "/citycouncil/cd4": 'G-771M1S28V2',
-    "/citycouncil/cd5": 'G-82Q1PQVFXC',
-    "/citycouncil/cd6": 'G-GJYHW2R30V',
-    "/citycouncil/cd7": 'G-CB5JKERWCX',
-    "/citycouncil/cd8": 'G-KR39EH38QJ',
-    "/citycouncil/cd9": 'G-P6TYEC8S32',
-    "/arts-culture": 'G-PK8WNBWLP0',
-    "/gangcommission": 'G-EE1MCPJY83',
-    "/development-services": 'G-XKE6XR334H',
-    "/public-library": 'G-X2YR7QFTMF',
-    "/park-and-recreation": 'G-VRFME2GYPK',
-    "/park-and-recreation/golf/torreypines": 'G-E46KP6EQXS',
-    "/parks-and-recreation": 'G-VRFME2GYPK',
-    "/torrey-pines": 'G-E46KP6EQXS',
-    "/police": 'G-DG9BGFRQE7',
-    "/join-san-diego-police-department": 'G-DG9BGFRQE7',
-    "/adacompliance": 'G-M3LZ85N0D5',
-    "/airports": 'G-LCK6MGBBGY',
-    "/auditor": 'G-E224K4W693',
-    "/cdbg": 'G-K6BC4S6YB9',
-    "/cip": 'G-9WSJYV1X7M',
-    "/cityattorney": 'G-NNEPNSYEVS',
-    "/city-clerk": 'G-2S5KEM1W1C',
-    "/digitalarchives": 'G-ZSBRZ23R71',
-    "/city-clerk/boards-commissions": 'G-VQEX22S08H',
-    "/city-clerk/elections": 'G-DS5HCR3KNK',
-    "/city-clerk/officialdocs": 'G-VH3MYR4YJ2',
-    "/communityservices": 'G-6KGL98ZGS8',
-    "/corporatepartnership": 'G-K6VJ0Z785G',
-    "/debtmanagement": 'G-MSV93H9KEP',
-    "/economic-development": 'G-D6Y8DKE3XN',
-    "/empopp": 'G-765H9SR903',
-    "/empopp/about/civilser": 'G-B5VDC1ME67',
-    "/environmental-services": 'G-D1L48D920W',
-    "/eoc": 'G-4TJWNSC41G',
-    "/eoc/about/commission": 'G-54TZMDKZHC',
-    "/ethics": 'G-KKCHB4MHPD',
-    "/fire": 'G-LDMKWB7RV3',
-    "/finance": 'G-37CBS40GVF',
-    "/get-it-done": 'G-M2TK4QG652',
-    "/homelessness-strategies-and-solutions": 'G-T3L3J53L62',
-    "/human-relations": 'G-4ZX0R41QLS',
-    "/humanresources": 'G-20KP0089FY',
-    "/iab": 'G-GVQGY567R3',
-    "/iba": 'G-239XQPZ3VL',
-    "/it": 'G-03LJ0RGH54',
-    "/lifeguards": 'G-18YB819BKM',
-    "/mayor": 'G-HHZ1PZPSX7',
-    "/oes": 'G-7NXL5NJK3E',
-    "/ohs": 'G-LG698T9YSN',
-    "/parkandrecboard": 'G-YK5J1GRF3N',
-    "/parking": 'G-YNFRK0WM61',
-    "/planning": 'G-KREYYWBH0B',
-    "/planning-commission": 'G-VSMQ44HZYR',
-    "/public-library/about-the-library/commissioners": 'G-KSRWZMEE3S',
-    "/public-utilities": 'G-Y9R8PRMBGL',
-    "/public-utilities/sustainability/pure-water-sd": 'G-KFJGCHX7NJ',
-    "/publicworks": 'G-YDR3KZRNPR',
-    "/ecp": 'G-YDR3KZRNPR',
-    "/purchasing": 'G-SYX047B8D9',
-    "/real-estate-and-airport-management": 'G-R2K47XS4X4',
-    "/riskmanagement": 'G-028TTCHRBE',
-    "/sandiegofamilyjusticecenter": 'G-7QSBBVB48N',
-    "/stormwater": 'G-BEQ0VQH6CP',
-    "/street-div": 'G-9E4HR3BEKJ',
-    "/treasurer": 'G-W3RZKL04WX',
-    "/tsw": 'G-CV63GYQTL4',
-    "/undergrounding": 'G-0EWHVS7X2W',
-    "/water": 'G-7ZFQVBF6Z8',
-    "/opengov": 'G-YC1LQ24SPE',
-    "/pad": 'G-29KJPZQDSM',
-    "/investorinformation": '',
-    "/communications": 'G-F6N0TCCCW6',
-    "/sustainability": 'G-8V5CPM322Y'
-  };
-
-    // Check if pathname starts with any key in the gtagConfigMap and apply the respective gtag config
-    Object.keys(gtagConfigMap).forEach(function(key) {
-      if (pathname.startsWith(key)) {
-        setGtagConfig(gtagConfigMap[key]);
-      }
-    });
-
-  } catch (ex) {
-    // Error handling
-    console.error('Error in Google Tag Manager script:', ex);
-  }
-
-  // Additional GTM script
-  try {
-    (function(w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({
-        'gtm.start': new Date().getTime(), event: 'gtm.js'
-      });
-      var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-      j.async = true;
-      j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
-      f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-TGPZ43');
-  } catch (ex) {
-    // Error handling
-    console.error('Error in GTM initialization script:', ex);
-  }
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F57QY06E4C');
+  })();
 noscript: ''
 noscriptRegion: {  }
 jquery: true
