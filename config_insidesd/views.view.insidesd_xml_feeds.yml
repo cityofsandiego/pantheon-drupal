@@ -829,7 +829,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<p class=\"l-margin-bn\"><a href=\"{{ view_node }}\" class=\"no-underline\"><img src=\"{{ field_media_image }}\" width=\"399\" height=\"224\"></a></p>\r\n<div class=\"l-padding-ad\">\r\n<p class=\"h3 heading--snug\"><a href=\"{{ view_node }}\" class=\"no-underline\">{{ title }}</a></p>\r\n{{ created }}\r\n<p class=\"categories\">\r\n{{ field_category }}\r\n</p>\r\n</div>"
+            text: "<p class=\"l-margin-bn\"><a href=\"{{ view_node }}\" class=\"no-underline\"><img src=\"{{ field_media_image }}\" width=\"399\" height=\"224\"></a></p>\r\n<div class=\"l-padding-ad\">\r\n<p class=\"h3 heading--snug\"><a href=\"{{ view_node }}\" class=\"no-underline\">{{ title|replace({'&#039;':''}) }}</a></p>\r\n{{ created }}\r\n<p class=\"categories\">\r\n{{ field_category }}\r\n</p>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -985,8 +985,8 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: false
-            text: "<a href=\"{{ view_node }}\" class=\"no-underline\">\r\n    {{ field_image }}\r\n    <p class=\"h5\">{{ title }}</p>\r\n</a>"
+            alter_text: true
+            text: '{{ title|replace({"&#039;":"''"})|raw }}'
             make_link: false
             path: ''
             absolute: false
