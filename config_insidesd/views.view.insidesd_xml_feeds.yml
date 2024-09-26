@@ -1302,6 +1302,13 @@ display:
         options:
           offset: 0
           items_per_page: 5
+      cache:
+        type: time
+        options:
+          results_lifespan: 60
+          results_lifespan_custom: 0
+          output_lifespan: 3600
+          output_lifespan_custom: 0
       sorts:
         sticky:
           id: sticky
@@ -1461,6 +1468,7 @@ display:
             utf8_bom: '0'
             use_serializer_encode_only: false
       defaults:
+        cache: false
         relationships: false
         fields: false
         sorts: false
