@@ -4,9 +4,9 @@ status: true
 dependencies:
   config:
     - system.menu.admin
+    - user.role.administrator
   module:
     - node
-    - scheduler
     - smart_date
     - user
 _core:
@@ -551,7 +551,10 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: scheduler
+        type: role
+        options:
+          role:
+            administrator: administrator
       cache:
         type: tag
         options: {  }
@@ -1011,8 +1014,8 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
+        - user.roles
       tags: {  }
   overview:
     id: overview
@@ -1046,8 +1049,8 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
+        - user.roles
       tags: {  }
   user_page:
     id: user_page
@@ -1077,7 +1080,7 @@ display:
           admin_label: ''
           entity_type: node
           entity_field: uid
-          plugin_id: numeric
+          plugin_id: entity_target_id
           default_action: empty
           exception:
             value: all
@@ -1109,6 +1112,7 @@ display:
             roles: {  }
           break_phrase: false
           not: false
+          target_entity_type_id: user
       defaults:
         empty: false
         access: true
@@ -1139,6 +1143,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
+        - user.roles
       tags: {  }
