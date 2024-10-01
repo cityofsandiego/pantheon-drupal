@@ -164,7 +164,6 @@
         "drupal/simplesamlphp_auth": "^4.0",
         "drupal/views_bulk_edit": "^3.0",
         "drupal/pantheon_advanced_page_cache": "^2.1",
-        "drupal/calendar_view": "^2.1",
         "drupal/flexslider": "^3.0@alpha",
         "woocommerce/flexslider": "~2.0",
         "drupal/sitewide_alert": "^2.0",
@@ -219,7 +218,8 @@
         "symfony/framework-bundle":"6.4.7",
         "drupal/embed": "^1.9",
         "drupal/entity_reference_revisions": "^1.12",
-        "drupal/scheduler": "^2.1"
+        "drupal/scheduler": "^2.1",
+        "drupal/calendar_view": "2.1.7"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.6",
@@ -227,7 +227,9 @@
         "jcnventura/pharborist": "dev-master",
         "phpspec/prophecy-phpunit": "^2",
         "drupal/core-dev": "^10",
-        "drupal/examples": "^4.0"
+        "drupal/examples": "^4.0",
+        "drupal/upgrade_status": "^4.3",
+        "palantirnet/drupal-rector": "^0.20.3"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -286,6 +288,7 @@
                 "Allow iframe in view rewrite and global text.": "patches/iframe_for_views_rewrite_global_text_idea_from_3019171.patch"
             },
             "drupal/calendar_view": {
+                "Hack for calendar_view and smart date": "patches/calendar_view_hack1.patch",
                 "Hack remove timezone adjustment": "patches/calendar_view_hack2.patch"
             },
             "drupal/insert_block": {
