@@ -36,7 +36,10 @@ class SandFeedImportHandler extends FeedImportHandler {
   public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
     return new static(
       $container->get('event_dispatcher'),
-      $container->get('database')
+      $container->get('database'),
+      $container->get('class_resolver'),
+      $container->get('keyvalue'),
+      $container->get('datetime.time'),
     );
   }
 
