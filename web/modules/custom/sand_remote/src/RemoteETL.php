@@ -2,6 +2,7 @@
 
 namespace Drupal\sand_remote;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\ContentEntityBase;
 
 /**
@@ -15,7 +16,7 @@ class RemoteETL extends ContentEntityBase {
    * @param $path
    * @return string
    */
-  public static function setDocType(\Drupal\Core\Entity\EntityInterface $entity): void {
+  public static function setDocType(EntityInterface $entity): void {
     $field_doc_set = 'field_doc_set';
     $field_doc_type = 'field_doc_type';
     if (!$entity->hasField($field_doc_set) || !$entity->hasField($field_doc_type)) {
@@ -155,7 +156,7 @@ class RemoteETL extends ContentEntityBase {
    * @return string
    */
   //function sand_search_get_committee_from_path(\Drupal\Core\Entity\EntityInterface $entity)
-  public static function setCommittee(\Drupal\Core\Entity\EntityInterface $entity): void {
+  public static function setCommittee(EntityInterface $entity): void {
     $field_path = 'field_path';
     $field_committee = 'field_committee';
     if (!$entity->hasField($field_path) || !$entity->hasField($field_committee)) {
@@ -255,7 +256,7 @@ class RemoteETL extends ContentEntityBase {
     }
   }
   
-  public static function setDocDateYear(\Drupal\Core\Entity\EntityInterface $entity): void {
+  public static function setDocDateYear(EntityInterface $entity): void {
     $field_doc_date_num = 'field_doc_date_num';
     $field_doc_date_year = 'field_doc_date_year';
     if (!$entity->hasField($field_doc_date_year) || !$entity->hasField($field_doc_date_year)) {
@@ -268,7 +269,7 @@ class RemoteETL extends ContentEntityBase {
     }
   }
 
-  public static function setMuniCodeChapter(\Drupal\Core\Entity\EntityInterface $entity): void {
+  public static function setMuniCodeChapter(EntityInterface $entity): void {
     $field_doc_num = 'field_doc_num';
     $field_muni_code_chapter = 'field_muni_code_chapter';
     if (!$entity->hasField($field_doc_num) || !$entity->hasField($field_muni_code_chapter)) {

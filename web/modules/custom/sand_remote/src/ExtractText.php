@@ -2,6 +2,7 @@
 
 namespace Drupal\sand_remote;
 
+use Drupal\Core\Utility\Error;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -266,7 +267,7 @@ class ExtractText {
    * @return \Drupal\file\FileInterface|false|string
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  function getRemoteFile($destination = NULL, $managed = FALSE, $replace = FileSystemInterface::EXISTS_RENAME) {
+  function getRemoteFile($destination = NULL, $managed = FALSE, $replace = Drupal\Core\File\FileExists::Rename ) {
     $url = $this->getUrlField();
     $parsed_url = parse_url($url);
     /** @var \Drupal\Core\File\FileSystemInterface $file_system */
@@ -452,7 +453,7 @@ class ExtractText {
 
     // See if the configuration wants us to bring the file locally first.
     if (\Drupal::config('sand_remote.settings')->get('fetch')) {
-      $file = $this->getRemoteFile('temporary://', TRUE, FileSystemInterface::EXISTS_RENAME);
+      $file = $this->getRemoteFile('temporary://', TRUE, Drupal\Core\File\FileExists::Rename );
       if ($file instanceof File) {
         // For some reason it set the file to permanent minute even know the destination is temporary, resetting it here.
         $file->setTemporary();
@@ -561,7 +562,8 @@ class ExtractText {
     try {
       $queue->createItem($item);
     } catch (Exception $exception) {
-      watchdog_exception(__CLASS__, $exception);
+      $logger = \Drupal::logger(__CLASS__);
+      Error::logException($logger, $exception);
     }
     
     return TRUE;

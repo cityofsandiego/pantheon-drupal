@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Url;
 
 /**
@@ -123,14 +124,14 @@ function sand_remote_user_predelete(UserInterface $account) {
 /**
  * Implements hook_entity_insert().
  */
-function sand_remote_sand_remote_insert(\Drupal\Core\Entity\EntityInterface $entity): void {
+function sand_remote_sand_remote_insert(EntityInterface $entity): void {
   $added_to_queue = \Drupal::service('sand.extract_text')->queueEntityForTextExtract('sand_remote', $entity);
 }
 
 /**
  * Implements hook_ENTITY_TYPE_update().
  */
-function sand_remote_sand_remote_update(\Drupal\Core\Entity\EntityInterface $entity): void {
+function sand_remote_sand_remote_update(EntityInterface $entity): void {
   // Only queue it for extracting text via tika if it's not already being updated
   // with tika extracted text or text extracted via webdata server.
   if ($entity->field_skip_text_extract_queuing->value) {
@@ -167,7 +168,7 @@ function sand_remote_sand_remote_update(\Drupal\Core\Entity\EntityInterface $ent
 //  }
 //}
 
-function sand_remote_entity_presave(\Drupal\Core\Entity\EntityInterface $entity) {
+function sand_remote_entity_presave(EntityInterface $entity) {
   $is_external_data_node = ($entity->getEntityTypeId() === 'node' && $entity->bundle() === 'external_data'); 
   $is_sand_remote_entity = ($entity->getEntityTypeId() === 'sand_remote');
 
