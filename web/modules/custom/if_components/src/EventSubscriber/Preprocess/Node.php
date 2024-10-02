@@ -669,7 +669,6 @@ final class Node implements EventSubscriberInterface {
   public function getSidebarContexts($field, $terms): void {
     foreach ($terms as $term) {
       $query = $this->entityTypeManager
-        ->accessCheck(FALSE)
         ->getStorage('node')
         ->getQuery();
       $query->condition('type', 'sidebar_block_context')
