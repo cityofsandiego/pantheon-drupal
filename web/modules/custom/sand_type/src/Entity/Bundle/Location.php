@@ -85,7 +85,7 @@ class Location extends Node implements DepartmentInterface {
       '#theme' => 'sand_location_library_xml',
       '#rows' => $rows,
     ];
-    return \Drupal::service('renderer')->renderPlain($render_array);
+    return \Drupal::service('renderer')->renderInIsolation($render_array);
   }
 
   /**
@@ -159,7 +159,7 @@ class Location extends Node implements DepartmentInterface {
       '#theme' => 'sand_location_insidesd_home_xml',
       '#rows' => $rows,
     ];
-    return \Drupal::service('renderer')->renderPlain($render_array);
+    return \Drupal::service('renderer')->renderInIsolation($render_array);
   }
 
   public static function formatInsideSDArticlesXML(string $url, int $max_items = 3): string {
@@ -197,7 +197,7 @@ class Location extends Node implements DepartmentInterface {
       '#theme' => 'sand_location_insidesd_articles_xml',
       '#rows' => $rows,
     ];
-    return \Drupal::service('renderer')->renderPlain($render_array);
+    return \Drupal::service('renderer')->renderInIsolation($render_array);
   }
 
 }

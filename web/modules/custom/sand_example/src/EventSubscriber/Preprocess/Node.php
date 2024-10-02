@@ -618,6 +618,7 @@ final class Node implements EventSubscriberInterface {
       $query->condition('type', 'sidebar_block_context')
         ->accessCheck(TRUE)
         ->condition($field, [$term], 'IN');
+      $query->accessCheck(FALSE);
       $nids = $query->execute();
       foreach ($nids as $nid) {
         if (!in_array($nid, $this->context_ids)) {

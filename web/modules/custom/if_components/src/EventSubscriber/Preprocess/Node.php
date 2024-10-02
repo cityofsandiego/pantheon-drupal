@@ -553,21 +553,15 @@ final class Node implements EventSubscriberInterface {
             $paragraph = Paragraph::load($paragraph_id['target_id']);
             if (!empty($paragraph->field_region->getValue()) && !empty($paragraph->field_region->getValue()[0]['value'])) {
               $weight_value = isset($paragraph->field_weight->getValue()[0]['value']) ? $paragraph->field_weight->getValue()[0]['value'] : 0;
-              switch ($paragraph->field_region->getValue()[0]['value']) {
-                case 'sidebar':
-                  $sidebar[] = [
-                    'weight' => $weight_value,
-                    'value' => $this->entityTypeManager->getViewBuilder('paragraph')->view($paragraph, 'full'),
-                  ];
-                  break;
-                  
-                case 'sidebar_bottom':
-                  $sidebar_bottom[] = [
-                    'weight' => $weight_value,
-                    'value' => $this->entityTypeManager->getViewBuilder('paragraph')
-                      ->view($paragraph, 'full'),
-                  ];
-                  break;
+              $region = $paragraph->field_region->getValue()[0]['value'];
+              $item = [
+                'weight' => $weight_value,
+                'paragraph_id' => $paragraph->id(),
+              ];
+              if ($region === 'sidebar') {
+                $sidebar[] = $item;
+              } elseif ($region === 'sidebar_bottom') {
+                $sidebar_bottom[] = $item;
               }
             }
           }
@@ -589,10 +583,24 @@ final class Node implements EventSubscriberInterface {
         // Get side menu links.
         $this->buildMenuLinks('sidemenu');
 
+        // Sort the arrays.
         array_multisort(array_column($sidebar, 'weight'), SORT_ASC, $sidebar);
         array_multisort(array_column($sidebar_bottom, 'weight'), SORT_ASC, $sidebar_bottom);
         array_multisort(array_column($this->sideMenuLinkData, 'weight'), SORT_ASC, $this->sideMenuLinkData);
         array_multisort(array_column($this->topMenuLinkData, 'weight'), SORT_ASC, $this->topMenuLinkData);
+
+        // Render paragraphs after sorting.
+        foreach ($sidebar as &$item) {
+          $paragraph = Paragraph::load($item['paragraph_id']);
+          $item['value'] = $this->entityTypeManager->getViewBuilder('paragraph')->view($paragraph, 'full');
+        }
+        unset($item);
+
+        foreach ($sidebar_bottom as &$item) {
+          $paragraph = Paragraph::load($item['paragraph_id']);
+          $item['value'] = $this->entityTypeManager->getViewBuilder('paragraph')->view($paragraph, 'full');
+        }
+        unset($item);
 
         $variables->set('sidebar', $sidebar);
         $variables->set('sidebar_bottom', $sidebar_bottom);
@@ -604,14 +612,14 @@ final class Node implements EventSubscriberInterface {
       }
     }
 
-    // //Preprocess Department document file to get URL
+    // Preprocess Department document file to get URL
     if ($node->hasField('field_attachment')) {
       $field_attachment = $node->field_attachment->getValue();
 
       if (!empty($field_attachment) && isset($field_attachment[0]['target_id'])) {
         $attachment = $this->entityTypeManager->getStorage('media')
-          ->load( $node->get('field_attachment')->getValue()[0]['target_id']);
-        $field_id = $attachment->getSource()->getSourceFieldValue( $attachment);
+          ->load($node->get('field_attachment')->getValue()[0]['target_id']);
+        $field_id = $attachment->getSource()->getSourceFieldValue($attachment);
         $file_url = File::load($field_id);
         $variables->set('attachment_url', $file_url->createFileUrl());
       }
@@ -652,8 +660,8 @@ final class Node implements EventSubscriberInterface {
         $variables->set(strtolower($department_name), $term->getName());
       }
     }
-
   }
+
 
   /*
    * Helper function to add context node ids based on term.
@@ -661,10 +669,10 @@ final class Node implements EventSubscriberInterface {
   public function getSidebarContexts($field, $terms): void {
     foreach ($terms as $term) {
       $query = $this->entityTypeManager
+        ->accessCheck(FALSE)
         ->getStorage('node')
         ->getQuery();
       $query->condition('type', 'sidebar_block_context')
-        ->accessCheck(FALSE)
         ->condition($field, [$term], 'IN');
       $nids = $query->execute();
       foreach ($nids as $nid) {
@@ -684,8 +692,8 @@ final class Node implements EventSubscriberInterface {
         ->getStorage('node')
         ->getQuery();
       $query->condition('type', 'sidebar_block_context')
-        ->accessCheck(FALSE)
         ->condition('field_path', $path . "%", 'LIKE');
+      $query->accessCheck(FALSE);
       $nids = $query->execute();
       foreach ($nids as $nid) {
         if (!in_array($nid, $this->context_ids_for_path)) {
