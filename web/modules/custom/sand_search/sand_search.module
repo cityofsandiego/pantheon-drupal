@@ -35,6 +35,6 @@ function sand_search_insert_form($path, $facet0 = null, $facet1 = null, $search_
   }
   
   $form = \Drupal::formBuilder()->getForm('Drupal\sand_search\Form\SearchForm', $path, $facet0, $facet1, $search_field_name);
-  $form_markup = \Drupal::service('renderer')->renderPlain($form);
+  $form_markup = \Drupal::service('renderer')->renderInIsolation($form);
   return $form_markup;
 }

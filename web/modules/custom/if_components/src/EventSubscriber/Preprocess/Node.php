@@ -669,10 +669,10 @@ final class Node implements EventSubscriberInterface {
   public function getSidebarContexts($field, $terms): void {
     foreach ($terms as $term) {
       $query = $this->entityTypeManager
+        ->accessCheck(FALSE)
         ->getStorage('node')
         ->getQuery();
       $query->condition('type', 'sidebar_block_context')
-        ->accessCheck(FALSE)
         ->condition($field, [$term], 'IN');
       $nids = $query->execute();
       foreach ($nids as $nid) {
@@ -692,8 +692,8 @@ final class Node implements EventSubscriberInterface {
         ->getStorage('node')
         ->getQuery();
       $query->condition('type', 'sidebar_block_context')
-        ->accessCheck(FALSE)
         ->condition('field_path', $path . "%", 'LIKE');
+      $query->accessCheck(FALSE);
       $nids = $query->execute();
       foreach ($nids as $nid) {
         if (!in_array($nid, $this->context_ids_for_path)) {
