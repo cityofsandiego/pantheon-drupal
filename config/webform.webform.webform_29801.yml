@@ -37,9 +37,9 @@ elements: |-
       '#title': 'The author is:'
       '#description': ''
       '#required': true
-    author_biography_1:
-      '#title': 'Author Biography'
-      '#description': ''
+    author_biography_200_characters_max_proofread_before_submitting:
+      '#type': textarea
+      '#title': 'Author Biography (200 characters max; proofread before submitting form)'
       '#required': true
     co_authors_of_illustrators_1:
       '#type': textfield
@@ -167,13 +167,17 @@ elements: |-
       '#type': radios
       '#title': 'Year of Publication'
       '#options':
+        2024: '2024'
         2023: '2023'
-        2022: '2022'
       '#required': true
     book_summary_14:
       '#title': 'Book Summary'
       '#description': ''
       '#required': true
+      book_summary_200_characters_maximum_proofread_before_submitting:
+        '#type': textarea
+        '#title': 'Book Summary (200 characters maximum; proofread before submitting form)'
+        '#required': true
     book_cover_14:
       '#type': managed_file
       '#max_filesize': '2'
@@ -237,21 +241,17 @@ elements: |-
     '#description': ''
     disclaimer1_28:
       '#type': processed_text
-      '#format': full_html
-      '#text': |
-        <p>Books entered in the Local Author Showcase that are in compliance with the Library’s Collection Development Policy may be added to the library collection. Please do not submit galley proofs, advanced reader copies, or book-of-the-month club titles.</p>
-
-        <p>San Diego Public Library commits to circulate all books entered in the Showcase for one year (3/23&nbsp;– 3/24).</p>
       '#title': Disclaimer
       '#description': ''
+      '#text': '<p>Books entered in the Local Author Showcase that are in compliance with the Library’s Collection Development Policy may be added to the library collection. Please do not submit galley proofs, advanced reader copies, or book-of-the-month club titles.</p><p>San Diego Public Library commits to circulate all books entered in the showcase for one year.</p>'
+      '#format': full_html
     disclaimer3_28:
       '#type': radios
+      '#title': '<strong>After the one-year period, if my book is not selected for the collection, I choose to:</strong>'
       '#options':
-        pickup: 'Pick the book up at the Central Library by April 30, 2024.'
+        pickup: 'Pick the book up at the Central Library by April 30, 2026.'
         return: 'Leave a self-addressed, postage paid envelope, so the library can mail it back to me.'
         donate: 'Donate the book to the Friends of Central Library where it may be sold to benefit the Library.'
-      '#title': '<strong>After the one-year period, if my book is not selected for the collection, I choose to:</strong>'
-      '#description': ''
       '#required': true
     disclaimer_understanding_28:
       '#type': radios
@@ -302,19 +302,19 @@ handlers:
       from_mail: _default
       from_options: {  }
       from_name: _default
-      reply_to: ''
+      reply_to: '[webform_submission:values:email_4:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
       subject: _default
-      body: default
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
       exclude_attachments: false
       html: false
-      attachments: false
+      attachments: true
       twig: false
       theme_name: ''
       parameters: {  }
