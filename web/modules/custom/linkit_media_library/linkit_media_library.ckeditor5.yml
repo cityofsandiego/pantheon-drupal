@@ -1,0 +1,23 @@
+linkit_media_library_link:
+  ckeditor5:
+    plugins:
+      - linkitMediaLibrary.LinkitMediaLibrary
+    config:
+      linkitMediaLibrary:
+        openDialog:
+          func:
+            name: Drupal.ckeditor5.openDialog
+            invoke: false
+        dialogSettings:
+          height: 75%
+          dialogClass: media-library-widget-modal
+          title: Add or select media
+  drupal:
+    label: LinkIt media library
+    class: Drupal\linkit_media_library\Plugin\CKEditor5Plugin\LinkitMediaLibrary
+    library: linkit_media_library/ckeditor5
+    elements:
+      - <a aria-label title class id target="_blank" rel>
+    conditions:
+      plugins:
+        - linkit_extension
