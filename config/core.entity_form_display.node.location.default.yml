@@ -56,7 +56,6 @@ dependencies:
     - search_api_exclude_entity
     - smart_date
     - telephone
-    - term_reference_fancytree
     - term_reference_tree
     - text
 third_party_settings:
@@ -83,7 +82,6 @@ third_party_settings:
     group_address_contact_info:
       children:
         - field_address
-        - field_address_pin
       label: Location
       region: content
       parent_name: group_sidebar
@@ -317,7 +315,8 @@ content:
     type: address_default
     weight: 19
     region: content
-    settings: {  }
+    settings:
+      wrapper_type: fieldset
     third_party_settings: {  }
   field_alt_amenities_title:
     type: string_textfield
@@ -396,6 +395,8 @@ content:
         custom
       show_extra: false
       hide_date: true
+      allday: true
+      remove_seconds: false
       separator: to
     third_party_settings: {  }
   field_exceptions_2:
@@ -413,6 +414,8 @@ content:
         custom
       show_extra: false
       hide_date: true
+      allday: true
+      remove_seconds: false
       separator: to
     third_party_settings: {  }
   field_location_bucket:
@@ -500,14 +503,15 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_location_type:
-    type: term_reference_fancytree
+    type: term_reference_tree
     weight: 20
     region: content
     settings:
-      select_all: false
-      select_children: false
+      start_minimized: true
+      leaves_only: false
       select_parents: false
-      selection_mode: '2'
+      cascading_selection: 0
+      max_depth: 0
     third_party_settings: {  }
   field_meta_tags:
     type: metatag_firehose
