@@ -22,6 +22,7 @@ dependencies:
     - field.field.node.department_document.field_search_keymatch
     - field.field.node.department_document.field_url
     - node.type.department_document
+    - workflows.workflow.editorial
   module:
     - allowed_formats
     - content_moderation
@@ -147,7 +148,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 19
+    weight: 20
     region: content
     settings:
       rows: 9
@@ -173,7 +174,7 @@ content:
     third_party_settings: {  }
   field_category:
     type: entity_reference_autocomplete
-    weight: 22
+    weight: 21
     region: content
     settings:
       match_operator: CONTAINS
@@ -194,7 +195,7 @@ content:
     third_party_settings: {  }
   field_dept_doc_id:
     type: string_textfield
-    weight: 23
+    weight: 14
     region: content
     settings:
       size: 60
@@ -202,7 +203,7 @@ content:
     third_party_settings: {  }
   field_display_body:
     type: boolean_checkbox
-    weight: 22
+    weight: 13
     region: content
     settings:
       display_label: true
@@ -217,7 +218,7 @@ content:
     third_party_settings: {  }
   field_icon:
     type: string_textfield
-    weight: 25
+    weight: 16
     region: content
     settings:
       size: 60
@@ -225,7 +226,7 @@ content:
     third_party_settings: {  }
   field_keywords:
     type: string_textfield
-    weight: 24
+    weight: 15
     region: content
     settings:
       size: 60
@@ -233,7 +234,7 @@ content:
     third_party_settings: {  }
   field_misc_field_1:
     type: string_textfield
-    weight: 27
+    weight: 18
     region: content
     settings:
       size: 60
@@ -241,7 +242,7 @@ content:
     third_party_settings: {  }
   field_misc_field_2:
     type: string_textfield
-    weight: 28
+    weight: 19
     region: content
     settings:
       size: 60
@@ -249,14 +250,14 @@ content:
     third_party_settings: {  }
   field_promote_to_city_home:
     type: boolean_checkbox
-    weight: 26
+    weight: 17
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_replace_body_text_with_att:
     type: boolean_checkbox
-    weight: 18
+    weight: 19
     region: content
     settings:
       display_label: true
@@ -270,7 +271,7 @@ content:
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete
-    weight: 23
+    weight: 22
     region: content
     settings:
       match_operator: CONTAINS
@@ -320,7 +321,7 @@ content:
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 53
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -374,7 +375,7 @@ content:
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 55
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }

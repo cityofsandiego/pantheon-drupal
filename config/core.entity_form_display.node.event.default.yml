@@ -48,6 +48,7 @@ dependencies:
     - field.field.node.event.field_type_of_event
     - field.field.node.event.field_website
     - node.type.event
+    - workflows.workflow.editorial
   module:
     - address
     - allowed_formats
@@ -109,7 +110,6 @@ third_party_settings:
     group_location:
       children:
         - field_event_location
-        - field_address_pin
         - field_event_do_not_show_map
         - field_event_no_show_social_media
         - field_event_no_show_add_to_cal
@@ -201,7 +201,7 @@ third_party_settings:
       label: 'Moderation State'
       region: content
       parent_name: ''
-      weight: 21
+      weight: 20
       format_type: details_sidebar
       format_settings:
         classes: ''
@@ -248,7 +248,7 @@ content:
     third_party_settings: {  }
   field_edit_notes:
     type: string_textarea
-    weight: 51
+    weight: 23
     region: content
     settings:
       rows: 10
@@ -304,6 +304,8 @@ content:
         custom
       show_extra: false
       hide_date: false
+      allday: true
+      remove_seconds: false
       separator: to
     third_party_settings:
       smart_date_recur:
@@ -317,7 +319,7 @@ content:
           YEARLY: YEARLY
   field_event_do_not_show_map:
     type: boolean_checkbox
-    weight: 21
+    weight: 20
     region: content
     settings:
       display_label: true
@@ -355,11 +357,12 @@ content:
     type: address_default
     weight: 19
     region: content
-    settings: {  }
+    settings:
+      wrapper_type: fieldset
     third_party_settings: {  }
   field_event_location_txt:
     type: string_textarea
-    weight: 37
+    weight: 38
     region: content
     settings:
       rows: 5
@@ -367,7 +370,7 @@ content:
     third_party_settings: {  }
   field_event_management_cd:
     type: string_textfield
-    weight: 36
+    weight: 37
     region: content
     settings:
       size: 60
@@ -383,14 +386,14 @@ content:
     third_party_settings: {  }
   field_event_no_show_add_to_cal:
     type: boolean_checkbox
-    weight: 23
+    weight: 22
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_event_no_show_social_media:
     type: boolean_checkbox
-    weight: 22
+    weight: 21
     region: content
     settings:
       display_label: true
@@ -420,7 +423,7 @@ content:
     third_party_settings: {  }
   field_event_pin_address:
     type: string_textfield
-    weight: 38
+    weight: 39
     region: content
     settings:
       size: 60
@@ -513,7 +516,7 @@ content:
     third_party_settings: {  }
   field_evet_pin_address:
     type: string_textfield
-    weight: 52
+    weight: 24
     region: content
     settings:
       size: 60
@@ -546,7 +549,7 @@ content:
             selector: ''
   field_images:
     type: media_library_widget
-    weight: 20
+    weight: 21
     region: content
     settings:
       media_types: {  }
@@ -571,7 +574,7 @@ content:
             selector: ''
   field_meta_tags:
     type: metatag_firehose
-    weight: 53
+    weight: 21
     region: content
     settings:
       sidebar: true
@@ -579,7 +582,7 @@ content:
     third_party_settings: {  }
   field_search_exclude_entity:
     type: search_api_exclude_entity_widget
-    weight: 54
+    weight: 22
     region: content
     settings:
       field_label: 'Yes, exclude this entity from the search indexes.'
@@ -610,7 +613,7 @@ content:
     third_party_settings: {  }
   field_website:
     type: link_default
-    weight: 21
+    weight: 22
     region: content
     settings:
       placeholder_url: ''
@@ -650,12 +653,12 @@ content:
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 53
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 20
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -698,13 +701,13 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 55
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
