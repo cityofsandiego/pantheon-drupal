@@ -150,6 +150,7 @@ class Location extends Node implements DepartmentInterface {
       $rows[$kount]['title'] = $item->title;
       $rows[$kount]['link'] = Url::fromUri($item->view_node);
       $rows[$kount]['created'] = $item->created;
+      $rows[$kount]['timestamp'] = $item->created_1;
       $rows[$kount]['image_url'] = $item->field_media_image;
       $rows[$kount]['sticky'] = $item->sticky;
     }
@@ -186,6 +187,7 @@ class Location extends Node implements DepartmentInterface {
       $rows[$kount]['title'] = $item->title;
       $rows[$kount]['link'] = Url::fromUri($item->view_node);
       $rows[$kount]['created'] = $item->created;
+      $rows[$kount]['timestamp'] = $item->created_1;
       $rows[$kount]['categories'] = $item->field_category;
       $rows[$kount]['row_count'] = $kount;
       $rows[$kount]['image_url'] = $item->field_media_image;

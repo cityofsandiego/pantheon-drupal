@@ -22,7 +22,6 @@ dependencies:
     - 'taxonomy_term:categories:85f2b37c-3c4c-497d-94bd-fc6df2944e49'
     - 'taxonomy_term:categories:9cac03be-caaf-4006-8e6d-9c1674852ff2'
     - 'taxonomy_term:categories:ab9cad0c-d387-4c52-a911-17a204686cbc'
-    - 'taxonomy_term:categories:b0c072c6-0dcc-4215-a1fe-6819f903a39b'
     - 'taxonomy_term:categories:b6eebb4d-5c3e-488e-bae1-d8798efe3a0d'
     - 'taxonomy_term:categories:bf112335-48c0-4db9-9dfd-b4f3be42fc84'
     - 'taxonomy_term:categories:d0a5e720-b358-4832-9088-2e81e1f963c4'
@@ -770,6 +769,83 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        created_1:
+          id: created_1
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: field
+          label: Timestamp
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: true
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: custom
+            custom_date_format: c
+            timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+              description: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         title:
           id: title
           table: node_field_data
@@ -784,7 +860,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"l-padding-ad off-white-bg rounded-corners l-margin-bd overflow-h\">\r\n<div class=\"grid-x grid-margin-x\">\r\n\t<div class=\"cell medium-2\">\r\n\t\t<p class=\"date\">{{ created }} {{ sticky }}</p>\r\n\t</div>\r\n\t<div class=\"cell medium-auto\">\r\n\t\t<p class=\"h5 heading--snug\"><a href=\"{{ view_node }}\" class=\"no-underline\">{{ title }}</a></p>\r\n\t</div>\r\n</div>\r\n</div>"
+            text: "<div class=\"l-padding-ad off-white-bg rounded-corners l-margin-bd overflow-h\">\r\n<div class=\"grid-x grid-margin-x\">\r\n\t<div class=\"cell medium-2\">\r\n\t\t<p class=\"date\"><time class=\"timeago\" datetime=\"{{ created_1 }}\">{{ created }}</time> {{ sticky }}</p>\r\n\t</div>\r\n\t<div class=\"cell medium-auto\">\r\n\t\t<p class=\"h5 heading--snug\"><a href=\"{{ view_node }}\" class=\"no-underline\">{{ title }}</a></p>\r\n\t</div>\r\n</div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -1528,6 +1604,83 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        created_1:
+          id: created_1
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: field
+          label: Timestamp
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: true
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: custom
+            custom_date_format: c
+            timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+              description: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         created:
           id: created
           table: node_field_data
@@ -1542,7 +1695,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '<p class="fine-print l-margin-vd"><span class="text-upper text-spruce">{{ created }}</span> {{ sticky }}</p>'
+            text: '<p class="fine-print l-margin-vd"><span class="text-upper text-spruce"><time class="timeago" datetime="{{ created_1 }}">{{ created }}</time></span> {{ sticky }}</p>'
             make_link: false
             path: ''
             absolute: false
@@ -1580,11 +1733,21 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: timestamp_ago
+          type: timestamp
           settings:
-            future_format: '@interval hence'
-            past_format: '@interval ago'
-            granularity: 2
+            date_format: custom
+            custom_date_format: 'F j, Y, g:i a'
+            timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+              description: ''
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -2103,6 +2266,83 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        created_1:
+          id: created_1
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: field
+          label: Timestamp
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: true
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: custom
+            custom_date_format: c
+            timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+              description: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         created:
           id: created
           table: node_field_data
@@ -2117,7 +2357,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '<p class="fine-print text-upper">{{ created }} {{ sticky }}</p>'
+            text: '<p class="fine-print text-upper"><time class="timeago" datetime="{{ created_1 }}">{{ created }}</time> {{ sticky }}</p>'
             make_link: false
             path: ''
             absolute: false
@@ -2155,11 +2395,21 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: timestamp_ago
+          type: timestamp
           settings:
-            future_format: '@interval hence'
-            past_format: '@interval ago'
-            granularity: 2
+            date_format: custom
+            custom_date_format: 'F j, Y, g:i a'
+            timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+              description: ''
           group_column: value
           group_columns: {  }
           group_rows: true

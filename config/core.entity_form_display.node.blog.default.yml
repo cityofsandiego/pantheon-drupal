@@ -26,6 +26,7 @@ dependencies:
     - field.field.node.blog.field_top_content
     - field.field.node.blog.field_website
     - node.type.blog
+    - workflows.workflow.editorial
   module:
     - allowed_formats
     - content_moderation
@@ -138,7 +139,7 @@ third_party_settings:
       label: Miscellaneous
       region: content
       parent_name: group_other
-      weight: 20
+      weight: 21
       format_type: details
       format_settings:
         classes: ''
@@ -170,7 +171,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 22
+    weight: 23
     region: content
     settings:
       rows: 9
@@ -202,14 +203,14 @@ content:
     third_party_settings: {  }
   field_blog_promote_to_home:
     type: boolean_checkbox
-    weight: 19
+    weight: 20
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_category:
     type: entity_reference_autocomplete
-    weight: 26
+    weight: 27
     region: content
     settings:
       match_operator: CONTAINS
@@ -277,7 +278,7 @@ content:
     third_party_settings: {  }
   field_misc_field_2:
     type: string_textfield
-    weight: 21
+    weight: 22
     region: content
     settings:
       size: 60
@@ -301,7 +302,7 @@ content:
     third_party_settings: {  }
   field_promote_to_city_home:
     type: boolean_checkbox
-    weight: 18
+    weight: 19
     region: content
     settings:
       display_label: true
@@ -315,7 +316,7 @@ content:
     third_party_settings: {  }
   field_search_keymatch:
     type: entity_reference_autocomplete
-    weight: 27
+    weight: 28
     region: content
     settings:
       match_operator: CONTAINS
@@ -344,7 +345,7 @@ content:
         hide_guidelines: '0'
   field_website:
     type: link_default
-    weight: 23
+    weight: 24
     region: content
     settings:
       placeholder_url: ''
@@ -384,7 +385,7 @@ content:
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 53
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -438,7 +439,7 @@ content:
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 55
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }

@@ -101,9 +101,9 @@
             {% if content.field_article_exclude.0['#markup'] != "All Views" %}
               <div class="byline">
               {% if (content.field_byline.0) and (node.title.value != "Inside San Diego Home") %}
-              <p>{{ node.created.value|date("F j, Y") }} | {{ content.field_byline.0 }}</p>
+              <p>{{ node.created.value|date("F j, Y, g:i a") }} | {{ content.field_byline.0 }}</p>
               {% else %}
-              <p>{{ node.created.value|date("F j, Y") }}</p>
+              <p>{{ node.created.value|date("F j, Y, g:i a") }}</p>
               {% endif %}
               </div>
             {% endif %}
