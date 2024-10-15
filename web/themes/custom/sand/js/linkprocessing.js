@@ -12,9 +12,10 @@
       // Get the current hostname
       var currentHostname = window.location.hostname;
 
-      // Define regex patterns for sandiego.gov-related hostnames, including sandgov.build
+      // Define regex patterns for hostnames, including .build
       var sandiegoDomains = /^(https?:\/\/|\/\/)?(www\.)?(sandiego\.gov|sandgov\.build)/;
-      var insidesdDomains = /^(https?:\/\/|\/\/)?(www\.)?(insidesdstaging\.org|insidesandiego\.org|insidesd\.build)/;
+      var insidesdDomains = /^(https?:\/\/|\/\/)?(www\.)?(insidesandiego\.org|insidesd\.build)/;
+      var citynetDomains = /^(https?:\/\/|\/\/)?(citynet\.)(sandiego\.gov|build)/;
       var sdgov2DomainRegex = /^(https?:\/\/|\/\/)?sdgov2\.lndo\.site/;
 
       $('a', context).each(function () {
@@ -50,9 +51,14 @@
             href = href.replace(sandiegoDomains, '');
           }
 
-          // If current hostname is insidesd.build or similar, strip insidesd-related links
+          // If current hostname is insidesandiego.org or insidesd.build or similar, strip insidesd-related links
           if (currentHostname.match(insidesdDomains)) {
             href = href.replace(insidesdDomains, '');
+          }
+
+          // If current hostname is citynet.sandiego.gov or citynet.build, strip citynet-related links
+          if (currentHostname.match(citynetDomains)) {
+            href = href.replace(citynetDomains, '');
           }
 
           // Cleanup URL: remove /index, /index.shtml, /index/index.shtml (with or without anchors)
