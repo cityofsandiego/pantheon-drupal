@@ -12,148 +12,144 @@ id: webform_30653
 title: 'Upload a Video/Photo'
 description: null
 categories: {  }
-elements: |
+elements: |-
   fieldset_contact_information_set:
     '#type': fieldset
     '#open': true
-    '#title': 'Contact Information' 
-    '#description': ""
+    '#title': 'Contact Information'
+    '#description': ''
     name_4:
       '#type': textfield
-      '#title': 'Name:' 
-      '#description': ""
+      '#title': 'Name:'
+      '#description': ''
       '#required': true
     email_address_4:
       '#type': email
       '#size': 20
-      '#title': 'Email Address:' 
-      '#description': "Must be a valid email address."
+      '#title': 'Email Address:'
+      '#description': 'Must be a valid email address.'
       '#required': true
     phone_number_4:
       '#type': textfield
-      '#title': 'Phone Number:' 
-      '#description': ""
+      '#title': 'Phone Number:'
+      '#description': ''
     best_time_to_be_contacted_4:
       '#type': radios
       '#options':
         day: 'Day (8 am - 5pm)'
         night: 'Night (5pm - 9pm)'
       '#title_display': inline
-      '#title': 'Best time to be contacted?' 
-      '#description': ""
-      '#required': true
+      '#title': 'Best time to be contacted?'
+      '#description': ''
       '#states':
         visible:
           ':input[name="phone_number_4[]"]':
             filled: false
-            
         required:
           ':input[name="phone_number_4[]"]':
             filled: false
-            
   fieldset_video_information_set:
     '#type': fieldset
     '#open': true
-    '#title': 'Video Information' 
-    '#description': ""
+    '#title': 'Video Information'
+    '#description': ''
     crime_types_6:
       '#type': checkboxes
       '#options':
-        Assault involving physical fights: 'Assault involving physical fights'
-        Assault involving Shooting/Stabbing: 'Assault involving Shooting/Stabbing'
-        Auto theft: 'Auto theft'
-        Juvenile related crimes: 'Crimes against juveniles and juvenile related crimes'
-        Narcotics/Drug activity: 'Narcotics/Drug activity'
-        Suspicious Criminal Activity: 'Suspicious Criminal Activity'
-        Suspicious Person/Terrorist: 'Suspicious Person/Terrorist'
-        Theft from vehicle: 'Theft from vehicle'
-        Theft from person: 'Theft from person'
-        Theft from a business: 'Theft from a business'
-        Traffic Accidents and DUI incidents: 'Traffic Accidents and DUI incidents'
-        Vandalism: 'Vandalism'
+        'Assault involving physical fights': 'Assault involving physical fights'
+        'Assault involving Shooting/Stabbing': 'Assault involving Shooting/Stabbing'
+        'Auto theft': 'Auto theft'
+        'Juvenile related crimes': 'Crimes against juveniles and juvenile related crimes'
+        'Narcotics/Drug activity': 'Narcotics/Drug activity'
+        'Suspicious Criminal Activity': 'Suspicious Criminal Activity'
+        'Suspicious Person/Terrorist': 'Suspicious Person/Terrorist'
+        'Theft from vehicle': 'Theft from vehicle'
+        'Theft from person': 'Theft from person'
+        'Theft from a business': 'Theft from a business'
+        'Traffic Accidents and DUI incidents': 'Traffic Accidents and DUI incidents'
+        Vandalism: Vandalism
         Other: 'Other: (describe the crime)'
       '#multiple': true
-      '#title': 'What type(s) of crime is shown in your video or photos?' 
-      '#description': "Multiple selections are allowed."
+      '#title': 'What type(s) of crime is shown in your video or photos?'
+      '#description': 'Multiple selections are allowed.'
       '#required': true
     crime_types_other_6:
       '#type': textfield
       '#title_display': invisible
-      '#title': 'If Other, describe the crime:' 
-      '#description': ""
-      '#required': true
+      '#title': 'If Other, describe the crime:'
+      '#description': ''
       '#states':
         required:
           ':input[name="crime_types_6[other]"]':
             checked: true
-            
     date_media_recorded_6:
       '#type': date
-      '#title': 'Date and Time the video/photo was recorded:' 
-      '#description': ""
+      '#title': 'Date and Time the video/photo was recorded:'
+      '#description': ''
       '#required': true
-    time_6:
-      '#type': time
+    time:
+      '#type': webform_time
+      '#title': Time
+      '#required': true
+      '#timepicker': true
       '#time_format': 'g:i A'
-      '#title_display': invisible
-      '#title': 'Time' 
-      '#description': ""
-      '#required': true
+      '#step': ''
     crime_location_6:
       '#type': textarea
-      '#title': 'Location where the video/photo was taken:' 
-      '#description': "Provide an address or a description of the location."
+      '#title': 'Location where the video/photo was taken:'
+      '#description': 'Provide an address or a description of the location.'
       '#required': true
     police_division_6:
       '#type': radios
       '#options':
-        Central: 'Central'
-        Eastern: 'Eastern'
-        Mid-City: 'Mid-City'
-        Northern: 'Northern'
-        Northwestern: 'Northwestern'
-        Northeastern: 'Northeastern'
-        Southern: 'Southern'
-        Southeastern: 'Southeastern'
-        Western: 'Western'
-      '#title': 'In which Police Division did the crime occur?' 
+        Central: Central
+        Eastern: Eastern
+        Mid-City: Mid-City
+        Northern: Northern
+        Northwestern: Northwestern
+        Northeastern: Northeastern
+        Southern: Southern
+        Southeastern: Southeastern
+        Western: Western
+      '#title': 'In which Police Division did the crime occur?'
       '#description': "Refer to the <a href='/sites/default/files/police_neighborhood_divisions.pdf' target='_blank' title='Police Divisions Map opens in a new tab'>Police Divisions Map</a>"
       '#required': true
     filename_6:
       '#type': textfield
-      '#title': 'Filename' 
-      '#description': ""
+      '#title': Filename
+      '#description': ''
     select_file_6:
       '#type': processed_text
       '#format': full_html
-      '#text': "<label for='select_file'>Filename: <span class='form-required' title='This field is required.'>*</span></label><input id='select_file' name='select_file' required='required' type='file'>\n"
-      '#title': 'Select File' 
-      '#description': ""
+      '#text': |
+        <label for='select_file'>Filename: <span class='form-required' title='This field is required.'>*</span></label><input id='select_file' name='select_file' required='required' type='file'>
+      '#title': 'Select File'
+      '#description': ''
   fieldset_case_information_set:
     '#type': fieldset
     '#open': true
-    '#title': 'Case Information (optional)' 
-    '#description': ""
+    '#title': 'Case Information (optional)'
+    '#description': ''
     case_number_14:
       '#type': textfield
-      '#title': 'Case Number:' 
-      '#description': ""
+      '#title': 'Case Number:'
+      '#description': ''
     incident_number_14:
       '#type': textfield
-      '#title': 'Incident Number:' 
-      '#description': ""
+      '#title': 'Incident Number:'
+      '#description': ''
     detective_officer_name_14:
       '#type': textfield
-      '#title': 'Detective/Officer Name:' 
-      '#description': ""
+      '#title': 'Detective/Officer Name:'
+      '#description': ''
     detective_officer_id_14:
       '#type': textfield
-      '#title': 'Detective/Officer ID:' 
-      '#description': ""
+      '#title': 'Detective/Officer ID:'
+      '#description': ''
   upload_url:
     '#type': hidden
-    '#title': 'Upload URL' 
-    '#description': ""
+    '#title': 'Upload URL'
+    '#description': ''
 css: ''
 javascript: ''
 settings:

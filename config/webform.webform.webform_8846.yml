@@ -69,21 +69,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: weblibrary@sandiego.gov
+      from_mail: _default
       from_options: {  }
-      from_name: '[webform_submission:values:email_address:raw]'
-      reply_to: ''
+      from_name: _default
+      reply_to: '[webform_submission:values:email_address:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
       subject: 'SDPL Online Comment'
-      body: |
-        Submitted on [webform_submission:date:long]
-
-        [webform_submission:values:your_comment:withlabel]
-        [webform_submission:values:name:withlabel]
-        [webform_submission:values:email_address:withlabel]
-        [webform_submission:values:phone:withlabel]
+      body: "Submitted on [webform_submission:created]\r\n\r\nYOUR COMMENT:\r\n[webform_submission:values:your_comment]\r\n\r\nNAME:\r\n[webform_submission:values:name]\r\n\r\nEMAIL ADDRESS:\r\n[webform_submission:values:email_address]\r\n\r\nPHONE:\r\n[webform_submission:values:phone]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

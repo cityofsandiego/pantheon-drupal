@@ -79,13 +79,13 @@ handlers:
       cc_options: {  }
       from_mail: engineering@sandiego.gov
       from_options: {  }
-      from_name: default
-      reply_to: ''
+      from_name: _default
+      reply_to: '[webform_submission:values:email_addressyouyourdomaincom:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: default
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nNAME:\r\n[webform_submission:values:name]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_addressyouyourdomaincom]\r\n\r\nPHONE NUMBER:\r\n[webform_submission:values:phone_number_999_999_9999]\r\n\r\nSUBJECT:\r\n[webform_submission:values:subject_of_your_message]\r\n\r\nMESSAGE:\r\n[webform_submission:values:message_limited_to_2000_characters]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

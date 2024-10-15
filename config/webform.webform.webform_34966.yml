@@ -100,7 +100,7 @@ handlers:
     handler_id: email_3
     label: 'Email 3'
     notes: ''
-    status: true
+    status: false
     conditions: {  }
     weight: 3
     settings:
@@ -149,19 +149,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: default
+      from_mail: _default
       from_options: {  }
-      from_name: default
-      reply_to: ''
+      from_name: _default
+      reply_to: '[webform_submission:values:email_correo_electronico_4:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: 'Form submission from: Community Request for Service'
-      body: |-
-        Submitted on [webform_submission:date:long]
-
-        Submitted values are:
-        [webform_submission:values]
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\n**** CONTACT INFORMATION ****\r\n\r\nNAME:\r\n[webform_submission:values:name_4]\r\n\r\nPHONE:\r\n[webform_submission:values:phone_4]\r\n\r\nEMAIL:\r\n[webform_submission:values:email_correo_electronico_4]\r\n\r\nADDRESS:\r\n[webform_submission:values:your_address_4]\r\n\r\n**** VIOLATION INFORMATION ****\r\n\r\nADDRESS OF CODE VIOLATION OR PUBLIC NUISANCE:\r\n[webform_submission:values:violation_street_address_32]\r\n\r\nTYPE OF ISSUE OR AREA OF CONCERN:\r\n[webform_submission:values:issue_type_32]\r\n\r\nDESCRIBE VIOLATION:\r\n[webform_submission:values:it_is_important_to_us_to_understand_in_more_detail_the_nature_of_the_problem_please_describe_the_violation_below_32]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

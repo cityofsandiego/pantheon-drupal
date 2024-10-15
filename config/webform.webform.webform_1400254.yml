@@ -159,37 +159,15 @@ handlers:
       bcc_options: {  }
       cc_mail: ''
       cc_options: {  }
-      from_mail: '[webform_submission:values:email:raw]'
+      from_mail: _default
       from_options: {  }
-      from_name: default
-      reply_to: ''
+      from_name: _default
+      reply_to: '[webform_submission:values:email:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: default
-      body: |-
-        Submitted on [webform_submission:date:long]
-
-        Submitted values are:
-
-        NAME:
-        [webform_submission:values:name:nolabel]
-
-        ADDRESS:
-        [webform_submission:values:street_address:nolabel]
-        [webform_submission:values:city:nolabel], [webform_submission:values:state:nolabel] [webform_submission:values:zip:nolabel]
-
-        PHONE:
-        [webform_submission:values:phone:nolabel]
-
-        EMAIL:
-        [webform_submission:values:email:nolabel]
-
-        ISSUE OR CONCERN:
-        [webform_submission:values:concern:nolabel]
-
-        REQUESTED ACTION:
-        [webform_submission:values:requested_action:nolabel]
+      subject: _default
+      body: "Submitted on [webform_submission:created]\r\n\r\nNAME:\r\n[webform_submission:values:name:nolabel]\r\n\r\nADDRESS:\r\n[webform_submission:values:street_address]\r\n[webform_submission:values:city], [webform_submission:values:state] [webform_submission:values:zip]\r\n\r\nPHONE:\r\n[webform_submission:values:phone]\r\n\r\nEMAIL:\r\n[webform_submission:values:email]\r\n\r\nISSUE OR CONCERN:\r\n[webform_submission:values:concern]\r\n\r\nREQUESTED ACTION:\r\n[webform_submission:values:requestedaction]"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true

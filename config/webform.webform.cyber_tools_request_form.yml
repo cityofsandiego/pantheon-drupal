@@ -1,4 +1,4 @@
-uuid: 98995e4e-ce1d-4414-b77f-09a5f81ed317
+uuid: e6b13133-2793-4e6b-bf76-1d71a30f3ede
 langcode: en
 status: open
 dependencies: {  }
@@ -8,88 +8,85 @@ close: null
 uid: 357
 template: false
 archive: false
-id: sdpl_books_unbanned_card_sign_up
-title: 'SDPL Books Unbanned Card Sign Up'
+id: cyber_tools_request_form
+title: 'Cyber Tools Request Form'
 description: ''
 categories: {  }
 elements: |-
-  contact_information:
-    '#type': fieldset
-    '#title': 'Contact Information'
-    name:
-      '#type': textfield
-      '#title': Name
-      '#description': 'You are welcome to use your preferred first name or nickname.'
-      '#description_display': before
-      '#required': true
-    container:
-      '#type': container
-      '#attributes':
-        class:
-          - grid-x
-          - grid-margin-x
-      date_of_birth:
-        '#type': textfield
-        '#title': 'Date of Birth'
-        '#placeholder': mm/dd/yyyy
-        '#input_mask': 99/99/9999
-        '#required': true
-        '#wrapper_attributes':
-          class:
-            - cell
-            - medium-6
-      email:
-        '#type': email
-        '#title': Email
-        '#required': true
-        '#wrapper_attributes':
-          class:
-            - cell
-            - medium-6
-      city:
-        '#type': textfield
-        '#title': City
-        '#required': true
-        '#wrapper_attributes':
-          class:
-            - cell
-            - medium-6
-      state:
-        '#type': textfield
-        '#title': 'State or U.S. Territory'
-        '#input_mask': '''casing'': ''upper'''
-        '#required': true
-        '#wrapper_attributes':
-          class:
-            - cell
-            - medium-6
-  why_how:
-    '#type': textarea
-    '#title': 'Why did you apply for this card? How will this card be helpful to you?'
-  feature_response:
-    '#type': radios
-    '#title': 'Can we feature your response above on our website or other library materials?'
-    '#options': yes_no
-    '#options_display': two_columns
+  full_name:
+    '#type': textfield
+    '#title': 'Full Name'
     '#required': true
-  how_did_you_hear_about_books_unbanned_:
+  phone_number:
+    '#type': textfield
+    '#title': 'Phone Number'
+    '#placeholder': xxx-xxx-xxxx
+    '#input_mask': 999-999-9999
+  email_address:
+    '#type': email
+    '#title': 'Email Address'
+    '#description': 'Your organization email address if you have one, for identity verification.'
+    '#description_display': before
+    '#required': true
+  receive_newsletter:
     '#type': radios
-    '#title': 'How did you hear about Books Unbanned?'
+    '#title': 'Would you like to receive the SD Regional Cyber Lab newsletter?'
     '#options':
-      'Social Media': 'Social Media'
-      'Library Website': 'Library Website'
-      'Library Foundation SD': 'Library Foundation SD'
-      ' Partner Books Unbanned Library (Boston, Seattle, Los Angeles Brooklyn)': ' Partner Books Unbanned Library -- (Boston, Seattle, Los Angeles Brooklyn)'
-      'Word of Mouth': 'Word of Mouth'
-      Other: Other
+      'Yes': 'Yes'
+      'No': 'No'
     '#required': true
-  other:
+  cyber_tools:
+    '#type': checkboxes
+    '#title': 'Which cyber tools are you interested in?'
+    '#description': 'Multiple selections allowed.'
+    '#description_display': before
+    '#options':
+      'Burp Suite': 'Burp Suite'
+      'Cyber Range': 'Cyber Range'
+      Pluralsight: Pluralsight
+      Shodan: Shodan
+    '#required': true
+  position_title:
+    '#type': textfield
+    '#title': Position/Title
+    '#required': true
+  organization:
+    '#type': textfield
+    '#title': Organization
+    '#description': 'Name of your employer, academic institution, etc.'
+    '#description_display': before
+    '#required': true
+  organization_type:
+    '#type': radios
+    '#title': 'Organization Type'
+    '#options':
+      Public: Public
+      Private: Private
+      ' Non-profit': ' Non-profit'
+      Academia: Academia
+    '#required': true
+  organization_website_url:
+    '#type': url
+    '#title': 'Organization Website URL'
+  linkedin_profile:
+    '#type': textfield
+    '#title': 'LinkedIn Profile'
+  goals:
     '#type': textarea
-    '#title': Other
-    '#states':
-      visible:
-        ':input[name="how_did_you_hear_about_books_unbanned_"]':
-          value: Other
+    '#title': 'What are your goals with using these tools?'
+    '#required': true
+  level_of_knowledge:
+    '#type': radios
+    '#title': 'How would you describe your current level of cyber security knowledge?'
+    '#options':
+      Beginner: Beginner
+      Intermediate: Intermediate
+      Advanced: Advanced
+      Expert: Expert
+    '#required': true
+  hear:
+    '#type': textfield
+    '#title': 'How did you hear about us?'
 css: ''
 javascript: ''
 settings:
@@ -194,17 +191,14 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: page
-  confirmation_url: ''
-  confirmation_title: 'We received your application.'
-  confirmation_message: 'Thank you for joining the fight against banned books!  A library staff member will contact you by email with information about your new Books Unbanned card.  <a href="https://libraryfoundationsd.org/donate">Learn more</a> about how you can support this effort.'
+  confirmation_type: url
+  confirmation_url: /cyber-lab/request-response
+  confirmation_title: ''
+  confirmation_message: ''
   confirmation_attributes: {  }
   confirmation_back: true
-  confirmation_back_label: 'Return to Books Unbanned'
-  confirmation_back_attributes:
-    class:
-      - btn
-      - btn--outline
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
   confirmation_exclude_query: false
   confirmation_exclude_token: false
   confirmation_update: false
@@ -280,7 +274,7 @@ handlers:
   email:
     id: email
     handler_id: email
-    label: Email
+    label: 'Staff Notification'
     notes: ''
     status: true
     conditions: {  }
@@ -288,7 +282,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: booksunbanned@sandiego.gov
+      to_mail: sdrcl@sandiego.gov
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
@@ -297,13 +291,62 @@ handlers:
       from_mail: _default
       from_options: {  }
       from_name: _default
-      reply_to: '[webform_submission:values:email:raw]'
+      reply_to: '[webform_submission:values:email_address:raw]'
       return_path: ''
       sender_mail: ''
       sender_name: ''
       subject: _default
-      body: "Submitted on [webform_submission:created]\r\n\r\nNAME:\r\n[webform_submission:values:name]\r\n\r\nDATE OF BIRTH:\r\n[webform_submission:values:date_of_birth]\r\n\r\nEMAIL:\r\n[webform_submission:values:email]\r\n\r\nCITY:\r\n[webform_submission:values:city]\r\n\r\nSTATE:\r\n[webform_submission:values:state]\r\n\r\nWHY DID YOU APPLY FOR THIS CARD? HOW WILL THIS CARD BE HELPFUL TO YOU?\r\n[webform_submission:values:why_how]\r\n\r\nCAN WE FEATURE YOUR RESPONSE ABOVE ON OUR WEBSITE OR OTHER LIBRARY MATERIALS?\r\n[webform_submission:values:feature_response]\r\n"
+      body: "Submitted on [webform_submission:created]\r\n\r\nNAME:\r\n[webform_submission:values:full_name]\r\n\r\nPHONE NUMBER:\r\n[webform_submission:values:phone_number]\r\n\r\nEMAIL ADDRESS:\r\n[webform_submission:values:email_address]\r\n\r\nWOULD YOU LIKE TO RECEIVE THE NEWSLETTER?\r\n[webform_submission:values:receive_newsletter]\r\n\r\nWHICH CYBER TOOLS ARE YOU INTERESTED IN?\r\n[webform_submission:values:cyber_tools]\r\n\r\nPOSITION/TITLE:\r\n[webform_submission:values:position_title]\r\n\r\nORGANIZATION:\r\n[webform_submission:values:organization]\r\n\r\nORGANIZATION TYPE:\r\n[webform_submission:values:organization_type]\r\n\r\nORGANIZATION WEBSITE URL:\r\n[webform_submission:values:organization_website_url]\r\n\r\nLINKEDIN PROFILE:\r\n[webform_submission:values:linkedin_profile]\r\n\r\nWHAT ARE YOUR GOALS WITH USING THESE TOOLS?\r\n[webform_submission:values:goals]\r\n\r\nHOW WOULD YOU DESCRIBE YOUR CURRENT LEVEL OF CYBER SECURITY KNOWLEDGE?\r\n[webform_submission:values:level_of_knowledge]\r\n\r\nHOW DID YOU HEAR ABOUT US?\r\n[webform_submission:values:hear]"
       excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: false
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_1:
+    id: email
+    handler_id: email_1
+    label: Receipt
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email_address:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Cyber Tools Request Confirmation'
+      body: "Hello [webform_submission:values:full_name],\r\n\r\nYour request has been received and is being reviewed. You will receive a response within ten (10) business days.\r\n\r\nIf you have questions or concerns, email us at sdrcl@sandiego.gov.\r\n\r\nThank you,\r\n\r\nSan Diego Regional Cyber Lab\r\n\r\n*********************************************\r\nPlease do NOT reply to this auto-generated message."
+      excluded_elements:
+        phone_number: phone_number
+        email_address: email_address
+        receive_newsletter: receive_newsletter
+        cyber_tools: cyber_tools
+        position_title: position_title
+        organization: organization
+        organization_type: organization_type
+        organization_website_url: organization_website_url
+        linkedin_profile: linkedin_profile
+        goals: goals
+        level_of_knowledge: level_of_knowledge
+        hear: hear
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
