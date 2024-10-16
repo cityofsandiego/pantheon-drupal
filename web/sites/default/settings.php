@@ -138,15 +138,12 @@ if (defined('PANTHEON_ENVIRONMENT') && isset($_ENV['PANTHEON_SITE_NAME'])) {
   }
   switch (LOCALSITE) {
     case 'sandgov':
-      // Activate sandgov split
       $config["config_split.config_split.config_sandgov"]["status"] = TRUE;
       break;
     case 'insidesd':
-      // Activate insidesd split
       $config["config_split.config_split.config_insidesd"]["status"] = TRUE;
       break;
     case 'citynet':
-      // Activate citynet split
       break;
     default:
       echo "ERROR - check your settings.localsite.php to make sure it is configured correctly like: define('LOCALSITE', 'sandgov');";
