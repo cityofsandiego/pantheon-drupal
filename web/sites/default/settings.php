@@ -94,15 +94,41 @@ if (defined('PANTHEON_ENVIRONMENT')) {
 if (defined('PANTHEON_ENVIRONMENT') && isset($_ENV['PANTHEON_SITE_NAME'])) {
   switch ($_ENV['PANTHEON_SITE_NAME']) {
     case 'sandgov':
-      // Activate sandgov split
-      $config["config_split.config_split.config_sandgov"]["status"] = TRUE;
+      switch ($_ENV['PANTHEON_SITE_NAME']) {
+        case 'DEV':
+          $config["config_split.config_split.config_sandgov"]["status"] = TRUE;
+          break;
+        case 'TEST':
+          $config["config_split.config_split.config_sandgov"]["status"] = TRUE;
+          break;
+        default:
+          $config["config_split.config_split.config_sandgov"]["status"] = TRUE;
+          break;
+      }
       break;
     case 'insidesd':
-      // Activate insidesd split
-      $config["config_split.config_split.config_insidesd"]["status"] = TRUE;
+      switch ($_ENV['PANTHEON_SITE_NAME']) {
+        case 'DEV':
+          $config["config_split.config_split.config_insidesd"]["status"] = TRUE;
+          break;
+        case 'TEST':
+          $config["config_split.config_split.config_insidesd"]["status"] = TRUE;
+          break;
+        default:
+          $config["config_split.config_split.config_insidesd"]["status"] = TRUE;
+          break;
+      }
       break;
     case 'citynet':
       // Activate citynet split
+      switch ($_ENV['PANTHEON_SITE_NAME']) {
+        case 'DEV':
+          break;
+        case 'TEST':
+          break;
+        default:
+          break;
+      }
       break;
   }
 } else {
@@ -111,10 +137,6 @@ if (defined('PANTHEON_ENVIRONMENT') && isset($_ENV['PANTHEON_SITE_NAME'])) {
     exit(1);
   }
   switch (LOCALSITE) {
-    case 'pantheon_drupal':
-      // Activate pantheon_drupal split
-      //$config["config_split.config_split.config_sandgov"]["status"] = TRUE;
-      break;
     case 'sandgov':
       // Activate sandgov split
       $config["config_split.config_split.config_sandgov"]["status"] = TRUE;
@@ -127,7 +149,7 @@ if (defined('PANTHEON_ENVIRONMENT') && isset($_ENV['PANTHEON_SITE_NAME'])) {
       // Activate citynet split
       break;
     default:
-      echo "ERROR - BAD Local site file check your settings.localsite.php to make sure it is configured correctly like: define('LOCALSITE', 'sandgov');";
+      echo "ERROR - check your settings.localsite.php to make sure it is configured correctly like: define('LOCALSITE', 'sandgov');";
       echo LOCALSITE;
       exit(2);
       break;
